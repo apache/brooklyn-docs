@@ -6,14 +6,15 @@ breadcrumbs:
 - /website/documentation/index.md
 - /guide/dev/index.md
 children:
-- env/
 - code/
-- { link: "http://github.com/apache/incubator-brooklyn", title: "GitHub" }
+- env/
+- code/structure.md
 - code/tests.md
 - code/licensing.md
 - tips/
 - tips/logging.md
 - tips/debugging-remote-brooklyn.md
+- { link: "http://github.com/apache/incubator-brooklyn", title: "GitHub" }
 - { link: "https://brooklyn.apache.org/v/latest/misc/javadoc", title: "Javadoc" }
 ---
 

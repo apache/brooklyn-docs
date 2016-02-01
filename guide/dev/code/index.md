@@ -1,91 +1,87 @@
 ---
-title: About the Code
+title: Get the Code
 layout: website-normal
+children:
+- submodules.md
+- no-submodules.md
 ---
 
 ## The Basics
 
-Brooklyn is available at [GitHub apache/incubator-brooklyn](http://github.com/apache/incubator-brooklyn).  Check it out using:
+The Apache Brooklyn source code is available at [GitHub apache/brooklyn](http://github.com/apache/brooklyn),
+together with many [`brooklyn-*` sub-module projects](https://github.com/apache?query=brooklyn).
+Checkout and build all the submodules with:
 
 {% highlight bash %}
-git clone git@github.com:apache/incubator-brooklyn.git
+git clone http://github.com/apache/brooklyn/
 cd brooklyn
-{% endhighlight %}
+git submodule init
+git submodule update --remote --merge --recursive
 
-Build it with:
-
-{% highlight bash %}
 mvn clean install
 {% endhighlight %}
 
-And launch it with:
+This will produce an artifact in `brooklyn-dist/dist/brooklyn-dist-0.9.0-SNAPSHOT-dist.tar.gz` <!-- BROOKLYN_VERSION -->
+which you can use [in the usual way](../../start/running.html).
+Some options which may be useful:
 
-{% highlight bash %}
-cd usage/dist/target/brooklyn-dist/
-bin/brooklyn launch
-{% endhighlight %}
+* Use `--depth 1` with `git clone` to skip the history (much faster but your `git log` will be incomplete)
+* Use `-DskipTests` with `mvn` to skip tests (again much faster but it won't catch failures)
+* Drop `--recursive` on the `git clone` and set up some submodules manually 
+  (e.g. with `git submodule init && git submodule update --remote [module]`) 
+  or avoid submodules, following the directions below
 
-{% comment %}
-TODO examples
-Plenty of examples are in the **examples** sub-dir,
-described [here]({{site.path.guide}}/use/examples).
-{% endcomment %}
+Thereafter to update the code in submodules, we strongly recommend doing this:
 
-Information on using Brooklyn -- configuring locations (in `brooklyn.properties`)
-and adding new projects to a catalog -- can be found in the [User's Guide]({{site.path.guide}}).
-This document is intended to help people become familiar with the codebase.
+    git pull && git submodule update --remote --merge --recursive
 
-## Project Structure
+This merges the latest upstream changes into the current branch of each sub-module on your local machine,
+giving nice errors on conflicts.
+It's fine also to do branching and pulling in each submodule,
+but running `update` without these parameters can cause chaos!
+This chaos -- and a `git sup` alias for this command -- are described in the [submodules](submodules.html) page.
 
-Brooklyn is split into the following projects and sub-projects:
 
-* **``camp``**: the components for a server which speaks with the CAMP REST API and understands the CAMP YAML plan language
-* **``api``**: the pure-Java interfaces for interacting with the system
-* **``core``**: the base class implementations for entities and applications, entity traits, locations, policies, sensor and effector support, tasks, and more
-* **``locations``**: specific location integrations
-    * **``jclouds``**: integration with many cloud APIs and providers via Apache jclouds
-* **``policies``**: collection of useful policies for automating entity activity  
-* **``software``**: entities which are mainly launched by launched software processes on machines, and collections thereof
-    * **``base``**: software process lifecycle abstract classes and drivers (e.g. SSH) 
-    * **``webapp``**: web servers (JBoss, Tomcat), load-balancers (Nginx), and DNS (Geoscaling) 
-    * **``database``**: relational databases (SQL) 
-    * **``nosql``**: datastores other than RDBMS/SQL (often better in distributed environments) 
-    * **``messaging``**: messaging systems, including Qpid, Apache MQ, RabbitMQ 
-    * **``monitoring``**: monitoring tools, including Monit
-    * **``osgi``**: OSGi servers 
-    * **...**
-* **``utils``**: projects with lower level utilities
-    * **common**: Utility classes and methods developed for Brooklyn but not dependent on Brooklyn
-    * **groovy**: Groovy extensions and utility classes and methods developed for Brooklyn but not dependent on Brooklyn
-    * **jmx/jmxmp-ssl-agent**: An agent implementation that can be attached to a Java process, to give expose secure JMXMP
-    * **jmx/jmxrmi-agent**: An agent implementation that can be attached to a Java process, to give expose JMX-RMI without requiring all high-number ports to be open
-    * **rest-swagger**: Swagger REST API utility classes and methods developed for Brooklyn but not dependent on Brooklyn
-    * **test-support**: Test utility classes and methods developed for Brooklyn but not dependent on Brooklyn
-* **``usage``**: projects which make Brooklyn easier to use, either for end-users or Brooklyn developers
-    * **all**: maven project to supply a shaded JAR (containing all dependencies) for convenience
-    * **archetypes**: A maven archetype for easily generating the structure of new downstream projects
-    * **camp**: Brooklyn bindings for the CAMP REST API
-    * **cli**: backing implementation for Brooklyn's command line interface
-    * **dist**: builds brooklyn as a downloadable .zip and .tar.gz
-    * **jsgui**: Javascript web-app for the brooklyn management web console (builds a WAR)
-    * **launcher**: for launching brooklyn, either using a main method or invoked from the cli project
-    * **logback-includes**: Various helpful logback XML files that can be included; does not contain logback.xml 
-    * **logback-xml**: Contains a logback.xml that references the include files in brooklyn-logback-includes
-    * **rest-api**: The API classes for the Brooklyn REST api
-    * **rest-client**: A client Java implementation for using the Brooklyn REST API 
-    * **rest-server**: The server-side implementation of the Brooklyn REST API
-    * **scripts**: various scripts useful for building, updating, etc. (see comments in the scripts)
-    * **qa**: longevity and stress tests
-    * **test-support**: provides Brooklyn-specific support for tests, used by nearly all projects in scope ``test``
-* **``docs``**: the markdown source code for this documentation
-* **``examples``**: some canonical examples
-* **``sandbox``**: various projects, entities and policies which the Brooklyn Project is incubating
+### If You Can't Stand Submodules
+
+[These instructions](no-submodules.html) can help setting up a local environment
+which does not rely on submodules.
+
+
+### Contributing a Small Change
+
+If you're making a small change in one project, consider just using that project.
+Whether you use this uber-project or not, to [contribute]({{ site.path.website }}/developers/how-to-contribute.html) 
+you'll need to follow the usual fork->work->push->pull-request process.
+
+To understand where you might want to make your change,
+look at the [code structure](structure.html).
+
+
+### Bigger and Regular Changes
+
+Regular contributors will typically have their own fork for each of the submodule projects,
+and will probably want some other settings and tips [as described here](submodules.html).
+
+
+## History, Tags, and Workflow
+
+There are branches for each released version and tags for various other milestones.
+
+As described in more detail [here](submodules.html), we primarily use submodule remote branch tracking
+rather than submodule SHA1 ID's.
+
+The history prior to `0.9.0` is imported from the legacy `incubator-brooklyn` repo for reference and history only.
+Visit that repo to build those versions; they are not intended to build here.
+(Although this works:
+`mkdir merged ; for x in brooklyn-* ; do pushd $x ; git checkout 0.8.0-incubating ; cp -r * ../merged ; popd ; cd merged ; mvn clean install`.)
 
  
 ## Next Steps
 
-If you're interested in building and editing the code, check out:
+If you're interested in building and editing the code, you probably want to become familiar with these:
 
+* [Product structure](structure.html)
 * [Maven setup](../env/maven-build.html)
 * [IDE setup](../env/ide/)
 * [Tests](tests.html)
