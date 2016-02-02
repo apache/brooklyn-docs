@@ -17,34 +17,41 @@ You'll need to create a fork and then set up your local submodules should then h
 
 Assuming you've checked out from the Apache GitHub repos 
 following [the standard instructions](index.html)
-(such that that repo is the `origin` remote and you don't have any forks in your GitHub account -- 
-if you do you should probably delete them as their upstream is likely to be wrong!),
+(such that that repo is the `origin` remote),
 then you can use the following script to automatically do the fork at GitHub and modify your locally-defined remote repos:
 
 {% highlight bash %}
-hub fork
-# the above triggers a fork at GitHub and then does a git remote rename of origin to upstream 
-# and a git add origin pointing to your fork
+GITHUB_ID=YOUR_ID_HERE
 
-# configure upstream so pushes go to origin
-git remote set-url --push upstream $(git remote -v | grep origin | grep push | awk '{print $2}')
-# and configure master branch to pull/push against "upstream", i.e. pull from apache/ and push to your repo
-git checkout master && git branch --set-upstream-to upstream/master
+for DIR in . brooklyn-* ; do
+  pushd $DIR
+  PROJ=$(basename $(pwd))
+  echo adding repos for $PROJ
 
-# configure git to fetch pull-request branches
-git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+  if curl --fail https://github.com/${GITHUB_ID}/${PROJ} > /dev/null 2>&1 ; then
+    # fork exists; rename locally and add fork as origin
+    git remote rename origin upstream && git remote add origin git@github.com:${GITHUB_ID}/${PROJ}
+  else
+    # fork does not exist; create it. this will also do the rename and new remote add as origin
+    hub fork
+  fi
+  git fetch origin
+  git fetch upstream
 
-# configure the apache-git remote as the canonical Apache git server (not GitHub)
-git remote add apache-git https://git-wip-us.apache.org/repos/asf/brooklyn
-
-for x in brooklyn-* ; do
-  # repeat the above for each subproject
-  pushd $x
-  hub fork
+  # configure upstream so pushes go to origin
   git remote set-url --push upstream $(git remote -v | grep origin | grep push | awk '{print $2}')
+  # and configure master branch to pull/push against "upstream", i.e. pull from apache/ and push to your repo
   git checkout master && git branch --set-upstream-to upstream/master
+
+  # configure git to fetch pull-request branches
   git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
-  git remote add apache-git https://git-wip-us.apache.org/repos/asf/$x
+
+  # configure the apache-git remote as the canonical Apache git server (not GitHub)
+  git remote add apache-git https://git-wip-us.apache.org/repos/asf/${PROJ}
+
+  # and if you want your id as an org set up the same as origin
+  git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/${PROJ}
+
   popd
 done
 {% endhighlight %}
@@ -53,6 +60,10 @@ This requires the command-line tool `hub` [from github](https://github.com/githu
 run in the directory of the uber-project checked out earlier.
 
 You should then be able pull and update from upstream, push to origin, and create pull requests in each sub-project.
+To check it, run `git remote -v && git submodule foreach "git remote -v"`.
+
+
+## Multi-Project Changes
 
 Cross-project changes will require multiple PRs: 
 try to minimise these, especially where one depends on another,
@@ -64,7 +75,7 @@ in the dependent PR to help reviewers
 For information on reviewing and committing PRs, see [the committer's guide]({{site.path.website}}/developers/committers/merging-contributed-code.html).
 
 
-## Things You Should Know
+## Other Things You Should Know
 
 Our submodules track **branches**, rather than specific commits,
 although due to the way `git` works there are still references to specific commits.
@@ -112,23 +123,52 @@ Some of the things to be careful of are:
 
 ### Useful Aliases
 
+This sets up variants of `pull`, `diff`, and `push` -- called `sup`, `sdiff`, and `spush` -- which act across submodules:
+
 {% highlight bash %}
-git config --global alias.sup 'submodule update --remote --merge --recursive'
+git config --global alias.sup '!git pull && git submodule update --remote --merge --recursive'
 git config --global alias.sdiff '!git diff && git submodule foreach "git diff"'
+git config --global alias.spush '!git push && git submodule foreach "git push"'
 {% endhighlight %}
 
 
 ### Getting a Summary of Submodules
 
-In addition, the `git-summary` script [here]() makes working with submodules much more enjoyable,
+The `git-summary` script [here](https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092) makes working with submodules much more enjoyable,
 simply install and use `git ss` in the uber-project to see the status of each submodule:
 
 {% highlight bash %}
-curl https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092/raw/05f99aa95a5e8eb541bb79c6707324e26fc0f579/git-summary.sh \
+curl https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092/raw/208cf4b3ec2ede77297d2f6011821ae62cf9ac0c/git-summary.sh \
   | sudo tee /usr/local/bin/git-summary
 sudo chmod 755 /usr/local/bin/git-summary  
-git config --global alias.ss '!git-summary ; echo ; git submodule foreach --quiet "git summary"'
+git config --global alias.ss '!git-summary -r'
+git config --global alias.so '!git-summary -r -o'
 {% endhighlight %}
+
+You'll get output such as:
+
+{% highlight bash %}
+brooklyn: master <- upstream/master (up to date)
+
+brooklyn-client: master <- upstream/master (up to date)
+
+brooklyn-dist: master <- upstream/master (up to date)
+
+brooklyn-docs: master <- upstream/master (uncommitted changes only)
+  M guide/dev/code/submodules.md
+
+brooklyn-library: master <- upstream/master (up to date)
+
+brooklyn-server: master <- upstream/master (up to date)
+
+brooklyn-ui: test <- origin/test (upstream 2 ahead of master)
+  > 62c553e Alex Heneveld, 18 minutes ago: WIP 2
+  > 22cd0ad Alex Heneveld, 62 minutes ago: WIP 1
+ ?? wip-local-untracked-file
+{% endhighlight %}
+
+If you want it to run fast, or you're offline, you can use `git so` to run in off-line mode.
+Run `git-summary --help` for more information.
 
 
 ### Other Handy Commands
