@@ -28,7 +28,7 @@ the easiest way of getting started with Apache Brooklyn.
 
 Firstly, download and install:
 
- * [Vagrant](http://www.vagrantup.com/downloads){:target="_blank"}
+ * [Vagrant](https://www.vagrantup.com/downloads.html){:target="_blank"}
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads){:target="_blank"}
  
 Then download the default Apache Brooklyn vagrant configuration from [here](https://github.com/johnmccabe/vagrant-brooklyn-getting-started/archive/master.tar.gz){:target="_blank"}. This configuration contains everything you need to get started using Apache Brooklyn.
