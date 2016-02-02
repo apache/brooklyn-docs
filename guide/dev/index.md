@@ -14,7 +14,7 @@ children:
 - tips/
 - tips/logging.md
 - tips/debugging-remote-brooklyn.md
-- { link: "http://github.com/apache/incubator-brooklyn", title: "GitHub" }
+- { link: "http://github.com/apache/brooklyn", title: "GitHub" }
 - { link: "https://brooklyn.apache.org/v/latest/misc/javadoc", title: "Javadoc" }
 ---
 

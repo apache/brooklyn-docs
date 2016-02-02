@@ -183,22 +183,3 @@ or Swift. It has the following options:
 
 * `blob --container <containerName> --blob <blobName>`: retrieves the given blob
   (i.e. object), including metadata and its contents.
-
-  
-## Running from a Source Build
-
-Here is an example of the commands you might run to get the Brooklyn code, 
-compile it and launch an application:
-
-{% highlight bash %}
-git clone https://github.com/apache/incubator-brooklyn.git
-cd brooklyn
-mvn clean install -DskipTests
-BROOKLYN_HOME=$(pwd)
-export PATH=${PATH}:${BROOKLYN_HOME}/usage/dist/target/brooklyn-dist/bin/
-export BROOKLYN_CLASSPATH=${BROOKLYN_HOME}/examples/simple-web-cluster/target/classes
-nohup brooklyn launch --app brooklyn.demo.SingleWebServerExample --location localhost &
-{% endhighlight %}
-
-
-  

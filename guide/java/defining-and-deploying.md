@@ -113,7 +113,7 @@ Alternatively you can just add a ``main`` method to the application class as fol
 Compile and run this with the [``brooklyn-all`` jar]({{site.path.guide}}/start/download.html) on the classpath,
 pointing at your favourite WAR on your filesystem. 
 (If the ``import`` packages aren't picked up correctly,
-you can cheat by looking at [the file in Github](https://github.com/apache/incubator-brooklyn/blob/master/examples/simple-web-cluster/src/main/java/brooklyn/demo/WebClusterDatabaseExample.java);
+you can cheat by looking at [the file in Github](https://github.com/apache/brooklyn-library/blob/master/examples/simple-web-cluster/src/main/java/org/apache/brooklyn/demo/WebClusterDatabaseExample.java);
 and you'll find a sample WAR which uses the database as configured above 
 [here](http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war).)
  TODO example webapp url 

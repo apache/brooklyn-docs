@@ -15,7 +15,7 @@
         isEmpty: true
 
     - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
-      downloadUrl: https://raw.githubusercontent.com/apache/incubator-brooklyn/master/docs/guide/yaml/test/entities/script1.sh
+      downloadUrl: https://github.com/apache/brooklyn-docs/raw/master/guide/yaml/test/example_yaml/entities/script1.sh
       assertStatus:
         equals: 0
       assertOut: 

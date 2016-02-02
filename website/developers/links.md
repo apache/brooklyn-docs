@@ -16,5 +16,5 @@ Handy places:
   * [Apache releases]({{ apache_releases_repo_groupid_url }})
   * [Apache snapshots]({{ apache_snapshots_repo_groupid_url }})
  
-* **CI server** is a jenkins server at: [https://builds.apache.org/job/incubator-brooklyn-master-build/](https://builds.apache.org/job/incubator-brooklyn-master-build/)
+* **CI server** is a jenkins server at: [https://builds.apache.org/job/brooklyn-master-build/](https://builds.apache.org/job/brooklyn-master-build/)
 

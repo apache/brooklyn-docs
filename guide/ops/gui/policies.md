@@ -22,7 +22,7 @@ This policy automatically scales the cluster up or down to be the right size for
 
 The loadbalancer's `targets` policy ensures that the loadbalancer is updated as the cluster size changes.
 
-Sitting idle, this cluster will only contain one server, but you can use a tool like [jmeter](http://jmeter.apache.org/) pointed at the nginx endpoint to create load on the cluster. Download a jmeter test plan [here](https://github.com/apache/incubator-brooklyn/blob/master/examples/simple-web-cluster/resources/jmeter-test-plan.jmx).
+Sitting idle, this cluster will only contain one server, but you can use a tool like [jmeter](http://jmeter.apache.org/) pointed at the nginx endpoint to create load on the cluster. Download a jmeter test plan [here](https://github.com/apache/brooklyn-library/blob/master/examples/simple-web-cluster/resources/jmeter-test-plan.jmx).
 
 As load is added, Apache Brooklyn requests a new cloud machine, creates a new app server, and adds it to the cluster. As load is removed, servers are removed from the cluster, and the infrastructure is handed back to the cloud.
 

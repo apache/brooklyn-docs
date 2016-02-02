@@ -85,12 +85,12 @@ although we'd love to if anyone can help!):
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Build Order:
 [INFO] 
+[INFO] Brooklyn REST JavaScript Web GUI
+[INFO] Brooklyn Server Root
 [INFO] Brooklyn Parent Project
-[INFO] Brooklyn Utilities to Support Testing (listeners etc)
+[INFO] Brooklyn Test Support Utilities
 [INFO] Brooklyn Logback Includable Configuration
 [INFO] Brooklyn Common Utilities
-[INFO] Brooklyn Groovy Utilities
-[INFO] Brooklyn API
 
 ...
 

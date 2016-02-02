@@ -149,7 +149,7 @@ you must either have Brooklyn built locally or one of these snapshot repositorie
 
 ## Source Code
 
-Source code is hosted at [github.com/apache/incubator-brooklyn](http://github.com/apache/incubator-brooklyn),
+Source code is hosted at [github.com/apache/brooklyn](http://github.com/apache/brooklyn),
 with this version in branch [{{ site.brooklyn.git_branch }}]({{ site.brooklyn.url.git }}).
 Information on working with the source is [here]({{ site.path.guide }}/dev/code).
 
