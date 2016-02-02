@@ -6,8 +6,8 @@ title: Merging Contributed Code
 The Apache Brooklyn Git repositories are hosted in the ASF infrastructure and mirrored to Github. This is the current
 repository layout:
 
-- [Apache](https://git-wip-us.apache.org/repos/asf?s=incubator-brooklyn) - the main and official repository
-- [GitHub](https://github.com/apache/incubator-brooklyn) - mirror of the ASF repository, used to accept contributions
+- [Apache](https://git-wip-us.apache.org/repos/asf?s=brooklyn) - the main and official repository
+- [GitHub](https://github.com/apache/brooklyn) - mirror of the ASF repository, used to accept contributions
   and do code reviews
 
 
@@ -36,24 +36,14 @@ Rules of thumb
 Setting up your repository
 --------------------------
 
-Clone the canonical ASF repo using this command. The `--origin` option tells git to name the remote `apache` instead
-of the default, `origin`; this will reduce ambiguity when we later add a second remote upstream.
+Follow [these instructions]({{site.path.guide}}/dev/code/submodules.html) to configure your local repositories.
+Make sure the canonical ASF repo is enabled as that is where you'll need to push to merge changes,
+and that you are able to fetch pull-requests.
 
-    git clone --origin apache https://git-wip-us.apache.org/repos/asf/incubator-brooklyn.git
+Once that is done, run `git fetch --all` to update from all remote repositories - you will see all the pull requests appear:
 
-Add a second remote, for the GitHub repository.
-
-    git remote add github https://github.com/apache/incubator-brooklyn.git
-
-For the GitHub remote, add an additional `fetch` reference which will cause
-every pull request to be made available as a remote branch in your workspace.
-
-    git config --local --add remote.github.fetch '+refs/pull/*/head:refs/remotes/github/pr/*'
-
-Finally, run `git fetch --all` to update from all remote repositories - you will see all the pull requests appear:
-
-    * [new ref]         refs/pull/98/head -> github/pr/98
-    * [new ref]         refs/pull/99/head -> github/pr/99
+    * [new ref]         refs/pull/98/head -> upstream/pr/1234
+    * [new ref]         refs/pull/99/head -> upstream/pr/1235
 
 
 Merging a pull request
@@ -63,9 +53,9 @@ Fetch the latest remote branches, which will cause a remote branch for the PR to
 
     git fetch --all
 
-If you want to inspect the PR and/or run tests, check out the branch:
+If you want to inspect a particular PR and/or run tests, check out the branch:
 
-    git checkout github/pr/1234
+    git checkout upstream/pr/1234
 
 To perform the merge, first update your master branch to the latest:
 
@@ -74,8 +64,8 @@ To perform the merge, first update your master branch to the latest:
 
 Then merge and push:
 
-    git merge --no-ff -m 'This closes #1234' github/pr/1234
-    git push apache master
+    git merge --no-ff -m 'This closes #1234' upstream/pr/1234
+    git push apache-git master
 
 Note that this commit message is important, as this is what will trigger the
 pull request to be automatically closed, and the `--no-ff` means that a merge
@@ -87,13 +77,13 @@ Alternative options
 
 ### Adding the remote reference to the contributor's repository
 
-Fetch the branch of the user you want to merge from
+Fetch the branch of the user you want to merge from (replacing `-PROJECT` as appropriate):
 
-    git fetch https://github.com/user-to-merge-from/incubator-brooklyn.git branch-to-merge-from
+    git fetch https://github.com/user-to-merge-from/brooklyn-PROJECT.git branch-to-merge-from
 
-If you commonly merge from a particular user, you'll want to add their repo as a remote to make fetching branches easier.
+If you commonly merge from a particular user, you'll want to add their repo as a remote to make fetching branches easier:
 
-    git remote add user-to-merge-from https://github.com/user-to-merge-from/incubator-brooklyn.git
+    git remote add user-to-merge-from https://github.com/user-to-merge-from/brooklyn-PROJECT.git
     git fetch user-to-merge-from
 
 
@@ -110,9 +100,9 @@ Apply the patch preserving the original author:
 Additional information
 ----------------------
 
-Particularly for new committers, you may find the following information useful:
+Particularly for new committers, you may find the following ASF information useful:
 
-* [Guide for new project
-  committers](https://www.apache.org/dev/new-committers-guide.html)
+* [Guide for new project committers](https://www.apache.org/dev/new-committers-guide.html)
 * [Committers FAQ](https://www.apache.org/dev/committers.html)
 * [Git at Apache](https://git-wip-us.apache.org/)
+

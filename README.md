@@ -18,7 +18,7 @@ familiarise yourself with the standard workflow for Apache Brooklyn:
 Workstation Setup
 -----------------
 
-First, if you have not already done so, clone the `incubator-brooklyn` repository 
+First, if you have not already done so, clone the `brooklyn` repository and subprojects
 and set up the remotes as described in [Guide for committers][COMMIT].
 
 The Brooklyn documentation uses Markdown notation (what this file is written in)
@@ -135,8 +135,8 @@ The site itself is hosted at `brooklyn.apache.org` with a `CNAME`
 record from `brooklyn.io`.
 
 Content is published to the site by updating an 
-Apache subversion repository, `incubator-brooklyn-site-public` at
-`https://svn.apache.org/repos/asf/incubator/brooklyn/site`.
+Apache subversion repository, `brooklyn-site-public` at
+`https://svn.apache.org/repos/asf/brooklyn/site`.
 See below for more information.
 
 
@@ -197,17 +197,17 @@ the generated HTML files must be checked in to Subversion, whereupon an automate
 will publish the files to the live website.
 So, to push changes the live site, you will need to have the website directory checked out 
 from the Apache subversion repository. We recommend setting this up as a sibling to your
-`incubator-brooklyn` git project directory:
+`brooklyn` git project directory:
 
     # verify we're in the right location and the site does not already exist
     ls _build/build.sh || { echo "ERROR: you should be in the docs/ directory to run this command" ; exit 1 ; }
-    ls ../../incubator-brooklyn-site-public > /dev/null && { echo "ERROR: incubator-brooklyn-site-public dir already exists" ; exit 1 ; }
+    ls ../../brooklyn-site-public > /dev/null && { echo "ERROR: brooklyn-site-public dir already exists" ; exit 1 ; }
     pushd `pwd -P`/../..
     
-    svn --non-interactive --trust-server-cert co https://svn.apache.org/repos/asf/incubator/brooklyn/site incubator-brooklyn-site-public
+    svn --non-interactive --trust-server-cert co https://svn.apache.org/repos/asf/brooklyn/site brooklyn-site-public
     
     # verify it
-    cd incubator-brooklyn-site-public
+    cd brooklyn-site-public
     ls style/img/apache-brooklyn-logo-244px-wide.png || { echo "ERROR: checkout is wrong" ; exit 1 ; }
     export BROOKLYN_SITE_DIR=`pwd`
     popd
@@ -219,10 +219,10 @@ structure, set BROOKLYN_SITE_DIR to point to the directory as above.  Alternativ
 using the instructions in `build.sh` as a guide.)
 
 A typical update consists of the following commands (or a subset),
-copied to `${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}`:
+copied to `${BROOKLYN_SITE_DIR-../../brooklyn-site-public}`:
 
     # ensure svn repo is up-to-date (very painful otherwise)
-    cd ${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}
+    cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
     svn up
     cd -
 
@@ -248,7 +248,7 @@ Note in particular that deleted files need special attention (there is no analog
 `git add -A`!). Look at deletions carefully, to try to avoid breaking links, but once
 you've done that these commands might be useful:
 
-    cd ${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}
+    cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
     svn add * --force
     export DELETIONS=$( svn status | sed -e '/^!/!d' -e 's/^!//' )
     if [ ! -z "${DELETIONS}" ] ; then svn rm ${DELETIONS} ; fi
