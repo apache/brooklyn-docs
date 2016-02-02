@@ -16,8 +16,8 @@ The scripts below use several environment variables to cut out repetition and en
 release. You should determine the following information and set your environment:
 
 {% highlight bash %}
-# The version we are releasing now. While Brooklyn is in the Apache Incubator, this must be suffixed `-incubating`.
-VERSION_NAME=0.7.0-incubating
+# The version we are releasing now.
+VERSION_NAME=0.9.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1

@@ -87,4 +87,4 @@ You might also find the following helpful:
 
 * **[Entity Design Tips]({{site.path.guide}}/dev/tips/index.html#EntityDesign)**
 * The **[User Guide]({{site.path.guide}})**
-* The **[Mailing List](https://mail-archives.apache.org/mod_mbox/incubator-brooklyn-dev/)**
+* The **[Mailing List](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/)**

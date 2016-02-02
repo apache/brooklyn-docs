@@ -13,8 +13,8 @@ OLD_MASTER_VERSION=0.9.0-SNAPSHOT
 # The next version to be set on the master branch
 NEW_MASTER_VERSION=0.NNN+1.0-SNAPSHOT
 
-# The version we are releasing now. While Brooklyn is in the Apache Incubator, this must be suffixed `-incubating`.
-VERSION_NAME=0.NNN.0-incubating
+# The version we are releasing now.
+VERSION_NAME=0.NNN.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1

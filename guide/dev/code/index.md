@@ -88,5 +88,5 @@ If you're interested in building and editing the code, you probably want to beco
 * [Remote Debugging](../tips/debugging-remote-brooklyn.html)
 
 Where things aren't documented **please ask us** at 
-[the brooklyn mailing list](https://mail-archives.apache.org/mod_mbox/incubator-brooklyn-dev/)
+[the brooklyn mailing list](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/)
 so we can remedy this!

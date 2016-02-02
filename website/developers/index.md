@@ -6,7 +6,7 @@ children:
 - /guide/dev/
 - committers/
 - code-standards.md
-- { link: 'http://github.com/apache/incubator-brooklyn', title: 'GitHub' }
+- { link: 'http://github.com/apache/brooklyn', title: 'GitHub' }
 - { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 ---
 
