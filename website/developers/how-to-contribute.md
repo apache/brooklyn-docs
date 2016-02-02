@@ -18,7 +18,7 @@ process of making contributions to the Apache Brooklyn code base.
 </div>
 <div class="panel-body" markdown="1">
 
-* Pull request to [GitHub](http://github.com/apache/incubator-brooklyn).
+* Pull request to the relevant [GitHub](http://github.com/apache/?query=brooklyn) project
 * Sign the [Apache CLA](https://www.apache.org/licenses/#clas) if it's non-trivial.
 * For bigger changes, open a [Jira](https://issues.apache.org/jira/browse/BROOKLYN)
    and/or [email the list](../community/mailing-lists.html).
@@ -56,8 +56,9 @@ existing issue anyway.
 
 ### Contributing using GitHub
 
-This is our preferred way for contributing code. Our GitHub repository is located at
-[https://github.com/apache/incubator-brooklyn](https://github.com/apache/incubator-brooklyn)
+This is our preferred way for contributing code. Our root GitHub repository is located at
+[https://github.com/apache/brooklyn](https://github.com/apache/brooklyn) with most of the code in one of the subprojects.
+You can checkout and PR against just one of the projects listed there. See the README in our root repository for information on subprojects.
 
 Your commit messages must properly describes the changes that have been made and their purpose
 ([here are some guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)). If your
@@ -96,9 +97,12 @@ easily understood.
 ### Contributing without using GitHub
 
 If you prefer to not use GitHub, then that is fine - we are also happy to accept patches attached to a Jira issue.
-Our canonical repository is located at `https://git-wip-us.apache.org/repos/asf/incubator-brooklyn.git`; for example:
+Our canonical root repository is located at `https://git-wip-us.apache.org/repos/asf/brooklyn.git` with others
+in `brooklyn-*.git`; for example:
 
-    $ git clone https://git-wip-us.apache.org/repos/asf/incubator-brooklyn.git
+{% highlight bash %}
+$ git clone https://git-wip-us.apache.org/repos/asf/brooklyn-server.git
+{% endhighlight %}
 
 When producing patches, please use `git format-patch` or a similar mechanism - this will ensure that you are properly
 attributed as the author of the patch when a committer merges it.

@@ -62,4 +62,5 @@ For More Information
 
 Advanced instructions for building, previewing and publishing docs are in a `README.md` file
 in the `docs` folder; see those instructions
-[here](https://github.com/apache/incubator-brooklyn/tree/master/docs/README.md).
+[here](https://github.com/apache/brooklyn-docs).
+

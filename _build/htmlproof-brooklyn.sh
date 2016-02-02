@@ -7,7 +7,6 @@ require 'html/proofer'
 HTML::Proofer.new("./_site", {
   :href_ignore => [
       /https?:\/\/127.*/,
-      /https?:\/\/github.com\/apache\/incubator-brooklyn\/edit.*/,
       ((ARGV.include? "--ignore-v-refs") ? /.*\/v\/.*/ : /ignore/),
       ((ARGV.include? "--v-only") ? /\/(|[^v].*|.[^\/].*)/ : /ignore/)
       ],

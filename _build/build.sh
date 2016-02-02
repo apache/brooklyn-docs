@@ -31,7 +31,7 @@ function help() {
   echo "* --skip-javadoc : to skip javadoc build"
   echo "* --quick-javadoc : to do a quick javadoc build (for testing)"
   echo "* --serve : serve files from _site after building (for testing)"
-  echo "* --install : install files from _site to the appropriate place in "'$'"BROOKLYN_SITE_DIR (or ../../incubator-brooklyn-site-public)"
+  echo "* --install : install files from _site to the appropriate place in "'$'"BROOKLYN_SITE_DIR (or ../../brooklyn-site-public)"
   echo "* --skip-htmlproof : skip the HTML Proof run on _site"
   echo "* --quick-htmlproof : do a fast HTML Proof run on _site (not checking external links)"
   echo ""
@@ -244,8 +244,8 @@ function make_install() {
   fi
   if [ ! -z ${QUICK_JAVADOC+SET} ]; then echo "ERROR: --install not permitted when doing quick javadoc" ; return 1 ; fi
 
-  SITE_DIR=${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}
-  ls $SITE_DIR/style/img/apache-brooklyn-logo-244px-wide.png > /dev/null || { echo "ERROR: cannot find incubator-brooklyn-site-public; set BROOKLYN_SITE_DIR" ; return 1 ; }
+  SITE_DIR=${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
+  ls $SITE_DIR/style/img/apache-brooklyn-logo-244px-wide.png > /dev/null || { echo "ERROR: cannot find brooklyn-site-public; set BROOKLYN_SITE_DIR" ; return 1 ; }
   if [ -z ${INSTALL_RSYNC_OPTIONS+SET} ]; then echo "ERROR: --install not supported for this build" ; return 1 ; fi
   if [ -z ${INSTALL_RSYNC_SUBDIR+SET} ]; then echo "ERROR: --install not supported for this build" ; return 1 ; fi
   

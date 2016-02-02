@@ -5,37 +5,63 @@ layout: website-normal
 
 ## Setting Up Forks
 
-If you're contributing regularly, you'll want your submodules to pull from the `apache` repo
+If you're contributing regularly, you'll want your submodules to pull from the repo in the Apache GitHub org
 and push to your fork.
-You'll need to create a fork and the set up your local submodules should then have:
+You'll need to create a fork and then set up your local submodules should then have:
 
 * your fork as the `origin` remote repo
-* the Apache github repo as the `upstream` remote repo
-* optionally the repo at the Apache git server as the `apache` remote repo  
+* the Apache GitHub repo as the `upstream` remote repo, 
+  optionally with `origin` set as the `push` target (since you can't push to `github.com/apache`)
+  and fetch set up to get pull-request branches
+* optionally the repo at the Apache git server as the `apache-git` remote repo
 
-This can be done automatically with the following commands:
+Assuming you've checked out from the Apache GitHub repos 
+following [the standard instructions](index.html)
+(such that that repo is the `origin` remote and you don't have any forks in your GitHub account -- 
+if you do you should probably delete them as their upstream is likely to be wrong!),
+then you can use the following script to automatically do the fork at GitHub and modify your locally-defined remote repos:
 
 {% highlight bash %}
-    hub fork
-    git remote add apache https://git-wip-us.apache.org/repos/asf/$x
-    for x in brooklyn-* ; do
-      pushd $x
-      hub fork
-      git remote add apache https://git-wip-us.apache.org/repos/asf/$x
-      popd
-    done
+hub fork
+# the above triggers a fork at GitHub and then does a git remote rename of origin to upstream 
+# and a git add origin pointing to your fork
+
+# configure upstream so pushes go to origin
+git remote set-url --push upstream $(git remote -v | grep origin | grep push | awk '{print $2}')
+# and configure master branch to pull/push against "upstream", i.e. pull from apache/ and push to your repo
+git checkout master && git branch --set-upstream-to upstream/master
+
+# configure git to fetch pull-request branches
+git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+
+# configure the apache-git remote as the canonical Apache git server (not GitHub)
+git remote add apache-git https://git-wip-us.apache.org/repos/asf/brooklyn
+
+for x in brooklyn-* ; do
+  # repeat the above for each subproject
+  pushd $x
+  hub fork
+  git remote set-url --push upstream $(git remote -v | grep origin | grep push | awk '{print $2}')
+  git checkout master && git branch --set-upstream-to upstream/master
+  git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+  git remote add apache-git https://git-wip-us.apache.org/repos/asf/$x
+  popd
+done
 {% endhighlight %}
 
 This requires the command-line tool `hub` [from github](https://github.com/github/hub) (or `sudo npm install -g hub`), 
 run in the directory of the uber-project checked out earlier.
 
-You can then pull and update from upstream, push to origin, and create pull requests in each sub-project.
+You should then be able pull and update from upstream, push to origin, and create pull requests in each sub-project.
+
 Cross-project changes will require multiple PRs: 
 try to minimise these, especially where one depends on another,
 and especially especially where two depend on each other -- that is normally a sign of broken backwards compatibility!
 Open the PRs in dependency order and assist reviewers by including the URLs of any upstream dependency PRs 
 in the dependent PR to help reviewers 
 (dependency PRs will then include a "mention" comment of the dependent PR).
+
+For information on reviewing and committing PRs, see [the committer's guide]({{site.path.website}}/developers/committers/merging-contributed-code.html).
 
 
 ## Things You Should Know
@@ -121,15 +147,14 @@ for x in brooklyn-* ; do pushd $x ; git status ; popd ; done
 If you need to apply code changes made pre-graduation, against the incubator repository,
 splitting it up into submodules, it's fairly straightforward:
 
-1. In the incubator codebase, start at its final state, in `master`.
-2. `git checkout -b making-a-diff`
-3. Merge or rebase the required commits. 
-   Ensure conflicts are resolved, but don't worry about commit messages.
-4. `git diff > /tmp/diff`
+1. In the incubator codebase, start at its final state: `cd .../incubator-brooklyn && git checkout master && git pull`
+2. Make a branch for your merged changes: `git checkout -b my-branch-merged-master`
+3. Merge or rebase the required commits (resolving conflicts; but don't worry about commit messages): `git merge my-branch`
+4. Create a patch file: `git diff > /tmp/diff-for-my-branch`
 5. Go to the new `brooklyn` uber-project directory.
-   Ensure you are at master and all subprojects updated (`git sup`).
-6. `patch -p1 < /tmp/diff` 
-7. Run `git ss` to inspect the changes.
+   Ensure you are at master and all subprojects updated: `cd .../brooklyn/ && git sup`
+6. Apply the patch: `patch -p1 < /tmp/diff-for-my-branch` 
+7. Inspect the changes: `git ss`
 8. Test it, commit each changed project on a branch and create pull requests.
    Where applicable, record the original author(s) and message(s) in the commit.
 
