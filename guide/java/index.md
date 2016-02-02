@@ -2,6 +2,7 @@
 title: Java Blueprints
 title_in_menu: Java Blueprints
 layout: website-normal
+started-pdf-exclude: true
 children:
 - archetype.md
 - defining-and-deploying.md

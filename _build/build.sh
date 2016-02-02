@@ -31,9 +31,10 @@ function help() {
   echo "* --skip-javadoc : to skip javadoc build"
   echo "* --quick-javadoc : to do a quick javadoc build (for testing)"
   echo "* --serve : serve files from _site after building (for testing)"
-  echo "* --install : install files from _site to the appropriate place in "'$'"BROOKLYN_SITE_DIR (or ../../brooklyn-site-public)"
+  echo "* --install : install files from _site to the appropriate place in "'$'"BROOKLYN_SITE_DIR (or ../../incubator-brooklyn-site-public)"
   echo "* --skip-htmlproof : skip the HTML Proof run on _site"
   echo "* --quick-htmlproof : do a fast HTML Proof run on _site (not checking external links)"
+  echo "* --skip-pdf : skip generation of the PDF Documentation"
   echo ""
 }
 
@@ -156,6 +157,10 @@ function parse_arguments() {
       QUICK_HTMLPROOF=true
       shift
       ;;
+    "--skip-pdf")
+      SKIP_PDF=true
+      shift
+      ;;
     *)
       echo "ERROR: invalid argument '"$1"'"
       exit 1
@@ -165,12 +170,25 @@ function parse_arguments() {
 }
 
 # Runs htmlproof against _site
+function build_pdf() {
+  if [ "$SKIP_PDF" == "true" ]; then
+    return
+  fi
+  echo "Running PDF Generation on _site/UserManual.html"
+  rm -rf _pdf
+  mkdir -p _pdf
+  PDF_MANUAL_LOG="_pdf/pdf_gen_manual.log"
+  PDF_STARTED_LOG="_pdf/pdf_gen_started.log"
+  _build/buildPDF.sh "_site/singlePageManual.html" "_pdf/UserManual.pdf" 2>&1 | tee $PDF_MANUAL_LOG
+  _build/buildPDF.sh "_site/singlePageStarted.html" "_pdf/GettingStarted.pdf" 2>&1 | tee $PDF_STARTED_LOG
+}
+
+# Runs htmlproof against _site
 function test_site() {
   if [ "$SKIP_HTMLPROOF" == "true" ]; then
     return
   fi
   echo "Running htmlproof on _site"
-  mkdir -p _build/target
   HTMLPROOF_LOG="_build/target/htmlproof.log"
   if [ "$QUICK_HTMLPROOF" == "true" ]; then
     HTMLPROOF_OPTS="$HTMLPROOF_OPTS --disable_external"
@@ -250,8 +268,8 @@ function make_install() {
   fi
   if [ ! -z ${QUICK_JAVADOC+SET} ]; then echo "ERROR: --install not permitted when doing quick javadoc" ; return 1 ; fi
 
-  SITE_DIR=${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
-  ls $SITE_DIR/style/img/apache-brooklyn-logo-244px-wide.png > /dev/null || { echo "ERROR: cannot find brooklyn-site-public; set BROOKLYN_SITE_DIR" ; return 1 ; }
+  SITE_DIR=${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}
+  ls $SITE_DIR/style/img/apache-brooklyn-logo-244px-wide.png > /dev/null || { echo "ERROR: cannot find incubator-brooklyn-site-public; set BROOKLYN_SITE_DIR" ; return 1 ; }
   if [ -z ${INSTALL_RSYNC_OPTIONS+SET} ]; then echo "ERROR: --install not supported for this build" ; return 1 ; fi
   if [ -z ${INSTALL_RSYNC_SUBDIR+SET} ]; then echo "ERROR: --install not supported for this build" ; return 1 ; fi
   
@@ -303,6 +321,8 @@ fi
 make_jekyll || { echo ERROR: failed jekyll docs build in `pwd` ; exit 1 ; }
 
 make_javadoc || { echo ERROR: failed javadoc build ; exit 1 ; }
+
+build_pdf
 
 test_site
 

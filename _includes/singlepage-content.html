@@ -1,0 +1,59 @@
+{% pop site_items item %}
+{% if item[pageMask] != true %}
+	
+	{% set_hash_entry item path item_path %}
+	{% set_hash_entry item url item_url %}
+	{% set_hash_entry item content item_content %}
+	{% set_hash_entry item title item_title %}
+	{% set_hash_entry item id item_id %}
+	
+	{% unless item_path %}
+	 {% unless item_url %}
+	  {% puts error, null item_url %}
+	  {% putp item %}
+	  {% putv item_url %}
+	  {% fail item missing path and url (jekyll block evaluation order can cause this) %}
+	 {% endunless %}
+	{% endunless %}
+	
+	 {% if visitedb contains item_title %}
+	  {% comment %} <!-- ignore --> {% endcomment %}
+	 {% elsif item['external'] %}
+	 {% comment %} <!-- ignore --> {% endcomment %}
+	  
+	 {% else %}
+	 {% capture pid %}{{ item.title | remove:'/' | replace:' ','-' | downcase }}{% endcapture %}
+	 {% if item_content != null %}
+	<div id="contentsLink-{{pid}}" class="section p-{{item_id}}">
+	<h1>{{ item_title }}</h1>
+	{% comment %}
+	<!-- 
+	  --This Section re-writes images so the base of their paths is the root docs directory. This allows the PDF to build properly.
+	  -->
+	{% endcomment %}
+	
+	{% comment %}<!-- Build the page directory by removing the file name from the item url -->{% endcomment %}
+	{% capture page_url %}{{ item_url | replace_regex:'[^\/]*$', '' }}{% endcapture %}
+	{% capture new_var %}img src=".{{ page_url }}{% endcapture %}
+	
+	{% comment %}<!-- Build a regex which replaces the current path with an absolute one but leaves any sub folders such as /images -->{% endcomment %}
+	{% capture regex %}(img(.*)src="{{ page_url | replace:'/','\/' }})|(img(.*)src="){% endcapture %}
+	
+	{% comment %}<!-- Filter the content of the included page -->{% endcomment %}
+	{% capture content_filtered %}{{ item_content | replace_regex:regex, new_var }}{% endcapture %}
+	{{ content_filtered }}
+	</div>
+	 {% endif %}
+	  {% if item['menu'] %}
+	   {% push visitedb item_title %}
+	    {% push site_items item %}
+	    {% assign last_item = site_items[-1] %}
+	    {% for item in last_item['menu'] %}
+	     {% push site_items item %}
+	     {% include singlepage-content.html %}
+	    {% endfor %}
+	    {% pop site_items item %}
+	  {% endif %}
+	 {% endif %}
+
+ {% endif %}

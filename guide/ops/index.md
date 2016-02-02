@@ -1,5 +1,6 @@
 ---
 title: Operations
+started-pdf-exclude: true
 layout: website-normal
 children:
 - server-cli-reference.md

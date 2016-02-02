@@ -1,6 +1,8 @@
 ---
 layout: website-normal
 title: Community
+started-pdf-exclude: true
+usermanual-pdf-exclude: true
 children:
 - mailing-lists.md
 - irc.md
