@@ -27,7 +27,7 @@ services:
 - type: brooklyn.entity.webapp.jboss.JBoss7Server
   name: AppServer HelloWorld
   brooklyn.config:
-    wars.root: http://search.maven.org/remotecontent?filepath=io/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.6.0/brooklyn-example-hello-world-sql-webapp-0.6.0.war
+    wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war
     http.port: 8080+
     java.sysprops:
       brooklyn.example.db.url: $brooklyn:formatString("jdbc:postgresql://%s/myappdb?user=%s\\&password=%s",
