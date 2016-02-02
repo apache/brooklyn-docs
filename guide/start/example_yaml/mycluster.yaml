@@ -1,0 +1,59 @@
+name: Tomcat Cluster
+
+location:
+  byon:
+    user: vagrant
+    password: vagrant
+    hosts:
+      - 10.10.10.101
+      - 10.10.10.102
+      - 10.10.10.103
+      - 10.10.10.104
+ 
+services:
+- type: org.apache.brooklyn.entity.group.DynamicCluster
+  name: Cluster
+  id: cluster
+  brooklyn.config:
+    initialSize: 1
+    memberSpec:
+      $brooklyn:entitySpec:
+        type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+        name: Tomcat Server
+        brooklyn.config:
+          wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.8.0-incubating/brooklyn-example-hello-world-webapp-0.8.0-incubating.war
+ 
+        brooklyn.policies:
+        - type: org.apache.brooklyn.policy.ha.ServiceRestarter
+          brooklyn.config:
+            failOnRecurringFailuresInThisDuration: 5m
+        brooklyn.enrichers:
+        - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector
+          brooklyn.config:
+            entityFailed.stabilizationDelay: 30s
+ 
+  brooklyn.policies:
+  - type: org.apache.brooklyn.policy.ha.ServiceReplacer
+ 
+  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
+    brooklyn.config:
+      metric: webapp.reqs.perSec.perNode
+      metricUpperBound: 3
+      metricLowerBound: 1
+      resizeUpStabilizationDelay: 2s
+      resizeDownStabilizationDelay: 1m
+      maxPoolSize: 3
+
+  brooklyn.enrichers:
+  - type: org.apache.brooklyn.enricher.stock.Aggregator
+    brooklyn.config:
+      enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
+      enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
+      enricher.aggregating.fromMembers: true
+      transformation: average
+
+- type: org.apache.brooklyn.entity.proxy.nginx.NginxController
+  name: Load Balancer (nginx)
+  brooklyn.config:
+    loadbalancer.serverpool: $brooklyn:entity("cluster")
+    nginx.sticky: false
