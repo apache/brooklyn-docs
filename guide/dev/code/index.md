@@ -27,9 +27,7 @@ Some options which may be useful:
 
 * Use `--depth 1` with `git clone` to skip the history (much faster but your `git log` will be incomplete)
 * Use `-DskipTests` with `mvn` to skip tests (again much faster but it won't catch failures)
-* Drop `--recursive` on the `git clone` and set up some submodules manually 
-  (e.g. with `git submodule init && git submodule update --remote [module]`) 
-  or avoid submodules, following the directions below
+* See below if you don't want to use submodules
 
 Thereafter to update the code in submodules, we strongly recommend doing this:
 
@@ -39,7 +37,8 @@ This merges the latest upstream changes into the current branch of each sub-modu
 giving nice errors on conflicts.
 It's fine also to do branching and pulling in each submodule,
 but running `update` without these parameters can cause chaos!
-This chaos -- and a `git sup` alias for this command -- are described in the [submodules](submodules.html) page.
+The [submodules](submodules.html) page will elaborate on potential chaos and pitfalls,
+and it provides instructions for setting up an alias `git sup` for this command.
 
 
 ### If You Can't Stand Submodules
