@@ -44,6 +44,12 @@ be described in [YAML][].
 An operation on an [entity][].
 
 
+#### Enricher
+
+Generates new events or [sensor][] values (metrics) for an entity, usually by aggregating 
+or modifying data from one or more other sensors.
+
+
 #### Entity
 
 A component of an application or system. This could be a physical component, a
@@ -71,10 +77,10 @@ A human-readable data format.
 * [Wikipedia article](http://en.wikipedia.org/wiki/YAML) on YAML
 
 
-#### Apache Jclouds
+#### Apache jclouds
 
 An open source Java library that provides a consistent interface to many
-clouds. Apache Brooklyn uses Apache Jclouds as its core cloud abstraction.
+clouds. Apache Brooklyn uses Apache jclouds as its core cloud abstraction.
 
 ###### See also
 * [Project homepage](https://jclouds.apache.org/)
