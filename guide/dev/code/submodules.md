@@ -134,13 +134,10 @@ git config --global alias.spush '!git push && git submodule foreach "git push"'
 
 ### Getting a Summary of Submodules
 
-The `git-summary` script [here](https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092) makes working with submodules much more enjoyable,
-simply install and use `git ss` in the uber-project to see the status of each submodule:
+The `git-summary` script [in the brooklyn-dist/scripts](https://github.com/apache/brooklyn-dist/tree/master/scripts) makes working with submodules much more enjoyable.
+Follow the `README` in that directory to add those scripts to your path, and then set up the following git aliases:
 
 {% highlight bash %}
-curl https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092/raw/208cf4b3ec2ede77297d2f6011821ae62cf9ac0c/git-summary.sh \
-  | sudo tee /usr/local/bin/git-summary
-sudo chmod 755 /usr/local/bin/git-summary  
 git config --global alias.ss '!git-summary -r'
 git config --global alias.so '!git-summary -r -o'
 {% endhighlight %}
