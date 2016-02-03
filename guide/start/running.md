@@ -23,7 +23,7 @@ Two methods of deployment are detailed in this tutorial, using virtualisation wi
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
-[Vagrant](https://www.vagrantup.com/){:target="_blank"} is a software package which automates the process of setting up virtual environments such as [Oracle VirtualBox](https://www.virtualbox.org){:target="_blank"}. We recommend it as
+[Vagrant](https://www.vagrantup.com/){:target="_blank"} is a software package which automates the process of setting up virtual machines (VM) such as [Oracle VirtualBox](https://www.virtualbox.org){:target="_blank"}. We recommend it as
 the easiest way of getting started with Apache Brooklyn.
 
 Firstly, download and install:
@@ -31,7 +31,7 @@ Firstly, download and install:
  * [Vagrant](http://www.vagrantup.com/downloads){:target="_blank"}
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads){:target="_blank"}
  
-Then download the default Apache Brooklyn vagrant configuration from [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}. This configuration contains everything you need to get started using Apache Brooklyn.
+Then download the provided Apache Brooklyn vagrant configuration from [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}. This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
 
 Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{site.brooklyn-version}}-vagrant` folder
 
