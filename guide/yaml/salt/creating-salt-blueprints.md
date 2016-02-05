@@ -15,7 +15,7 @@ For example:
     location: mylocation
     services:
     - id: minion1
-      type: org.apache.brooklyn.cm.salt.SaltEntity
+      type: org.apache.brooklyn.entity.cm.salt.SaltEntity
       name: myent
       start_states:
         - apache
@@ -76,7 +76,7 @@ configuration data.  For example:
     location: mylocation
     services:
     - id: mydb
-      type: org.apache.brooklyn.cm.salt.SaltEntity
+      type: org.apache.brooklyn.entity.cm.salt.SaltEntity
       name: saltdb
     
       start_states:
