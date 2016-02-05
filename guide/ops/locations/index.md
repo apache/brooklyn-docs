@@ -184,6 +184,11 @@ For more keys and more detail on the keys below, see
   (It is useful in the case of `loginUser.publicKeyFile`, where you shouldn't need,
   or might not even have, the private key of the `root` user when you log in.)
 
+- Provide a list of URLs to public keys in `extraSshPublicKeyUrls`,
+  or the data of one key in `extraSshPublicKeyData`,
+  to have additional public keys added to the `authorized_keys` file for logging in.
+  (This is supported in most but not all locations.)
+  
 - Use `dontCreateUser` to have Brooklyn run as the initial `loginUser` (usually `root`),
   without creating any other user.
 
@@ -297,11 +302,35 @@ brooklyn.location.named.AWS\ Virginia\ Large\ Centos.user=root
 brooklyn.location.named.AWS\ Virginia\ Large\ Centos.minRam=4096
 {% endhighlight %}
 
-The precedence for configuration defined at different levels is that the most value
+Named locations can refer to other named locations using `named:xxx` as their value.
+These will inherit the configuration and can override selected keys.
+Properties set in the namespace of the provider (e.g. `b.l.jclouds.aws-ec2.KEY=VALUE`)
+will be inherited by everything which extends AWS
+Sub-prefix strings are also inherited up to `brooklyn.location.*`, 
+except that they are filtered for single-word and other
+known keys 
+(so that we exclude provider-scoped properties when looking at sub-prefix keys).
+The precedence for configuration defined at different levels is that the value
 defined in the most specific context will apply.
 
-For example, in the example below the config key is repeatedly overridden. If you deploy
-`location: named:my-aws`, Brooklyn will get `VAL5` or `KEY`:
+This is rather straightforward and powerful to use,
+although it sounds rather more complicated than it is!
+The examples below should make it clear.
+You could use the following to install
+a public key on all provisioned machines,
+an additional public key in all AWS machines, 
+and no extra public key in `prod1`: 
+
+<!-- tested in JcloudsLocationResolverTest -->
+{% highlight bash %}
+brooklyn.location.extraSshPublicKeyUrls=http://me.com/public_key
+brooklyn.location.jclouds.aws-ec2.extraSshPublicKeyUrls="[ \"http://me.com/public_key\", \"http://me.com/aws_public_key\" ]"
+brooklyn.location.named.prod1.extraSshPublicKeyUrls=
+{% endhighlight %}
+
+And in the example below, a config key is repeatedly overridden. 
+Deploying `location: named:my-extended-aws` will result in an `aws-ec2` machine in `us-west-1` (by inheritance)
+with `VAL6` for `KEY`:
   
 {% highlight bash %}
 brooklyn.location.KEY=VAL1
@@ -310,6 +339,8 @@ brooklyn.location.jclouds.aws-ec2.KEY=VAL3
 brooklyn.location.jclouds.aws-ec2@us-west-1.KEY=VAL4
 brooklyn.location.named.my-aws=jclouds:aws-ec2:us-west-1
 brooklyn.location.named.my-aws.KEY=VAL5
+brooklyn.location.named.my-extended-aws=named:my-aws
+brooklyn.location.named.my-extended-aws.KEY=VAL6
 {% endhighlight %}
 
 
