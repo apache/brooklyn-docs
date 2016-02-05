@@ -1,6 +1,7 @@
 ---
 title: Apache Brooklyn Manual
 layout: singlePage
+page_mask: usermanual-pdf-exclude
 ---
 	<div id="content_container" class="container">
 	<header>
@@ -8,9 +9,7 @@ layout: singlePage
 	</header>
 		<h1>Contents</h1>
 	
-	{% assign pageMask = "usermanual-pdf-exclude" %}
-	
-	    <nav><ul><!-- site.pages --> 
+	    <nav><ul>
 		  {% assign visited = "" | split: "|" %}
 	      {% for node in site.data.menu  %}
 			  {% push site_items node %}
@@ -23,4 +22,5 @@ layout: singlePage
 			  {% push site_items node %}
 			  {% include singlepage-content.html %}
 	      {% endfor %}
+	  
   </div>

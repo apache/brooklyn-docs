@@ -132,4 +132,4 @@ The CLI provides the command `br`, it's full usage is described in the user manu
 
 ## Next
 
-The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.html)**.
+<div class="started-pdf-exclude">The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.html)**.</div>

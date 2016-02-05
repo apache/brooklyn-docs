@@ -1,6 +1,7 @@
 ---
 title: Apache Brooklyn Manual
 layout: singlePage
+page_mask: started-pdf-exclude
 ---
 	<div id="content_container" class="container">
 	<header>
@@ -8,9 +9,7 @@ layout: singlePage
 	</header>
 		<h1>Contents</h1>
 	
-	{% assign pageMask = "started-pdf-exclude" %}
-	
-	    <nav><ul><!-- site.pages --> 
+	    <nav><ul>
 		  {% assign visited = "" | split: "|" %}
 	      {% for node in site.data.menu  %}
 			  {% push site_items node %}

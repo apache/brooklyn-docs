@@ -1,0 +1,38 @@
+.nav.nav-tabs{
+	display: none;
+}
+#next{
+	display: none;
+}
+.collapse {
+    display: block;
+}
+.section-breaker {
+page-break-before:always;
+}
+.panel-heading{
+	padding-bottom: 15px;
+}
+/* The styled bootstrap panels */
+.panel-body, .panel-default{
+	background: none;
+	border: 0px solid #fff !important;
+	box-shadow: none;
+	padding: 0px;
+}
+.panel-default > .panel-heading{
+	background: none;
+	border: 0px solid #fff !important;
+	box-shadow: none;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+pre{
+	overflow: auto;
+	white-space: pre-wrap;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}

@@ -1,20 +1,11 @@
 {% pop site_items item %}
-{% if item[pageMask] != true %}
+{% if item[page.page_mask] != true %}
 	
 	{% set_hash_entry item path item_path %}
 	{% set_hash_entry item url item_url %}
 	{% set_hash_entry item content item_content %}
 	{% set_hash_entry item title item_title %}
 	{% set_hash_entry item id item_id %}
-	
-	{% unless item_path %}
-	 {% unless item_url %}
-	  {% puts error, null item_url %}
-	  {% putp item %}
-	  {% putv item_url %}
-	  {% fail item missing path and url (jekyll block evaluation order can cause this) %}
-	 {% endunless %}
-	{% endunless %}
 	
 	 {% if visitedb contains item_title %}
 	  {% comment %} <!-- ignore --> {% endcomment %}
@@ -24,7 +15,7 @@
 	 {% else %}
 	 {% capture pid %}{{ item.title | remove:'/' | replace:' ','-' | downcase }}{% endcapture %}
 	 {% if item_content != null %}
-	<div id="contentsLink-{{pid}}" class="section p-{{item_id}}">
+	<div id="contentsLink-{{pid}}" class="section-breaker section p-{{item_id}}">
 	<h1>{{ item_title }}</h1>
 	{% comment %}
 	<!-- 
@@ -34,13 +25,26 @@
 	
 	{% comment %}<!-- Build the page directory by removing the file name from the item url -->{% endcomment %}
 	{% capture page_url %}{{ item_url | replace_regex:'[^\/]*$', '' }}{% endcapture %}
-	{% capture new_var %}img src=".{{ page_url }}{% endcapture %}
+	
+	{% comment %}<!-- If the URL is prefixed with a pdf-rewrite-prefix, remove it -->{% endcomment %}
+	{% for part in site.pdf-rewrite-prefixes %}
+	  {% capture prefixed %}{{ page_url | startsWith: part[0] }}{% endcapture %}
+	  {% if prefixed == "true"  %}
+	  	{% capture page_url %}{{ part[1] }}{{ page_url | removePrefix: part[0] }}{% endcapture %}
+	  {% endif %}
+	{% endfor %}
+	
+	{% capture new_img %}img src=".{{ page_url }}{% endcapture %}
+	{% capture new_href %}href="{{ site.brooklyn-base-url }}{{ brooklyn-version }}{{ page_url }}{% endcapture %}
 	
 	{% comment %}<!-- Build a regex which replaces the current path with an absolute one but leaves any sub folders such as /images -->{% endcomment %}
-	{% capture regex %}(img(.*)src="{{ page_url | replace:'/','\/' }})|(img(.*)src="){% endcapture %}
+	{% capture img_regex %}(img(.*)src="{{ page_url | replace:'/','\/' }})|(img(.*)src="){% endcapture %}
+	
+	{% comment %}<!-- Build a regex which replaces the current links with an absolute one but leaves any sub folders such as /images and ignores # or external links -->{% endcomment %}
+	{% capture link_regex %}(href="{{ page_url | replace:'/','\/' }})|(href="(?!http)(?!#)){% endcapture %}
 	
 	{% comment %}<!-- Filter the content of the included page -->{% endcomment %}
-	{% capture content_filtered %}{{ item_content | replace_regex:regex, new_var }}{% endcapture %}
+	{% capture content_filtered %}{{ item_content | replace_regex: img_regex, new_img | replace_regex: link_regex, new_href }}{% endcapture %}
 	{{ content_filtered }}
 	</div>
 	 {% endif %}

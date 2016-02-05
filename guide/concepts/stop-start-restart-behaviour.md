@@ -10,7 +10,7 @@ Many entities expose `start`, `stop` and `restart` effectors. The semantics of t
 ## Top-level applications
 A top-level application is a grouping of other entities, pulling them together into the "application" of your choice. This could range from a single app-server, to an app that is a composite of a no-sql cluster (e.g. MongoDB sharded cluster, or Cassandra spread over multiple datacenters), a cluster of load-balanced app-servers, message brokers, etc.
 
-### start(Collection<Location>)
+### start(Collection &lt;Location&gt;)
 This will start the application in the given location(s). Each child-entity within the application will be started concurrently, passing the location(s) to each child.
 The start effector will be called automatically when the application is deployed through the catalog.
 Is is strongly recommended to not call start again.
@@ -25,7 +25,7 @@ Is is strongly recommended to not call this, unless the application has been exp
 
 ## Software Process (e.g MySql, Tomcat, JBoss app-server, MongoDB)
 
-### start(Collection<Location>)
+### start(Collection &lt;Location&gt;)
 This will start the software process in the given location.
 If a machine location is passed in, then the software process is started there.
 If a cloud location is passed in, then a new VM will be created in that cloud - the software process will be **installed+launched** on that new VM.
