@@ -179,7 +179,7 @@ function test_site() {
 }
 
 function make_jekyll() {
-  BROOKLYN_BIN=../usage/dist/target/brooklyn-dist/brooklyn/bin/brooklyn
+  BROOKLYN_BIN=../brooklyn-dist/dist/target/brooklyn-dist/brooklyn/bin/brooklyn
   if [ -f $BROOKLYN_BIN ]; then
     ITEMS_JS=style/js/catalog/items.js
     echo "Generating catalog items in $ITEMS_JS"
@@ -188,6 +188,12 @@ function make_jekyll() {
       list-objects >> "$ITEMS_JS"
     echo ";" >> "$ITEMS_JS"
     echo "Generating catalog items completed"
+  else
+    echo "Could not find brooklyn to generate items.js"
+    if [ "$INSTALL_AFTERWARDS" == "true" ]; then
+      echo "ERROR: aborting if can't make items.js for install build"
+      exit 1
+    fi
   fi
 
   echo JEKYLL running with: jekyll build $JEKYLL_CONFIG
