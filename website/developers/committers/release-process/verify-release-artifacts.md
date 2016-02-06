@@ -16,14 +16,14 @@ The scripts below use several environment variables to cut out repetition and en
 release. You should determine the following information and set your environment:
 
 {% highlight bash %}
-# The version we are releasing now. While Brooklyn is in the Apache Incubator, this must be suffixed `-incubating`.
-VERSION_NAME=0.7.0-incubating
+# The version we are releasing now.
+VERSION_NAME=0.9.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1
 
 # A reference to your Git repository for Brooklyn
-BASE_REPO=~/repos/apache-asf/incubator-brooklyn
+BASE_REPO=~/repos/apache-asf/brooklyn
 
 # The Git commit hash from which the release was made - get this from the release script, or the Release Manager's announcement
 GIT_COMMIT=edcf928ee65cc29a84376c822759e468a9f016fe
@@ -32,7 +32,7 @@ GIT_COMMIT=edcf928ee65cc29a84376c822759e468a9f016fe
 Import the PGP keys of the release Managers:
 
 {% highlight bash %}
-curl https://dist.apache.org/repos/dist/release/incubator/brooklyn/KEYS | gpg2 --import
+curl https://dist.apache.org/repos/dist/release/brooklyn/KEYS | gpg2 --import
 {% endhighlight %}
 
 
@@ -46,7 +46,7 @@ If you're verifying a build someone else has made, first download the files incl
 {% highlight bash %}
 TEMP_DIR=~/tmp/brooklyn/release/${VERSION_NAME}-rc${RC_NUMBER}
 BASE_NAME=apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-BASE_URL=https://dist.apache.org/repos/dist/dev/incubator/brooklyn/${BASE_NAME}
+BASE_URL=https://dist.apache.org/repos/dist/dev/brooklyn/${BASE_NAME}
 
 mkdir -p ${TEMP_DIR}
 cd ${TEMP_DIR}

@@ -14,7 +14,7 @@ This can be done interactively using:
 $ mvn archetype:generate
 {% endhighlight %}
 
-The user will be prompted for the archetype to use (i.e. group "io.brooklyn" 
+The user will be prompted for the archetype to use (i.e. group "org.apache.brooklyn" 
 and artifact "brooklyn-archetype-quickstart"), as well as options for the project 
 to be created.
 

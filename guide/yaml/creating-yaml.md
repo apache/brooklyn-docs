@@ -66,7 +66,7 @@ by dropping to the JVM. For more information on Java:
 
 * start with a [Maven archetype]({{site.path.guide}}/java/archetype.html)
 * see all [Brooklyn Java guide]({{site.path.guide}}/java/) topics
-* look at test cases in the [codebase](https://github.com/apache/incubator-brooklyn)
+* look at test cases in the [codebase](https://github.com/apache/brooklyn)
 
 <!-- 
 TODO

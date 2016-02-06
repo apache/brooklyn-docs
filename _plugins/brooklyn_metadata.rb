@@ -44,7 +44,7 @@ module BrooklynMetadata
         }
       end
       
-      url_set["git"] = "https://github.com/apache/incubator-brooklyn/tree/#{ git_branch }"
+      url_set["git"] = "https://github.com/apache/brooklyn/tree/#{ git_branch }"
       
       site.config['brooklyn'] = {
           "version" => BrooklynMetadata::BROOKLYN_VERSION,

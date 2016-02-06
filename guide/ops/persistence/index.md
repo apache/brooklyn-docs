@@ -219,7 +219,7 @@ The meaning of the configuration options is:
 
 ### Seek Help
 
-Help can be found at `dev@brooklyn.incubator.apache.org`, where folk will be able to investigate 
+Help can be found at `dev@brooklyn.apache.org`, where folk will be able to investigate 
 issues and suggest work-arounds.
 
 By sharing the persisted state (with credentials removed), Brooklyn developers will be able to 

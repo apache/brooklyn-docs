@@ -15,6 +15,7 @@ children:
 - { path: publish.md }
 - { path: announce.md }
 ---
+0. Review and update these instructions, post-graduation from incubation!
 1. [Prerequisites](prerequisites.html) - steps that a new release manager must do (but which only need to be done once)
 2. [Set environment variables](environment-variables.html) - many example snippets here use environment variables to
    avoid repetition - this page describes what they are

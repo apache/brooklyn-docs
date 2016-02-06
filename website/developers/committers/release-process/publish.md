@@ -83,7 +83,7 @@ Update the website
 ------------------
 
 *Instructions on uploading to the website are beyond the scope of these instructions. Refer to the 
-[appropriate instructions](https://github.com/apache/incubator-brooklyn/tree/master/brooklyn-docs).*
+[appropriate instructions](https://github.com/apache/brooklyn-docs/tree/master/README.md).*
 
 ### Publish documentation for the new release
 

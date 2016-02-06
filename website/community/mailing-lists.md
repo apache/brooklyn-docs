@@ -8,10 +8,10 @@ help with issues, ranging from basic getting started through to detailed
 questions about Brooklyn's internals.
 
 To subscribe, send an email to:
-[dev-subscribe@brooklyn.incubator.apache.org](mailto:dev-subscribe@brooklyn.incubator.apache.org)
+[dev-subscribe@brooklyn.apache.org](mailto:dev-subscribe@brooklyn.apache.org)
 
 You can also [read and search the dev list
-archives](https://mail-archives.apache.org/mod_mbox/incubator-brooklyn-dev/) on
+archives](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/) on
 Apache's list archiver.
 
 
@@ -19,11 +19,15 @@ Apache's list archiver.
 
 We also have a *commits* list - a read-only list which automatically posts as
 commits are made to our source repositories. Subscribe by sending an email to
-[commits-subscribe@brooklyn.incubator.apache.org](mailto:commits-subscribe@brooklyn.incubator.apache.org),
-and [read the archives here](https://mail-archives.apache.org/mod_mbox/incubator-brooklyn-commits/).
+[commits-subscribe@brooklyn.apache.org](mailto:commits-subscribe@brooklyn.apache.org),
+and [read the archives here](https://mail-archives.apache.org/mod_mbox/brooklyn-commits/).
 
 
 ### Historical lists
+
+Before Brooklyn graduated from the Apache Incubator, the lists included the word
+"incubator" (e.g. dev@brooklyn.incubator.apache.org). These were automatically
+migrated upon graduation; the old lists should not be used.
 
 Before Brooklyn joined the Apache Incubator, we had lists hosted on Google
 Groups. These lists are now deprecated and it's no longer possible to subscribe

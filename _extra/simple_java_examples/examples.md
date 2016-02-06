@@ -115,7 +115,7 @@ Examples Source
 
 Source code for (more up-to-date!) examples is available for download from GitHub. To retrieve the source, execute the following command:
 
-    git clone git@github.com:apache/incubator-brooklyn.git
-    cd incubator-brooklyn/examples
+    git clone git@github.com:apache/brooklyn-library.git
+    cd brooklyn-library/examples
 
-You can also [browse the code](https://github.com/apache/incubator-brooklyn/tree/examples) on the web.
+You can also [browse the code](https://github.com/apache/brooklyn-library/tree/examples) on the web.
