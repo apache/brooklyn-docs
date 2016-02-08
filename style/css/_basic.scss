@@ -17,7 +17,11 @@ p { margin: 0.75em 0; line-height: 1.4em;}
 form {padding: 0; margin: 0;}
 img {border: 0;}
 
-a {color: $a_color;}
+// don't treat focus specially; it's too disconcerting
+// in normal mode when someone is clicking, the color stays changed otherwise
+// (goes blue if using e.g. bootstrap.css); 
+// keyboard nav uses bounded blue boxes so there is no need
+a,a:focus {color: $a_color; text-decoration: none;}
 a:hover {text-decoration: none; color: $a_hover_color;}
 
 .dropdown-menu > li > a {
@@ -60,3 +64,4 @@ a:hover {text-decoration: none; color: $a_hover_color;}
     // these get collapsed so not sure why bootstrap does weirdness where there's no bottom border
     border-bottom: 1px solid $white_dd;
 }
+
