@@ -36,7 +36,7 @@ Rules of thumb
 Setting up your repository
 --------------------------
 
-Follow [these instructions]({{site.path.guide}}/dev/code/submodules.html) to configure your local repositories.
+Follow [these instructions](../code/git-more.html) to configure your local repositories.
 Make sure the canonical ASF repo is enabled as that is where you'll need to push to merge changes,
 and that you are able to fetch pull-requests.
 

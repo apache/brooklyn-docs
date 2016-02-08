@@ -1,7 +1,6 @@
 ---
 layout: website-normal
-title: Development Bookmarks
-menu_proxy_for: index.md
+title: Handy Places
 ---
 
 {% include fields.md %}

@@ -6,7 +6,8 @@ children:
 - { section: Create an Issue in Jira, title: Jira }
 - { section: Contributing using GitHub, title: GitHub }
 - { section: Reviews }
-- { section: Handy Places }
+- { link: code/, title: Get the Code }
+- { link: links.html, title: Handy Places }
 ---
 
 Welcome and thank you for your interest in contributing to Apache Brooklyn! This guide will take you through the

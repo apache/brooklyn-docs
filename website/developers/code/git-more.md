@@ -1,9 +1,19 @@
 ---
-title: Git Submodules
+title: Get the Code
 layout: website-normal
+menu_proxy_for: index.md
+children:
+- { link: index.html, title: Basics }
+- { section: Set Up Forks }
+- { section: Multi-Project Changes }
+- { section: How We Use Branches, title: Branches }
+- { section: About Submodules, title: Submodules }
+- { section: Not Using Submodules }
+- { section: Useful Aliases and Commands, title: Git Aliases }
+- { section: Legacy Incubator Pull Requests, title: Incubator PRs }
 ---
 
-## Setting Up Forks
+## Set Up Forks
 
 If you're contributing or working a lot on a feature, 
 you'll probably want your own forks and a slightly different git remote setup.
@@ -16,9 +26,10 @@ by running this command:
 hub fork; git submodule foreach 'hub fork'
 {% endhighlight %}
 
-The basic clone-and-get-submodules process in the ["Get the code" page](index.html) 
-retrieved the upstream repos, but it gave those remotes the name `origin`.
-If you have forks, `upstream` is a more accurate name. You can rename the origin remotes with:
+The [Get the Code: Basics](index.html) page described how to retrieve the upstream repos, 
+but it gave those remotes the name `origin`.
+When using forks, `upstream` is a more accurate name. 
+You can rename the origin remotes with:
 
 {% highlight bash %}
 git remote rename origin upstream; git submodule foreach 'git remote rename origin upstream'
@@ -64,6 +75,7 @@ git remote add apache-git https://git-wip-us.apache.org/repos/asf/brooklyn
 git submodule foreach 'git remote add apache-git https://git-wip-us.apache.org/repos/asf/${name}'
 {% endhighlight %}
 
+
 **That's it.** Test that it's all working by browsing the submodules and issuing `git remote -v` and `git pull` commands. Also see the aliases below.
 
 To work on code in a branch, in any of the submodules, you can simply do the following:
@@ -82,7 +94,6 @@ but a `git push` goes to the fork.
 When you're finished, don't forget to go to the UI of your repo to open a pull request.
 
 
-
 ## Multi-Project Changes
 
 Cross-project changes will require multiple PRs: 
@@ -95,7 +106,23 @@ in the dependent PR to help reviewers
 For information on reviewing and committing PRs, see [the committer's guide]({{site.path.website}}/developers/committers/merging-contributed-code.html).
 
 
-## Other Things You Should Know
+## How We Use Branches
+
+### History, Tags, and Workflow
+
+There are branches for each released version and tags for various other milestones.
+
+As described in more detail [here](git-more.html#how-we-use-branches), 
+we primarily use submodule remote branch tracking
+rather than submodule SHA1 ID's.
+
+The history prior to `0.9.0` is imported from the legacy `incubator-brooklyn` repo for reference and history only.
+Visit that repo to build those versions; they are not intended to build here.
+(Although this works:
+`mkdir merged ; for x in brooklyn-* ; do pushd $x ; git checkout 0.8.0-incubating ; cp -r * ../merged ; popd ; cd merged ; mvn clean install`.)
+
+
+### Tracking Branches
 
 Our submodules track **branches**, rather than specific commits,
 although due to the way `git` works there are still references to specific commits.
@@ -120,10 +147,13 @@ A `summary` script is provided below which solves these issues,
 showing useful status across all subprojects.
 
 
-### Pitfalls of Submodules
+## About Submodules
 
-Submodules can be confusing; if you get stuck the references at the bottom may be useful.
-You can also work [without submodules](no-submodules.html).
+Submodules can be confusing; if you get stuck the info and references in this section may be useful.
+You can also work [without submodules](#not-using-submodules).
+
+
+### Pitfalls of Submodules
 
 Some of the things to be careful of are:
 
@@ -141,7 +171,45 @@ Some of the things to be careful of are:
   very quickly become stale on `master`.
 
 
-### Useful Aliases
+### Git Submodule References
+
+* [1] [Git SCM Book](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+* [2] [Medium blog: Mastering Git Submodules](https://medium.com/@porteneuve/mastering-git-submodules-34c65e940407#.r7677prhv)
+* [3] `git submodule --help` section on `update`
+* [4] [StackOverflow: Git Submodules Branch Tag](http://stackoverflow.com/questions/1777854/git-submodules-specify-a-branch-tag/18797720#18797720)
+
+
+## Not Using Submodules
+
+If you don't want to use submodules, you can clone everything as top-level projects with the following:
+
+{% highlight bash %}
+mkdir apache-brooklyn
+cd apache-brooklyn
+git clone http://github.com/apache/brooklyn/
+git clone http://github.com/apache/brooklyn-ui/
+git clone http://github.com/apache/brooklyn-server/
+git clone http://github.com/apache/brooklyn-client/
+git clone http://github.com/apache/brooklyn-docs/
+git clone http://github.com/apache/brooklyn-library/
+git clone http://github.com/apache/brooklyn-dist/
+{% endhighlight %}
+
+
+With one symbolic link in the root `apache-brooklyn/` dir, you can then use a normal `mvn` workflow:
+
+{% highlight bash %}
+ln -s brooklyn/pom.xml .
+mvn clean install
+{% endhighlight %}
+
+
+With minor changes you can follow the instructions for creating forks and getting all updates
+elsewhere on this page.
+
+
+
+## Useful Aliases and Commands
 
 This sets up variants of `pull`, `diff`, and `push` -- called `sup`, `sdiff`, and `spush` -- which act across submodules:
 
@@ -154,9 +222,10 @@ git config --global alias.spush '!git push && git submodule foreach "git push"'
 
 #### Getting a Summary of Submodules
 
-The `git-summary` script [here](https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092) makes working with submodules much more enjoyable,
-simply install and use `git ss` in the uber-project to see the status of each submodule:
-
+The `git-summary` script [in the brooklyn-dist/scripts](https://github.com/apache/brooklyn-dist/tree/master/scripts) makes 
+working with submodules much more enjoyable.
+Follow the `README` in that directory to add those scripts to your path, and then set up the following git aliases:
+ 
 {% highlight bash %}
 curl https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092/raw/208cf4b3ec2ede77297d2f6011821ae62cf9ac0c/git-summary.sh \
   | sudo tee /usr/local/bin/git-summary
@@ -165,7 +234,7 @@ git config --global alias.ss '!git-summary -r'
 git config --global alias.so '!git-summary -r -o'
 {% endhighlight %}
 
-You'll get output such as:
+Then `git ss` will give output such as:
 
 {% highlight bash %}
 brooklyn: master <- upstream/master (up to date)
@@ -187,8 +256,9 @@ brooklyn-ui: test <- origin/test (upstream 2 ahead of master)
  ?? wip-local-untracked-file
 {% endhighlight %}
 
-If you want it to run fast, or you're offline, you can use `git so` to run in off-line mode.
-Run `git-summary --help` for more information.
+The command `git so` does the same thing without updating remotes.
+Use it if you want it to run fast, or if you're offline.
+For more information un `git-summary --help`.
 
 
 #### Other Handy Commands
@@ -202,7 +272,7 @@ for x in brooklyn-* ; do pushd $x ; git status ; popd ; done
 {% endhighlight %}
 
 
-### Legacy Incubator Pull Requests
+## Legacy Incubator Pull Requests
 
 If you need to apply code changes made pre-graduation, against the incubator repository,
 splitting it up into submodules, it's fairly straightforward:
@@ -217,13 +287,4 @@ splitting it up into submodules, it's fairly straightforward:
 7. Inspect the changes: `git ss`
 8. Test it, commit each changed project on a branch and create pull requests.
    Where applicable, record the original author(s) and message(s) in the commit.
-
-
-
-## Git Submodule References
-
-* [1] [Git SCM Book](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-* [2] [Medium blog: Mastering Git Submodules](https://medium.com/@porteneuve/mastering-git-submodules-34c65e940407#.r7677prhv)
-* [3] `git submodule --help` section on `update`
-* [4] [StackOverflow: Git Submodules Branch Tag](http://stackoverflow.com/questions/1777854/git-submodules-specify-a-branch-tag/18797720#18797720)
 
