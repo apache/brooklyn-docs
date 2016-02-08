@@ -1,5 +1,5 @@
 ---
-title: YAML BLueprint Advanced Example
+title: YAML Blueprint Advanced Example
 layout: website-normal
 ---
 
