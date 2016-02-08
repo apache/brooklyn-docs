@@ -12,6 +12,7 @@ children:
 - custom-entities.md
 - winrm/
 - chef/
+- salt/
 - test/
 - advanced-example.md
 - { path: yaml-reference.md, title: YAML Blueprint Reference }
