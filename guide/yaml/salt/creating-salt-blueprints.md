@@ -8,19 +8,19 @@ To write a blueprint to use Salt with Brooklyn it will help to have a degree of 
 sections below, when the Brooklyn configuration is described, the underlying Salt operation is also noted briefly, for 
 clarity for readers who know Salt.
 
-To manage a node with Salt, create a blueprint containing a service of type "org.apache.brooklyn.cm.salt.SaltEntity". 
+To manage a node with Salt, create a blueprint containing a service of type `org.apache.brooklyn.cm.salt.SaltEntity`
+and define and minimum the `formulas` and `start_states` 
 For example:
 
-    name: salt-web
-    location: mylocation
+    name: Salt Example setting up Apache httpd
+    location: my-cloud
     services:
-    - id: minion1
+    - id: httpd-from-salt
       type: org.apache.brooklyn.entity.cm.salt.SaltEntity
-      name: myent
-      start_states:
-        - apache
       formulas:
-        - https://github.com/saltstack-formulas/apache-formula/archive/master.tar.gz
+      - https://github.com/saltstack-formulas/apache-formula/archive/master.tar.gz
+      start_states:
+      - apache
     
 This example specifies that Brooklyn should use Salt to download the `apache-formula` from the Saltstack repository on
 Github. The apache formula contains the Apache web server with a simple "it worked" style index page. To start the 
@@ -44,9 +44,12 @@ supplies a state `mysql.disabled` that will shut down the database server.
 If the Saltstack formula does not supply a suitable stop state, the blueprint author can create a suitable state and
 include it in an additional formula to be supplied in the `formulas` section. 
 
-The `stop_states` configuration key is optional; if it is not provided, Brooklyn assumes that each state `S` in the 
-`start_state`s should have a matching `S.stop` state.  If not all such states exist, the stop effector will fail; stop
-states are required for Brooklyn to use Salt.
+The `stop_states` configuration key is optional; 
+if it is not provided, Brooklyn assumes that each state `S` in the `start_states` will have a matching `S.stop` state.  
+If any `S` does not have such a state, the stop effector will fail stopping processes.
+Note that on a machine created for this entity, Brooklyn's default behaviour may be to proceed to destroy the VM,
+so stop states are not always needed unless there is a cleaner shutdown process or you are using long-running servers.
+
 
 ### Restart States
 
@@ -54,11 +57,14 @@ For completeness, Brooklyn also provides a `restart_states` configuration key. T
 effector, and blueprint authors may choose to provide custom states to implement restart if that is applicable for their
 application. 
 
-This key is again optional.  If Brooklyn detects that the states `S` in `start_states` have matching `S.restart` states
-then these will be applied by the restart effector.  (If only some of `S` have matching `S.restart` states, Brooklyn
-takes the precaution of failing, on the assumption that the configuration is missing.)   If no such `.restart` states
-exist, Brooklyn will invoke the `stop` and then `start` effectors (so restart states are not required for Brooklyn to
-use Salt).
+This key is again optional.
+If not supplied, Brooklyn will go through each of the states `S` in `start_states` 
+looking for a matching `S.restart` state defined in the formulas.
+If all exist, these will be applied by the restart effector. 
+If none exist, Brooklyn will invoke the `stop` and then `start` effectors -- 
+so `restart` states are not required for Brooklyn to use Salt.
+(If some but not all have matching `restart` states, 
+Brooklyn will fail the restart, on the assumption that the configuration is incomplete.)   
 
 ### Formulas
 
@@ -72,29 +78,28 @@ A typical Salt deployment will include both states (provided via Salt formulas) 
 Salt's "Pillar" component.  Brooklyn provides configuration keys for the Salt entity to specify where to get the Pillar
 configuration data.  For example:
 
-    name: salt-mysql
-    location: mylocation
+    name: Salt Example setting up MySQL with a Pillar
+    location: my-cloud
     services:
-    - id: mydb
+    - id: mysql-from-salt-with-my-pillar
       type: org.apache.brooklyn.entity.cm.salt.SaltEntity
-      name: saltdb
-    
-      start_states:
-        - mysql
-      stop_states: 
-        - mysql.disabled
     
       formulas:
-        - https://github.com/saltstack-formulas/mysql-formula/archive/master.tar.gz
-        - http://myhost:8080/my-mysql-formula.tar.gz
+      - https://github.com/saltstack-formulas/mysql-formula/archive/master.tar.gz
+      - http://myhost:8080/my-mysql-formula.tar.gz
+    
+      start_states:
+      - mysql
+      stop_states: 
+      - mysql.disabled
     
       pillars: 
-        - mysql
+      - mysql
       pillarUrls:
-        - http://myhost:8080/my-mysql-pillar.tar.gz
+      - http://myhost:8080/my-mysql-pillar.tar.gz
 
 
-This blueprint contains the MySQL database, and includes a formula available from "myhost" which includes the schema
+This blueprint contains the MySQL database, and includes a formula available from `myhost` which includes the schema
 information for the DB. The MySQL formula from Saltstack has extensive configurability through Salt Pillars. In the 
 blueprint above, Brooklyn is instructed to apply the pillars defined in the `pillars` configuration key.  (This will 
 add these values to the Salt Pillars `top.sls` file.)  The pillar data must be downloaded; for this, the `pillarUrls` key
@@ -102,9 +107,9 @@ provides the address of an archive containing the Pillar data.  The contents of 
 in the `/srv/pillar` directory on the minion, in order to be available to Salt when applying the pillar. For example,
 the archive above can simply have the structure
 
-    pillar
+    pillar/
     |
-    +- mysql
+    +- mysql/
        |
        +- init.sls
 
@@ -120,11 +125,11 @@ The init.sls contains the pillar configuration values, such as
 
 Meanwhile the `my-mysql-formula.tar.gz` formula archive contains the schema:
 
-    my-mysql-formula
+    my-mysql-formula/
     |
-    +- mysql
+    +- mysql/
        |
-       +- files
+       +- files/
           |
           +- orders.schema
 
@@ -146,9 +151,7 @@ above, this might look like:
 Then, for each ID and each Salt state function in that ID, a Brooklyn sensor is created, containing a map of the data
 from the highstate.  For example, the `salt.state.mysqld.service.running` sensor would have a value like:
 
-
     {"name":"mysql", "enable":true, "watch":[{"pkg":"mysqld"}, {"file":"mysql_config"}], "order":10005}
-
 
 
 ### saltCall Effector
@@ -157,6 +160,4 @@ The Salt entity includes a general purpose Salt effector, `saltCall`, which perm
 `salt-call --local`.  It contains a single parameter, `spec`, which specifies the command to invoke.  For example, 
 invoking the effector with a `spec` value of `network.interfaces --out=yaml` would return a YAML formatted map of the 
 network interfaces on the minion.
-
-
 
