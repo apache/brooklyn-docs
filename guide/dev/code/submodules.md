@@ -5,62 +5,82 @@ layout: website-normal
 
 ## Setting Up Forks
 
-If you're contributing regularly, you'll want your submodules to pull from the repo in the Apache GitHub org
-and push to your fork.
-You'll need to create a fork and then set up your local submodules should then have:
+If you're contributing or working a lot on a feature, 
+you'll probably want your own forks and a slightly different git remote setup.
 
-* your fork as the `origin` remote repo
-* the Apache GitHub repo as the `upstream` remote repo, 
-  optionally with `origin` set as the `push` target (since you can't push to `github.com/apache`)
-  and fetch set up to get pull-request branches
-* optionally the repo at the Apache git server as the `apache-git` remote repo
-
-Assuming you've checked out from the Apache GitHub repos 
-following [the standard instructions](index.html)
-(such that that repo is the `origin` remote),
-then you can use the following script to automatically do the fork at GitHub and modify your locally-defined remote repos:
+You can create forks of each Brooklyn repo [in the GitHub UI](https://github.com/apache?query=brooklyn) 
+or, if you have the command-line tool `hub` ([described here](https://github.com/github/hub), or `sudo npm install -g hub`),
+by running this command:
 
 {% highlight bash %}
-GITHUB_ID=YOUR_ID_HERE
-
-for DIR in . brooklyn-* ; do
-  pushd $DIR
-  PROJ=$(basename $(pwd))
-  echo adding repos for $PROJ
-
-  if curl --fail https://github.com/${GITHUB_ID}/${PROJ} > /dev/null 2>&1 ; then
-    # fork exists; rename locally and add fork as origin
-    git remote rename origin upstream && git remote add origin git@github.com:${GITHUB_ID}/${PROJ}
-  else
-    # fork does not exist; create it. this will also do the rename and new remote add as origin
-    hub fork
-  fi
-  git fetch origin
-  git fetch upstream
-
-  # configure upstream so pushes go to origin
-  git remote set-url --push upstream $(git remote -v | grep origin | grep push | awk '{print $2}')
-  # and configure master branch to pull/push against "upstream", i.e. pull from apache/ and push to your repo
-  git checkout master && git branch --set-upstream-to upstream/master
-
-  # configure git to fetch pull-request branches
-  git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
-
-  # configure the apache-git remote as the canonical Apache git server (not GitHub)
-  git remote add apache-git https://git-wip-us.apache.org/repos/asf/${PROJ}
-
-  # and if you want your id as an org set up the same as origin
-  git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/${PROJ}
-
-  popd
-done
+hub fork; git submodule foreach 'hub fork'
 {% endhighlight %}
 
-This requires the command-line tool `hub` [from github](https://github.com/github/hub) (or `sudo npm install -g hub`), 
-run in the directory of the uber-project checked out earlier.
+The basic clone-and-get-submodules process in the ["Get the code" page](index.html) 
+retrieved the upstream repos, but it gave those remotes the name `origin`.
+If you have forks, `upstream` is a more accurate name. You can rename the origin remotes with:
 
-You should then be able pull and update from upstream, push to origin, and create pull requests in each sub-project.
-To check it, run `git remote -v && git submodule foreach "git remote -v"`.
+{% highlight bash %}
+git remote rename origin upstream; git submodule foreach 'git remote rename origin upstream'
+{% endhighlight %}
+
+You'll now likely want to add the remote `origin` for your fork:
+
+{% highlight bash %}
+if [ -z "$GITHUB_ID" ] ; then echo -n "Enter your GitHub ID id: " ; read GITHUB_ID ; fi
+git remote add origin git@github.com:${GITHUB_ID}/apache
+git submodule foreach 'git remote add origin git@github.com:${GITHUB_ID}/${name}'
+{% endhighlight %}
+
+And if you created the fork in the GitHub UI, you may want to create a remote named by your
+GitHub ID as well (if you used `hub` it will have done it for you):
+
+{% highlight bash %}
+if [ -z "$GITHUB_ID" ] ; then echo -n "Enter your GitHub ID id: " ; read GITHUB_ID ; fi
+git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/apache
+git submodule foreach 'git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/${name}'
+{% endhighlight %}
+
+You probably also want the default `push` target to be your repo in the `origin` remote:
+
+{% highlight bash %}
+git config remote.pushDefault origin; git submodule foreach 'git config remote.pushDefault origin'
+{% endhighlight %}
+
+Optionally, if you're interested in reviewing pull requests,
+you may wish to have `git` automatically check out PR branches: 
+
+{% highlight bash %}
+git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+git submodule foreach "git config --local --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'"
+git pull ; git submodule foreach 'git pull'
+{% endhighlight %}
+
+And also optionally, to set up the official Apache repo as a remote ---
+useful if GitHub is slow to update (and required if you're a committer):
+ 
+{% highlight bash %}
+git remote add apache-git https://git-wip-us.apache.org/repos/asf/brooklyn
+git submodule foreach 'git remote add apache-git https://git-wip-us.apache.org/repos/asf/${name}'
+{% endhighlight %}
+
+**That's it.** Test that it's all working by browsing the submodules and issuing `git remote -v` and `git pull` commands. Also see the aliases below.
+
+To work on code in a branch, in any of the submodules, you can simply do the following:
+
+{% highlight bash %}
+% git branch my-new-feature-branch upstream/master
+% git checkout my-new-feature-branch
+(make some commits)
+% git push
+To https://github.com/your_account/brooklyn.git
+ * [new branch]      my-new-feature-branch -> my-new-feature-branch
+{% endhighlight %}
+
+Note how the branch is tracking `upstream/master` for the purpose of `git pull`, 
+but a `git push` goes to the fork. 
+When you're finished, don't forget to go to the UI of your repo to open a pull request.
+
 
 
 ## Multi-Project Changes
@@ -132,7 +152,7 @@ git config --global alias.spush '!git push && git submodule foreach "git push"'
 {% endhighlight %}
 
 
-### Getting a Summary of Submodules
+#### Getting a Summary of Submodules
 
 The `git-summary` script [here](https://gist.githubusercontent.com/ahgittin/6399a29df1229a37b092) makes working with submodules much more enjoyable,
 simply install and use `git ss` in the uber-project to see the status of each submodule:
@@ -171,7 +191,7 @@ If you want it to run fast, or you're offline, you can use `git so` to run in of
 Run `git-summary --help` for more information.
 
 
-### Other Handy Commands
+#### Other Handy Commands
 
 {% highlight bash %}
 # run a git command (eg pull) in each submodule
