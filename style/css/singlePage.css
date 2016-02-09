@@ -1,5 +1,12 @@
+/* Fix the bootstrap parts so they show the content not the controls*/
 .nav.nav-tabs{
 	display: none;
+}
+.tab-content > .tab-pane {
+    display: inline;
+}
+.fade {
+    opacity: 1;
 }
 #next{
 	display: none;
@@ -8,7 +15,7 @@
     display: block;
 }
 .section-breaker {
-page-break-before:always;
+	page-break-before:always;
 }
 .panel-heading{
 	padding-bottom: 15px;
@@ -28,7 +35,7 @@ page-break-before:always;
 	padding-right: 0px;
 	padding-left: 0px;
 }
-pre{
+pre, pre code{
 	overflow: auto;
 	white-space: pre-wrap;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */

@@ -11,9 +11,16 @@
 
 <link href=".{{site.path.style}}/css/website.css" rel="stylesheet">
 <link rel="stylesheet" href=".{{ site.path.style }}/css/singlePage.css" type="text/css" media="screen" />
-<style>.{{ page.pageMask }}{ display: none; }</style>
+<style>.{{ page.css_hide_class }}{ display: none; } .{{ page.css_show_class }}{ display: inline !important; visibility: visible !important; }</style>
+<script>
+[]
+.forEach
+.call(document.querySelectorAll('a[target="_blank"]'),
+ function(link) {
+  link.removeAttribute('target');
+});
+</script>
 </head>
-
 
 <body>
 

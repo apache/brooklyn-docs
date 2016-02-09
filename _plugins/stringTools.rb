@@ -24,3 +24,12 @@ module RemovePrefixFilter
 
   Liquid::Template.register_filter self
 end
+
+module Append
+  def appendToArray(array, addition)
+    (array ||= []) << addition
+    ""
+  end
+
+  Liquid::Template.register_filter self
+end

@@ -2,6 +2,9 @@
 title: Apache Brooklyn Manual
 layout: singlePage
 page_mask: usermanual-pdf-exclude
+css_hide_class: usermanual-pdf-exclude
+css_show_class: usermanual-pdf-include
+availablePages: []
 ---
 {% comment %}<!-- This page builds the single page manual for the PDF, note that this name must be retained for conversion order -->{% endcomment %}
 
@@ -10,7 +13,7 @@ page_mask: usermanual-pdf-exclude
 		<h1>Apache Brooklyn: User Manual</h1>
 	</header>
 		<h1>Contents</h1>
-	
+		
 	    <nav><ul>
 		  {% assign visited = "" | split: "|" %}
 	      {% for node in site.data.menu  %}

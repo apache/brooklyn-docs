@@ -23,8 +23,9 @@ Two methods of deployment are detailed in this tutorial, using virtualisation wi
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
-[Vagrant](https://www.vagrantup.com/){:target="_blank"} is a software package which automates the process of setting up virtual machines (VM) such as [Oracle VirtualBox](https://www.virtualbox.org){:target="_blank"}. We recommend it as
-the easiest way of getting started with Apache Brooklyn.
+<strong class="hidden started-pdf-include">a) Vagrant</strong>
+
+[Vagrant](https://www.vagrantup.com/){:target="_blank"} is a software package which automates the process of setting up virtual machines (VM) such as [Oracle VirtualBox](https://www.virtualbox.org){:target="_blank"}. We recommend it as the easiest way of getting started with Apache Brooklyn.
 
 Firstly, download and install:
 
@@ -43,6 +44,8 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 </div>
 <div id="impl-2" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">b) Local Install</strong>
 
 Download the Apache Brooklyn binary distribution as described on [the download page]({{site.path.website}}/download/){:target="_blank"}.
 
@@ -88,6 +91,8 @@ you may wish to set up other configuration options first:
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
+<strong class="hidden started-pdf-include">a) Vagrant</strong>
+
 Now start Apache Brooklyn with the following command:
 
 {% highlight bash %}
@@ -102,6 +107,8 @@ $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 
 </div>
 <div id="impl-2" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">b) Local Install</strong>
 
 Now start Apache Brooklyn with the following command:
 
@@ -132,4 +139,8 @@ The CLI provides the command `br`, it's full usage is described in the user manu
 
 ## Next
 
-<div class="started-pdf-exclude">The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.html)**.</div>
+<div class="started-pdf-exclude">
+
+The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.html)**.
+
+</div>

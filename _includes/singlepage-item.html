@@ -7,6 +7,9 @@
 	{% set_hash_entry item content item_content %}
 	{% set_hash_entry item data item_data %}
 	
+	{% comment %}<!-- Build a list of all the pages included in this manual -->{% endcomment %}
+	{{ page.availablePages | appendToArray: item }}
+	
 	{% capture pid %}{{ item.title | remove:'/' | replace:' ','-' | downcase }}{% endcapture %}
 	<a id="{{ item_path }}" name="{{ item_path }}" href="javascript:void(0);"></a>
 	{{ page.my_array['test'] = 'test' }}

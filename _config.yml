@@ -51,6 +51,7 @@ brooklyn-base-url: https://brooklyn.apache.org
 pdf-rewrite-prefixes: 
     '/guide' : '/v/0.9.0-SNAPSHOT'
     '/website' : ''
+    '/community' : '/community'
     
 brooklyn-version: 0.9.0-SNAPSHOT # BROOKLYN_VERSION
 brooklyn-snapshot-git-branch: master   # if line above is SNAPSHOT this should point to corresponding git branch (e.g. master, 0.4)
