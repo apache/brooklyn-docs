@@ -294,6 +294,12 @@ parse_mode $@
 shift
 parse_arguments $@
 
+# prep
+if [ ! -f style/js/zeroclipboard/ZeroClipboard.swf ] ; then 
+  echo downloading ZeroClipboard.swf
+  curl -L -o style/js/zeroclipboard/ZeroClipboard.swf http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.3.5/ZeroClipboard.swf
+fi
+
 make_jekyll || { echo ERROR: failed jekyll docs build in `pwd` ; exit 1 ; }
 
 make_javadoc || { echo ERROR: failed javadoc build ; exit 1 ; }
