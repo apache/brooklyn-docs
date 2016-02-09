@@ -214,9 +214,16 @@ elsewhere on this page.
 This sets up variants of `pull`, `diff`, and `push` -- called `sup`, `sdiff`, and `spush` -- which act across submodules:
 
 {% highlight bash %}
+# update all modules
 git config --global alias.sup '!git pull && git submodule update --remote --merge --recursive'
+# show diffs across all modules
 git config --global alias.sdiff '!git diff && git submodule foreach "git diff"'
+# return to master in all modules
+git config --global alias.smaster '!git checkout master && echo && git submodule foreach "git checkout master && echo"'
+# push in all modules
 git config --global alias.spush '!git push && git submodule foreach "git push"'
+# show issues in all projects (only works if upstream configured properly for current branch)
+git config --global alias.si '!hub issue && git submodule foreach "hub issue"'
 {% endhighlight %}
 
 
