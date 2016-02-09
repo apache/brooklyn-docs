@@ -16,6 +16,7 @@ git clone http://github.com/apache/brooklyn/
 cd brooklyn
 git submodule init
 git submodule update --remote --merge --recursive
+git submodule foreach 'git checkout master'
 
 mvn clean install
 {% endhighlight %}

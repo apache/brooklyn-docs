@@ -39,7 +39,7 @@ You'll now likely want to add the remote `origin` for your fork:
 
 {% highlight bash %}
 if [ -z "$GITHUB_ID" ] ; then echo -n "Enter your GitHub ID id: " ; read GITHUB_ID ; fi
-git remote add origin git@github.com:${GITHUB_ID}/apache
+git remote add origin git@github.com:${GITHUB_ID}/brooklyn
 git submodule foreach 'git remote add origin git@github.com:${GITHUB_ID}/${name}'
 {% endhighlight %}
 
@@ -48,7 +48,7 @@ GitHub ID as well (if you used `hub` it will have done it for you):
 
 {% highlight bash %}
 if [ -z "$GITHUB_ID" ] ; then echo -n "Enter your GitHub ID id: " ; read GITHUB_ID ; fi
-git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/apache
+git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/brooklyn
 git submodule foreach 'git remote add ${GITHUB_ID} git@github.com:${GITHUB_ID}/${name}'
 {% endhighlight %}
 
