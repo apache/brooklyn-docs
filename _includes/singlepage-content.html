@@ -16,13 +16,12 @@
 	 {% capture pid %}{{ item.title | remove:'/' | replace:' ','-' | downcase }}{% endcapture %}
 	 {% if item_content != null %}
 	<div id="contentsLink-{{pid}}" class="section-breaker section p-{{item_id}}">
-	<h1>{{ item_title }}</h1>
+	<span style="width: 100%"><h1>{{ item_title }}</h1><a href="#content-top" class="goToTop">^</a></span>
 	{% comment %}
 	<!-- 
 	  --This Section re-writes images so the base of their paths is the root docs directory. This allows the PDF to build properly.
 	  -->
 	{% endcomment %}
-	
 	{% comment %}<!-- Build the page directory by removing the file name from the item url -->{% endcomment %}
 	{% capture page_url %}{{ item_url | replace_regex:'[^\/]*$', '' }}{% endcapture %}
 	

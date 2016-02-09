@@ -43,3 +43,14 @@ pre, pre code{
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+.goToTop{
+	padding-right: 25px;
+    padding-top: 75px;
+	float: right;
+    font-size: 20pt;
+    font-weight: bold;
+}
+#content_container h1{
+	display: inline-block;
+	width: 95%;
+}
