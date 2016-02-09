@@ -18,12 +18,12 @@ function help() {
   echo "Usage:  _build/build.sh MODE [ARGS]"
   echo ""
   echo "where MODE can be any of:"
+  echo "* test-both : to build the website to root and guide to /v/latest/ (for testing)"
   echo "* website-root  : to build the website only, in the root"
   echo "* guide-latest  : to build the guide only, in /v/latest/"
   # BROOKLYN_VERSION_BELOW
   echo "* guide-version : to build the guide only, in the versioned namespace /v/0.9.0-SNAPSHOT/"
   echo "* test-guide-root : to build the guide only, in the root (for testing)"
-  echo "* test-both : to build the website to root and guide to /v/latest/ (for testing)"
   echo "* test-both-sub : to build the website to /sub/ and guide to /sub/v/latest/ (for testing)"
   echo "* original : to build the files in their original location (website it /website and guide in /guide/, for testing)"
   echo ""

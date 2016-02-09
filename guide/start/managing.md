@@ -45,11 +45,11 @@ In the above example the Id `hTPAF19s` and the Name `Tomcat` are shown. You can 
 
 <div class="panel-group" id="accordion">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Get the application details</a>
+                    Get the application details
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
 <p>     
@@ -74,11 +74,11 @@ $ br application Tomcat
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Explore the hierarchy of all applications</a>
+                    Explore the hierarchy of all applications
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
 <p>              
@@ -97,11 +97,11 @@ $ br tree
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">View our application's blueprint</a>
+                    View our application's blueprint
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseThree" class="panel-collapse collapse">
                 <div class="panel-body">
 <p>
@@ -116,11 +116,11 @@ $ br application Tomcat spec
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">View our application's configuration</a>
+                    View our application's configuration
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseFour" class="panel-collapse collapse">
                 <div class="panel-body">
 <p>
@@ -341,11 +341,11 @@ No return value (null)"
 
 <div class="panel-group" id="accordionB">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordionB" href="#collapseOneB"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordionB" href="#collapseOneB">View Input and Output Streams</a>
+                    View Input and Output Streams
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseOneB" class="panel-collapse collapse in">
                 <div class="panel-body">
 <p>
@@ -363,11 +363,11 @@ BASE_DIR_RESULT:/home/vagrant/brooklyn-managed-processes:BASE_DIR_RESULT
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordionB" href="#collapseTwoB"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordionB" href="#collapseTwoB">Monitor the progress of an effector</a>
+                    Monitor the progress of an effector
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseTwoB" class="panel-collapse collapse">
                 <div class="panel-body">
                         
@@ -391,11 +391,11 @@ $ br application Tomcat entity tomcatServer act KLTxDkoa stderr
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordionB" href="#collapseThreeB"><div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordionB" href="#collapseThreeB">Diagnose a failure</a>
+                    Diagnose a failure
                 </h4>
-            </div>
+            </div></a>
             <div id="collapseThreeB" class="panel-collapse collapse">
                 <div class="panel-body">
                 

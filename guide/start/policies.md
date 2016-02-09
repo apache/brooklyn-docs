@@ -2,11 +2,6 @@
 title: Getting Started - Policies
 title_in_menu: Policies
 layout: website-normal
-menu_parent: index.md
-children:
-- { section: "A Clustered Example", title_in_menu: "Clustering" } 
-- { section: "Configuring Dependencies", title_in_menu: "Dependencies" } 
-- { section: "Managing with Policies", title_in_menu: "Policies"  } 
 ---
 
 ## A Clustered Example

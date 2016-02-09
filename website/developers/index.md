@@ -2,10 +2,12 @@
 layout: website-normal
 title: Developers
 children:
+- code/
 - how-to-contribute.md
 - /guide/dev/
 - committers/
 - code-standards.md
+- links.md
 - { link: 'http://github.com/apache/brooklyn', title: 'GitHub' }
 - { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 ---
@@ -36,11 +38,12 @@ simply come say hello somewhere in the [community](../community/index.html):
 - [IRC channel](../community/irc.html)
 - [JIRA for bug tracking](https://issues.apache.org/jira/browse/BROOKLYN)
 
-Once you have some code or a blueprint you want to share, 
+Then [get the code](code/).
+
+When you have a blueprint or an improvement you want to share, 
 there are a few instructions to note on [how to contribute](how-to-contribute.html).
 
 If you're looking to learn more about the codebase itself, 
 have a look at [Developer Guide]({{ site.path.guide }}/dev/).
 There are also a number of [development bookmarks](links.html) for the tools we use
 (git, jenkins, jira).
-
