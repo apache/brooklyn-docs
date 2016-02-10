@@ -8,7 +8,7 @@
 .fade {
     opacity: 1;
 }
-#next{
+#next, *[id$='_next']{
 	display: none;
 }
 .collapse {
