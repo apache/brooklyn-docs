@@ -105,20 +105,20 @@ although we'd love to if anyone can help!):
 [INFO] — maven-assembly-plugin:2.3:single (build-distribution-dir) @ brooklyn-dist —
 [INFO] Reading assembly descriptor: src/main/config/build-distribution-dir.xml
 {% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:0.9.0-SNAPSHOT; it doesn't have an associated file or directory.
-[INFO] Copying files to ~/repos/apache/incubator-brooklyn/usage/dist/target/brooklyn-dist
-[WARNING] Assembly file: ~/repos/apache/incubator-brooklyn/usage/dist/target/brooklyn-dist is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.
+[INFO] Copying files to ~/repos/apache/brooklyn/usage/dist/target/brooklyn-dist
+[WARNING] Assembly file: ~/repos/apache/brooklyn/usage/dist/target/brooklyn-dist is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.
 
 ...
 
 [INFO] — maven-assembly-plugin:2.3:single (build-distribution-archive) @ brooklyn-dist —
 [INFO] Reading assembly descriptor: src/main/config/build-distribution-archive.xml
 {% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:0.9.0-SNAPSHOT; it doesn't have an associated file or directory.
-{% comment %}BROOKLYN_VERSION{% endcomment %}[INFO] Building tar: /Users/aled/repos/apache/incubator-brooklyn/usage/dist/target/brooklyn-0.9.0-SNAPSHOT-dist.tar.gz
+{% comment %}BROOKLYN_VERSION{% endcomment %}[INFO] Building tar: /Users/aled/repos/apache/brooklyn/usage/dist/target/brooklyn-0.9.0-SNAPSHOT-dist.tar.gz
 {% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:0.9.0-SNAPSHOT; it doesn't have an associated file or directory.
 
 ...
 
-[WARNING] Don't override file /Users/aled/repos/apache/incubator-brooklyn/usage/archetypes/quickstart/target/test-classes/projects/integration-test-1/project/brooklyn-sample/src/main/resources/sample-icon.png
+[WARNING] Don't override file /Users/aled/repos/apache/brooklyn/usage/archetypes/quickstart/target/test-classes/projects/integration-test-1/project/brooklyn-sample/src/main/resources/sample-icon.png
 
 ...
 

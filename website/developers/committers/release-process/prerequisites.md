@@ -11,18 +11,18 @@ Apache releases are posted to dist.apache.org, which is a Subversion repository.
 
 We have two directories here:
 
-- https://dist.apache.org/repos/dist/release/incubator/brooklyn - this is where IPMC approved releases go. Do not upload
-  here until we have a vote passed on dev@brooklyn and incubator-general. Check out this folder and name it
+- https://dist.apache.org/repos/dist/release/brooklyn - this is where IPMC approved releases go. Do not upload
+  here until we have a vote passed on dev@brooklyn. Check out this folder and name it
   `apache-dist-release-brooklyn`
-- https://dist.apache.org/repos/dist/dev/incubator/brooklyn - this is where releases to be voted on go. Make the release
+- https://dist.apache.org/repos/dist/dev/brooklyn - this is where releases to be voted on go. Make the release
   artifact, and post it here, then post the [VOTE] thread with links here. Check out this folder and name it
   `apache-dist-dev-brooklyn`.
 
 Example:
 
 {% highlight bash %}
-svn co https://dist.apache.org/repos/dist/release/incubator/brooklyn apache-dist-release-brooklyn
-svn co https://dist.apache.org/repos/dist/dev/incubator/brooklyn apache-dist-dev-brooklyn
+svn co https://dist.apache.org/repos/dist/release/brooklyn apache-dist-release-brooklyn
+svn co https://dist.apache.org/repos/dist/dev/brooklyn apache-dist-dev-brooklyn
 {% endhighlight %}
 
 When working with these folders, **make sure you are working with the correct one**, otherwise you may be publishing
@@ -76,7 +76,7 @@ Now add your key to the `apache-dist-release-brooklyn/KEYS` file:
 {% highlight bash %}
 cd apache-dist-release-brooklyn
 (gpg2 --list-sigs richard@apache.org && gpg2 --armor --export richard@apache.org) >> KEYS
-svn --username $SVN_USERNAME commit -m 'Update incubator/brooklyn/KEYS for $GPG_KEY'
+svn --username $SVN_USERNAME commit -m 'Update brooklyn/KEYS for $GPG_KEY'
 {% endhighlight %}
 
 References: 
