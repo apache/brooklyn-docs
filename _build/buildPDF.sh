@@ -7,14 +7,15 @@ if [ ! -x _build/build.sh ] ; then
   exit 1
 fi
 
-if [ "$#" -lt 2 ] ; then
+if [ "$#" -ne 2 ] ; then
 	echo "Usage: buildPDF.sh <source html> <target PDF>"
 	exit 1
 fi
 
-command -v wkhtmltopdf >/dev/null 2>&1 || { 
-	echo "ERROR: script requires wkhtmltopdf but it's not installed." >&2; exit 1;
-	}
+if ! command -v wkhtmltopdf >/dev/null 2>&1; then
+	echo "ERROR: script requires wkhtmltopdf but it's not installed."
+	exit 1
+fi
 	
 # run the PDF build with wkhtmltopdf
 wkhtmltopdf --page-size Letter --margin-top 0.75in --margin-right 0.75in --margin-bottom 0.75in --margin-left 0.75in --encoding UTF-8 $1 $2

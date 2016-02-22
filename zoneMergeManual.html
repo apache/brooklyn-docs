@@ -8,24 +8,24 @@ availablePages: []
 ---
 {% comment %}<!-- This page builds the single page manual for the PDF, note that this name must be retained for conversion order -->{% endcomment %}
 
-	<div id="content_container" class="container">
+<div id="content_container" class="container">
 	<header>
 		<h1 id="content-top">Apache Brooklyn: User Manual</h1>
 	</header>
-		<h1>Contents</h1>
+	<h1>Contents</h1>
 		
-	    <nav><ul>
-		  {% assign visited = "" | split: "|" %}
-	      {% for node in site.data.menu  %}
-			  {% push site_items node %}
-			  {% include singlepage-item.html %}
-	      {% endfor %}
-	    </ul></nav>
-
-		{% assign visitedb = "" | split: "|" %}
+    <nav><ul>
+		{% assign visited = "" | split: "|" %}
 		{% for node in site.data.menu  %}
-			  {% push site_items node %}
-			  {% include singlepage-content.html %}
-	      {% endfor %}
-	  
-  </div>
+			{% push site_items node %}
+			{% include singlepage-item.html %}
+		{% endfor %}
+    </ul></nav>
+
+	{% assign visitedb = "" | split: "|" %}
+	{% for node in site.data.menu  %}
+		{% push site_items node %}
+		{% include singlepage-content.html %}
+    {% endfor %}
+  
+</div>
