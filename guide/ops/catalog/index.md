@@ -12,7 +12,7 @@ children:
  
 ---
 
-Brooklyn provides a **catalog**, which is a persisted collection of versioned blueprints and other resources. 
+Apache Brooklyn provides a **catalog**, which is a persisted collection of versioned blueprints and other resources. 
 Blueprints in the catalog can be deployed directly, via the Brooklyn REST API or the web console,
 or referenced in other blueprints using their `id`.
 
@@ -126,6 +126,33 @@ The following optional catalog metadata is supported:
   and if entities have been deployed against that version, their behavior may change in subtle or potentially incompatible ways.
   To avoid this situation, it is highly recommended to use OSGi version stamps as part of the URL.
 
+#### Locations in Catalog
+
+In addition to blueprints, locations can be stored in the Apache Brooklyn catalog. The example below shows a location for the vagrant configuration used in the [getting started guide]({{ site.path.guide }}/start/blueprints.html}, formatted as a catalog entry.
+
+~~~ yaml
+brooklyn.catalog:
+  id: vagrant
+  version: 1.0
+  itemType: location
+  name: Vagrant getting started location
+  item:
+    type: byon
+    brooklyn.config:
+      user: vagrant
+      password: vagrant
+      hosts:
+        - 10.10.10.101
+        - 10.10.10.102
+        - 10.10.10.103
+        - 10.10.10.104
+~~~
+
+Once this has been added to the catalog it can be used as a named location in yaml templates using:
+
+~~~ yaml
+location: vagrant
+~~~
 
 #### Catalog YAML Examples
 
