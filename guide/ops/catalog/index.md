@@ -128,7 +128,7 @@ The following optional catalog metadata is supported:
 
 #### Locations in Catalog
 
-In addition to blueprints, locations can be stored in the Apache Brooklyn catalog. The example below shows a location for the vagrant configuration used in the [getting started guide]({{ site.path.guide }}/start/blueprints.html}, formatted as a catalog entry.
+In addition to blueprints, locations can be stored in the Apache Brooklyn catalog. The example below shows a location for the vagrant configuration used in the [getting started guide]({{ site.path.guide }}/start/blueprints.html), formatted as a catalog entry.
 
 ~~~ yaml
 brooklyn.catalog:
@@ -148,7 +148,7 @@ brooklyn.catalog:
         - 10.10.10.104
 ~~~
 
-Once this has been added to the catalog it can be used as a named location in yaml templates using:
+Once this has been added to the catalog it can be used as a named location in yaml blueprints using:
 
 ~~~ yaml
 location: vagrant
