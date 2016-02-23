@@ -6,7 +6,7 @@ children:
 - { section: Inheritance and Named Locations, title: Named Locations }
 - { section: Localhost }
 - { section: BYON }
-- cloud-credentials.md
+- { title: More on Clouds, path: more-clouds.md }
 - more-locations.md
 - location-customizers.md
 - ssh-keys.md
@@ -62,8 +62,12 @@ brooklyn.location.jclouds.aws-ec2.credential=s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1
 
 And in this case you can reference the location in YAML with `location: jclouds:aws-ec2`.
 
-The Getting Started [template brooklyn.properties]({{ site.path.guide }}/start/brooklyn.properties) contains more examples 
-of configuring cloud endpoints, including information on credential types used in different clouds.
+Brooklyn irons out many of the differences between clouds so that blueprints run similarly
+in a wide range of locations, including setting up access and configuring images and machine specs.
+The configuration options are described in more detail below.
+
+In some cases, a cloud provider may offer special features or unexpected quirks;
+known issues are described a the **[More Details for Specific Clouds](more-clouds.html)** page.
 
 
 #### OS Initial Login and Setup
@@ -216,7 +220,7 @@ For more keys and more detail on the keys below, see
   This setting prevents scripts executed on the VMs from being deleted on completion.
   Note that some scripts run periodically so this can eventually fill a disk; it should only be used for dev/test. 
 
-###### Custom template options
+###### Custom Template Options
 
 jclouds supports many additional options for configuring how a virtual machine is created and deployed, many of which
 are for cloud-specific features and enhancements. Brooklyn supports some of these, but if what you are looking for is
@@ -445,7 +449,7 @@ provisioned. See `FixedListMachineProvisioningLocation.MACHINE_CHOOSER`.
 
 ### Other Location Topics
 
-* [Cloud Credentials](cloud-credentials.html)
+* [More Details on Specific Clouds](more-clouds.html)
 * [More Locations](more-locations.html)
 * [Location Customizers](location-customizers.html)
 * [SSH Keys](ssh-keys.html)

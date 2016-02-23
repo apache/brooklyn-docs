@@ -1,5 +1,5 @@
 ---
-title: Location customizers
+title: Location Customizers
 layout: website-normal
 ---
 
