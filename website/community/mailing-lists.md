@@ -10,7 +10,7 @@ questions about Brooklyn's internals.
 To subscribe, send an email to:
 [dev-subscribe@brooklyn.apache.org](mailto:dev-subscribe@brooklyn.apache.org)
 
-You can also [read and search the dev list
+You can also [read the dev list
 archives](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/) on
 Apache's list archiver.
 
@@ -22,6 +22,14 @@ commits are made to our source repositories. Subscribe by sending an email to
 [commits-subscribe@brooklyn.apache.org](mailto:commits-subscribe@brooklyn.apache.org),
 and [read the archives here](https://mail-archives.apache.org/mod_mbox/brooklyn-commits/).
 
+
+### Search archives
+
+You can search all Brooklyn list archives from one location:
+
+<form action="http://markmail.org/search/list:org.apache.brooklyn-*">
+  <input type="text" placeholder="Search query…" size="50"><button>Search</button>
+</form>
 
 ### Historical lists
 
