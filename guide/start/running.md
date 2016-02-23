@@ -133,7 +133,7 @@ INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://br
 
 By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser. 
 
-The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI). To use this, download and install the tool as described on the [CLI GitHub page](https://github.com/brooklyncentral/brooklyn-cli){:target="_blank"}.
+The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI). To use this, download and install the tool as described on the [CLI GitHub page](https://github.com/apache/brooklyn-client){:target="_blank"}.
 
 The CLI provides the command `br`, it's full usage is described in the user manual which can be found [here](../ops/cli/){:target="_blank"}
 
