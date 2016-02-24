@@ -68,5 +68,15 @@ Previously when a task was cancelled the API did not guarantee semantics but the
 in very limited cases. Now the semantics are more precise and controllable, and more sub-tasks are cancelled.
 This can prevent some leaked waits on `attributeWhenReady`.
 
+4. The name of the sensor `VanillaWindowsProcess.WINRM_PORT` has been changed from `winrmPort` to `winrm.port`.
+<br>
+During the development some wrong named sensors appeared for WINRM_PORT. They are still there for backwards compatibility but they are deprecated.
+<br>
+If you are referencing this sensor in blueprint DSL or somewhere else please use the key `winrm.port`.
+
+5. The name of the sensor `VanillaWindowsProcess.RDP_PORT` has been changed from `rdpPort` to `rdp.port`.
+<br>
+If you are referencing this sensor in blueprint DSL or somewhere else please use the key `rdp.port`.
+
 For changes in prior versions, please refer to the release notes for 
 [0.8.0](/v/0.8.0-incubating/misc/release-notes.html).
