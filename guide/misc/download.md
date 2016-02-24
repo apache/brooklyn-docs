@@ -151,25 +151,7 @@ you must either have Brooklyn built locally or one of these snapshot repositorie
 
 Source code is hosted at [github.com/apache/brooklyn](http://github.com/apache/brooklyn),
 with this version in branch [{{ site.brooklyn.git_branch }}]({{ site.brooklyn.url.git }}).
-Information on working with the source is [here]({{ site.path.guide }}/dev/code).
+These locations have a `README.md` in the root which explains how to get the code including
+submodules.
 
-You can download archives of the source directly:
-
-<table class="table">
-  <tr>
-    <td style="vertical-align: middle;"><center>{{ site.brooklyn.git_branch }}</center></td>
-    <td>
-<a href="https://github.com/apache/brooklyn/tarball/{{ site.brooklyn.git_branch }}"><img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-<a href="https://github.com/apache/brooklyn/zipball/{{ site.brooklyn.git_branch }}"><img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-    </td>
-  </tr>
-{% if site.brooklyn.git_branch != 'master' %}
-  <tr>
-    <td style="vertical-align: middle;"><center>master</center></td>
-    <td>
-<a href="https://github.com/apache/brooklyn/tarball/master"><img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-<a href="https://github.com/apache/brooklyn/zipball/master"><img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-    </td>
-  </tr>
-{% endif %}
-</table>
+Useful information on working with the source is [here]({{ site.path.guide }}/dev/code).

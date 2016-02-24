@@ -11,7 +11,7 @@ Apache releases are posted to dist.apache.org, which is a Subversion repository.
 
 We have two directories here:
 
-- https://dist.apache.org/repos/dist/release/brooklyn - this is where IPMC approved releases go. Do not upload
+- https://dist.apache.org/repos/dist/release/brooklyn - this is where PMC approved releases go. Do not upload
   here until we have a vote passed on dev@brooklyn. Check out this folder and name it
   `apache-dist-release-brooklyn`
 - https://dist.apache.org/repos/dist/dev/brooklyn - this is where releases to be voted on go. Make the release
