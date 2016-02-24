@@ -12,7 +12,7 @@ taking a single argument being the staging repo link. For example:
 
     brooklyn-dist/release/print-vote-email.sh orgapachebrooklyn-1234 | pbcopy
 
-You should move the subject and put your name at the end, and simply eyeball the rest. This should be sent to **dev@brooklyn.incubator.apache.org**.
+You should move the subject and put your name at the end, and simply eyeball the rest. This should be sent to **dev@brooklyn.apache.org**.
 
 Alternatively, copy-paste the e-mail template below, being sure to substitute:
 
@@ -33,7 +33,7 @@ binary distribution, and Maven artifacts.
 
 The source and binary distributions, including signatures, digests, etc. can
 be found at:
-https://dist.apache.org/repos/dist/dev/incubator/brooklyn/apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
+https://dist.apache.org/repos/dist/dev/brooklyn/apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
 
 The artifact SHA-256 checksums are as follows:
 c3b5c581f14b44aed786010ac7c8c2d899ea0ff511135330395a2ff2a30dd5cf *apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}-bin.tar.gz
@@ -48,11 +48,11 @@ All release artifacts are signed with the following key:
 https://people.apache.org/keys/committer/richard.asc
 
 KEYS file available here:
-https://dist.apache.org/repos/dist/release/incubator/brooklyn/KEYS
+https://dist.apache.org/repos/dist/release/brooklyn/KEYS
 
 The artifacts were built from Git commit ID
 24a23c5a4fd5967725930b8ceaed61dfbd225980
-https://git-wip-us.apache.org/repos/asf?p=incubator-brooklyn.git;a=commit;h=24a23c5a4fd5967725930b8ceaed61dfbd225980
+https://git-wip-us.apache.org/repos/asf?p=brooklyn.git;a=commit;h=24a23c5a4fd5967725930b8ceaed61dfbd225980
 
 
 Please vote on releasing this package as Apache Brooklyn ${VERSION_NAME}.
@@ -117,7 +117,7 @@ Note that you must find the URL for the previous thread at [mail-archives.apache
 The vote for releasing Apache Brooklyn ${VERSION_NAME} passed with 5 binding +1s, 1 non-binding +1s, and no 0 or -1.
 
 Vote thread link:
-https://mail-archives.apache.org/mod_mbox/incubator-brooklyn-dev/201507.mbox/%3CCABQFKi1WapCMRUqQ93E7Qow5onKgL3nyG3HW9Cse7vo%2BtUChRQ%40mail.gmail.com%3E
+https://mail-archives.apache.org/mod_mbox/brooklyn-dev/201507.mbox/%3CCABQFKi1WapCMRUqQ93E7Qow5onKgL3nyG3HW9Cse7vo%2BtUChRQ%40mail.gmail.com%3E
 
 Binding +1s:
 Hadrian Zbarcea (IPMC)

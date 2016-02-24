@@ -8,7 +8,7 @@ Publish the source and binary distributions to the pre-release area
 -------------------------------------------------------------------
 
 You will need to have checked out the Apache distribution Subversion repository located at
-https://dist.apache.org/repos/dist/release/incubator/brooklyn. Please refer to [Prerequisites](prerequisites.html) for
+https://dist.apache.org/repos/dist/release/brooklyn. Please refer to [Prerequisites](prerequisites.html) for
 information.
 
 In your workspace for the `dist.apache.org` repo, create a directory with the artifact name and version:
@@ -58,7 +58,7 @@ Then, add them to Subversion and commit.
 
 {% highlight bash %}
 svn add apache-brooklyn-${VERSION_NAME}
-svn commit --message "Add apache-brooklyn-${VERSION_NAME} to dist/release/incubator/brooklyn"
+svn commit --message "Add apache-brooklyn-${VERSION_NAME} to dist/release/brooklyn"
 {% endhighlight %}
 
 
@@ -97,7 +97,7 @@ mvn clean install -DskipTests
 Ensure the SVN repo is up-to-date (very painful otherwise!)
 
 {% highlight bash %}
-cd ${BROOKLYN_SITE_DIR-../incubator-brooklyn-site-public}
+cd ${BROOKLYN_SITE_DIR-../brooklyn-site-public}
 svn up
 cd -
 {% endhighlight %}
@@ -120,7 +120,7 @@ Update the "latest" docs to this release:
 Now publish _site/v/latest to the public website:
 
 {% highlight bash %}
-cd ${BROOKLYN_SITE_DIR-../../incubator-brooklyn-site-public}
+cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
 svn add * --force
 export DELETIONS=$( svn status | sed -e '/^!/!d' -e 's/^!//' )
 if [ ! -z "${DELETIONS}" ] ; then svn rm ${DELETIONS} ; fi
