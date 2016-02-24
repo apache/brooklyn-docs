@@ -52,7 +52,7 @@ location:
 {% endhighlight %} 
 
 The above YAML can be embedded directly in blueprints, either at the root or on individual services.
-If you prefer to keep the credentials separate, these can be set instead in `brooklyn.properties` 
+If you prefer to keep the credentials separate, you can instead store them as a [catalog entry]({{ site.path.guide }}/ops/catalog/index.html#locations-in-catalog) or set them in `brooklyn.properties` 
 in the `jclouds.<provider>` namespace:
 
 {% highlight bash %}
