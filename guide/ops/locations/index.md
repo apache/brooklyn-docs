@@ -95,7 +95,8 @@ Following a successful logon, Brooklyn performs the following steps to configure
 
 1. install the local user's `~/.ssh/id_rsa.pub` as an `authorized_keys` on the new machine,
    to make it easy for the operator to `ssh` in
-   (override with `privateKeyFile`; or if there is no `id_{r,d}sa{,.pub}` an ad hoc keypair will be generated;
+   (override with `privateKeyFile`; or if there is no `id_{r,d}sa{,.pub}` an ad hoc keypair will be generated
+   for the regular Brooklyn user;
    if there is a passphrase on the key, this must be supplied)  
 
 1. give `sudo` access to the newly created user (override with `grantUserSudo: false`)
@@ -128,8 +129,9 @@ For more keys and more detail on the keys below, see
 - Specific Security Groups can be specified using `securityGroups`, as a list of strings (the existing security group names),
   or `inboundPorts` can be set, as a list of numeric ports (selected clouds only)
 
-- A specific existing key pair known at the cloud to use can be specified with `keyPair`
-  (selected clouds only)
+- A specific existing key pair known at the cloud to use for login can be specified with `keyPair`
+  (selected clouds only); if this `keyPair` does not correspond to your default `~/.ssh/id_rsa`
+  then you must typically also specify the `loginUser.privateKeyFile` to use with this `keyPair`
 
 - A specific VM name (often the hostname) base to be used can be specified by setting `groupId`.
   By default, this name is constructed based on the entity which is creating it,
