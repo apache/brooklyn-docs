@@ -11,6 +11,7 @@ children:
 - blueprinting-tips.md
 - custom-entities.md
 - winrm/
+- ansible/
 - chef/
 - salt/
 - test/

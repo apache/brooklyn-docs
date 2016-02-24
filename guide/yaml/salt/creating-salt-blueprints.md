@@ -8,8 +8,8 @@ To write a blueprint to use Salt with Brooklyn it will help to have a degree of 
 sections below, when the Brooklyn configuration is described, the underlying Salt operation is also noted briefly, for 
 clarity for readers who know Salt.
 
-To manage a node with Salt, create a blueprint containing a service of type `org.apache.brooklyn.cm.salt.SaltEntity`
-and define and minimum the `formulas` and `start_states` 
+To manage a node with Salt, create a blueprint containing a service of type `org.apache.brooklyn.entity.cm.salt.SaltEntity`
+and define the `formulas` and `start_states` 
 For example:
 
     name: Salt Example setting up Apache httpd
