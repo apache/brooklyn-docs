@@ -1,6 +1,8 @@
 ---
 layout: website-normal
 title: Download
+started-pdf-exclude: true
+usermanual-pdf-exclude: true
 children:
 - { path: /guide/misc/download.md, title: Details }
 - { path: verify.md, title: Verify }

@@ -1,6 +1,7 @@
 ---
 layout: website-normal
 title: Developers
+started-pdf-exclude: true
 children:
 - code/
 - how-to-contribute.md

@@ -2,6 +2,7 @@
 # BROOKLYN_VERSION_BELOW
 title: Other 0.9.0-SNAPSHOT Resources
 layout: website-normal
+started-pdf-exclude: true
 children:
 - { title: Javadoc, path: javadoc/ }
 - download.md

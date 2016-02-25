@@ -1,6 +1,7 @@
 ---
 layout: website-normal
 title: Learn More
+started-pdf-exclude: true
 children:
 - blueprint-tour.md
 - features/

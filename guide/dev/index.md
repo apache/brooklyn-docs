@@ -1,5 +1,6 @@
 ---
 title: Developer Guide
+started-pdf-exclude: true
 layout: website-normal
 menu_parent: /website/documentation/
 breadcrumbs:

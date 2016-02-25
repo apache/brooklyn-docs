@@ -141,7 +141,7 @@ brooklyn.wrapper_app   true
 
 ## Entities
 
-An *Entity* is Apache Brooklyn's representation of a software package or service which it can control or interact with. All of the entities Apache Brooklyn can use are listed in the __[Brooklyn Catalog](../../website/learnmore/catalog/)__. 
+An *Entity* is Apache Brooklyn's representation of a software package or service which it can control or interact with. All of the entities Apache Brooklyn can use are listed in the __[Brooklyn Catalog]({{ site.path.website }}/learnmore/catalog/)__. 
 
 To list the entities of the application you can use the `entity` or `ent` command:
 
@@ -208,15 +208,15 @@ To explore sensors on a specific entity use the `sensor` command with an entity 
 $ br application Tomcat entity tomcatServer sensor
 {% endhighlight %}
 <pre>
-Name                                            Description                                                                                                      Value   
-download.addon.urls                             URL patterns for downloading named add-ons (will substitute things like ${version} automatically)                   
-download.url                                    URL pattern for downloading the installer (will substitute things like ${version} automatically)                 "http://download.nextag.com/apache/tomcat/tomcat-7/v${version}/bin/apache-tomcat-${version}.tar.gz"   
-expandedinstall.dir                             Directory for installed artifacts (e.g. expanded dir after unpacking .tgz)                                       "/home/vagrant/brooklyn-managed-processes/installs/TomcatServer_7.0.65/apache-tomcat-7.0.65"   
-host.address                                    Host IP address                                                                                                  "10.10.10.101"   
-host.name                                       Host name                                                                                                        "10.10.10.101"   
-host.sshAddress                                 user@host:port for ssh'ing (or null if inappropriate)                                                            "vagrant@10.10.10.101:22"   
-host.subnet.address                             Host address as known internally in the subnet where it is running (if different to host.name)                   "10.10.10.101"   
-host.subnet.hostname                            Host name as known internally in the subnet where it is running (if different to host.name)                      "10.10.10.101"   
+Name                 Description                                                                                       Value   
+download.addon.urls  URL patterns for downloading named add-ons (will substitute things like ${version} automatically) 
+download.url         URL pattern for downloading the installer (will substitute things like ${version} automatically)  "http://download.nextag.com/apache/tomcat/tomcat-7/v${version}/bin/apache-tomcat-${version}.tar.gz"   
+expandedinstall.dir  Directory for installed artifacts (e.g. expanded dir after unpacking .tgz)                        "/home/vagrant/brooklyn-managed-processes/installs/TomcatServer_7.0.65/apache-tomcat-7.0.65"   
+host.address         Host IP address                                                                                   "10.10.10.101"   
+host.name            Host name                                                                                         "10.10.10.101"   
+host.sshAddress      user@host:port for ssh'ing (or null if inappropriate)                                             "vagrant@10.10.10.101:22"   
+host.subnet.address  Host address as known internally in the subnet where it is running (if different to host.name)    "10.10.10.101"   
+host.subnet.hostname Host name as known internally in the subnet where it is running (if different to host.name)       "10.10.10.101"   
 # etc. etc.
 </pre>
 
@@ -239,9 +239,9 @@ Effectors are a means by which you can manipulate the entities in an application
 $ br application Tomcat effector
 {% endhighlight %}
 <pre>
-Name            Description                                                                                                                                                                            Parameters   
+Name            Description                                           Parameters   
 restart         Restart the process/service represented by an entity                                                                                                                                      
-start           Start the process/service represented by an entity                                                                                                                                     locations   
+start           Start the process/service represented by an entity    locations   
 stop            Stop the process/service represented by an entity                                                                                                                                         
 </pre>
 

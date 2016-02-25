@@ -34,6 +34,9 @@ function help() {
   echo "* --install : install files from _site to the appropriate place in "'$'"BROOKLYN_SITE_DIR (or ../../brooklyn-site-public)"
   echo "* --skip-htmlproof : skip the HTML Proof run on _site"
   echo "* --quick-htmlproof : do a fast HTML Proof run on _site (not checking external links)"
+  echo "* --skip-pdf : skip generation of all PDF Documentation"
+  echo "* --skip-pdf-manual : skip generation of the PDF Manual"
+  echo "* --skip-pdf-started : skip generation of the Getting Started PDF"
   echo ""
 }
 
@@ -156,12 +159,43 @@ function parse_arguments() {
       QUICK_HTMLPROOF=true
       shift
       ;;
+    "--skip-pdf")
+      SKIP_PDF=true
+      shift
+      ;;
+    "--skip-pdf-manual")
+      SKIP_PDF_MANUAL=true
+      shift
+      ;;
+    "--skip-pdf-started")
+      SKIP_PDF_STARTED=true
+      shift
+      ;;
     *)
       echo "ERROR: invalid argument '"$1"'"
       exit 1
       ;;
     esac
   done
+}
+
+# Runs htmlproof against _site
+function build_pdf() {
+  if [ "$SKIP_PDF" == "true" ]; then
+    return
+  fi
+  echo "Running PDF Generation on _site/UserManual.html"
+  rm -rf _pdf
+  mkdir -p _pdf
+  PDF_MANUAL_LOG="_pdf/pdf_gen_manual.log"
+  PDF_STARTED_LOG="_pdf/pdf_gen_started.log"
+  
+  if [ "$SKIP_PDF_MANUAL" != "true" ]; then
+    _build/buildPDF.sh "_site/zoneMergeManual.html" "_pdf/UserManual.pdf" 2>&1 | tee $PDF_MANUAL_LOG
+  fi
+  if [ "$SKIP_PDF_STARTED" != "true" ]; then
+    _build/buildPDF.sh "_site/zoneMergeStarted.html" "_pdf/GettingStarted.pdf" 2>&1 | tee $PDF_STARTED_LOG
+  fi
 }
 
 # Runs htmlproof against _site
@@ -303,6 +337,8 @@ fi
 make_jekyll || { echo ERROR: failed jekyll docs build in `pwd` ; exit 1 ; }
 
 make_javadoc || { echo ERROR: failed javadoc build ; exit 1 ; }
+
+build_pdf
 
 test_site
 

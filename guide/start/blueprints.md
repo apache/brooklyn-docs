@@ -3,7 +3,7 @@ title: Deploying Blueprints
 layout: website-normal
 ---
 
-Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML){:target="_blank"} and all of the entities available are defined in the __[Brooklyn Catalog](../../website/learnmore/catalog/)__.
+Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML){:target="_blank"} and all of the entities available are defined in the __[Brooklyn Catalog]({{ site.path.website }}/learnmore/catalog/)__.
 
 ## Launching from a Blueprint
 
@@ -126,4 +126,8 @@ you can monitor the progress of the application deployment and verify if it was 
 
 ## Next
 
+<div class="started-pdf-exclude">
+
 Having deployed an application, the next step is **[monitoring and managing](managing.html)** it.
+
+</div>
