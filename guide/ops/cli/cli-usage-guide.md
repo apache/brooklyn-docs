@@ -212,7 +212,7 @@ parameter to the `sensor` command:
 
 {% highlight text %}
 $ br app WebCluster entity CZ8QUVgX sensor service.state.expected
-"running @ 1449314377781 / Sat Dec 05 11:19:37 GMT 2015"
+running @ 1449314377781 / Sat Dec 05 11:19:37 GMT 2015
 {% endhighlight %}
 
 ## Effectors
