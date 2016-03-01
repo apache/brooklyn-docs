@@ -116,6 +116,26 @@ The installation script - referred to as `/Users/richard/install7zip.ps1` in the
 
     Start-Process "msiexec" -ArgumentList '/qn','/i',$Dl -RedirectStandardOutput ( [System.IO.Path]::Combine($Path, "stdout.txt") ) -RedirectStandardError ( [System.IO.Path]::Combine($Path, "stderr.txt") ) -Wait
 
+In some the installer command may not obtain properly Administrator priviliges and you may get access is denied error during the setup process.
+For this case we strongly recommend enabling CredSSP and using the `Invoke-Command`.
+
+Here is a snippet for enabling CredSSP and using `Invoke-Command` through it.
+
+    & winrm set winrm/config/service/auth '@{CredSSP="true"}'
+    & winrm set winrm/config/client/auth '@{CredSSP="true"}'
+    #
+    $pass = '${attribute['windows.password']}'
+    $secpasswd = ConvertTo-SecureString $pass -AsPlainText -Force
+    $mycreds = New-Object System.Management.Automation.PSCredential ($($env:COMPUTERNAME + "\${location.user}"), $secpasswd)
+    #
+    $exitCode = Invoke-Command -ComputerName $env:COMPUTERNAME -Credential $mycreds -ScriptBlock {
+        param($driveLetter)
+        $process = Start-Process ( $driveLetter + "setup.exe") -ArgumentList "/ConfigurationFile=C:\ConfigurationFile.ini" -RedirectStandardOutput "C:\sqlout.txt" -RedirectStandardError "C:\sqlerr.txt" -Wait -PassThru -NoNewWindow
+        $process.ExitCode
+    } -Authentication CredSSP -ArgumentList $driveLetter
+    #
+    exit $exitCode
+
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
 Brooklyn source code]({{ site.brooklyn.url.git }}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
 
