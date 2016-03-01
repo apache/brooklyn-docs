@@ -116,25 +116,9 @@ The installation script - referred to as `/Users/richard/install7zip.ps1` in the
 
     Start-Process "msiexec" -ArgumentList '/qn','/i',$Dl -RedirectStandardOutput ( [System.IO.Path]::Combine($Path, "stdout.txt") ) -RedirectStandardError ( [System.IO.Path]::Combine($Path, "stderr.txt") ) -Wait
 
-In some the installer command may not obtain properly Administrator priviliges and you may get access is denied error during the setup process.
-For this case we strongly recommend enabling CredSSP and using the `Invoke-Command`.
-
-Here is a snippet for enabling CredSSP and using `Invoke-Command` through it.
-
-    & winrm set winrm/config/service/auth '@{CredSSP="true"}'
-    & winrm set winrm/config/client/auth '@{CredSSP="true"}'
-    #
-    $pass = '${attribute['windows.password']}'
-    $secpasswd = ConvertTo-SecureString $pass -AsPlainText -Force
-    $mycreds = New-Object System.Management.Automation.PSCredential ($($env:COMPUTERNAME + "\${location.user}"), $secpasswd)
-    #
-    $exitCode = Invoke-Command -ComputerName $env:COMPUTERNAME -Credential $mycreds -ScriptBlock {
-        param($driveLetter)
-        $process = Start-Process ( $driveLetter + "setup.exe") -ArgumentList "/ConfigurationFile=C:\ConfigurationFile.ini" -RedirectStandardOutput "C:\sqlout.txt" -RedirectStandardError "C:\sqlerr.txt" -Wait -PassThru -NoNewWindow
-        $process.ExitCode
-    } -Authentication CredSSP -ArgumentList $driveLetter
-    #
-    exit $exitCode
+Where security-related operation are to be executed, it may require the use of `CredSSP` to obtain
+the correct Administrator privileges: you may otherwise get an access denied error. See the sub-section 
+[How and Why to re-authenticate within a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
 Brooklyn source code]({{ site.brooklyn.url.git }}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
@@ -294,39 +278,68 @@ for paths in their Powershell scripts (e.g. for installation, configuration file
 
 ### How and Why to re-authenticate within a powershell script
 
-Brooklyn will run powershell scripts by making a WinRM call over HTTP. For most scripts this will work, however for
-some scripts (e.g. MSSQL installation), this will fail even if the script can be run locally (e.g. by using RDP to
-connect to the machine and running the script manually)
+Some installation scripts require the use of security-related operations. In some environments,  
+these fail by default when executed over WinRM, even though the script may succeed when run locally   
+(e.g. by using RDP to connect to the machine and running the script manually). There may be no  
+clear indication from Windows why it failed (e.g. for MSSQL install, the only clue is a   
+security exception in the installation log).
 
-For example in the case of MS SQL server installation, there was no clear indication of why this would not work. 
-The only clue was a security exception in the installation log.
+When a script is run over WinRM, the credentials under which the script are run are marked as
+'remote' credentials, which are prohibited from running certain security-related operations. The 
+solution is to obtain a new set of credentials within the script and use those credentials to 
+required commands.
 
-When a script is run over WinRM over HTTP, the credentials under which the script are run are marked as
-'remote' credentials, which are prohibited from running certain security-related operations. The solution was to obtain
-a new set of credentials within the script and use those credentials to execute the installer, so this:
+Certain Windows registry keys must be reconfigured in order to support re-authentication. For 
+clouds that support an init script, Brooklyn can take care of this at instance boot time, as part 
+of the setup script. For clouds where an init script is not (currently) supported, such as Azure, 
+it is assumed that the VM is already correctly configured. Please ensure that Brooklyn's changes 
+are compatible with your organisation's security policy.
+
+Re-authentication also requires that the password credentials are passed in plain text within the
+script. Please be aware that it is normal for script files - and therefore the plaintext password - 
+to be saved to the VM's disk. The scripts are also accessible via the Brooklyn web-console's 
+activity view. Access to the latter can be controlled via 
+[Entitlements]({{site.path.guide}}/java/entitlements.html).
+
+As an example (taken from MSSQL install), the command below works when run locally, but fails over 
+WinRM:
 
     ( $driveLetter + "setup.exe") /ConfigurationFile=C:\ConfigurationFile.ini
 
-became this:
+The code below can be used instead (note this example uses Freemarker templating):
 
+    & winrm set winrm/config/service/auth '@{CredSSP="true"}'
+    & winrm set winrm/config/client/auth '@{CredSSP="true"}'
+    #
     $pass = '${attribute['windows.password']}'
     $secpasswd = ConvertTo-SecureString $pass -AsPlainText -Force
-    $mycreds = New-Object System.Management.Automation.PSCredential ($($env:COMPUTERNAME + "\Administrator"), $secpasswd)
+    $mycreds = New-Object System.Management.Automation.PSCredential ($($env:COMPUTERNAME + "\${location.user}"), $secpasswd)
+    #
+    $exitCode = Invoke-Command -ComputerName $env:COMPUTERNAME -Credential $mycreds -ScriptBlock {
+        param($driveLetter)
+        $process = Start-Process ( $driveLetter + "setup.exe") -ArgumentList "/ConfigurationFile=C:\ConfigurationFile.ini" -RedirectStandardOutput "C:\sqlout.txt" -RedirectStandardError "C:\sqlerr.txt" -Wait -PassThru -NoNewWindow
+        $process.ExitCode
+    } -Authentication CredSSP -ArgumentList $driveLetter
+    #
+    exit $exitCode
 
-    Start-Process ( $driveLetter + "setup.exe") -ArgumentList "/ConfigurationFile=C:\ConfigurationFile.ini" -Credential $mycreds -RedirectStandardOutput "C:\sqlout.txt" -RedirectStandardError "C:\sqlerr.txt" -Wait
+In this example, the `${...}` format is FreeMarker templating. Those sections will be substituted
+before the script is uploaded for execution. To explain this example in more detail:
 
-The `$pass=` line simply reads the Windows password from the entity before the script is copied to the server. This is
-then encrypted on the next line before being used to create a new credential object. Then, rather than calling the executable
-directly, the `Start-Process` scriptlet is used. This allows us to pass in the newly created credentials, under which
-the process will be run.
+* `${attribute['windows.password']}` is substituted for the entity's attribute "windows.password".
+  This (clear-text) password is sent as part of the script. Assuming that HTTPS and NTLM is used,
+  the script will be encrypted while in-flight.
 
-Certain registry keys must be reconfigured in order to support re-authentication. Brooklyn will take care of this at
-instance boot time, as part of the setup script. Please ensure that Brooklyn's changes are compatible with your 
-organisation's security policy.
+* The `${location.user}` gets (from the entity's machine location) the username, substituting this 
+  text for the actual username. In many cases, this will be "Administrator". However, on some  
+  clouds a different username (with admin privileges) will be used.
 
-Re-authentication also requires that the password credentials are passed in plain text in the blueprint's script files.
-Please be aware that it is normal for script files - and therefore the plaintext password - to be saved to the VM's
-disk.
+* The username and password are used to create a new credential object (having first converted the
+  password to a secure string).
+
+* Credential Security Service Provider (CredSSP) is used for authentication, to pass the explicit  
+  credentials when using `Invoke-Command`.
+
 
 ### Windows AMIs on AWS
 
@@ -389,7 +402,8 @@ else then the setup will not be done and the VM may not not be accessible remote
 When a script is run over WinRM over HTTP, the credentials under which the script are run are marked as
 'remote' credentials, which are prohibited from running certain security-related operations. This may prevent certain
 operations. The installer from Microsoft SQL Server is known to fail in this case, for example. For a workaround, please
-refer to [How and Why to re-authenticate withing a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) above.
+refer to [How and Why to re-authenticate withing a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) 
+above.
 
 ### AMIs not found
 
