@@ -192,9 +192,11 @@ function build_pdf() {
   
   if [ "$SKIP_PDF_MANUAL" != "true" ]; then
     _build/buildPDF.sh "_site/zoneMergeManual.html" "_pdf/UserManual.pdf" 2>&1 | tee $PDF_MANUAL_LOG
+    _build/buildPDF.sh "_site/zoneMergeManual.html" "_pdf/UserManual_printable.pdf" "./style/css/printable.css" 2>&1 | tee $PDF_MANUAL_LOG
   fi
   if [ "$SKIP_PDF_STARTED" != "true" ]; then
     _build/buildPDF.sh "_site/zoneMergeStarted.html" "_pdf/GettingStarted.pdf" 2>&1 | tee $PDF_STARTED_LOG
+    _build/buildPDF.sh "_site/zoneMergeStarted.html" "_pdf/GettingStarted_printable.pdf" "./style/css/printable.css" 2>&1 | tee $PDF_STARTED_LOG
   fi
 }
 
