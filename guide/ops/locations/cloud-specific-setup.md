@@ -1,5 +1,7 @@
 ---
 section: Cloud Specific Setup
+section_type: inline
+section_position: 1.1
 ---
 
 ### Cloud Specific Setup

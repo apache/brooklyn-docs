@@ -1,7 +1,7 @@
 ---
 title: Locations
 layout: website-normal
-show_inline_children: true
+check_directory_for_children: true
 ---
 
 Locations are the environments to which Brooklyn deploys applications, including:

@@ -1,5 +1,7 @@
 ---
 section: Clouds
+section_type: inline
+section_position: 1.0
 ---
 
 ### Clouds

@@ -1,6 +1,8 @@
 ---
 section: Inheritance and Named Locations
 title: Named Locations
+section_type: inline
+section_position: 2
 ---
 
 ### Inheritance and Named Locations

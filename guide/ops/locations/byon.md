@@ -1,5 +1,7 @@
 ---
 section: BYON
+section_position: 4
+section_type: inline
 ---
 
 ### BYON

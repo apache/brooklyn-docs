@@ -227,8 +227,8 @@ module SiteStructure
         # see: page_structure.rb
         #
         # require show_inline_children to be set to true to show in the menu
-        if page['show_inline_children'] == true
-          $childPages = PageStructureUtils::ChildPage.parseChildPagesFromParent(page)
+        if page['check_directory_for_children'] == true
+          $childPages = PageStructureUtils::ChildPage.parseChildYAMLFromParent(page)
           # add the child pages in before the site structure has been created
           for $childPage in $childPages
             if $childPage.yaml() != nil && $childPage.yaml() != false
@@ -239,6 +239,14 @@ module SiteStructure
               data['children'] << $childPage.yaml()
             end
           end
+        end
+        
+        ##
+        # This sorts child pages by the YAML property section_position. This uses a versioning format so 1.1.0 > 1.0.4
+        # Any sections missing numbers will use their current position to determine their order
+        #
+        if data['children']
+          data['children'] = PageStructureUtils::ChildPage.sortYAMLSectionPositions(data['children'])
         end
         
         data['path'] = page.path
@@ -329,6 +337,7 @@ module SiteStructure
       end
 
       if (data['children'])
+                
         data['menu'] = []
         puts "children of #{data['path']} - #{data['children']}" if @@verbose
         data['children'].each do |child|

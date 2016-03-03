@@ -1,5 +1,7 @@
 ---
 section: Localhost
+section_position: 3
+section_type: inline
 ---
 
 ### Localhost
