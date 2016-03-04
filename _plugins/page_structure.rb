@@ -52,6 +52,7 @@ module PageStructureUtils
     end
     ##
     # Sorts a list of yaml children, if there's no numbering, use the YAML order to create a numbering
+    # NOTE: doesn't alter the returned object as that seemed to break things downstream
     #
     def self.sortYAMLSectionPositions(yaml)
           position = Hash.new
