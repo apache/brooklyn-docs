@@ -10,6 +10,12 @@ require "kramdown"
 
 module PageStructureUtils
   
+  class MyHash < Hash
+    def to_s
+      "cheese"
+    end
+  end
+  
   class ChildPage
     def initialize(yaml, content)
       @yaml=yaml
@@ -48,33 +54,42 @@ module PageStructureUtils
     # Sorts a list of yaml children, if there's no numbering, use the YAML order to create a numbering
     #
     def self.sortYAMLSectionPositions(yaml)
-#      puts "a > "+yaml.to_s
-      hashArray = []
-      $major = "1"
-      $minor = 1
-      # first check all the child pages are numbered, if not, number them in the order they are
-      yaml.each do |i|
-        hash = {}
-        # if it's a string, convert it to a hash
-        if i.instance_of? String
-          hash = { "path" => i }
-        else
-          hash = i
-        end
-        if i['section_position'] == nil
-          hash['section_position'] = $major+"."+$minor.to_s
-          $minor += 1
-        else
-          # Store any major, start incrementing minor
-          $major = i['section_position'].to_s
+          position = Hash.new
+          $major = "1"
           $minor = 1
+          # go through and generate a position for each
+          yaml.each do |i|
+            if i.instance_of? String
+              position[i] = $major+"."+$minor.to_s
+            else
+              if i['section_position'] == nil
+                position[i['path']] = $major+"."+$minor.to_s
+                $minor += 1
+              else
+                # Store any major, start incrementing minor
+                position[i['path']] = i['section_position'].to_s
+                $major = i['section_position'].to_s
+                $minor = 1
+              end
+            end
+          end
+          # sort on the position (NB: sort! for in-place sorting)
+          yaml.sort!{ |x,y| 
+            $pos_x = nil
+            $pos_y = nil
+            if x.instance_of? String
+              $pos_x = position[x]
+            else
+              $pos_x = position[x['path']]
+            end
+            if y.instance_of? String
+              $pos_y = position[y]
+            else
+              $pos_y = position[y['path']]
+            end
+            Gem::Version.new($pos_x.to_s) <=> Gem::Version.new($pos_y.to_s) 
+            }
         end
-        hashArray << hash
-      end
-      # return the comparison between the versions (NB: sort! for in-place sorting)
-      hashArray.sort!{ |x,y| Gem::Version.new(x['section_position'].to_s) <=> Gem::Version.new(y['section_position'].to_s) }
-#      puts "2 > "+hashArray.to_s
-    end
     
     ##
     # This function looks at all the *.md files at the YAML in the headers and produces a list of children ordered by section_position
