@@ -66,8 +66,8 @@ Brooklyn irons out many of the differences between clouds so that blueprints run
 in a wide range of locations, including setting up access and configuring images and machine specs.
 The configuration options are described in more detail below.
 
-In some cases, a cloud provider may offer special features or unexpected quirks;
-known issues are described a the **[More Details for Specific Clouds](more-clouds.html)** page.
+In some cases, cloud providers have special features or unusual requirements. 
+These are outlined in **[More Details for Specific Clouds](more-clouds.html)**.
 
 
 #### OS Initial Login and Setup
@@ -129,9 +129,10 @@ For more keys and more detail on the keys below, see
 - Specific Security Groups can be specified using `securityGroups`, as a list of strings (the existing security group names),
   or `inboundPorts` can be set, as a list of numeric ports (selected clouds only)
 
-- A specific existing key pair known at the cloud to use for login can be specified with `keyPair`
-  (selected clouds only); if this `keyPair` does not correspond to your default `~/.ssh/id_rsa`
-  then you must typically also specify the `loginUser.privateKeyFile` to use with this `keyPair`
+- Where a key pair is registered with a target cloud for logging in to machines,
+  Brooklyn can be configured to request this when provisioning VMs by setting `keyPair` (selected clouds only). 
+  Note that if this `keyPair` does not correspond your default `~/.ssh/id_rsa`, you must typically 
+  also specify the corresponding `loginUser.privateKeyFile` as a file or URL accessible from Brooklyn.
 
 - A specific VM name (often the hostname) base to be used can be specified by setting `groupId`.
   By default, this name is constructed based on the entity which is creating it,
