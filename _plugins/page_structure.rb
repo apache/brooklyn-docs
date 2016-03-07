@@ -10,12 +10,6 @@ require "kramdown"
 
 module PageStructureUtils
   
-  class MyHash < Hash
-    def to_s
-      "cheese"
-    end
-  end
-  
   class ChildPage
     def initialize(yaml, content)
       @yaml=yaml
