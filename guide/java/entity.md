@@ -7,10 +7,23 @@ title: Writing an Entity
 
 There are several ways to write a new entity:
 
-* Write pure-java, extending existing base-classes and using utilities such as `HttpTool` and `BashCommands`.
-* Write scripts, and configure (e.g. using YAML) a **`VanillaSoftwareProcess`**.
-* Use Chef recipes, and wire these into the entity by using `ChefConfig` and `ChefLifecycleEffectorTasks`.
-* Use an equivalent of Chef (e.g. Salt or Puppet; support for these is currently less mature than for Chef)
+* For Unix/Linux, write YAML blueprints, for example using a **`VanillaSoftwareProcess`** and 
+  configuring it with your scripts.
+* For Windows, write YAML blueprints using **`VanillaWindowsProcess`** and configure the PowerShell
+  scripts.
+* For composite entities, use YAML to compose exiting types of entities (potentially overwriting
+  parts of their configuration), and wire them together.
+* Use **[Chef recipes]({{site.path.guide}}/yaml/chef)**.
+* Use **[Salt formulas]({{site.path.guide}}/yaml/salt)**.
+* Use **[Ansible playbooks]({{site.path.guide}}/yaml/ansible)**.
+* Write pure-java, extending existing base-classes. For example, the `GistGenerator` 
+  [example](defining-and-deploying.html). These can use utilities such as `HttpTool` and 
+  `BashCommands`.
+* Write pure-Java blueprints that extend `SoftwareProcess`. However, the YAML approach is strongly
+  recommended over this approach.
+* Write pure-Java blueprints that compose together existing entities, for example to manage
+  a cluster. Often this is possible in YAML and that approach is strongly recommended. However,
+  sometimes the management logic may be so complex that it is easier to use Java.
 
 The rest of this section covers writing an entity in pure-java (or other JVM languages).
 
@@ -24,8 +37,7 @@ Entities are created through the management context (rather than calling the
 constructor directly). This returns a proxy for the entity rather than the real 
 instance, which is important in a distributed management plane.
 
-All entity implementations inherit from `AbstractEntity`, 
-often through one of the following:
+All entity implementations inherit from `AbstractEntity`, often through one of the following:
 
 * **`SoftwareProcessImpl`**:  if it's a software process
 * **`VanillaJavaAppImpl`**:  if it's a plain-old-java app
@@ -47,6 +59,8 @@ Choose one (or more) as appropriate.
 
 
 ## Key Steps
+
+*NOTE: Consider instead writing a YAML blueprint for your entity.*
 
 So to get started:
 

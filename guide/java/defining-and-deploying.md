@@ -5,121 +5,171 @@ layout: website-normal
 
 ## Intro
 
-This walkthrough will set up a sample application which you can use as foundation for creating your own applications.
+This walkthrough will set up a simple entity, add it to the catalog, and provision it.
 
-The sample application is a three tier web service, composed of:
+For illustration purposes, we will write an integration with [Github Gist](https://gist.github.com/), 
+with an effector to create new gists.
 
-* an Nginx load-balancer
-* a cluster of JBoss appservers
-* a MySQL database
 
-## Define your Application Blueprint
+## Project Setup
 
-An application blueprint is defined as a Java class, as follows:
+Follow the instructions to create a new Java project using the [archetype](archetype.html), and
+import it into your [favorite IDE]({{ site.path.guide }}/dev/env/ide/). This example assumes you 
+used the groupId `com.acme` and artifact id `autobrick`.
+
+First ensure you can build this project at the command line, using `mvn clean install`.
+
+
+## Java Entity Classes
+
+For this particular example, we will use a third party Gist library, so will need to add that as 
+a dependency. Add the following to your `pom.xml` inside the `<dependencies>` section 
+(see [Maven](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html) 
+for more details):
+
+{% highlight xml %}
+<dependency>
+  <groupId>org.eclipse.mylyn.github</groupId>
+  <artifactId>org.eclipse.egit.github.core</artifactId>
+  <version>2.1.5</version>
+</dependency>
+{% endhighlight %}
+
+Create a new Java interface, `GistGenerator`, to describe the entity's interface (i.e. the 
+configuration options, sensors, and effectors). The code below assumes you have created this
+in the package `com.acme` for `src/main/java`.
 
 {% highlight java %}
-public class ClusterWebServerDatabaseSample extends AbstractApplication {
-    @Override
-    public void init() {
-        MySqlNode mysql = addChild(EntitySpec.create(MySqlNode.class));
-        ControlledDynamicWebAppCluster web = addChild(EntitySpec.create(ControlledDynamicWebAppCluster.class));
-    }
-}
+{% readj gist_generator/GistGenerator.java %}
 {% endhighlight %}
 
-The file `ClusterWebServerDatabaseSample.java` in `src/main/java/com/acme/sample/brooklyn/sample/app/` 
-provides a template to follow.
+To describe each part of this:
 
+* The `@ImplementedBy` indicates the implementation class for this entity type - i.e. the class 
+  to instantiate when an entity of this type is created.
+* By extending `Entity`, we indicate that this interface is an Entity type. We could alternatively
+  have extended one of the other sub-types of Entity.
+* The `OAUTH_KEY` is a configuration key - it is configuration that can be set on the entity when 
+  it is being instantiated.
+* The `@Effector` annotation indicates the the given method is an effector, so should be presented
+  and tracked as such. Execution of the effector is intercepted, to track it as a task and show its
+  execution in the Activity view.
+* The `@EffectorParam` annotations give metadata about the effector's parameters. These will be  
+  presented in users of the entity, e.g. when invoking the effector via the web-console.
 
-## Deploying the Application
+Note there is an alternative way of defining effectors - adding them to the entity dynamically, 
+discussed in the section [Dynamic Effectors](dynamic_effectors.html).
 
-If you have not already done so, follow the instructions 
-[here]({{site.path.guide}}/ops/locations/) to create a `brooklyn.properties` 
-file containing credentials for your preferred cloud provider. 
-
-To launch this application, build the project and run the `start.sh` script in the resulting assembly:
-
-{% highlight bash %}
-$ mvn clean assembly:assembly
-
-$ cd target/brooklyn-sample-0.1.0-SNAPSHOT-dist/brooklyn-sample-0.1.0-SNAPSHOT/
-
-$ ./start.sh launch \
-    --app com.acme.sample.brooklyn.sample.app.ClusterWebServerDatabaseSample \
-    --location jclouds:aws-ec2:eu-west-1
-{% endhighlight %}
-
-(Amazon is used in this walkthrough, but lots of targets are supported,
-including `--location localhost`, fixed IP addresses, and 
-everything supported by [jclouds](http://jclouds.org), from OpenStack to Google Compute.)
-
-Your console will inform you that it has started a Brooklyn console at [http://localhost:8081](http://localhost:8081)
-
-[![Web Console]({{ page.url_basedir }}wt-starting-700.png "Web Console")](wt-starting.png) 
-
-The management console provides a view on to the entities that launched,
-including the hierarchy (appservers grouped into a cluster) and their locations. 
-
-Brooklyn collects information from these entities ("sensors"), 
-aggregates these for clusters and other groups (using "enrichers"),
-and exposes operations ("effectors") that can be performed on entities.
-
-[![Web Console Details]({{ page.url_basedir }}wt-tree-jboss-sensors-700.png "Web Console Details")](wt-tree-jboss-sensors.png) 
-
-## What Next?
- 
-In addition to the sample project created by the archetype, with its README and
-`assembly` build, you can find additional code related to this example included with Brooklyn as the ``simple-web-cluster`` example.
-{% comment %}
-described [in detail here]({{site.path.guide}}/use/examples/webcluster).
-{% endcomment %}
-
-For your applications, you might want to mix in other data stores, messaging systems, or on-line services including PaaS.
-Brooklyn supports some of these out-of-the-box, including a wide-range of tools which it can use Whirr to provision, such as Hadoop.
-But if you have something you don't see, 
-[let us know]({{site.path.website}}/community/) -- 
-we want to work with you to 
-[write a new entity]({{site.path.guide}}/java/entity.html) or
-[policy]({{site.path.guide}}/java/policy.html) 
-and [contribute it]({{site.path.website}}/developers/how-to-contribute.html).
-
-
-<!--
-
-Alternatively you can just add a ``main`` method to the application class as follows:
+Next lets add the implementation. Create a new Java class named `GistGeneratorImpl`.
 
 {% highlight java %}
-    public static void main(String[] argv) {
-        List<String> args = Lists.newArrayList(argv);
-        String port =  CommandLineUtil.getCommandLineOption(args, "--port", "8081+");
-        String location = CommandLineUtil.getCommandLineOption(args, "--location", DEFAULT_LOCATION);
-
-        BrooklynServerDetails server = BrooklynLauncher.newLauncher()
-                .webconsolePort(port)
-                .launch();
-
-        Location loc = server.getManagementContext().getLocationRegistry().resolve(location);
-
-        StartableApplication app = new WebClusterDatabaseExample()
-                .appDisplayName("Brooklyn WebApp Cluster with Database example")
-                .manage(server.getManagementContext());
-        
-        app.start(ImmutableList.of(loc));
-        
-        Entities.dumpInfo(app);
-    }
+{% readj gist_generator/GistGeneratorImpl.java %}
 {% endhighlight %}
 
-Compile and run this with the [``brooklyn-all`` jar]({{site.path.guide}}/start/download.html) on the classpath,
-pointing at your favourite WAR on your filesystem. 
-(If the ``import`` packages aren't picked up correctly,
-you can cheat by looking at [the file in Github](https://github.com/apache/brooklyn-library/blob/master/examples/simple-web-cluster/src/main/java/org/apache/brooklyn/demo/WebClusterDatabaseExample.java);
-and you'll find a sample WAR which uses the database as configured above 
-[here](http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war).)
- TODO example webapp url 
- 
-If you want to adventure beyond ``localhost`` (the default),
-simply supply the your favourite cloud (e.g. ``aws-ec2:eu-west-1``)
-with credentials set up as described [here]({{ site.path.guide }}/use/guide/management/index.html#startup-config).
+To describe each part of this:
 
--->
+* Extends `AbstractEntity` - all entity implementations should extend this, or one of its 
+  sub-types.
+* Implements `GistGenerator`: this is the Entity type definition, so must be implemented.
+  Users of the entity will only refer to the interface; they will never be given an instance 
+  of the concrete class - instead a [dynamic proxy](https://docs.oracle.com/javase/7/docs/api/java/lang/reflect/Proxy.html) 
+  is used (to allow remoting).
+* `org.slf4j.Logger` is the logger used throughout Apache Brooklyn.
+* Implements the `createGist` effector - we do not need to re-declare all the annotations.
+* If no `oath.key` parameter was passed in, then use the configuration set on the entity.
+* Use the third party library to create the gist.
+
+
+### Configuring GitHub
+
+First, create a github.com account, if you do not already have one.
+
+Before running the blueprint, we'll need to generate an access token that has permissions to
+create a gist programmatically.
+
+First [create a new access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) 
+that our blueprint will use to create a gist:
+
+[![Create a new access key.](gist_generator/gist_create_token.png "Create a new access key")](gist_generator/gist_create_token.png)
+
+Next, grant the token rights to create gists:
+
+[![Grant access.](gist_generator/gist_grant_access.png "Grant access")](gist_generator/gist_grant_access.png)
+
+
+### Testing
+
+The archetype project comes with example unit tests that demonstrate how to test entities, 
+both within Java and also using YAML-based blueprints. 
+
+We will create a similar Java-based test for this blueprint. Create a new Java class named 
+`GistGeneratorTest` in the package `com.acme`, inside `src/test/java`.
+
+You will need to substitute the github access token you generated in the previous section for
+the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
+
+{% highlight java %}
+{% readj gist_generator/GistGeneratorTest.java %}
+{% endhighlight %}
+
+Similarly, we can write a test that uses the `GistGenerator` from a YAML blueprint. 
+Create a new Java class named `GistGeneratorYamlTest` in the package `com.acme`, 
+inside `src/test/java`.
+
+Again you will need to substitute the github access token you generated in the previous section for
+the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section on 
+[externalised configuration]({{ site.path.guide }}/ops/externalized-configuration.html) 
+for how to store these credentials more securely. 
+
+{% highlight java %}
+{% readj gist_generator/GistGeneratorYamlTest.java %}
+{% endhighlight %}
+
+
+## Building the OSGi Bundle
+
+We will build this as an [OSGi Bundle](https://www.osgi.org/developer/architecture/) so that it
+can be added to the Apache Brooklyn server at runtime, and so multiple versions of the blueprint 
+can be managed.
+
+The `mvn clean install` will automatically do this, creating a jar inside the `target/` sub-directory
+of the project. This works by using the 
+[Maven Bundle Plugin](http://felix.apache.org/documentation/subprojects/apache-felix-maven-bundle-plugin-bnd.html)
+which we get automatically by declaring the `pom.xml`'s parent as `brooklyn-downstream-parent`.
+
+
+## Adding to the catalog
+
+Similar to the `sample.bom` entity that ships with the archetype, we will define a `.bom` file
+to add our `GistGenerator` to the catalog. Substitute the URL below for your own newly built 
+artifact (which will be in the `target` sub-directory after running `mvn clean install`).
+
+{% highlight yaml %}
+{% readj gist_generator/gist_generator.bom %}
+{% endhighlight %}
+
+*Unfortunately the file org.eclipse.egit.github.core-2.1.5.jar (available on maven central) was 
+generated incorrectly as an OSGi bundle (there is a missing quotation mark from the manfest file,
+making it invalid). The above YAML references a corrected version of this OSGi bundle, made 
+available for test purposes.*
+
+The command below will use the REST api to add this to the catalog of a running Brooklyn instance.
+Substitute the credentials, URL and port for those of your server.
+
+    curl -u admin:pa55w0rd https://127.0.0.1:8443/v1/catalog --data-binary @gist_generator.bom
+
+
+## Using the blueprint
+
+The YAML blueprint below shows an example usage of this blueprint:
+
+    name: my sample
+    services:
+    - type: example.GistGenerator:1.0
+      brooklyn.config:
+        oauth.key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Note the type name matches the id and version defined in the `.bom` file.
+
+You can now call the effector by any of the standard means - [web console]({{ site.path.guide }}/ops/gui/), 
+[REST api]({{ site.path.guide }}/ops/rest.html), or [Client CLI]({{ site.path.guide }}/ops/cli/).
