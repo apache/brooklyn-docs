@@ -29,11 +29,11 @@ The content from these inline sections can then be included in the page content 
 in an example from [/guide/ops/locations/index.md](https://github.com/apache/brooklyn-docs/blob/master/guide/ops/locations/index.md){:target="_blank"}:
 
 <pre>
-&#45;&#45;&#45;
+---
 title: Locations
 layout: website-normal
 check_directory_for_children: true
-&#45;&#45;&#45;
+---
 
 Locations are the environments to which Brooklyn deploys applications, including:
 

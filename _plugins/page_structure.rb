@@ -115,7 +115,7 @@ module PageStructureUtils
               yamlContent['section_position'] = Integer::MAX
             end
             # if there's YAML, check it has the section_position tag and put it into child pages
-            ($allPages ||= []) << ChildPage.new(yamlContent, $partitionedFileContent[2])
+            ($allPages ||= []) << ChildPage.new(yamlContent, $partitionedFileContent[2..-1].join('---'))
           end
         end     
       end
@@ -154,7 +154,7 @@ module PageStructureUtils
           yamlContent = YAML.load($partitionedFileContent[1])
           # if we can, use it
           if yamlContent != nil && yamlContent != false
-            $textContent = $partitionedFileContent[2]
+            $textContent = $partitionedFileContent[2..-1].join('---')
           end
         end
         
