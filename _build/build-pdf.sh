@@ -8,7 +8,7 @@ if [ ! -x _build/build.sh ] ; then
 fi
 
 if [ "$#" -lt 2 ] ; then
-	echo "Usage: buildPDF.sh <source html> <target PDF> [user-style-sheet]"
+	echo "Usage: build-pdf.sh <source html> <target PDF> [user-style-sheet]"
 	exit 1
 fi
 
@@ -18,11 +18,8 @@ if ! command -v wkhtmltopdf >/dev/null 2>&1; then
 fi
 	
 # run the PDF build with wkhtmltopdf
-if [ -z "$3" ] ; then
-	wkhtmltopdf --page-size Letter --margin-top 0.75in --margin-right 0.75in --margin-bottom 0.75in --margin-left 0.75in --encoding UTF-8 $1 $2
-else
-	wkhtmltopdf --user-style-sheet $3 --page-size Letter --margin-top 0.75in --margin-right 0.75in --margin-bottom 0.75in --margin-left 0.75in --encoding UTF-8 $1 $2
-fi
+wkhtmltopdf ${3:+--user-style-sheet $3} --page-size Letter --margin-top 0.75in --margin-right 0.75in --margin-bottom 0.75in --margin-left 0.75in --encoding UTF-8 $1 $2
+
 if [ $? -eq 1 ] ; then
 	echo "Note that ContentNotFoundError is usually because of the invalid relational path of a local resource such as an image"
 elif [ $? -eq 0 ] ; then
