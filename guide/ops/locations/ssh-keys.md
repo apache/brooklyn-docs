@@ -1,6 +1,6 @@
 ---
 section: SSH Keys
-section_position: 3.1
+section_position: 5
 section_type: inline
 ---
 

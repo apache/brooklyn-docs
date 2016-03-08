@@ -1,7 +1,7 @@
 ---
 section: Clouds
 section_type: inline
-section_position: 1.0
+section_position: 1
 ---
 
 ### Clouds
@@ -37,8 +37,12 @@ brooklyn.location.jclouds.aws-ec2.credential=s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1
 
 And in this case you can reference the location in YAML with `location: jclouds:aws-ec2`.
 
-The Getting Started [template brooklyn.properties]({{ site.path.guide }}/start/brooklyn.properties) contains more examples 
-of configuring cloud endpoints, including information on credential types used in different clouds.
+Brooklyn irons out many of the differences between clouds so that blueprints run similarly
+in a wide range of locations, including setting up access and configuring images and machine specs.
+The configuration options are described in more detail below.
+
+In some cases, cloud providers have special features or unusual requirements. 
+These are outlined in **[More Details for Specific Clouds](more-clouds.html)**.
 
 #### OS Initial Login and Setup
 
@@ -65,7 +69,8 @@ Following a successful logon, Brooklyn performs the following steps to configure
 
 1. install the local user's `~/.ssh/id_rsa.pub` as an `authorized_keys` on the new machine,
    to make it easy for the operator to `ssh` in
-   (override with `privateKeyFile`; or if there is no `id_{r,d}sa{,.pub}` an ad hoc keypair will be generated;
+   (override with `privateKeyFile`; or if there is no `id_{r,d}sa{,.pub}` an ad hoc keypair will be generated
+   for the regular Brooklyn user;
    if there is a passphrase on the key, this must be supplied)  
 
 1. give `sudo` access to the newly created user (override with `grantUserSudo: false`)
@@ -96,8 +101,10 @@ For more keys and more detail on the keys below, see
 - Specific Security Groups can be specified using `securityGroups`, as a list of strings (the existing security group names),
   or `inboundPorts` can be set, as a list of numeric ports (selected clouds only)
 
-- A specific existing key pair known at the cloud to use can be specified with `keyPair`
-  (selected clouds only)
+- Where a key pair is registered with a target cloud for logging in to machines,
+  Brooklyn can be configured to request this when provisioning VMs by setting `keyPair` (selected clouds only). 
+  Note that if this `keyPair` does not correspond your default `~/.ssh/id_rsa`, you must typically 
+  also specify the corresponding `loginUser.privateKeyFile` as a file or URL accessible from Brooklyn.
 
 - A specific VM name (often the hostname) base to be used can be specified by setting `groupId`.
   By default, this name is constructed based on the entity which is creating it,
@@ -187,7 +194,7 @@ For more keys and more detail on the keys below, see
   This setting prevents scripts executed on the VMs from being deleted on completion.
   Note that some scripts run periodically so this can eventually fill a disk; it should only be used for dev/test. 
 
-###### Custom template options
+###### Custom Template Options
 
 jclouds supports many additional options for configuring how a virtual machine is created and deployed, many of which
 are for cloud-specific features and enhancements. Brooklyn supports some of these, but if what you are looking for is

@@ -45,6 +45,14 @@ module PageStructureUtils
       yaml.sort{ |x,y| Gem::Version.new(x.yaml['section_position'].to_s) <=> Gem::Version.new(y.yaml['section_position'].to_s) }
     end
     ##
+    # This goes through the hash looking for the keys for the different types of children
+    #
+    def self.getDefiningParameterFromHash(hash)
+      param_name = hash['path']
+      param_name = (param_name == nil ? hash['link'] : param_name)
+       (param_name == nil ? hash['section'] : param_name)
+    end
+    ##
     # Sorts a list of yaml children, if there's no numbering, use the YAML order to create a numbering
     # NOTE: doesn't alter the returned object as that seemed to break things downstream
     #
@@ -57,12 +65,14 @@ module PageStructureUtils
             if i.instance_of? String
               position[i] = $major+"."+$minor.to_s
             else
+              # get the key for this type of child
+              defining_param = getDefiningParameterFromHash(i)
               if i['section_position'] == nil
-                position[i['path']] = $major+"."+$minor.to_s
+                position[defining_param] = $major+"."+$minor.to_s
                 $minor += 1
               else
                 # Store any major, start incrementing minor
-                position[i['path']] = i['section_position'].to_s
+                position[defining_param] = i['section_position'].to_s
                 $major = i['section_position'].to_s
                 $minor = 1
               end
@@ -75,12 +85,14 @@ module PageStructureUtils
             if x.instance_of? String
               $pos_x = position[x]
             else
-              $pos_x = position[x['path']]
+              defining_param = getDefiningParameterFromHash(x)
+              $pos_x = position[defining_param]
             end
             if y.instance_of? String
               $pos_y = position[y]
             else
-              $pos_y = position[y['path']]
+              defining_param = getDefiningParameterFromHash(y)
+              $pos_y = position[defining_param]
             end
             Gem::Version.new($pos_x.to_s) <=> Gem::Version.new($pos_y.to_s) 
             }

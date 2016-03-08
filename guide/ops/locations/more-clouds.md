@@ -1,7 +1,11 @@
 ---
-title: More Details on Specific Clouds
-layout: website-normal
+section: More Details on Specific Clouds
+title: More on Clouds
+section_type: inline
+section_position: 2
 ---
+
+### More Details on Specific Clouds
 
 To connect to a Cloud, Brooklyn requires appropriate credentials. These comprise the `identity` and 
 `credential` in Brooklyn terminology. 

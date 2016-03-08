@@ -2,7 +2,7 @@
 section: Inheritance and Named Locations
 title: Named Locations
 section_type: inline
-section_position: 2
+section_position: 3
 ---
 
 ### Inheritance and Named Locations

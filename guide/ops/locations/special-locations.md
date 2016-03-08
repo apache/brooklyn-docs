@@ -1,6 +1,6 @@
 ---
 section: Specialized Locations
-section_position: 5
+section_position: 7
 section_type: inline
 ---
 
