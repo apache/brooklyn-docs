@@ -14,8 +14,10 @@ For inline children, sourced using `check_directory_for_children: true`, this `s
 The format for `section_position` is that of software versioning, i.e `A.B... Z` where A, B etc are numbers of decreasing value. Position `1.1.0` would appear
 before version `1.0.4` for example. This allows an infinite number of sub pages between each `section_position`.
 
-Any un-versioned pages are automatically numbered to follow on from the last numbered page, or `1.1` if no pages are yet numbered. For
-example, if a numbered page, `1.4` is followed by a non-numbered page, the non-numbered page would be auto-numbered as `1.4.1`.
+Any un-versioned pages are automatically numbered to add a new minor version from the last page if that was numbered or increment the minor
+if it was not. If no pages are yet numbered, the numbering is started at `1.1`. For example, if a numbered page, `1.4` is followed by a 
+non-numbered page, the non-numbered page would be auto-numbered as `1.4.1`. If this page is followed by another non-numbered page it would
+be auto-numbered as `1.4.2`.
 
 For example, a set of children pages numbered like this:
 

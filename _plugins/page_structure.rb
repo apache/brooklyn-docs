@@ -64,6 +64,7 @@ module PageStructureUtils
           yaml.each do |i|
             if i.instance_of? String
               position[i] = $major+"."+$minor.to_s
+              $minor += 1
             else
               # get the key for this type of child
               defining_param = getDefiningParameterFromHash(i)
