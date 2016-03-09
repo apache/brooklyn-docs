@@ -16,7 +16,7 @@ review and/or change the the location where the application will be deployed.
 You will need four machines for this example: one for the load-balancer (nginx), and three for the 
 Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 
-<div class="usermanual-pdf-include" style="display: none;">
+<div class="usermanual-pdf-include started-pdf-include" style="display: none;">
 {% highlight yaml %}
 name: Tomcat Cluster
 
