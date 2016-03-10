@@ -14,6 +14,10 @@ familiarise yourself with the standard workflow for Apache Brooklyn:
 [CONTRIB]: https://brooklyn.apache.org/community/how-to-contribute-docs.html
 [COMMIT]: https://brooklyn.apache.org/developers/committers/index.html
 
+The documents are written in [kramdown](http://kramdown.gettalong.org/syntax.html) a superset of Markdown 
+which is processed into HTML using [Jekyll](https://jekyllrb.com/). In addition to the standard set of options
+and notation available with these platforms, a number of custom plug-ins have been implemented specifically
+for the Brooklyn docs. These are detailed in the [contributing to docs](https://brooklyn.apache.org/contributing) doc.  
 
 Workstation Setup
 -----------------
@@ -21,8 +25,8 @@ Workstation Setup
 First, if you have not already done so, clone the `brooklyn` repository and subprojects
 and set up the remotes as described in [Guide for committers][COMMIT].
 
-The Brooklyn documentation uses Markdown notation (what this file is written in)
-and the Jekyll process. This in turn requires Ruby and gems as described in the `Gemfile`:
+The Brooklyn documentation uses [Jekyll](https://jekyllrb.com/) to process the site content into HTML. 
+This in turn requires Ruby and gems as described in the `Gemfile`:
 install [RVM](http://rvm.io/) to manage Ruby installations and sets of Ruby gems.
 
     \curl -sSL https://get.rvm.io | bash -s stable

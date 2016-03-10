@@ -16,6 +16,69 @@ review and/or change the the location where the application will be deployed.
 You will need four machines for this example: one for the load-balancer (nginx), and three for the 
 Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 
+<div class="usermanual-pdf-include started-pdf-include" style="display: none;">
+{% highlight yaml %}
+name: Tomcat Cluster
+
+location:
+  byon:
+    user: vagrant
+    password: vagrant
+    hosts:
+      - 10.10.10.101
+      - 10.10.10.102
+      - 10.10.10.103
+      - 10.10.10.104
+ 
+services:
+- type: org.apache.brooklyn.entity.group.DynamicCluster
+  name: Cluster
+  id: cluster
+  brooklyn.config:
+    initialSize: 1
+    memberSpec:
+      $brooklyn:entitySpec:
+        type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+        name: Tomcat Server
+        brooklyn.config:
+          wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.8.0-incubating/brooklyn-example-hello-world-webapp-0.8.0-incubating.war
+ 
+        brooklyn.policies:
+        - type: org.apache.brooklyn.policy.ha.ServiceRestarter
+          brooklyn.config:
+            failOnRecurringFailuresInThisDuration: 5m
+        brooklyn.enrichers:
+        - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector
+          brooklyn.config:
+            entityFailed.stabilizationDelay: 30s
+ 
+  brooklyn.policies:
+  - type: org.apache.brooklyn.policy.ha.ServiceReplacer
+ 
+  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
+    brooklyn.config:
+      metric: webapp.reqs.perSec.perNode
+      metricUpperBound: 3
+      metricLowerBound: 1
+      resizeUpStabilizationDelay: 2s
+      resizeDownStabilizationDelay: 1m
+      maxPoolSize: 3
+
+  brooklyn.enrichers:
+  - type: org.apache.brooklyn.enricher.stock.Aggregator
+    brooklyn.config:
+      enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
+      enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
+      enricher.aggregating.fromMembers: true
+      transformation: average
+
+- type: org.apache.brooklyn.entity.proxy.nginx.NginxController
+  name: Load Balancer (nginx)
+  brooklyn.config:
+    loadbalancer.serverpool: $brooklyn:entity("cluster")
+    nginx.sticky: false
+{% endhighlight %}
+</div>
 
 <!-- WARNING: if modifying either mycluster.yaml or the yaml below, be sure to keep them both in-sync -->
 
@@ -194,21 +257,23 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 See blueprint-tour.md for where this CSS/javascript was copied from.
 {% endcomment %} 
 
-$(function() {
-  maxCodeWidth = Math.max.apply(Math, $(".annotated_blueprint div.block > div:last-child").map(function(){ return this.scrollWidth; }).get());
-  $(".annotated_blueprint div.block").width(maxCodeWidth);
-})
-
-$(".annotated_blueprint .code_scroller .initial_notice > div").height($(".annotated_blueprint .code_scroller .code_viewer").height());
-$(".annotated_blueprint .code_scroller .initial_notice > div").width($(".annotated_blueprint .code_scroller").width());
-$(".annotated_blueprint .code_scroller").hover(function() {
-  $(".annotated_blueprint .initial_notice").css("display", "none");
-});
-$(function() {
-  setTimeout(function() { $(".annotated_blueprint .initial_notice").hide(400); }, 3000);
-  setTimeout(function() { $(".annotated_blueprint #countdown").text("2s"); }, 1000);
-  setTimeout(function() { $(".annotated_blueprint #countdown").text("1s"); }, 2000);
-});
+if (window.$ != null) {
+	$(function() {
+	  maxCodeWidth = Math.max.apply(Math, $(".annotated_blueprint div.block > div:last-child").map(function(){ return this.scrollWidth; }).get());
+	  $(".annotated_blueprint div.block").width(maxCodeWidth);
+	})
+	
+	$(".annotated_blueprint .code_scroller .initial_notice > div").height($(".annotated_blueprint .code_scroller .code_viewer").height());
+	$(".annotated_blueprint .code_scroller .initial_notice > div").width($(".annotated_blueprint .code_scroller").width());
+	$(".annotated_blueprint .code_scroller").hover(function() {
+	  $(".annotated_blueprint .initial_notice").css("display", "none");
+	});
+	$(function() {
+	  setTimeout(function() { $(".annotated_blueprint .initial_notice").hide(400); }, 3000);
+	  setTimeout(function() { $(".annotated_blueprint #countdown").text("2s"); }, 1000);
+	  setTimeout(function() { $(".annotated_blueprint #countdown").text("1s"); }, 2000);
+	});
+	}
 </script>
 
 

@@ -1,15 +1,14 @@
 ---
-title: More Locations
-layout: website-normal
-children:
-- { section: Single Host }
-- { section: The Multi Location }
-- { section: The Server Pool }
+section: Specialized Locations
+section_position: 7
+section_type: inline
 ---
+
+### Specialized Locations
 
 Some additional location types are supported for specialized situations:
 
-### Single Host
+#### Single Host
 
 The spec `host`, taking a string argument (the address) or a map (`host`, `user`, `password`, etc.),
 provides a convenient syntax when specifying a single host.
@@ -25,7 +24,7 @@ services:
 Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0.1)`.
 
 
-### The Multi Location
+#### The Multi Location
 
 The spec `multi` allows multiple locations, specified as `targets`,
 to be combined and treated as one location.
@@ -48,7 +47,7 @@ and then to `acct2`.
 
 
 
-### The Server Pool
+#### The Server Pool
 
 The {% include java_link.html class_name="ServerPool" package_path="org/apache/brooklyn/entity/machine/pool" project_subpath="software/base" %}
 entity type allows defining an entity which becomes available as a location.
