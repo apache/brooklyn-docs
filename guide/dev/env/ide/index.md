@@ -12,7 +12,7 @@ But with a bit of a dance the IDE can still be your friend,
 making it much easier to run tests and debug.
 
 As a general tip, don't always trust the IDE to build correctly; if you hit a snag,
-do a command-line ``mvn clean install`` (optionally with ``-DskipTests``)
+do a command-line ``mvn clean install`` (optionally with ``-DskipTests`` and/or ``-Dno-go-client``)
 then refresh the project.
 
 See instructions below for specific IDEs.
@@ -41,7 +41,7 @@ If you encounter issues, the following hints may be helpful:
   You can manually mark as permanently ignored certain errors;
   this updates the pom.xml (and should be current).
 
-* A quick command-line build (`mvn clean install -DskipTests`) followed by a workspace refresh
+* A quick command-line build (`mvn clean install -DskipTests -Dno-go-client`) followed by a workspace refresh
   can be useful to re-populate files which need to be copied to `target/`
 
 * m2e likes to put `excluding="**"` on `resources` directories; if you're seeing funny missing files
