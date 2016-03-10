@@ -39,9 +39,11 @@ public static final ConfigKey<String> ROOT_WAR = new ConfigKeys.newStringConfigK
         "WAR file to deploy as the ROOT, as URL (supporting file: and classpath: prefixes)");
 {% endhighlight %}
 
-One can optional define a `@SetFromFlag("war")`. This defines a short-hand for configuring the
-entity. However, it should be used with caution - the long form defined in the constructor should
-be meaningful and sufficient. Its use may be deprecated in a future release.
+One can optionally define a `@SetFromFlag("war")`. This defines a short-hand for configuring the
+entity. However, it should be used with caution - when using configuration set on a parent entity
+(and thus inherited), the `@SetFromFlag` short-form names are not checked. The long form defined 
+in the constructor should be meaningful and sufficient. The usage of `@SetFromFlag` is therefore
+discouraged.
 
 The type `AttributeSensorAndConfigKey<?>` can be used to indicate that a config key should be resolved,
 and its value set as a sensor on the entity (when `ConfigToAttributes.apply(entity)` is called).

@@ -10,7 +10,9 @@ recommended.
 ## Define your Application Blueprint
 
 The example below creates a three tier web service, composed of an Nginx load-balancer, 
-a cluster of Tomcat app-servers, and a MySQL database:
+a cluster of Tomcat app-servers, and a MySQL database. It is similar to the [YAML policies
+example]({{ site.path.guide }}/start/policies.html), but also includes the MySQL database
+to demonstrate the use of dependent configuration.
 
 {% highlight java %}
 {% readj java_app/ExampleWebApp.java %}
@@ -25,9 +27,11 @@ To describe each part of this:
   its type and its configuration.
 * The `brooklyn.example.db.url` is a system property that will be passed to each `TomcatServer` 
   instance. Its value is the database's URL (discussed below).
+* The policies and enrichers provide in-life management of the application, to restart failed
+  instances and to replace those components that repeatedly fail.
 * The `NginxController` is the load-balancer and reverse-proxy: by default, it round-robins to 
   the ip:port of each member of the cluster configured as the `SERVER_POOL`.
-  
+
 
 ## Dependent Configuration
 
@@ -36,7 +40,7 @@ information is only available at runtime (e.g. it requires the IP of a dynamical
 component). For example, the app-servers in the example above require the database URL to be 
 injected.
 
-The "DependentConfiguration" methods returns a return a future (or a "promise" in the language of 
+The "DependentConfiguration" methods returns a future (or a "promise" in the language of 
 some other programming languages): when the  value is needed, the caller will block to wait for  
 the future to resolve. It will block only "at the last moment" when the value is needed (e.g. 
 after the VMs have been provisioned and the software is installed, thus optimising the 

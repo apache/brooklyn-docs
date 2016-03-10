@@ -51,14 +51,15 @@ To describe each part of this:
   have extended one of the other sub-types of Entity.
 * The `OAUTH_KEY` is a configuration key - it is configuration that can be set on the entity when 
   it is being instantiated.
-* The `@Effector` annotation indicates the the given method is an effector, so should be presented
+* The `@Effector` annotation indicates that the given method is an effector, so should be presented
   and tracked as such. Execution of the effector is intercepted, to track it as a task and show its
   execution in the Activity view.
-* The `@EffectorParam` annotations give metadata about the effector's parameters. These will be  
-  presented in users of the entity, e.g. when invoking the effector via the web-console.
+* The `@EffectorParam` annotations give metadata about the effector's parameters. This metadata,
+  such as the parameter description, is available to those using the client CLI, rest API and 
+  web-console.
 
 Note there is an alternative way of defining effectors - adding them to the entity dynamically, 
-discussed in the section [Dynamic Effectors](dynamic_effectors.html).
+discussed in the section [Dynamically Added Effectors](common-usage.html#dynamically-added-effectors).
 
 Next lets add the implementation. Create a new Java class named `GistGeneratorImpl`.
 
@@ -128,9 +129,9 @@ for how to store these credentials more securely.
 
 ## Building the OSGi Bundle
 
-We will build this as an [OSGi Bundle](https://www.osgi.org/developer/architecture/) so that it
-can be added to the Apache Brooklyn server at runtime, and so multiple versions of the blueprint 
-can be managed.
+Next we will build this example as an [OSGi Bundle](https://www.osgi.org/developer/architecture/) 
+so that it can be added to the Apache Brooklyn server at runtime, and so multiple versions of the  
+blueprint can be managed.
 
 The `mvn clean install` will automatically do this, creating a jar inside the `target/` sub-directory
 of the project. This works by using the 
@@ -156,7 +157,9 @@ available for test purposes.*
 The command below will use the REST api to add this to the catalog of a running Brooklyn instance.
 Substitute the credentials, URL and port for those of your server.
 
-    curl -u admin:pa55w0rd https://127.0.0.1:8443/v1/catalog --data-binary @gist_generator.bom
+{% highlight bash %} 
+$ curl -u admin:pa55w0rd https://127.0.0.1:8443/v1/catalog --data-binary @gist_generator.bom
+{% endhighlight %}
 
 
 ## Using the blueprint

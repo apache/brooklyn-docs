@@ -7,7 +7,9 @@ layout: website-normal
 
 ### Feeds
 
-A `Feed` is used to populate an entity's sensors. A variety of feed types are available.
+`Feed`s within Apache Brooklyn are used to populate an entity's sensors. There are a variety of 
+feed types, which commonly poll to retrieve the raw metrics of the entity (for example polling an 
+HTTP management API, or over JMX).  
 
 
 #### Persistence
