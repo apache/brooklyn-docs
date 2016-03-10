@@ -25,6 +25,8 @@ Key things to note if you're new to Maven:
 
 * Add ``-Dno-go-client`` to skip building the ``brooklyn-client`` project (useful if you don't have Go installed).
 
+* You may need to install ``rpm`` package to build RPM packages: ``brew install rpm`` for Mac OS, ``apt-get install rpm`` for Ubuntu, ``yum install rpm`` for Centos/RHEL.
+
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
   ([tests described here](../code/tests.html))
 
