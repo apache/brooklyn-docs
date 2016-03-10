@@ -116,7 +116,7 @@ Now start Apache Brooklyn with the following command:
 $ bin/brooklyn launch
 {% endhighlight %}
 
-The application should then output it's log into the console
+The application should then output its log into the console
 
 </div>
 </div>
@@ -125,7 +125,8 @@ The application should then output it's log into the console
 
 ## Control Apache Brooklyn
 
-Apache Brooklyn has a web console which can be used to control the application. The Brooklyn log will contain the address of the management interface:
+Apache Brooklyn has a web console which can be used to control the application. The Brooklyn log will contain the 
+address of the management interface:
 
 <pre>
 INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war
@@ -133,9 +134,9 @@ INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://br
 
 By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser. 
 
-The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI). To use this, download and install the tool as described on the [CLI GitHub page](https://github.com/brooklyncentral/brooklyn-cli){:target="_blank"}.
+The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI) tool, `br`. 
+This tool is distributed along with Apache Brooklyn. See details on the [Client CLI Reference](../../ops/cli/) page. 
 
-The CLI provides the command `br`, it's full usage is described in the user manual which can be found [here](../ops/cli/){:target="_blank"}
 
 ## Next
 

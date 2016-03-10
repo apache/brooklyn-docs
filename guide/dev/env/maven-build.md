@@ -6,7 +6,7 @@ toc: /guide/toc.json
 
 ## The Basics
 
-To build the code, you need Maven (v3) installed and Java (v1.7+).
+To build the code, you need Maven (v3.1+) and Java (v1.7+, 1.8 recommended) and Go (v1.6+).
 With that in place, you should be able to build everything with a:
 
 {% highlight bash %}
@@ -23,10 +23,12 @@ Key things to note if you're new to Maven:
 
 * Add ``-DskipTests`` to skip tests. 
 
+* Add ``-Dno-go-client`` to skip building the ``brooklyn-client`` project (useful if you don't have Go installed).
+
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
   ([tests described here](../code/tests.html))
 
-* Nearly all the gory details are in the root ``pom.xml``, which is referenced by child project poms.
+* Note that many of the gory details are in ``brooklyn-server/parent/pom.xml``, which is referenced by most other poms.
 
 * You can also open and use the code in your favourite IDE,
   although you may hit a few **[snags](ide/)**

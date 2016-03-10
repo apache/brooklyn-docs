@@ -110,7 +110,8 @@ policy       pol
 ### Login
 
 - `br login <URL> [username [password]]`  
-  Login to Brooklyn.  The CLI will prompt for a password if it is not provided.  If the Brooklyn server is running on localhost with no security enabled, the username and password may be omitted.  
+  Login to Brooklyn.  The CLI will prompt for a password if it is not provided.  If the Brooklyn server is running on 
+  localhost with no security enabled, the username and password may be omitted.  
   On successful login, the version of the connected Brooklyn server is shown.
 
 - `br version`
@@ -150,7 +151,8 @@ policy       pol
 
 - `br <app-scope> delete`  
   Delete an application from Brooklyn.  
-  **NOTE:** Use this command with care.  Even if the application / entities are still running, Brooklyn will drop all knowledge of them and they will be left running in an 'orphaned' state.
+  **NOTE:** Use this command with care.  Even if the application / entities are still running, Brooklyn will drop all 
+  knowledge of them and they will be left running in an 'orphaned' state.
 
 ### Entities
 
