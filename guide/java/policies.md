@@ -5,14 +5,16 @@ layout: website-normal
 ---
 
 Policies perform the active management enabled by Brooklyn.  
-They can subscribe to entity sensors and be triggered by them or they can run periodically.
+They can subscribe to entity sensors and be triggered by them (or they can run periodically,
+or be triggered by external systems).
 
 <!---
-TODO, clarify below, memebers of what?
+TODO, clarify below, members of what?
 -->
-Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its related entity, to the child entities, and/or those entities which are members.
+Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its 
+associated entity, to the child entities, and/or to the members of a "group" entity.
 
-When a policy runs it can:
+Common uses of a policy include the following:
 
 *	perform calculations,
 *	look up other values,
