@@ -12,19 +12,21 @@ information on starting on a Brooklyn Server, refer to [Server CLI Reference](..
 
 ## Obtaining the CLI tool
 
-The CLI tool, `br`,  is included in the Apache Brooklyn distribution, in bin/brooklyn-client-cli-0.9.0-SNAPSHOT.
-The tool is an executable binary (written in Go), and is distributed in a number of builds for a variety of platforms
-and architectures, each build in its own subdirectory:
+The CLI tool, `br`,  is included in the Apache Brooklyn distribution, under `bin/brooklyn-client-cli/`.
+The tool is an executable binary available for many platforms, with each build in its own subdirectory:
 
-    darwin.386    freebsd.386    linux.386    netbsd.386     openbsd.386    windows.386
-    darwin.amd64  freebsd.amd64  linux.amd64  netbsd.amd64   openbsd.amd64  windows.amd64
+* Mac: `darwin.amd64/`
+* Windows 32-bit: `windows.386/`
+* Windows 64-bit: `windows.amd64/`
+* Linux 32-bit: `linux.386/`
+* Linux 64-bit: `linux.amd64/`
 
-You can add the appropriate directory to your path, alias the command, or copy it somewhere on your path, whatever is
-convenient. For example:
+The binary is completely self-contained so you can either copy it to your `bin/` directory
+or add the appropriate directory above to your path:
 
-    PATH=$PATH:$HOME/apache-brooklyn/bin/brooklyn-client-cli-0.9.0-SNAPSHOT/linux/amd64
+    PATH=$PATH:$HOME/apache-brooklyn/bin/brooklyn-client-cli/linux.amd64/
+
 
 ## Documentation
-
 
 {% include list-children.html %}
