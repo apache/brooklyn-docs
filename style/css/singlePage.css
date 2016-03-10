@@ -43,6 +43,9 @@ pre, pre code{
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+pre {
+	font-family: "Lucida Console", Monaco, monospace;
+}
 .goToTop{
   padding-right: 25px;
   padding-top: 75px;
@@ -53,4 +56,13 @@ pre, pre code{
 #content_container h1{
   display: inline-block;
   width: 90%;
+}
+.jumobotron.annotated_blueprint{
+	display: none;
+}
+.usermanual-pdf-include{
+	display: inline !important;
+}
+.usermanual-pdf-exclude{
+	display: none !important;
 }
