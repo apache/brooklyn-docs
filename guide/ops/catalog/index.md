@@ -16,6 +16,8 @@ Apache Brooklyn provides a **catalog**, which is a persisted collection of versi
 Blueprints in the catalog can be deployed directly, via the Brooklyn REST API or the web console,
 or referenced in other blueprints using their `id`.
 
+A set of blueprints is loaded from `default.catalog.bom` in the brooklyn folder by default.
+
  
 ### Catalog Items YAML Syntax
 
