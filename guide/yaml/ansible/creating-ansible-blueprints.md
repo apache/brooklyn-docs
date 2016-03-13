@@ -109,3 +109,105 @@ or REST API.)
 
     $ br app myweb ent apache effector ansibleCommand invoke \
        -P module=shell -P args='curl http://myhost:8080/additional.html > /var/www/html/additional.html'
+
+### Roles and Multi-Playbook Installations
+
+There is no specific configuration in AnsibleEntity for Ansible [Roles](http://docs.ansible.com/ansible/playbooks_roles.html),
+ or to install multiple playbooks. However, the installation of roles or multiple playbooks can be carried out first 
+ by taking advantage of Brooklyn's SameServerEntity. The installation step can be applied in one child of the same server
+ entity, while the AnsibleEntity can operate under the second child. It will typically be necessary to delay the start
+ of the AnsibleEntity until the first child has carried out whatever preparation is required. The examples below
+ illustrate the concept (with just one playbook, for brevity).
+ 
+ One way to a achieve this, as with any Brooklyn entity, is to use the idiom of making it a child of a BasicApplication 
+ with a start latch waiting on the first child, such as in the following example, which installs the standalone Tomcat example,
+ with its playbook and roles, from the "Ansible Examples" Github site. 
+ (Note, this is designed for installation on Redhat/Centos 6.)
+ The first child in the SameServerEntity downloads
+ and unpacks the Ansible examples. This might also install standalone Ansible roles, or whatever other resources the
+ AnsibleEntity might require.  The second child uses `attributeWhenReady` to block until the first is ready, before 
+ starting the AnsibleEntity to apply the desired playbook.
+ 
+
+    name: multi
+    location:
+      red1
+    services:
+    - serviceType: brooklyn.entity.basic.SameServerEntity
+      name: Entities
+      brooklyn.children:
+      
+      - serviceType: org.apache.brooklyn.entity.cm.ansible.AnsibleEntity
+        id: bootstrap
+        service.name: crond
+        playbook: bootstrap
+        playbook.yaml: |
+            ---
+            - hosts: localhost
+              tasks:
+              - shell: printf "[tomcat-servers]\nlocalhost ansible_connection=local\n" >> /etc/ansible/hosts
+              - file: path=/etc/ansible/playbooks state=directory mode=0755
+              - get_url: url=https://github.com/ansible/ansible-examples/archive/master.zip dest=/tmp/master.zip mode=0440
+              - command: unzip -o -d /etc/ansible/playbooks /tmp/master.zip
+    
+      - serviceType: org.apache.brooklyn.entity.stock.BasicApplication
+        start.latch: $brooklyn:component("bootstrap").attributeWhenReady("service.isUp")
+        brooklyn.children:
+        - type: org.apache.brooklyn.entity.cm.ansible.AnsibleEntity
+          name: test
+          service.name: tomcat
+          playbook: tomcat
+          playbook.yaml: |
+              ---
+              - hosts: localhost
+              - include: /etc/ansible/playbooks/ansible-examples-master/tomcat-standalone/site.yml
+                vars:
+                    http_port: 8080
+                    https_port: 8443
+                    admin_username: admin
+                    admin_password: secret
+
+ 
+An alternative to the above is to use Ansible itself to do the waiting, as in the variant below, which uses AnsibleEntity
+itself in the first SameServerEntity child, to install the required material.  In the second child, which is simply an
+AnsibleEntity rather than a BasicApplication, Ansible's `wait_for` operation is used as the first step in the playbook, 
+to block the remaining steps in its playbook until the first is complete.
+
+    name: multi
+    location:
+      red1
+    services:
+    - serviceType: brooklyn.entity.basic.SameServerEntity
+      name: Entities
+      brooklyn.children:
+      
+      - serviceType: org.apache.brooklyn.entity.cm.ansible.AnsibleEntity
+        id: bootstrap
+        service.name: crond
+        playbook: bootstrap
+        playbook.yaml: |
+            ---
+            - hosts: localhost
+              tasks:
+              - command: rm -f /tmp/bootstrap.done
+              - shell: printf "[tomcat-servers]\nlocalhost ansible_connection=local\n" >> /etc/ansible/hosts
+              - file: path=/etc/ansible/playbooks state=directory mode=0755
+              - get_url: url=https://github.com/ansible/ansible-examples/archive/master.zip dest=/tmp/master.zip mode=0440
+              - command: unzip -o -d /etc/ansible/playbooks /tmp/master.zip
+              - file: path=/tmp/bootstrap.done state=touch
+    
+      - serviceType: org.apache.brooklyn.entity.cm.ansible.AnsibleEntity
+        name: test
+        service.name: tomcat
+        playbook: tomcat
+        playbook.yaml: |
+            ---
+            - tasks:
+              - wait_for: path=/tmp/bootstrap.done
+              include: /etc/ansible/playbooks/ansible-examples-master/tomcat-standalone/site.yml
+              vars:
+                http_port: 8080
+                https_port: 8443
+                admin_username: admin
+                admin_password: secret
+
