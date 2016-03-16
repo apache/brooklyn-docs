@@ -37,6 +37,10 @@ brooklyn.location.jclouds.aws-ec2.credential=s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1
 
 And in this case you can reference the location in YAML with `location: jclouds:aws-ec2`.
 
+Alternatively, you can use the location wizard tool available within the web console
+to create any cloud location supported by <a href="http://jclouds.org">Apache jclouds</a>.
+This location will be saved as a [catalog entry]({{ site.path.guide }}/ops/catalog/index.html#locations-in-catalog) for easy reusability.
+
 Brooklyn irons out many of the differences between clouds so that blueprints run similarly
 in a wide range of locations, including setting up access and configuring images and machine specs.
 The configuration options are described in more detail below.
