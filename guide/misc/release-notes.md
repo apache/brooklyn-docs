@@ -32,9 +32,10 @@ For a good demonstration, see the "Custom Entities" section of the YAML chapter 
 [ TODO - 
 restructuring and graduation; 
 the `br` client CLI tool;
+better YAML editor in the UI;
+a location wizard for defining new clouds;
 test framework;
 `$brooklyn:external(...)` extension for taking values from other sources is supported in more places;
-better YAML editor in the UI;
 OSGi-native mode using Karaf, to simplify packaging of blueprints;
 a new pure-java WinRM client (winrm4j), hugely reducing the number of dependencies and distro size;
 several version bumps (jclouds) and performance and reliability improvements
@@ -77,6 +78,16 @@ If you are referencing this sensor in blueprint DSL or somewhere else please use
 5. The name of the sensor `VanillaWindowsProcess.RDP_PORT` has been changed from `rdpPort` to `rdp.port`.
 <br>
 If you are referencing this sensor in blueprint DSL or somewhere else please use the key `rdp.port`.
+
+6. Location resolvers now generate `LocationSpec` instances instead of `Location` instances.
+This makes it clearer when locations become managed and prevents a memory leak which can
+happen when some locations are never unmanaged. All implementations of `LocationResolver`
+need to be updated to conform to the new interface.   
+   
+7. The named location `localhost` is no longer automatically added by default on a fresh Brooklyn install.
+Instead UI users are directed to a location wizard where they can configure their targets, including localhost. 
+If you require `localhost` to be available on boot, define it as a named location in `brooklyn.properties`
+or the default catalog. (The property `brooklyn.location.name.localhost=localhost` is usually sufficient.)
 
 For changes in prior versions, please refer to the release notes for 
 [0.8.0](/v/0.8.0-incubating/misc/release-notes.html).
