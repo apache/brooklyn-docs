@@ -217,7 +217,7 @@ policy       pol
 - `br <app-scope> effector <EffectorID> invoke`  
   Invoke the effector without any parameters.
 
-- `br <app-scope> effector <EffectorID> invoke [<param>=<value> ...]`  
+- `br <app-scope> effector <EffectorID> invoke [-P <param>=<value> ...]`
   Invoke the effector with one of more parameters.
 
 - `br <entity-scope> effector`  
@@ -229,7 +229,7 @@ policy       pol
 - `br <entity-scope> effector <EffectorID> invoke`  
   Invoke the effector without any parameters.
 
-- `br <entity-scope> effector <EffectorID> invoke [<param>=<value> ...]`  
+- `br <entity-scope> effector <EffectorID> invoke [-P <param>=<value> ...]`
   Invoke the effector with one of more parameters.  
   If the parameter value is
   complex or multi-lined it may be provided in a file and referenced as:  
