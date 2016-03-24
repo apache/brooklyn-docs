@@ -9,7 +9,7 @@ This guide will walk you through deploying an example 3-tier web application to 
 
 An overview of core [Brooklyn concepts](./concept-quickstart.html){:target="_blank"} is available for reference.
 
-Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and a local install. Both assume that you are using Linux or Mac OS X.
+Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and an install in your own environment (such as your local machine or in your private/public cloud). Both assume that you are using Linux or Mac OS X. To get you up-and-running quickly, the Vagrant option will provision four compute nodes for you to deploy applications to. 
 
 ## Install Apache Brooklyn
 
@@ -45,7 +45,7 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">b) Local Install</strong>
+<strong class="hidden started-pdf-include">b) Install</strong>
 
 Download the Apache Brooklyn binary distribution as described on [the download page]({{site.path.website}}/download/){:target="_blank"}.
 
@@ -85,7 +85,7 @@ you may wish to set up other configuration options first:
 
 <ul class="nav nav-tabs">
     <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Local Install</a></li>
+    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Install</a></li>
 </ul>
 
 <div class="tab-content">
@@ -108,7 +108,7 @@ $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">b) Local Install</strong>
+<strong class="hidden started-pdf-include">b) Install</strong>
 
 Now start Apache Brooklyn with the following command:
 
