@@ -47,8 +47,17 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 <strong class="hidden started-pdf-include">b) Local Install</strong>
 
-Download the Apache Brooklyn binary distribution as described on [the download page]({{site.path.website}}/download/){:target="_blank"}.
+Download the Apache Brooklyn RPM distribution (CentOS 7, RHEL 7.x only) from:
+https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm
 
+Other binary distributions are also available at [the download page]({{site.path.website}}/download/){:target="_blank"}.
+
+### Install the RPM package:
+{% highlight bash %}
+$ sudo yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
+{% endhighlight %}
+
+### Install from other distributions:
 {% if brooklyn_version contains 'SNAPSHOT' %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
