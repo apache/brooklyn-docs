@@ -53,16 +53,16 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 <strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
 
-For Centos and RHEL (v7) users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
+For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
 
-RPM is the de facto standard for packaging software on most Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The AMP package contains all the necessary files associated with the Apache Brooklyn application. 
+RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The AMP package contains all the necessary files associated with the Apache Brooklyn application. 
 
-Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"} (CentOS 7, RHEL 7.x only):
+Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
 
-Once downloaded, run the following shell command:
+Once downloaded, run the following shell command as root:
 
 {% highlight bash %}
-$ sudo yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
+$ yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
 {% endhighlight %}
 
 </div>
@@ -70,7 +70,8 @@ $ sudo yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
 
 <strong class="hidden started-pdf-include">c) OSX / Linux</strong>
 
-Other binary distributions are also available to [download]({{site.path.website}}/download/){:target="_blank"}.
+For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{site.path.website}}/download/){:target="_blank"} section.
+
 {% if brooklyn_version contains 'SNAPSHOT' %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
@@ -93,6 +94,10 @@ $ cd apache-brooklyn-{{ site.brooklyn.version }}
 <div id="impl-4" class="tab-pane fade">
 
 <strong class="hidden started-pdf-include">d) Windows</strong>
+
+For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{site.path.website}}/download/){:target="_blank"}. 
+
+Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
 
 </div>
 </div>
@@ -132,10 +137,24 @@ You can see if Apache Brooklyn launched OK by viewing the log files with the com
 $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 {% endhighlight %}
 
+
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">b) Install</strong>
+<strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
+
+Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard systemctl commands:
+
+{% highlight bash %}
+$ systemctl start|stop|restart|status brooklyn
+{% endhighlight %}
+
+The application should then output its logs to `/var/log/brooklyn/apache-brooklyn.debug.log` and `/var/log/brooklyn/apache-brooklyn.info.log`.
+
+</div>
+<div id="impl-3" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">c) OSX / Linux</strong>
 
 Now start Apache Brooklyn with the following command:
 
@@ -143,7 +162,16 @@ Now start Apache Brooklyn with the following command:
 $ bin/brooklyn launch
 {% endhighlight %}
 
-The application should then output its log into the console
+The application should then output its log into the console and also `apache-brooklyn.debug.log` and `apache-brooklyn.info.log`
+
+</div>
+<div id="impl-4" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">d) Windows</strong>
+
+You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\brooklyn.bat`
+
+The application should then output its log into the console and also `c:\Program Files\brooklyn\apache-brooklyn.debug.log` and `c:\Program Files\brooklyn\apache-brooklyn.info.log`
 
 </div>
 </div>
