@@ -9,7 +9,9 @@ This guide will walk you through deploying an example 3-tier web application to 
 
 An overview of core [Brooklyn concepts](./concept-quickstart.html){:target="_blank"} is available for reference.
 
-Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and an install in your own environment (such as your local machine or in your private/public cloud). Both assume that you are using Linux or Mac OS X. To get you up-and-running quickly, the Vagrant option will provision four compute nodes for you to deploy applications to. 
+Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and an install in your own environment (such as your local machine or in your private/public cloud). 
+
+Both assume that you are using Linux or Mac OS X. To get you up-and-running quickly, the Vagrant option will provision four compute nodes for you to deploy applications to. 
 
 ## Install Apache Brooklyn
 
@@ -17,7 +19,7 @@ Two methods of deployment are detailed in this tutorial, using virtualisation wi
 
 <ul class="nav nav-tabs">
     <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Local Install</a></li>
+    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Install</a></li>
 </ul>
 
 <div class="tab-content">
@@ -47,17 +49,27 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 <strong class="hidden started-pdf-include">b) Install</strong>
 
-Download the Apache Brooklyn RPM distribution (CentOS 7, RHEL 7.x only) from:
-https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm
-
-Other binary distributions are also available at [the download page]({{site.path.website}}/download/){:target="_blank"}.
 
 ### Install the RPM package:
+
+For Centos and RHEL (v7) users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
+
+If you are using another Linux distribution, refer to the ['Install from other distributions'](#install-from-other-distributions) steps.
+
+RPM is the de facto standard for packaging software on most Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The AMP package contains all the necessary files associated with the Apache Brooklyn application. 
+
+Download the Apache Brooklyn RPM distribution (CentOS 7, RHEL 7.x only):
+
+ * [RPM](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}
+
+Once downloaded, run the following shell command:
+
 {% highlight bash %}
 $ sudo yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
 {% endhighlight %}
 
 ### Install from other distributions:
+Other binary distributions are also available to [download]({{site.path.website}}/download/){:target="_blank"}.
 {% if brooklyn_version contains 'SNAPSHOT' %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
