@@ -289,11 +289,25 @@ When a script is run over WinRM, the credentials under which the script are run 
 solution is to obtain a new set of credentials within the script and use those credentials to 
 required commands.
 
-Certain Windows registry keys must be reconfigured in order to support re-authentication. For 
-clouds that support an init script, Brooklyn can take care of this at instance boot time, as part 
-of the setup script. For clouds where an init script is not (currently) supported, such as Azure, 
-it is assumed that the VM is already correctly configured. Please ensure that Brooklyn's changes 
-are compatible with your organisation's security policy.
+The WinRM client uses Negotiate+NTLM to authenticate against the machine.
+This mechanism applies certain restrictions to executing commands on the windows host.
+
+For this reason you should enable CredSSP on the windows host which grants all privileges available to the user.
+ https://technet.microsoft.com/en-us/library/hh849719.aspx#sectionSection4
+
+To use `Invoke-Command -Authentication CredSSP` the Windows Machine has to have:
+- Up and running WinRM over http. Notice that we support winrm over https but for Invoke-Command to work it needs up and running winrm over http.
+  Apache Brooklyn can winrm over https but if the install script has inside it `Invoke-Command -Authentication CredSSP` then winrm over http has to be enabled as well.
+- Added trusted host entries which will use Invoke-Command
+- Allowed CredSSP
+
+All the above requirements are enabled in Apache Brooklyn through [brooklyn-server/software/base/src/main/resources/org/apache/brooklyn/software/base/custom-enable-credssp.ps1](https://github.com/apache/brooklyn-server/blob/master/software/base/src/main/resources/org/apache/brooklyn/software/base/custom-enable-credssp.ps1)
+script which enables executing commands with CredSSP in the general case.
+The script works for most of the Windows images out there version 2008 and later.
+
+Please ensure that Brooklyn's changes are compatible with your organisation's security policy.
+
+Check Microsoft Documentation for more information about [Negotiate authenticate mechanism on technet.microsoft.com](https://msdn.microsoft.com/en-us/library/windows/desktop/aa378748\(v=vs.85\).aspx)
 
 Re-authentication also requires that the password credentials are passed in plain text within the
 script. Please be aware that it is normal for script files - and therefore the plaintext password - 
