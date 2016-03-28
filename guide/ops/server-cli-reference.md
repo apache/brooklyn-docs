@@ -44,7 +44,7 @@ it keeps running after the shell terminates.
 
 ### Other Server CLI Arguments
 
-The Server CLI arguments for [persistence and HA](persistence/) are described separately.
+The Server CLI arguments for [persistence and HA](persistence/) and the [catalog](catalog/#cli-options) are described separately.
 
 
 ### Path Setup
