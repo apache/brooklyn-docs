@@ -296,8 +296,10 @@ For this reason you should enable CredSSP on the windows host which grants all p
  https://technet.microsoft.com/en-us/library/hh849719.aspx#sectionSection4
 
 To use `Invoke-Command -Authentication CredSSP` the Windows Machine has to have:
-- Up and running WinRM over http. Notice that we support winrm over https but for Invoke-Command to work it needs up and running winrm over http.
-  Apache Brooklyn can winrm over https but if the install script has inside it `Invoke-Command -Authentication CredSSP` then winrm over http has to be enabled as well.
+- Up and running WinRM over http. The custom-enable-credssp.ps1 script enables winrm over http because `Invoke-Command` use winrm over http by default.
+  Invoke-Command can be used with -UseSSL option but this will lead to modifying powershell scripts.
+  With always enabling winrm over http on the host, blueprint's powershell scripts remain consistent and not depend on the winrm https/http environments.
+  We hope future versions of winrm4j will support CredSSP out of the box and wrapping commands in Invoke-Command will not be needed.
 - Added trusted host entries which will use Invoke-Command
 - Allowed CredSSP
 
