@@ -77,7 +77,7 @@ The deb file is the de facto standard for packaging software on these Linux dist
 
 Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn_{{site.brooklyn-version}}_noarch.deb){:target="_blank"}.
 
-Once downloaded, run the following shell command as root:
+Once downloaded, run the following shell command:
 
 {% highlight bash %}
 $ sudo dpkg -i apache-brooklyn_{{site.brooklyn-version}}_noarch.deb

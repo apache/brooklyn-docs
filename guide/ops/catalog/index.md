@@ -55,7 +55,7 @@ brooklyn.catalog:
 
 #### Catalog Metadata
 
-Catalog metadata fields supply the additional information required In order to register an item in the catalog. 
+Catalog metadata fields supply the additional information required in order to register an item in the catalog. 
 These fields can be supplied as `key: value` entries 
 where either the `<catalog-metadata>` or `<additional-catalog-metadata>` placeholders are,
 with the latter overriding the former unless otherwise specfied below.
