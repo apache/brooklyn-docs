@@ -187,10 +187,16 @@ address of the management interface:
 INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war
 </pre>
 
-By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser. 
+By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser.
 
 The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI) tool, `br`. 
-This tool is distributed along with Apache Brooklyn. See details on the [Client CLI Reference](../ops/cli/) page. 
+This tool is both distributed with Apache Brooklyn or can be downloaded using the most appropriate link for your OS:
+
+* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-windows.zip)
+* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-linux.tar.gz)
+* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
+
+For details on the CLI, see the [Client CLI Reference](../ops/cli/) page. 
 
 
 ## Next
