@@ -156,7 +156,9 @@ brooklyn.webconsole.security.ldap.realm=example.com
 After you setup the brooklyn connection to your LDAP server, you can authenticate in brooklyn using your cn (e.g. John Smith) and your password.
 `org.apache.brooklyn.rest.security.provider.LdapSecurityProvider` searches in the LDAP tree in LDAP://cn=John Smith,ou=Users,dc=example,dc=com
 
-If you want to customize the ldap path or something else which is particular to your LDAP setup you can extend `LdapSecurityProvider` class or implement from scratch the `SecurityProvider` interface.
+If you want to customize the ldap path or something else which is particular to your LDAP setup you
+can extend `LdapSecurityProvider` class or implement from scratch the `SecurityProvider` interface.
+
 
 ## Entitlements
 
@@ -175,15 +177,17 @@ The default entitlement manager is one which responds to per-user entitlement ru
 and understands:
 
 * `root`:  full access, including to the Groovy console
+* `user`:  access to everything but actions that affect the server itself. Such actions include the
+  Groovy console, stopping the server and retrieving management context configuration.
 * `readonly`:  read-only access to almost all information
 * `minimal`:  access only to server stats, for use by monitoring systems
 
-These keywords are also understood at the `global` level, so to grant full access to `admin`
-but limited access to other authenticated users and `readonly, 
+These keywords are also understood at the `global` level, so to grant full access to `admin`,
+read-only access to `support`, limited access to `metrics` and regular access to `user`
 you can write:
 
 {% highlight properties %}
-brooklyn.entitlements.global=readonly
+brooklyn.entitlements.global=user
 brooklyn.entitlements.perUser.admin=root
 brooklyn.entitlements.perUser.support=readonly
 brooklyn.entitlements.perUser.metrics=minimal
@@ -195,7 +199,7 @@ so the above can equivalently be written:
 
 {% highlight properties %}
 brooklyn.entitlements.global=org.apache.brooklyn.core.mgmt.entitlement.PerUserEntitlementManager
-brooklyn.entitlements.perUser.default=readonly
+brooklyn.entitlements.perUser.default=user
 brooklyn.entitlements.perUser.admin=root
 brooklyn.entitlements.perUser.support=readonly
 brooklyn.entitlements.perUser.metrics=minimal
@@ -205,7 +209,6 @@ For more information, see
 [Java: Entitlements]({{ site.path.guide }}/java/entitlements.html).
 or
 {% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
-
 
 
 ## HTTPS Configuration
