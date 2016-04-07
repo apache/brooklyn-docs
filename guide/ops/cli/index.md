@@ -12,8 +12,14 @@ information on starting on a Brooklyn Server, refer to [Server CLI Reference](..
 
 ## Obtaining the CLI tool
 
-The CLI tool, `br`,  is included in the Apache Brooklyn distribution, under `bin/brooklyn-client-cli/`.
-The tool is an executable binary available for many platforms, with each build in its own subdirectory:
+A selection of distributions of the CLI tool, `br`, are available to download from the download site here:
+
+* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-windows.zip)
+* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-linux.tar.gz)
+* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
+
+Alternatively the CLI tool is available as an executable binary for many more platforms in the Apache Brooklyn
+ distribution, under `bin/brooklyn-client-cli/`, with each build in its own subdirectory:
 
 * Mac: `darwin.amd64/`
 * Windows 32-bit: `windows.386/`
