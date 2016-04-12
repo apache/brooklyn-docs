@@ -45,11 +45,11 @@ exclude: ['/Gemfile*','/README.md']
 sass:
     sass_dir: style/css
 
-brooklyn-stable-version: 0.8.0-incubating
+brooklyn-stable-version: 0.9.0
 brooklyn-base-url: https://brooklyn.apache.org
 
 pdf-rewrite-prefixes: 
-    '/guide' : '/v/0.9.0-SNAPSHOT'
+    '/guide' : '/v/0.9.0'
     '/website' : ''
     '/community' : '/community'
     
