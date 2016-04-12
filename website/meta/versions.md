@@ -19,9 +19,12 @@ This documentation was generated {{ site.time | date_to_string }}.
 
 Apache Brooklyn has made the following releases:
 
-* **[0.8.0-incubating](/v/0.8.0-incubating/)**: Package rename to org.apache.brooklyn.*, and many other improvements. Apache-endorsed binary release! (September 2015)
+* **[0.9.0](/v/0.9.0/)**: Adds Brooklyn CLI client, RPM package, getting started
+  using Vagrant. First release as an Apache top-level project! (April 2016)
 
-* **[0.7.0-incubating](/v/0.7.0-incubating/)**: New policies, more clouds, improved Windows support and many other improvements. Apache-endorsed binary release! (July 2015)
+* **[0.8.0-incubating](/v/0.8.0-incubating/)**: Package rename to org.apache.brooklyn, and many other improvements. (September 2015)
+
+* **[0.7.0-incubating](/v/0.7.0-incubating/)**: New policies, more clouds, improved Windows support and many other improvements. First Apache-endorsed binary release! (July 2015)
 
 * **[0.7.0-M2-incubating](/v/0.7.0-M2-incubating/)**: YAML, persistence, Chef, Windows, Docker. The first Apache release! (December 2014)
 
