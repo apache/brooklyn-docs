@@ -19,54 +19,76 @@ The latest stable release can be accessed on the [main download page]({{ site.pa
 	<th>checksums <small><a href="{{ site.path.website }}/download/verify.html" title='Instructions on verifying the integrity of your downloads.{% if site.brooklyn.is_snapshot %} May not be available for SNAPSHOT artifacts.{% endif %}'>(?)</a></small></th>
   </tr>
   <tr>
-	<td style='text-align:left;vertical-align:top' rowspan='2'>Distro</td>
-	<td style='text-align:left'><a href='{{ this_dist_url_zip }}' title='Download ZIP archive'>brooklyn-dist-{{ site.brooklyn-version }}-dist.zip</a></td>
-	<td><small>
-	  {% if site.brooklyn.is_release %}<a href='{{ this_dist_url_zip }}.asc'>PGP</a>, {% endif %}
-	  <a href='{{ this_dist_url_zip }}.sha1'>SHA1</a></small></td>
-  </tr>
-  <tr>
-	<td style='text-align:left'><a href='{{ this_dist_url_tgz }}' title='Download TGZ archive'>brooklyn-dist-{{ site.brooklyn-version }}-dist.tar.gz</a></td>
+	<td style='text-align:left;vertical-align:top' rowspan='2'>Binary distribution<br />Server &amp; client</td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-bin.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-bin.tar.gz</a></td>
 	<td ><small>
-	  {% if site.brooklyn.is_release %}<a href='{{ this_dist_url_tgz }}.asc'>PGP</a>, {% endif %}
-	  <a href='{{ this_dist_url_tgz }}.sha1'>SHA1</a></small></td>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-bin.tar.gz.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.hash_brooklyn.download_prefix }}-bin.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-    <td style='text-align:left'>Apache Repo</td>
-    <td style='text-align:left'>
-      <a href='{{ this_anything_url_search }}' title='Search'><i>GUI</i></a>
-      —
-      <a href='{{ this_dist_url_list }}' title='List'><i>dir</i></a>
-    </td>
-    <td> — </td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-bin.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-bin.zip</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-bin.zip.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-bin.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'>Release Notes</td>
-	<td style='text-align:left'><a href='{{ site.path.guide }}/misc/release-notes.html'>{{ site.brooklyn-version }}</a></td>
-	<td> — </td>
+	<td style='text-align:left;vertical-align:top'>RPM package<br />CentOS7, RHEL7, etc.</td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-1.noarch.rpm' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-1.noarch.rpm</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-1.noarch.rpm.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-1.noarch.rpm.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left;vertical-align:top' rowspan='6'>Client CLI only</td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.tar.gz</a></td>
+	<td ><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.tar.gz.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-linux.tar.gz.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.zip</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.zip.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.zip.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.tar.gz</a></td>
+	<td ><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.tar.gz.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-macosx.tar.gz.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.zip</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.zip.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.zip.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.tar.gz</a></td>
+	<td ><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.tar.gz.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-windows.tar.gz.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.zip</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.zip.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.zip.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left;vertical-align:top' rowspan='2'>Source code</td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.tar.gz</a></td>
+	<td ><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-src.tar.gz.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.hash_brooklyn.download_prefix }}-src.tar.gz.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.zip</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-src.zip.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}-src.zip.sha1'>SHA1</a></small></td>
   </tr>
 </table>
-
-
-<a name="distro"></a>
-
-## The Dist
-
-The binary distribution archive contains Brooklyn as a standalone executable package.
-
-* [This version ZIP]({{ this_dist_url_zip }})
-* [This version TGZ]({{ this_dist_url_tgz }})
-* [Apache stable versions]({{ apache_releases_repo_groupid_url }}/brooklyn-dist/)
-* [Apache snapshot versions]({{ apache_snapshots_repo_groupid_url }}/brooklyn-dist/)
-
-Released versions are also available at 
-[Maven Central](https://search.maven.org/#search%7Cga%7C1%7Corg.apache.brooklyn).
-
-{% if site.brooklyn-version contains 'SNAPSHOT' %} 
-**Please note**: You are reading the documentation for a snapshot version of Brooklyn.
-You should always confirm that the source repository and datestamp for downloaded snapshot artifacts
-match the intended dependencies, as snapshot artifacts change as code is written.
-{% endif %}
 
 
 ## Release Notes
@@ -110,8 +132,7 @@ If you prefer a smaller repo you might want just ``brooklyn-core``,  ``brooklyn-
 and some of ``brooklyn-software-webapp``,  ``brooklyn-software-database``, ``brooklyn-software-messaging``, or others
 (browse the full list [here]({{ this_anything_url_search }})).
 
-If you wish to use the Apache snapshot repo and/or Cloudsoft repositories,
-you can add some of the following sections:
+If you wish to use the Apache snapshot repo, you can add this to you `pom.xml`:
 
 {% highlight xml %}
 <!-- include repos for snapshot items and other dependencies -->
@@ -123,19 +144,6 @@ you can add some of the following sections:
             <releases> <enabled>false</enabled> </releases>
             <snapshots> <enabled>true</enabled> </snapshots>
         </repository>
-        <repository>
-            <id>cloudsoft-cloudfront-releases-repo</id>
-            <url>http://developers.cloudsoftcorp.com/maven/releases/</url>
-        </repository>
-        <repository>
-            <id>cloudsoft-cloudfront-snapshots-repo</id>
-            <url>http://developers.cloudsoftcorp.com/maven/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-           </snapshots>
-         </repository>
     </repositories>
 {% endhighlight %}
 

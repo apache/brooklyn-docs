@@ -17,15 +17,6 @@
 {% capture this_repo_base_url_content %}{% if SNAPSHOT %}{{ apache_snapshots_repo_groupid_url }}{% else %}{{ apache_releases_repo_groupid_url }}{% endif %}{% endcapture %}
 {% capture this_dist_url_list %}{{ this_repo_base_url_content }}/brooklyn-dist/{{ site.brooklyn-version }}/{% endcapture %}
 
-{% if SNAPSHOT %}
-  <!-- put e field last, so we can append .sha1 -->
-  {% capture this_dist_url_zip %}{{ this_repo_base_url_artifact }}?r=snapshots&g={{ brooklyn_group_id }}&a=brooklyn-dist&v={{ site.brooklyn-version }}&c=dist&e=zip{% endcapture %}
-  {% capture this_dist_url_tgz %}{{ this_repo_base_url_artifact }}?r=snapshots&g={{ brooklyn_group_id }}&a=brooklyn-dist&v={{ site.brooklyn-version }}&c=dist&e=tar.gz{% endcapture %}
-{% else %}<!--- RELEASE -->
-  {% capture this_dist_url_zip %}{{ this_dist_url_list }}/brooklyn-dist-{{ site.brooklyn-version }}-dist.zip{% endcapture %}
-  {% capture this_dist_url_tgz %}{{ this_dist_url_list }}/brooklyn-dist-{{ site.brooklyn-version }}-dist.tar.gz{% endcapture %}
-{% endif %}
-
 {% capture this_anything_url_search %}{{ this_repo_base_url_search }};gav~{{ brooklyn_group_id }}~~{{ site.brooklyn-version }}~~{% endcapture %}
 {% capture this_dist_url_search %}{{ this_repo_base_url_search }};gav~{{ brooklyn_group_id }}~brooklyn-dist~{{ site.brooklyn-version }}~~{% endcapture %}
 
