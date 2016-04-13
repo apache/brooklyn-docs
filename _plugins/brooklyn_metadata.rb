@@ -51,7 +51,9 @@ module BrooklynMetadata
           "is_snapshot" => is_snapshot,
           "is_release" => !is_snapshot,
           "url" => url_set,
-          "git_branch" => git_branch
+          "git_branch" => git_branch,
+          "download_prefix" => "https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-#{ site.config['brooklyn-stable-version'] }/apache-brooklyn-#{ site.config['brooklyn-stable-version'] }",
+          "hash_download_prefix" => "https://dist.apache.org/repos/dist/release/brooklyn/apache-brooklyn-#{ site.config['brooklyn-stable-version'] }/apache-brooklyn-#{ site.config['brooklyn-stable-version'] }"
       }
 
       # config is preferred of data, because you can write just {{ site.brooklyn.xxx }},
