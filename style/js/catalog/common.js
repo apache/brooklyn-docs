@@ -74,9 +74,9 @@ var brooklyn = (function ($, _) {
             "<div class='card configKey'>" +
             "<div class='name'><%=name%></div>" +
             "<dl>" +
-            "<dt>description</dt><dd><%=(description||'&nbsp;')%></dd>" +
-            "<dt>value type</dt><dd class='java'><%=(type||'&nbsp;')%></dd>" +
-            "<dt>default value</dt><dd><%=(defaultValue||'&nbsp;')%></dd>" +
+            "<dt>description</dt><dd><% if (typeof description !== 'undefined') { %><%= description %><% } else { %>&nbsp;<% } %></dd>" +
+            "<dt>value type</dt><dd class='java'><% if (typeof type !== 'undefined') { %><%= type %><% } else { %>&nbsp;<% } %></dd>" +
+            "<dt>default value</dt><dd><% if (typeof defaultValue !== 'undefined') { %><%= defaultValue %><% } else { %>&nbsp;<% } %></dd>" +
             "</dl>" +
             "</div>"
         ),
@@ -84,8 +84,8 @@ var brooklyn = (function ($, _) {
             "<div class='card sensor'>" +
             "<div class='name'><%=name%></div>" +
             "<dl>" +
-            "<dt>description</dt><dd><%=(description||'&nbsp;')%></dd>" +
-            "<dt>value type</dt><dd class='java'><%=(type||'&nbsp;')%></dd>" +
+            "<dt>description</dt><dd><% if (typeof description !== 'undefined') { %><%= description %><% } else { %>&nbsp;<% } %></dd>" +
+            "<dt>value type</dt><dd class='java'><% if (typeof type !== 'undefined') { %><%= type %><% } else { %>&nbsp;<% } %></dd>" +
             "</dl>" +
             "</div>"
         ),
@@ -93,8 +93,8 @@ var brooklyn = (function ($, _) {
             "<div class='card effector'>" +
             "<div class='name'><%=name%></div>" +
             "<dl>" +
-            "<dt>description</dt><dd><%=(description||'&nbsp;')%></dd>" +
-            "<dt>return type</dt><dd class='java'><%=(returnType||'&nbsp;')%></dd>" +
+            "<dt>description</dt><dd><% if (typeof description !== 'undefined') { %><%= description %><% } else { %>&nbsp;<% } %></dd>" +
+            "<dt>return type</dt><dd class='java'><% if (typeof returnType !== 'undefined') { %><%= returnType %><% } else { %>&nbsp;<% } %></dd>" +
             "</dl>" +
             "</div>"
         )

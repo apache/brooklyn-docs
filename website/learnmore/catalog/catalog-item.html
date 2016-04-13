@@ -90,15 +90,20 @@ under the License.
 
       document.title = 'Brooklyn ' + catalog_type + ' - ' + item.name;
 
-      item.config.forEach(function (element) { $("#configKeys").append(brooklyn.configKeyCard(element)); });
+      item.config.forEach(function (element) {
+        $("#configKeys").append(brooklyn.configKeyCard(element));
+      });
 
       if(args[0] == 'entities') {
         $("#sensorsTab").show();
         $("#effectorsTab").show();
-        
-        item.sensors.forEach(function (element) { $("#sensors").append(brooklyn.sensorCard(element)); });
+        item.sensors.forEach(function (element) {
+          $("#sensors").append(brooklyn.sensorCard(element));
+        });
         if (item.effectors != undefined) {
-          item.effectors.forEach(function (element) { $("#effectors").append(brooklyn.effectorCard(element)); });
+          item.effectors.forEach(function (element) {
+            $("#effectors").append(brooklyn.effectorCard(element));
+          });
         }
         
       } else {
