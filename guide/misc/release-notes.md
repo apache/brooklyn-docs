@@ -9,38 +9,27 @@ title: Release Notes
 **You are viewing a SNAPSHOT release (master branch), so this list is in progress!**
 {% endif %}
 
-* Introduction
-* New Features
-* Backwards Compatibility
-
-
-### Introduction
-
-Version 0.9.0 is [TODO add description] 
-
 Thanks go to our community for their improvements, feedback and guidance, and
 to Brooklyn's commercial users for funding much of this development.
 
-
 ### New Features
 
-1. Parameters (config keys) can now be defined in YAML, using `brooklyn.parameters`.
-This allows YAML entities to advertise how they should be parameterized,
-for use in the UI and in documentation tools, and do coercion on these values.
-For a good demonstration, see the "Custom Entities" section of the YAML chapter of the user guide. 
-
-[ TODO - 
-restructuring and graduation; 
-the `br` client CLI tool;
-better YAML editor in the UI;
-a location wizard for defining new clouds;
-test framework;
-`$brooklyn:external(...)` extension for taking values from other sources is supported in more places;
-OSGi-native mode using Karaf, to simplify packaging of blueprints;
-a new pure-java WinRM client (winrm4j), hugely reducing the number of dependencies and distro size;
-several version bumps (jclouds) and performance and reliability improvements
-]
- 
+1. Brooklyn has now graduated to an Apache top-level project - this is our first release without the "incubating"
+   designation.
+1. A new YAML editor that supports syntax highlighting and other conveniences for editing blueprints.
+1. The `br` command line tool allows Brooklyn to be controlled from a shell and to be scripted. You no longer need to
+   use the web UI or REST API to control Brooklyn.
+1. Parameters (config keys) can now be defined in YAML, using `brooklyn.parameters`. This allows YAML entities to
+   advertise how they should be parameterized, for use in the UI and in documentation tools, and do coercion on these
+   values. For a good demonstration, see the "Custom Entities" section of the YAML chapter of the user guide.
+1. New locations can be added to the catalog with an easy-to-use wizard. 
+1. `$brooklyn:external(...)` extension for taking values from other sources is supported in more places.
+1. OSGi-native mode using Karaf, to simplify packaging of blueprints.
+1. A new pure-java WinRM client (winrm4j). This eliminates a number of large dependencies, reducing the size of Brooklyn.
+1. jclouds and several other dependencies updated to newer versions.
+1. Performance and reliability improvements.
+1. Our source code repository is now split into modules covering broad areas of functionality. Combined with some
+   cleanup, this significantly reduces the size of data that needs to be downloaded when cloning the repository.
 
 ### Backwards Compatibility
 
