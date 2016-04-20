@@ -7,6 +7,7 @@
 require 'rubygems'
 require 'yaml'
 require "kramdown"
+require 'pathname'
 
 module PageStructureUtils
   
@@ -105,7 +106,7 @@ module PageStructureUtils
     #
     def self.parseChildYAMLFromParent(page)
       # get the base directory of the current file
-      $baseFile = Dir.pwd+page['dir']
+      $baseFile = Dir.pwd+"/"+(Pathname(page['path']).dirname.to_s)
       # list all of the files in that directory
       $listings = Dir[$baseFile+"/*.md"]
       $allPages = []
@@ -143,7 +144,7 @@ module PageStructureUtils
     #
     def self.parseChildPagesFromParent(page)
       # get the base directory of the current file
-      $baseFile = Dir.pwd+page['dir']
+      $baseFile = Dir.pwd+"/"+(Pathname(page['path']).dirname.to_s)
       # list all of the files in that directory
       $listings = Dir[$baseFile+"/*"]
       # filter by the key pattern
