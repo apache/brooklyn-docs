@@ -1,6 +1,6 @@
 path:
   # BROOKLYN_VERSION_BELOW
-  guide: /v/0.9.0
+  guide: /v/0.9.1-SNAPSHOT
   # BROOKLYN_VERSION_BELOW
-  style: /v/0.9.0/style
+  style: /v/0.9.1-SNAPSHOT/style
   website: ""

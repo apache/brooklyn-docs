@@ -21,7 +21,7 @@ git submodule foreach 'git checkout master'
 mvn clean install
 {% endhighlight %}
 
-This will produce an artifact in `brooklyn-dist/dist/brooklyn-dist-0.9.0-dist.tar.gz` <!-- BROOKLYN_VERSION -->
+This will produce an artifact in `brooklyn-dist/dist/brooklyn-dist-0.9.1-SNAPSHOT-dist.tar.gz` <!-- BROOKLYN_VERSION -->
 which you can use [in the usual way]({{ site.path.guide }}/start/running.html).
 Some options which may be useful:
 
