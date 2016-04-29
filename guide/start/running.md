@@ -38,9 +38,13 @@ Firstly, download and install:
  * [Vagrant](https://www.vagrantup.com/downloads.html){:target="_blank"}
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads){:target="_blank"}
  
-Then download the provided Apache Brooklyn vagrant configuration from [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}. This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
+Then download the provided Apache Brooklyn vagrant configuration from {% if site.brooklyn-version contains 'SNAPSHOT' %}
+from [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{site.brooklyn-version}}&c=dist&e=zip){:target="_blank"}.
+{% else %}
+[here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}.
+{% endif %} This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
 
-Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{site.brooklyn-version}}-vagrant` folder
+Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{site.brooklyn-version}}-vagrant` folder {% if site.brooklyn-version contains 'SNAPSHOT' %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
 
 {% highlight bash %}
 $ tar xvf apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz
@@ -72,13 +76,13 @@ $ yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
 
 For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{site.path.website}}/download/){:target="_blank"} section.
 
-{% if brooklyn_version contains 'SNAPSHOT' %}
+{% if site.brooklyn-version contains 'SNAPSHOT' %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
 Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{ site.brooklyn-version }}` folder.
 {% endif %}
 
-{% if brooklyn_version contains 'SNAPSHOT' %}
+{% if site.brooklyn-version contains 'SNAPSHOT' %}
 {% highlight bash %}
 $ tar -zxf apache-brooklyn-dist-{{ site.brooklyn-version }}-timestamp-dist.tar.gz
 $ cd apache-brooklyn-{{ site.brooklyn.version }}
@@ -190,11 +194,15 @@ INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://br
 By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser.
 
 The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI) tool, `br`. 
-This tool is both distributed with Apache Brooklyn or can be downloaded using the most appropriate link for your OS:
+This tool is both distributed with Apache Brooklyn or can be downloaded {% if site.brooklyn-version contains 'SNAPSHOT' %}
+from [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-client-cli&v={{site.brooklyn-version}}&c=bin&e=zip).
+{% else %}
+using the most appropriate link for your OS:
 
-* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-windows.zip)
-* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-linux.tar.gz)
-* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
+* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-windows.zip)
+* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-linux.tar.gz)
+* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
+{% endif %}
 
 For details on the CLI, see the [Client CLI Reference](../ops/cli/) page. 
 
