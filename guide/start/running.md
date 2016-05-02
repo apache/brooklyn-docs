@@ -85,7 +85,11 @@ For Ubuntu and Debian users, the recommended way to install Apache Brooklyn is t
 
 The deb file is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The deb package contains all the necessary files associated with the Apache Brooklyn application. 
 
+{% if site.brooklyn-version contains 'SNAPSHOT' %}
+Download the Apache Brooklyn [deb distribution](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=deb-packaging&v={{site.brooklyn-version}}&e=deb){:target="_blank"}.
+{% else %}
 Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn_{{site.brooklyn-version}}_noarch.deb){:target="_blank"}.
+{% endif %}
 
 Once downloaded, run the following shell command:
 
