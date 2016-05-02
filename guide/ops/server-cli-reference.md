@@ -76,7 +76,8 @@ Brooklyn process.
 
 ### Web Console Bind Address
 
-To specify a local interface other than loopback (127.0.0.1) for the web console to bind to:
+The web console will by default bind to 0.0.0.0. It's restricted to 127.0.0.1 if the `--noConsoleSecurity` flag is used.
+To specify a local interface, or use the local loopback (127.0.0.1), for the web console to bind to you should use:
 
     --bindAddress <IP>
 
