@@ -74,6 +74,12 @@ This means that, once the task history is large, Brooklyn will continually use t
 memory. It will only expunge tasks from memory when this space is required for other objects within the
 Brooklyn process.
 
+### Web Console Bind Address
+
+The web console will by default bind to 0.0.0.0. It's restricted to 127.0.0.1 if the `--noConsoleSecurity` flag is used.
+To specify a local interface, or use the local loopback (127.0.0.1), for the web console to bind to you should use:
+
+    --bindAddress <IP>
 
 ## Configuration
 
