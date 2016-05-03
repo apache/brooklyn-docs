@@ -421,6 +421,54 @@ operations. The installer from Microsoft SQL Server is known to fail in this cas
 refer to [How and Why to re-authenticate withing a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) 
 above.
 
+### WebServiceException: Could not send Message
+
+We detected a `WebServiceException` and different `SocketException`
+during deployment of long lasting Application Blueprint against VcloudDirector.
+
+Launching the blueprint bellow was giving constantly this type of error on launch step.
+
+    services:
+      type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
+      brooklyn.config:
+        pre.install.command: echo preInstallCommand
+        install.command: echo installCommand > C:\\install.txt
+        post.install.command: echo postInstallCommand
+        customize.command: echo customizeCommand
+        pre.launch.command: echo preLaunchCommand
+        launch.powershell.command: |
+          Start-Sleep -s 400
+          Write-Host Test Completed
+        post.launch.command: echo postLaunchCommand
+        checkRunning.command: echo checkRunningCommand
+        stop.command: echo stopCommand
+        
+With series of tests we concluded that on the Vcloud Director environment we were using
+a restart was happening ~2 minutes after the VM is provisioned.
+Logging in the host and search for System event of type 1074 in Windows Event Viewer, we found two 1074 events where the second one was
+```none
+The process C:\Windows\system32\winlogon.exe (W2K12-STD) has initiated the restart of computer WIN-XXXX on behalf of user 
+NT AUTHORITY\SYSTEM for the following reason: Operating System: Upgrade (Planned) Reason Code: 0x80020003 Shutdown Type: restart Comment:
+```
+
+Normally on other clouds only one restart event is registered and the first time winrm connection is made the Windows VM is ready for use. 
+
+For this particular case when you want this second restart to finish we made `waitWindowsToStart` location parameter
+which basically adds additional check assuring the Windows VM provisioning is done.
+
+
+For example when using `waitWindowsToStart: 5m` location parameter, Apache Brooklyn will wait 5 minutes to see if a disconnect occurs.
+If it does, then it will again wait 5m for the machine to come back up.
+The default behaviour in Apache Brooklyn is to consider provisioning done on the first successful winrm connection, without waiting for restart. 
+
+
+To determine whether you should use this parameter you should carefully inspect how the image you choose to provision is behaving.
+If the description above matches your case and you are getting **connection failure message in the middle of the installation process** for your blueprints,
+a restart probably occurred and you should try this parameter.
+
+Before using this parameter we advice to check whether this is really your case.
+To verify the behavior check as described above.
+
 ### AMIs not found
 
 If using the imageId of a Windows community AMI, you may find that the AMI is deleted after a few weeks.
