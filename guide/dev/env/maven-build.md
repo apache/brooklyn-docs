@@ -6,35 +6,42 @@ toc: /guide/toc.json
 
 ## The Basics
 
-To build the code, you need Maven (v3.1+) and Java (v1.7+, 1.8 recommended) and Go (v1.6+).
-With that in place, you should be able to build everything with a:
+The full build requires the following software to be installed:
+
+* Maven (v3.1+)
+* Java (v1.7+, 1.8 recommended)
+* Go (v1.6+) [if building the CLI client]
+* rpm tools [if building the dist packages for those platforms]
+
+With these in place, you should be able to build everything with a:
 
 {% highlight bash %}
 % mvn clean install
 {% endhighlight %}
 
-Key things to note if you're new to Maven:
+Alternatively you can build most things with just Java and Maven installed using:
+
+{% highlight bash %}
+mvn clean install -Dno-go-client -Dno-rpm`
+{% endhighlight %}
+
+Other tips:
+
+* Add ``-DskipTests`` to skip tests (builds much faster, but not as safe)
 
 * You may need more JVM memory, e.g. at the command-line (or in `.profile`):
 
   ``export MAVEN_OPTS="-Xmx1024m -Xms512m -XX:MaxPermSize=256m"``
 
-* You can do this in specific projects as well.
-
-* Add ``-DskipTests`` to skip tests. 
-
-* Add ``-Dno-go-client`` to skip building the ``brooklyn-client`` project (useful if you don't have Go installed).
-
-* You may need to install ``rpm`` package to build RPM packages: ``brew install rpm`` for Mac OS, ``apt-get install rpm`` for Ubuntu, ``yum install rpm`` for Centos/RHEL.
-
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
   ([tests described here](../code/tests.html))
 
-* Note that many of the gory details are in ``brooklyn-server/parent/pom.xml``, which is referenced by most other poms.
+* You may need to install ``rpm`` package to build RPM packages: ``brew install rpm`` for Mac OS, ``apt-get install rpm`` for Ubuntu, ``yum install rpm`` for Centos/RHEL.
+  On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.
 
-* You can also open and use the code in your favourite IDE,
-  although you may hit a few **[snags](ide/)**
-  (that link has some tips for resolving them too)
+* If you're looking at the maven internals, note that many of the settings are inherited from parent projects (see for instance `brooklyn-server/parent/pom.xml`)
+
+* For tips on building within various IDEs, look [here](ide/).
 
 
 ## When the RAT Bites
