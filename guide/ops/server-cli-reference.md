@@ -11,7 +11,7 @@ already running Brooklyn Server, refer to [Client CLI Reference](cli/index.html)
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 {% highlight bash %}
-% nohup bin/brooklyn launch > /dev/null 2&>1 &
+% nohup bin/brooklyn launch > /dev/null 2>&1 &
 {% endhighlight %}
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/).
