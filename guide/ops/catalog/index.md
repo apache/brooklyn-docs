@@ -87,7 +87,9 @@ In addition to the above fields, exactly **one** of the following is also requir
   the `brooklyn.catalog` value, and the keys in these map override any metadata specified as
   a sibling of this `items` key (or, in the case of `brooklyn.libraries` they add to the list);
   if there are references between items, then order is important, 
-  `items` are processed in order, depth-first, and forward references are not supported.
+  `items` are processed in order, depth-first, and forward references are not supported. Entries
+  can be URL to another catalog file to include, inheriting the meta from the current hierarchy.
+  Libraries defined so far in the meta will be used to load classpath entries.
 
 The following optional catalog metadata is supported:
   
@@ -126,6 +128,8 @@ The following optional catalog metadata is supported:
   whenever a bundle is reloaded in a Brooklyn server,
   and if entities have been deployed against that version, their behavior may change in subtle or potentially incompatible ways.
   To avoid this situation, it is highly recommended to use OSGi version stamps as part of the URL.
+- `include`: A URL to another catalog file to include, inheriting the meta from the current hierarchy.
+  Libraries defined so far in the meta will be used to load classpath entries.
 
 
 #### Catalog YAML Examples
