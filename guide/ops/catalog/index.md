@@ -89,7 +89,21 @@ In addition to the above fields, exactly **one** of the following is also requir
   if there are references between items, then order is important, 
   `items` are processed in order, depth-first, and forward references are not supported. Entries
   can be URL to another catalog file to include, inheriting the meta from the current hierarchy.
-  Libraries defined so far in the meta will be used to load classpath entries.
+  Libraries defined so far in the meta will be used to load classpath entries. For example:
+
+~~~ yaml
+brooklyn.catalog:
+  displayName: Foo
+  brooklyn.libraries:
+  - http://some.server.or.other/path/my.jar
+  items:
+  - classpath://my-catalog-entries-inside-jar.bom
+  - some-property: value
+    include: classpath://more-catalog-entries-inside-jar.bom
+  - id: use-from-my-catalog
+    item:
+      type: some-type-defined-in-my-catalog-entries
+~~~
 
 The following optional catalog metadata is supported:
   
@@ -129,7 +143,9 @@ The following optional catalog metadata is supported:
   and if entities have been deployed against that version, their behavior may change in subtle or potentially incompatible ways.
   To avoid this situation, it is highly recommended to use OSGi version stamps as part of the URL.
 - `include`: A URL to another catalog file to include, inheriting the meta from the current hierarchy.
-  Libraries defined so far in the meta will be used to load classpath entries.
+  Libraries defined so far in the meta will be used to load classpath entries. `include` must be used
+  when you have sibling properties. If it's the only property it may be skipped by having the URL as the
+  value - see `items` example above.
 
 
 #### Catalog YAML Examples
