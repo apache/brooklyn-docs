@@ -46,7 +46,7 @@ in a wide range of locations, including setting up access and configuring images
 The configuration options are described in more detail below.
 
 In some cases, cloud providers have special features or unusual requirements. 
-These are outlined in **[More Details for Specific Clouds](more-clouds.html)**.
+These are outlined in **[More Details for Specific Clouds](#more-details-on-specific-clouds)**.
 
 #### OS Initial Login and Setup
 
