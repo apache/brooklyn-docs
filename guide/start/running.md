@@ -22,8 +22,9 @@ To get you up-and-running quickly, the Vagrant option will provision four comput
 <ul class="nav nav-tabs">
     <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
     <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Centos / RHEL 7</a></li>
-    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
-    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">Windows</a></li>
+    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">Ubuntu / Debian</a></li>
+    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
+    <li class="impl-5-tab"><a data-target="#impl-5, .impl-5-tab" data-toggle="tab" href="#">Windows</a></li>
 </ul>
 
 <div class="tab-content">
@@ -55,7 +56,7 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
 
-RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The AMP package contains all the necessary files associated with the Apache Brooklyn application. 
+RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
 Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
 
@@ -68,7 +69,24 @@ $ yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">c) OSX / Linux</strong>
+<strong class="hidden started-pdf-include">c) Debian / Ubuntu</strong>
+
+For Ubuntu and Debian users, the recommended way to install Apache Brooklyn is to use the deb file. 
+
+The deb file is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The deb package contains all the necessary files associated with the Apache Brooklyn application. 
+
+Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn_{{site.brooklyn-version}}_noarch.deb){:target="_blank"}.
+
+Once downloaded, run the following shell command:
+
+{% highlight bash %}
+$ sudo dpkg -i apache-brooklyn_{{site.brooklyn-version}}_noarch.deb
+{% endhighlight %}
+
+</div>
+<div id="impl-4" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">d) OSX / Linux</strong>
 
 For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{site.path.website}}/download/){:target="_blank"} section.
 
@@ -91,9 +109,9 @@ $ cd apache-brooklyn-{{ site.brooklyn.version }}
 {% endif %}
 
 </div>
-<div id="impl-4" class="tab-pane fade">
+<div id="impl-5" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">d) Windows</strong>
+<strong class="hidden started-pdf-include">e) Windows</strong>
 
 For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{site.path.website}}/download/){:target="_blank"}. 
 
@@ -116,8 +134,9 @@ you may wish to set up other configuration options first:
 <ul class="nav nav-tabs">
     <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
     <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Centos / RHEL</a></li>
-    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
-    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">Windows</a></li>
+    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">Ubuntu / Debian</a></li>
+    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
+    <li class="impl-5-tab"><a data-target="#impl-5, .impl-5-tab" data-toggle="tab" href="#">Windows</a></li>
 </ul>
 
 <div class="tab-content">
@@ -154,7 +173,20 @@ The application should then output its logs to `/var/log/brooklyn/apache-brookly
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">c) OSX / Linux</strong>
+<strong class="hidden started-pdf-include">c) Ubuntu / Debian</strong>
+
+Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard service commands:
+
+{% highlight bash %}
+$ sudo service brooklyn start|stop|restart|status
+{% endhighlight %}
+
+The application should then output its logs to `/var/log/brooklyn/apache-brooklyn.debug.log` and `/var/log/brooklyn/apache-brooklyn.info.log`.
+
+</div>
+<div id="impl-4" class="tab-pane fade">
+
+<strong class="hidden started-pdf-include">d) OSX / Linux</strong>
 
 Now start Apache Brooklyn with the following command:
 
@@ -165,9 +197,9 @@ $ bin/brooklyn launch
 The application should then output its log into the console and also `apache-brooklyn.debug.log` and `apache-brooklyn.info.log`
 
 </div>
-<div id="impl-4" class="tab-pane fade">
+<div id="impl-5" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">d) Windows</strong>
+<strong class="hidden started-pdf-include">e) Windows</strong>
 
 You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\brooklyn.bat`
 
