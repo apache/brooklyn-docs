@@ -75,6 +75,10 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 - `timeout` - duration to wait on assertion to return a result. For example `10s`, `10m`, etc
 - `assert` - assertion to perform on the specified sensor value. See section on assertions below.
 
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestSensor</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+</div>
+
 ### TestEffector
 The `TestEffector` entity invokes the specified effector on a target entity. If the result of the effector is a String, it will then perform assertions on the result.
 {% highlight yaml %}
@@ -89,6 +93,10 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 - `params` - parameters to pass to the effector, these will depend on the entity and effector being tested. The example above shows the `url` and `targetName` parameters being passed to Tomcats `deploy` effector.
 - `assert` - assertion to perform on the returned result. See section on assertions below.
 
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestEffector</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+</div>
+
 ### TestHttpCall
 The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs an assertion on the response.
 {% highlight yaml %}
@@ -101,8 +109,11 @@ The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs 
 - `applyAssertionTo` - The filed to apply the assertion to. For example `status`, `body`
 - `assert` - assertion to perform on the response.  See section on assertions below.
 
-### SimpleShellCommandTest
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestHttpCall</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+</div>
 
+### SimpleShellCommandTest
 The SimpleShellCommandTest runs a command on the host of the target entity.
 The script is expected not to run indefinitely, but to return a result (process exit code), along with its
 standard out and error streams, which can then be tested using assertions.
@@ -122,6 +133,10 @@ Either a shell command may be provided in the YAML, or a URL for a script which 
 - `assertStatus` - Assertions on the exit code of the command or script. See section on assertions below.
 - `assertOut` - Assertions on the standard output of the command as a String.
 - `assertErr` -  Assertions on the standard error of the command as a String.
+
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>SimpleShellCommandTest</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+</div>
 
 ## Assertions
 
