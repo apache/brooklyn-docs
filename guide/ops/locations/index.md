@@ -20,7 +20,7 @@ Brooklyn supports a wide range of locations:
 Configuration can be set in `~/.brooklyn/brooklyn.properties`, through the
 location wizard tool available within the web console
 or directly in YAML when specifying a location.
-On some entities, config keys determining maching selection and provisioning behavior
-can also be set `in `provisioning.properties`.  
+On some entities, config keys determining matching selection and provisioning behavior
+can also be set in `provisioning.properties`.
 
 {% child_content %}
