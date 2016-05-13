@@ -57,11 +57,17 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 <strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
 
+{% if site.brooklyn-version contains 'SNAPSHOT' %}<strong>Please note, an RPM is not available for snapshot builds</strong>{% endif %}
+
 For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
 
 RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
+{% if site.brooklyn-version contains 'SNAPSHOT' %}
+This is a snapshot build and no RPM is available, please download [a different version]({{site.path.website}}/download/) or go to [the latest release version](http://brooklyn.apache.org/v/latest/start/running.html) instead.
+{% else %}
 Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
+{% endif %}
 
 Once downloaded, run the following shell command as root:
 
