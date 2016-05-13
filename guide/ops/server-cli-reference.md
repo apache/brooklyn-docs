@@ -11,7 +11,7 @@ already running Brooklyn Server, refer to [Client CLI Reference](cli/index.html)
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 {% highlight bash %}
-% nohup bin/brooklyn launch > /dev/null 2&>1 &
+% nohup bin/brooklyn launch > /dev/null 2>&1 &
 {% endhighlight %}
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/).
@@ -74,6 +74,12 @@ This means that, once the task history is large, Brooklyn will continually use t
 memory. It will only expunge tasks from memory when this space is required for other objects within the
 Brooklyn process.
 
+### Web Console Bind Address
+
+The web console will by default bind to 0.0.0.0. It's restricted to 127.0.0.1 if the `--noConsoleSecurity` flag is used.
+To specify a local interface, or use the local loopback (127.0.0.1), for the web console to bind to you should use:
+
+    --bindAddress <IP>
 
 ## Configuration
 

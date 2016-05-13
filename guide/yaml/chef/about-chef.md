@@ -38,13 +38,13 @@ the server. This is not the case - the bootstrap operation does not involve `kni
 itself to the server, passing on its configuration.
 
 This diagram summarises the interaction between Brooklyn, the new node, and the various Chef tools. Note that there
-is no interaction between the AMP Server and the Chef Server.
+is no interaction between the Apache Brooklyn Server and the Chef Server.
 
 [![Chef Flow Diagram](chef-call-flow.png "Chef Flow Diagram" )](chef-call-flow.png)
 
 ### How Brooklyn interacts with Chef
 
 Brooklyn understands both the *server* and *solo* modes of operation. Server mode utilises the `knife` toolkit, and
-therefore `knife` must be installed onto the AMP server and configured appropriately. Solo mode does not have any
+therefore `knife` must be installed onto the Apache Brooklyn server and configured appropriately. Solo mode does not have any
 special requirements; when running in solo mode, Brooklyn will install and configure the Chef client over SSH, just
 like it does most other kinds of entities.
