@@ -59,7 +59,7 @@ Brooklyn to use specific credentials for the initial login to a cloud-provisione
 
 (This custom login is particularly useful when using a custom image templates where the cloud-side account 
 management logic is not enabled. For example, a vCloud (vCD) template can have guest customization that will change
-the root password. This setting tells AMP to only use the given password, rather than the initial 
+the root password. This setting tells Apache Brooklyn to only use the given password, rather than the initial 
 randomly generated password that vCD returns. Without this property, there is a race for such templates:
 does Brooklyn manage to create the admin user before the guest customization changes the login and reboots,
 or is the password reset first (the latter means Brooklyn can never ssh to the VM). With this property, 

@@ -367,7 +367,7 @@ An example script to be invoked by CRON is shown below:
     BACKUP_FILENAME=/path/to/archives/back-${DATE}.tar.gz
     TEMP_DATA_DIR=/path/to/tempdir
     
-    amp copy-state \
+    brooklyn copy-state \
             --persistenceLocation named:my-persistence-location \
             --persistenceDir /path/to/bucket \
             --destinationDir $TEMP_DATA_DIR
