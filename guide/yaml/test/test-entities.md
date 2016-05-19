@@ -155,17 +155,14 @@ The following conditions are provided by those test entities above that include 
 
 Assertions may be provided as a simple map:
 
-```yaml
-  assert:
-       contains: 2 users
-       matches: .*[\d]* days.*
-```
+    assert:
+      contains: 2 users
+      matches: .*[\d]* days.*
+
 
 If there is the need to make multiple assertions with the same key, the assertions can be specified
 as a list of such maps:
 
-```yaml
-  assert:
-       - contains: 2 users
-       - contains: 2 days
-```
+    assert:
+     - contains: 2 users
+     - contains: 2 days
