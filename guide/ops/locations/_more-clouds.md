@@ -265,3 +265,42 @@ sensors, with the same names as the last two configuration keys.
 
 ***NOTE*** If the SoftLayer location is already configured with specific VLANs
 then this customizer will have no effect.
+
+
+## Openstack
+
+### Networks
+
+When multiple networks are available you should indicate which ones machines should join.
+Do this by setting the desired values id as an option in the
+**[templateOptions](#custom-template-options)** configuration:
+
+    location:
+      jclouds:openstack-nova:
+        ...
+        templateOptions:
+          # Assign the node to all networks in the list.
+          networks:
+          - network-one-id
+          - network-two-id
+          - ...
+
+
+### Floating IPs
+
+Configuration of floating IPs is as networks; specify the pools to use as another
+[template option](#custom-template-options):
+
+    location:
+      jclouds:openstack-nova:
+        ...
+        templateOptions:
+          # Pool names to use when allocating a floating IP
+          floatingIpPoolNames:
+          - "pool name"
+
+
+### Other features
+
+Consult jclouds' [Nova template options](https://jclouds.apache.org/reference/javadoc/1.9.x/org/jclouds/openstack/nova/v2_0/compute/options/NovaTemplateOptions.html)
+for futher options when configuring Openstack locations.
