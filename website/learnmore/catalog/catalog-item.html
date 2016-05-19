@@ -91,7 +91,7 @@ under the License.
       document.title = 'Brooklyn ' + catalog_type + ' - ' + item.name;
 
       item.config.forEach(function (element) {
-        $("#configKeys").append(brooklyn.configKeyCard(element));
+        $("#configKeys").append(brooklyn.configKeyCard(deleteDefaultValueObjectId(element)));
       });
 
       if(args[0] == 'entities') {
@@ -110,6 +110,13 @@ under the License.
         $("#sensorsTab").hide();
         $("#effectorsTab").hide();
       }
+    }
+
+    function deleteDefaultValueObjectId(configkey){
+        if(_.isString(configkey.defaultValue)){
+            configkey.defaultValue = configkey.defaultValue.replace(/@[a-zA-Z0-9]+$/, "");
+        }
+        return configkey;
     }
 
     function getArgs() {
