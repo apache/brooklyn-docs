@@ -446,10 +446,9 @@ Launching the blueprint bellow was giving constantly this type of error on launc
 With series of tests we concluded that on the Vcloud Director environment we were using
 a restart was happening ~2 minutes after the VM is provisioned.
 Logging in the host and search for System event of type 1074 in Windows Event Viewer, we found two 1074 events where the second one was
-```none
-The process C:\Windows\system32\winlogon.exe (W2K12-STD) has initiated the restart of computer WIN-XXXX on behalf of user 
-NT AUTHORITY\SYSTEM for the following reason: Operating System: Upgrade (Planned) Reason Code: 0x80020003 Shutdown Type: restart Comment:
-```
+
+    The process C:\Windows\system32\winlogon.exe (W2K12-STD) has initiated the restart of computer WIN-XXXX on behalf of user
+    NT AUTHORITY\SYSTEM for the following reason: Operating System: Upgrade (Planned) Reason Code: 0x80020003 Shutdown Type: restart Comment:
 
 Normally on other clouds only one restart event is registered and the first time winrm connection is made the Windows VM is ready for use. 
 
