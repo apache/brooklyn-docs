@@ -57,7 +57,7 @@ Topics to explore next on the topic of YAML blueprints are:
 {% include list-children.html %}
 
 Plenty of examples of blueprints exist in the Brooklyn codebase,
-so another starting point is to [`git clone`]({{ site.path.guide }}/dev/code/index.html) it
+so another starting point is to [`git clone`]({{ site.path.guide }}/developers/code/index.html) it
 and search for `*.yaml` files therein.
 
 Brooklyn lived as a Java framework for many years before we felt confident
