@@ -75,6 +75,10 @@ In addition, any such config key will be opened,
 irrespective of whether it matches the `inboundPorts.configRegex`. 
 To prevent any inferencing of ports to open, you can set the config `inboundPorts.autoInfer` to `false`.
 
+Furthermore, the port inferencing capability takes in account static `ConfigKey` fields that
+are defined on any Entity sub-class. So, `ConfigKey` fields that are based on `PortRanges` type will
+be also included as required open ports.
+
 Note that in the example above, `netcat.port` must be specified in a `brooklyn.config` block.
 This block can be used to hold any config (including for example the `launch.command`),
 but for convenience Brooklyn allows config keys declared on the underlying type
