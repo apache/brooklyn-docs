@@ -26,7 +26,6 @@ is included below. You may also find these sources helpful:
   sometimes required for various clouds.
  
 
-
 ## Amazon Web Services (AWS)
 
 ### Credentials
@@ -172,6 +171,7 @@ For example, for dev/demo purposes an "everything" network could be created that
 || Source IP Ranges            || 0.0.0.0/0                   |
 || Allowed protocols and ports || tcp:0-65535 and udp:0-65535 |
 
+
 ## IBM SoftLayer
 
 ### VLAN Selection
@@ -185,15 +185,13 @@ The VLAN ID can be set explicitly using the fields
 `primaryBackendNetworkComponentNetworkVlanId` of `SoftLayerTemplateOptions`
 when specifying the location being used in the blueprint, as follows:
 
-```YAML
-location:
-  jclouds:softlayer:
-    region: ams01
-    templateOptions:
-      # Enter your preferred network IDs
-      primaryNetworkComponentNetworkVlanId: 1153481
-      primaryBackendNetworkComponentNetworkVlanId: 1153483
-```
+    location:
+      jclouds:softlayer:
+        region: ams01
+        templateOptions:
+          # Enter your preferred network IDs
+          primaryNetworkComponentNetworkVlanId: 1153481
+          primaryBackendNetworkComponentNetworkVlanId: 1153483
 
 This method requires that a VM already exist and you look up the IDs of its
 VLANs, for example in the SoftLayer console UI, and that subsequently at least
@@ -210,16 +208,14 @@ end-users.
 To use this method, we tell brooklyn to use `SoftLayerSameVlanLocationCustomizer`
 as a location customizer.  This can be done on a location as follows:
 
-```YAML
-location:
-  jclouds:softlayer:
-    region: lon02
-    customizers:
-    - $brooklyn:object:
-        type: org.apache.brooklyn.location.jclouds.softlayer.SoftLayerSameVlanLocationCustomizer
-    softlayer.vlan.scopeUid: "my-custom-scope"
-    softlayer.vlan.timeout: 10m
-```
+    location:
+      jclouds:softlayer:
+        region: lon02
+        customizers:
+        - $brooklyn:object:
+            type: org.apache.brooklyn.location.jclouds.softlayer.SoftLayerSameVlanLocationCustomizer
+        softlayer.vlan.scopeUid: "my-custom-scope"
+        softlayer.vlan.timeout: 10m
 
 Usually you will want the scope to be unique to a single application, but if you
 need multiple applications to share the same VLAN, simply configure them with
@@ -228,27 +224,24 @@ the same scope identifier.
 It is also possible with many blueprints to specify this as one of the
 `provisioning.properties` on an *application*:
 
-```YAML
-services:
-- type: org.apache.brooklyn.entity.stock.BasicApplication
-  id: same-vlan-application
-  brooklyn.config:
-    provisioning.properties:
-      customizers:
-      - $brooklyn:object:
-          type: org.apache.brooklyn.location.jclouds.softlayer.SoftLayerSameVlanLocationCustomizer
-    softlayer.vlan.scopeUid: "my-custom-scope"
-    softlayer.vlan.timeout: 10m
-```
+    services:
+    - type: org.apache.brooklyn.entity.stock.BasicApplication
+      id: same-vlan-application
+      brooklyn.config:
+        provisioning.properties:
+          customizers:
+          - $brooklyn:object:
+              type: org.apache.brooklyn.location.jclouds.softlayer.SoftLayerSameVlanLocationCustomizer
+        softlayer.vlan.scopeUid: "my-custom-scope"
+        softlayer.vlan.timeout: 10m
 
 If you are writing an entity in Java, you can also use the helper
 method `forScope(String)` to create the customizer. Configure the
 provisioning flags as follows:
 
-```Java
-JcloudsLocationCustomizer vlans = SoftLayerSameVlanLocationCustomizer.forScope("my-custom-scope");
-flags.put(JcloudsLocationConfig.JCLOUDS_LOCATION_CUSTOMIZERS.getName(), ImmutableList.of(vlans));
-```
+    JcloudsLocationCustomizer vlans = SoftLayerSameVlanLocationCustomizer.forScope("my-custom-scope");
+    flags.put(JcloudsLocationConfig.JCLOUDS_LOCATION_CUSTOMIZERS.getName(), ImmutableList.of(vlans));
+
 
 ### Configuration Options
 
@@ -272,3 +265,42 @@ sensors, with the same names as the last two configuration keys.
 
 ***NOTE*** If the SoftLayer location is already configured with specific VLANs
 then this customizer will have no effect.
+
+
+## Openstack
+
+### Networks
+
+When multiple networks are available you should indicate which ones machines should join.
+Do this by setting the desired values id as an option in the
+**[templateOptions](#custom-template-options)** configuration:
+
+    location:
+      jclouds:openstack-nova:
+        ...
+        templateOptions:
+          # Assign the node to all networks in the list.
+          networks:
+          - network-one-id
+          - network-two-id
+          - ...
+
+
+### Floating IPs
+
+Configuration of floating IPs is as networks; specify the pools to use as another
+[template option](#custom-template-options):
+
+    location:
+      jclouds:openstack-nova:
+        ...
+        templateOptions:
+          # Pool names to use when allocating a floating IP
+          floatingIpPoolNames:
+          - "pool name"
+
+
+### Other features
+
+Consult jclouds' [Nova template options](https://jclouds.apache.org/reference/javadoc/1.9.x/org/jclouds/openstack/nova/v2_0/compute/options/NovaTemplateOptions.html)
+for futher options when configuring Openstack locations.

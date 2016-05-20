@@ -241,8 +241,6 @@ If the method call cannot be matched to the template options available - for exa
 specific option but your location is an OpenStack cloud - then a warning is logged and the option is ignored.
 
 
-
-  
 See the following resources for more information:
 
 - [AWS VPC issues which may affect users with older AWS accounts](vpc-issues.html)
