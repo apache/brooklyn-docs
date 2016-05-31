@@ -201,7 +201,7 @@ using `env` variables to inject the `netcat-server` location and
 `parameters` to pass in per-effector data:
 
       env:
-        TARGET_HOSTNAME: $brooklyn:component("netcat-server").attributeWhenReady("host.name")
+        TARGET_HOSTNAME: $brooklyn:entity("netcat-server").attributeWhenReady("host.name")
       brooklyn.initializers:
       - type: org.apache.brooklyn.core.effector.ssh.SshCommandEffector
         brooklyn.config:

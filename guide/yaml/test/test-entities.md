@@ -41,7 +41,7 @@ The `LoopOverGroupMembersTestCase` entity is configured with a target group and 
 {% endhighlight %}
 
 #### Parameters
-- `target` - group who's members are to be tested, specified via DSL. For example, `$brooklyn:component("tomcat")`. See also the `targetId` parameter.
+- `target` - group who's members are to be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
 - `targetId` - alternative to the `target` parameter which wraps the DSL component lookup requiring only the `id` be supplied. For example, `tomcat`. Please note, this must point to a group.
 - `test.spec` - The TargetableTestComponent to create for each child.
 
@@ -69,7 +69,7 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 {% endhighlight %}
 
 #### Parameters
-- `target` - entity whose sensor will be tested, specified via DSL. For example, `$brooklyn:component("tomcat")`. See also the `targetId` parameter.
+- `target` - entity whose sensor will be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
 - `targetId` - alternative to the `target` parameter which wraps the DSL component lookup requiring only the `id` be supplied. For example, `tomcat`.
 - `sensor` - sensor to evaluate. For example `service.isUp`.
 - `timeout` - duration to wait on assertion to return a result. For example `10s`, `10m`, etc
@@ -82,7 +82,7 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 {% endhighlight %}
 
 #### Parameters
-- `target` - entity whose effector will be invoked, specified via DSL. For example, `$brooklyn:component("tomcat")`. See also the `targetId` parameter.
+- `target` - entity whose effector will be invoked, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
 - `targetId` - alternative to the `target` parameter which wraps the DSL component lookup requiring only the `id` be supplied. For example, `tomcat`.
 - `timeout` - duration to wait on the effector task to complete. For example `10s`, `10m`, etc
 - `effector` - effector to invoke, for example `deploy`.
@@ -96,7 +96,7 @@ The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs 
 {% endhighlight %}
 
 #### Parameters
-- `url` - URL to perform GET request on, this can use DSL for example `$brooklyn:component("tomcat").attributeWhenReady("webapp.url")`.
+- `url` - URL to perform GET request on, this can use DSL for example `$brooklyn:entity("tomcat").attributeWhenReady("webapp.url")`.
 - `timeout` - duration to wait on a HTTP response. For example `10s`, `10m`, etc
 - `applyAssertionTo` - The filed to apply the assertion to. For example `status`, `body`
 - `assert` - assertion to perform on the response.  See section on assertions below.

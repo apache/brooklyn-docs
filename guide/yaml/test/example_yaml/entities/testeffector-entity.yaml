@@ -1,6 +1,6 @@
 - type: org.apache.brooklyn.test.framework.TestEffector
   name: Invoke Deploy Effector
-  target: $brooklyn:component("tomcat")
+  target: $brooklyn:entity("tomcat")
   effector: deploy
   timeout: 5m
   params:

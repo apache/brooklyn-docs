@@ -13,9 +13,9 @@ services:
   launch_attributes:
     mysql:
       # these attrs are required by the mysql cookbook under node['mysql']
-      server_root_password: $brooklyn:component("db").config("mysql.password")
-      server_repl_password: $brooklyn:component("db").config("mysql.password")
-      server_debian_password: $brooklyn:component("db").config("mysql.password")
+      server_root_password: $brooklyn:entity("db").config("mysql.password")
+      server_repl_password: $brooklyn:entity("db").config("mysql.password")
+      server_debian_password: $brooklyn:entity("db").config("mysql.password")
       # many others are attrs are supported by the cookbook and can be passed here...
       
   # how to determine if the process is running and how to kill it

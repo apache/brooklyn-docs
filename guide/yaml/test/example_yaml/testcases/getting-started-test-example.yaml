@@ -14,7 +14,7 @@ services:
     java.sysprops:
       brooklyn.example.db.url: >
         $brooklyn:formatString("jdbc:%s%s?user=%s&password=%s",
-        component("db").attributeWhenReady("datastore.url"),
+        entity("db").attributeWhenReady("datastore.url"),
         "visitors", "brooklyn", "br00k11n")
 - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
   id: db
@@ -25,8 +25,8 @@ services:
   name: Check HTTP Response Status Code
   url: >
     $brooklyn:formatString("http://%s:%s",
-    $brooklyn:component("webappcluster").attributeWhenReady("host.address"),
-    $brooklyn:component("webappcluster").attributeWhenReady("proxy.http.port"))
+    $brooklyn:entity("webappcluster").attributeWhenReady("host.address"),
+    $brooklyn:entity("webappcluster").attributeWhenReady("proxy.http.port"))
   timeout: 10m
   applyAssertionTo: status
   assert:
@@ -35,8 +35,8 @@ services:
   name: Check HTTP Response Body
   url: >
     $brooklyn:formatString("http://%s:%s",
-    $brooklyn:component("webappcluster").attributeWhenReady("host.address"),
-    $brooklyn:component("webappcluster").attributeWhenReady("proxy.http.port"))
+    $brooklyn:entity("webappcluster").attributeWhenReady("host.address"),
+    $brooklyn:entity("webappcluster").attributeWhenReady("proxy.http.port"))
   timeout: 10m
   applyAssertionTo: body
   assert:
@@ -64,8 +64,8 @@ services:
     timeout: 5m
     url: >
       $brooklyn:formatString("http://%s:%s/newcontext/",
-      $brooklyn:component("webappcluster").attributeWhenReady("host.address"),
-      $brooklyn:component("webappcluster").attributeWhenReady("proxy.http.port"))
+      $brooklyn:entity("webappcluster").attributeWhenReady("host.address"),
+      $brooklyn:entity("webappcluster").attributeWhenReady("proxy.http.port"))
     applyAssertionTo: status
     assert:
     - isEqualTo: 200

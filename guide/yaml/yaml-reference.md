@@ -191,9 +191,9 @@ concise DSL defined here:
   can be used to supply config at the root which is used in multiple places in the plan
 * `$brooklyn:sensor("sensor.name")` returns the given sensor on the current entity if found, or an untyped (Object) sensor;
   `$brooklyn:sensor("com.acme.brooklyn.ContainingEntityClass", "sensor.name")` returns the strongly typed sensor defined in the given class
-* `$brooklyn:component("ID")` refers to a Brooklyn component with the given ID; you can then access the following subfields,
+* `$brooklyn:entity("ID")` refers to a Brooklyn entity with the given ID; you can then access the following subfields,
   using the same syntax as defined above but with a different reference entity,
-  e.g. `$brooklyn:component("ID").attributeWhenReady("sensor")`:
+  e.g. `$brooklyn:entity("ID").attributeWhenReady("sensor")`:
   * `.attributeWhenReady("sensor")`
   * `.config("key")`
   * `.sensor("sensor.name")`

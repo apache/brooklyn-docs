@@ -48,7 +48,7 @@ services:
   # set the hostname of the netcat instance as an env var for the scripts 
   env:
     TARGET_HOSTNAME: 
-      $brooklyn:component("netcat-server").
+      $brooklyn:entity("netcat-server").
         attributeWhenReady("host.name")
     
   # start/check/stop are no-op
@@ -74,5 +74,5 @@ services:
 brooklyn.enrichers:
 - enricherType: org.apache.brooklyn.enricher.stock.Propagator
   brooklyn.config:
-    enricher.producer: $brooklyn:component("netcat-server")
+    enricher.producer: $brooklyn:entity("netcat-server")
     enricher.propagating.propagatingAll: true
