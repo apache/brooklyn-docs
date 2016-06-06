@@ -31,7 +31,7 @@ You could encounter this error when running with many entities.
 Please **increase the ulimit** if you see such error:
 
 On the VM running Apache Brooklyn, we recommend ensuring nproc and nofile are reasonably high (e.g. higher than 1024, which is often the default).
-We recommend setting it limits to a value above 16000.
+We recommend setting it limits to a value of 16384 or higher.
 
 If you want to check the current limits run `ulimit -a`.
 
