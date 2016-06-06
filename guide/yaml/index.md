@@ -7,6 +7,7 @@ children:
 - configuring-vms.md
 - clusters.md
 - multiple-services.md
+- entity-configuration.md
 - clusters-and-policies.md
 - blueprinting-tips.md
 - custom-entities.md
