@@ -160,7 +160,7 @@ In the ELK blueprint, there is a good example of a latch. Latches are used to fo
 - type: kibana-standalone
   ...
   name: Kibana Server
-  customize.latch: $brooklyn:component("es").attributeWhenReady("service.isUp")
+  customize.latch: $brooklyn:entity("es").attributeWhenReady("service.isUp")
 ~~~
 
 This latch is used to stop Kibana customizing until the Elasticsearch cluster is up. We do this to ensure that the URL sensors have been setup, so that they can be passed into Kibana during the customization phase.

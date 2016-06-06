@@ -21,8 +21,8 @@
     timeout: 5m
     url: >
       $brooklyn:formatString("http://%s:%s/newcontext/",
-      $brooklyn:component("webappcluster").attributeWhenReady("host.address"),
-      $brooklyn:component("webappcluster").attributeWhenReady("proxy.http.port"))
+      $brooklyn:entity("webappcluster").attributeWhenReady("host.address"),
+      $brooklyn:entity("webappcluster").attributeWhenReady("proxy.http.port"))
     applyAssertionTo: status
     assert:
     - isEqualTo: 200

@@ -63,7 +63,7 @@ please let us know.  We'd like to see this too, and we'll help you along the way
 To help you on your way writing Chef blueprints, here are a handful of pointers
 particularly useful in this context:
 
-* Configuration keys can be inherited from the top-level and accessed using `$brooklyn:component('id').config('key_name')`.
+* Configuration keys can be inherited from the top-level and accessed using `$brooklyn:entity('id').config('key_name')`.
   An example of this is shown in the `mysql-chef.yaml` sample recipe contained in the Brooklyn code base
   and [here](example_yaml/mysql-chef-2.yaml) for convenience.
   Here, `p4ssw0rd` is specified only once and then used for all the attributes required by the stock mysql cookbook.  
