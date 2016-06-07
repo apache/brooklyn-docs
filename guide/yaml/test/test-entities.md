@@ -22,6 +22,7 @@ Timeouts on child entities should be set relative to the completion of the prece
 
 The `ParallelTestCase` entity can be added as a child to run a subset of entities in parallel as a single step.
 
+
 ### ParallelTestCase
 The `ParallelTestCase` entity acts as a container for a list of child entities which are started in *parallel*.
 
@@ -32,6 +33,7 @@ The `ParallelTestCase` entity acts as a container for a list of child entities w
 This can be used to run a subset of entities in parallel as a single step when nested under a `TestCase` entity.
 
 Timeouts on child entities should be set relative to the start of the `ParallelTestCase`.
+
 
 ### LoopOverGroupMembersTestCase
 The `LoopOverGroupMembersTestCase` entity is configured with a target group and a test specification. For each member of the targeted group, the test case will create a TargetableTestComponent entity from the supplied test specification and set the components target to be the group member.
@@ -59,6 +61,7 @@ The `InfrastructureDeploymentTestCase` will first create and deploy an infrastru
 - `infrastructure.deployment.entity.specs` - the entities to be deployed to the infrastructure
 - `infrastructure.deployment.location.sensor` - the name of the sensor on the infrastructure to retrieve the deployment location
 
+
 ## Validation Test Entities
 
 ### TestSensor
@@ -76,8 +79,11 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 - `assert` - assertion to perform on the specified sensor value. See section on assertions below.
 
 <div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestSensor</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+    <strong>Tip:</strong> If the <code>TestSensor</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
 </div>
+
 
 ### TestEffector
 The `TestEffector` entity invokes the specified effector on a target entity. If the result of the effector is a String, it will then perform assertions on the result.
@@ -94,8 +100,11 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 - `assert` - assertion to perform on the returned result. See section on assertions below.
 
 <div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestEffector</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+    <strong>Tip:</strong> If the <code>TestEffector</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
 </div>
+
 
 ### TestHttpCall
 The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs an assertion on the response.
@@ -110,24 +119,28 @@ The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs 
 - `assert` - assertion to perform on the response.  See section on assertions below.
 
 <div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestHttpCall</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+    <strong>Tip:</strong> If the <code>TestHttpCall</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
 </div>
 
-### SimpleShellCommandTest
-The SimpleShellCommandTest runs a command on the host of the target entity.
+
+### TestSshCommand
+The TestSshCommand runs a command on the host of the target entity.
 The script is expected not to run indefinitely, but to return a result (process exit code), along with its
 standard out and error streams, which can then be tested using assertions.
 If no assertions are explicitly configured, the default is to assert a non-zero exit code.
 
-Either a shell command may be provided in the YAML, or a URL for a script which will be executed.
+Either a bash command may be provided in the YAML, or a URL for a script which will be executed.
 
 {% highlight yaml %}
-{% readj example_yaml/entities/simpleshellcommandtest-entity.yaml %}
+{% readj example_yaml/entities/testsshcommand-entity.yaml %}
 {% endhighlight %}
 
 #### Parameters
 - `command` - The shell command to execute. (This and `downloadUrl` are mutually exclusive.)
 - `downloadUrl` - URL for a script to download and execute. (This and `command` are mutually exclusive.)
+- `shell.env` - Map of environment variables to be set.
 - `scriptDir` - if `downloadUrl` is used.  The directory on the target host where downloaded scripts should be copied to.
 - `runDir` - the working directory where the command or script will be executed on the target host.
 - `assertStatus` - Assertions on the exit code of the command or script. See section on assertions below.
@@ -135,8 +148,11 @@ Either a shell command may be provided in the YAML, or a URL for a script which 
 - `assertErr` -  Assertions on the standard error of the command as a String.
 
 <div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>SimpleShellCommandTest</code> is wrapped within a <code>TestCase</code>, <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, <strong>you don't need to specify the target</strong>, unless you want to test another entity.
+    <strong>Tip:</strong> If the <code>TestSshCommand</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
 </div>
+
 
 ## Assertions
 
