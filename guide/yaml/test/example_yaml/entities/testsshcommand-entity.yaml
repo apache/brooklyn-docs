@@ -1,11 +1,13 @@
+services:
 - type: org.apache.brooklyn.test.framework.TestCase
   name: testcase1
-  targetId: testprocess
   brooklyn.children:
     - type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
       id: testprocess
 
-    - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
+    - type: org.apache.brooklyn.test.framework.TestSshCommand
+      name: Check tomcat process running with ps
+      targetId: testprocess
       command: ps -ef
       assertStatus:
         equals: 0
@@ -14,7 +16,9 @@
       assertErr: 
         isEmpty: true
 
-    - type: org.apache.brooklyn.test.framework.SimpleShellCommandTest
+    - type: org.apache.brooklyn.test.framework.TestSshCommand
+      name: Check hello world script
+      targetId: testprocess
       downloadUrl: https://github.com/apache/brooklyn-docs/raw/master/guide/yaml/test/example_yaml/entities/script1.sh
       assertStatus:
         equals: 0

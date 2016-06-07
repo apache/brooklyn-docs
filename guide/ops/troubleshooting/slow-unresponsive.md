@@ -8,6 +8,7 @@ There are many possible causes for a Brooklyn server becoming slow or unresponsi
 describes some possible reasons, and some commands and tools that can help diagnose the problem.
 
 Possible reasons include:
+
 * CPU is max'ed out
 * Memory usage is extremely high
 * SSH'ing is very slow due (e.g. due to lack of entropy)
@@ -154,8 +155,7 @@ If the Brooklyn Server was originally run to allow a remote debugger to connect 
 discouraged in production!), then this provides a convenient way to investigate why Brooklyn
 is being slow or unresonsive. See the Debugging Tips in the 
 tip [Debugging Remote Brooklyn][({{ site.path.guide }}/dev/tips/debugging-remote-brooklyn.html)
-and the the [IDE docs](See [Brooklyn Requirements]({{ site.path.guide }}/dev/env/ide/) for more
-information.
+and the [IDE docs]({{ site.path.guide }}/dev/env/ide/) for more information.
 
 
 ## Log Files
@@ -171,7 +171,7 @@ these messages (or their very presence) may change in future version of Brooklyn
 
 The lines below are commonly logged, and can be useful to search for when finding the start of a section of logging.
 
-{% highlight %}
+{% highlight text %}
 2016-05-30 17:05:51,458 INFO  o.a.b.l.BrooklynWebServer [main]: Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war
 2016-05-30 17:06:04,098 INFO  o.a.b.c.m.h.HighAvailabilityManagerImpl [main]: Management node tF3GPvQ5 running as HA MASTER autodetected
 2016-05-30 17:06:08,982 INFO  o.a.b.c.m.r.InitialFullRebindIteration [brooklyn-execmanager-rvpnFTeL-0]: Rebinding from /home/compose/compose-amp-state/brooklyn-persisted-state/data for master rvpnFTeL...
@@ -183,7 +183,7 @@ The lines below are commonly logged, and can be useful to search for when findin
 
 The debug log includes (every minute) a log statement about the memory usage and task activity. For example:
 
-{% highlight %}
+{% highlight text %}
 2016-05-27 12:20:19,395 DEBUG o.a.b.c.m.i.BrooklynGarbageCollector [brooklyn-gc]: brooklyn gc (before) - using 328 MB / 496 MB memory (5.58 kB soft); 69 threads; storage: {datagrid={size=7, createCount=7}, refsMapSize=0, listsMapSize=0}; tasks: 10 active, 33 unfinished; 78 remembered, 1696906 total submitted)
 2016-05-27 12:20:19,395 DEBUG o.a.b.c.m.i.BrooklynGarbageCollector [brooklyn-gc]: brooklyn gc (after) - using 328 MB / 496 MB memory (5.58 kB soft); 69 threads; storage: {datagrid={size=7, createCount=7}, refsMapSize=0, listsMapSize=0}; tasks: 10 active, 33 unfinished; 78 remembered, 1696906 total submitted)
 {% endhighlight %}
@@ -198,7 +198,7 @@ One source of high CPU in Brooklyn is when a subscription (e.g. for a policy or 
 triggered many times (i.e. handling many events). A log message like that below will be logged on 
 every 1000 events handled by a given single subscription.
 
-{% highlight %}
+{% highlight text %}
 2016-05-30 17:29:09,125 DEBUG o.a.b.c.m.i.LocalSubscriptionManager [brooklyn-execmanager-rvpnFTeL-8]: 1000 events for subscriber Subscription[SCFnav9g;CanopyComposeApp{id=gIeTwhU2}@gIeTwhU2:webapp.url]
 {% endhighlight %}
 
@@ -213,7 +213,7 @@ If a subscription is handling a huge number of events, there are a couple of com
 
 All activity triggered by the REST API or web-console will be logged. Some examples are shown below:
 
-{% highlight %}
+{% highlight text %}
 2016-05-19 17:52:30,150 INFO  o.a.b.r.r.ApplicationResource [brooklyn-jetty-server-8081-qtp1058726153-17473]: Launched from YAML: name: My Example App
 location: aws-ec2:us-east-1
 services:
@@ -232,6 +232,6 @@ include the stdout and stderr of all the commands executed by that entity.
 It can also be very useful to search for all effector invocations, to see where the behaviour
 has been triggered:
 
-{% highlight %}
+{% highlight text %}
 2016-05-27 12:45:43,529 DEBUG o.a.b.c.m.i.EffectorUtils [brooklyn-execmanager-gvP7MuZF-14364]: Invoking effector stop on TomcatServerImpl{id=mPujYmPd}
 {% endhighlight %}
