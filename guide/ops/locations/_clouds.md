@@ -240,11 +240,23 @@ Here you can see that we set three template options:
 If the method call cannot be matched to the template options available - for example if you are trying to set an AWS EC2
 specific option but your location is an OpenStack cloud - then a warning is logged and the option is ignored.
 
+###### Cloud Machine Naming
 
-See the following resources for more information:
+The name that Apache Brooklyn generates for your virtual machine will, by default, be based on your Apache Brooklyn server name and the IDs of the entities involved. This is the name you see in places such as the AWS console and will look something like:
 
-- [AWS VPC issues which may affect users with older AWS accounts](vpc-issues.html)
-- [Amazon EC2 and Amazon Virtual Private Cloud](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types)
-- [Your Default VPC and Subnets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html)
-- [Amazon VPC FAQs](http://aws.amazon.com/vpc/faqs/#Default_VPCs)
+    brooklyn-o8jql4-machinename-rkix-tomcat-wi-nca6-14b
+
+If you have created a lot of virtual machines, this kind of naming may not be helpful. This can be changed using the following YAML in your location's `brooklyn.config`:
+
+    cloudMachineNamer: org.apache.brooklyn.core.location.cloud.names.CustomMachineNamer
+    custom.machine.namer.machine: My-Custom-Name-${entity.displayName}
+
+A [FreeMarker](http://freemarker.org/) format is used in `custom.machine.namer.machine` which can take values from places such as the launching entity or location.
+
+The above example will create a name such as:
+
+    My-Custom-Name-Tomcat
+    
+Allowing you to more easily identify your virtual machines.
+
   
