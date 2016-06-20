@@ -19,6 +19,43 @@ at least 8GB RAM and 100GB disk. The disk is just for logs, a small amount of pe
 any binaries for custom blueprints/integrations.
 
 
+### Disk Space
+
+There are three main consumers of disk space:
+
+* **Static files**: these are the Apache Brooklyn files themselves, plus
+  binaries for custom blueprints and integrations added to the `lib` directory.
+* **Persisted state**: when using [Persistence](persistence/index.html) -- which
+  is a prerequisite for [High Availability](high-availability.html) -- Brooklyn
+  will save data to a store location. Items in the persisted state include
+  metadata about the Brooklyn servers, catalog items, and metadata about all
+  running applications and entities.
+* **Log files**: Brooklyn writes detailed log files by default to its own
+  installation directory. This can be reconfigured to change the destination
+  files, and increase or decrease the detail of the logs. See the
+  [Logging](logging.html) page for more details.
+
+
+The Apache Brooklyn distribution itself, when unpacked, consumes approximately
+75MB of disk space. The space consumed by additional binaries for custom
+blueprints and integrations is application-specific.
+
+Persisted state, excluding catalog data, is relatively small, starting at
+approximately 300KB for a clean, idle Brooklyn server. Deploying blueprints will
+add to this - how much depends exactly on the entities involved and is therefore
+application specific, but as a guideline, a 3-node Riak cluster adds
+approximately 500KB to the persistence store.
+
+Log data can be a large consumer of disk space. By default Brooklyn generates
+two logfiles, one which logs notable information only, and another which logs at
+a debug level. Each logfile rotates when it hits a size of 100MB; a maximum of
+10 log files are retained for each type. The two logging streams combined,
+therefore, can consume up to 2GB of disk space. In the default configuration
+logs are saved to the Brooklyn installation directory. You will most likely want
+to [reconfigure Brooklyn's logging](logging.html) to save logs to a location
+elsewhere, and to rotate logs according to your organisation's policy.
+
+
 ## Supported Operating Systems
 
 The recommended operating system is CentOS 6.x or RedHat 6.x.
