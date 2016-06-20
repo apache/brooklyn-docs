@@ -10,6 +10,7 @@ children:
 - locations/
 - persistence/
 - high-availability.md
+- high-availability-supplemental.md
 - catalog/
 - rest.md
 - logging.md
