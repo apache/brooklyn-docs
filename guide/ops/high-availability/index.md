@@ -1,6 +1,8 @@
 ---
 title: High Availability
 layout: website-normal
+children:
+- high-availability-supplemental.md
 ---
 
 Brooklyn will automatically run in HA mode if multiple Brooklyn instances are started

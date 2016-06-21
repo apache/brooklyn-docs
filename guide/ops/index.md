@@ -9,8 +9,7 @@ children:
 - brooklyn_properties.md
 - locations/
 - persistence/
-- high-availability.md
-- high-availability-supplemental.md
+- high-availability/
 - catalog/
 - rest.md
 - logging.md
