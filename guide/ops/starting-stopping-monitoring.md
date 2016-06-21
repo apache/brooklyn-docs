@@ -7,8 +7,21 @@ layout: website-normal
 Server.  For information on using the Brooklyn Client CLI to access an already
 running Brooklyn Server, refer to [Client CLI Reference](cli/index.html).
 
+## Packages for RHEL/CentOS and Ubuntu
 
-## Starting
+If you are using the `.rpm` or `.deb` package of Apache Brooklyn, then Brooklyn
+will integrate with your OS service management. Commands such as
+`service brooklyn start` will work as expected, and Brooklyn's PID file will be
+stored in the normal location for your OS, such as `/var/run/brooklyn.pid`.
+
+
+## Platform-independent distributions
+
+The platform-independent distributions are packaged in `.tar.gz` and `.zip`
+files.
+
+
+### Starting
 
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
@@ -28,7 +41,7 @@ the Brooklyn directory, which contains the PID of the last Brooklyn process to
 be started.
 
 
-## Stopping
+### Stopping
 
 To stop Brooklyn, simply send a `TERM` signal to the Brooklyn process. The PID
 of the most recently run Brooklyn process can be found in the `pid_java` file at
@@ -43,20 +56,24 @@ For example:
 
 ## Monitoring
 
-As already mentioned, the Brooklyn startup script will create a file name
-`pid_java` at the root of the Brooklyn directory, which contains the PID of the
-last Brooklyn process to be started. You can examine this file to discover the
-PID, and then test that the process is still running.
+For `.tar.gz` and `.zip` distributions of Brooklyn, the Brooklyn startup script
+will create a file name `pid_java` at the root of the Brooklyn directory, which
+contains the PID of the last Brooklyn process to be started. You can examine
+this file to discover the PID, and then test that the process is still running.
+`.rpm` and `.deb` distributions of Brooklyn will use the normal mechanism that
+your OS uses, such as writing to `/var/run/brooklyn.pid`.
 
 This should lead to a fairly straightforward integration with many monitoring
 tools - the monitoring tool can discover the expected PID, and can execute the
 start or stop commands shown above as necessary.
 
-For example, here is a fragment of a `monitrc` file as used by [Monit](http://https://mmonit.com/monit/):
+For example, here is a fragment of a `monitrc` file as used by
+[Monit](http://https://mmonit.com/monit/), for a Brooklyn `.tar.gz` distribution
+unpacked and installed at `/opt/apache-brooklyn`:
 
 {% highlight text %}
 check process apachebrooklyn with pidfile /opt/apache-brooklyn/pid_java
-    start program = "/bin/bash -c '/opt/apache-brooklyn/bin/brooklyn launch & disown'" with timeout 10 seconds
+    start program = "/bin/bash -c '/opt/apache-brooklyn/bin/brooklyn launch --persist auto & disown'" with timeout 10 seconds
     stop  program = "/bin/bash -c 'kill $( cat /opt/apache-brooklyn/pid_java )'"
 {% endhighlight %}
 
