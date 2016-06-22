@@ -19,11 +19,54 @@ at least 8GB RAM and 100GB disk. The disk is just for logs, a small amount of pe
 any binaries for custom blueprints/integrations.
 
 
+### Disk Space
+
+There are three main consumers of disk space:
+
+* **Static files**: these are the Apache Brooklyn distribution with its own
+  dependencies, plus binaries for custom blueprints and integrations added to
+  the `lib` directory. Note that Brooklyn requires that Java is installed which
+  you may have to consider when calculating disk space requirements.
+* **Persisted state**: when using [Persistence](persistence/index.html) -- which
+  is a prerequisite for [High Availability](high-availability.html) -- Brooklyn
+  will save data to a store location. Items in the persisted state include
+  metadata about the Brooklyn servers, catalog items, and metadata about all
+  running applications and entities.
+* **Log files**: Brooklyn writes info and debug log files. By default, these are
+  written to the local filesystem. This can be reconfigured to set the
+  destination and to increase or decrease the detail in the logs. See the
+  [Logging](logging.html) section for more details.
+
+The Apache Brooklyn distribution itself, when unpacked, consumes approximately
+75MB of disk space. This includes everything needed to run Brooklyn except for a
+Java VM. The space consumed by additional binaries for custom blueprints and
+integrations is application-specific.
+
+Persisted state, excluding catalog data, is relatively small, starting at
+approximately 300KB for a clean, idle Brooklyn server. Deploying blueprints will
+add to this - how much depends exactly on the entities involved and is therefore
+application specific, but as a guideline, a 3-node Riak cluster adds
+approximately 500KB to the persistence store.
+
+Log data can be a large consumer of disk space. By default Brooklyn generates
+two logfiles, one which logs notable information only, and another which logs at
+a debug level. Each logfile rotates when it hits a size of 100MB; a maximum of
+10 log files are retained for each type. The two logging streams combined,
+therefore, can consume up to 2GB of disk space.
+
+In the default configuration of Brooklyn's `.tar.gz` and `.zip` distributions,
+logs are saved to the Brooklyn installation directory. You will most likely want
+to [reconfigure Brooklyn's logging](logging.html) to save logs to a location
+elsewhere. In the `.rpm` and `.deb` packaging, logging files will be located
+under `/var/log`. You can further reconfiguring the logging detail level and log
+rotation according to your organisation's policy.
+
+
 ## Supported Operating Systems
 
 The recommended operating system is CentOS 6.x or RedHat 6.x.
 
-Brooklyn has also been tested on Ubuntu 12.04 and OS X.
+Brooklyn has also been tested on Ubuntu 14.04 and OS X.
 
 
 ## Software Requirements

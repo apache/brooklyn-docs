@@ -3,6 +3,7 @@ title: Operations
 started-pdf-exclude: true
 layout: website-normal
 children:
+- starting-stopping-monitoring.md
 - server-cli-reference.md
 - cli/
 - gui/
