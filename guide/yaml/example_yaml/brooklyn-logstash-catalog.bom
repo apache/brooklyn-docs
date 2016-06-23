@@ -1,8 +1,9 @@
 brooklyn.catalog:
-  version: 1.5.5
+  version: "1.5.5"
   iconUrl: http://logstash.net/images/logstash.png
   items:
   - id: logstash-standalone
+    itemType: entity
     name: "Logstash server"
     description: "Single Logstash server"
     item:
@@ -45,6 +46,7 @@ brooklyn.catalog:
         nohup /opt/logstash/logstash-${VERSION}/bin/logstash agent -f ${CONFIG_DIR} -l /var/log/logstash/logstash.log &
         echo $! > $PID_FILE
   - id: logstash-child
+    itemType: entity
     name: "Logstash Child"
     description: |
        Logstash server to be embedded as a child of a SoftwareProcess who

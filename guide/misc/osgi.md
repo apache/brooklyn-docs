@@ -88,6 +88,7 @@ For example, the `catalog.bom` file for Brooklyn's Webapp bundle looks like (abb
         version: ...
         items:
         - id: org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppService
+          itemType: entity
           item:
             type: org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppService
             name: Node.JS Application

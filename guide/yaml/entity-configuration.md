@@ -49,7 +49,8 @@ The example below illustrates the principles:
 brooklyn.catalog:
   items:
   - id: entity-config-example
-    displayName: Entity Config Example
+    itemType: entity
+    name: Entity Config Example
     item:
       type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
       brooklyn.parameters:
@@ -182,8 +183,9 @@ parent entity's value will never be inherited:
 brooklyn.catalog:
   items:
   - id: entity-config-example
-    version: 1.1.0-SNAPSHOT
-    displayName: Entity Config Example
+    version: "1.1.0-SNAPSHOT"
+    itemType: entity
+    name: Entity Config Example
     item:
       type: org.apache.brooklyn.entity.machine.MachineEntity
       brooklyn.parameters:
