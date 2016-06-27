@@ -317,10 +317,12 @@ location:
     identity: "your-tenant:your-username"
     credential: your-password
 
+    # imageId, hardwareId, and loginUser* are optional
     imageId: your-region-name/your-image-id
     hardwareId: your-region-name/your-flavor-id
     loginUser: 'ubuntu'
     loginUser.privateKeyFile: /path/to/your/privatekey
+
     jclouds.openstack-nova.auto-generate-keypairs: false
     jclouds.openstack-nova.auto-create-floating-ips: true
 
@@ -328,6 +330,8 @@ location:
       networks: [ "your-network-id" ]
       floatingIpPoolNames: [ "your-floatingIp-pool" ]
       securityGroups: ['your-security-group']
+
+      # Optional if 'jclouds.openstack-nova.auto-generate-keypairs' is assigned to 'true'
       keyPairName: "your-keypair"
 ```
 
@@ -353,10 +357,12 @@ brooklyn.location.named.My\ OpenStack.securityGroups=your-security-group
 brooklyn.location.named.My\ OpenStack.keyPair=your-keypair
 ```
 
-For an even more detailed example location configuration, consult the
-[template properties file](https://brooklyn.apache.org/v/latest/start/brooklyn.properties).
+Chose a value of `your-flavor-id` from one of the defaults, or create your own flavor if
+you have administrator privileges.
+For for more information, see the
+[OpenStack flavors guide](http://docs.openstack.org/admin-guide/cli_manage_flavors.html).
 
-`my-flavor-id` can be chosen from the following options:
+The default flavors are:
 
 ```
 +-----+-----------+-----------+------+
@@ -369,6 +375,9 @@ For an even more detailed example location configuration, consult the
 | 5   | m1.xlarge | 16384     | 160  |
 +-----+-----------+-----------+------+
 ```
+
+For an even more detailed example location configuration, consult the
+[template properties file](https://brooklyn.apache.org/v/latest/start/brooklyn.properties).
 
 
 ### Other features
@@ -397,3 +406,24 @@ by building: https://github.com/cloudsoft/jclouds-openstack-devtest
 * Copy the patch JAR into $BROOKLYN_HOME/lib/patch
 * Change `jclouds:openstack-nova` to `jclouds:openstack-devtest-compute` in your location
 configuration
+
+Here is a simple example template to be used with this workaround:
+
+```
+location:
+  jclouds:openstack-devtest-compute:
+    endpoint: http://x.x.x.x:5000/v2.0/
+    identity: "your-tenant:your-username"
+    credential: your-password
+    templateOptions:
+      networks: [ "your-network-id" ]
+      floatingIpPoolNames: [ "your-floatingIp-pool" ]
+```
+
+Note that the following values will be set by default when omitted above:
+
+```
+jclouds.keystone.credential-type=passwordCredentials
+jclouds.openstack-nova.auto-generate-keypairs: true
+jclouds.openstack-nova.auto-create-floating-ips: true
+```
