@@ -4,6 +4,21 @@ title: Publish to the public
 navgroup: developers
 ---
 
+Update the canonical Git repository
+-----------------------------------
+
+Make a signed tag for this release:
+
+{% highlight bash %}
+for m in ${MODULES}; do ( cd $m && git tag -s -m "Tag release ${VERSION_NAME}" rel/apache-brooklyn-${VERSION_NAME} rel/apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER} ); done
+{% endhighlight %}
+
+Now push the release tag:
+
+{% highlight bash %}
+for m in ${MODULES}; do ( cd $m && git push apache-git rel/apache-brooklyn-${VERSION_NAME} ); done
+{% endhighlight %}
+
 Publish the source and binary distributions to the pre-release area
 -------------------------------------------------------------------
 
@@ -40,8 +55,7 @@ Note that the PGP signatures do not embed the filename so they do not need to be
 As a final check, re-test the hashes and signatures:
 
 {% highlight bash %}
-for ext in -src.tar.gz -src.zip -bin.tar.gz -bin.zip; do
-    artifact=apache-brooklyn-${VERSION_NAME}${ext}
+for artifact in *.tar.gz *.zip *.rpm; do
     md5sum -c ${artifact}.md5
     shasum -a1 -c ${artifact}.sha1
     shasum -a256 -c ${artifact}.sha256

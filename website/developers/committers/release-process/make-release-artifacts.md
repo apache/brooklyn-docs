@@ -15,26 +15,26 @@ The release script will:
 The script has a single required parameter `-r` which is given the release candidate number - so `-r1` will create
 release candidate 1 and will name the artifacts appropriately.
 
-Before running this however, it is a good idea to check the `apache-release` profile build is healthy.
-This will catch glitches such as PGP or javadoc problems without doing time-consuming uploads:
+The script takes a `-n` parameter to work in *dry run* mode; in this mode, the script will NOT upload Maven artifacts
+or commit the release to the Subversion repository. This speeds up the process (the Maven deploy in particular slows
+down the build) and will catch any problems such as PGP or javadoc problems much sooner.
 
 {% highlight bash %}
-mvn clean install -Papache-release
-{% endhighlight %}
+# A dry run to test everything is OK
+./brooklyn-dist/release/make-release-artifacts.sh -r$RC_NUMBER -n
 
-To run the script:
-
-{% highlight bash %}
+# The real build, which will publish artifacts
 ./brooklyn-dist/release/make-release-artifacts.sh -r$RC_NUMBER
 {% endhighlight %}
 
-It will show you the release information it has deduced, and ask yes-or-no if it can proceed. Please note that the
-script will thoroughly clean the Git workspace of all uncommited and unadded files.
+It will show you the release information it has deduced, and ask yes-or-no if it can proceed. Then you will be prompted
+for the passphrase to your GnuPG private key. You should only be asked this question once; the GnuPG agent will cache
+the password for the remainder of the build.
 
-**You really probably want to run this against a secondary checkout.** It will wipe `.project` files and other IDE metadata, and bad things can happen if an IDE tries to write while the script is running. Also as it takes a long time, this means your workspace is not tied up. One quick and easy way to do this is to `git clone` the local directory of your primary checkout to a secondary location.
-
-A few minutes into the script you will be prompted for the passphrase to your GnuPG private key. You should only be
-asked this question once; the GnuPG agent will cache the password for the remainder of the build.
+Please note that the script will thoroughly clean the Git workspace of all uncommitted and unadded files **even in dry
+run mode**. Therefore **you really want to run this against a secondary checkout.** It will wipe `.project` files and
+other IDE metadata, and bad things can happen if an IDE tries to write while the script is running. Consider using the
+Vagrant configuration provided.
 
 Please note that uploading to the Nexus staging repository is a slow process. Expect this stage of the build to take
 2 hours.
@@ -49,10 +49,3 @@ The release script will:
 5. For each of the produced files, produce MD5, SHA1, SHA256 and GnuPG signatures
 
 At the end of the script, it will show you the files it has produced and their location.
-
-Make a signed tag for this release, and then push the tag:
-
-{% highlight bash %}
-git tag -s -m "Tag release ${VERSION_NAME} release candidate ${RC_NUMBER}" apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-git push apache apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-{% endhighlight %}

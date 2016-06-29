@@ -4,6 +4,22 @@ title: Publish to the staging area
 navgroup: developers
 ---
 
+Update the canonical Git repository
+-----------------------------------
+
+Make a signed tag for this release candidate:
+
+{% highlight bash %}
+for m in ${MODULES}; do ( cd $m && git tag -s -m "Tag release ${VERSION_NAME} release candidate ${RC_NUMBER}" rel/apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER} ); done
+{% endhighlight %}
+
+Now push the release branch and release candidate tag:
+
+{% highlight bash %}
+for m in ${MODULES}; do ( cd $m && git push apache-git $VERSION_NAME && git push apache-git rel/apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER} ); done
+{% endhighlight %}
+
+
 Publish the source and binary distributions to the pre-release area
 -------------------------------------------------------------------
 
@@ -17,8 +33,8 @@ In your workspace for the `dist.apache.org` repo, create a directory with the ar
 mkdir apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
 {% endhighlight %}
 
-Copy into this directory all of the artifacts from the previous step - `-src` and `-bin`, `.tar.gz` and `.zip`, and all
-associated `.md5`, `.sha1`, `.sha256` and `.asc` signatures. Then commit:
+Copy into this directory all of the artifacts from the previous step - `-src` and `-bin`, `.tar.gz`, `.zip` and `.rpm`,
+and all associated `.md5`, `.sha1`, `.sha256` and `.asc` signatures. Then commit:
 
 {% highlight bash %}
 svn add apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
