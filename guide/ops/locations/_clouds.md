@@ -154,7 +154,7 @@ For more keys and more detail on the keys below, see
 - Private keys can be specified using `privateKeyFile`; 
   these are not copied to provisioned machines, but are required if using a local public key
   or a pre-defined `authorized_keys` on the server.
-  (For more information on SSH keys, see [here](ssh-keys.html).) 
+  (For more information on SSH keys, see [here](#ssh-keys).) 
 
 - If there is a passphrase on the key file being used, you must supply it to Brooklyn for it to work, of course!
   `privateKeyPassphrase` does the trick (as in `brooklyn.location.jclouds.privateKeyPassphrase`, or other places

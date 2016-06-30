@@ -13,7 +13,7 @@ Your nodes must meet the following prerequisites:
 
 - A suitable OS must have been installed on all nodes
 - The node must be running sshd (or similar)
-- the brooklyn user must be able to ssh to each node as root or as a user with passwordless sudo permission. (For more information on SSH keys, see [here](ssh-keys.html).) 
+- the brooklyn user must be able to ssh to each node as root or as a user with passwordless sudo permission. (For more information on SSH keys, see [here](#ssh-keys).) 
 
 To deploy to machines with known IP's in a blueprint, use the following syntax:
 
