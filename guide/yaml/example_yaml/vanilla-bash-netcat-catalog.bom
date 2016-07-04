@@ -1,6 +1,7 @@
 brooklyn.catalog:
   id: netcat-example
   version: "1.0"
+  itemType: entity
   item:
     type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
     name: Simple Netcat Server

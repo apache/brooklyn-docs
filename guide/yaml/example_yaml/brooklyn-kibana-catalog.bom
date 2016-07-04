@@ -1,8 +1,9 @@
 brooklyn.catalog:
-  version: 0.0.2
+  version: "0.0.2"
   iconUrl: http://blog.arungupta.me/wp-content/uploads/2015/07/kibana-logo.png
   items:
   - id: kibana-standalone
+    itemType: entity
     name: "Kibana server"
     description: "Single Kibana server"
     description: |

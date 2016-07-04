@@ -12,10 +12,11 @@ children:
  
 ---
 
-Apache Brooklyn provides a **catalog**, which is a persisted collection of versioned blueprints and other resources. 
-A set of blueprints is loaded from the `default.catalog.bom` in the Brooklyn folder by default and additional ones can be added through the web console or CLI. 
-Blueprints in the catalog can be deployed directly, via the Brooklyn CLI or the web console,
-or referenced in other blueprints using their `id`.
+Apache Brooklyn provides a **catalog**, which is a persisted collection of versioned blueprints 
+and other resources. A set of blueprints is loaded from the `default.catalog.bom` in the Brooklyn 
+folder by default and additional ones can be added through the web console or CLI.  Blueprints in 
+the catalog can be deployed directly, via the Brooklyn CLI or the web console, or referenced in 
+other blueprints using their `id`.
 
  
 ### Catalog Items YAML Syntax
@@ -25,20 +26,8 @@ specifying the catalog metadata for the items and the actual blueprint or resour
 
 
 #### General YAML Schema
- 
-A single catalog item can be defined following this general structure:
 
-~~~ yaml
-brooklyn.catalog:
-  <catalog-metadata>
-  item:
-    <blueprint-or-resource-definition>
-~~~ 
-
-
-To define multiple catalog items in a single YAML,
-where they may share some metadata,
-use the following structure:
+Catalog items can be defined using the general structure below:
 
 ~~~ yaml
 brooklyn.catalog:
@@ -51,6 +40,34 @@ brooklyn.catalog:
     item:
       <blueprint-or-resource-definition>
 ~~~ 
+ 
+Alternatively, a single catalog item can be defined using the following general structure:
+
+~~~ yaml
+brooklyn.catalog:
+  <catalog-metadata>
+  item:
+    <blueprint-or-resource-definition>
+~~~ 
+
+For example, the YAML below adds to the catalog a Tomcat entity with some additional default 
+configuration:
+
+~~~ yaml
+brooklyn.catalog:
+  items:
+  - id: tomcat-server
+    version: "1.0.0"
+    itemType: entity
+    item:
+      type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server
+      brooklyn.config:
+        webapp.enabledProtocols: https
+        httpsSsl:
+          url: classpath://org/apache/brooklyn/entity/webapp/sample-java-keystore.jks
+          alias: myname
+          password: mypass
+~~~ 
 
 
 #### Catalog Metadata
@@ -58,7 +75,7 @@ brooklyn.catalog:
 Catalog metadata fields supply the additional information required in order to register an item in the catalog. 
 These fields can be supplied as `key: value` entries 
 where either the `<catalog-metadata>` or `<additional-catalog-metadata>` placeholders are,
-with the latter overriding the former unless otherwise specfied below.
+with the latter overriding the former unless otherwise specified below.
 
 The following metadata is *required* for all items:
 
@@ -67,7 +84,13 @@ The following metadata is *required* for all items:
   this field disambiguates between blueprints of the same `id`.
   Note that this is typically *not* the version of the software being installed,
   but rather the version of the blueprint. For more information on versioning, see below.
-  (Also note YAML treats numbers differently to Strings. Explicit quotes may sometimes be required.)
+  (Also note YAML treats numbers differently to Strings. Explicit quotes are recommended, to avoid 
+  `1.10` being interpretted as the number `1.1`.)
+- `itemType`: the type of the item being defined. The supported item types are:
+  - `entity`
+  - `template`
+  - `policy`
+  - `location`
 
 To reference a catalog item in another blueprint, simply reference its ID and optionally its version number.
 For instance, if we've added an item with metadata `{ id: datastore, version: "1.0" }` (such as the example below),
@@ -80,20 +103,20 @@ services:
 
 In addition to the above fields, exactly **one** of the following is also required:
 
-- `item`: the YAML for a service or policy or location specification 
-  (a map containing `type` and optional `brooklyn.config`)
-  or a full application blueprint (in the usual YAML format) for a template; **or*
+- `item`: the YAML for an entity, or policy, or location specification 
+  (a map containing `type` and optional `brooklyn.config`). For a "template" item, it
+  should be a map containing `services` (i.e. the usual YAML format for a full application
+  blueprint). **Or**
 - `items`: a list of catalog items, where each entry in the map follows the same schema as
   the `brooklyn.catalog` value, and the keys in these map override any metadata specified as
   a sibling of this `items` key (or, in the case of `brooklyn.libraries` they add to the list);
-  if there are references between items, then order is important, 
+  if there are references between items, then order is important:
   `items` are processed in order, depth-first, and forward references are not supported. Entries
-  can be URL to another catalog file to include, inheriting the meta from the current hierarchy.
-  Libraries defined so far in the meta will be used to load classpath entries. For example:
+  can be URL to another catalog file to include, inheriting the metadata from the current hierarchy.
+  Libraries defined so far in the metadata will be used to load classpath entries. For example:
 
 ~~~ yaml
 brooklyn.catalog:
-  displayName: Foo
   brooklyn.libraries:
   - http://some.server.or.other/path/my.jar
   items:
@@ -101,31 +124,27 @@ brooklyn.catalog:
   - some-property: value
     include: classpath://more-catalog-entries-inside-jar.bom
   - id: use-from-my-catalog
+    version: "1.0.0"
+    itemType: entity
     item:
       type: some-type-defined-in-my-catalog-entries
+      brooklyn.config:
+        some.config: "some value"
 ~~~
 
 The following optional catalog metadata is supported:
   
-- `itemType`: the type of the item being defined.
-  When adding a template (see below) this must be set.
-  In most other cases this can be omitted and type type will be inferred.
-  The supported item types are:
-  - `entity`
-  - `template`
-  - `policy`
-  - `location`
-- `name`: a nicely formatted display name for the item, used when presenting it in a GUI
-- `description`: supplies an extended textual description for the item
+- `name`: a nicely formatted display name for the item, used when presenting it in a GUI.
+- `description`: supplies an extended textual description for the item.
 - `iconUrl`: points to an icon for the item, used when presenting it in a GUI.
-  The URL prefix `classpath` is supported but these URLs may *not* refer items in any OSGi bundle in the `brooklyn.libraries` section 
-  (to prevent requiring all OSGi bundles to be loaded at launch).
-  Icons are instead typically installed either at the server from which the OSGi bundles or catalog items are supplied 
-  or in the `conf` folder of the Brooklyn distro.
-- `scanJavaAnnotations` [experimental]: if provided (as `true`), this will scan any locally provided
-  library URLs for types annotated `@Catalog` and extract metadata to include them as catalog items.
-  If no libraries are specified this will scan the default classpath.
-  This feature is experimental and may change or be removed.
+  The URL prefix `classpath` is supported but these URLs may *not* refer to resources in any OSGi 
+  bundle in the `brooklyn.libraries` section (to prevent requiring all OSGi bundles to be loaded 
+  at launch). Icons are instead typically installed either at the web server from which the OSGi 
+  bundles or catalog items are supplied or in the `conf` folder of the Brooklyn distro.
+- `scanJavaAnnotations` [experimental; deprecated]: if provided (as `true`), this will scan any 
+  locally provided library URLs for types annotated `@Catalog` and extract metadata to include 
+  them as catalog items. If no libraries are specified this will scan the default classpath.
+  This feature will likely be removed.
   Also note that external OSGi dependencies are not supported 
   and other metadata (such as versions, etc) may not be applied.
 - `brooklyn.libraries`: a list of pointers to OSGi bundles required for the catalog item.
@@ -135,7 +154,7 @@ The following optional catalog metadata is supported:
   Libraries should be supplied in the form 
   `brooklyn.libraries: [ "http://...", "http://..." ]`, 
   or as
-  `brooklyn.libraries: [ { name: symbolic-name, version: 1.0, url: http://... }, ... ]` if `symbolic-name:1.0` 
+  `brooklyn.libraries: [ { name: symbolic-name, version: "1.0", url: http://... }, ... ]` if `symbolic-name:1.0` 
   might already be installed from a different URL and you want to skip the download.
   Note that these URLs should point at immutable OSGi bundles;
   if the contents at any of these URLs changes, the behaviour of the blueprint may change 
@@ -160,14 +179,15 @@ and its implementation will be the Java class `org.apache.brooklyn.entity.nosql.
 ~~~ yaml
 brooklyn.catalog:
   id: datastore
-  version: 1.0
+  version: "1.0"
   itemType: template
   iconUrl: classpath://org/apache/brooklyn/entity/nosql/riak/riak.png
   name: Datastore (Riak)
   description: Riak is an open-source NoSQL key-value data store.
   item:
-    type: org.apache.brooklyn.entity.nosql.riak.RiakNode
-    name: Riak Node
+    services:
+    - type: org.apache.brooklyn.entity.nosql.riak.RiakNode
+      name: Riak Node
 ~~~ 
 
 
@@ -177,15 +197,17 @@ This YAML will install three items:
 
 ~~~ yaml
 brooklyn.catalog:
-  version: 1.1
+  version: "1.1"
   iconUrl: classpath://org/apache/brooklyn/entity/nosql/riak/riak.png
   description: Riak is an open-source NoSQL key-value data store.
   items:
     - id: riak-node
+      itemType: entity
       item:
         type: org.apache.brooklyn.entity.nosql.riak.RiakNode
         name: Riak Node
     - id: riak-cluster
+      itemType: entity
       item:
         type: org.apache.brooklyn.entity.nosql.riak.RiakCluster
         name: Riak Cluster
@@ -195,12 +217,6 @@ brooklyn.catalog:
       item:
         services:
         - type: riak-cluster
-          location: 
-            jclouds:softlayer:
-              region: sjc01
-              # identity and credential must be set unless they are specified in your brooklyn.properties
-              # identity: XXX
-              # credential: XXX
           brooklyn.config:
             # the default size is 3 but this can be changed to suit your requirements
             initial.size: 3
@@ -209,7 +225,7 @@ brooklyn.catalog:
               minRam: 8gb
 ~~~ 
 
-The items this will install are:
+The items this will add to the catalog are:
 
 - `riak-node`, as before, but with a different name
 - `riak-cluster` as a convenience short name for the `org.apache.brooklyn.entity.nosql.riak.RiakCluster` class
@@ -228,7 +244,7 @@ In addition to blueprints, locations can be added to the Apache Brooklyn catalog
 ~~~ yaml
 brooklyn.catalog:
   id: vagrant
-  version: 1.0
+  version: "1.0"
   itemType: location
   name: Vagrant getting started location
   item:
@@ -252,7 +268,7 @@ location: vagrant
 
 #### Legacy Syntax
 
-The following legacy and experimental syntax is also supported:
+The following legacy and experimental syntax is also supported, but deprecated:
 
 ~~~ yaml
 <blueprint-definition>
@@ -275,6 +291,8 @@ and any OSGi `brooklyn.libraries` defined there will not be loaded.)
 
 ### Templates and the Add-Application Wizard
 
+A `template` is a full application. It consists of one or more entities inside an application 
+(though this is also composable: it can be used as part of another application).
 When a `template` is added to the catalog, the blueprint will appear in the 'Create Application' dialog
 as shown here:
 
@@ -298,7 +316,13 @@ with a `POST` of the YAML file to `/v1/catalog` endpoint.
 To do this using `curl`:
 
 ~~~ bash
-curl http://127.0.0.1:8081/v1/catalog --data-binary @/path/to/riak.catalog.bom
+curl -u admin:password http://127.0.0.1:8081/v1/catalog --data-binary @/path/to/riak.catalog.bom
+~~~ 
+
+Or using the CLI:
+
+~~~ bash
+br add-catalog /path/to/riak.catalog.bom
 ~~~ 
 
 
@@ -311,8 +335,9 @@ Using the REST API, you can delete a versioned item from the catalog using the c
 For example, to delete the item with id `datastore` and version `1.0` with `curl`:
 
 ~~~ bash
-curl -X DELETE http://127.0.0.1:8081/v1/catalog/applications/datastore/1.0
+curl -u admin:password -X DELETE http://127.0.0.1:8081/v1/catalog/applications/datastore/1.0
 ~~~ 
+
 
 **Note:** Catalog items should not be deleted if there are running apps which were created using the same item. 
 During rebinding the catalog item is used to reconstruct the entity.
@@ -326,7 +351,7 @@ Deprecation applies to a specific version of a catalog item, so the full
 id including the version number is passed to the REST API as follows:
 
 ~~~ bash
-curl -X POST http://127.0.0.1:8081/v1/catalog/entities/MySQL:1.0/deprecated/true
+curl -u admin:password -X POST http://127.0.0.1:8081/v1/catalog/entities/MySQL:1.0/deprecated/true
 ~~~ 
 
 
@@ -347,9 +372,9 @@ When referencing a blueprint, if a version number is not specified
 the latest non-snapshot version will be loaded when an entity is instantiated.
 
 
-### CLI Options
+### Brooklyn Server Command Line Arguments
 
-The `brooklyn` CLI includes several commands for working with the catalog.
+The command line arguments when launching `brooklyn` include several commands for working with the catalog.
 
 * `--catalogAdd <file.bom>` will add the catalog items in the `bom` file
 * `--catalogReset` will reset the catalog to the initial state 
