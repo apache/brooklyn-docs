@@ -48,52 +48,48 @@ Configuration of floating IPs is as networks; specify the pools to use as anothe
 
 This is a basic inline YAML template for an OpenStack location:
 
-```
-location:
-  jclouds:clouds:openstack-nova:
-    endpoint: http://x.x.x.x:5000/v2.0/
-    identity: "your-tenant:your-username"
-    credential: your-password
+    location:
+        jclouds:clouds:openstack-nova:
+            endpoint: http://x.x.x.x:5000/v2.0/
+            identity: "your-tenant:your-username"
+            credential: your-password
 
-    # imageId, hardwareId, and loginUser* are optional
-    imageId: your-region-name/your-image-id
-    hardwareId: your-region-name/your-flavor-id
-    loginUser: 'ubuntu'
-    loginUser.privateKeyFile: /path/to/your/privatekey
+            # imageId, hardwareId, and loginUser* are optional
+            imageId: your-region-name/your-image-id
+            hardwareId: your-region-name/your-flavor-id
+            loginUser: 'ubuntu'
+            loginUser.privateKeyFile: /path/to/your/privatekey
 
-    jclouds.openstack-nova.auto-generate-keypairs: false
-    jclouds.openstack-nova.auto-create-floating-ips: true
+            jclouds.openstack-nova.auto-generate-keypairs: false
+            jclouds.openstack-nova.auto-create-floating-ips: true
 
-    templateOptions:
-      networks: [ "your-network-id" ]
-      floatingIpPoolNames: [ "your-floatingIp-pool" ]
-      securityGroups: ['your-security-group']
+            templateOptions:
+                networks: [ "your-network-id" ]
+                floatingIpPoolNames: [ "your-floatingIp-pool" ]
+                securityGroups: ['your-security-group']
 
-      # Optional if 'jclouds.openstack-nova.auto-generate-keypairs' is assigned to 'true'
-      keyPairName: "your-keypair"
-```
+                # Optional if 'jclouds.openstack-nova.auto-generate-keypairs' is assigned to 'true'
+                keyPairName: "your-keypair"
 
 This is the same OpenStack location in a format that can be added to your
 `brooklyn.properties` file:
 
-```
-brooklyn.location.named.My\ Openstack=jclouds:openstack-nova:http://x.x.x.x:5000/v2.0/
-brooklyn.location.named.My\ OpenStack.identity=your-tenant:your-username
-brooklyn.location.named.My\ OpenStack.credential=your-password
-brooklyn.location.named.My\ OpenStack.endpoint=http://x.x.x.x:5000/v2.0/
+    brooklyn.location.named.My\ Openstack=jclouds:openstack-nova:http://x.x.x.x:5000/v2.0/
+    brooklyn.location.named.My\ OpenStack.identity=your-tenant:your-username
+    brooklyn.location.named.My\ OpenStack.credential=your-password
+    brooklyn.location.named.My\ OpenStack.endpoint=http://x.x.x.x:5000/v2.0/
 
-brooklyn.location.named.My\ OpenStack.imageId=your-region-name/your-image-id
-brooklyn.location.named.My\ OpenStack.hardwareId=your-region-name/your-flavor-id
-brooklyn.location.named.My\ OpenStack.loginUser=ubuntu
-brooklyn.location.named.My\ OpenStack.loginUser.privateKeyFile=/path/to/your/privatekey
-brooklyn.location.named.My\ OpenStack.openstack-nova.auto-generate-keypairs=false
-brooklyn.location.named.My\ OpenStack.openstack-nova.auto-create-floating-ips=true
+    brooklyn.location.named.My\ OpenStack.imageId=your-region-name/your-image-id
+    brooklyn.location.named.My\ OpenStack.hardwareId=your-region-name/your-flavor-id
+    brooklyn.location.named.My\ OpenStack.loginUser=ubuntu
+    brooklyn.location.named.My\ OpenStack.loginUser.privateKeyFile=/path/to/your/privatekey
+    brooklyn.location.named.My\ OpenStack.openstack-nova.auto-generate-keypairs=false
+    brooklyn.location.named.My\ OpenStack.openstack-nova.auto-create-floating-ips=true
 
-brooklyn.location.named.My\ OpenStack.networks=your-network-id
-brooklyn.location.named.My\ OpenStack.floatingIpPoolNames=your-floatingIp-pool
-brooklyn.location.named.My\ OpenStack.securityGroups=your-security-group
-brooklyn.location.named.My\ OpenStack.keyPair=your-keypair
-```
+    brooklyn.location.named.My\ OpenStack.networks=your-network-id
+    brooklyn.location.named.My\ OpenStack.floatingIpPoolNames=your-floatingIp-pool
+    brooklyn.location.named.My\ OpenStack.securityGroups=your-security-group
+    brooklyn.location.named.My\ OpenStack.keyPair=your-keypair
 
 Chose a value of `your-flavor-id` from one of the defaults, or create your own flavor if
 you have administrator privileges.
@@ -102,17 +98,15 @@ For for more information, see the
 
 The default flavors are:
 
-```
-+-----+-----------+-----------+------+
-| ID  | Name      | Memory_MB | Disk |
-+-----+-----------+-----------+------+
-| 1   | m1.tiny   | 512       | 1    |
-| 2   | m1.small  | 2048      | 20   |
-| 3   | m1.medium | 4096      | 40   |
-| 4   | m1.large  | 8192      | 80   |
-| 5   | m1.xlarge | 16384     | 160  |
-+-----+-----------+-----------+------+
-```
+    +-----+-----------+-----------+------+
+    | ID  | Name      | Memory_MB | Disk |
+    +-----+-----------+-----------+------+
+    | 1   | m1.tiny   | 512       | 1    |
+    | 2   | m1.small  | 2048      | 20   |
+    | 3   | m1.medium | 4096      | 40   |
+    | 4   | m1.large  | 8192      | 80   |
+    | 5   | m1.xlarge | 16384     | 160  |
+    +-----+-----------+-----------+------+
 
 For an even more detailed example location configuration, consult the
 [template properties file](https://brooklyn.apache.org/v/latest/start/brooklyn.properties).
@@ -133,9 +127,9 @@ the current version of jclouds does not yet support.
 If you are having problems deploying to OpenStack, consult your Brooklyn debug log and
 look for the following:
 
-```
-"namespace": "http://docs.openstack.org/compute/ext/fake_xml"
-```
+
+    "namespace": "http://docs.openstack.org/compute/ext/fake_xml"
+
 
 If this appears, perform the following steps as a workaround:
 
@@ -147,23 +141,23 @@ configuration
 
 Here is a simple example template to be used with this workaround:
 
-```
-location:
-  jclouds:openstack-devtest-compute:
-    endpoint: http://x.x.x.x:5000/v2.0/
-    identity: "your-tenant:your-username"
-    credential: your-password
-    templateOptions:
-      networks: [ "your-network-id" ]
-      floatingIpPoolNames: [ "your-floatingIp-pool" ]
-```
+
+    location:
+        jclouds:openstack-devtest-compute:
+            endpoint: http://x.x.x.x:5000/v2.0/
+            identity: "your-tenant:your-username"
+            credential: your-password
+            templateOptions:
+                networks: [ "your-network-id" ]
+                floatingIpPoolNames: [ "your-floatingIp-pool" ]
+
 
 Note that the following values will be set by default when omitted above:
 
-```
-jclouds.keystone.credential-type=passwordCredentials
-jclouds.openstack-nova.auto-generate-keypairs: true
-jclouds.openstack-nova.auto-create-floating-ips: true
-```
+
+    jclouds.keystone.credential-type=passwordCredentials
+    jclouds.openstack-nova.auto-generate-keypairs: true
+    jclouds.openstack-nova.auto-create-floating-ips: true
+
 
 
