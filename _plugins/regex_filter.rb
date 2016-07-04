@@ -26,7 +26,7 @@ module RefactorURL
     if input == nil
       return nil
     end
-    
+
     # generate document id, this will be used for the anchors
     $pid = "id-undefined"
     if currentPage['title'] != nil
@@ -100,12 +100,12 @@ module RefactorURL
             # make an absolute external URL for the link
             if $match.start_with?(prefix[0])
               $notFoundPrefix = false
-              $newLink = site['brooklyn-base-url']+prefix[1]+$match[prefix[0].length, $match.length]
+              $newLink = site['pdf-default-base-url']+prefix[1]+$match[prefix[0].length, $match.length]
             end
           end 
           if $notFoundPrefix
-            puts $match+" not found prefix"
-            $newLink = site['brooklyn-base-url']+"/v/"+site['brooklyn-version']+$match
+            $newLink = site['pdf-default-base-url']+site['pdf-default-versioned-url-subpath']+$match
+            puts "PDF link to "+$match+" in "+currentPage['path']+" has unknown prefix, routing to "+$newLink
           end
         end
       end

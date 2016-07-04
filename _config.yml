@@ -45,13 +45,14 @@ exclude: ['/Gemfile*','/README.md']
 sass:
     sass_dir: style/css
 
+# TODO the 0.9.0 paths must be changed!
 brooklyn-stable-version: 0.9.0
-brooklyn-base-url: https://brooklyn.apache.org
+pdf-default-base-url: http://brooklyn.apache.org
+pdf-default-versioned-url-subpath: /v/0.9.0
 
 pdf-rewrite-prefixes: 
     '/guide' : '/v/0.9.0'
     '/website' : ''
-    '/community' : '/community'
     
 brooklyn-version: 0.10.0-SNAPSHOT # BROOKLYN_VERSION
 brooklyn-snapshot-git-branch: master   # if line above is SNAPSHOT this should point to corresponding git branch (e.g. master, 0.4)
