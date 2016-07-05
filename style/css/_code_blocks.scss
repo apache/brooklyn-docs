@@ -9,7 +9,7 @@
 @mixin code() {
     font-family: Consolas, Lucida Console, Monaco, monospace;
     @include nowrap();
-    font-size: 14px;
+    font-size: 80%;
     /* override color and bg-color on 'code' from bootstrap, and a touch more padding on top since font-size is smaller */
     color: $text_color;
     background-color: $code_bg_color;
