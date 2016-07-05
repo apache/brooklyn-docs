@@ -259,4 +259,15 @@ The above example will create a name such as:
     
 Allowing you to more easily identify your virtual machines.
 
-  
+### More Details on Specific Clouds
+
+Clouds vary in the format of the identity, credential, endpoint, and region.
+Some also have their own idiosyncracies.  More details for configuring some common clouds
+is included below. You may also find these sources helpful:
+
+* The **[template brooklyn.properties]({{ site.path.guide }}/start/brooklyn.properties)** file
+  in the Getting Started guide
+  contains numerous examples of configuring specific clouds,
+  including the format of credentials and options for sometimes-fiddly private clouds.
+* The **[jclouds guides](https://jclouds.apache.org/guides)** describes low-level configuration
+  sometimes required for various clouds.
