@@ -113,7 +113,7 @@ wiring for the sensors, and the effector implementations. In simple cases it may
 to capture the behaviour of the effectors in a simple methods.
 For example deploying a WAR to a cluster can be done as follows:
 
-*This section is not complete. Feel free to [fork]({{site.path.guide}}/dev/code) the docs and lend a hand.*
+*This section is not complete. Feel free to [fork](https://github.com/apache/brooklyn-docs) the docs and lend a hand.*
 
 <!---
 TODO show an effector which recurses across children
