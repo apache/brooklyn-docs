@@ -7,7 +7,7 @@ children:
 ---
 
 This guide describes how Brooklyn entities can be created using the Ansible infrastructure management tool
- ([ansible.com](ansible.com)).
+ ([ansible.com](http://ansible.com)).
 At present Brooklyn provides basic support for Ansible, operating in a 'masterless' mode. 
 Comments on this support and suggestions for further development are welcome.
 
