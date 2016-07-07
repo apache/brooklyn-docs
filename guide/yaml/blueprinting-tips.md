@@ -48,7 +48,7 @@ and to use these as the target for a BYON location.
 Docker containers provide a convenient way to test blueprints (and also to run blueprints in
 production!).
 
-The [Clocker project](www.clocker.io) allows the simple setup of Docker Engine(s), and for Docker
+The [Clocker project](http://www.clocker.io) allows the simple setup of Docker Engine(s), and for Docker
 containers to be used instead of VMs. For testing, this allows each run to start from a fresh 
 container (i.e. no install artifacts from previous runs), while taking advantage of the speed
 of starting containers.

@@ -15,19 +15,19 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging](logging.md)
+* [Logging](logging.html)
 * [Persistence](persistence/)
-* [High availability](high-availability.md)
+* [High availability](high-availability/)
 
 
 ### <a id="prerequisites"></a>Set up the Prerequisites
 
-Check that the server meets the [requirements](requirements.md).
+Check that the server meets the [requirements](requirements.html).
 Then configure the server as follows:
 
 * install Java JRE or JDK (version 7 or later)
-* install an [SSH key]({{ site.path.guide }}/ops/locations/ssh-keys.html), if not available
-* enable [passwordless ssh login]({{ site.path.guide }}/ops/locations/ssh-keys.html)
+* install an [SSH key]({{ site.path.guide }}/ops/locations/index.html#ssh-keys), if not available
+* enable [passwordless ssh login]({{ site.path.guide }}/ops/locations/index.html#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
 * check that the [linux kernel entropy]({{ site.path.website }}/documentation/increase-entropy.html) is sufficient
@@ -66,7 +66,7 @@ Let's setup some paths for easy commands.
 
 ### <a id="configuring-properties"></a>Configuring brooklyn.properties
 
-Set up `brooklyn.properties` as described [here](brooklyn_properties.md):
+Set up `brooklyn.properties` as described [here](brooklyn_properties.html):
 
 * Configure the users who should have access
 * Turn on HTTPS

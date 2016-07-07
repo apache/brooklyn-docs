@@ -7,7 +7,7 @@ children:
 ---
 
 This guide describes how Brooklyn entities can be created using the Salt infrastructure management tool
- ([saltstack.com](saltstack.com)).
+ ([saltstack.com](https://saltstack.com/)).
 At present Brooklyn provides basic support for Salt, operating in a 'masterless' mode. 
 Comments on this support and suggestions for further development are welcome.
 

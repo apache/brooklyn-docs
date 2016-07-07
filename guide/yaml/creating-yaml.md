@@ -25,7 +25,7 @@ Here's a very simple YAML blueprint plan, to explain the structure:
 * The `name` is just for the benefit of us humans.
 
 * The `location` specifies where this should be deployed.
-  If you've [set up passwordless localhost SSH access](../ops/locations/#localhost) 
+  If you've [set up passwordless localhost SSH access]({{ site.path.guide }}/ops/locations/#localhost) 
   you can use `localhost` as above, but if not, just wait ten seconds for the next example.
   
 * The `services` block takes a list of the typed services we want to deploy.
@@ -37,7 +37,7 @@ then in the "Create Application" dialog at the web console
 (usually [http://127.0.0.1:8081/](http://127.0.0.1:8081/), paste the copied YAML into the "Yaml" tab of the dialog and press "Finish". 
 There are several other ways to deploy, including `curl` and via the command-line,
 and you can configure users, https, persistence, and more, 
-as described [in the ops guide](../ops/).
+as described [in the ops guide]({{ site.path.guide }}/ops/).
 
 [![Web Console](web-console-yaml-700.png "YAML via Web Console")](web-console-yaml.png)
 
@@ -57,7 +57,7 @@ Topics to explore next on the topic of YAML blueprints are:
 {% include list-children.html %}
 
 Plenty of examples of blueprints exist in the Brooklyn codebase,
-so another starting point is to [`git clone`]({{ site.path.guide }}/developers/code/index.html) it
+so another starting point is to [`git clone`]({{ site.path.website }}/developers/code/index.html) it
 and search for `*.yaml` files therein.
 
 Brooklyn lived as a Java framework for many years before we felt confident
