@@ -7,7 +7,7 @@ menu_parent: index.md
 
 This guide will walk you through deploying an example 3-tier web application to a public cloud, and demonstrate the autoscaling capabilities of the Brooklyn platform.
 
-An overview of core [Brooklyn concepts](./concept-quickstart.html){:target="_blank"} is available for reference.
+An overview of core [Brooklyn concepts](./concept-quickstart.html) is available for reference.
 
 Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and an install in your own environment (such as your local machine or in your private/public cloud). 
 
@@ -65,7 +65,7 @@ For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on
 RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
 {% if site.brooklyn-version contains 'SNAPSHOT' %}
-This is a snapshot build and no RPM is available, please download [a different version]({{site.path.website}}/download/) or go to [the latest release version](http://brooklyn.apache.org/v/latest/start/running.html) instead.
+This is a snapshot build and no RPM is available, please download [a different version]({{site.path.website}}/download/).
 {% else %}
 Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
 {% endif %}
