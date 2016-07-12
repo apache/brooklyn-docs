@@ -75,6 +75,58 @@ There are many possible reasons for this ssh failure, which include:
 A very useful debug configuration is to set `destroyOnFailure` to false. This will allow ssh failures to
 be more easily investigated.
 
+#### java.security.KeyException when Provisioning VM
+
+The exception `java.security.KeyException` can be thrown when jclouds is attempting the SSL handshake,
+to make cloud API calls. This can happen if the version of nss is older than 3.16 - the nss package
+includes the ssl library.
+
+To fix this on CentOS, run:
+
+{% highlight bash %}
+sudo yum upgrade nss
+{% endhighlight %}
+
+For a discussion of investigating this kind of issue, see this [Backslasher blog](http://blog.backslasher.net/java-ssl-crash.html).
+
+The full stacktrace is shown below:
+
+{% highlight java %}
+Caused by: javax.net.ssl.SSLException: java.security.ProviderException: java.security.KeyException
+	at sun.security.ssl.Alerts.getSSLException(Alerts.java:208)
+	at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1949)
+	at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1906)
+	at sun.security.ssl.SSLSocketImpl.handleException(SSLSocketImpl.java:1889)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1410)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+	at sun.net.www.protocol.http.HttpURLConnection.getOutputStream0(HttpURLConnection.java:1283)
+	at sun.net.www.protocol.http.HttpURLConnection.getOutputStream(HttpURLConnection.java:1258)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getOutputStream(HttpsURLConnectionImpl.java:250)
+	at org.jclouds.http.internal.JavaUrlHttpCommandExecutorService.writePayloadToConnection(JavaUrlHttpCommandExecutorService.java:294)
+	at org.jclouds.http.internal.JavaUrlHttpCommandExecutorService.convert(JavaUrlHttpCommandExecutorService.java:170)
+	at org.jclouds.http.internal.JavaUrlHttpCommandExecutorService.convert(JavaUrlHttpCommandExecutorService.java:64)
+	at org.jclouds.http.internal.BaseHttpCommandExecutorService.invoke(BaseHttpCommandExecutorService.java:95)
+	... 64 more
+Caused by: java.security.ProviderException: java.security.KeyException
+	at sun.security.ec.ECKeyPairGenerator.generateKeyPair(ECKeyPairGenerator.java:147)
+	at java.security.KeyPairGenerator$Delegate.generateKeyPair(KeyPairGenerator.java:703)
+	at sun.security.ssl.ECDHCrypt.<init>(ECDHCrypt.java:77)
+	at sun.security.ssl.ClientHandshaker.serverKeyExchange(ClientHandshaker.java:721)
+	at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:281)
+	at sun.security.ssl.Handshaker.processLoop(Handshaker.java:979)
+	at sun.security.ssl.Handshaker.process_record(Handshaker.java:914)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:1062)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	... 74 more
+Caused by: java.security.KeyException
+	at sun.security.ec.ECKeyPairGenerator.generateECKeyPair(Native Method)
+	at sun.security.ec.ECKeyPairGenerator.generateKeyPair(ECKeyPairGenerator.java:128)
+	... 83 more
+{% endhighlight %}
+
 
 ## Timeout Waiting For Service-Up
 

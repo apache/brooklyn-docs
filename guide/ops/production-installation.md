@@ -31,6 +31,7 @@ Then configure the server as follows:
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
 * check that the [linux kernel entropy]({{ site.path.website }}/documentation/increase-entropy.html) is sufficient
+* ensure external libraries are up-to-date, including `nss` for SSL. 
 
 
 ### <a id="download"></a>Download Apache Brooklyn
