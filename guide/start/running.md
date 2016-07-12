@@ -220,6 +220,8 @@ You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\broo
 The application should then output its log into the console and also `c:\Program Files\brooklyn\apache-brooklyn.debug.log` and `c:\Program Files\brooklyn\apache-brooklyn.info.log`
 
 </div>
+_Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
+Even several minutes before or after the actual time could cause problems._
 </div>
 
 ---

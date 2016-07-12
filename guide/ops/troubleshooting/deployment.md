@@ -30,6 +30,11 @@ means there was some problem obtaining or connecting to the machine.
 
 An error like `... Not authorized to access cloud ...` usually means the wrong identity/credential was used.
 
+AWS requires a X-Amz-Date header which contains the date of the Apache Brooklyn AWS client.
+If the date on the server is wrong, for example several minutes behind you will get Authorization Exception.
+Please be sure that the machine which is running Apache Brooklyn set its clock correctly.
+To set the time on Linux we advice to use the ntp client: `sudo ntpdate pool.ntp.org`.
+
 An error like `Unable to match required VM template constraints` means that a matching image (e.g. AMI in AWS terminology) could not be found. This 
 could be because an incorrect explicit image id was supplied, or because the match-criteria could not
 be satisfied using the given images available in the given cloud. The first time this error is 
