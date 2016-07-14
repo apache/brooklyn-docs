@@ -232,7 +232,7 @@ An Enricher which computes latency in accessing a URL.
 
 - org.apache.brooklyn.enricher.stock.Combiner
 
-Can be used to combine the values of sensors.  This enricher should be instantiated using Enrichers.buider.combineing(..).
+Can be used to combine the values of sensors.  This enricher should be instantiated using Enrichers.buider.combining(..).
 This enricher is only available in Java blueprints and cannot be used in YAML.
 
 
