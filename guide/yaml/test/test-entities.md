@@ -132,6 +132,7 @@ The following conditions are provided by those test entities above that include 
 - `isEqualTo` - asserts that the actual value equals an expected value.
 - `equalTo` - a synonym for `isEqualTo`
 - `equals` - a synonym for `isEqualTo`
+- `notEqual` - asserts that the actual value does not equal the expected value.
 - `matches` - asserts that the actual value matches a [regex pattern](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html?is-external=true), for example `".*hello.*"`.
 - `contains` - asserts that the actual value contains the supplied value
 - `isEmpty` - asserts that the actual value is an empty string
