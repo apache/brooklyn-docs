@@ -174,9 +174,18 @@ For more keys and more detail on the keys below, see
 - Use `dontCreateUser` to have Brooklyn run as the initial `loginUser` (usually `root`),
   without creating any other user.
 
-- A post-provisioning `setup.script` can be specified (as a URL) to run an additional script,
-  before making the `Location` available to entities,
-  optionally also using `setup.script.vars` (set as `key1:value1,key2:value2`)
+- A post-provisioning `setup.script` can be specified to run an additional script, before making the `Location` 
+  available to entities. This may take the form of a URL of the script or a [base64](https://en.wikipedia.org/wiki/Base64) 
+  encoded script with the prefix `data:text/plain;base64,` to denote this. 
+  For example if you wanted to disable a yum repository called `reponame` prior to using the machine, you could use the following command:
+  
+  `sudo yum-config-manager --disable reponame`
+    
+  Once base64 encoded (with a tool such as [this](https://www.base64encode.org/)), plus the prefix, this property would be:
+
+  `setup.script: data:text/plain;base64,c3VkbyB5dW0tY29uZmlnLW1hbmFnZXIgLS1kaXNhYmxlIHJlcG9uYW1l`
+
+  Optionally `setup.script.vars` can also be used to set variables (set as `key1:value1,key2:value2`)
 
 - Use `openIptables: true` to automatically configure `iptables`, to open the TCP ports required by
   the software process. One can alternatively use `stopIptables: true` to entirely stop the
