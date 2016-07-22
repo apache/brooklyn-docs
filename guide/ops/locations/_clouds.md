@@ -175,17 +175,35 @@ For more keys and more detail on the keys below, see
   without creating any other user.
 
 - A post-provisioning `setup.script` can be specified to run an additional script, before making the `Location` 
-  available to entities. This may take the form of a URL of the script or a [base64](https://en.wikipedia.org/wiki/Base64) 
-  encoded script with the prefix `data:text/plain;base64,` to denote this. 
+  available to entities. This may take the form of a URL of a script or a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme).
+  Note that if using a data URI it is usually a good idea to [base64](https://en.wikipedia.org/wiki/Base64) this string to escape problem characters
+  in more complex scripts. The base64 encoded script should then be prefixed with `data:text/plain;base64,` to denote this. 
   For example if you wanted to disable a yum repository called `reponame` prior to using the machine, you could use the following command:
   
   `sudo yum-config-manager --disable reponame`
     
-  Once base64 encoded (with a tool such as [this](https://www.base64encode.org/)), plus the prefix, this property would be:
+  Base64 encoding can be done with a with a tool such as [this](https://www.base64encode.org/) or a linux command such as:
+  
+  `echo "sudo yum-config-manager --disable reponame" | base64`
+  
+  With the base64 prefix this would then look like this:
 
   `setup.script: data:text/plain;base64,c3VkbyB5dW0tY29uZmlnLW1hbmFnZXIgLS1kaXNhYmxlIHJlcG9uYW1l`
 
-  Optionally `setup.script.vars` can also be used to set variables (set as `key1:value1,key2:value2`)
+  The `setup.script` can also take [FreeMarker](http://freemarker.org/) variables in a `setup.script.vars`
+  property. Variables are set in the format `key1:value1,key2:value2` and used in the form `${key1}`. So for the above example:
+  
+  `setup.script.vars: repository:reponame`
+  
+  then
+  
+  `setup.script: data:sudo yum-config-manager --disable ${repository}`
+  
+  or encoded in base64:
+  
+  `setup.script: data:text/plain;base64,c3VkbyB5dW0tY29uZmlnLW1hbmFnZXIgLS1kaXNhYmxlICR7cmVwb3NpdG9yeX0=`
+  
+  This enables the name of the repository to be passed in to the script.
 
 - Use `openIptables: true` to automatically configure `iptables`, to open the TCP ports required by
   the software process. One can alternatively use `stopIptables: true` to entirely stop the
