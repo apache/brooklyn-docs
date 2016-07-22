@@ -170,6 +170,20 @@ The `copy-state` CLI command takes the following arguments:
 * `--transformations` <transformations>
   The local transformations file to be applied to the copy of the data before uploading it.
 
+## CLI Commands for Cleaning Orphaned State
+
+Brooklyn includes a command to clean orphaned state which uses the copy state command
+and removes orphaned locations, enrichers, policies and feeds from the copied state.
+The `clean-orphaned-state` CLI command takes the following arguments:
+
+* `--persistenceDir` <source persistence dir>
+  The directory to read persisted state (or container name if using an object store).
+* `--persistenceLocation` <source persistence location>
+  The location spec for an object store to read persisted state.
+* `--destinationDir` <target persistence dir>
+  The directory to copy persistence data to, with orphaned state removed.
+* `--destinationLocation` <target persistence location>
+  The location spec for an object store to copy data to.
 
 ## Handling Rebind Failures
 
