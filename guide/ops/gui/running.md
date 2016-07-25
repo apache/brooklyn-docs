@@ -38,6 +38,9 @@ INFO  Starting brooklyn web-console on loopback interface because no security co
 INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war
 </pre>
 
+_Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
+Even several minutes before or after the actual time could cause problems._
+
 ## Connect with Browser
 
 Next, open the web console on [http://127.0.0.1:8081](http://127.0.0.1:8081). 
