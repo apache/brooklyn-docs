@@ -68,7 +68,7 @@ tools - the monitoring tool can discover the expected PID, and can execute the
 start or stop commands shown above as necessary.
 
 For example, here is a fragment of a `monitrc` file as used by
-[Monit](http://https://mmonit.com/monit/), for a Brooklyn `.tar.gz` distribution
+[Monit](https://mmonit.com/monit/), for a Brooklyn `.tar.gz` distribution
 unpacked and installed at `/opt/apache-brooklyn`:
 
 {% highlight text %}

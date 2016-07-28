@@ -312,7 +312,7 @@ The script works for most of the Windows images out there version 2008 and later
 
 Please ensure that Brooklyn's changes are compatible with your organisation's security policy.
 
-Check Microsoft Documentation for more information about [Negotiate authenticate mechanism on technet.microsoft.com](https://msdn.microsoft.com/en-us/library/windows/desktop/aa378748\(v=vs.85\).aspx)
+Check Microsoft Documentation for more information about [Negotiate authenticate mechanism on technet.microsoft.com](https://msdn.microsoft.com/en-us/library/windows/desktop/aa378748(v=vs.85).aspx)
 
 Re-authentication also requires that the password credentials are passed in plain text within the
 script. Please be aware that it is normal for script files - and therefore the plaintext password - 
