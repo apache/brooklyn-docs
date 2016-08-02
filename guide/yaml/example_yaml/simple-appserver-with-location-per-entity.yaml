@@ -1,0 +1,8 @@
+name: simple-appserver-with-location-per-entity
+services:
+- type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server
+  location:
+    byon(hosts="192.168.0.18",user="brooklyn",privateKeyFile="~/.ssh/brooklyn.pem")
+- type: org.apache.brooklyn.entity.webapp.jboss.JBoss7Server
+  location:
+    byon(hosts="192.168.0.19",user="brooklyn",privateKeyFile="~/.ssh/brooklyn.pem")
