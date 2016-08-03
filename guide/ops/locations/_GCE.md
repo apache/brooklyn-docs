@@ -82,10 +82,13 @@ For example, for dev/demo purposes an "everything" network could be created that
 || Source IP Ranges            || 0.0.0.0/0                   |
 || Allowed protocols and ports || tcp:0-65535 and udp:0-65535 |
 
-To configure the location to use this, you can include a location configuration option like 
-`networkName: everything`.
+To configure the location to use this, you can include a location configuration option like:
+
+    templateOptions:
+      network: https://www.googleapis.com/compute/v1/projects/<project name>/global/networks/everything
 
 
 ### Entropy
 
 GCE images often have little entropy. One option to work around this is to use `installDevUrandom: true`.
+For more information, see [Increase Entropy]({{ site.path.website }}/documentation/increase-entropy.html).

@@ -30,7 +30,7 @@ although for these you'll supply an `endpoint: https://9.9.9.9:9999/v2.0/`
 (or `client/api/` in the case of CloudStack) instead of the `region`.
 
 
-### "Bring Your Own Nodes" Example
+### "Bring Your Own Nodes" (BYON) Example
 
 You can also specify pre-existing servers to use -- "bring-your-own-nodes".
 The example below shows a pool of machines that will be used by the entities within the 
@@ -78,8 +78,8 @@ locations:
 The rules for precedence when defining a location for an entity are:
 
 * The location defined on that specific entity.
-* If no location, then the first ancestor that defines an explicit location.
-* If still no location, then the location defined at the top-level of the blueprint.
+* If no location is defined, then the first ancestor that defines an explicit location.
+* If still no location is defined, then the location defined at the top-level of the blueprint.
 
 This means, for example, that if you define an explicit location on a cluster then it will be used 
 for all members of that cluster.
@@ -91,12 +91,18 @@ Some entities are written to expect a set of locations. For example, a `DynamicF
 create a member entity in each location that it is given. To supply multiple locations, simply
 use `locations` with a yaml list.
 
-In the example below, it will create a cluster of app-servers in each location:
+In the example below, it will create a cluster of app-servers in each location. One location is
+used for each `DynamicCluster`; all app-servers inside that cluster will obtain a machine from
+that given location.
 
 {% highlight yaml %}
 {% readj example_yaml/fabric-with-multiple-locations.yaml %}
 {% endhighlight %}
 
+The entity hierarchy at runtime will have a `DynamicFabric` with two children, each of type 
+`DynamicCluster` (each running in different locations), each of which initially has three 
+app-servers.
+ 
 For brevity, this example excludes the credentials for aws-ec2. These could either be specificed
 in-line or defined as named locations in the catalog (see below).
 

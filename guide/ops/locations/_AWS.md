@@ -35,7 +35,7 @@ credential management, for example using [Vault](https://www.vaultproject.io/).
 Below are examples of configuration options that use values specific to AWS EC2:
 
 * The `region` is the [AWS region code](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
-  For example, `region: us-east-1`. One can also in-line this value when such as `jclouds:aws-ec2:us-east-1`.
+  For example, `region: us-east-1`. You can in-line the region name using the following format: `jclouds:aws-ec2:us-east-1`.
   A specific availability zone within the region can be specified by including its letter identifier as a suffix. 
   For example, `region: us-east-1a`.
 
@@ -130,10 +130,12 @@ This is covered in the previous section, "Using Subnets".
 
 Security groups are not always deleted by jclouds. This is due to a limitation in AWS (see
 https://issues.apache.org/jira/browse/JCLOUDS-207). In brief, AWS prevents the security group
-being deleted until there are no VMs using it. However, there is eventual consistency for
+from being deleted until there are no VMs using it. However, there is eventual consistency for
 recording which VMs still reference those security groups: after deleting the VM, it can sometimes
 take several minutes before the security group can be deleted. jclouds retries for 3 seconds, but
 does not block for longer.
 
-There is utility written by Cloudsoft for deleting these unused resources:
-http://www.cloudsoftcorp.com/blog/2013/03/tidying-up-after-jclouds.
+Whilst there is eventual consistency for recording which VMs still reference security groups, after deleting a VM, it can sometimes take several minutes before a security group can be deleted
+
+There is utility written by [Cloudsoft](http://www.cloudsoft.io/) for deleting these unused resources:
+[http://blog.abstractvisitorpattern.co.uk/2013/03/tidying-up-after-jclouds.html](http://blog.abstractvisitorpattern.co.uk/2013/03/tidying-up-after-jclouds.html).

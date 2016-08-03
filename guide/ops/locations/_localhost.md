@@ -19,7 +19,8 @@ If you use a passpharse or prefer a different key, these can be configured as fo
 
 
 Alternatively, you can create a specific localhost location through the location wizard tool available within the web console.
-This location will be saved as a [catalog entry]({{ site.path.guide }}/ops/catalog/index.html#locations-in-catalog) for easy reusability.
+This location will be saved as a [catalog entry]({{ site.path.guide }}/ops/catalog/index.html#locations-in-the-catalog) 
+for easy reusability.
 
 
 #### Passwordless Sudo

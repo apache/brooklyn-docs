@@ -19,6 +19,10 @@ For example:
         identity: my-user-name
         credential: 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 
+Users are strongly recommended to use 
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+credential management, for example using [Vault](https://www.vaultproject.io/).
+
 
 ### Common Configuration Options
 

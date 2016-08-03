@@ -17,7 +17,7 @@ Support for OpenStack is provided by Apache jclouds. For more information, see t
 
 The endpoint URI is that of keystone (normally on port 5000).
 
-The identity normally consists of the tenant and username, colons-separated. The credential is 
+The identity normally consists of a colon-separated tenant and username. The credential is 
 the password. For example:
 
     location:
@@ -27,7 +27,12 @@ the password. For example:
         credential: your-password
 
 OpenStack Nova access information can be downloaded from the openstack web interface, for example 
-as an openrc.sh file. This file will normally contain the identity and credential.
+as an openrc.sh file. It is usually available from API Access tab in "Access & Security" section.
+This file will normally contain the identity and credential.
+
+Users are strongly recommended to use 
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+credential management, for example using [Vault](https://www.vaultproject.io/).
 
 
 ### Common Configuration Options
@@ -36,8 +41,8 @@ Below are examples of configuration options that use values specific to OpenStac
 
 * The `imageId` is the id of an image. For example,
   `imageId: RegionOne/08086159-8b0b-4970-b332-a7a929ee601f`.
-  These ids can be found from the the CLI or the web-console, for example in IBM Blue Box, 
-  the URL is https://cloudsoft2-lon.openstack.blueboxgrid.com/project/images/.
+  These ids can be found from the the CLI or the web-console, for example in IBM Blue Box London, 
+  the URL is https://tenant-region.openstack.blueboxgrid.com/project/images/.
 
 * The `hardwareId` is the [flavor id](http://docs.openstack.org/admin-guide/compute-flavors.html).
   For example `hardwareId: RegionOne/1`. These ids can be found from the the CLI or the web-console,
@@ -162,20 +167,22 @@ is inferred from the image metadata, but if no (or the wrong) login user is spec
 default to root. The correct login user can be specified using the configuration option `loginUser`.
 For example, `loginUser: ubuntu`.
 
-The use of the wrong login user can also result in the obscure error shown below, caused by 
+The use of the wrong login user can also result in the obscure message, caused by 
 an unexpected response saying to use a different user. For more technical information, see 
-this [sshj github issue](https://github.com/hierynomus/sshj/issues/75):
+this [sshj github issue](https://github.com/hierynomus/sshj/issues/75). The message is:
 
     Received message too long 1349281121
 
 
-#### I Want to Use my Own KeyPair
+#### I Want to Use My Own KeyPair
 
 By default, jclouds will auto-generate a new [key pair](http://docs.openstack.org/user-guide/cli_nova_configure_access_security_for_instances.html)
 for the VM. This key pair will be deleted automatically when the VM is deleted.
 
 Alternatively, you can use a pre-existing key pair. If so, you must also specify the corresponding
-private key (pem file, or data) to be used for the initial login. For example:
+private key (pem file, or data) to be used for the initial login. The name used in the `keyPair` 
+configuration must match the name of a key pair that has already been added in OpenStack.
+For example:
    
     location:
       jclouds:clouds:openstack-nova:

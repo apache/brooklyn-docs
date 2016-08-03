@@ -1,24 +1,28 @@
 ---
-section: Openstack
-title: Openstack
+section: CloudStack
+title: Apache CloudStack
 section_type: inline
 section_position: 6
 ---
 
-## CloudStack
+## Apache CloudStack
 
 ### Connection Details
 
 The endpoint URI will normally have the suffix `/client/api/`.
 
 The identity is the "api key" and the credential is the "secret key". These can be generated in 
-the cloudstack gui: under accounts, select "view users", then "generate key".
+the CloudStack gui: under accounts, select "view users", then "generate key".
 
     location:
       jclouds:cloudstack:
         endpoint: https://cloud.acme.com/client/api
         identity: abcdefghijklmnopqrstuvwxyz01234567890-abcdefghijklmnopqrstuvwxyz01234567890-abcdefghij
         credential: mycred-abcdefghijklmnopqrstuvwxyz01234567890-abcdefghijklmnopqrstuvwxyz01234567890-abc
+
+Users are strongly recommended to use 
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+credential management, for example using [Vault](https://www.vaultproject.io/).
 
 
 ### Common Configuration Options
@@ -46,7 +50,6 @@ The configuration below uses a pre-existing key pair:
     location:
       jclouds:cloudstack:
         ...
-        jclouds.openstack-nova.auto-generate-keypairs: false
         loginUser: root
         loginUser.privateKeyFile: /path/to/keypair.pem
         keyPair: my-keypair
@@ -54,7 +57,7 @@ The configuration below uses a pre-existing key pair:
 
 ### Using Pre-existing Security Groups
 
-To specify existing security groups, their ids must be used rather than their names (note this
+To specify existing security groups, their IDs must be used rather than their names (note this
 differs from the configuration on other clouds!).
  
 The configuration below uses a pre-existing security group:
@@ -75,11 +78,11 @@ parlance. To give some consistency across different clouds, the configuration op
 `autoAssignFloatingIp`. For example, `autoAssignFloatingIp: false`.
 
 
-### Cloudmonkey CLI
+### CloudMonkey CLI
 
-The [CloudStack Cloudmonkey CLI](https://cwiki.apache.org/confluence/display/CLOUDSTACK/CloudStack+cloudmonkey+CLI)
-is a very useful tool for validating that credentials are correct, and for querying the API to find the correct
-zone ids etc.
+The [CloudStack CloudMonkey CLI](https://cwiki.apache.org/confluence/display/CLOUDSTACK/CloudStack+cloudmonkey+CLI)
+is a very useful tool. It gives is an easy way to validate that credentials are correct, and to query  
+the API to find the correct zone IDs etc.
 
 Useful commands include:
 
@@ -89,10 +92,12 @@ Useful commands include:
     # for finding the ids of the networks.
     cloudmonkey api listNetworks | grep -E "id =|name =|========="
 
+
 ### CloudStack Troubleshooting
 
 These troubleshooting tips are more geared towards problems encountered in old test/dev 
-CloudPlatform environment.
+CloudStack environment.
+
 
 #### Resource Garbage Collection Issues
 
@@ -101,16 +106,16 @@ VMs or allocating IP addresses (May respond with this error message:
 `errorCode=INTERNAL_ERROR, errorText=Job failed due to exception Unable to create a deployment for VM`). 
 There are two options worth checking it to enforce clearing up the zombie resources:
 
-* Goto the Accounts tab in the webconsole and tap on the Update Resource Count button.
+* Go to the Accounts tab in the webconsole and tap on the Update Resource Count button.
 * Restart the VPC in question from the Network tab.
 
 
 #### Releasing Allocated Public IP Addresses
 
-Releasing allocated Public IP from the web console did not free up the resources. Instead 
-Cloudmonkey can be used to dissociate IPs and expunge VMs.
+Releasing an allocated Public IP from the web console did not free up the resources. Instead 
+CloudMonkey can be used to dissociate IPs and expunge VMs.
 
-Here is a cloudmonkey script to dissociate any zombie IPs:
+Here is a CloudMonkey script to dissociate any zombie IPs:
 
     cloudmonkey set display json;
     cloudmonkey api listPublicIpAddresses | grep '"id":' > ips.txt; 
@@ -123,13 +128,13 @@ Here is a cloudmonkey script to dissociate any zombie IPs:
 
 #### Restarting VPCs
 
-Errors have been encountered when a zone failed to provision new VMs, giving errors like:
+Errors have been encountered when a zone failed to provision new VMs, with messages like:
 
     Job failed due to exception Resource [Host:15] is unreachable: Host 15: Unable to start instance due to null
 
 The workaround was to restart the VPC networks:
 
-* Log into the CloudPlatform web-console.
+* Log into the CloudStack web-console.
 * Go to Network -> VPC (from the "select view")
 * For each of the VPCs, click on the "+" in the "quickview" column, and invoke "restart VPC".
 
