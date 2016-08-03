@@ -58,6 +58,9 @@ ulimit -a -u adalovelace
 
 Of particular interest is the limit for "open files".
 
+See [Increase System Resource Limits]({{ site.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) 
+for more information.
+
 
 #### Disk Space
 
@@ -102,7 +105,7 @@ netstat -an | grep ESTABLISHED | wc -l
 
 A lack of entropy can cause random number generation to be extremely slow. This can cause
 tasks like ssh to also be extremely slow. See 
-[linux kernel entropy]({{ site.path.website }}/documentation/increase-entropy.html)
+[linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html)
 for details of how to work around this.
 
 
