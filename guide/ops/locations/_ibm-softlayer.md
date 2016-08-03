@@ -7,6 +7,38 @@ section_position: 5
 
 ## IBM SoftLayer
 
+### Credentials
+
+Credentials can be obtained from the Softlayer API, under "administrative -> user administration -> api-access".
+
+For example:
+
+    location:
+      jclouds:softlayer:
+        region: ams01
+        identity: my-user-name
+        credential: 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+
+Users are strongly recommended to use 
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+credential management, for example using [Vault](https://www.vaultproject.io/).
+
+
+### Common Configuration Options
+
+Below are examples of configuration options that use values specific to Softlayer:
+
+* The `region` is the [Softlayer datacenter](http://www.softlayer.com/data-centers).
+  For example, `region: dal05`.
+
+* The `hardwareId` is an auto-generated combination of the hardware configuration options.
+  This is because there is no concept of hardwareId or hardware profile names in Softlayer. 
+  An example value is `hardwareId: "cpu=1,memory=1024,disk=25,type=LOCAL"`.
+
+* The `imageId` is the [Image template](https://knowledgelayer.softlayer.com/learning/introduction-image-templates).
+  For example, `imageId: CENTOS_6_64`.
+
+
 ### VLAN Selection
 
 SoftLayer may provision VMs in different VLANs, even within the same region.

@@ -19,21 +19,35 @@ and [AWS IAM instructions](http://docs.aws.amazon.com/IAM/latest/UserGuide/Manag
 
 An example of the expected format is shown below:
 
-    brooklyn.location.jclouds.aws-ec2.identity=ABCDEFGHIJKLMNOPQRST
-    brooklyn.location.jclouds.aws-ec2.credential=abcdefghijklmnopqrstu+vwxyzabcdefghijklm
+    location:
+      jclouds:aws-ec2:
+        region: us-east-1
+        identity: ABCDEFGHIJKLMNOPQRST
+        credential: abcdefghijklmnopqrstu+vwxyzabcdefghijklm
+
+Users are strongly recommended to use 
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+credential management, for example using [Vault](https://www.vaultproject.io/).
 
 
-### Tidying up after jclouds
+### Common Configuration Options
 
-Security groups are not always deleted by jclouds. This is due to a limitation in AWS (see
-https://issues.apache.org/jira/browse/JCLOUDS-207). In brief, AWS prevents the security group
-being deleted until there are no VMs using it. However, there is eventual consistency for
-recording which VMs still reference those security groups: after deleting the VM, it can sometimes
-take several minutes before the security group can be deleted. jclouds retries for 3 seconds, but
-does not block for longer.
+Below are examples of configuration options that use values specific to AWS EC2:
 
-There is utility written by Cloudsoft for deleting these unused resources:
-http://www.cloudsoftcorp.com/blog/2013/03/tidying-up-after-jclouds.
+* The `region` is the [AWS region code](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
+  For example, `region: us-east-1`. You can in-line the region name using the following format: `jclouds:aws-ec2:us-east-1`.
+  A specific availability zone within the region can be specified by including its letter identifier as a suffix. 
+  For example, `region: us-east-1a`.
+
+* The `hardwareId` is the [instance type](https://aws.amazon.com/ec2/instance-types/). For example,
+  `hardwareId: m4.large`.
+
+* The `imageId` is the region-specific [AMI id](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
+  For example, `imageId: us-east-1/ami-05ebd06c`.
+
+* The `securityGroups` option takes one or more names of pre-existing 
+  [security groups](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
+  For example, `securityGroups: mygroup1` or `securityGroups: [ mygroup1, mygroup2 ]`.
 
 
 ### Using Subnets and Security Groups
@@ -111,3 +125,17 @@ You can then deploy blueprints to the subnet, allowing VPC hardware instance typ
 by specifying the subnet ID as the `networkName` in your YAML blueprint.
 This is covered in the previous section, "Using Subnets".
 
+
+### Tidying up after jclouds
+
+Security groups are not always deleted by jclouds. This is due to a limitation in AWS (see
+https://issues.apache.org/jira/browse/JCLOUDS-207). In brief, AWS prevents the security group
+from being deleted until there are no VMs using it. However, there is eventual consistency for
+recording which VMs still reference those security groups: after deleting the VM, it can sometimes
+take several minutes before the security group can be deleted. jclouds retries for 3 seconds, but
+does not block for longer.
+
+Whilst there is eventual consistency for recording which VMs still reference security groups, after deleting a VM, it can sometimes take several minutes before a security group can be deleted
+
+There is utility written by [Cloudsoft](http://www.cloudsoft.io/) for deleting these unused resources:
+[http://blog.abstractvisitorpattern.co.uk/2013/03/tidying-up-after-jclouds.html](http://blog.abstractvisitorpattern.co.uk/2013/03/tidying-up-after-jclouds.html).
