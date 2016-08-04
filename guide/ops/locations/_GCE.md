@@ -91,4 +91,4 @@ To configure the location to use this, you can include a location configuration 
 ### Entropy
 
 GCE images often have little entropy. One option to work around this is to use `installDevUrandom: true`.
-For more information, see [Increase Entropy]({{ site.path.website }}/documentation/increase-entropy.html).
+For more information, see [Linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html).

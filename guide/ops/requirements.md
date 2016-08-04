@@ -110,4 +110,9 @@ It is normally recommended that Brooklyn run as a non-root user with keys instal
 
 ### Linux Kernel Entropy
 
-Check that the [linux kernel entropy]({{ site.path.website }}/documentation/increase-entropy.html) is sufficient.
+Check that the [linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient.
+
+
+### System Resource Limits
+
+Check that the [ulimit values]({{ site.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high.
