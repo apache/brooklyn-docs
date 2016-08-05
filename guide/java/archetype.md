@@ -61,19 +61,34 @@ $ mvn clean install
 The build will produce an OSGi bundle in `target/autobrick-0.1.0-SNAPSHOT.jar`, suitable for 
 use in the [Brooklyn catalog]({{ site.path.guide }}/ops/catalog/) (using `brooklyn.libraries`).
 
-The project comes with a `sample.bom` file, located in `src/test/resources`. You will first have 
-to copy the target jar to a suitable location, and update the URL in `sample.bom` to point at that 
-jar.
+To use this in your Brooklyn catalog you will first have to copy the target jar to a suitable location. 
+For developing/testing purposes storing on the local filesystem is fine. 
+For production use, we recommend uploading to a remote maven repository or similar.
 
-The command below will use the REST api to add this to the catalog of a running Brooklyn instance:
+Once your jar is in a suitable location the next step is to add a new catalog item to Brooklyn. 
+The project comes with a `catalog.bom` file, located in `src/main/resources`. 
+Modify this file by adding a 'brooklyn.libraries' statement to the bom pointing to the jar. 
+For example:
 
-    curl -u admin:pa55w0rd http://127.0.0.1:8081/v1/catalog --data-binary @src/test/resources/sample.bom
+{% highlight yaml %}
+brooklyn.catalog:
+    brooklyn.libraries:
+    - file:///path/to/jar/autobrick-0.1.0-SNAPSHOT.jar     
+    itemType: entity
+    items:
+    - id: com.acme.MySample
+      item:
+        type: com.acme.MySample
+{% endhighlight %}
 
-The YAML blueprint below shows an example usage of this blueprint:
+The command below will use the CLI to add this to the catalog of a running Brooklyn instance:
 
-    name: my sample
-    services:
-    - type: com.acme.MySampleInCatalog:1.0
+{% highlight bash %}
+    br add-catalog src/main/resources/catalog.bom
+{% endhighlight %}
+
+After running that command the entity will have been added to your catalog and can be used
+in the same way as regular Brooklyn entities.
 
 
 ### Testing Entities
