@@ -28,7 +28,7 @@ There are three main consumers of disk space:
   the `lib` directory. Note that Brooklyn requires that Java is installed which
   you may have to consider when calculating disk space requirements.
 * **Persisted state**: when using [Persistence](persistence/index.html) -- which
-  is a prerequisite for [High Availability](high-availability.html) -- Brooklyn
+  is a prerequisite for [High Availability](high-availability) -- Brooklyn
   will save data to a store location. Items in the persisted state include
   metadata about the Brooklyn servers, catalog items, and metadata about all
   running applications and entities.

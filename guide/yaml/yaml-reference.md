@@ -20,7 +20,7 @@ defining types:
 
 * `com.acme.brooklyn.package.JavaEntityClass`
 * `java:com.acme.brooklyn.package.JavaEntityClass`
-* `java-entity-class` (where this has been added to the [catalog](../ops/catalog/))
+* `java-entity-class` (where this has been added to the [catalog]({{ site.path.guide }}/ops/catalog/))
 
 A reference of some of the common service `type` instances used is included in a section below.
 
