@@ -10,6 +10,7 @@ To install Apache Brooklyn on a production server:
 1. [Set up the prerequisites](#prerequisites)
 1. [Download Apache Brooklyn](#download)
 1. [Configuring brooklyn.properties](#configuring-properties)
+1. [Configuring Karaf Security](#configuring-karaf-security)
 1. [Configuring default.catalog.bom](#configuring-catalog)
 1. [Test the installation](#confirm)
 
@@ -81,6 +82,13 @@ It may be useful to use the following script to install an initial `brooklyn.pro
 % chmod 600 ~/.brooklyn/brooklyn.properties
 {% endhighlight %}
 
+### <a id="configuring-karaf-security"></a>Configuring Karaf Security
+
+Out of the box, Apache Brooklyn includes the default Karaf security configuration.
+This configuration is used to manage connections to the ssh port of Karaf
+(which is available to localhost connections only).
+It is recommended that you update the credentials as detailed in the
+[Karaf Security](https://karaf.apache.org/manual/latest/security#_users_groups_roles_and_passwords) page.
 
 ### <a id="configuring-catalog"></a>Configuring the Catalog
 
