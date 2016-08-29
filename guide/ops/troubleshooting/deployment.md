@@ -143,3 +143,25 @@ start tasks are completed).
 
 See the [overview](overview.html) for where to find additional information, especially the section on
 "Entity's Error Status".
+
+## Invalid packet error
+
+If you receive an error message similar to the one below when provisioning a Centos VM, you can workaround the issue by explicitly setting the user that AMP should use to login to the VM.
+
+`error acquiring SFTPClient() (out of retries - max 50)
+Invalid packet: indicated length too large
+java.lang.IllegalStateException
+Invalid packet: indicated length too large` 
+
+An example of how to explicitly set the user is shown below (when defining a Location) by using 'loginUser': 
+
+{% highlight yaml %}
+brooklyn.locations:
+- type: jclouds:aws-ec2
+  brooklyn.config:
+    displayName: aws-us-east-1
+    region: us-east-1
+    identity: <add>
+    credential: <add>
+    loginUser: centos
+{% endhighlight %}
