@@ -3,6 +3,7 @@ title: Troubleshooting
 layout: website-normal
 children:
 - { path: overview.md, title: Overview }
+- { path: web-console-issues.md, title: Web Console Issues }
 - { path: deployment.md, title: Deployment }
 - { path: connectivity.md, title: Server Connectivity }
 - { path: slow-unresponsive.md, title: Brooklyn Slow or Unresponsive }
