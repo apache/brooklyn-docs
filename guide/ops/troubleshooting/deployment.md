@@ -16,11 +16,20 @@ brackets.
 The error `Unrecognized application blueprint format: no services defined` means that the `services:`
 section is missing.
 
-An error like `Deployment plan item Service[name=<null>,description=<null>,serviceType=com.acme.Foo,characteristics=[],customAttributes={}] cannot be matched` means that the given entity type (in this case com.acme.Foo) is not in the catalog or on the classpath.
+An error like the one shown below means that the given entity type (in this case com.acme.Foo) is not in the catalog or on the classpath:
 
-An error like `Illegal parameter for 'location' (aws-ec3); not resolvable: java.util.NoSuchElementException: Unknown location 'aws-ec3': either this location is not recognised or there is a problem with location resolver configuration` means that the given location (in this case aws-ec3) 
-was unknown. This means it does not match any of the named locations in brooklyn.properties, nor any of the
-clouds enabled in the jclouds support, nor any of the locations added dynamically through the catalog API.
+{% highlight bash %}
+Deployment plan item Service[name=<null>,description=<null>,serviceType=com.acme.Foo,characteristics=[],customAttributes={}] cannot be matched
+{% endhighlight %}
+
+
+An error like the one shown below means that the given location (in this case aws-ec3) was unknown:
+
+{% highlight bash %}
+Illegal parameter for 'location' (aws-ec3); not resolvable: java.util.NoSuchElementException: Unknown location 'aws-ec3': either this location is not recognised or there is a problem with location resolver configuration
+{% endhighlight %}
+
+This means it does not match any of the named locations in brooklyn.properties, nor any of the clouds enabled in the jclouds support, nor any of the locations added dynamically through the catalog API.
 
 
 ## VM Provisioning Failures
@@ -143,3 +152,29 @@ start tasks are completed).
 
 See the [overview](overview.html) for where to find additional information, especially the section on
 "Entity's Error Status".
+
+## Invalid packet error
+
+If you receive an error message similar to the one below when provisioning a VM, it means that the wrong username is being used for ssh'ing to the machine. The "invalid packet" is because a response such as "Please login as the ubuntu user rather than root user." is being sent back.
+
+You can workaround the issue by explicitly setting the user that AMP should use to login to the VM  (typically the OS default user).
+
+{% highlight bash %}
+error acquiring SFTPClient() (out of retries - max 50)
+Invalid packet: indicated length too large
+java.lang.IllegalStateException
+Invalid packet: indicated length too large
+{% endhighlight %}
+
+An example of how to explicitly set the user is shown below (when defining a Location) by using 'loginUser': 
+
+{% highlight yaml %}
+brooklyn.locations:
+- type: jclouds:aws-ec2
+  brooklyn.config:
+    displayName: aws-us-east-1
+    region: us-east-1
+    identity: <add>
+    credential: <add>
+    loginUser: centos
+{% endhighlight %}
