@@ -40,9 +40,12 @@ means there was some problem obtaining or connecting to the machine.
 An error like `... Not authorized to access cloud ...` usually means the wrong identity/credential was used.
 
 AWS requires a X-Amz-Date header which contains the date of the Apache Brooklyn AWS client.
-If the date on the server is wrong, for example several minutes behind you will get Authorization Exception.
-Please be sure that the machine which is running Apache Brooklyn set its clock correctly.
-To set the time on Linux we advice to use the ntp client: `sudo ntpdate pool.ntp.org`.
+If the date on the server is wrong, for example several minutes behind you will get an 
+Authorization Exception. This is to prevent replay attacks. Please be sure to set the clock 
+correctly on the machine running Apache Brooklyn. To set the time on Linux you can use the ntp 
+client (e.g. `sudo ntpdate pool.ntp.org`). We advise running the 
+[ntp daemon](http://www.tldp.org/LDP/sag/html/basic-ntp-config.html) so that the clock is kept 
+continually in sync.
 
 An error like `Unable to match required VM template constraints` means that a matching image (e.g. AMI in AWS terminology) could not be found. This 
 could be because an incorrect explicit image id was supplied, or because the match-criteria could not
