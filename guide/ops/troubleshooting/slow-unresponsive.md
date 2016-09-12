@@ -156,15 +156,15 @@ appropriate for a production server.
 
 If the Brooklyn Server was originally run to allow a remote debugger to connect (strongly 
 discouraged in production!), then this provides a convenient way to investigate why Brooklyn
-is being slow or unresonsive. See the Debugging Tips in the 
-tip [Debugging Remote Brooklyn][({{ site.path.guide }}/dev/tips/debugging-remote-brooklyn.html)
+is being slow or unresponsive. See the Debugging Tips in the 
+tip [Debugging Remote Brooklyn]({{ site.path.guide }}/dev/tips/debugging-remote-brooklyn.html)
 and the [IDE docs]({{ site.path.guide }}/dev/env/ide/) for more information.
 
 
 ## Log Files
 
 Apache Brooklyn will by default create brooklyn.info.log and brooklyn.debug.log files. See the
-[Logging](({{ site.path.guide }}/ops/logging.html) docs for more information.
+[Logging]({{ site.path.guide }}/ops/logging.html) docs for more information.
 
 The following are useful log messages to search for (e.g. using `grep`). Note the wording of
 these messages (or their very presence) may change in future version of Brooklyn. 

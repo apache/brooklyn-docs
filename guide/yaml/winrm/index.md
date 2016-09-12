@@ -70,7 +70,7 @@ A Sample Blueprint
 
 Creating a Windows VM is done using the `org.apache.brooklyn.entity.software.base.VanillaWindowsProcess` entity type. This is very similar
 to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead of Linux. We suggest you read the
-[documentation for VanillaSoftwareProcess](../custom-entities.html#vanilla-software-using-bash) to find out what you
+[documentation for VanillaSoftwareProcess]({{ site.path.guide }}/yaml/custom-entities.html#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
 Entity authors are strongly encouraged to write Windows Powershell or Batch scripts as separate 
@@ -127,7 +127,7 @@ Brooklyn source code]({{ site.brooklyn.url.git }}/software/database/src/main/res
 Tips and Tricks
 ---------------
 
-The best practices for other entities (e.g. using [VanillaSoftwareProcess](../custom-entities.html#vanilla-software-using-bash))
+The best practices for other entities (e.g. using [VanillaSoftwareProcess]({{ site.path.guide }}/yaml/custom-entities.html#vanilla-software-using-bash))
 apply for WinRM as well.
 
 ### Execution Phases
