@@ -34,6 +34,7 @@ Then configure the server as follows:
 * check that the [linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient
 * check that the [ulimit values]({{ site.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high
 * ensure external libraries are up-to-date, including `nss` for SSL. 
+* ensure the time is continually accurate, ideally by running a service like the [ntp daemon](http://www.ntp.org/).
 
 
 ### <a id="download"></a>Download Apache Brooklyn
