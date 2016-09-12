@@ -239,4 +239,4 @@ This enricher is only available in Java blueprints and cannot be used in YAML.
 Next: Writing a Policy
 ---------------------------
 
-To write a policy, see the section on [Writing a Policy](policy.html).
+To write a policy, see the section on [Writing a Policy]({{ site.path.guide }}/java/policy.html).

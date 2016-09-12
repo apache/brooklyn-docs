@@ -137,9 +137,9 @@ Extract this zip file to a directory on your computer such as `c:\Program Files\
 It is not necessary at this time, but depending on what you are going to do, 
 you may wish to set up other configuration options first:
  
-* [Security](../ops/brooklyn_properties.html)
-* [Persistence](../ops/persistence/)
-* [Cloud credentials](../ops/locations/)
+* [Security]({{ site.path.guide }}/ops/brooklyn_properties.html)
+* [Persistence]({{ site.path.guide }}/ops/persistence/)
+* [Cloud credentials]({{ site.path.guide }}/ops/locations/)
 
 ## Launch Apache Brooklyn
 
@@ -246,7 +246,7 @@ using the most appropriate link for your OS:
 * [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
 {% endif %}
 
-For details on the CLI, see the [Client CLI Reference](../ops/cli/) page. 
+For details on the CLI, see the [Client CLI Reference]({{ site.path.guide }}/ops/cli/) page. 
 
 
 ## Next

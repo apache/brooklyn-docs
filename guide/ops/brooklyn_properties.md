@@ -15,7 +15,7 @@ children:
 The file `~/.brooklyn/brooklyn.properties` is read when Brooklyn starts
 to load server configuration values.
 A different properties file can be specified either additionally or instead
-through [CLI options](server-cli-reference.html).
+through [CLI options]({{ site.path.guide }}/ops/server-cli-reference.html).
 
 A template [brooklyn.properties]({{brooklyn_properties_url_path}}) file is available,
 with abundant comments.
@@ -76,7 +76,7 @@ example.property=$brooklyn:literal("$brooklyn:myexample")
 
 ## Locations
 
-Information on defining locations in the `brooklyn.properties` file is available [here](locations/).
+Information on defining locations in the `brooklyn.properties` file is available [here]({{ site.path.guide }}/ops/locations/).
 
 
 ## Java

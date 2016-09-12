@@ -402,7 +402,7 @@ on the Microsoft TechNet site.
 Troubleshooting
 ---------------
 
-Much of the [operations troubleshooting guide](../../ops/troubleshooting/) is applicable for Windows blueprints.  
+Much of the [operations troubleshooting guide]({{ site.path.guide }}/ops/troubleshooting/) is applicable for Windows blueprints.  
 
 ### User metadata service requirement
 
