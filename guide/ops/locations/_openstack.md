@@ -242,27 +242,19 @@ For example, try following [these jclouds instructions](https://github.com/jclou
 
 #### jclouds Namespace Issue
 
-A change to Nova's API resulted in all extensions having the same "fake" namespace which
-the current version of jclouds does not yet support.
+A change to Nova's API (in the Mitaka release) resulted in all extensions having the same "fake" 
+namespace which the current version of jclouds does not yet support.
 
 If you are having problems deploying to OpenStack, consult your Brooklyn debug log and
 look for the following:
 
     "namespace": "http://docs.openstack.org/compute/ext/fake_xml"
 
-
-If this appears, perform the following steps as a workaround:
-
-* Generate a patch JAR `openstack-devtest-compute-1.9.2.jar`
-by building: https://github.com/cloudsoft/jclouds-openstack-devtest
-* Copy the patch JAR into $BROOKLYN_HOME/lib/patch
-* Change `jclouds:openstack-nova` to `jclouds:openstack-devtest-compute` in your location
-configuration
-
-Here is a simple example template to be used with this workaround:
+If you already have `jclouds:openstack-mitaka-nova`, then try using this instead of the vanilla
+`jclouds:openstack-nova`. For example:
 
     location:
-        jclouds:openstack-devtest-compute:
+        jclouds:openstack-mitaka-nova:
             endpoint: http://x.x.x.x:5000/v2.0/
             identity: "your-tenant:your-username"
             credential: your-password
@@ -270,12 +262,16 @@ Here is a simple example template to be used with this workaround:
                 networks: [ "your-network-id" ]
                 floatingIpPoolNames: [ "your-floatingIp-pool" ]
 
-
 Note that the following values will be set by default when omitted above:
 
     jclouds.keystone.credential-type=passwordCredentials
     jclouds.openstack-nova.auto-generate-keypairs: true
     jclouds.openstack-nova.auto-create-floating-ips: true
 
+If you do not have `openstack-mitaka-nova`, you can build and install it using the following steps:
 
-
+* Generate a JAR `openstack-mitaka-nova-1.9.3-cloudsoft.20160831.jar`
+  by building: https://github.com/cloudsoft/jclouds-openstack-mitaka-nova
+* If using Karaf, install this bundle (e.g. `bundle:install mvn:io.cloudsoft.jclouds.api/openstack-mitaka-nova/1.9.3-cloudsoft.20160831`),
+  and start it (e.g. `bundle:start openstack-mitaka-nova`).
+* Or if using the old-style main, copy the jar into the `lib/dropins` directory and retart.
