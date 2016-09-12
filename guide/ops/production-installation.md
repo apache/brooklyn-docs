@@ -26,7 +26,7 @@ Check that the server meets the [requirements](requirements.html).
 Then configure the server as follows:
 
 * install Java JRE or JDK (version 7 or later)
-* install an [SSH key]({{ site.path.guide }}/ops/locations#ssh-keys), if not available
+* install an [SSH key]({{ site.path.guide }}/ops/locations/index.html#ssh-keys), if not available
 * if the "localhost" location will be used, enable [passwordless ssh login]({{ site.path.guide }}/ops/locations/index.html#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
