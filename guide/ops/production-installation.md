@@ -16,7 +16,7 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging](logging.html)
+* [Logging]({{ site.path.guide }}/ops/logging.html)
 * [Persistence](persistence/)
 * [High availability](high-availability/)
 

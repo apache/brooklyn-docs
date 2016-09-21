@@ -14,8 +14,6 @@ children:
 
 The file `~/.brooklyn/brooklyn.properties` is read when Brooklyn starts
 to load server configuration values.
-A different properties file can be specified either additionally or instead
-through [CLI options]({{ site.path.guide }}/ops/server-cli-reference.html).
 
 A template [brooklyn.properties]({{brooklyn_properties_url_path}}) file is available,
 with abundant comments.
@@ -57,7 +55,7 @@ More information, including setting up a certificate, is described [further belo
 Values in `brooklyn.properties` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
-This allows [externalized configuration](externalized-configuration.html) to be used from 
+This allows [externalized configuration]({{ site.path.guide}}/ops/externalized-configuration.html) to be used from 
 brooklyn.properties. For example:
 
 {% highlight properties %}

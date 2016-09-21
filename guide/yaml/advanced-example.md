@@ -43,7 +43,7 @@ After the application has been deployed, you can ensure it is working as expecte
 * You can also use the Elasticsearch REST API to explore further. The Elasticsearch Cluster entity has a `urls.http.list` sensor. Using a host:port from that list you will be able to access the REST API. The following URL will give you the state of the cluster `http://<host:port>/_cluster/health?pretty=true`. As you can see the `number_of_nodes` is currently 2, indicating that the Elasticsearch nodes are communicating with each other.
 
 ### Interesting Feature Spotlight
-We will mainly focus on the Elasticsearch blueprint, and will be clear when another blueprint is being discussed. This blueprint describes a cluster of Elasticsearch nodes. Clustering is a useful technique that is explained in more depth [here](../clusters.html).
+We will mainly focus on the Elasticsearch blueprint, and will be clear when another blueprint is being discussed. This blueprint describes a cluster of Elasticsearch nodes. Clustering is a useful technique that is explained in more depth [here]({{site.path.guide}}/yaml/clusters.html).
 
 #### Provisioning Properties
 Our Elasticsearch blueprint has a few requirements of the location in which it is run. Firstly, it must be run on an Ubuntu machine as the example has been written specifically for this OS. Secondly, two ports must opened to ensure that the entities can be accessed from the outside world. Both of these requirements are configured via provisioning.properties as follows:

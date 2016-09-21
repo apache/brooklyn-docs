@@ -41,7 +41,7 @@ such as for inheriting configuration from a parent entity.
 When defining an entity in the catalog, it can include configuration values like any other 
 blueprint. It can also explicitly declare config keys. For details of how to write and add
 catalog items, see [Catalog]({{ site.path.guide }}/ops/catalog/). For more details of 
-declaring config keys, see the section ["Declaring New Config Keys" in Custom Entities](custom-entities.html).
+declaring config keys, see the [Custom Entities]({{ site.path.guide }}/yaml/custom-entities.html#declaring-new-config-keys) page.
 
 The example below illustrates the principles:
 
