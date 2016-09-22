@@ -23,7 +23,7 @@ cd apache-brooklyn-{{ site.brooklyn-version }}
 
 ## Running
 
-Start the instance using the following command
+Start the instance with a console in the foreground using the following command
 
 {% highlight bash %}
 bin/karaf
@@ -45,6 +45,13 @@ To pause startup until the debugger is connected you can use
 
 {% highlight bash %}
 JAVA_DEBUG_OPTS='-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005' bin/karaf debug
+{% endhighlight %}
+
+
+Start the instance as a server in the background using the following command
+
+{% highlight bash %}
+bin/start
 {% endhighlight %}
 
 The Karaf container will keep state such as installed bundles and configuration between restarts.
