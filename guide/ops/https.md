@@ -3,11 +3,13 @@ title: HTTPS Configuration
 layout: website-normal
 ---
 
-## HTTPS Configuration
-
-### Getting the Certificate
+## Getting the Certificate
 To enable HTTPS web access, you will need a server certificate in a java keystore. To create a self-signed certificate,
-and add it to a keystore, `keystore.jks`, you can use the following command:
+for testing and non-production use, you can use the tool `keytool` from your Java distribution. (A self-signed 
+certificate will cause a warning to be displayed by a browser when viewing the page. The various browsers each have 
+ways to import the certificate as a trusted one, for test purposes.)
+
+The following command creates a self-signed certificate and adds it to a keystore, `keystore.jks`:
 
 {% highlight bash %}
 % keytool -genkey -keyalg RSA -alias brooklyn \
@@ -15,16 +17,13 @@ and add it to a keystore, `keystore.jks`, you can use the following command:
           -validity 365 -keysize 2048 -keypass "password"
 {% endhighlight %}
 
-Of course, the passwords above should be changed.  Omit those arguments above for the tool to prompt you for the values.
+The passwords above should be changed to your own values.  Omit those arguments above for the tool to prompt you for the values.
 
 You will then be prompted to enter your name and organization details. This will use (or create, if it does not exist)
 a keystore with the password `mypassword` - you should use your own secure password, which will be the same password
 used in your brooklyn.properties (below). You will also need to replace `<path-to-keystore-directory>` with the full 
 path of the folder where you wish to store your keystore. The keystore will contain the newly generated key, 
 with alias `brooklyn` and password `password`.
-
-The certificate generated will be a self-signed certificate, which will cause a warning to be displayed by a browser 
-when viewing the page. (The various browsers each have ways to import the certificate as a trusted one, for test purposes.)
 
 For production servers, a valid signed certificate from a trusted certifying authority should be used instead.
 Typically keys from a certifying authority are not provided in Java keystore format.  To create a Java keystore from 
@@ -45,7 +44,7 @@ and then convert it into a keystore `keystore.jks` as follows:
 {% endhighlight %}
 
 
-### Configuring Brooklyn for HTTPS
+## Configuring Brooklyn for HTTPS
 
 How to do this depends on whether you are using the traditional or the Karaf distribution. See either of
 

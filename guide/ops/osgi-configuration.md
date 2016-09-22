@@ -3,10 +3,10 @@ title: OSGi Configuration
 layout: website-normal
 ---
 
-Configuration of Brooklyn when running under Karaf is largely done through standard Karaf mechanisms. 
+Configuration of Apache Brooklyn when running under Karaf is largely done through standard Karaf mechanisms. 
 The Karaf "Configuration Admin" subsystem is used to manage configuration values loaded at first boot from the
 `.cfg` files in the `etc` directory of the distribution. In the Karaf command line these can then be viewed
-and manipulated by the `config:` commands, see the Karaf documentation for full details.
+and manipulated by the `config:` commands, see the [Karaf documentation](https://karaf.apache.org/manual/latest/) for full details.
 
 ## Configuring Brooklyn Properties
 
@@ -25,7 +25,8 @@ Web console related configuration is done through the corresponding Karaf mechan
   * The port is set in `etc/org.ops4j.pax.web.cfg`, key `org.osgi.service.http.port`.
   * For authentication the JAAS realm "webconsole" is used; by default it will use any
     SecurityProvider implementations configured in Brooklyn falling back to auto generating
-    the password. To configure a custom JAAS realm see the `jetty.xml` file in `brooklyn-server/karaf/jetty-config/src/main/resources`
+    the password. To configure a custom JAAS realm see the `jetty.xml` file in 
+    `brooklyn-server/karaf/jetty-config/src/main/resources`
     and override it by creating a custom one in `etc` folder. Point the "webconsole" login service
     to the JAAS realm you would like to use.
    * For other Jetty related configuration consult the Karaf and pax-web docs.

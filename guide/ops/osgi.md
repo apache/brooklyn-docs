@@ -8,8 +8,8 @@ children:
 # Running Apache Brooklyn inside Karaf container
 
 The Apache Brooklyn Karaf based distribution lives in brooklyn-server/karaf/apache-brooklyn folder.
-It's still in a testing stage so some features might not work as expected. Do reach out if you
-find any problems.
+It's still in a testing stage so some features might not work as expected. Please contact us on the 
+[mailing list](mailto:dev@brooklyn.apache.org) if you find any problems.
 
 ## Building
 
@@ -39,7 +39,7 @@ To start in debug mode use
 bin/karaf debug
 {% endhighlight %}
 
-and connect to port 5005 using your debugger.
+and connect to port 5005 using your normal Java debugger.
 
 To pause startup until the debugger is connected you can use
 
@@ -47,7 +47,7 @@ To pause startup until the debugger is connected you can use
 JAVA_DEBUG_OPTS='-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005' bin/karaf debug
 {% endhighlight %}
 
-The Karaf container will keep state like installed bundles and configuration between restarts.
+The Karaf container will keep state such as installed bundles and configuration between restarts.
 To reset any changes add **clean** to the cli arguments.
 
 ## Configuring

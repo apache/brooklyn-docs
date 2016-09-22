@@ -212,7 +212,7 @@ or
 
 
 
-## Configuring HTTPS in Brooklyn
+## HTTPS Configuration
 
 See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
 
