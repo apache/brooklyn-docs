@@ -17,7 +17,7 @@ For example:
 {% highlight yaml %}
 location: host:(192.168.0.1)
 services:
-- type: org.apache.brooklyn.entity.webapp.jboss.JBoss7Server 
+- type: org.apache.brooklyn.entity.webapp.jboss.JBoss7Server
 {% endhighlight %}
 
 Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0.1)`.
@@ -28,11 +28,13 @@ Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0
 The spec `multi` allows multiple locations, specified as `targets`,
 to be combined and treated as one location.
 
+##### Sequential Consumption
+
 In its simplest form, this will use the first target location where possible,
 and will then switch to the second and subsequent locations when there are no
-machine available.
+machines available.
 
-In the example below, it provisions the first node to `192.168.0.1`, then it provisions into AWS 
+In the example below, it provisions the first node to `192.168.0.1`, then it provisions into AWS
 us-east-1 region (because the bring-your-own-nodes region will have run out of nodes).
 
 {% highlight yaml %}
@@ -50,34 +52,62 @@ services:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 {% endhighlight %}
 
-The `multi` location also supports the "availability zone" location extension: it presents each  
-target location as an "availability zone". This means that a cluster can be configured to
-round-robin across the targets.
+##### Round-Robin Consumption and Availability Zones for Clustered Applications
 
-For example, in the blueprint below the cluster will request VMs round-robin across the three zones
-(where `zone1` etc are locations already added to the catalog, or defined in brooklyn.properties).
-The configuration option `dynamiccluster.zone.enable` on `DynamicCluster` tells it to query the 
-given location for the `AvailabilityZoneExtension`. If available, it will query for the list of  
-zones (in this case the list of targets), and then use them round-robin. Custom alternatives to 
-round-robin are also possible using the configuration option `dynamiccluster.zone.placementStrategy`
-on `DynamicCluster`.
+A `DynamicCluster` can be configured to cycle through its deployment targets round-robin when
+provided with a location that supports the `AvailabilityZoneExtension` -- the `multi` location
+supports this extension.
+
+The configuration option `dynamiccluster.zone.enable` on `DynamicCluster` tells it to query the
+given location for `AvailabilityZoneExtension` support. If the location supports it, then the
+cluster will query for the list of availability zones (which in this case is simply the list of
+targets) and deploy to them round-robin.
+
+In the example below, the cluster will request VMs round-robin across three different
+locations (in this case, the locations were already added to the catalog, or defined in
+`brooklyn.properties`).
 
 {% highlight yaml %}
 location:
   multi:
     targets:
-    - zone1
-    - zone2
-    - zone3
+    - my-location-1
+    - my-location-2
+    - my-location-3
 services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
     dynamiccluster.zone.enable: true
-    initialSize: 4
+    initialSize: 3
     memberSpec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 {% endhighlight %}
+
+Of course, clusters can also be deployed round-robin to real availability zones offered by
+cloud providers, as long as their locations support `AvailabilityZoneExtension`. Currently, only
+AWS EC2 locations support this feature.
+
+In the example below, the cluster will request VMs round-robin across the availability zones
+provided by AWS EC2 in the "us-east-1" region.
+
+{% highlight yaml %}
+location: jclouds:aws-ec2:us-east-1
+services:
+- type: org.apache.brooklyn.entity.group.DynamicCluster
+  brooklyn.config:
+    dynamiccluster.zone.enable: true
+    initialSize: 3
+    memberSpec:
+      $brooklyn:entitySpec:
+        type: org.apache.brooklyn.entity.machine.MachineEntity
+{% endhighlight %}
+
+For more information about AWS EC2 availability zones, see
+[this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
+
+Custom alternatives to round-robin are also possible using the configuration option
+`dynamiccluster.zone.placementStrategy` on `DynamicCluster`.
 
 
 #### The Server Pool
