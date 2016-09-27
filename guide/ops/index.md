@@ -13,7 +13,9 @@ children:
 - high-availability/
 - catalog/
 - rest.md
+- osgi.md
 - logging.md
+- https.md
 - externalized-configuration.md
 - requirements.md
 - production-installation.md

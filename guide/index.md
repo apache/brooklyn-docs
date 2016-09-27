@@ -11,7 +11,6 @@ children:
 - { path: /guide/yaml/index.md }
 - { path: /guide/java/index.md }
 - { path: /guide/ops/index.md }
-- { path: /guide/misc/osgi.md }
 - { path: /guide/misc/index.md }
 ---
 
