@@ -149,16 +149,15 @@ artifact (which will be in the `target` sub-directory after running `mvn clean i
 {% readj gist_generator/gist_generator.bom %}
 {% endhighlight %}
 
-*Unfortunately the file org.eclipse.egit.github.core-2.1.5.jar (available on maven central) was 
-generated incorrectly as an OSGi bundle (there is a missing quotation mark from the manfest file,
-making it invalid). The above YAML references a corrected version of this OSGi bundle, made 
-available for test purposes.*
+See [Handling Bundle Dependencies]({{ site.path.guide}}/java/bundle-dependencies.html)
+for a description of the `brooklyn.libraries` used above, and for other alternative approaches.
 
-The command below will use the REST api to add this to the catalog of a running Brooklyn instance.
+The command below will use the `br` CLI to add this to the catalog of a running Brooklyn instance.
 Substitute the credentials, URL and port for those of your server.
 
-{% highlight bash %} 
-$ curl -u admin:pa55w0rd https://127.0.0.1:8443/v1/catalog --data-binary @gist_generator.bom
+{% highlight bash %}
+$ br login https://127.0.0.1:8443 admin pa55w0rd
+$ br add-catalog gist_generator.bom
 {% endhighlight %}
 
 
@@ -168,11 +167,11 @@ The YAML blueprint below shows an example usage of this blueprint:
 
     name: my sample
     services:
-    - type: example.GistGenerator:1.0
+    - type: example.GistGenerator
       brooklyn.config:
         oauth.key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-Note the type name matches the id and version defined in the `.bom` file.
+Note the type name matches the id defined in the `.bom` file.
 
 You can now call the effector by any of the standard means - [web console]({{ site.path.guide }}/ops/gui/), 
 [REST api]({{ site.path.guide }}/ops/rest.html), or [Client CLI]({{ site.path.guide }}/ops/cli/).

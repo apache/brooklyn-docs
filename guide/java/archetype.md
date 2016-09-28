@@ -26,11 +26,13 @@ Alternatively, all options can be supplied at the command line. For example,
 if creating a project named "autobrick" for "com.acme":
 
 {% highlight bash %}
+$ BROOKLYN_VERSION={{ site.brooklyn-version }}
 $ mvn archetype:generate \
 	-DarchetypeGroupId=org.apache.brooklyn \
 	-DarchetypeArtifactId=brooklyn-archetype-quickstart \
-	-DarchetypeVersion={{ site.brooklyn-version }} \
-	-DgroupId=com.acme -DartifactId=autobrick \
+	-DarchetypeVersion=${BROOKLYN_VERSION} \
+	-DgroupId=com.acme \
+	-DartifactId=autobrick \
 	-Dversion=0.1.0-SNAPSHOT \
 	-DpackageName=com.acme.autobrick \
 	-DinteractiveMode=false
@@ -73,22 +75,31 @@ For example:
 {% highlight yaml %}
 brooklyn.catalog:
     brooklyn.libraries:
-    - file:///path/to/jar/autobrick-0.1.0-SNAPSHOT.jar     
+    - file:///path/to/jar/autobrick-0.1.0-SNAPSHOT.jar
+    version: "0.1.0-SNAPSHOT"
     itemType: entity
     items:
-    - id: com.acme.MySample
+    - id: com.acme.autobrick.MySample
       item:
-        type: com.acme.MySample
+        type: com.acme.autobrick.MySample
 {% endhighlight %}
 
 The command below will use the CLI to add this to the catalog of a running Brooklyn instance:
 
 {% highlight bash %}
-    br add-catalog src/main/resources/catalog.bom
+    br add-catalog catalog.bom
 {% endhighlight %}
 
-After running that command the entity will have been added to your catalog and can be used
-in the same way as regular Brooklyn entities.
+After running that command, the OSGi bundle will have been added to the OSGi container, and the
+entity will have been added to your catalog. It can then be used in the same way as regular AMP 
+entities.
+
+For example, you can use the blueprint:
+
+{% highlight yaml %}
+services:
+- type: com.acme.autobrick.MySample
+{% endhighlight %}
 
 
 ### Testing Entities
