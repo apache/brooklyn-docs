@@ -72,6 +72,7 @@ the entity being defined, with these being the most common:
     obvious coercion is supported so 
     `timestamp` accepts most common ISO date formats, `duration` accepts `5m`, and port accepts `8080+`
   * `default`: a default value; this will be coerced to the declared `type`
+  * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
   * `constraints`: a list of constraints the parameter should meet;
     currently `required` is supported, with the default being not required
 
@@ -81,16 +82,18 @@ the entity being defined, with these being the most common:
 
 ~~~ yaml
 brooklyn.parameters:
-# user.age parameter is required, and fully specified
+# user.age parameter is required, pinned and fully specified
 - name: user.age
   type: integer
   label: Age
   description: the age of the user
+  pinned: true
   constraints:
   - required
-# user.name is optional, and has a default
+# user.name is optional, is not pinned and has a default
 - name: user.name
   default: You
+  pinned: false
 # shorthand notation: displayName will be an optional config of type string with no default
 - displayName
 ~~~
