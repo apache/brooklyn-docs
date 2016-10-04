@@ -1,15 +1,14 @@
 brooklyn.catalog:
+  libraries:
+  - http://search.maven.org/remotecontent?filepath=com/google/code/gson/gson/2.2.2/gson-2.2.2.jar
+  - http://repo1.maven.org/maven2/org/apache/servicemix/bundles/org.apache.servicemix.bundles.egit.github.core/2.1.5_1/org.apache.servicemix.bundles.egit.github.core-2.1.5_1.jar
+  - http://developers.cloudsoftcorp.com/brooklyn/guide/java/gist_generator/autobrick-0.1.0-SNAPSHOT.jar
   id: example.GistGenerator
-  version: "1.0"
+  version: "0.1.0-SNAPSHOT"
   itemType: template
   description: For programmatically generating GitHub Gists
   displayName: Gist Generator
   iconUrl: classpath:///sample-icon.png
-  libraries:
-  - http://search.maven.org/remotecontent?filepath=com/google/code/gson/gson/2.2.2/gson-2.2.2.jar
-  - http:/.developers.cloudsoftcorp.com/brooklyn/guide/java/gist_generator/org.eclipse.egit.github.core-2.1.5.jar
-  - http://developers.cloudsoftcorp.com/brooklyn/guide/java/gist_generator/autobrick-0.1.0-SNAPSHOT.jar
-
   item:
     services:
     - type: com.acme.GistGenerator

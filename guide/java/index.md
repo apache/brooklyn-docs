@@ -6,6 +6,7 @@ started-pdf-exclude: true
 children:
 - archetype.md
 - defining-and-deploying.md
+- bundle-dependencies.md
 - topology-dependencies.md
 - common-usage.md
 - feeds.md
