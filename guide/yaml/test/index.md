@@ -21,6 +21,10 @@ Validation test entities include:
 - `TestEffector` - perform assertion on response to effector call.
 - `TestHttpCall` - perform assertion on response to specified HTTP GET Request.
 - `TestSshCommand` - test assertions on the result of an ssh command on the same machine as the target entity.
+- `TestWinrmCommand` - test assertions on the result of a WinRM command on the same machine as the target entity.
+- `TestEndpointReachable` - assert that a TCP endpoint is reachable. The endpoint can be in a 
+  number of different formats: a string in the form of `ip:port` or URI format; or a 
+  `com.google.common.net.HostAndPort` instance; or a `java.net.URI` instance; or a `java.net.URL` instance.
 
 TargetableTestComponents can be chained together, with the target being inherited by the components children. For example, a ParallelTestCase could be created that has a TestHttpCall as a child. As long as the TestHttpCall itself does not have a target, it will use the target of it's parent, ParallelTestCase. Using this technique, we can build up complex test scenarios.
 
