@@ -1,6 +1,8 @@
 ---
 title: Windows Blueprints
 layout: website-normal
+children:
+- client.md
 ---
 
 Brooklyn can deploy to Windows servers using WinRM to run commands. These deployments can be 
