@@ -322,7 +322,7 @@ curl -u admin:password http://127.0.0.1:8081/v1/catalog --data-binary @/path/to/
 Or using the CLI:
 
 ~~~ bash
-br add-catalog /path/to/riak.catalog.bom
+br catalog add /path/to/riak.catalog.bom
 ~~~ 
 
 

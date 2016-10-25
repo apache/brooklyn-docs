@@ -18,7 +18,9 @@ by using the CLI to deploy an application then examine various aspects of it.
 
 The YAML blueprint for the application that will be deployed is shown at the end of this document.
 
-**NOTE:** In the sample output, some additional line-wrapping has been used to aid readabilty.
+**NOTE:** In the sample output, some additional line-wrapping has been used to aid readabilty. Additionally, the 
+vertical bar character is omitted from table output for readability.  For scripting purposes it can be useful in
+conjunction with a shell pipeline like `some_command | cut -f 1 -d '|' | xargs -L1 some_other_command`.
 
 ## Login
 First, login to the running Brooklyn server.  This example assumes that the Brooklyn server

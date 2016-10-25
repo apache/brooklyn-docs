@@ -157,7 +157,7 @@ Substitute the credentials, URL and port for those of your server.
 
 {% highlight bash %}
 $ br login https://127.0.0.1:8443 admin pa55w0rd
-$ br add-catalog gist_generator.bom
+$ br catalog add gist_generator.bom
 {% endhighlight %}
 
 
