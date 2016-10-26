@@ -5,7 +5,6 @@ brooklyn.catalog:
   - id: kibana-standalone
     itemType: entity
     name: "Kibana server"
-    description: "Single Kibana server"
     description: |
        Kibana server. Callers should configure 'kibana.elasticsearch.ip'
     item:
