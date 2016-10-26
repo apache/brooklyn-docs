@@ -33,15 +33,19 @@ and likely to change in upcoming releases.
 {% highlight text %}
 COMMANDS:
 
+   Commands whose description begins with a "*" character are particularly experimental and likely to change in upcoming
+   releases.  If not otherwise specified, "SCOPE" below means application or entity scope.  If an entity scope is not
+   specified, the application entity is used as a default.
+
    access		Show access control
    activity		Show the activity for an application / entity
-   add-catalog		* Add a new catalog item from the supplied YAML
+   add-catalog		(deprecated, use catalog add) Add a new catalog item from the supplied YAML (a file or http URL)
    add-children		* Add a child or children to this entity from the supplied YAML
    application		Show the status and location of running applications
-   catalog		* List the available catalog applications
+   catalog		Catalog operations
    config		Show the config for an application or entity
    delete		* Delete (expunge) a brooklyn application
-   deploy		Deploy a new application from the given YAML (read from file or stdin)
+   deploy		Deploy a new application from the given YAML (read from file or URL, or stdin)
    destroy-policy	Destroy a policy
    effector		Show the effectors for an application or entity
    entity		Show the entities of an application or entity
@@ -65,8 +69,9 @@ COMMANDS:
    tree			* Show the tree of all applications
    version		Display the version of the connected Brooklyn
    help			
-
+   
 GLOBAL OPTIONS:
+   --skipSslChecks	Skip verification of server's certificate chain and hostname (for use with self-signed certs)
    --help, -h		show help
    --version, -v	print the version
 {% endhighlight %}
@@ -119,8 +124,8 @@ policy       pol
 
 ### Applications
 
-- `br deploy ( <FILE> | - )`  
-  Deploy an application based on the supplied YAML file or read from STDIN when `-` is given instead of a file name.
+- `br deploy ( <FILE|URL> | - )`  
+  Deploy an application based on the supplied YAML file or URL, or read from STDIN when `-` is given instead of a file name.
 
 - `br application`  
   List the running applications.
@@ -288,7 +293,6 @@ policy       pol
 
 ### Miscellaneous
 
-These commands are likely to change significantly or be removed in later versions of the Brooklyn CLI.
 
 #### Applications
 
@@ -297,19 +301,22 @@ These commands are likely to change significantly or be removed in later version
 
 #### Entities
 
-- `br <entity-scope> add-children <FILE>`  
-  Add a child or children to the entity from a YAML file.
+- `br <entity-scope> add-children <FILE|URL>`  
+  Add a child or children to the entity from local YAML file or a URL.
 
 #### Catalog
 
-- `br catalog`  
-  List the application catalog.
-
-- `br add-catalog <FILE>`  
-  Add a catalog entry from a YAML file.
+- `br catalog list <TYPE>`  
+  List the application catalog, where `TYPE` is one of "application", "entity", "location", or "policy"
+  
+- `br catalog delete  <TYPE> <ITEM_ID:VERSION>`  
+  Delete an item from the catalog, where `TYPE` is as above, and supplying the item's id and version 
+  
+- `br catalog add <FILE|URL>`  
+  Add catalog entries from a local YAML file or a URL. The id and version of added entries are displayed.
 
 - `br locations`  
-  List the location catalog.
+  List the location catalog. (Includes all locations including those defined in `brooklyn.properties`)
 
 - `br access`  
   Show if you have access to provision locations.

@@ -87,7 +87,7 @@ brooklyn.catalog:
 The command below will use the CLI to add this to the catalog of a running Brooklyn instance:
 
 {% highlight bash %}
-    br add-catalog catalog.bom
+    br catalog add catalog.bom
 {% endhighlight %}
 
 After running that command, the OSGi bundle will have been added to the OSGi container, and the
