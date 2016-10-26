@@ -86,6 +86,18 @@ to be specified up one level, alongside the type.
 However config keys which are *not* declared on the type *must* be declared in the `brooklyn.config` block. 
 
 
+### Passing custom variables
+
+Blueprint scripts can be parametrised through environment variables, making them reusable in different use-cases.
+Define the variables in the `env` block and then reference them using the standard bash notation:
+
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-env.yaml %}
+{% endhighlight %}
+
+Non-string objects in the `env` map will be serialized to JSON before passing them to the script.
+
+
 #### Declaring New Config Keys
 
 We can define config keys to be presented to the user 
