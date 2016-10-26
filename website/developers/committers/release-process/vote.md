@@ -131,9 +131,7 @@ Ciprian Ciubotariu
 
 Thanks to everyone that tested our release and voted.
 
-We will shortly begin a vote on the incubator-general list.
-
-
-Thanks.
+Next, the release manager will publish the artifacts, and make an announcement to this list once they are available from
+the Apache mirrors.
 
 {% endhighlight %}
