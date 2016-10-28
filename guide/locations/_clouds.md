@@ -252,7 +252,7 @@ For example, here is a complete blueprint that sets some AWS EC2 specific option
     location: AWS_eu-west-1
     services:
     - type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
-      provisioningProperties:
+      provisioning.properties:
         templateOptions:
           subnetId: subnet-041c8373
           mapNewVolumeToDeviceName: ["/dev/sda1", 100, true]
