@@ -355,8 +355,8 @@ Tomcat on the vagrant VMs named "byon1" to "byon4":
 
 {% highlight bash %}
 $ for i in byon{1..4}; do
-$   vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
-$ done
+>   vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
+> done
 {% endhighlight %}
 
 You can view the state of the Tomcat server with the command below (which drills into the  
@@ -437,12 +437,12 @@ you could use a load generator like jmeter, or use a script such as the one show
 {% highlight bash %}
 $ URL=http://10.10.10.101:8000/
 $ for i in {1..600}; do
-$   for j in {1..50}; do 
-$     curl -saefafefj  ${URL} > /dev/null || echo "Curl failed with exit code $?"
-$   done
-$   echo "Finished batch $i"
-$   sleep 1
-$ done
+>   for j in {1..50}; do 
+>     curl -saefafefj  ${URL} > /dev/null || echo "Curl failed with exit code $?"
+>   done
+>   echo "Finished batch $i"
+>   sleep 1
+> done
 {% endhighlight %}
 
 While those curl commands run in a separate terminal, you can look at the metrics for the first

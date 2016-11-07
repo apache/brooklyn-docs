@@ -253,6 +253,6 @@ For details on the CLI, see the [Client CLI Reference]({{ site.path.guide }}/ops
 
 <div class="started-pdf-exclude">
 
-The first thing we want to do with Brooklyn is **[deploy a blueprint]({{ site.path.guide }}/ops/blueprints.html)**.
+The first thing we want to do with Brooklyn is **[deploy a blueprint]({{ site.path.guide }}/start/blueprints.html)**.
 
 </div>
