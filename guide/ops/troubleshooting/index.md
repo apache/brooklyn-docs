@@ -12,6 +12,7 @@ children:
 - { path: detailed-support-report.md, title:  Detailed Support Report }
 - { path: softwareprocess.md, title: SoftwareProcess Entities }
 - { path: going-deep-in-java-and-logs.md, title: Going Deep in Java and Logs }
+- { path: memory-usage.md, title: Monitoring Memory Usage }
 ---
 
 {% include list-children.html %}
