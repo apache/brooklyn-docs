@@ -70,6 +70,9 @@ a code {
 .clipboard_button.zeroclipboard-is-active .on-active {
   display: inherit;
 }
+.clipboard_button.manual-clipboard-is-active .on-active {
+  display: inherit;
+}
 .clipboard_button .on-active {
   // z-index often doesn't help here (diff stacking context to the side menu)... but it shouldn't hurt!
   z-index: 10;
@@ -96,3 +99,10 @@ a code {
   padding: 3px 7px;
   @include transform('translateX(-50%)');
 }
+
+
+span.bash_prompt {
+  color: #bb60d5;
+  font-weight: bold;
+}
+

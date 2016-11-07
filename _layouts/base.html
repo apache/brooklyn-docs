@@ -23,10 +23,8 @@ under the License.
 
 {{ content }}
 
-
-<script src="{{ site.path.style }}/js/zeroclipboard/ZeroClipboard.min.js"></script>
-
 <script language="JavaScript" type="application/javascript">
+
     fix_padding_function = function () { 
         $('body').css('padding-top', parseInt($('#header').css("height"))+10);
         $('body').css('padding-bottom', parseInt($('#footer').css("height"))+10);
@@ -65,31 +63,69 @@ $(function () {
     }
 });
 
-<!-- Clipboard support -->
-  ZeroClipboard.config({ moviePath: '{{ site.path.style }}/js/zeroclipboard/ZeroClipboard.swf' });
+<!-- Copying and clipboard support -->
+
+// first make the $% line starts not selectable 
+
+$(function() {
+  $('div.highlight').attr('oncopy', 'handleHideCopy(this)');
+  $('div.highlight').each(function(index,target) {
+    if ($(target).find('code.bash')) {
+      // Mark bash prompts from the start of each line (i.e. '$' or '%' characters
+      // at the very start, or immediately following any newline) as not-selectable. 
+      // Handle continuation lines where a leading '$' or '%' is *not* a prompt character.
+      // (If example wants to exclude output, it can manually use class="nocopy".)
+      target.innerHTML = target.innerHTML.replace(/(^\s*|[^\\]\n)(<.*>)?([$%]|&gt;) /g, '$1$2<span class="nocopy bash_prompt">$3 </span>');
+    }
+  });
+});
+
+// normal cmd-C (non-icon) copying
+
+function handleHideCopy(el) {
+//    var origHtml = $(el).clone();
+    console.log("handling copy", el);
+    $(el).addClass('copying');
+    $(el).find('.nocopy').hide();
+    $(el).find('.clipboard_button').addClass('manual-clipboard-is-active');
+    setTimeout(function(){
+        $(el).removeClass('copying');
+        $(el).find('.clipboard_button').removeClass('manual-clipboard-is-active');
+        $(el).find('.nocopy').show();
+//        $(el).html(origHtml);
+    }, 600);
+}
+
+// and icon (flash) copying
+
+</script>
+
+<script src="{{ site.path.style }}/js/zeroclipboard/ZeroClipboard.min.js"></script>
+
+<script language="JavaScript" type="application/javascript">
+
+ZeroClipboard.config({ moviePath: '{{ site.path.style }}/js/zeroclipboard/ZeroClipboard.swf' });
 
 $(function() {
   $('div.highlight').prepend(
-  $('<div class="clipboard_container" title="Copy to Clipboard">'+
-    '<div class="fa clipboard_button">'+
-    '<div class="on-active"><div>Copied to Clipboard</div></div>'+
-  '</div></div>'));
+    $('<div class="clipboard_container" title="Copy to Clipboard">'+
+      '<div class="fa clipboard_button">'+
+      '<div class="on-active"><div>Copied to Clipboard</div></div>'+
+    '</div></div>'));
   $('div.clipboard_container').each(function(index) {
     var clipboard = new ZeroClipboard();
     clipboard.clip( $(this).find(":first")[0], $(this)[0] );
-    var target = $(this).next();
-    var txt = target.text().trim();
-    if (target.find('code.bash')) {
-      // Strip out bash prompts from the start of each line (i.e. '$' or '%' characters
-      // at the very start, or immediately following any newline). Correctly handles continuation
-      // lines, where a leading '$' or '%' is *not* a prompt character.
-      txt = txt.replace(/(^|[^\\]\n)[$%] /g, "$1");
-    }
+    var target0 = $(this).next();
+    var target = target0.clone();
+    target.find('.nocopy').remove();
+    var txt = target.text();
     clipboard.on( 'dataRequested', function (client, args) {
+      handleHideCopy( target0.closest('div.highlight') );  //not necessary but nicer feedback
       client.setText( txt );
     });
   });
 });
+
 
 <!-- search -->
     $(function() {
