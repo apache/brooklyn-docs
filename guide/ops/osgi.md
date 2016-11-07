@@ -7,14 +7,14 @@ children:
 
 # Running Apache Brooklyn inside Karaf container
 
-The Apache Brooklyn Karaf based distribution lives in brooklyn-server/karaf/apache-brooklyn folder.
+The Apache Brooklyn Karaf based distribution lives in brooklyn-dist/karaf/apache-brooklyn folder.
 It's still in a testing stage so some features might not work as expected. Please contact us on the 
 [mailing list](mailto:dev@brooklyn.apache.org) if you find any problems.
 
 ## Building
 
 {% highlight bash %}
-cd brooklyn-server
+cd brooklyn-dist
 mvn clean install
 cd karaf/apache-brooklyn/target
 tar -zxvf apache-brooklyn-{{ site.brooklyn-version }}.tar.gz
