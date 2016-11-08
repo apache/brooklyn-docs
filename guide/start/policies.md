@@ -438,7 +438,7 @@ you could use a load generator like jmeter, or use a script such as the one show
 $ URL=http://10.10.10.101:8000/
 $ for i in {1..600}; do
 >   for j in {1..50}; do 
->     curl -saefafefj  ${URL} > /dev/null || echo "Curl failed with exit code $?"
+>     curl --fail --silent ${URL} > /dev/null || echo "Curl failed with exit code $?"
 >   done
 >   echo "Finished batch $i"
 >   sleep 1
