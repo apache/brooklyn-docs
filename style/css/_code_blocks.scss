@@ -70,6 +70,9 @@ a code {
 .clipboard_button.zeroclipboard-is-active .on-active {
   display: inherit;
 }
+.clipboard_button.manual-clipboard-is-active .on-active {
+  display: inherit;
+}
 .clipboard_button .on-active {
   // z-index often doesn't help here (diff stacking context to the side menu)... but it shouldn't hurt!
   z-index: 10;
@@ -95,4 +98,18 @@ a code {
   @include nowrap();
   padding: 3px 7px;
   @include transform('translateX(-50%)');
+}
+
+span.bash_prompt {
+  color: #bb60d5;
+  font-weight: bold;
+}
+
+.nocopy {
+  // still experimental, and seems to affect rendering rather and not what is actually copied to clipboard
+  // our JS removes these blocks explicitly on copy events, but nice to add that it doesn't appear highlighted 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
