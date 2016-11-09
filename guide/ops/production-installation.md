@@ -111,4 +111,4 @@ Launch Brooklyn in a disconnected session so it will remain running after you ha
 
 Apache Brooklyn should now be running on port 8081 (or other port if so specified).
 
-
+To install on a different port edit config in `etc/org.ops4j.pax.web.cfg`.
