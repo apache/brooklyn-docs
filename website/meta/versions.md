@@ -19,6 +19,9 @@ This documentation was generated {{ site.time | date_to_string }}.
 
 Apache Brooklyn has made the following releases:
 
+* **[0.10.0](/v/0.10.0/)**: Adds Brooklyn CLI client, RPM package, getting started
+  using Vagrant. First release as an Apache top-level project! (December 2016)
+
 * **[0.9.0](/v/0.9.0/)**: Adds Brooklyn CLI client, RPM package, getting started
   using Vagrant. First release as an Apache top-level project! (April 2016)
 
@@ -45,7 +48,13 @@ This code has not been voted on and are not endorsed by The Apache Software Foun
 Documentation for these versions are uploaded from time to time,
 and are provided here for reference:
 
-* **[0.9.0-SNAPSHOT](/v/0.9.0-SNAPSHOT/)**: latest unreleased version
+* **[0.11.0-SNAPSHOT](/v/0.11.0-SNAPSHOT/)**: latest unreleased version
+(although docs may not be up-to-date with the latest code)
+
+* **[0.10.0-SNAPSHOT](/v/0.10.0-SNAPSHOT/)**: any changes since 0.10.0 which would go into 0.10.1
+(although docs may not be up-to-date with the latest code)
+
+* **[0.9.0-SNAPSHOT](/v/0.9.0-SNAPSHOT/)**: any changes since 0.9.0 which would go into 0.9.1
 (although docs may not be up-to-date with the latest code)
 
 * **[0.8.0-SNAPSHOT](/v/0.8.0-SNAPSHOT/)**: any changes since 0.8.0-incubating which would go into 0.8.1
