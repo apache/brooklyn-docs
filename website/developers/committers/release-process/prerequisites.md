@@ -58,8 +58,9 @@ The release manager must have a GPG key to be used to sign the release. See belo
 (not using `whoami` if that's not appropriate):
 
 {% highlight bash %}
-GPG_KEY=`whoami`@apache.org
-SVN_USERNAME=`whoami`
+ASF_USERNAME=`whoami`
+GPG_KEY=$ASF_USERNAME@apache.org
+SVN_USERNAME=$ASF_USERNAME
 {% endhighlight %}
 
 If you have an existing GPG key, but it does not include your Apache email address, you can add your email address as
@@ -78,8 +79,8 @@ Now add your key to the `apache-dist-release-brooklyn/KEYS` file:
 
 {% highlight bash %}
 cd apache-dist-release-brooklyn
-(gpg2 --list-sigs richard@apache.org && gpg2 --armor --export richard@apache.org) >> KEYS
-svn --username $SVN_USERNAME commit -m 'Update brooklyn/KEYS for $GPG_KEY'
+(gpg2 --list-sigs $ASF_USERNAME@apache.org && gpg2 --armor --export $ASF_USERNAME@apache.org) >> KEYS
+svn --username $SVN_USERNAME --no-auth-cache commit -m "Update brooklyn/KEYS for $GPG_KEY"
 {% endhighlight %}
 
 References:

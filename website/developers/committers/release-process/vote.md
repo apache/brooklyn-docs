@@ -8,7 +8,7 @@ Start the vote
 --------------
 
 A script to generate the voting email can be found in `brooklyn-dist/release/print-vote-email.sh`,
-taking a single argument being the staging repo link. For example:
+taking a single argument being the staging repo ID. For example:
 
     brooklyn-dist/release/print-vote-email.sh orgapachebrooklyn-1234 | pbcopy
 
@@ -67,6 +67,56 @@ Thanks,
 [Release manager name]
 {% endhighlight %}
 
+Discuss the vote
+----------------
+Open a parallel thread for a place to discuss the vote. Name it [DISCUSS]<Subject of the voting email>, replying
+to the vote email. Here's an example body for the email.
+
+{% highlight text %}
+This thread is for discussions related to the release vote.
+
+I should clarify what we are looking for in a release vote. Particularly,
+we are looking for people to download,validate, and test the release.
+Only if you are satisfied that the artifacts are correct and the quality is
+high enough, should you make a "+1" vote. Alongside your vote you should list
+the checks that you made.
+
+Here is a good example: http://markmail.org/message/gevsz2pdciraw6jw
+
+The vote is not simply about "the master branch contains the features I wanted" -
+it is about making sure that *these* artifacts are *correct* (e.g. they are
+not corrupted, hashes and signatures pass) and are of *sufficiently high
+quality* to be stamped as an official release of The Apache Software Foundation.
+
+Why test the artifacts when master is looking good? Here are some reasons:
+
+- somebody could have made a commit that broke it, since you last git pulled
+- the release branch could have been made at the wrong point, or inconsistently
+  between all of the submodules
+- something in the release process could have broken it
+- I could have made a mistake and corrupted the files
+- a problem with the Apache infrastructure could mean that the release files are
+  unobtainable or corrupted
+
+This is why the release manager needs you to download the actual release
+artifacts and try them out.
+
+The way Apache works can be a bit arcane sometimes, but it's all done with
+a reason. If the vote passes then the contents of the email and its links
+become "endorsed" by The Apache Software Foundation, and the Foundation will
+take on legal liability for them, forever.
+
+And of course we want the best possible experience for our users - so we need
+the actual release files to be tested manually to make sure that a mistake does
+not ruin the experience for users.
+
+So if you can spare an hour or more to download some of the artifacts and try
+them out, then it will be *very* useful! The vote lasts for three days so
+there's no need to rush to get a vote in.
+
+Thanks!
+[Release manager name]
+{% endhighlight %}
 
 Reply to vote
 -------------

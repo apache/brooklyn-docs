@@ -17,7 +17,7 @@ release. You should determine the following information and set your environment
 
 {% highlight bash %}
 # The version we are releasing now.
-VERSION_NAME=0.9.0
+VERSION_NAME=0.10.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1
