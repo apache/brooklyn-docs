@@ -120,14 +120,14 @@ brooklyn.catalog:
   brooklyn.libraries:
   - http://some.server.or.other/path/my.jar
   items:
-  - classpath://my-catalog-entries-inside-jar.bom
+  - classpath://myJar-BundleSymbolicName:my-catalog-entries-inside-jar.bom
   - some-property: value
-    include: classpath://more-catalog-entries-inside-jar.bom
+    include: classpath://myJar-BundleSymbolicName:more-catalog-entries-inside-jar.bom
   - id: use-from-my-catalog
     version: "1.0.0"
     itemType: entity
     item:
-      type: some-type-defined-in-my-catalog-entries
+      type: myJar-BundleSymbolicName:some-type-defined-in-my-catalog-entries
       brooklyn.config:
         some.config: "some value"
 ~~~
@@ -149,6 +149,12 @@ The following optional catalog metadata is supported:
   and other metadata (such as versions, etc) may not be applied.
 - `brooklyn.libraries`: a list of pointers to OSGi bundles required for the catalog item.
   This can be omitted if blueprints are pure YAML and everything required is included in the classpath and catalog.
+  Each pointer to an OSGi bundle can be a string representing the JAR file url or a map.
+  A map consists of:
+    - `url: http://some.server.or.other/path/my.jar` Resource where JAR file is retrieved . Usually it is with prefix `http://` or ``file://`
+    - `name: myJar-BundleSymbolicName` If not supplied here it will be obtained from <br>`Bundle-SymbolicName` written in `my.jar:META-INF/MANIFEST.MF`
+    - `version: 1.0` If not supplied here it will be obtained from <br>`Bundle-Version` written in `my.jar:META-INF/MANIFEST.MF`
+
   Where custom Java code or bundled resources is needed, however, OSGi JARs supply
   a convenient packaging format and a very powerful versioning format.
   Libraries should be supplied in the form 
@@ -161,6 +167,30 @@ The following optional catalog metadata is supported:
   whenever a bundle is reloaded in a Brooklyn server,
   and if entities have been deployed against that version, their behavior may change in subtle or potentially incompatible ways.
   To avoid this situation, it is highly recommended to use OSGi version stamps as part of the URL.
+- To refer a resource from a JAR file added by brooklyn.libraries 
+  you should include OSGi Bundle-SymbolicName in the classpath.
+  Example:
+  
+~~~ yaml
+brooklyn.catalog:
+  brooklyn.libraries:
+  - url: http://some.server.or.other/path/my.jar
+    name: myJar-BundleSymbolicName
+    version: 1.0
+  items:
+  - classpath://myJar-BundleSymbolicName:my-catalog-entries-inside-jar.bom
+  - id: use-from-my-catalog
+    version: "1.0.0"
+    itemType: entity
+    iconUrl: classpath://myJar-BundleSymbolicName:org/apache/brooklyn/MyEntity/icon.png
+    item:
+      type: myJar-BundleSymbolicName:org.apache.brooklyn.MyEntity
+      brooklyn.config:
+        some.config: "some value"
+        templates.install:
+          classpath://myJar-BundleSymbolicName:org/apache/brooklyn/MyEntity/config.xml: config.xml 
+~~~
+
 - `include`: A URL to another catalog file to include, inheriting the meta from the current hierarchy.
   Libraries defined so far in the meta will be used to load classpath entries. `include` must be used
   when you have sibling properties. If it's the only property it may be skipped by having the URL as the
