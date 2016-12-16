@@ -61,6 +61,37 @@ done
 (Alternatively if you have `apache-dist-dev-repo` checked out,
 you can do an `svn up` in there and `cd apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}`.)
 
+Verify presence of NOTICE & LICENSE
+-----------------------------------
+Check that all archives are correctly annotated with license information.
+Check NOTICE is included:
+
+{% highlight bash %}
+for ARCHIVE in $( ls --ignore '*.sha1' --ignore '*.sha256' --ignore '*.asc' --ignore '*.md5' ); do
+  REL_ARCHIVE=${ARCHIVE/-rc?}
+  case $ARCHIVE in
+    *.tar.gz)
+      LIST="tar -tvf"
+      PREFIX=${REL_ARCHIVE%.tar.gz}
+      ;;
+    *.zip)
+      LIST="unzip -Zl"
+      PREFIX=${REL_ARCHIVE%.zip}
+      ;;
+    *.rpm)
+      LIST="rpm -qlp"
+      PREFIX="/opt/brooklyn"
+      ;;
+    *)
+      echo "Unrecognized file type $ARCHIVE. Aborting!"
+      exit 1
+      ;;
+  esac
+  $LIST $ARCHIVE | grep "$PREFIX/NOTICE" && \
+  $LIST $ARCHIVE | grep "$PREFIX/LICENSE" \
+    || { echo "Missing LICENSE or NOTICE in $ARCHIVE. Aborting!"; break; } 
+done
+{% endhighlight %}
 
 Verify the hashes and signatures of artifacts
 ---------------------------------------------
@@ -68,12 +99,12 @@ Verify the hashes and signatures of artifacts
 Then check the hashes and signatures, ensuring you get a positive message from each one:
 
 {% highlight bash %}
-for ext in -src.tar.gz -src.zip -bin.tar.gz -bin.zip; do
-    artifact=apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}${ext}
-    md5sum -c ${artifact}.md5
-    shasum -a1 -c ${artifact}.sha1
-    shasum -a256 -c ${artifact}.sha256
-    gpg2 --verify ${artifact}.asc ${artifact}
+for artifact in  $( ls -1 --ignore '*.sha1' --ignore '*.sha256' --ignore '*.asc' --ignore '*.md5' ); do
+    md5sum -c ${artifact}.md5 && \
+    shasum -a1 -c ${artifact}.sha1 && \
+    shasum -a256 -c ${artifact}.sha256 && \
+    gpg2 --verify ${artifact}.asc ${artifact} \
+      || { echo "Invalid signature for $artifact. Aborting!"; break; }
 done
 {% endhighlight %}
 
@@ -100,6 +131,24 @@ unzip ${BASE_NAME}-src.zip -d unpacked-src/
 # (or preferably both!)
 diff -qr unpacked-src/$BASE_NAME $BASE_REPO
 {% endhighlight %}
+
+Check for files with invalid headers in source archive
+------------------------------------------------------
+
+{% highlight bash %}
+grep -rL "Licensed to the Apache Software Foundation" * | less
+{% endhighlight %}
+
+Check for binary files in source archive
+-----------------------------------------
+
+Look for files which are created/compiled based on other source files in the distribution.
+"Primary" binary files like images are acceptable.
+
+{% highlight bash %}
+find . | xargs -n1 file | awk -F $':' ' { t = $1; $1 = $2; $2 = t; print; } ' | sort | less
+{% endhighlight %}
+
 
 
 Verify the operation of the binary distribution
