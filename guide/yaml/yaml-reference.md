@@ -1,5 +1,5 @@
 ---
-title: Broooklyn YAML Blueprint Reference
+title: YAML Blueprint Reference
 layout: website-normal
 ---
 
