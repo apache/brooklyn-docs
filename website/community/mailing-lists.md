@@ -11,7 +11,7 @@ To subscribe, send an email to:
 [dev-subscribe@brooklyn.apache.org](mailto:dev-subscribe@brooklyn.apache.org)
 
 You can also [read the dev list
-archives](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/) on
+archives](https://lists.apache.org/list.html?dev@brooklyn.apache.org) on
 Apache's list archiver.
 
 
@@ -20,7 +20,7 @@ Apache's list archiver.
 We also have a *commits* list - a read-only list which automatically posts as
 commits are made to our source repositories. Subscribe by sending an email to
 [commits-subscribe@brooklyn.apache.org](mailto:commits-subscribe@brooklyn.apache.org),
-and [read the archives here](https://mail-archives.apache.org/mod_mbox/brooklyn-commits/).
+and [read the archives here](https://lists.apache.org/list.html?commits@brooklyn.apache.org).
 
 
 ### Search archives
