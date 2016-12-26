@@ -36,11 +36,10 @@ Refer back to the pre-release area Subversion (see [Publish to the staging area]
 the release candidate artifacts - `-src` and `-bin`, `.tar.gz` and `.zip`, and all associated `.md5`, `.sha1`, `.sha256`
 and `.asc` signatures - into this new folder.
 
-Rename all of the files to remove the `-rcN` designation. If you have the `mmv` tool installed, this can be done with
-this command:
+Rename all of the files to remove the `-rcN` designation:
 
 {% highlight bash %}
-mmv -v '*-rc'$RC_NUMBER'-*' '#1-#2'
+for f in *; do mv $f ${f//-rc${RC_NUMBER}/}; done
 {% endhighlight %}
 
 The hash files will need patching to refer to the filenames without the `-rcN` designation:
@@ -55,11 +54,12 @@ Note that the PGP signatures do not embed the filename so they do not need to be
 As a final check, re-test the hashes and signatures:
 
 {% highlight bash %}
-for artifact in *.tar.gz *.zip *.rpm; do
-    md5sum -c ${artifact}.md5
-    shasum -a1 -c ${artifact}.sha1
-    shasum -a256 -c ${artifact}.sha256
-    gpg2 --verify ${artifact}.asc ${artifact}
+for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
+    md5sum -c ${artifact}.md5 && \
+    shasum -a1 -c ${artifact}.sha1 && \
+    shasum -a256 -c ${artifact}.sha256 && \
+    gpg2 --verify ${artifact}.asc ${artifact} \
+      || { echo "Invalid signature for $artifact. Aborting!"; break; }
 done
 {% endhighlight %}
 

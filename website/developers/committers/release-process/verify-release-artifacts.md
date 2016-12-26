@@ -46,16 +46,15 @@ If you're verifying a build someone else has made, first download the files incl
 {% highlight bash %}
 TEMP_DIR=~/tmp/brooklyn/release/${VERSION_NAME}-rc${RC_NUMBER}
 BASE_NAME=apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-BASE_URL=https://dist.apache.org/repos/dist/dev/brooklyn/${BASE_NAME}
+BASE_URL=https://dist.apache.org/repos/dist/dev/brooklyn/${BASE_NAME}/
 
 mkdir -p ${TEMP_DIR}
 cd ${TEMP_DIR}
-for ext in -src.tar.gz -src.zip -bin.tar.gz -bin.zip; do
-    artifact=${BASE_NAME}${ext}
-    for i in ${artifact} ${artifact}.asc ${artifact}.md5 ${artifact}.sha1 ${artifact}.sha256; do
-      curl ${BASE_URL}/$i -O
-    done
-done
+curl -s $BASE_URL | \
+    grep href | grep -v '\.\.' | \
+    sed -e 's@.*href="@'$BASE_URL'@' | \
+    sed -e 's@">.*@@' | \
+    xargs -n 1 curl -O
 {% endhighlight %}
 
 (Alternatively if you have `apache-dist-dev-repo` checked out,
@@ -67,7 +66,7 @@ Check that all archives are correctly annotated with license information.
 Check NOTICE is included:
 
 {% highlight bash %}
-for ARCHIVE in $( ls --ignore '*.sha1' --ignore '*.sha256' --ignore '*.asc' --ignore '*.md5' ); do
+for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
   REL_ARCHIVE=${ARCHIVE/-rc?}
   case $ARCHIVE in
     *.tar.gz)
@@ -99,7 +98,7 @@ Verify the hashes and signatures of artifacts
 Then check the hashes and signatures, ensuring you get a positive message from each one:
 
 {% highlight bash %}
-for artifact in  $( ls -1 --ignore '*.sha1' --ignore '*.sha256' --ignore '*.asc' --ignore '*.md5' ); do
+for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
     md5sum -c ${artifact}.md5 && \
     shasum -a1 -c ${artifact}.sha1 && \
     shasum -a256 -c ${artifact}.sha256 && \
@@ -197,6 +196,9 @@ About the sanity check
 This is the most basic sanity check. This is now suitable to be uploaded to the pre-release area and an announcement
 made with voting open. This is then the point for the RM and the community to perform more detailed testing on the RC
 artifacts and submit bug reports and votes.
+
+
+Automated sanity check script available at brooklyn-dist/release/verity_brooklyn_rc.sh
 
 
 If the sanity check fails

@@ -61,7 +61,7 @@ Some issues we've encountered are:
    [clean out your gems](http://judykat.com/ken-judy/force-bundler-rebuild-ruby-rails-gemset/)
  * if `libxml2` fails, set `bundle config build.nokogiri --use-system-libraries` before the install
    (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
- * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev`
+ * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
 
 If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
 You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use the usual apt-get / yum / brew.
