@@ -21,10 +21,11 @@ with abundant comments.
 
 ## Quick Setup
 
-The most common properties set in this file are for access control.
-Without this, Brooklyn will bind only to localhost or will create a random
-password written to the log for use on other networks.
-The simplest way to specify users and passwords is:
+The most common properties set in this file are for access control. Without this, Brooklyn's 
+web-console and REST api will require no authentication.
+
+The simplest way to specify users and passwords is shown below (but see the 
+[Authentication](#authentication) section for how to avoid storing passwords in plain text):
  
 {% highlight properties %}
 brooklyn.webconsole.security.users=admin,bob
@@ -36,8 +37,7 @@ The properties file *must* have permissions 600
 (i.e. readable and writable only by the file's owner),
 for some security.
 
-In many cases, it is preferable instead to use an external credentials store such as LDAP
-or at least to have passwords in this file.
+In many cases, it is preferable instead to use an external credentials store such as LDAP.
 Information on configuring these is [below](#authentication). 
 
 If coming over a network it is highly recommended additionally to use `https`.

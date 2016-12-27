@@ -134,12 +134,14 @@ Extract this zip file to a directory on your computer such as `c:\Program Files\
 
 ---
 
-It is not necessary at this time, but depending on what you are going to do, 
-you may wish to set up other configuration options first:
+By default, no authentication is required and the web-console will listen on all network interfaces.
+For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
+to configure security. Documentation of configuration options include:
  
 * [Security]({{ site.path.guide }}/ops/brooklyn_properties.html)
 * [Persistence]({{ site.path.guide }}/ops/persistence/)
 * [Cloud credentials]({{ site.path.guide }}/ops/locations/)
+
 
 ## Launch Apache Brooklyn
 
@@ -187,7 +189,7 @@ The application should then output its logs to `/var/log/brooklyn/apache-brookly
 
 <strong class="hidden started-pdf-include">c) Ubuntu / Debian</strong>
 
-Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard service commands:
+Apache Brooklyn should now have been installed and be running as a system service. It can be stopped and started with the standard service commands:
 
 {% highlight bash %}
 $ sudo service brooklyn start|stop|restart|status

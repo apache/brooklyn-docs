@@ -29,9 +29,9 @@ To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 % bin/brooklyn launch > /dev/null 2>&1 & disown
 {% endhighlight %}
 
-With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/).
-No password is set, but the server is listening only on the loopback network interface for security.
-Once [security is configured](brooklyn_properties.html), Brooklyn will listen on all network interfaces by default.
+With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
+listening on all network interfaces. No credentials are required by default. It is strongly
+recommended to [configure security](brooklyn_properties.html).
 
 See the [Server CLI Reference](server-cli-reference.html) for more information
 about the Brooklyn server process.

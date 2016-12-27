@@ -32,10 +32,11 @@ Please refer to the [Server CLI Reference](../server-cli-reference.html) for det
 Brooklyn will output the address of the management interface:
 
 <pre>
-INFO  No security provider options specified. ...
-INFO  Starting Brooklyn web-console with passwordless access on localhost ...
-INFO  Starting brooklyn web-console on loopback interface because no security config is set
-INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war
+INFO  Starting Brooklyn web-console with no security options (defaulting to no authentication), on bind address <any>
+INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://brooklyn.war@
+INFO  Persistence disabled
+INFO  High availability disabled
+INFO  Launched Brooklyn; will now block until shutdown command received via GUI/API (recommended) or process interrupt.
 </pre>
 
 _Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
