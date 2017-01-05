@@ -55,17 +55,27 @@ echo "HRNGDEVICE=/dev/urandom" | cat >> /etc/default/rng-tools
 /etc/init.d/rng-tools start
 {% endhighlight %}
 
-The following links contain further [information for RHEL or CentOS](http://my.itwnik.com/how-to-increase-linux-kernel-entropy/), 
-and [Ubuntu](http://www.howtoforge.com/helping-the-random-number-generator-to-gain-enough-entropy-with-rng-tools-debian-lenny).
-
 
 ### Using /dev/urandom
 
-You can also just mv /dev/random then create it again linked to /dev/urandom, by issuing the following commands:
+You can also just `mv /dev/random` then create it again linked to `/dev/urandom`:
 
 {% highlight bash %}
 sudo mv /dev/random /dev/random-real
 sudo ln -s /dev/urandom /dev/random
 {% endhighlight %}
 
-Notice! If you map /dev/random to use /dev/urandom you will need to restart the Apache Brooklyn java process in order for the change to take place.
+Notice! If you map `/dev/random` to use `/dev/urandom` you will need to restart the Apache Brooklyn java process in order for the change to take place.
+
+
+### More Information
+
+The following links contain further information:
+
+* [haveged (another solution) and general info from Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-setup-additional-entropy-for-cloud-servers-using-haveged)
+* for specific OSs:
+  * [for RHEL or CentOS](http://my.itwnik.com/how-to-increase-linux-kernel-entropy/)
+  * [for Ubuntu](http://www.howtoforge.com/helping-the-random-number-generator-to-gain-enough-entropy-with-rng-tools-debian-lenny)
+  * [for Alpine](https://wiki.alpinelinux.org/wiki/Entropy_and_randomness)
+
+
