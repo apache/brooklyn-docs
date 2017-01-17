@@ -22,7 +22,7 @@ Web
 
 The class ``ControlledDynamicWebAppCluster`` creates a load-balanced cluster of web servers.
 It defaults to Nginx and JBoss 7, but this is configurable with the ``controller`` or ``controllerSpec``, and 
-the ``memberSpec`` configuration options.
+the ``dynamiccluster.memberspec`` configuration options.
 
 Most web app server processes, and some clusters and PaaS implementations,
 support the interface ``WebAppService`` which defines many sensors including requests per second.

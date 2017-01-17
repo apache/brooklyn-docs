@@ -9,7 +9,7 @@ Now let's bring the concept of the "cluster" back in.
 We could wrap our appserver in the same `DynamicCluster` we used earlier,
 although then we'd need to define and configure the load balancer.
 But another blueprint, the `ControlledDynamicWebAppCluster`, does this for us.
-It takes the same `memberSpec`, so we can build a fully functional elastic 3-tier
+It takes the same `dynamiccluster.memberspec`, so we can build a fully functional elastic 3-tier
 deployment of our `hello-world-sql` application as follows:
 
 {% highlight yaml %}

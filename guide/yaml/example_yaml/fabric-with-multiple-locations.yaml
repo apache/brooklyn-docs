@@ -5,11 +5,11 @@ locations:
 services:
 - type: org.apache.brooklyn.entity.group.DynamicFabric
   brooklyn.config:
-    memberSpec:
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.group.DynamicCluster
         brooklyn.config:
           cluster.initial.size: 3
-          memberSpec:
+          dynamiccluster.memberspec:
             $brooklyn:entitySpec:
               type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server

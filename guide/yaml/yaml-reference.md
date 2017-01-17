@@ -218,7 +218,7 @@ concise DSL defined here:
   and either `object.fields` or `brooklyn.config` to supply bean/constructor/flags to create an instance
 * `$brooklyn:entitySpec(Map)` returns a new `ServiceSpecification` as defined by the given `Map`,
   but as an `EntitySpec` suitable for setting as the value of `ConfigKey<EntitySpec>` config items
-  (such as `memberSpec` in `DynamicCluster`)
+  (such as `dynamiccluster.memberspec` in `DynamicCluster`)
 
 <!-- TODO examples for object and entitySpec -->
 
@@ -237,6 +237,6 @@ elements for more information:
 * **Chef** in `ChefSoftwareProcess`: makes it easy to use Chef cookbooks to build entities,
   either with recipes following conventions or with configuration in the `ServiceSpecification`
   to use artibitrary recipes 
-* `DynamicCluster`: provides resizable clusters given a `memberSpec` set with `$brooklyn.entitySpec(Map)` as described above 
+* `DynamicCluster`: provides resizable clusters given a `dynamiccluster.memberspec` set with `$brooklyn.entitySpec(Map)` as described above 
 * `DynamicFabric`: provides a set of homogeneous instances started in different locations,
   with an effector to `addLocation`, i.e. add a new instance in a given location, at runtime

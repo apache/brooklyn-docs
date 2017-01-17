@@ -15,8 +15,8 @@ services:
   name: Cluster
   id: cluster
   brooklyn.config:
-    initialSize: 1
-    memberSpec:
+    cluster.initial.size: 1
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
         name: Tomcat Server

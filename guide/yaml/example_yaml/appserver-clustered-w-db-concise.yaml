@@ -1,8 +1,8 @@
 name: appserver-clustered-w-db-concise
 services:
 - type: org.apache.brooklyn.entity.webapp.ControlledDynamicWebAppCluster
-  initialSize: 2
   brooklyn.config:
+    cluster.initial.size: 2
     wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war
     http.port: 8080+
     java.sysprops: 
