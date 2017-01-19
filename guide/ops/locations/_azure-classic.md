@@ -9,8 +9,8 @@ section_position: 2.1
 Azure is a cloud computing platform and infrastructure created by Microsoft. Apache Brooklyn includes support for both Azure Classic and Azure ARM, as
 one of the [Apache jclouds](http://jclouds.org) supported clouds `Microsoft Azure Compute`.
 
-The two modes of using Azure are the "classic deployment" model and the newer "resource manager deployment" (ARM)
-model. See https://azure.microsoft.com/en-gb/documentation/articles/resource-manager-deployment-model/
+The two modes of using Azure are the "classic deployment" model and the newer "Azure Resource Manager" (ARM)
+model. See [https://azure.microsoft.com/en-gb/documentation/articles/resource-manager-deployment-model/](https://azure.microsoft.com/en-gb/documentation/articles/resource-manager-deployment-model/)
 for details.
 
 
@@ -110,7 +110,7 @@ The following configuration options are important for provisioning Windows VMs i
 
 * `useJcloudsSshInit: false` tells jclouds to not try to connect to the VM
 
-* `vmNameMaxLength: 15` tells the cloud client to strip the VM to maximum 15 characters. 
+* `vmNameMaxLength: 15` tells the cloud client to strip the VM name to maximum 15 characters. 
   This is the maximum size supported by Azure Windows VMs.
 
 * `winrm.useHttps` tells Apache Brooklyn to configure the WinRM client to use HTTPS.
@@ -135,13 +135,11 @@ The following configuration options are important for provisioning Windows VMs i
   authentication mechanisms, so this may be changed to a prioritised list so as to
   provide fallback options.
 
-* `user` tells Apache Brooklyn the user to login as (in this case using WinRM).  
-  For Windows on Azure, the value should match that supplied in the `overrideLoginUser` of 
-  the `templateOptions`.
+* `user` tells Apache Brooklyn which user to login as. The value should match that supplied 
+  in the `overrideLoginUser` of the `templateOptions`.
 
-* `password`: tells Apache Brooklyn the password to use when connecting (in this case using WinRM).  
-  For Windows on Azure, the value should match that supplied in the `overrideLoginPassword` of 
-  the `templateOptions`.
+* `password`: tells Apache Brooklyn the password to use when connecting. The value should
+  match that supplied in the `overrideLoginPassword` of the `templateOptions`.
 
 * `templateOptions: { overrideLoginUser: adminuser, overrideLoginPassword: Pa55w0rd! }`  
   tells the Azure Cloud to provision a VM with the given admin username and password. Note that

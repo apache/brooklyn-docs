@@ -86,7 +86,11 @@ The publishers is any item from the list available here: [https://docs.microsoft
 The region is any region from the list available here: [https://azure.microsoft.com/en-us/regions/](https://azure.microsoft.com/en-us/regions/)
 
     loginUser: brooklyn
+        
+The loginUser can be anything, as long as it's specified. 
+
     templateOptions:
         overrideAuthenticateSudo: true
-        
-The loginUser can be anything, as long as it's specified.
+
+The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on Azure images do not have passwordless sudo 
+configured by default.
