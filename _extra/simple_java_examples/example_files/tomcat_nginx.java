@@ -9,9 +9,9 @@ public class TomcatClusterWithNginxApp extends AbstractApplication {
         
         addChild(EntitySpec.create(ControlledDynamicWebAppCluster.class)
                 .configure("controller", nginxController)
-                .configure("memberSpec", : EntitySpec.create(TomcatServer.class)
+                .configure("dynamiccluster.memberspec", : EntitySpec.create(TomcatServer.class)
                         .configure("httpPort", "8080+")
                         .configure("war", "/path/to/booking-mvc.war"))
-                .configure("initialSize", 2));
+                .configure("cluster.initial.size", 2));
     }
 }

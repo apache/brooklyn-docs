@@ -91,7 +91,7 @@ public class WebClusterDatabaseExample extends AbstractApplication {
                 .configure("creationScriptUrl", DB_SETUP_SQL_URL));
         
         ControlledDynamicWebAppCluster web = addChild(EntitySpec.create(ControlledDynamicWebAppCluster.class)
-                .configure("memberSpec", EntitySpec.create(JBoss7Server.class)
+                .configure("dynamiccluster.memberspec", EntitySpec.create(JBoss7Server.class)
                         .configure("httpPort", "8080+")
                         .configure("war", WAR_PATH)
                         .configure(javaSysProp("brooklyn.example.db.url"), 

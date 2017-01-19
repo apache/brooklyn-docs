@@ -35,8 +35,8 @@ services:
   name: Cluster
   id: cluster
   brooklyn.config:
-    initialSize: 1
-    memberSpec:
+    cluster.initial.size: 1
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
         name: Tomcat Server
@@ -144,8 +144,8 @@ services:
   name: Cluster
   id: cluster
   brooklyn.config:
-    initialSize: 1
-    memberSpec:
+    cluster.initial.size: 1
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
         name: Tomcat Server
@@ -283,7 +283,7 @@ The `DynamicCluster` can dynamically increase or decrease the number of members.
 cluster can either be carried out manually via effectors or automatically by attaching an 
 `AutoScalerPolicy`.
 
-It is configured with a `memberSpec`, which defines the type and configurtion of members
+It is configured with a `dynamiccluster.memberspec`, which defines the type and configurtion of members
 in the cluster. In our example, each is a Tomcat server with a WAR deployed at the root URL.
 
 Deploy the app:

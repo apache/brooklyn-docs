@@ -46,8 +46,8 @@ location:
 services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
-    initialSize: 3
-    memberSpec:
+    cluster.initial.size: 3
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 {% endhighlight %}
@@ -78,8 +78,8 @@ services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
     dynamiccluster.zone.enable: true
-    initialSize: 3
-    memberSpec:
+    cluster.initial.size: 3
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 {% endhighlight %}
@@ -97,8 +97,8 @@ services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
     dynamiccluster.zone.enable: true
-    initialSize: 3
-    memberSpec:
+    cluster.initial.size: 3
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 {% endhighlight %}

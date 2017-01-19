@@ -140,7 +140,7 @@ services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
     wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.9.0/brooklyn-example-hello-world-webapp-0.9.0.war
-    memberSpec:
+    dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
 {% endhighlight %}

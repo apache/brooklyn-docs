@@ -6,9 +6,9 @@ public class TomcatFabricApp extends AbstractApplication {
                 .configure("displayName", "WebFabric")
                 .configure("displayNamePrefix", "")
                 .configure("displayNameSuffix", " web cluster")
-                .configure("memberSpec", EntitySpec.create(ControlledDynamicWebAppCluster.class)
-                        .configure("initialSize", 2)
-                        .configure("memberSpec", : EntitySpec.create(TomcatServer.class)
+                .configure("dynamiccluster.memberspec", EntitySpec.create(ControlledDynamicWebAppCluster.class)
+                        .configure("cluster.initial.size", 2)
+                        .configure("dynamiccluster.memberspec", : EntitySpec.create(TomcatServer.class)
                                 .configure("httpPort", "8080+")
                                 .configure("war", "/path/to/booking-mvc.war"))));
     }
