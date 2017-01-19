@@ -19,8 +19,8 @@ This documentation was generated {{ site.time | date_to_string }}.
 
 Apache Brooklyn has made the following releases:
 
-* **[0.10.0](/v/0.10.0/)**: Adds Brooklyn CLI client, RPM package, getting started
-  using Vagrant. First release as an Apache top-level project! (December 2016)
+* **[0.10.0](/v/0.10.0/)**: Improved blueprints and CLI, new DSL features,
+  Karaf distribution. (December 2016)
 
 * **[0.9.0](/v/0.9.0/)**: Adds Brooklyn CLI client, RPM package, getting started
   using Vagrant. First release as an Apache top-level project! (April 2016)

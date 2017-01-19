@@ -44,7 +44,7 @@ git add . && git commit -m "Change version to $VERSION_NAME"
 If you are happy with the changes, push them:
 
 {% highlight bash %}
-for m in $MODULES; do ( cd $m && git push apache-git $VERSION ); done
+for m in $MODULES; do ( cd $m && git push apache-git $VERSION_NAME ); done
 {% endhighlight %}
 
 

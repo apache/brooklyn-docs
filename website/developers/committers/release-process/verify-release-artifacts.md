@@ -17,7 +17,7 @@ release. You should determine the following information and set your environment
 
 {% highlight bash %}
 # The version we are releasing now.
-VERSION_NAME=0.9.0
+VERSION_NAME=0.10.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1
@@ -46,21 +46,51 @@ If you're verifying a build someone else has made, first download the files incl
 {% highlight bash %}
 TEMP_DIR=~/tmp/brooklyn/release/${VERSION_NAME}-rc${RC_NUMBER}
 BASE_NAME=apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-BASE_URL=https://dist.apache.org/repos/dist/dev/brooklyn/${BASE_NAME}
+BASE_URL=https://dist.apache.org/repos/dist/dev/brooklyn/${BASE_NAME}/
 
 mkdir -p ${TEMP_DIR}
 cd ${TEMP_DIR}
-for ext in -src.tar.gz -src.zip -bin.tar.gz -bin.zip; do
-    artifact=${BASE_NAME}${ext}
-    for i in ${artifact} ${artifact}.asc ${artifact}.md5 ${artifact}.sha1 ${artifact}.sha256; do
-      curl ${BASE_URL}/$i -O
-    done
-done
+curl -s $BASE_URL | \
+    grep href | grep -v '\.\.' | \
+    sed -e 's@.*href="@'$BASE_URL'@' | \
+    sed -e 's@">.*@@' | \
+    xargs -n 1 curl -O
 {% endhighlight %}
 
 (Alternatively if you have `apache-dist-dev-repo` checked out,
 you can do an `svn up` in there and `cd apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}`.)
 
+Verify presence of NOTICE & LICENSE
+-----------------------------------
+Check that all archives are correctly annotated with license information.
+Check NOTICE is included:
+
+{% highlight bash %}
+for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
+  REL_ARCHIVE=${ARCHIVE/-rc?}
+  case $ARCHIVE in
+    *.tar.gz)
+      LIST="tar -tvf"
+      PREFIX=${REL_ARCHIVE%.tar.gz}
+      ;;
+    *.zip)
+      LIST="unzip -Zl"
+      PREFIX=${REL_ARCHIVE%.zip}
+      ;;
+    *.rpm)
+      LIST="rpm -qlp"
+      PREFIX="/opt/brooklyn"
+      ;;
+    *)
+      echo "Unrecognized file type $ARCHIVE. Aborting!"
+      exit 1
+      ;;
+  esac
+  $LIST $ARCHIVE | grep "$PREFIX/NOTICE" && \
+  $LIST $ARCHIVE | grep "$PREFIX/LICENSE" \
+    || { echo "Missing LICENSE or NOTICE in $ARCHIVE. Aborting!"; break; } 
+done
+{% endhighlight %}
 
 Verify the hashes and signatures of artifacts
 ---------------------------------------------
@@ -68,12 +98,12 @@ Verify the hashes and signatures of artifacts
 Then check the hashes and signatures, ensuring you get a positive message from each one:
 
 {% highlight bash %}
-for ext in -src.tar.gz -src.zip -bin.tar.gz -bin.zip; do
-    artifact=apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}${ext}
-    md5sum -c ${artifact}.md5
-    shasum -a1 -c ${artifact}.sha1
-    shasum -a256 -c ${artifact}.sha256
-    gpg2 --verify ${artifact}.asc ${artifact}
+for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
+    md5sum -c ${artifact}.md5 && \
+    shasum -a1 -c ${artifact}.sha1 && \
+    shasum -a256 -c ${artifact}.sha256 && \
+    gpg2 --verify ${artifact}.asc ${artifact} \
+      || { echo "Invalid signature for $artifact. Aborting!"; break; }
 done
 {% endhighlight %}
 
@@ -100,6 +130,24 @@ unzip ${BASE_NAME}-src.zip -d unpacked-src/
 # (or preferably both!)
 diff -qr unpacked-src/$BASE_NAME $BASE_REPO
 {% endhighlight %}
+
+Check for files with invalid headers in source archive
+------------------------------------------------------
+
+{% highlight bash %}
+grep -rL "Licensed to the Apache Software Foundation" * | less
+{% endhighlight %}
+
+Check for binary files in source archive
+-----------------------------------------
+
+Look for files which are created/compiled based on other source files in the distribution.
+"Primary" binary files like images are acceptable.
+
+{% highlight bash %}
+find . | xargs -n1 file | awk -F $':' ' { t = $1; $1 = $2; $2 = t; print; } ' | sort | less
+{% endhighlight %}
+
 
 
 Verify the operation of the binary distribution
@@ -148,6 +196,9 @@ About the sanity check
 This is the most basic sanity check. This is now suitable to be uploaded to the pre-release area and an announcement
 made with voting open. This is then the point for the RM and the community to perform more detailed testing on the RC
 artifacts and submit bug reports and votes.
+
+
+Automated sanity check script available at brooklyn-dist/release/verity_brooklyn_rc.sh
 
 
 If the sanity check fails

@@ -38,7 +38,7 @@ and all associated `.md5`, `.sha1`, `.sha256` and `.asc` signatures. Then commit
 
 {% highlight bash %}
 svn add apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
-svn commit --message "Add apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER} to dist/dev/brooklyn"
+svn commit --username $SVN_USERNAME --no-auth-cache --message "Add apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER} to dist/dev/brooklyn"
 {% endhighlight %}
 
 These steps can be performed as part of the `make-release-artifacts.sh` script used earlier
@@ -54,4 +54,4 @@ be used for downloading the artifacts.
 Go to the Apache Nexus server at [https://repository.apache.org/](https://repository.apache.org/) and log in using the
 link in the top right (the credentials are the same as your Git and Jenkins credentials). Go to the "Staging
 Repositories" page, and tick the repository with the name starting `orgapachebrooklyn`. Click the **Close** button.
-Provide a description which includes the version and release candidate, e.g. `Apache Brooklyn 0.7.0-incubating-rc1`.
+Provide a description which includes the version and release candidate, e.g. `Apache Brooklyn 0.10.0-rc1`.

@@ -45,13 +45,13 @@ exclude: ['/Gemfile*','/README.md']
 sass:
     sass_dir: style/css
 
-# TODO the 0.9.0 paths must be changed!
-brooklyn-stable-version: 0.9.0
+# TODO the 0.10.0 paths must be changed!
+brooklyn-stable-version: 0.10.0
 pdf-default-base-url: http://brooklyn.apache.org
-pdf-default-versioned-url-subpath: /v/0.9.0
+pdf-default-versioned-url-subpath: /v/0.10.0
 
 pdf-rewrite-prefixes: 
-    '/guide' : '/v/0.9.0'
+    '/guide' : '/v/0.10.0'
     '/website' : ''
     
 brooklyn-version: 0.11.0-SNAPSHOT # BROOKLYN_VERSION
