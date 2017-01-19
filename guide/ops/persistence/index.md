@@ -98,7 +98,7 @@ Object Store Persistence
 
 Brooklyn can persist its state to any Object Store API that jclouds supports including 
 S3, Swift and Azure. This gives access to any compatible Object Store product or cloud provider
-including AWS-S3, SoftLayer, Rackspace, HP and Microsoft Azure. For a complete list of supported
+including AWS-S3, SoftLayer, Rackspace and Microsoft Azure. For a complete list of supported
 providers, see [jclouds](http://jclouds.apache.org/reference/providers/#blobstore).
 
 To configure the Object Store, add the credentials to `~/.brooklyn/brooklyn.properties` such as:
@@ -112,9 +112,10 @@ brooklyn.location.named.aws-s3-eu-west-1.credential=abcdefghijklmnopqrstuvwxyz12
 or:
 
 {% highlight properties %}
-brooklyn.location.named.softlayer-swift-ams01=jclouds:swift:https://ams01.objectstorage.softlayer.net/auth/v1.0
+brooklyn.location.named.softlayer-swift-ams01=jclouds:openstack-swift:https://ams01.objectstorage.softlayer.net/auth/v1.0
 brooklyn.location.named.softlayer-swift-ams01.identity=ABCDEFGHIJKLM:myname
 brooklyn.location.named.softlayer-swift-ams01.credential=abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz12
+brooklyn.location.named.softlayer-swift-ams01.jclouds.keystone.credential-type=tempAuthCredentials
 {% endhighlight %} 
 
 Start Brooklyn pointing at this target object store, e.g.:
@@ -126,15 +127,15 @@ nohup brooklyn launch --persist auto --persistenceDir myContainerName --persiste
 
 The following `brooklyn.properties` options can also be used:
 
-    # Location spec string for an object store (e.g. jclouds:swift:URL) where persisted state 
+    # Location spec string for an object store (e.g. jclouds:openstack-swift:URL) where persisted state 
     # should be kept; if blank or not supplied, the file system is used.
     brooklyn.persistence.location.spec=<location>
 
     # Container name for writing persisted state
     brooklyn.persistence.dir=/path/to/dataContainer
 
-    # Location spec string for an object store (e.g. jclouds:swift:URL) where backups of persisted 
-    # state should be kept; defaults to the local file system.
+    # Location spec string for an object store (e.g. jclouds:openstack-swift:URL) where backups of  
+    # persisted state should be kept; defaults to the local file system.
     brooklyn.persistence.backups.location.spec=<location>
 
     # Container name for writing backups of persisted state;
