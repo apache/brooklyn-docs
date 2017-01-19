@@ -513,13 +513,15 @@ Additional logs may be created by some Windows programs. For example, MSSQL crea
 Known Limitations
 -----------------
 
-### Use of Unencrypted HTTP
+WinRM 2.0 supports encryption mechanisms on top of HTTP. However those are not supported in Apache Brooklyn.
+For production adoptions please make sure you follow Microsoft Guidelines https://msdn.microsoft.com/en-us/library/ee309366(v=vs.85).aspx
 
-Brooklyn is currently using unencrypted HTTP for WinRM communication. This means that the login credentials will be
-transmitted in clear text.
+### Apache Brooklyn limitations on using WinRM over HTTP and HTTPS
 
-In future we aim to improve Brooklyn to support HTTPS. However this requires adding support to the underlying 
-WinRM library, and also involves certificate creation and verification.
+By default Apache Brooklyn is currently using unencrypted HTTP for WinRM communication. It does not support encrypted HTTP for WinRM.
+
+HTTPS is supported but there is no mechanism of specifying which certificates to trust.
+Currently Apache Brooklyn will accept any certificate used in a HTTPS WinRM connection.
 
 ### Incorrect Exit Codes
 
