@@ -106,7 +106,7 @@ This is set using the [template option](#custom-template-options). For example:
 This is a basic inline YAML template for an OpenStack location:
 
     location:
-        jclouds:clouds:openstack-nova:
+        jclouds:openstack-nova:
             endpoint: http://x.x.x.x:5000/v2.0/
             identity: "your-tenant:your-username"
             credential: your-password
