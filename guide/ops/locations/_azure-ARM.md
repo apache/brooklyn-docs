@@ -1,7 +1,7 @@
 ---
 section: Azure Compute ARM
 section_type: inline
-section_position: 2.1.1
+section_position: 2
 ---
 
 ### Azure Compute ARM

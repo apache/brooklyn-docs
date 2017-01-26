@@ -1,7 +1,7 @@
 ---
 section: Azure Compute Classic
 section_type: inline
-section_position: 2.1
+section_position: 3
 ---
 
 ### Azure Compute Classic

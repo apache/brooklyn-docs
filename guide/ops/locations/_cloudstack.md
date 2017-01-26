@@ -2,7 +2,7 @@
 section: CloudStack
 title: Apache CloudStack
 section_type: inline
-section_position: 6
+section_position: 4
 ---
 
 ## Apache CloudStack
