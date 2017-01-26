@@ -2,7 +2,7 @@
 section: Amazon Web Services (AWS)
 title: Amazon Web Services
 section_type: inline
-section_position: 3
+section_position: 2
 ---
 
 ## Amazon Web Services (AWS)

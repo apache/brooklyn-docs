@@ -2,7 +2,7 @@
 section: IBM Softlayer
 title: IBM Softlayer
 section_type: inline
-section_position: 5
+section_position: 6
 ---
 
 ## IBM SoftLayer
