@@ -24,8 +24,9 @@ any binaries for custom blueprints/integrations.
 There are three main consumers of disk space:
 
 * **Static files**: these are the Apache Brooklyn distribution with its own
-  dependencies, plus binaries for custom blueprints and integrations added to
-  the `lib` directory. Note that Brooklyn requires that Java is installed which
+  dependencies, OSGi bundles for custom blueprints and integrations installed to the `deploy/` directory,
+  plus `data/` directory which is generated on first launch.
+  Note that Brooklyn requires that Java is installed which
   you may have to consider when calculating disk space requirements.
 * **Persisted state**: when using [Persistence](persistence/index.html) -- which
   is a prerequisite for [High Availability](high-availability) -- Brooklyn
