@@ -96,7 +96,7 @@ The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on A
 configured by default.
 
 #### Known issues
-There are currently two know issues with Azure ARM:
+There are currently two known issues with Azure ARM:
 
 * It can take a long time for VMs to be provisioned
-* Azure ARM appears to have some fairly strict rate limiting
+* The Azure ARM APIs appear to have some fairly strict rate limiting that can result in AzureComputeRateLimitExceededException
