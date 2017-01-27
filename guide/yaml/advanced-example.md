@@ -201,6 +201,36 @@ certain conditions are met before continuing. For example:
 This latch is used to stop Kibana customizing until the Elasticsearch cluster is up. We do this to ensure 
 that the URL sensors have been setup, so that they can be passed into Kibana during the customization phase.
 
+Latches can also be used to control how many entities can execute the same step at any given moment. When
+a latch is given the value of a `MaxConcurrencySensor` it will unblock execution only when there are
+available "slots" to execute (think of it as a semaphore). For example to let a single entity execute the
+launch step of the start effector:
+
+~~~yaml
+services:
+- type: cluster
+
+  brooklyn.initializers:
+  - type: org.apache.brooklyn.core.sensor.MaxConcurrencySensor
+    brooklyn.config:
+      name: single-executor
+      latch.concurrency.max: 1
+
+  brooklyn.config: 
+    initialSize: 10
+    memberSpec:
+      $brooklyn:entitySpec:
+        type: vanilla-bash-server
+        brooklyn.config:
+          launch.command: sleep 2
+          checkRunning.command: true
+          launch.latch: $brooklyn:parent().attributeWhenReady("single-executor")
+~~~
+
+It's important to note that the above setup is not reentrant. This means that users should be careful to
+avoid deadlocks. For example having a start and launch latches against the `single-executor` from above.
+The launch latch will block forever since the start latch already would've acquired the free slot.
+
 #### Child entities
 The ELK blueprint also contains a good example of a child entity.
 
