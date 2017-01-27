@@ -94,3 +94,9 @@ The loginUser can be anything, as long as it's specified.
 
 The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on Azure images do not have passwordless sudo 
 configured by default.
+
+#### Known issues
+There are currently two known issues with Azure ARM:
+
+* It can take a long time for VMs to be provisioned
+* The Azure ARM APIs appear to have some fairly strict rate limiting that can result in AzureComputeRateLimitExceededException
