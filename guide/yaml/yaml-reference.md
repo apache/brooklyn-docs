@@ -213,6 +213,10 @@ concise DSL defined here:
   `$brooklyn:root()`.
 * `$brooklyn:formatString("pattern e.g. %s %s", "field 1", "field 2")` returns a future which creates the formatted string
   with the given parameters, where parameters may be strings *or* other tasks such as `attributeWhenReady`
+* `$brooklyn:urlEncode("val")` returns a future which creates a string with the characters escaped
+  so it is a valid part of a URL. The parameter can be a string *or* another task. For example,
+  `$brooklyn:urlEncode($brooklyn:config(\"mykey\"))`. It uses "www-form-urlencoded" for the encoding,
+  which is appropriate for query parameters but not for some other parts of the URL (e.g. space is encoded as '+').
 * `$brooklyn:literal("string")` returns the given string as a literal (suppressing any `$brooklyn:` expansion)
 * `$brooklyn:object(Map)` creates an object, using keys `type` to define the java type,
   and either `object.fields` or `brooklyn.config` to supply bean/constructor/flags to create an instance
