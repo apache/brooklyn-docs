@@ -6,6 +6,7 @@ usermanual-pdf-exclude: true
 children:
 - mailing-lists.md
 - irc.md
+- security/index.md
 - { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 - { path: how-to-contribute-docs.md }
 ---
@@ -58,6 +59,25 @@ Find us on `#brooklyncentral` on Freenode, or click below for more information.
 </div>
 
 </div><!-- col -->
+
+<div class="col-md-6" markdown="1">
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### [Security advisories](security/index.html)
+  </div>
+  <div class="panel-body" markdown="1">
+A list of security advisories covering Apache Brooklyn
+
+<div class="text-center"><a class="btn btn-primary" href="security/index.html" role="button">Security Advisories</a></div>
+  </div>
+</div>
+
+</div><!-- col -->
+</div><!-- row -->
+
+<div class="row">
+<div class="col-md-3" markdown="1">
+</div>
 <div class="col-md-6" markdown="1">
 
 <div class="panel panel-default">
@@ -72,4 +92,6 @@ Want to contribute code to our project? Head over to our developer's section. Wa
 </div>
 
 </div><!-- col -->
+<div class="col-md-3" markdown="1">
+</div>
 </div><!-- row -->
