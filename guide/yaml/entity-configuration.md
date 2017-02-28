@@ -39,11 +39,10 @@ such as for inheriting configuration from a parent entity.
 ### Configuration in a Catalog Item
 
 When defining an entity in the catalog, it can include configuration values like any other 
-blueprint. It can also explicitly declare config keys. For details of how to write and add
-catalog items, see [Catalog]({{ site.path.guide }}/ops/catalog/). For more details of 
-declaring config keys, see the [Custom Entities]({{ site.path.guide }}/yaml/custom-entities.html#declaring-new-config-keys) page.
+blueprint (i.e. inside the `brooklyn.config` block).
 
-The example below illustrates the principles:
+It can also explicitly declare config keys, using the `brooklyn.parameters` block. The example 
+below illustrates the principle:
 
 {% highlight yaml %}
 brooklyn.catalog:
@@ -56,6 +55,7 @@ brooklyn.catalog:
       brooklyn.parameters:
       - name: custom.message
         type: string
+        description: Message to be displayed
         default: Hello
       brooklyn.config:
         shell.env:
@@ -74,6 +74,64 @@ for `custom.message`, and will use the given values for `launch.command` and `ch
 location: aws-ec2:us-east-1
 services:
 - type: entity-config-example
+{% endhighlight %}
+
+For details of how to write and add catalog items, see [Catalog]({{ site.path.guide }}/ops/catalog/). 
+
+
+#### Config Key Constraints
+
+The config keys in the `brooklyn.parameters` can also have constraints defined, for what values
+are valid. If more than one constraint is defined, then they must all be satisfied. The constraints 
+can be any of:
+
+* `required`: deployment will fail if no value is supplied for this config key.
+* `regex: ...`: the value will be compared against the given regular expression.
+* A predicate, declared using the DSL `$brooklyn:object`.  
+
+This is illustrated in the example below:
+
+{% highlight yaml %}
+brooklyn.catalog:
+  items:
+  - id: entity-constraint-example
+    itemType: entity
+    name: Entity Config Example
+    item:
+      type: org.apache.brooklyn.entity.stock.BasicEntity
+      brooklyn.parameters:
+      - name: compulsoryExample
+        type: string
+        constraints:
+        - required
+      - name: addressExample
+        type: string
+        constraints:
+        - regex: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
+      - name: numberExample
+        type: double
+        constraints:
+        - $brooklyn:object:
+            type: org.apache.brooklyn.util.math.MathPredicates
+            factoryMethod.name: greaterThan
+            factoryMethod.args:
+            - 0.0
+        - $brooklyn:object:
+            type: org.apache.brooklyn.util.math.MathPredicates
+            factoryMethod.name: lessThan
+            factoryMethod.args:
+            - 256.0
+{% endhighlight %}
+
+An example usage of this toy example, once added to the catalog, is shown below:
+
+{% highlight yaml %}
+services:
+- type: entity-constraint-example
+  brooklyn.config:
+    compulsoryExample: foo
+    addressExample: 1.1.1.1
+    numberExample: 2.0
 {% endhighlight %}
 
 
