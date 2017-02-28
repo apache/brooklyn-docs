@@ -74,7 +74,7 @@ the entity being defined, with these being the most common:
   * `default`: a default value; this will be coerced to the declared `type`
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
   * `constraints`: a list of constraints the parameter should meet;
-    currently `required` is supported, with the default being not required
+    for details, see [Entity Configuration]({{ site.path.guide }}/yaml/entity-configuration.html#config-key-constraints). 
 
   A shorthand notation is also supported where just the name of the parameter is supplied
   as an item in the list, with the other values being unset or the default.
