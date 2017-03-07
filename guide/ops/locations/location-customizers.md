@@ -123,6 +123,23 @@ To register `JcloudsLocationCustomizer` instances programmatically, set the conf
 config option when calling `location.obtain(options)`.
 
 
+The `SharedLocationSecurityGroupCustomizer` configures a shared security group on Jclouds locations.
+It only works on AWS and Azure ARM.
+
+To register a `SharedLocationSecurityGroupCustomizer` in YAML, you can use the config key `customizers`
+and configure it with `$brooklyn:object` and `object.fields`. For example:
+
+    location:
+      jclouds:aws-ec2:us-east-1:
+        customizers:
+        - $brooklyn:object:
+            type: org.apache.brooklyn.location.jclouds.networking.SharedLocationSecurityGroupCustomizer
+            object.fields: {locationName: "myloc", tcpPortRanges: ["22", "8080", "9443"], udpPortRanges: ["2001", "4013"], cidr: "82.40.153.101/24"}
+
+where `cidr` can be optionally set to restrict the range that the ports that are to be opened can be accessed from.
+
+
+
 ## Machine Location Customizers
 
 *Warning: additional methods (i.e. customization hooks) may be added to the `MachineLocationCustomizer` 
