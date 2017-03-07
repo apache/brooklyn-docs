@@ -289,7 +289,7 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 Deploy the app:
 
 {% highlight bash %}
-$ br deploy mycluster.yaml
+br deploy mycluster.yaml
 {% endhighlight %}
 
 <pre>
@@ -301,7 +301,7 @@ $ br deploy mycluster.yaml
 And wait for the app to be running, viewing its state with:
 
 {% highlight bash %}
-$ br application
+br application
 {% endhighlight %}
 
 <pre>
@@ -314,7 +314,7 @@ application named "Tomcat Cluster", then into its child entity named "Cluster", 
 entities):
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity
+br application "Tomcat Cluster" entity "Cluster" entity
 {% endhighlight %}
  
 <pre>
@@ -354,9 +354,9 @@ Try killing the Tomcat process for one of the members in the cluster. The comman
 Tomcat on the vagrant VMs named "byon1" to "byon4":
 
 {% highlight bash %}
-$ for i in byon{1..4}; do
->   vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
-> done
+for i in byon{1..4}; do
+  vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
+done
 {% endhighlight %}
 
 You can view the state of the Tomcat server with the command below (which drills into the  
@@ -364,7 +364,7 @@ application named "Tomcat Cluster", then into its child entity named "Cluster", 
 first member of the cluster named "Tomcat Server"):
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
+br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
 {% endhighlight %}
 
 <pre>
@@ -380,7 +380,7 @@ $ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
 You can view its activity, to see the call to restart, using:
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" activity
+br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" activity
 {% endhighlight %}
 
 TODO Why doesn't the restart() show in the activity view?!
@@ -405,7 +405,7 @@ application named "Tomcat Cluster", then into its child entity named "Cluster", 
 child entities):
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity
+br application "Tomcat Cluster" entity "Cluster" entity
 {% endhighlight %}
 
 <pre>
@@ -435,21 +435,21 @@ you could use a load generator like jmeter, or use a script such as the one show
 (changing URL for the URL of your load-balancer):
 
 {% highlight bash %}
-$ URL=http://10.10.10.101:8000/
-$ for i in {1..600}; do
->   for j in {1..50}; do 
->     curl --fail --silent ${URL} > /dev/null || echo "Curl failed with exit code $?"
->   done
->   echo "Finished batch $i"
->   sleep 1
-> done
+URL=http://10.10.10.101:8000/
+for i in {1..600}; do
+  for j in {1..50}; do 
+    curl --fail --silent ${URL} > /dev/null || echo "Curl failed with exit code $?"
+  done
+  echo "Finished batch $i"
+  sleep 1
+done
 {% endhighlight %}
 
 While those curl commands run in a separate terminal, you can look at the metrics for the first
 Tomcat server using the command:
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
+br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
 {% endhighlight %}
 
 <pre>
@@ -470,7 +470,7 @@ $ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
 You can look at the average requests per second on the cluster with the command:
  
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
+br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
 {% endhighlight %}
 
 <pre>
@@ -481,7 +481,7 @@ When this value exceeds 3 for two seconds, the cluster with scale up. You can se
 using the command:
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity
+br application "Tomcat Cluster" entity "Cluster" entity
 {% endhighlight %}
 
 <pre>
@@ -496,7 +496,7 @@ Cancel the curl commands (or wait for them to finish), and then wait for the one
 `resizeDownStabilizationDelay`. The cluster will scale back to the minimum one instance.
 
 {% highlight bash %}
-$ br application "Tomcat Cluster" entity "Cluster" entity
+br application "Tomcat Cluster" entity "Cluster" entity
 {% endhighlight %}
 
 <pre>
