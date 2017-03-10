@@ -58,6 +58,10 @@ the entity being defined, with these being the most common:
     and optionally a `period`, to create a sensor feed which populates the sensor with
     the given name by running the given command (on an entity which as an ssh-able machine)
 
+  * `org.apache.brooklyn.core.sensor.windows.WinRmCommandSensor`: For command supplied via WinRm. Takes a `name` and `command`,
+    and optionally a `period`, to create a sensor feed which populates the sensor with
+    the given name by running the given command (on an entity which as an winrm-able machine)
+
 * `brooklyn.parameters`: documents a list of typed parameters the entity accepts. If none
   are specified the config keys declared in the entity's class are used (including the
   information from the `@CatalogConfig` annotation). The items have the following properties:

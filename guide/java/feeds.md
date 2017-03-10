@@ -14,8 +14,10 @@ HTTP management API, or over JMX).
 
 #### Persistence
 
-There are two ways to associate a feed with an entity. The recommended way is (within the
-entity) to call `feeds().addFeed(...)`. This persists the feed: the feed will be automatically
+There are two ways to associate a feed with an entity.
+
+The first way is (within the entity) to call `feeds().addFeed(...)`.
+This persists the feed: the feed will be automatically
 added to the entity when the Brooklyn server restarts. It is important that all configuration
 of the feed is persistable (e.g. not using any in-line anonymous inner classes to define
 functions).
@@ -38,7 +40,7 @@ An `HttpFeed` polls over http(s). An example is shown below:
 {% highlight java %}
 private HttpFeed feed;
 
-//@Override
+@Override
 protected void connectSensors() {
   super.connectSensors();
   
@@ -67,15 +69,15 @@ protected void disconnectSensors() {
 An SSH feed executes a command over ssh periodically. An example is shown below:
 
 {% highlight java %}
-private SshFeed feed;
+private AbstractCommandFeed feed;
 
-//@Override
+@Override
 protected void connectSensors() {
   super.connectSensors();
 
   feed = feeds.addFeed(SshFeed.builder()
       .machine(mySshMachineLachine)
-      .poll(new SshPollConfig(SERVICE_UP)
+      .poll(new CommandPollConfig(SERVICE_UP)
           .command("rabbitmqctl -q status")
           .onSuccess(new Function() {
               public Boolean apply(SshPollValue input) {
@@ -91,6 +93,32 @@ protected void disconnectSensors() {
 }
 {% endhighlight %}
 
+##### WinRm CMD Feed
+
+A WinRM feed executes a windows command over winrm periodically. An example is shown below:
+
+{% highlight java %}
+private AbstractCommandFeed feed;
+
+//@Override
+protected void connectSensors() {
+  super.connectSensors();
+
+  feed = feeds.addFeed(CmdFeed.builder()
+                .entity(entity)
+                .machine(machine)
+                .poll(new CommandPollConfig<String>(SENSOR_STRING)
+                        .command("ipconfig")
+                        .onSuccess(SshValueFunctions.stdout()))
+                .build());
+}
+
+@Override
+protected void disconnectSensors() {
+  super.disconnectSensors();
+  if (feed != null) feed.stop();
+}
+{% endhighlight %}
 
 ##### Windows Performance Counter Feed
 
