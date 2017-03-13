@@ -243,6 +243,33 @@ so that the `$message` we passed above gets logged and reported back:
           period: 1s
           command: tail -1 server-input
 
+You can even define effectors using your favourite scripting language. By default the
+JSR-223 drivers for javaScript and Python are available, and others can be installed.
+Add an `initializer` that defines your effector with a block of code, and pass in
+data with `parameters` like this:
+
+      brooklyn.initializers:
+      - type: org.apache.brooklyn.core.effector.script.ScriptEffector
+        brooklyn.config:
+          name: modifyEntity
+          description: JavaScript effector example
+          parameters:
+            name:
+              description: "New name for the entity"
+              type: java.lang.String
+          script.language: "JavaScript"
+          script.return.var: "id"
+          script.return.type: java.lang.String
+          script.content: |
+            var id = entity.getId();
+            entity.setDisplayName('Entity: ' + name);
+
+As you can see, the `script.content` key contains a block of JavaScript code, which
+can access the `entity` object and manipulate it. The `script.return.var` and
+`script.return.type` keys define a variable and its type that will be returned by
+the effector; in  this case the `id` variable is set to the value of the entities
+Brooklyn id. If you prefer to keep your code in a separate file, you can set the
+`script.url` key to a URL pointing at the script.
 
 #### Summary
 
