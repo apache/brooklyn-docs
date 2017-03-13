@@ -243,6 +243,21 @@ so that the `$message` we passed above gets logged and reported back:
           period: 1s
           command: tail -1 server-input
 
+##### Windows Command Sensor
+
+Like the blueprint above, the following example also uses brooklyn.initializers to define sensors on the entity,
+this time however it is a windows VM and uses `WinRmCommandSensor`.
+
+    - type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
+      brooklyn.config:
+        launch.command: echo launching
+        checkRunning.command: echo running
+      brooklyn.initializers:
+      - type: org.apache.brooklyn.core.sensor.windows.WinRmCommandSensor
+        brooklyn.config:
+          name: ip.config
+          period: 60s
+          command: hostname
 
 #### Summary
 
