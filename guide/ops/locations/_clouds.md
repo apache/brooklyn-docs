@@ -278,7 +278,10 @@ The name that Apache Brooklyn generates for your virtual machine will, by defaul
 If you have created a lot of virtual machines, this kind of naming may not be helpful. This can be changed using the following YAML in your location's `brooklyn.config`:
 
     cloudMachineNamer: org.apache.brooklyn.core.location.cloud.names.CustomMachineNamer
-    custom.machine.namer.machine: My-Custom-Name-${entity.displayName}
+    custom.machine.namer.machine: My-Custom-Name-${entity.displayName[0..*10]}-${entity.id}
+
+_Note that often Cloud Provider require Virtual Machine name to be unique.<br>
+Some jclouds providers use that machine node name for other cloud resources such as Security Groups._
 
 A [FreeMarker](http://freemarker.org/) format is used in `custom.machine.namer.machine` which can take values from places such as the launching entity or location.
 
