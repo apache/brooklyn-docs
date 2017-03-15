@@ -220,6 +220,42 @@ sub-components. Users of this catalog item would set only those exposed config o
 than trying to inject config directly into the nested entities.
 
 
+#### DSL Evaluation of Inherited Config
+
+When writing blueprints that rely on inheritance from the runtime management hierarchy, it is 
+important to  understand how config keys that use DSL will be evaluated. In particular, when 
+evaluating a DSL expression, it will be done in the context of the entity declaring the config 
+value (rather than on the entity using the config value).
+
+For example, consider the config value `$brooklyn:attributeWhenReady("host.name")`
+declared on entity X, and inherited by child entity Y. If entity Y uses this config value, 
+it will get the "host.name" attribute of entity X.
+
+Below is another (contrived!) example of this DSL evaluation. When evaluating `refExampleConfig`,
+it retrievies the value of `exampleConfig` which is the DSL expression, and evaluates this in the 
+context of the parent entity that declares it. Therefore `$brooklyn:config("ownConfig")` returns 
+the parent's `ownConfig` value, and the final result for `refExampleConfig` is set to "parentValue":
+
+{% highlight yaml %}
+services:
+- type: org.apache.brooklyn.entity.stock.BasicApplication
+  brooklyn.config:
+    ownConfig: parentValue
+    exampleConfig: $brooklyn:config("ownConfig")
+  
+  brooklyn.children:
+  - type: org.apache.brooklyn.entity.stock.BasicEntity
+    brooklyn.config:
+      ownConfig: childValue
+      refExampleConfig: $brooklyn:config("exampleConfig")
+{% endhighlight %}
+
+_However, the web-console also shows other misleading (incorrect!) config values for the child 
+entity. It shows the inherited config value of `exampleConfig` as "childValue" (because the
+REST api did not evaluate the DSL in the correct context, when retrieving the value! 
+See https://issues.apache.org/jira/browse/BROOKLYN-455._
+
+
 #### Merging Configuration Values
 
 For some configuration values, the most logical behaviour is to merge the configuration value
