@@ -10,7 +10,7 @@ Azure Resource Manager (ARM) is a framework for deploying and managing applicati
 
 #### Setup the Azure credentials
 
-Firstly, install and configure Azure CLI following [these steps](http://azure.microsoft.com/en-us/documentation/articles/xplat-cli/).
+Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/azure/cli-install-nodejs).
 
 Using the Azure CLI, run the following commands to create a service principal
 
@@ -31,7 +31,7 @@ Using the Azure CLI, run the following commands to create a service principal
     # Output will include a value for `Application Id`, which will be used for the live tests
     
     # Create a Service Principal
-    azure ad sp create <Application-id>
+    azure ad sp create --applicationId <Application-id>
     
     # Output will include a value for `Object Id`, to be used in the next step 
 
