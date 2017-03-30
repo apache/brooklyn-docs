@@ -4,14 +4,14 @@ layout: website-normal
 
 ---
 
-Policies perform the active management enabled by Brooklyn.  
+Policies perform the active management enabled by Brooklyn.
 They can subscribe to entity sensors and be triggered by them (or they can run periodically,
 or be triggered by external systems).
 
 <!---
 TODO, clarify below, members of what?
 -->
-Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its 
+Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its
 associated entity, to the child entities, and/or to the members of a "group" entity.
 
 Common uses of a policy include the following:
@@ -19,7 +19,7 @@ Common uses of a policy include the following:
 *	perform calculations,
 *	look up other values,
 *	invoke effectors  (management policies) or,
-*	cause the entity associated with the policy to emit sensor values (enricher policies). 
+*	cause the entity associated with the policy to emit sensor values (enricher policies).
 
 Entities can have zero or more ``Policy`` instances attached to them.
 
@@ -143,7 +143,7 @@ brooklyn.enrichers:
 - org.apache.brooklyn.enricher.stock.Propagator
 
 Use propagator to duplicate one sensor as another, giving the supplied sensor mapping.
-The other use of Propagator is where you specify a producer (using $brooklyn:entity(...) as below)
+The other use of Propagator is where you specify a producer (using `$brooklyn:entity(...)` as below)
 from which to take sensors; in that mode you can specify `propagate` as a list of sensors whose names are unchanged,
 instead of (or in addition to) this map
 
@@ -200,7 +200,7 @@ Converts absolute sensor values into a delta.
 - org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher
 
 Converts absolute sensor values into a delta/second.
-	
+
 {% highlight yaml %}
 brooklyn.enrichers:
 - type: org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher
@@ -215,7 +215,7 @@ brooklyn.enrichers:
 - org.apache.brooklyn.policy.enricher.RollingMeanEnricher
 
 Converts the last *N* sensor values into a mean.
-	
+
 ####	Rolling Time-window Mean
 
 - org.apache.brooklyn.policy.enricher.RollingTimeWindowMeanEnricher
@@ -235,6 +235,35 @@ An Enricher which computes latency in accessing a URL.
 Can be used to combine the values of sensors.  This enricher should be instantiated using Enrichers.buider.combining(..).
 This enricher is only available in Java blueprints and cannot be used in YAML.
 
+#### Note On Enricher Producers
+
+If an entity needs an enricher whose source sensor (`enricher.sourceSensor`) belongs to another entity, then the enricher
+configuration must include an `enricher.producer` key referring to the other entity.
+
+For example, if we consider the Transfomer from above, suppose that `enricher.sourceSensor: $brooklyn:sensor("urls.tcp.list")`
+is actually a sensor on a different entity called `load.balancer`. In this case, we would need to supply an
+`enricher.producer` value.
+
+{% highlight yaml %}
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.Transformer
+  brooklyn.config:
+    enricher.producer: $brooklyn:entity("load.balancer")
+    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.string")
+    enricher.targetSensor: $brooklyn:sensor("urls.tcp.withBrackets")
+    enricher.targetValue: |
+      $brooklyn:formatString("[%s]", $brooklyn:attributeWhenReady("urls.tcp.string"))
+{% endhighlight %}
+
+It is important to note that the value supplied to `enricher.producer` must be immediately resolvable. While it would be valid
+DSL syntax to write:
+
+{% highlight yaml %}
+enricher.producer: brooklyn:entity($brooklyn:attributeWhenReady("load.balancer.entity"))
+{% endhighlight %}
+
+(assuming the `load.balancer.entity` sensor returns a Brooklyn entity), this will not function properly because `enricher.producer`
+will unsuccessfully attempt to get the supplied entity immediately.
 
 Next: Writing a Policy
 ---------------------------
