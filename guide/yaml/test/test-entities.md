@@ -169,6 +169,12 @@ The following conditions are provided by those test entities above that include 
 - `isEmpty` - asserts that the actual value is an empty string
 - `notEmpty` - asserts that the actual value is a non empty string
 - `hasTruthValue` - asserts that the actual value has the expected interpretation as a boolean
+- `greaterThan` - asserts that the actual value is greater than the expected value according to Java's
+  [Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html) interface. Actual and
+  expected must be instances of the same type and implement `Comparable`.
+- `lessThan` - asserts that the actual value is less than the expected value according to Java's
+  [Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html) interface. Actual and
+  expected must be instances of the same type and implement `Comparable`.
 
 Assertions may be provided as a simple map:
 
