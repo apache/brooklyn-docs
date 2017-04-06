@@ -236,7 +236,7 @@ template options for your cloud.
 
 Part of the process for creating a virtual machine is the creation of a jclouds `TemplateOptions` object. jclouds
 providers extends this with extra options for each cloud - so when using the AWS provider, the object will be of
-type `AWSEC2TemplateOptions`. By [examining the source code](https://github.com/jclouds/jclouds/blob/jclouds-1.9.0/providers/aws-ec2/src/main/java/org/jclouds/aws/ec2/compute/AWSEC2TemplateOptions.java),
+type `AWSEC2TemplateOptions`. By [examining the source code](https://jclouds.apache.org/reference/javadoc/2.0.x/org/jclouds/aws/ec2/compute/AWSEC2TemplateOptions.html),
 you can see all of the options available to you.
 
 The `templateOptions` config key takes a map. The keys to the map are method names, and Brooklyn will find the method on
