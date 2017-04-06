@@ -79,38 +79,40 @@ the entity being defined, with these being the most common:
   * `default`: a default value; this will be coerced to the declared `type`
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
   * `constraints`: a list of constraints the parameter should meet;
-    for details, see [Entity Configuration]({{ site.path.guide }}/yaml/entity-configuration.html#config-key-constraints). 
+    for details, see [Entity Configuration]({{ site.path.guide }}/yaml/entity-configuration.html#config-key-constraints).
 
   A shorthand notation is also supported where just the name of the parameter is supplied
   as an item in the list, with the other values being unset or the default.
   See `displayName` in the following example for an illustration of this:
 
-~~~ yaml
-brooklyn.parameters:
-# user.age parameter is required, pinned and fully specified
-- name: user.age
+  ~~~ yaml
+  brooklyn.parameters:
+  # user.age parameter is required, pinned and fully specified
+  - name: user.age
   type: integer
   label: Age
   description: the age of the user
   pinned: true
   constraints:
   - required
-# user.name is optional, is not pinned and has a default
-- name: user.name
+  # user.name is optional, is not pinned and has a default
+  - name: user.name
   default: You
   pinned: false
-# shorthand notation: displayName will be an optional config of type string with no default
-- displayName
-~~~
+  # shorthand notation: displayName will be an optional config of type string with no default
+  - displayName
+  ~~~
 
-Entities, policies, and initializers may accept additional key-value pairs,
-usually documented in their documentation (e.g. javadoc), or in the case of Java
-often as static fields in the underlying Java class.
-Often there are config keys or flags (indicated by `@SetFromFlag`) declared on the class; 
-these declared flags and config keys may be passed in at the root of the `ServiceSpecification` or in `brooklyn.config`.
-(Undeclared config is only accepted in the `brooklyn.config` map.)
-Referencing the parameters from within java classes is identical to using config keys. In yaml it's
-usually referenced using `$brooklyn:scopeRoot().config("displayName")`. See below for more details on scopes.
+  Entities, policies, and initializers may accept additional key-value pairs,
+  usually documented in their documentation (e.g. javadoc), or in the case of Java
+  often as static fields in the underlying Java class.
+  Often there are config keys or flags (indicated by `@SetFromFlag`) declared on the class;
+  these declared flags and config keys may be passed in at the root of the `ServiceSpecification` or in `brooklyn.config`.
+  (Undeclared config is only accepted in the `brooklyn.config` map.)
+  Referencing the parameters from within java classes is identical to using config keys. In yaml it's
+  usually referenced using `$brooklyn:scopeRoot().config("displayName")`. See below for more details on scopes.
+
+* `brooklyn.tags`: documents a list of tag objects which should be assigned to the entity.
 
 
 ## Location Specification Elements
