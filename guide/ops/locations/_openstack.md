@@ -62,7 +62,7 @@ The default flavors are shown below (though the set of flavors can be
     +-----+-----------+-----------+------+
 
 For further configuration options, consult 
-[jclouds Nova template options](https://jclouds.apache.org/reference/javadoc/1.9.x/org/jclouds/openstack/nova/v2_0/compute/options/NovaTemplateOptions.html).
+[jclouds Nova template options](https://jclouds.apache.org/reference/javadoc/2.0.x/org/jclouds/openstack/nova/v2_0/compute/options/NovaTemplateOptions.html).
 These can be used with the **[templateOptions](#custom-template-options)** configuration option.
 
 
@@ -267,11 +267,3 @@ Note that the following values will be set by default when omitted above:
     jclouds.keystone.credential-type=passwordCredentials
     jclouds.openstack-nova.auto-generate-keypairs: true
     jclouds.openstack-nova.auto-create-floating-ips: true
-
-If you do not have `openstack-mitaka-nova`, you can build and install it using the following steps:
-
-* Generate a JAR `openstack-mitaka-nova-1.9.3-cloudsoft.20160831.jar`
-  by building: https://github.com/cloudsoft/jclouds-openstack-mitaka-nova
-* If using Karaf, install this bundle (e.g. `bundle:install mvn:io.cloudsoft.jclouds.api/openstack-mitaka-nova/1.9.3-cloudsoft.20160831`),
-  and start it (e.g. `bundle:start openstack-mitaka-nova`).
-* Or if using the old-style main, copy the jar into the `lib/patch` directory and retart.
