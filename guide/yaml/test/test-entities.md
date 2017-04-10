@@ -165,6 +165,13 @@ The following conditions are provided by those test entities above that include 
 - `equals` - a synonym for `isEqualTo`
 - `notEqual` - asserts that the actual value does not equal the expected value.
 - `matches` - asserts that the actual value matches a [regex pattern](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html?is-external=true), for example `".*hello.*"`.
+  Note that regular expressions follow the Java defaults, e.g. for [line terminators](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html#lt). 
+  One can use `"(?m)"` for multi-line mode (so that `^` and `$` also match just after/before line terminators, 
+  rather than just the start/end of the entire input sequence). The dotall mode, set with `"(?s)"`, can also 
+  be useful (so that `.` matches any character, including line terminators). 
+- `containsMatch` - asserts that the value contains a string that matches a regex. It follow the behaviour of 
+  the [Matcher.find() method](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Matcher.html#find()).
+  This can be useful for simplifying matching in multi-line input.
 - `contains` - asserts that the actual value contains the supplied value
 - `isEmpty` - asserts that the actual value is an empty string
 - `notEmpty` - asserts that the actual value is a non empty string
