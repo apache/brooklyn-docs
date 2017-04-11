@@ -1,7 +1,6 @@
 ---
 title: Policies
 layout: website-normal
-
 ---
 
 Policies perform the active management enabled by Brooklyn.
@@ -121,151 +120,79 @@ The ConditionalSuspendPolicy will suspend and resume a target policy based on co
 
 The LoadBalancingPolicy is attached to a pool of "containers", each of which can host one or more migratable "items".  The policy monitors the workrates of the items and effects migrations in an attempt to ensure that the containers are all sufficiently utilized without any of them being overloaded.
 
-###  Enrichers
 
-#### Transformer
+Writing a Policy
+----------------
 
-- org.apache.brooklyn.enricher.stock.Transformer
+### Your First Policy
 
-Transforms attributes of an entity.
+Policies perform the active management enabled by Brooklyn.
+Each policy instance is associated with an entity,
+and at runtime it will typically subscribe to sensors on that entity or children,
+performing some computation and optionally actions when a subscribed sensor event occurs.
+This action might be invoking an effector or emitting a new sensor,
+depending the desired behavior is.
 
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.Transformer
-  brooklyn.config:
-    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.string")
-    enricher.targetSensor: $brooklyn:sensor("urls.tcp.withBrackets")
-    enricher.targetValue: $brooklyn:formatString("[%s]", $brooklyn:attributeWhenReady("urls.tcp.string"))
+Writing a policy is straightforward.
+Simply extend [``AbstractPolicy``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/policy/AbstractPolicy.html),
+overriding the [``setEntity``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/objs/AbstractEntityAdjunct.html#setEntity-org.apache.brooklyn.api.entity.EntityLocal-) method to supply any subscriptions desired:
+
+{% highlight java %}
+    @Override
+    public void setEntity(EntityLocal entity) {
+        super.setEntity(entity)
+        subscribe(entity, TARGET_SENSOR, this)
+    }
 {% endhighlight %}
 
-#### Propagator
+and supply the computation and/or activity desired whenever that event occurs:
 
-- org.apache.brooklyn.enricher.stock.Propagator
-
-Use propagator to duplicate one sensor as another, giving the supplied sensor mapping.
-The other use of Propagator is where you specify a producer (using `$brooklyn:entity(...)` as below)
-from which to take sensors; in that mode you can specify `propagate` as a list of sensors whose names are unchanged,
-instead of (or in addition to) this map
-
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.Propagator
-  brooklyn.config:
-    producer: $brooklyn:entity("cluster")
-- type: org.apache.brooklyn.enricher.stock.Propagator
-  brooklyn.config:
-    sensorMapping:
-      $brooklyn:sensor("url"): $brooklyn:sensor("org.apache.brooklyn.core.entity.Attributes", "main.uri")
+{% highlight java %}
+    @Override
+    public void onEvent(SensorEvent<Integer> event) {
+        int val = event.getValue()
+        if (val % 2 == 1)
+            entity.sayYoureOdd();
+    }
 {% endhighlight %}
 
-####	Custom Aggregating
 
-- org.apache.brooklyn.enricher.stock.Aggregator
+You'll want to do more complicated things, no doubt,
+like access other entities, perform multiple subscriptions,
+and emit other sensors -- and you can.
+See the best practices below and source code for some commonly used policies and enrichers,
+such as ``AutoScalerPolicy`` and ``RollingMeanEnricher``.
 
-Aggregates multiple sensor values (usually across a tier, esp. a cluster) and performs a supplied aggregation method to them to return an aggregate figure, e.g. sum, mean, median, etc.
+One rule of thumb, to close on:
+try to keep policies simple, and compose them together at runtime;
+for instance, if a complex computation triggers an action,
+define one **enricher** policy to aggregate other sensors and emit a new sensor,
+then write a second policy to perform that action.
 
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.Aggregator
-  brooklyn.config:
-    enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
-    enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
-    enricher.aggregating.fromMembers: true
-    transformation: average
-{% endhighlight %}
 
-#### Joiner
+### Best Practice
 
-- org.apache.brooklyn.enricher.stock.Joiner
+The following recommendations should be considered when designing policies:
 
-Joins a sensor whose output is a list into a single item joined by a separator.
+#### Management should take place as "low" as possible in the hierarchy
+*   place management responsibility in policies at the entity, as much as possible ideally management should take run as a policy on the relevant entity
 
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.Joiner
-  brooklyn.config:
-    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.list")
-    enricher.targetSensor: $brooklyn:sensor("urls.tcp.string")
-    uniqueTag: urls.quoted.string
-{% endhighlight %}
+*   place escalated management responsibility at the parent entity. Where this is impractical, perhaps because two aspects of an entity are best handled in two different places, ensure that the separation of responsibilities is documented and there is a group membership relationship between secondary/aspect managers.
 
-####	Delta Enricher
 
-- org.apache.brooklyn.policy.enricher.Delta Enricher
+#### Policies should be small and composable
 
-Converts absolute sensor values into a delta.
+e.g. one policy which takes a sensor and emits a different, enriched sensor, and a second policy which responds to the enriched sensor of the first     (e.g. a policy detects a process is maxed out and emits a TOO_HOT sensor; a second policy responds to this by scaling up the VM where it is running, requesting more CPU)
 
-####	Time-weighted Delta
+#### Where a policy cannot resolve a situation at an entity, the issue should be escalated to a manager with a compatible policy.
 
-- org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher
+Typically escalation will go to the entity parent, and then cascade up.
+e.g. if the earlier VM CPU cannot be increased, the TOO_HOT event may go to the parent, a cluster entity, which attempts to balance. If the cluster cannot balance, then to another policy which attempts to scale out the cluster, and should the cluster be unable to scale, to a third policy which emits TOO_HOT for the cluster.
 
-Converts absolute sensor values into a delta/second.
+#### Management escalation should be carefully designed so that policies are not incompatible
 
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher
-  brooklyn.config:
-    enricher.sourceSensor: reqs.count
-    enricher.targetSensor: reqs.per_sec
-    enricher.delta.period: 1s
-{% endhighlight %}
+Order policies carefully, and mark sensors as "handled" (or potentially "swallow" them locally), so that subsequent policies and parent entities do not take superfluous (or contradictory) corrective action.
 
-####	Rolling Mean
+### Implementation Classes
 
-- org.apache.brooklyn.policy.enricher.RollingMeanEnricher
-
-Converts the last *N* sensor values into a mean.
-
-####	Rolling Time-window Mean
-
-- org.apache.brooklyn.policy.enricher.RollingTimeWindowMeanEnricher
-
-Converts the last *N* seconds of sensor values into a weighted mean.
-
-#### Http Latency Detector
-
-- org.apache.brooklyn.policy.enricher.RollingTimeWindowMeanEnricher.HttpLatencyDetector
-
-An Enricher which computes latency in accessing a URL.
-
-#### Combiner
-
-- org.apache.brooklyn.enricher.stock.Combiner
-
-Can be used to combine the values of sensors.  This enricher should be instantiated using Enrichers.buider.combining(..).
-This enricher is only available in Java blueprints and cannot be used in YAML.
-
-#### Note On Enricher Producers
-
-If an entity needs an enricher whose source sensor (`enricher.sourceSensor`) belongs to another entity, then the enricher
-configuration must include an `enricher.producer` key referring to the other entity.
-
-For example, if we consider the Transfomer from above, suppose that `enricher.sourceSensor: $brooklyn:sensor("urls.tcp.list")`
-is actually a sensor on a different entity called `load.balancer`. In this case, we would need to supply an
-`enricher.producer` value.
-
-{% highlight yaml %}
-brooklyn.enrichers:
-- type: org.apache.brooklyn.enricher.stock.Transformer
-  brooklyn.config:
-    enricher.producer: $brooklyn:entity("load.balancer")
-    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.string")
-    enricher.targetSensor: $brooklyn:sensor("urls.tcp.withBrackets")
-    enricher.targetValue: |
-      $brooklyn:formatString("[%s]", $brooklyn:attributeWhenReady("urls.tcp.string"))
-{% endhighlight %}
-
-It is important to note that the value supplied to `enricher.producer` must be immediately resolvable. While it would be valid
-DSL syntax to write:
-
-{% highlight yaml %}
-enricher.producer: brooklyn:entity($brooklyn:attributeWhenReady("load.balancer.entity"))
-{% endhighlight %}
-
-(assuming the `load.balancer.entity` sensor returns a Brooklyn entity), this will not function properly because `enricher.producer`
-will unsuccessfully attempt to get the supplied entity immediately.
-
-Next: Writing a Policy
----------------------------
-
-To write a policy, see the section on [Writing a Policy]({{ site.path.guide }}/java/policy.html).
+Extend [`AbstractPolicy`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/policy/AbstractPolicy.html), or override an existing policy.
