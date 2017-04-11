@@ -12,7 +12,7 @@ See below for documentation of the stock enrichers available in Apache Brooklyn.
 
 [`org.apache.brooklyn.enricher.stock.Transformer`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/enricher/stock/Transformer.html)
 
-Transforms attributes of an entity.
+Takes a source sensor and modifies it in some way before publishing the result in a new sensor. See below an example using `$brooklyn:formatString`.
 
 {% highlight yaml %}
 brooklyn.enrichers:
@@ -42,7 +42,7 @@ brooklyn.enrichers:
       $brooklyn:sensor("url"): $brooklyn:sensor("org.apache.brooklyn.core.entity.Attributes", "main.uri")
 {% endhighlight %}
 
-####	Custom Aggregating
+#### Custom Aggregating
 
 [`org.apache.brooklyn.enricher.stock.Aggregator`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/enricher/stock/Aggregator.html)
 
@@ -57,6 +57,14 @@ brooklyn.enrichers:
     enricher.aggregating.fromMembers: true
     transformation: average
 {% endhighlight %}
+
+There are a number of additional configuration keys available for the Aggregators:
+
+| Configuration Key                 | Default | Description                                                         |
+|-----------------------------------|---------|---------------------------------------------------------------------|
+| enricher.transformation.untyped   | list    | Specifies a transformation, as a function from a collection to the value, or as a string matching a pre-defined named transformation, such as 'average' (for numbers), 'sum' (for numbers), 'isQuorate' (to compute a quorum), or 'list' (the default, putting any collection of items into a list) |
+| quorum.check.type                 |         | The requirement to be considered quorate -- possible values: 'all', 'allAndAtLeastOne', 'atLeastOne', 'atLeastOneUnlessEmpty', 'alwaysHealthy'", "allAndAtLeastOne" |
+| quorum.total.size                 | 1       | The total size to consider when determining if quorate              |
 
 #### Joiner
 
@@ -73,17 +81,28 @@ brooklyn.enrichers:
     uniqueTag: urls.quoted.string
 {% endhighlight %}
 
+There are a number of additional configuration keys available for the joiner:
+
+| Configuration Key                 | Default | Description                                                         |
+|-----------------------------------|---------|---------------------------------------------------------------------|
+| enricher.joiner.separator         | ,       | Separator string to insert between each argument                    |
+| enricher.joiner.keyValueSeparator | =       | Separator string to insert between each key-value pair              |
+| enricher.joiner.joinMapEntries    | false   | Whether to add map entries as key-value pairs or just use the value |
+| enricher.joiner.quote             | true    | Whether to bash-escape each parameter and wrap in double-quotes     |
+| enricher.joiner.minimum           | 0       | Minimum number of elements to join; if fewer than this, sets null   |
+| enricher.joiner.maximum           | null    | Maximum number of elements to join (null means all elements taken)  |
+
 ####	Delta Enricher
 
 [`org.apache.brooklyn.policy.enricher.DeltaEnricher`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/enricher/DeltaEnricher.html)
 
-Converts absolute sensor values into a delta.
+Converts an absolute sensor into a delta sensor (i.e. the difference between the current and previous value)
 
 ####	Time-weighted Delta
 
 [`org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/enricher/stock/YamlTimeWeightedDeltaEnricher.html)
 
-Converts absolute sensor values into a delta/second.
+Converts absolute sensor values into a difference over time. The `enricher.delta.period` indicates the measurement interval.
 
 {% highlight yaml %}
 brooklyn.enrichers:
@@ -98,19 +117,30 @@ brooklyn.enrichers:
 
 [`org.apache.brooklyn.policy.enricher.RollingMeanEnricher`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/enricher/RollingMeanEnricher.html)
 
-Converts the last *N* sensor values into a mean.
+Transforms a sensor into a rolling average based on a fixed window size. This is useful for smoothing sample type metrics, such as latency or CPU time
 
-####	Rolling Time-window Mean
+#### Rolling Time-window Mean
 
 [`org.apache.brooklyn.policy.enricher.RollingTimeWindowMeanEnricher`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/enricher/RollingTimeWindowMeanEnricher.html)
 
-Converts the last *N* seconds of sensor values into a weighted mean.
+Transforms a sensor's data into a rolling average based on a time window. This time window can be specified with the config key `confidenceRequired` - Minimum confidence level (ie period covered) required to publish a rolling average (default `8d`).
 
 #### Http Latency Detector
 
 [`org.apache.brooklyn.policy.enricher.RollingTimeWindowMeanEnricher.HttpLatencyDetector`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/enricher/HttpLatencyDetector.html)
 
-An Enricher which computes latency in accessing a URL.
+An Enricher which computes latency in accessing a URL, normally by periodically polling that URL. This is then published in the sensors `web.request.latency.last` and `web.request.latency.windowed`.
+
+There are a number of additional configuration keys available for the Http Latency Detector:
+
+| Configuration Key                 | Default | Description                                                          |
+|-----------------------------------|---------|----------------------------------------------------------------------|
+| latencyDetector.url               |         | The URL to compute the latency of                                    |
+| latencyDetector.urlSensor         |         | A sensor containing the URL to compute the latency of                |
+| latencyDetector.urlPostProcessing |         | Function applied to the urlSensor value, to determine the URL to use |
+| latencyDetector.rollup            |         | The window size (in duration) over which to compute                  |
+| latencyDetector.requireServiceUp  | false   | Require the service is up                                            |
+| latencyDetector.period            | 1s      | The period of polling                                                |
 
 #### Combiner
 
