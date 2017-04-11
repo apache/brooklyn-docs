@@ -40,30 +40,6 @@ If you wish you can
 <a href="javascript:void(0);" onclick="clear_user_versions();">re-enable all warnings</a>.
 
 
-## Snapshot Versions
-
-Current work on Apache Brooklyn is done with SNAPSHOT version labels,
-in the `master` branch or in a branch with the version label.
-This code has not been voted on and are not endorsed by The Apache Software Foundation.
-Documentation for these versions are uploaded from time to time,
-and are provided here for reference:
-
-* **[0.11.0-SNAPSHOT](/v/0.11.0-SNAPSHOT/)**: latest unreleased version
-(although docs may not be up-to-date with the latest code)
-
-* **[0.10.0-SNAPSHOT](/v/0.10.0-SNAPSHOT/)**: any changes since 0.10.0 which would go into 0.10.1
-(although docs may not be up-to-date with the latest code)
-
-* **[0.9.0-SNAPSHOT](/v/0.9.0-SNAPSHOT/)**: any changes since 0.9.0 which would go into 0.9.1
-(although docs may not be up-to-date with the latest code)
-
-* **[0.8.0-SNAPSHOT](/v/0.8.0-SNAPSHOT/)**: any changes since 0.8.0-incubating which would go into 0.8.1
-(mainly things from 0.9.0-SNAPSHOT which warranted being backported)
-
-* **[0.7.0-SNAPSHOT](/v/0.7.0-SNAPSHOT/)**: any changes since 0.7.0-incubating which would go into 0.7.1
-(mainly things from 0.8.0-SNAPSHOT which warranted being backported)
-
-
 ## Ancient Versions
 
 The versions below were made prior to joining The Apache Software Foundation, therefore **they are not endorsed by
