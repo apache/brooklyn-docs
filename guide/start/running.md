@@ -140,7 +140,7 @@ to configure security. Documentation of configuration options include:
  
 * [Security]({{ site.path.guide }}/ops/brooklyn_properties.html)
 * [Persistence]({{ site.path.guide }}/ops/persistence/)
-* [Cloud credentials]({{ site.path.guide }}/ops/locations/)
+* [Cloud credentials]({{ site.path.guide }}/locations/)
 
 
 ## Launch Apache Brooklyn

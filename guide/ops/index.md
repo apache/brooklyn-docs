@@ -1,24 +1,22 @@
 ---
-title: Operations
+title: Reference Guide
 started-pdf-exclude: true
 layout: website-normal
 children:
+- production-installation.md
 - starting-stopping-monitoring.md
 - server-cli-reference.md
 - cli/
 - gui/
+- rest.md
 - brooklyn_properties.md
-- locations/
 - persistence/
 - high-availability/
-- catalog/
-- rest.md
 - osgi.md
 - logging.md
 - https.md
 - externalized-configuration.md
 - requirements.md
-- production-installation.md
 - security-guidelines.md
 - troubleshooting/
 ---
