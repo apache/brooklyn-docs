@@ -10,9 +10,9 @@ children:
   menu:
   - { path: /guide/index.md, title_in_menu: "User Guide", 
       menu_customization: { dropdown_section_header: true } }
-  - { path: /guide/yaml/index.md, title_in_menu: YAML Blueprints, href_path: /guide/yaml/creating-yaml.md }
-  - { path: /guide/java/index.md, title_in_menu: Java Blueprints }
-  - { path: /guide/ops/index.md, title_in_menu: Operations,
+  - { path: /guide/blueprints/index.md, title_in_menu: Writing Blueprints, href_path: /guide/blueprints/creating-yaml.md }
+  - { path: /guide/locations/index.md, title_in_menu: Deploying Blueprints }
+  - { path: /guide/ops/index.md, title_in_menu: Reference Guide,
       menu_customization: { dropdown_section_header: true } }
   - { path: /guide/dev/index.md, title_in_menu: Developer Guide }
   - { path: meta/versions.md, title_in_menu: Versions,

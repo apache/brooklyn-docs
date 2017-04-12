@@ -63,7 +63,7 @@ location:
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ site.path.guide }}/ops/locations/#clouds){:target="_blank"}.
+Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ site.path.guide }}/locations/#clouds){:target="_blank"}.
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com){:target="_blank"}. Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
 
@@ -77,7 +77,7 @@ location:
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ site.path.guide }}/ops/locations/#byon){:target="_blank"}. 
+The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ site.path.guide }}/locations/#byon){:target="_blank"}. 
 
 Replace the hosts, user and password in the example below with your own server details, then replace the location in your "myapp.yaml" with this.
 
@@ -98,7 +98,7 @@ location:
 
 ---
 
-**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ site.path.guide }}/ops/locations)__ in the Operations section of the User Guide.
+**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ site.path.guide }}/locations)__ in the Operations section of the User Guide.
 
 ## Deploying the Application
 
