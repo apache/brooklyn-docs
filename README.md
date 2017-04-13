@@ -29,16 +29,16 @@ The Brooklyn documentation uses [Jekyll](https://jekyllrb.com/) to process the s
 This in turn requires Ruby and gems as described in the `Gemfile`:
 install [RVM](http://rvm.io/) to manage Ruby installations and sets of Ruby gems.
 
-    \curl -sSL https://get.rvm.io | bash -s stable
+    \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
 
 Close your shell session and start a new one, to get the new
 environment that RVM has configured. Change directory to the location where
-you checked out your repository and then to the `docs/` subdirectory (where this file is located).
+this project is (where this file is located).
 
 RVM should detect its configuration inside `Gemfile` and try to configure itself. 
 Most likely it will report that the required version of Ruby is not installed,
 and it will show the command that you need to run to install the correct version. 
-Follow the instructions it shows.
+Follow the instructions it shows, typically something like `rvm install ruby-2.1.2`.
 
 Once the correct version of Ruby is installed, change to your home directory
 and then change back (`cd ~ ; cd -`).
@@ -50,7 +50,7 @@ at the correct versions:
     bundle install
 
 Any time you need to reset your Ruby environment for `jekyll` to run correctly,
-return to the `_build` directory and re-run the above command.
+go to this directory (or the `_build` subdir) and re-run the above command.
 
 On some platforms there may be some fiddling required before `jekyll` runs without errors,
 but the ecosystem is fairly mature and most problems can be resolved with a bit of googling.
@@ -69,7 +69,7 @@ You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use th
 Seeing the Website and Docs
 ---------------------------
 
-To build and most of see the documentation, run this command in your `docs` folder:
+To build and most of see the documentation, run this command in this folder:
 
     jekyll serve
     
