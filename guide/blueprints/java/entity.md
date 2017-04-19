@@ -13,9 +13,9 @@ There are several ways to write a new entity:
   scripts.
 * For composite entities, use YAML to compose exiting types of entities (potentially overwriting
   parts of their configuration), and wire them together.
-* Use **[Chef recipes]({{site.path.guide}}/yaml/chef)**.
-* Use **[Salt formulas]({{site.path.guide}}/yaml/salt)**.
-* Use **[Ansible playbooks]({{site.path.guide}}/yaml/ansible)**.
+* Use **[Chef recipes]({{site.path.guide}}/blueprints/chef)**.
+* Use **[Salt formulas]({{site.path.guide}}/blueprints/salt)**.
+* Use **[Ansible playbooks]({{site.path.guide}}/blueprints/ansible)**.
 * Write pure-java, extending existing base-classes. For example, the `GistGenerator` 
   [example](defining-and-deploying.html). These can use utilities such as `HttpTool` and 
   `BashCommands`.

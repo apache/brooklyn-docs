@@ -8,7 +8,7 @@ children:
 - { section: Templates and the Add-Application Wizard, title: Templates }
 - { section: Adding to the Catalog, title: Adding and Deleting } 
 - { section: Versioning } 
-- { section: CLI Options }
+- { section: brooklyn-server-command-line-arguments, title: CLI Options }
  
 ---
 
@@ -387,7 +387,7 @@ As `scanJavaAnnotations: true` is set in `default.catalog.bom`, Brooklyn will sc
 which will be added to the catalog.
 To launch Brooklyn without initializing the catalog, use `--catalogInitial classpath://brooklyn/empty.catalog.bom`
 
-If [persistence](../persistence/) is enabled, catalog additions will remain between runs. If items that were
+If [persistence](../../ops/persistence/) is enabled, catalog additions will remain between runs. If items that were
 previously added based on items in `brooklyn/default.catalog.bom` or `--catalogInitial` are 
 deleted, they will not be re-added on subsequent restarts of brooklyn. I.e. `--catalogInitial` is ignored
 if persistence is enabled and persistent state has already been created.

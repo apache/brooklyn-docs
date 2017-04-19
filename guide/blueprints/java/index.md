@@ -1,6 +1,6 @@
 ---
-title: Java Blueprints
-title_in_menu: Java Blueprints
+title: Java Entities
+title_in_menu: Java Entities
 layout: website-normal
 started-pdf-exclude: true
 children:
@@ -12,8 +12,6 @@ children:
 - feeds.md
 - entity.md
 - entities.md
-- enrichers.md
-- policies.md
 - service-state.md
 - entitlements.md
 ---

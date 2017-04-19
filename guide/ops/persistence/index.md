@@ -313,7 +313,7 @@ Behaviour on rebind:
 
 * By extending `SoftwareProcess`, entities get a lot of the rebind logic for free. For 
   example, the default `rebind()` method will call `connectSensors()`.
-  See [`SoftwareProcess` Lifecycle]({{site.path.guide}}/java/entities.html#SoftwareProcess-lifecycle)
+  See [`SoftwareProcess` Lifecycle]({{site.path.guide}}/blueprints/java/entities.html#SoftwareProcess-lifecycle)
   for more details.
 * If necessary, implement rebind. The `entity.rebind()` is called automatically by the
   Brooklyn framework on rebind, after configuring the entity's config/attributes but before 

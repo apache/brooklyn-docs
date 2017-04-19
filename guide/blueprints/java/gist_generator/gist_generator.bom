@@ -2,7 +2,7 @@ brooklyn.catalog:
   libraries:
   - http://search.maven.org/remotecontent?filepath=com/google/code/gson/gson/2.2.2/gson-2.2.2.jar
   - http://repo1.maven.org/maven2/org/apache/servicemix/bundles/org.apache.servicemix.bundles.egit.github.core/2.1.5_1/org.apache.servicemix.bundles.egit.github.core-2.1.5_1.jar
-  - http://developers.cloudsoftcorp.com/brooklyn/guide/java/gist_generator/autobrick-0.1.0-SNAPSHOT.jar
+  - http://developers.cloudsoftcorp.com/brooklyn/guide/blueprints/java/gist_generator/autobrick-0.1.0-SNAPSHOT.jar
   id: example.GistGenerator
   version: "0.1.0-SNAPSHOT"
   itemType: template

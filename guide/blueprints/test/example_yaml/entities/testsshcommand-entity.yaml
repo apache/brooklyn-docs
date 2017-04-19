@@ -19,7 +19,7 @@ services:
     - type: org.apache.brooklyn.test.framework.TestSshCommand
       name: Check hello world script
       targetId: testprocess
-      downloadUrl: https://github.com/apache/brooklyn-docs/raw/master/guide/yaml/test/example_yaml/entities/script1.sh
+      downloadUrl: https://github.com/apache/brooklyn-docs/raw/master/guide/blueprints/test/example_yaml/entities/script1.sh
       assertStatus:
         equals: 0
       assertOut: 

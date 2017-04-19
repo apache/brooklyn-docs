@@ -37,7 +37,7 @@ Options for speeding up provisioning include those below.
 
 #### Deploying to Bring Your Own Nodes (BYON)
 
-A [BYON location]({{ site.path.guide }}/ops/locations/#byon) can be defined, which avoids the time 
+A [BYON location]({{ site.path.guide }}/locations/#byon) can be defined, which avoids the time 
 required to provision VMs. This is fast, but has the downside that artifacts installed during a 
 previous run can interfere with subsequent runs.
 
@@ -113,7 +113,7 @@ real thing.
 
 ## Writing Entity Tests
 
-Use the [test framework]({{ site.path.guide }}/yaml/test/) to write test cases. This will make 
+Use the [test framework]({{ site.path.guide }}/blueprints/test/) to write test cases. This will make 
 automated (regression) testing easier, and will allow others to easily confirm that the entity 
 works in their environment.
 

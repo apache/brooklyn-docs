@@ -149,7 +149,7 @@ artifact (which will be in the `target` sub-directory after running `mvn clean i
 {% readj gist_generator/gist_generator.bom %}
 {% endhighlight %}
 
-See [Handling Bundle Dependencies]({{ site.path.guide}}/java/bundle-dependencies.html)
+See [Handling Bundle Dependencies]({{ site.path.guide}}/blueprints/java/bundle-dependencies.html)
 for a description of the `brooklyn.libraries` used above, and for other alternative approaches.
 
 The command below will use the `br` CLI to add this to the catalog of a running Brooklyn instance.

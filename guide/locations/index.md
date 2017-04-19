@@ -12,10 +12,10 @@ to a pre-provisioned network or to localhost (primarily useful for testing bluep
 
 See also:
 
-* The [Locations yaml guide]({{ site.path.guide }}/yaml/setting-locations.html)
+* The [Locations yaml guide]({{ site.path.guide }}/blueprints/setting-locations.html)
 * Use within an entity of the configuration option 
-  [provisioning.properties]({{ site.path.guide }}/yaml/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
-* How to add location definitions to the [Catalog]({{ site.path.guide }}/ops/catalog/); and 
+  [provisioning.properties]({{ site.path.guide }}/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
+* How to add location definitions to the [Catalog]({{ site.path.guide }}/blueprints/catalog/); and 
 * How to use [Externalized Configuration]({{ site.path.guide }}/ops/externalized-configuration.html).
 
 {% child_content %}

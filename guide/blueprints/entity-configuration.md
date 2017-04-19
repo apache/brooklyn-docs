@@ -76,7 +76,7 @@ services:
 - type: entity-config-example
 {% endhighlight %}
 
-For details of how to write and add catalog items, see [Catalog]({{ site.path.guide }}/ops/catalog/). 
+For details of how to write and add catalog items, see [Catalog]({{ site.path.guide }}/blueprints/catalog/). 
 
 
 #### Config Key Constraints

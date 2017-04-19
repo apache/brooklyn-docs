@@ -25,7 +25,7 @@ Here's a very simple YAML blueprint plan, to explain the structure:
 * The `name` is just for the benefit of us humans.
 
 * The `location` specifies where this should be deployed.
-  If you've [set up passwordless localhost SSH access]({{ site.path.guide }}/ops/locations/#localhost) 
+  If you've [set up passwordless localhost SSH access]({{ site.path.guide }}/locations/#localhost) 
   you can use `localhost` as above, but if not, just wait ten seconds for the next example.
   
 * The `services` block takes a list of the typed services we want to deploy.
@@ -64,8 +64,8 @@ Brooklyn lived as a Java framework for many years before we felt confident
 to make a declarative front-end, so you can do pretty much anything you want to
 by dropping to the JVM. For more information on Java:
 
-* start with a [Maven archetype]({{site.path.guide}}/java/archetype.html)
-* see all [Brooklyn Java guide]({{site.path.guide}}/java/) topics
+* start with a [Maven archetype]({{site.path.guide}}/blueprints/java/archetype.html)
+* see all [Brooklyn Java guide]({{site.path.guide}}/blueprints/java/) topics
 * look at test cases in the [codebase](https://github.com/apache/brooklyn)
 
 <!-- 

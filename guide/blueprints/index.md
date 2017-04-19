@@ -1,24 +1,27 @@
 ---
-title: YAML Blueprints
+title: Writing Blueprints
 layout: website-normal
 children:
 - creating-yaml.md
+- entity-configuration.md
 - setting-locations.md
 - configuring-vms.md
-- clusters.md
 - multiple-services.md
-- entity-configuration.md
-- clusters-and-policies.md
-- blueprinting-tips.md
 - custom-entities.md
+- catalog/
+- clusters.md
+- enrichers.md
+- policies.md
+- clusters-and-policies.md
+- java/
 - winrm/
+- test/
 - ansible/
 - chef/
 - salt/
-- test/
 - advanced-example.md
+- blueprinting-tips.md
 - { path: yaml-reference.md, title: YAML Blueprint Reference }
-- { link: 'https://github.com/brooklyncentral/blueprint-library', title: 'GitHub Blueprint Library' }
 ---
 
 

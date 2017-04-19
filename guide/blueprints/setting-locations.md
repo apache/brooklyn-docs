@@ -9,7 +9,7 @@ categories: [use, guide, defining-applications]
 
 Brooklyn supports a very wide range of target locations. 
 With deep integration to [Apache jclouds](https://jclouds.apache.org), most well-known clouds 
-and cloud platforms are supported. See the [Locations guide]({{ site.path.guide }}/ops/locations/) 
+and cloud platforms are supported. See the [Locations guide]({{ site.path.guide }}/locations/) 
 for details and more examples.
 
 ### Cloud Example
@@ -113,7 +113,7 @@ The examples above have given all the location details within the application bl
 It is also possible (and indeed preferred) to add the location definitions to the catalog
 so that they can be referenced by name in any blueprint.
 
-For more information see the [Operations: Catalog]({{ site.path.guide }}/ops/catalog/) section of 
+For more information see the [Operations: Catalog]({{ site.path.guide }}/blueprints/catalog/) section of 
 the User Guide.
 
 
@@ -128,5 +128,5 @@ to retrieve the credentials from a secure credentials store, such as [Vault](htt
 
 An entity that represents a "software process" can use the configuration option 
 `provisioning.properties` to augment the location's configuration. For more information, see
-[Entity Configuration]({{ site.path.guide }}/yaml/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
+[Entity Configuration]({{ site.path.guide }}/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
 details.
