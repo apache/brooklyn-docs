@@ -1,8 +1,8 @@
 /* BASIC STYLES
    ----------------------------------------------------------------------- */
 body {
-    margin: 0px; 
-    padding: 60px 0px 20px 0px; 
+    margin: 0;
+    padding-top: 50px;
     font-family: $fonts;
     font-weight: 300;
     font-size: 17px; 
@@ -67,4 +67,30 @@ a:hover {text-decoration: none; color: $a_hover_color;}
 td, th {
     border: 1px solid #ccc;
     padding: 5px;
+}
+
+.navbar-brand .brand-apache {
+  position: relative;
+
+  & > img {
+    transform: rotate(-125deg);
+    height: 100px;
+    position: absolute;
+    top: -45px;
+    left: 35px;
+  }
+}
+.navbar-brand .brand-brooklyn > img {
+  padding-left: 125px;
+  margin-top: -4px;
+}
+
+abbr.glossarizer_replaced {
+  border-bottom: 1px dashed;
+  font-style: italic;
+  &:before {
+    font-family: FontAwesome;
+    content: "\f045";
+    padding-right: 5px;
+  }
 }
