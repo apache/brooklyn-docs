@@ -39,6 +39,10 @@ public static final ConfigKey<String> ROOT_WAR = new ConfigKeys.newStringConfigK
         "WAR file to deploy as the ROOT, as URL (supporting file: and classpath: prefixes)");
 {% endhighlight %}
 
+If supplying a default value, it is important that this be immutable. Otherwise, it risks users
+of the blueprint modifying the default value, which would affect blueprints that are subsequently 
+deployed.
+
 One can optionally define a `@SetFromFlag("war")`. This defines a short-hand for configuring the
 entity. However, it should be used with caution - when using configuration set on a parent entity
 (and thus inherited), the `@SetFromFlag` short-form names are not checked. The long form defined 
