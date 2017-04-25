@@ -11,9 +11,9 @@
   while customizing the side menu (make self breadcrumb[1]).
 {% endcomment %}
 
-{% unless page.landing %}
+{% if page.layout != "website-landing" %}
   {% if page.menu_parent %}
-    {% if page.menu_parent.landing %} {% comment %} case 2 {% endcomment %}
+    {% if page.menu_parent.layout == "website-landing" %} {% comment %} case 2 {% endcomment %}
               {% for item in page.breadcrumb_pages offset:1 %}
                   <h4 class="{% if forloop.index0 > 0 %} with_preceding{% endif %}{% if forloop.rindex0 > 0 %} with_following{% endif %}">
                     <a href="{{item.url}}" class="list-group-item{% if item.path == page.menu_path %} active{% endif %} breadcrumb breadcrumb{{ forloop.index0 }}">
@@ -57,188 +57,187 @@
   {% elsif page.menu %}
     <!-- no pages have a menu without being in the top menu, won't come here -->
   {% endif %}
-{% endunless %}
+{% endif %}
         
 </div>
 <div id="width_reference"></div>
 
 
 <script language="JavaScript" type="application/javascript">
+(function($){
+    {% comment %}
+    the menu is css position:fixed so won't scroll;
+    but also it will not obey its parents width.
+    set the width on load and on resize.
+    {% endcomment %}
+    sidemenu_x_sizer=function(){ $('#side-menu').width($('#side-menu').parent().find('#width_reference').outerWidth()); };
+    $(sidemenu_x_sizer);
+    $(window).resize(sidemenu_x_sizer);
 
-{% comment %} 
-the menu is css position:fixed so won't scroll; 
-but also it will not obey its parents width.
-set the width on load and on resize.
-{% endcomment %} 
-sidemenu_x_sizer=function(){ $('#side-menu').width($('#side-menu').parent().find('#width_reference').outerWidth()); };
-$(sidemenu_x_sizer);
-$(window).resize(sidemenu_x_sizer);
+    {% comment %}
+    also ensure the screen is big enough, else revert to non-floating menu:
+    check y-height, and check widths (in case it was moved to after the other column)
+    {% endcomment %}
+    sidemenu_y_nonfloater=function(){
+      if ($('#side-menu').outerHeight(true) + $('#header').outerHeight(true) + $('#footer').outerHeight(true) > window.innerHeight ||
+          $('#side-menu').width() >= $('#content_container').width()/2) {
+        $('#side-menu').css('position', 'inherit');
+      } else {
+        // restore if screen has grown
+        $('#side-menu').css('position', 'fixed');
+      }
+    };
+    $(sidemenu_y_nonfloater);
+    $(window).resize(sidemenu_y_nonfloater);
 
-{% comment %} 
-also ensure the screen is big enough, else revert to non-floating menu:
-check y-height, and check widths (in case it was moved to after the other column)
-{% endcomment %} 
-sidemenu_y_nonfloater=function(){
-  if ($('#side-menu').outerHeight(true) + $('#header').outerHeight(true) + $('#footer').outerHeight(true) > window.innerHeight ||
-      $('#side-menu').width() >= $('#content_container').width()/2) {
-    $('#side-menu').css('position', 'inherit');
-  } else {
-    // restore if screen has grown
-    $('#side-menu').css('position', 'fixed');
-  }
-};
-$(sidemenu_y_nonfloater);
-$(window).resize(sidemenu_y_nonfloater);
+    {% comment %}
+    auto-advance "sections" in menu on scroll
+    {% endcomment %}
 
-{% comment %} 
-auto-advance "sections" in menu on scroll
-{% endcomment %} 
+    var sideMenu = $("#side-menu"),
+        sideItems = sideMenu.find("a"),
+        // Anchors corresponding to menu items
+        scrollItems = sideItems.map(function(){
+          var item = $(this).attr("section-target");
+          if (item && item.length) { return item; }
+        });
 
-var sideMenu = $("#side-menu"),
-    sideItems = sideMenu.find("a"),
-    // Anchors corresponding to menu items
-    scrollItems = sideItems.map(function(){
-      var item = $(this).attr("section-target");
-      if (item && item.length) { return item; }
-    });
+    var highlight_section_last_top = -1;
+    var highlight_section_completed = false;
 
-var highlight_section_last_top = -1;
-var highlight_section_completed = false;
+    var highlight_section = function() {
+       // Get container scroll position
+       var highlight_section_new_top = $(this).scrollTop();
+       if (highlight_section_new_top == highlight_section_last_top) return;
+       var highlight_section_new_bottom = highlight_section_new_top + $(window).height();
+       var scroll_advancing = (highlight_section_new_top > highlight_section_last_top);
 
-var highlight_section = function() {
-   // Get container scroll position
-   var highlight_section_new_top = $(this).scrollTop();
-   if (highlight_section_new_top == highlight_section_last_top) return;
-   var highlight_section_new_bottom = highlight_section_new_top + $(window).height();
-   var scroll_advancing = (highlight_section_new_top > highlight_section_last_top);
+       var last_item = null, active_item = $("#side-menu a.section#active");
 
-   var last_item = null, active_item = $("#side-menu a.section#active");
-   
-   var found_top = false;
-   var displayable_items = scrollItems.map(function(itemI){
-     item = $(scrollItems[itemI]);
-     if (item && item.length) {
-       if (highlight_section_last_top == -1 || !highlight_section_completed) {
-         // just opening page - take item matching hash, or otherwise the first item visible
-         if (item.selector === window.location.hash || (item.offset().top > highlight_section_new_top - 20 && !found_top)) {
-           found_top = true;
-           if (item.selector === window.location.hash && item.offset().top < highlight_section_new_top + 60) {
-             // because of our top header, we need to scroll 64px down from any link
-             $('html, body').animate({scrollTop: item.offset().top - 64}, 0);
+       var found_top = false;
+       var displayable_items = scrollItems.map(function(itemI){
+         item = $(scrollItems[itemI]);
+         if (item && item.length) {
+           if (highlight_section_last_top == -1 || !highlight_section_completed) {
+             // just opening page - take item matching hash, or otherwise the first item visible
+             if (item.selector === window.location.hash || (item.offset().top > highlight_section_new_top - 20 && !found_top)) {
+               found_top = true;
+               if (item.selector === window.location.hash && item.offset().top < highlight_section_new_top + 60) {
+                 // because of our top header, we need to scroll 64px down from any link
+                 $('html, body').animate({scrollTop: item.offset().top - 64}, 0);
+               }
+               return item;
+             }
+           } else if (scroll_advancing) {
+             // if scrolling advance, pick up a section when title starts before 1/3 height
+             if (item.offset().top < highlight_section_new_top + $(window).height()/3)
+               return item;
+
+             // or if containing div is finished (usu the whole main content)
+             div_containing_item = item.closest("div");
+             if (div_containing_item.offset().top + div_containing_item.height() < highlight_section_new_bottom + 15)
+               return item;
+             // or when next title is visible
+             if (last_item && item.offset().top < highlight_section_new_bottom + 15)
+               return last_item;
+           } else {
+             // if scrolling back, pick up a section as soon as the title is visible,
+             if (item.offset().top < highlight_section_new_top)
+               return item;
+             // or if title is before the 2/3 point
+             // (not sure about this, probably want also to have
+             // "AND the id.top is <= displayable_itemsrent_active_it.top" so we don't jump FORWARD a section
+             // when scrolling BACK, with lots of tiny sections)
+             if ((item.offset().top < highlight_section_new_top + 2*$(window).height()/3)
+                 && (!active_item || !active_item.offset() || active_item.offset().top >= item.offset().top))
+               return item;
+
            }
-           return item;
+           last_item = item;
          }
-       } else if (scroll_advancing) {
-         // if scrolling advance, pick up a section when title starts before 1/3 height 
-         if (item.offset().top < highlight_section_new_top + $(window).height()/3)
-           return item;
-           
-         // or if containing div is finished (usu the whole main content)
-         div_containing_item = item.closest("div");
-         if (div_containing_item.offset().top + div_containing_item.height() < highlight_section_new_bottom + 15)
-           return item;
-         // or when next title is visible
-         if (last_item && item.offset().top < highlight_section_new_bottom + 15)
-           return last_item;
-       } else {
-         // if scrolling back, pick up a section as soon as the title is visible,
-         if (item.offset().top < highlight_section_new_top)
-           return item;
-         // or if title is before the 2/3 point
-         // (not sure about this, probably want also to have 
-         // "AND the id.top is <= displayable_itemsrent_active_it.top" so we don't jump FORWARD a section
-         // when scrolling BACK, with lots of tiny sections) 
-         if ((item.offset().top < highlight_section_new_top + 2*$(window).height()/3)
-             && (!active_item || !active_item.offset() || active_item.offset().top >= item.offset().top))
-           return item;
-         
+       });
+       if (!highlight_section_completed && document.readyState === "complete") {
+         highlight_section_completed = true;
        }
-       last_item = item;
-     }
-   });
-   if (!highlight_section_completed && document.readyState === "complete") {
-     highlight_section_completed = true;
-   }
-   if (!displayable_items.length) {
-     $("#side-menu a.section").removeClass("active");
-   } else {
-     displayable_items = displayable_items[displayable_items.length-1];
-     var id = displayable_items && displayable_items.length ? displayable_items[0].id : "";
-   // Set/remove active class
-     new_active = $("#side-menu a.section").filter("[section-target='#"+id+"']");
-     if (new_active.hasClass("active")) {
-       // nothing needed
-     } else {
-       $("#side-menu a.section").removeClass("active");
-       $("#side-menu a.section").filter("[section-target='#"+id+"']").addClass("active");
-     }
-   }
-   
-   highlight_section_last_top = highlight_section_new_top;
-};
-var highlight_new_section = function() {
-  highlight_section_completed = false;
-  highlight_section_last_top = -1;
-  highlight_section();
-}
+       if (!displayable_items.length) {
+         $("#side-menu a.section").removeClass("active");
+       } else {
+         displayable_items = displayable_items[displayable_items.length-1];
+         var id = displayable_items && displayable_items.length ? displayable_items[0].id : "";
+       // Set/remove active class
+         new_active = $("#side-menu a.section").filter("[section-target='#"+id+"']");
+         if (new_active.hasClass("active")) {
+           // nothing needed
+         } else {
+           $("#side-menu a.section").removeClass("active");
+           $("#side-menu a.section").filter("[section-target='#"+id+"']").addClass("active");
+         }
+       }
 
-$(window).scroll(highlight_section);
-$(highlight_new_section);
+       highlight_section_last_top = highlight_section_new_top;
+    };
+    var highlight_new_section = function() {
+      highlight_section_completed = false;
+      highlight_section_last_top = -1;
+      highlight_section();
+    }
 
-// detect link change - courtesy http://www.bennadel.com/blog/1520-binding-events-to-non-dom-objects-with-jquery.htm
-    (
-        function( $ ){
-            // Default to the current location.
-            var strLocation = window.location.href;
-            var strHash = window.location.hash;
-            var strPrevLocation = "";
-            var strPrevHash = "";
+    $(window).scroll(highlight_section);
+    $(highlight_new_section);
 
-            // This is how often we will be checkint for
-            // changes on the location.
-            var intIntervalTime = 100;
+    // detect link change - courtesy http://www.bennadel.com/blog/1520-binding-events-to-non-dom-objects-with-jquery.htm
 
-            // This method removes the pound from the hash.
-            var fnCleanHash = function( strHash ){
-                return(
-                    strHash.substring( 1, strHash.length )
-                    );
-            }
+    // Default to the current location.
+    var strLocation = window.location.href;
+    var strHash = window.location.hash;
+    var strPrevLocation = "";
+    var strPrevHash = "";
 
-            // This will be the method that we use to check
-            // changes in the window location.
-            var fnCheckLocation = function(){
-                // Check to see if the location has changed.
-                if (strLocation != window.location.href){
+    // This is how often we will be checkint for
+    // changes on the location.
+    var intIntervalTime = 100;
 
-                    // Store the new and previous locations.
-                    strPrevLocation = strLocation;
-                    strPrevHash = strHash;
-                    strLocation = window.location.href;
-                    strHash = window.location.hash;
+    // This method removes the pound from the hash.
+    var fnCleanHash = function( strHash ){
+        return(
+            strHash.substring( 1, strHash.length )
+            );
+    }
 
-                    // The location has changed. Trigger a
-                    // change event on the location object,
-                    // passing in the current and previous
-                    // location values.
-                    $( window.location ).trigger(
-                        "change",
-                        {
-                            currentHref: strLocation,
-                            currentHash: fnCleanHash( strHash ),
-                            previousHref: strPrevLocation,
-                            previousHash: fnCleanHash( strPrevHash )
-                        }
-                        );
+    // This will be the method that we use to check
+    // changes in the window location.
+    var fnCheckLocation = function(){
+        // Check to see if the location has changed.
+        if (strLocation != window.location.href){
 
+            // Store the new and previous locations.
+            strPrevLocation = strLocation;
+            strPrevHash = strHash;
+            strLocation = window.location.href;
+            strHash = window.location.hash;
+
+            // The location has changed. Trigger a
+            // change event on the location object,
+            // passing in the current and previous
+            // location values.
+            $( window.location ).trigger(
+                "change",
+                {
+                    currentHref: strLocation,
+                    currentHash: fnCleanHash( strHash ),
+                    previousHref: strPrevLocation,
+                    previousHash: fnCleanHash( strPrevHash )
                 }
-            }
+                );
 
-            // Set an interval to check the location changes.
-            setInterval( fnCheckLocation, intIntervalTime );
         }
-    )( jQuery );
-// and trigger highlight section on link change
-$(window.location).bind("change", highlight_new_section);
+    }
+
+    // Set an interval to check the location changes.
+    setInterval( fnCheckLocation, intIntervalTime );
+
+    // and trigger highlight section on link change
+    $(window.location).bind("change", highlight_new_section);
+})(jQuery);
 
 </script>

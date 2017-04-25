@@ -1,5 +1,4 @@
 ---
-layout: base
 title: Catalog
 page_mask: usermanual-pdf-exclude
 page_mask: started-pdf-exclude
@@ -24,7 +23,7 @@ under the License.
 -->
 <head>
 
-  {% include base-head.html %}
+  {% include head.html %}
   <script type="text/javascript" src="{{site.path.style}}/js/catalog/items.js"></script>
   <link rel="stylesheet" href="{{site.path.style}}/css/catalog_items.css" type="text/css" media="screen"/>
 </head>
@@ -32,16 +31,11 @@ under the License.
 
 <body>
 
-{% include topmenu.html %}
+{% include header.html %}
 
 
 
 <div id="container">
-  <div id="header">
-    <div id="identity">
-      <a href="https://brooklyn.apache.org/" rel="home">Brooklyn</a>
-    </div>
-  </div>
 
   <ul class="nav nav-tabs">
     <li class="active"><a href="#entities" data-toggle="tab">Entities</a></li>
