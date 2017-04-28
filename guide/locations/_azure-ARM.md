@@ -95,6 +95,17 @@ The loginUser can be anything, as long as it's specified.
 The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on Azure images do not have passwordless sudo 
 configured by default.
 
+    imageId: westeurope/OpenLogic/CentOS/7.3
+
+Listing images in Azure CLI [https://docs.microsoft.com/en-us/cli/azure/vm/image#list-skus](https://docs.microsoft.com/en-us/cli/azure/vm/image#list-skus).
+A VM Image can be specified using Brooklyn location config `imageId`.
+For Azure ARM, Apache Brooklyn expects `imageId` in one of the following formats:
+
+- `location/group/storage/offer/name`
+- `location/publisher/offer/sku`
+
+Consider using imageId sku instead of `osVersion` or `osVersionRegex`.
+
 #### Known issues
 There are currently two known issues with Azure ARM:
 
