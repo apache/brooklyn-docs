@@ -181,3 +181,13 @@ brooklyn.locations:
     credential: <add>
     loginUser: centos
 {% endhighlight %}
+
+## SSLException close_notify Exception
+
+The following error, when deploying a blueprint, has been shown to be caused by issues with DNS provided by your ISP or
+traffic filtering such as child-safe type filtering:
+
+    Caused by: javax.net.ssl.SSLException: Received fatal alert: close_notify
+
+To resolve this try disabling traffic filtering and setting your DNS to a public server such as 8.8.8.8 to use google
+[DNS](https://www.wikiwand.com/en/Google_Public_DNS).  [See here](https://developers.google.com/speed/public-dns/docs/using) for details on how to configure this.
