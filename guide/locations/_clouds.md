@@ -95,7 +95,7 @@ For more keys and more detail on the keys below, see
 - Most providers require exactly one of either `region` (e.g. `us-east-1`) or `endpoint` (the URL, usually for private cloud deployments)
 
 - Hardware requirements can be specified, including 
-  `minRam`, `minCores`, and `os64Bit`; or as a specific `hardwareId`
+  `minRam`, `minCores`, `minDisk` and `os64Bit`; or as a specific `hardwareId`
 
 - VM image constraints can be set using `osFamily` (e.g. `Ubuntu`, `CentOS`, `Debian`, `RHEL`)
   and `osVersionRegex`, or specific VM images can be specified using `imageId` or `imageNameRegex`
