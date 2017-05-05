@@ -160,7 +160,7 @@ See the [overview](overview.html) for where to find additional information, espe
 
 If you receive an error message similar to the one below when provisioning a VM, it means that the wrong username is being used for ssh'ing to the machine. The "invalid packet" is because a response such as "Please login as the ubuntu user rather than root user." is being sent back.
 
-You can workaround the issue by explicitly setting the user that AMP should use to login to the VM  (typically the OS default user).
+You can workaround the issue by explicitly setting the user that Brooklyn should use to login to the VM  (typically the OS default user).
 
 {% highlight bash %}
 error acquiring SFTPClient() (out of retries - max 50)

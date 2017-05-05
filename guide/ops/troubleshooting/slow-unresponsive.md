@@ -20,7 +20,7 @@ requirements.
 
 ## Machine Diagnostics
 
-The following commands will collect OS-level diagnostics about the machine, and about the AMP 
+The following commands will collect OS-level diagnostics about the machine, and about the Brooklyn 
 process. The commands below assume use of CentOS 6.x. Minor adjustments may be required for
 other platforms.
 
@@ -65,7 +65,7 @@ for more information.
 #### Disk Space
 
 The command below will list the disk size for each partition, including the amount used and 
-available. If the AMP base directory, persistence directory or logging directory are close 
+available. If the Brooklyn base directory, persistence directory or logging directory are close 
 to 0% available, this can cause serious problems:
 
 {% highlight bash %}

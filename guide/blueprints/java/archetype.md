@@ -91,7 +91,7 @@ The command below will use the CLI to add this to the catalog of a running Brook
 {% endhighlight %}
 
 After running that command, the OSGi bundle will have been added to the OSGi container, and the
-entity will have been added to your catalog. It can then be used in the same way as regular AMP 
+entity will have been added to your catalog. It can then be used in the same way as regular Brooklyn 
 entities.
 
 For example, you can use the blueprint:
