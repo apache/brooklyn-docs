@@ -455,7 +455,7 @@ The possible modes are:
 #### Explicit Inheritance Modes
 
 _The YAML support for explicitly defining the inheritance mode is still work-in-progress. The options
-documented below will be enhanced in a future version of AMP, to better support the modes described
+documented below will be enhanced in a future version of Brooklyn, to better support the modes described
 above._
 
 In a YAML blueprint, within the `brooklyn.parameters` section for declaring new config keys, one can
