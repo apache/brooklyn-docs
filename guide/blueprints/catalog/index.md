@@ -375,80 +375,75 @@ the latest non-snapshot version will be loaded when an entity is instantiated.
 
 ### Bundling Catalog Resources
 
-When deploying a blueprint, it is possible to deploy it as an OSGI bundle with additional resources scoped
-to this bundle. This is particularly useful when, for example, deploying a Tomcat server with a `.war` file
-which is deployed using a classpath path such as `classpath://mywar.war`.
+It is possible to add an OSGi bundle to AMP. This is useful when you have a blueprint that needs to reference external scripts/resources or when you have multiple blueprints that you want to keep in sync. Brooklyn will persist any uploaded bundles so that they are available after a restart, or a HA failover.
 
-In this example, we will create a simple `server` catalog item, bundled with a simple text file.
+In this example, we will create a simple `my-server` catalog item, bundled with a simple script. The script will be run when launching the server.
 
-First, create the text file with some sample contents:
+First, create a folder called bundleFolder, then add a file called myfile.sh to it. 
+The contents of myfile.sh should be as follows:
 
 ~~~ bash
-echo Hello, World! > myfile.txt
+echo Hello, World!
 ~~~
 
-Now create a file called `catalog.bom` with the following contents:
+Now create a file in bundleFolder called `catalog.bom` with the following contents:
 
 ~~~ yaml
 brooklyn.catalog:
-  bundle: script-server
+  bundle: MyServerBundle
   version: 1.0.0
-  items:
-  - id: script-server
-    itemType: entity
-    item:
-      type: server
-      brooklyn.config:
-        files.runtime:
-          classpath://myfile.txt: files/myfile.txt
+  item:  
+    id: my-server
+    type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+    brooklyn.config:
+      files.runtime:
+        classpath://myfile.sh: files/myfile.sh
+      launch.command: |
+        chmod +x ./files/myfile.sh
+        ./files/myfile.sh
+        
+      checkRunning.command:
+        echo "Running"  
+        
 ~~~
 
-The `bundle: script-server` line specifies the OSGI bundle name for this blueprint. Any resources included
+The `bundle: MyServerBundle` line specifies the OSGI bundle name for this bundle. Any resources included
 in this bundle will be accessible on the classpath, but will be scoped to this bundle. This prevents an
 issue where multiple bundles include the same resource.
 
-To create the bundle, simply zip the `.bom` and `.txt` files as follows:
+To create the bundle, simply use the BR command as follows:
 
 ~~~ bash
-zip script-server.zip catalog.bom myfile.txt
+br add-catalog bundleFolder
 ~~~
 
-Currently the only supported method for uploading the bundle to the server is via the API, e.g. using
-`curl`:
-
-~~~ bash
-curl -X POST -u admin:password -H "Content-Type: application/zip" --data-binary @/tmp/zip/script-server.zip "http://127.0.0.1:8081/v1/catalog"
-~~~
-
-We can now deploy an instance of our script server as follows:
+This will have added our bundle to the catalog. We can now deploy an instance of our server as follows:
 
 ~~~ yaml
 location: localhost
 services:
-- type: script-server
+- type: my-server
 ~~~
 
-And we can now inspect the contents of the file copied to the server
+We can now see the result of running that script. In the UI find the activities for this application. The start activity has a sub task called launch (you will have to click through multiple activities called start/launch. Looking at the stdout of the launch task you should see:
 
-~~~ bash
-cat /tmp/brooklyn-martin/apps/nl9djqbq2i/entities/EmptySoftwareProcess_g52gahfxnt/files/myfile.txt
-~~~
-~~~ bash
+~~~ bash  
 Hello, World!
 ~~~
 
-Now modify `myfile.txt` to contain a different message, change the version number in `catalog.bom` to
-`1.1.0`, re-build the zip file and re-post it to the server
-
-If you now deploy a new instance of the script-server using the same YAML as used above, you should be
-able to confirm that the new script has been copied to the server:
-
+Alternatively you can view the script directly if you ran this against localhost:
 ~~~ bash
-cat /tmp/brooklyn-martin/apps/bwu57darkd/entities/EmptySoftwareProcess_umcgshzduk/files/myfile.txt 
+cat /tmp/brooklyn-username/apps/nl9djqbq2i/entities/EmptySoftwareProcess_g52gahfxnt/files/myfile.sh
 ~~~
 ~~~ bash
-Goodbye
+echo Hello, World!
 ~~~
+
+Now modify `myfile.sh` to contain a different message, change the version number in `catalog.bom` to
+`1.1.0`, and use the BR command to send the bundle to the server.
+
+If you now deploy a new instance of the server using the same YAML as above, you should be
+able to confirm that the new script has been run (either by looking at the stdout of the launch task, or looking at the script itself)
 
 At this point, it is also possible to deploy the original `Hello, World!` version by explicitly stating
 the version number in the YAML:
@@ -456,72 +451,44 @@ the version number in the YAML:
 ~~~ yaml
 location: localhost
 services:
-- type: script-server:1.0.0
-~~~
-
-And we can now confirm that the original text file has been used:
-
-~~~ bash
-cat /tmp/brooklyn-martin/apps/bek7efltx8/entities/EmptySoftwareProcess_r4emcpg05y/files/myfile.txt 
-~~~
-~~~ bash
-Hello, World!
+- type: my-server:1.0.0
 ~~~
 
 To demonstrate the scoping, you can create another bundle with the following `catalog.bom`. Note the
-bundle name and entity id have been changed, but it still references the text file
+bundle name and entity id have been changed, but it still references a script with the same name.
 
 ~~~ yaml
 brooklyn.catalog:
-  bundle: different-script-server
+  bundle: DifferentServerBundle
   version: 1.0.0
-  items:
-  - id: different-script-server
-    itemType: entity
-    item:
-      type: server
-      brooklyn.config:
-        files.runtime:
-          classpath://myfile.txt: files/myfile.txt
+  item:  
+    id: different-server
+    type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+    brooklyn.config:
+      files.runtime:
+        classpath://myfile.sh: files/myfile.sh
+      launch.command: |
+        chmod +x ./files/myfile.sh
+        ./files/myfile.sh
+        
+      checkRunning.command:
+        echo "Running"  
 ~~~
 
-Now create a new `myfile.txt` file with a different message, and zip it along with the new `catalog.bom`.
+Now create a new `myfile.sh` script with a different message, and use the BR command to send it to Brooklyn.
 This can then be posted to the Brooklyn server as follows:
 
-~~~ bash
-curl -X POST -u admin:password -H "Content-Type: application/zip" --data-binary @/tmp/zip2/different-server.zip "http://127.0.0.1:8081/v1/catalog"
-~~~
-
-Now deploy a blueprint which deploys both the old and the new script servers
+Now deploy a blueprint which deploys both the old and the new script servers. Each of the three deployments will utilise the script that was included with there bundle.
 
 ~~~ yaml
 location: localhost
 services:
-- type: script-server:1.0.0
-- type: script-server:1.1.0
-- type: different-script-server
+- type: my-server:1.0.0
+- type: my-server:1.1.0
+- type: different-server
 ~~~
 
-**Note**: Both entities copy a file from `classpath://myfile.txt`, but as they are in different bundles, we should expect the files copied to the server to be different
-
-~~~ bash
-cat /tmp/brooklyn-martin/apps/likms91qqt/entities/EmptySoftwareProcess_l3zb6gr4nm/files/myfile.txt
-~~~
-~~~ bash 
-Hello, World!
-~~~
-~~~ bash
-cat /tmp/brooklyn-martin/apps/likms91qqt/entities/EmptySoftwareProcess_roovwmq3ck/files/myfile.txt 
-~~~
-~~~ bash
-Goodbye
-~~~
-~~~ bash
-cat /tmp/brooklyn-martin/apps/likms91qqt/entities/EmptySoftwareProcess_qv74z4818s/files/myfile.txt 
-~~~
-~~~ bash
-Hello from a different script server
-~~~
+**Note**: Both entities copy a file from `classpath://myfile.sh`, but as they are in different bundles, the scripts copied to the server will be different.
 
 ### Brooklyn Server Command Line Arguments
 
