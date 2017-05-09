@@ -432,9 +432,13 @@ Hello, World!
 ~~~
 
 Alternatively you can view the script directly if you ran this against localhost:
+
 ~~~ bash
 cat /tmp/brooklyn-username/apps/nl9djqbq2i/entities/EmptySoftwareProcess_g52gahfxnt/files/myfile.sh
 ~~~
+
+It should look like this:
+
 ~~~ bash
 echo Hello, World!
 ~~~
