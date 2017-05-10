@@ -199,47 +199,6 @@ Or alternatively:
 
 Note the quotes around the command. This is because the "&" has special meaning in a YAML value. 
 
-### Uploading Script and Configuration Files
-
-Often, blueprints will require that (parameterized) scripts and configuration files are available to be copied to the
-target VM. These must be URLs resolvable from the Brooklyn instance, or on the Brooklyn classpath. One simple way 
-to achieve this is to compile the support files into a .jar, which is then added to AMP's 'dropins' folder. Alternatively, 
-an OSGi bundle can be used, referenced from the catalog item. 
-
-Ensure that these scripts end each line with "\r\n", rather than just "\n".
-
-There are two types of file that can be uploaded: plain files and templated files. A plain 
-file is uploaded unmodified. A templated file is interpreted as a [FreeMarker](http://freemarker.org) 
-template. This supports a powerful set of substitutions. In brief, anything (unescaped) of the form
-`${name}` will be substituted, in this case looking up "name" for the value to use.
-
-Templated files (be they configuration files or scripts) gives a powerful way to inject dependent 
-configuration when installing an entity (e.g. for customising the install, or for referencing the
-connection details of another entity). A common substitution is of the form `${config['mykey']}`. 
-This looks up a config key (in this case named "mykey") and will insert the value into the file.
-Another common substitution is is of the form `${attribute['myattribute']}` - this looks up the
-attribute named "myattribute" of this entity.
-
-Files can be referenced as URLs. This includes support for things like `classpath://mypath/myfile.bat`. 
-This looks for the given (fully qualified) resource on the Brooklyn classpath.
-
-The destination for the file upload is specified in the entity's configuration. Note that "\" must
-be escaped. For example `"C:\\install7zip.ps1"`.
-
-A list of plain files to be uploaded can be configured under `files.preinstall`, `files.install` and
-`files.runtime`. These are uploaded respectively prior to executing the `pre.install.command`,
-prior to `install.command` and prior to `pre.launch.command`.
-
-A list of templated files to be uploaded can be configured under `templates.preinstall`, `templates.install`
-and `templates.runtime`. The times these are uploaded is as for the plain files. The templates 
-substitutions will be resolved only at the point when the file is to be uploaded.
-
-For example:
-
-    files.preinstall:
-    - classpath://com/acme/installAcme.ps1
-    - classpath://com/acme/acme.conf
-
 ### Parameterised Scripts
 
 Calling parameterised Batch and Powershell scripts is done in the normal Windows way - see
