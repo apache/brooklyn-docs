@@ -54,6 +54,8 @@ Try accessing the web-service URLs from a browser via the proxy, or perhaps try 
     bin/brooklyn launch
 ```
 
+If a system-level proxy server has been configured, you can instruct brooklyn to use the proxy server by passing `-Djava.net.useSystemProxies=true` to the JVM
+
 ## Service is listening
 
 ### Service responds
