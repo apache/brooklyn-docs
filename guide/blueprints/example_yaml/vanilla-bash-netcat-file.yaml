@@ -3,4 +3,5 @@ location: localhost
 services:
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   name: Simple Netcat Server
-  download.url: file:///tmp/netcat-server.tgz
+  brooklyn.config:
+    download.url: file:///tmp/netcat-server.tgz

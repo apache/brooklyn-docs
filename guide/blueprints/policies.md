@@ -44,12 +44,12 @@ e.g. if the average request per second across a cluster of Tomcat servers goes o
 brooklyn.policies:
 - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
   brooklyn.config:
-    metric: webapp.reqs.perSec.perNode
-    metricUpperBound: 3
-    metricLowerBound: 1
-    resizeUpStabilizationDelay: 2s
-    resizeDownStabilizationDelay: 1m
-    maxPoolSize: 3
+    autoscaler.metric: webapp.reqs.perSec.perNode
+    autoscaler.metricUpperBound: 3
+    autoscaler.metricLowerBound: 1
+    autoscaler.resizeUpStabilizationDelay: 2s
+    autoscaler.resizeDownStabilizationDelay: 1m
+    autoscaler.maxPoolSize: 3
 
 {% endhighlight %}
 

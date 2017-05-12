@@ -15,11 +15,11 @@ services:
   brooklyn.policies:
   - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
     brooklyn.config:
-      metric: $brooklyn:sensor("brooklyn.entity.webapp.DynamicWebAppCluster", "webapp.reqs.perSec.windowed.perNode")
-      metricLowerBound: 10
-      metricUpperBound: 100
-      minPoolSize: 1
-      maxPoolSize: 5
+      autoscaler.metric: $brooklyn:sensor("brooklyn.entity.webapp.DynamicWebAppCluster", "webapp.reqs.perSec.windowed.perNode")
+      autoscaler.metricLowerBound: 10
+      autoscaler.metricUpperBound: 100
+      autoscaler.minPoolSize: 1
+      autoscaler.maxPoolSize: 5
 - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
   id: db
   name: DB HelloWorld Visitors

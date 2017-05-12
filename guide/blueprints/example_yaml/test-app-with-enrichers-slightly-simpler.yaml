@@ -26,7 +26,7 @@ services:
           # from which to take sensors; in that mode you can specify `propagate` as a list of sensors whose names are unchanged,
           # instead of (or in addition to) this map
           brooklyn.config:
-            sensorMapping:
+            enricher.propagating.sensorMapping:
               $brooklyn:sensor("url"): $brooklyn:sensor("org.apache.brooklyn.core.entity.Attributes", "main.uri")
   brooklyn.enrichers:
   - type: org.apache.brooklyn.enricher.stock.Aggregator
@@ -40,7 +40,7 @@ services:
     brooklyn.config:
       enricher.sourceSensor: $brooklyn:sensor("urls.list")
       enricher.targetSensor: $brooklyn:sensor("urls.list.comma_separated.max_2")
-      maximum: 2
+      enricher.joiner.maximum: 2
       # TODO infer uniqueTag, name etc
       uniqueTag: urls.list.comma_separated.max_2
   - type: org.apache.brooklyn.enricher.stock.Joiner
@@ -48,11 +48,11 @@ services:
     brooklyn.config:
       enricher.sourceSensor: $brooklyn:sensor("urls.list")
       enricher.targetSensor: $brooklyn:sensor("org.apache.brooklyn.core.entity.Attributes", "main.uri")
-      quote: false
-      maximum: 1
+      enricher.joiner.quote: false
+      enricher.joiner.maximum: 1
 brooklyn.enrichers:
 - type: org.apache.brooklyn.enricher.stock.Propagator
   # if nothing specified for `propagating` or `sensorMapping` then 
   # Propagator will do all but the usual lifecycle defaults, handy at the root!
   brooklyn.config:
-    producer: $brooklyn:entity("cluster")
+    enricher.producer: $brooklyn:entity("cluster")

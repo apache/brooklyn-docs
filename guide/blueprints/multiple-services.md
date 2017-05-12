@@ -25,17 +25,6 @@ running on port 8080.
 **Tip**:  If port 8080 might be in use, you can specify `8080+` to take the first available port >= 8080;
 the actual port will be reported as a sensor by Brooklyn.
 
-It's also worth indicating an alternate, more formal syntax.
-Not all configuration on entities is supported at the top level of the service specification
-(only those which are defined as "flags" in the underlying blueprint,
-e.g. the `@SetFromFlag("war")` in the `WebAppServiceConstants` parent of `JBoss7Server`).
-All configuration has a formal qualified name, and this can be supplied even where flags or config keys are not
-explicitly defined, by placing it into a `brooklyn.config` section:
-
-{% highlight yaml %}
-{% readj example_yaml/appserver-configured-in-config.yaml %}
-{% endhighlight %}
-
 
 ### Multiple Services
 
