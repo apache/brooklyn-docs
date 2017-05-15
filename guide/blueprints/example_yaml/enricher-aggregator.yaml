@@ -4,4 +4,4 @@ brooklyn.enrichers:
     enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
     enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
     enricher.aggregating.fromMembers: true
-    enricher.transformation.untyped: average
+    transformation: average

@@ -57,12 +57,12 @@ services:
  
   - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
     brooklyn.config:
-      autoscaler.metric: webapp.reqs.perSec.perNode
-      autoscaler.metricUpperBound: 3
-      autoscaler.metricLowerBound: 1
-      autoscaler.resizeUpStabilizationDelay: 2s
-      autoscaler.resizeDownStabilizationDelay: 1m
-      autoscaler.maxPoolSize: 3
+      metric: webapp.reqs.perSec.perNode
+      metricUpperBound: 3
+      metricLowerBound: 1
+      resizeUpStabilizationDelay: 2s
+      resizeDownStabilizationDelay: 1m
+      maxPoolSize: 3
 
   brooklyn.enrichers:
   - type: org.apache.brooklyn.enricher.stock.Aggregator
@@ -70,7 +70,7 @@ services:
       enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
       enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
       enricher.aggregating.fromMembers: true
-      enricher.transformation.untyped: average
+      transformation: average
 
 - type: org.apache.brooklyn.entity.proxy.nginx.NginxController
   name: Load Balancer (nginx)
