@@ -4,10 +4,11 @@ title: How to Contribute
 children:
 - { section: Contributor License Agreement, title: CLA }
 - { section: Create an Issue in Jira, title: Jira }
-- { section: Contributing using GitHub, title: GitHub }
-- { section: Reviews }
-- { link: code/, title: Get the Code }
-- { link: links.html, title: Handy Places }
+- { section: Pull Request at GitHub, title: GitHub }
+- { section: The Review Process, title: Reviews }
+- { section: Contributing without using GitHub, title: Patches }
+- { link: /developers/code/index.html, title: Get the Code }
+- { link: /developers/links.html, title: Handy Places }
 ---
 
 Welcome and thank you for your interest in contributing to Apache Brooklyn! This guide will take you through the
