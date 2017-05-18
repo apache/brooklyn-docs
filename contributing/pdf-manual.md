@@ -1,13 +1,13 @@
 ---
-section: Single Page Manual & PDF
+section: Single Page Manual and PDF
 section_position: 4
 section_type: inline
 ---
 
-## Single Page Manual & PDF
+## Single Page Manual and PDF
 
 A single page overview of selections of the site are available in `zoneMergeManual` and `zoneMergeStarted`. These overviews are for the user manual
-and getting started guide respectively. The zone merge pages go through the [site structure](#site-structure), described above, and compile the files from this into a
+and getting started guide respectively. The zone merge pages go through the [site structure](index.html#site-structure), described above, and compile the files from this into a
 single HTML page.
 
 In order to do this, each page is iterated over in order and it's rendered content included in the page. The plug-in `regex_filter.rb` is used to re-write

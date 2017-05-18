@@ -1,9 +1,7 @@
 ---
 title: Get the Code
 layout: website-normal
-menu_proxy_for: index.md
 children:
-- { link: index.html, title: Basics }
 - { section: Set Up Forks }
 - { section: Multi-Project Changes }
 - { section: How We Use Branches, title: Branches }
