@@ -110,12 +110,9 @@ View and modify using the *web console* or automate using the *REST API*
             <span>bash</span>
           </div>
 {% highlight bash %}
-{% if site.brooklyn-version contains 'SNAPSHOT' %}
-curl -SL --output apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz "https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{site.brooklyn-version}}&c=dist&e=zip"
-{% else %}
-curl -SL --output apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz "https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz"
-{% endif %}tar xvf apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz
-cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
+curl -SL --output apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz "https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-stable-version}}/apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz"
+tar xvf apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz
+cd apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant
 vagrant up brooklyn
 {% endhighlight %}
         </div>
