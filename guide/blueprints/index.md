@@ -21,7 +21,6 @@ children:
 - salt/
 - advanced-example.md
 - blueprinting-tips.md
-- catalog/
 - { path: yaml-reference.md, title: YAML Blueprint Reference }
 ---
 
