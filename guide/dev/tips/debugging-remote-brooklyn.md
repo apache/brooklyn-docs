@@ -49,11 +49,11 @@ root of the Brooklyn installation:
 {% highlight bash %}
 # NOTE: Running this kill command will lose existing apps and machines if persistence is disabled.
 % kill `cat pid_java`
-% export JAVA_OPTS="-Xms256m -Xmx1g -XX:MaxPermSize=256m -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=n"
+% export JAVA_OPTS="-Xms256m -Xmx1g -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=n"
 % bin/brooklyn launch &
 {% endhighlight %}
 
-If `JAVA_OPTS` is not set, Brooklyn will automatically set it to `"-Xms256m -Xmx1g -XX:MaxPermSize=256m"`, which is why
+If `JAVA_OPTS` is not set, Brooklyn will automatically set it to `"-Xms256m -Xmx1g"`, which is why
 we have prepended the agentlib settings with these values here.
 
 You should see the following in the console output:
