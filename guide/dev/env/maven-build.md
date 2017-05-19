@@ -31,7 +31,7 @@ Other tips:
 
 * You may need more JVM memory, e.g. at the command-line (or in `.profile`):
 
-  ``export MAVEN_OPTS="-Xmx1024m -Xms512m -XX:MaxPermSize=256m"``
+  ``export MAVEN_OPTS="-Xmx1024m -Xms512m"``
 
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
   ([tests described here](../code/tests.html))

@@ -69,7 +69,7 @@ For a standard Brooklyn deployment, the defaults are to start with 256m, and to 
 These numbers can be overridden by setting the environment variable `JAVA_OPTS` before launching
 the `brooklyn script`, as follows:
 
-    JAVA_OPTS="-Xms1g -Xmx4g -XX:MaxPermSize=256m"
+    JAVA_OPTS="-Xms1g -Xmx4g"
 
 (On Java 8 and later the last entry has no effect and can be dropped.)
 

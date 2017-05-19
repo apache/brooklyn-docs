@@ -41,7 +41,7 @@ memory should shrink dramatically then increase until the problem recurs.
 This can be fixed by passing `-XX:SoftRefLRUPolicyMSPerMB=1` to the JVM,
 as described in [Brooklyn issue 375](https://issues.apache.org/jira/browse/BROOKLYN-375).
 
-Other common JVM options include `-Xms256m -Xmx1g -XX:MaxPermSize=256m`
+Other common JVM options include `-Xms256m -Xmx1g`
 (depending on JVM provider and version) to set the right balance of memory allocation.
 In some cases a larger `-Xmx` value may simply be the fix
 (but this should not be the case unless many or large blueprints are being used).
