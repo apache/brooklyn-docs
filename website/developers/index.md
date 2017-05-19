@@ -1,26 +1,23 @@
 ---
 layout: website-normal
 title: Developers
-started-pdf-exclude: true
+menu_parent: index.md
 children:
 - code/
 - how-to-contribute.md
 - committers/
 - code-standards.md
 - links.md
-- { link: 'http://github.com/apache/brooklyn', title: 'GitHub' }
-- { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
-- { link: "{{ site.path.website }}/developers/code/", title: "Get the Code" }
 - env/maven-build.md
 - env/ide/
-- code/structure.md
-- code/tests.md
-- code/licensing.md
+- code/
 - tips/
 - tips/logging.md
 - tips/debugging-remote-brooklyn.md
 - { link: "http://github.com/apache/brooklyn", title: "GitHub" }
 - { link: "https://brooklyn.apache.org/v/latest/misc/javadoc", title: "Javadoc" }
+- { link: 'http://github.com/apache/brooklyn', title: 'GitHub' }
+- { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 ---
 
 Hello developers!
