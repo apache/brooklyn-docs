@@ -392,18 +392,17 @@ Now create a file in bundleFolder called `catalog.bom` with the following conten
 brooklyn.catalog:
   bundle: MyServerBundle
   version: 1.0.0
-  item:  
-    id: my-server
-    type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
-    brooklyn.config:
-      files.runtime:
-        classpath://myfile.sh: files/myfile.sh
-      launch.command: |
-        chmod +x ./files/myfile.sh
-        ./files/myfile.sh
-        
-      checkRunning.command:
-        echo "Running"  
+  items:  
+    - id: my-server
+      item: 
+        type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+        brooklyn.config:
+          files.runtime:
+            classpath://myfile.sh: files/myfile.sh
+          launch.command: |
+            chmod +x ./files/myfile.sh
+            ./files/myfile.sh        
+        checkRunning.command: echo "Running"  
         
 ~~~
 
@@ -411,13 +410,13 @@ The `bundle: MyServerBundle` line specifies the OSGI bundle name for this bundle
 in this bundle will be accessible on the classpath, but will be scoped to this bundle. This prevents an
 issue where multiple bundles include the same resource.
 
-To create the bundle, simply use the BR command as follows:
+To create the bundle, simply use the br command as follows. This will create a zip and send it to Brooklyn. Please note you can also specify a zip file (either on the file system or hosted remotely):
 
 ~~~ bash
-br add-catalog bundleFolder
+br catalog add bundleFolder
 ~~~
 
-This will have added our bundle to the catalog. We can now deploy an instance of our server as follows:
+This will have added our bundle to the catalog. We can now deploy an instance of our server as follows. Please note that in this example we deploy to localhost. If you have not setup your machine to use localhost please see the instructions [here](../../locations#localhost-setup) or use a non localhost location. 
 
 ~~~ yaml
 location: localhost
@@ -431,10 +430,10 @@ We can now see the result of running that script. In the UI find the activities 
 Hello, World!
 ~~~
 
-Alternatively you can view the script directly if you ran this against localhost:
+Alternatively you can view the script directly if you run the following against localhost. Please note that brooklyn-username and the id of your app will be different.
 
 ~~~ bash
-cat /tmp/brooklyn-username/apps/nl9djqbq2i/entities/EmptySoftwareProcess_g52gahfxnt/files/myfile.sh
+cat /tmp/brooklyn-username/apps/nl9djqbq2i/entities/VanillaSoftwareProcess_g52gahfxnt/files/myfile.sh
 ~~~
 
 It should look like this:
@@ -444,7 +443,7 @@ echo Hello, World!
 ~~~
 
 Now modify `myfile.sh` to contain a different message, change the version number in `catalog.bom` to
-`1.1.0`, and use the BR command to send the bundle to the server.
+`1.1.0`, and use the br command to send the bundle to the server.
 
 If you now deploy a new instance of the server using the same YAML as above, you should be
 able to confirm that the new script has been run (either by looking at the stdout of the launch task, or looking at the script itself)
@@ -479,10 +478,9 @@ brooklyn.catalog:
         echo "Running"  
 ~~~
 
-Now create a new `myfile.sh` script with a different message, and use the BR command to send it to Brooklyn.
-This can then be posted to the Brooklyn server as follows:
+Now create a new `myfile.sh` script with a different message, and use the br command to send the bundle to Brooklyn.
 
-Now deploy a blueprint which deploys both the old and the new script servers. Each of the three deployments will utilise the script that was included with there bundle.
+Now deploy a blueprint which deploys all three servers. Each of the three deployments will utilise the script that was included with their bundle.
 
 ~~~ yaml
 location: localhost
@@ -492,7 +490,7 @@ services:
 - type: different-server
 ~~~
 
-**Note**: Both entities copy a file from `classpath://myfile.sh`, but as they are in different bundles, the scripts copied to the server will be different.
+**Note**: All three entities copy a file from `classpath://myfile.sh`, but as they are in different bundles, the scripts copied to the server will be different.
 
 ### Brooklyn Server Command Line Arguments
 
