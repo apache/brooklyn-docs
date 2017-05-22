@@ -356,6 +356,7 @@ id including the version number is passed to the REST API as follows:
 curl -u admin:password -X POST http://127.0.0.1:8081/v1/catalog/entities/MySQL:1.0/deprecated/true
 ~~~ 
 
+<!-- TODO: update above to use CLI -->
 
 ### Versioning
 
