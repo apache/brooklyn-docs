@@ -1,7 +1,13 @@
 ---
 title: Catalog
 layout: website-normal
-check_directory_for_children: true
+children:: 
+- schema.md
+- templates.md
+- versioning.md
+- management.md
+- bundle.md
+- cli.md
 
  
 ---
