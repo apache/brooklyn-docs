@@ -1,7 +1,7 @@
 ---
 title: Catalog
 layout: website-normal
-children:: 
+children:
 - schema.md
 - templates.md
 - versioning.md
@@ -18,4 +18,4 @@ folder by default and additional ones can be added through the web console or CL
 the catalog can be deployed directly, via the Brooklyn CLI or the web console, or referenced in 
 other blueprints using their `id`.
 
-{% child_content %}
+{% include list-children.html %}
