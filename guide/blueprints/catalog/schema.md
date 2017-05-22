@@ -1,5 +1,6 @@
 ---
 title: Catalog Items YAML Syntax
+layout: website-normal
 ---
 
 ### Catalog Items YAML Syntax

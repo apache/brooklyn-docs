@@ -1,5 +1,6 @@
 ---
 title: Templates and the Add-Application Wizard
+layout: website-normal
 ---
 
 ### Templates and the Add-Application Wizard

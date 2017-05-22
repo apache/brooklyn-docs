@@ -1,5 +1,6 @@
 ---
 title: Bundling
+layout: website-normal
 ---
 
 ### Bundling Catalog Resources

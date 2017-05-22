@@ -1,5 +1,6 @@
 ---
 title: Versioning
+layout: website-normal
 ---
 
 ### Versioning
