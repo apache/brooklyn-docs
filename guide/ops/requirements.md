@@ -64,14 +64,14 @@ rotation according to your organisation's policy.
 
 ## Supported Operating Systems
 
-The recommended operating system is CentOS 6.x or RedHat 6.x.
+The recommended operating system is CentOS 7.x or RedHat 7.x.
 
-Brooklyn has also been tested on Ubuntu 14.04 and OS X.
+Brooklyn has also been tested on CentOS 6.x, Ubuntu 14.04, Ubuntu 16.04 and OS X.
 
 
 ## Software Requirements
 
-Brooklyn requires Java (JRE or JDK) minimum version 1.7. 
+Brooklyn requires Java (JRE or JDK) minimum version 1.8. 
 OpenJDK is recommended. Brooklyn has also been tested on IBM J9 and Oracle's JVM.
 
 
