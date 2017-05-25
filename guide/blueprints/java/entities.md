@@ -38,6 +38,7 @@ Configuration
 <!---
 TODO: why to use config?
 -->
+- A ConfigKey default value should be immutable.
 
 - AttributeSensorAndConfigKey fields can be automatically converted for ``SoftwareProcess``. 
   This is done in ``preStart()``. This must be done manually if required for other entities,
