@@ -55,4 +55,4 @@ brooklyn.enrichers:
   # if nothing specified for `propagating` or `sensorMapping` then 
   # Propagator will do all but the usual lifecycle defaults, handy at the root!
   brooklyn.config:
-    producer: $brooklyn:entity("cluster")
+    enricher.producer: $brooklyn:entity("cluster")

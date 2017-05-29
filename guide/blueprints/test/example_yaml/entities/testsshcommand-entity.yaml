@@ -7,22 +7,24 @@ services:
 
     - type: org.apache.brooklyn.test.framework.TestSshCommand
       name: Check tomcat process running with ps
-      targetId: testprocess
-      command: ps -ef
-      assertStatus:
-        equals: 0
-      assertOut:
-        contains: tomcat
-      assertErr: 
-        isEmpty: true
+      brooklyn.config:
+        targetId: testprocess
+        command: ps -ef
+        assert.status:
+          equals: 0
+        assert.out:
+          contains: tomcat
+        assert.err:
+          isEmpty: true
 
     - type: org.apache.brooklyn.test.framework.TestSshCommand
       name: Check hello world script
-      targetId: testprocess
-      downloadUrl: https://github.com/apache/brooklyn-docs/raw/master/guide/blueprints/test/example_yaml/entities/script1.sh
-      assertStatus:
-        equals: 0
-      assertOut: 
-        equals: hello world
-      assertErr: 
-        isEmpty: true
+      brooklyn.config:
+        targetId: testprocess
+        download.url: https://github.com/apache/brooklyn-docs/raw/master/guide/blueprints/test/example_yaml/entities/script1.sh
+        assert.status:
+          equals: 0
+        assert.out:
+          equals: hello world
+        assert.err:
+          isEmpty: true

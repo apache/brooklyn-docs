@@ -9,4 +9,4 @@ services:
         message: hello from cluster member
         netcat.port: 8000+
     cluster.initial.size: 3
-    restartMode: parallel
+    dynamiccluster.restartMode: parallel

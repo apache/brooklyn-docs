@@ -1,0 +1,6 @@
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.Transformer
+  brooklyn.config:
+    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.string")
+    enricher.targetSensor: $brooklyn:sensor("urls.tcp.withBrackets")
+    enricher.targetValue: $brooklyn:formatString("[%s]", $brooklyn:attributeWhenReady("urls.tcp.string"))

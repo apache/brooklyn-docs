@@ -1,0 +1,6 @@
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.YamlTimeWeightedDeltaEnricher
+  brooklyn.config:
+    enricher.sourceSensor: reqs.count
+    enricher.targetSensor: reqs.per_sec
+    enricher.delta.period: 1s

@@ -1,0 +1,6 @@
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.Joiner
+  brooklyn.config:
+    enricher.sourceSensor: $brooklyn:sensor("urls.tcp.list")
+    enricher.targetSensor: $brooklyn:sensor("urls.tcp.string")
+    uniqueTag: urls.quoted.string

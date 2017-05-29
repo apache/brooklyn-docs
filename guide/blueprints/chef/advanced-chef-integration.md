@@ -32,13 +32,14 @@ A general schema for the supported YAML is below:
 
 {% highlight yaml %}
 - type: chef:cookbook_name
-  cookbook_urls:
-    cookbook_name: url://for/cookbook.tgz
-    dependency1: url://for/dependency1.tgz
-  launch_run_list: [ "cookbook_name::start" ]
-  launch_attributes: # map of arguments to set in the chef node
-  service_name: cookbook_service
-  pid_file: /var/run/cookbook.pid
+  brooklyn.config:
+    cookbook_urls:
+      cookbook_name: url://for/cookbook.tgz
+      dependency1: url://for/dependency1.tgz
+    launch_run_list: [ "cookbook_name::start" ]
+    launch_attributes: # map of arguments to set in the chef node
+    service_name: cookbook_service
+    pid_file: /var/run/cookbook.pid
 {% endhighlight %}
 
 If you are interested in exploring the Java code for creating blueprints,

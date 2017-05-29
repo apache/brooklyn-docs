@@ -1,0 +1,7 @@
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.Aggregator
+  brooklyn.config:
+    enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
+    enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
+    enricher.aggregating.fromMembers: true
+    transformation: average
