@@ -29,12 +29,12 @@ There are a number of additional configuration keys available for the `SSHComman
 
 | Configuration Key                 | Default | Description                                                                          |
 |-----------------------------------|---------|--------------------------------------------------------------------------------------|
-| command                           | String  | command to be executed on the execution target                                       |
-| executionDir                      | String  | possible values: 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'TRACE' |
-| shellEnv                          | String  | custom shell environment where the command is executed                               |
-| executionTarget                   | ENTITY | possible values: 'MEMBERS', 'CHILDREN'                                                |
+| command                           |         | command to be executed on the execution target                                       |
+| executionDir                      |         | possible values: 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'TRACE' |
+| shellEnv                          |         | custom shell environment where the command is executed                               |
+| executionTarget                   | ENTITY  | possible values: 'MEMBERS', 'CHILDREN'                                               |
 
-Here a simple example of an `SshCommandEffector` definition:
+Here is a simple example of an `SshCommandEffector` definition:
 
 {% highlight yaml %}
   brooklyn.initializers:
