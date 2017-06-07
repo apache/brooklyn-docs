@@ -4,6 +4,16 @@ title: Increase System Resource Limits
 toc: /guide/toc.json
 ---
 
+If you encounter the following error:
+
+    Caused by: java.io.IOException: Too many open files
+            at java.io.UnixFileSystem.createFileExclusively(Native Method)[:1.8.0
+
+Please check the limit for opened files `cat /proc/sys/fs/file-max` and increase it.
+You can increase the maximum limit of opened files by setting `fs.file-max` in `/etc/sysctl.conf`.
+and then running `sudo sysctl -p` to apply the changes.
+
+
 If you encounter the error below, e.g. when running with many entities, please consider **increasing the ulimit**:
 
     java.lang.OutOfMemoryError: unable to create new native thread
