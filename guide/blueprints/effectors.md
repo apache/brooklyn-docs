@@ -4,14 +4,14 @@ layout: website-normal
 ---
 
 Effectors perform an operation of some kind, carried out by a Brooklyn Entity.
-They can be manually invoked or triggered by a Policy.
+They can be manually invoked or triggered by a [Policy]({{ site.path.guide }}/blueprints/policies.html).
 
-Common uses of a effector include the following:
+Common uses of an effector include the following:
 
-*	perform a command on a remote machine,
-*	collect data and publish them to sensors.
+*   Perform a command on a remote machine.
+*   Collect data and publish them to sensors.
 
-Entities have default effectors, the lifecycle management effectors like ``start``, ``stop``, ``restart``, and clearly more ``Effectors`` can be attached to them.
+Entities have default effectors, the lifecycle management effectors like `start`, `stop`, `restart`, and clearly more ``Effectors`` can be attached to them.
 
 Off-the-Shelf Effectors
 ----------------------
@@ -22,8 +22,17 @@ Effectors are highly reusable as their inputs, thresholds and targets are custom
 
 An ```Effector``` to invoke a command on a node accessible via SSH.
 
-It allows to execute a ```command``` in a specific ```execution director``` (executionDir) by using a custom ```shell environment` (shellEnv).
+It enables execution of a ```command``` in a specific ```execution director``` (executionDir) by using a custom ```shell environment` (shellEnv).
 By default, the specified command will be executed on the entity where the effector is attached or on all *children* or all *members* (if it is a group) by configuring ```executionTarget```.
+
+There are a number of additional configuration keys available for the ``SSHCommandEffector``:
+
+| Configuration Key                 | Default | Description                                                                          |
+|-----------------------------------|---------|--------------------------------------------------------------------------------------|
+| command                           | String  | command to be executed on the execution target                                       |
+| executionDir                      | String  | possible values: 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'TRACE' |
+| shellEnv                          | String  | custom shell environment where the command is executed                               |
+| executionTarget                   | ENTITY | possible values: 'MEMBERS', 'CHILDREN'                                                |
 
 Here a simple example of an ```SshCommandEffector``` definition:
 
@@ -45,16 +54,25 @@ See [```here```](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/br
 
 ### HTTPCommandEffector
 
-An ```Effector``` to invoke REST endpoints.
+An ```Effector``` to invoke HTTP endpoints.
 
-It allows to specify the URI, the HTTP verb, credentials for authentication and HTTP headers.
+It allows the user to specify the URI, the HTTP verb, credentials for authentication and HTTP headers.
 
-It deals with some ```HttpHeaders.CONTENT_TYPE``` namely *application/json* (as default) and *application/x-www-form-urlencoded*.
-In the latter case, a map payload will be ```URLEncoded``` in a single string.
+There are a number of additional configuration keys available for the ``HTTPCommandEffector``:
 
-With optional ```JSON_PATH``` configuration key, the effector will extract a section of the json response.
+| Configuration Key                 | Default          | Description                                                                                                   |
+|-----------------------------------|------------------|---------------------------------------------------------------------------------------------------------------|
+| uri                               |                  | URI of the endpoint                                                                                           |
+| httpVerb                          |                  | possible values: 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'TRACE'                          |
+| httpUsername                      |                  | user name for the authentication                                                                              |
+| httpPassword                      |                  | password for the authentication                                                                               |
+| headers                           | application/json | It explicitly supports `application/x-www-form-urlencoded`                                                    |
+| httpPayload                       |                  | The body of the http request                                                                                  |
+| jsonPath                          |                  | A jsonPath expression to extract values from a json object                                                    |
+| jsonPathAndSensors                |                  | A map where keys are jsonPath expressions and values the name of the sensor where to publish extracted values |
 
-Using ```JSON_PATHS_AND_SENSORS``` configuration key, it is possible to extract one or more values from a json response, and publish them in sensors.
+
+When a the header ```HttpHeaders.CONTENT_TYPE``` is equals to *application/x-www-form-urlencoded* and the ``httpPayload`` is a `map`, the payload is transformed into a single string using ```URLEncoded```.
 
 {% highlight yaml %}
 brooklyn.initializers:
@@ -126,7 +144,7 @@ Effectors generally perform actions on entities.
 Each effector instance is associated with an entity,
 and at runtime it will typically exectute an operation, collect the result and, potentially, publish it as sensor on that entity, performing some computation.
 
-Writing a effector is straightforward.
+Writing an effector is straightforward.
 Simply extend [``AddEffector``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddEffector.html),
 providing an implementation for ``newEffectorBuilder`` and adding a constructor that consumes the builder or override an existing effector.
 
@@ -159,9 +177,9 @@ protected static class Body extends EffectorBody<String> {
 
 ### Best Practice
 
-The following recommendations should be considered when designing policies:
+The following recommendations should be considered when designing effectors:
 
-#### Policies should be small and composable
+#### Effectors should be small and composable
 
 One effector which executes a command and emits a sensor, and a second effector which uses the previous sensor, if defined, to execute another operation.
 
