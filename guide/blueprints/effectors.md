@@ -11,7 +11,7 @@ Common uses of an effector include the following:
 *   Perform a command on a remote machine.
 *   Collect data and publish them to sensors.
 
-Entities have default effectors, the lifecycle management effectors like `start`, `stop`, `restart`, and clearly more ``Effectors`` can be attached to them.
+Entities have default effectors, the lifecycle management effectors like `start`, `stop`, `restart`, and clearly more `Effectors` can be attached to them.
 
 Off-the-Shelf Effectors
 ----------------------
@@ -20,12 +20,12 @@ Effectors are highly reusable as their inputs, thresholds and targets are custom
 
 ### SSHCommandEffector
 
-An ```Effector``` to invoke a command on a node accessible via SSH.
+An `Effector` to invoke a command on a node accessible via SSH.
 
-It enables execution of a ```command``` in a specific ```execution director``` (executionDir) by using a custom ```shell environment` (shellEnv).
-By default, the specified command will be executed on the entity where the effector is attached or on all *children* or all *members* (if it is a group) by configuring ```executionTarget```.
+It enables execution of a `command` in a specific `execution director` (executionDir) by using a custom `shell environment` (shellEnv).
+By default, the specified command will be executed on the entity where the effector is attached or on all *children* or all *members* (if it is a group) by configuring `executionTarget`.
 
-There are a number of additional configuration keys available for the ``SSHCommandEffector``:
+There are a number of additional configuration keys available for the `SSHCommandEffector`:
 
 | Configuration Key                 | Default | Description                                                                          |
 |-----------------------------------|---------|--------------------------------------------------------------------------------------|
@@ -34,7 +34,7 @@ There are a number of additional configuration keys available for the ``SSHComma
 | shellEnv                          | String  | custom shell environment where the command is executed                               |
 | executionTarget                   | ENTITY | possible values: 'MEMBERS', 'CHILDREN'                                                |
 
-Here a simple example of an ```SshCommandEffector``` definition:
+Here a simple example of an `SshCommandEffector` definition:
 
 {% highlight yaml %}
   brooklyn.initializers:
@@ -50,15 +50,15 @@ Here a simple example of an ```SshCommandEffector``` definition:
           defaultValue: hi netcat
 {% endhighlight %}
 
-See [```here```](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
+See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
 
 ### HTTPCommandEffector
 
-An ```Effector``` to invoke HTTP endpoints.
+An `Effector` to invoke HTTP endpoints.
 
 It allows the user to specify the URI, the HTTP verb, credentials for authentication and HTTP headers.
 
-There are a number of additional configuration keys available for the ``HTTPCommandEffector``:
+There are a number of additional configuration keys available for the `HTTPCommandEffector`:
 
 | Configuration Key                 | Default          | Description                                                                                                   |
 |-----------------------------------|------------------|---------------------------------------------------------------------------------------------------------------|
@@ -72,7 +72,7 @@ There are a number of additional configuration keys available for the ``HTTPComm
 | jsonPathAndSensors                |                  | A map where keys are jsonPath expressions and values the name of the sensor where to publish extracted values |
 
 
-When a the header ```HttpHeaders.CONTENT_TYPE``` is equals to *application/x-www-form-urlencoded* and the ``httpPayload`` is a `map`, the payload is transformed into a single string using ```URLEncoded```.
+When a the header `HttpHeaders.CONTENT_TYPE` is equals to *application/x-www-form-urlencoded* and the `httpPayload` is a `map`, the payload is transformed into a single string using `URLEncoded`.
 
 {% highlight yaml %}
 brooklyn.initializers:
@@ -96,11 +96,11 @@ brooklyn.initializers:
       Content-Type: "application/x-www-form-urlencoded"
 {% endhighlight %}
 
-See [```here```](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
+See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
 
 ### AddChildrenEffector
 
-An ```Effector``` to add a child blueprint to an entity.
+An `Effector` to add a child blueprint to an entity.
 
 {% highlight yaml %}
 brooklyn.initializers:
@@ -131,9 +131,9 @@ brooklyn.initializers:
     auto_start: true
 {% endhighlight %}
 
-One of the config keys ```BLUEPRINT_YAML``` (containing a YAML blueprint (map or string)) or ```BLUEPRINT_TYPE``` (containing a string referring to a catalog type) should be supplied, but not both.
+One of the config keys `BLUEPRINT_YAML` (containing a YAML blueprint (map or string)) or `BLUEPRINT_TYPE` (containing a string referring to a catalog type) should be supplied, but not both.
 
-See [```here```](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
+See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
 
 Writing an Effector
 -------------------
@@ -145,8 +145,8 @@ Each effector instance is associated with an entity,
 and at runtime it will typically exectute an operation, collect the result and, potentially, publish it as sensor on that entity, performing some computation.
 
 Writing an effector is straightforward.
-Simply extend [``AddEffector``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddEffector.html),
-providing an implementation for ``newEffectorBuilder`` and adding a constructor that consumes the builder or override an existing effector.
+Simply extend [`AddEffector`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddEffector.html),
+providing an implementation for `newEffectorBuilder` and adding a constructor that consumes the builder or override an existing effector.
 
 {% highlight java %}
 
@@ -161,7 +161,7 @@ public static EffectorBuilder<String> newEffectorBuilder(ConfigBag params) {
 }
 {% endhighlight %}
 
-and supply an ```EffectorBody``` similar to:
+and supply an `EffectorBody` similar to:
 
 {% highlight java %}
 
