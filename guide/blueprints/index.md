@@ -12,6 +12,7 @@ children:
 - clusters.md
 - enrichers.md
 - policies.md
+- effectors.md
 - clusters-and-policies.md
 - java/
 - winrm/
