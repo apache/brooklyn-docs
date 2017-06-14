@@ -21,7 +21,7 @@ children:
 <div style="height: 9em;" markdown="1">
 A pre-built package that contains Apache Brooklyn and all of its dependencies in a single, easy-to-run package. 
 *Suitable for Linux and Windows servers and workstations with Java installed
-(Java 1.7 or 1.8 are supported, including OpenJDK, Oracle, and IBM varieties).*
+(Java 1.8 is supported, including OpenJDK, Oracle, and IBM varieties).*
 </div>
 
 <div class="text-center">
