@@ -71,7 +71,7 @@ Brooklyn has also been tested on Ubuntu 14.04 and OS X.
 
 ## Software Requirements
 
-Brooklyn requires Java (JRE or JDK) minimum version 1.7. 
+Brooklyn requires Java (JRE or JDK) minimum version 1.8.
 OpenJDK is recommended. Brooklyn has also been tested on IBM J9 and Oracle's JVM.
 
 

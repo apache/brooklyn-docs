@@ -115,7 +115,7 @@ for details of how to work around this.
 
 To get memory and thread usage for the Brooklyn (Java) process, two useful tools are `jstack` 
 and `jmap`. These require the "development kit" to also be installed 
-(e.g. `yum install java-1.7.0-openjdk-devel`). Some useful commands are shown below:
+(e.g. `yum install java-1.8.0-openjdk-devel`). Some useful commands are shown below:
 
 {% highlight bash %}
 BROOKLYN_HOME=/home/users/brooklyn/apache-brooklyn-0.9.0-bin
