@@ -1,131 +1,25 @@
 /* WEBSITE MENUS
    ----------------------------------------------------------------------- */
 
-/* top menu bar */
-.navbar-brand {
-    margin-top: -4px;
-    margin-left: -30px !important;
+.navbar-brand > img {
+  margin-top: -4px;
 }
-
-@mixin icon($name) {
-  .icon-#{$name} {
-    width: 32px;
-    height: 32px;
-    background: url('#{$style_dir}/img/'+$name+'-256-black.png');
-    background-size: 32px 32px;
-  }
-  .icon-#{$name}:hover {
-    background: url('#{$style_dir}/img/'+$name+'-256-green.png');
-    background-size: 32px 32px;
-  }
-}
-
-.navbar {
-    @include icon('github');
-    @include icon('twitter');
-    @include icon('irc');
-}
-
-.navbar .tooltip .tooltip-inner {
-    position: relative;
-    right: 40%;
-    // include calc for those browsers which support it
-    right: calc(50% - 25px);
-    max-width: 300px;
-}
-
-/* special container with sidebar where if sidebar is squeezed
-   (under "responsiveness") the text keeps at least its "auto" size,
-   squashing the main container instead */
-.container-and-sidebars {
-    width: 100%;
-    @include flex();
-}
-.container-between-sidebars {
-    -webkit-box-flex: 1 100%;
-    -webkit-flex: 1 100%;
-    -webkit-flex-flex: 1 100%;
-    flex: 1 100%;
-    flex: 10 1 100%;
-    display: inline-block;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-.container-sidebar {
-    -webkit-box-flex: 0 auto;
-    -webkit-flex: 0 auto;
-    -webkit-flex-flex: 0 auto;
-    flex: 0 auto;
-    flex: 0 0 auto;
-}
-.container-sidebar-right { 
-    @extend .container-sidebar; 
-    text-align: left;
-    padding-right: 10px;
-} 
-.container-sidebar-left {
-    @extend .container-sidebar;
-    text-align: right;
-    padding-left: 10px;
-}
-
-@media (min-width: 768px) {
-  .container-sidebar { min-width: calc((100% - 750px)/2); }
-}
-@media (min-width: 992px) {
-  .container-sidebar { min-width: calc((100% - 970px)/2); }
-}
-@media (min-width: 1200px) {
-  .container-sidebar { min-width: calc((100% - 1170px)/2); }
-}
-
-
-.navbar-feather {
-  padding-top: 12px; 
-  margin-right: -6px;
-}
-.navbar-sidebar-right-icons {
-    padding-top: 10px;
-    margin-left: -6px;
-    white-space: nowrap;
-    a {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-    }
-}
-.navbar-icon-shift { margin-right: -2px; }
-
-.navbar div.dropdown_section_header hr {
-  margin: 4px 12px;
-  border-color: $white_dd;
-}
-
-.navbar div.dropdown_new_section hr {
-  margin: 6px 0px;
-  border-color: $white_dd;
+.navbar a.navbar-btn {
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 6px 12px;
 }
 
 /* pop-up top-menu */
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   background-color: $white_f5;
   color: $brooklyn_green;
-}
-.top-menu {
-  font-size: 14px;
-  font-weight: 400;
-  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: $white_f5;
-    background-image: none;
-    color: $brooklyn_green;
-  }
-  ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-  }
+      background-image: none;
 }
 
 /* side menu */

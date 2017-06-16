@@ -160,7 +160,7 @@ See the [overview](overview.html) for where to find additional information, espe
 
 If you receive an error message similar to the one below when provisioning a VM, it means that the wrong username is being used for ssh'ing to the machine. The "invalid packet" is because a response such as "Please login as the ubuntu user rather than root user." is being sent back.
 
-You can workaround the issue by explicitly setting the user that AMP should use to login to the VM  (typically the OS default user).
+You can workaround the issue by explicitly setting the user that Brooklyn should use to login to the VM  (typically the OS default user).
 
 {% highlight bash %}
 error acquiring SFTPClient() (out of retries - max 50)
@@ -181,3 +181,13 @@ brooklyn.locations:
     credential: <add>
     loginUser: centos
 {% endhighlight %}
+
+## SSLException close_notify Exception
+
+The following error, when deploying a blueprint, has been shown to be caused by issues with DNS provided by your ISP or
+traffic filtering such as child-safe type filtering:
+
+    Caused by: javax.net.ssl.SSLException: Received fatal alert: close_notify
+
+To resolve this try disabling traffic filtering and setting your DNS to a public server such as 8.8.8.8 to use google
+[DNS](https://www.wikiwand.com/en/Google_Public_DNS).  [See here](https://developers.google.com/speed/public-dns/docs/using) for details on how to configure this.

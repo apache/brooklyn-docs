@@ -26,7 +26,7 @@ in the YAML front matter of a page causes the site structure plug-in to look thr
 containing `section_type: inline` in the YAML front matter.
 
 The content from these inline sections can then be included in the page content using the liquid tag `child_content`. This is shown below
-in an example from [/guide/ops/locations/index.md](https://github.com/apache/brooklyn-docs/blob/master/guide/ops/locations/index.md){:target="_blank"}:
+in an example from [/guide/locations/index.md](https://github.com/apache/brooklyn-docs/blob/master/guide/locations/index.md){:target="_blank"}:
 
 <pre>
 ---

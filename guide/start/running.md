@@ -38,7 +38,7 @@ Firstly, download and install:
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads){:target="_blank"}
  
 Then download the provided Apache Brooklyn vagrant configuration from {% if site.brooklyn-version contains 'SNAPSHOT' %}
-from [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{site.brooklyn-version}}&c=dist&e=zip){:target="_blank"}.
+[here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{site.brooklyn-version}}&c=dist&e=zip){:target="_blank"}.
 {% else %}
 [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}.
 {% endif %} This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
@@ -140,7 +140,7 @@ to configure security. Documentation of configuration options include:
  
 * [Security]({{ site.path.guide }}/ops/brooklyn_properties.html)
 * [Persistence]({{ site.path.guide }}/ops/persistence/)
-* [Cloud credentials]({{ site.path.guide }}/ops/locations/)
+* [Cloud credentials]({{ site.path.guide }}/locations/)
 
 
 ## Launch Apache Brooklyn

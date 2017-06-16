@@ -72,7 +72,8 @@ root login.
 ### VM Users
 
 It is strongly discouraged to use the root user on VMs being created or managed by Brooklyn.
-
+SSH-ing on the VM should be done on rare cases such as initial Apache Brooklyn setup,
+Apache Brooklyn upgrade and other important maintenance occasions.
 
 ### SSH keys
 

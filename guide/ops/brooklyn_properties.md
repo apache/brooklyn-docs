@@ -74,7 +74,7 @@ example.property=$brooklyn:literal("$brooklyn:myexample")
 
 ## Locations
 
-Information on defining locations in the `brooklyn.properties` file is available [here]({{ site.path.guide }}/ops/locations/).
+Information on defining locations in the `brooklyn.properties` file is available [here]({{ site.path.guide }}/locations/).
 
 
 ## Java
@@ -204,7 +204,7 @@ brooklyn.entitlements.perUser.metrics=minimal
 {% endhighlight %}
 
 For more information, see 
-[Java: Entitlements]({{ site.path.guide }}/java/entitlements.html).
+[Java: Entitlements]({{ site.path.guide }}/blueprints/java/entitlements.html).
 or
 {% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
 

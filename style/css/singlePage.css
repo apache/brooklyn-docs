@@ -53,7 +53,7 @@ pre {
   font-size: 20pt;
   font-weight: bold;
 }
-#content_container h1{
+.page .content h1{
   display: inline-block;
   width: 90%;
 }
