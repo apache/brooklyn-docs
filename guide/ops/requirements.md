@@ -62,17 +62,15 @@ under `/var/log`. You can further reconfiguring the logging detail level and log
 rotation according to your organisation's policy.
 
 
-## Supported Operating Systems
+## OS Requirements
 
-The recommended operating system is CentOS 6.x or RedHat 6.x.
-
-Brooklyn has also been tested on Ubuntu 14.04 and OS X.
+Brooklyn is tested against CentOS (6 or later), RHEL (6 or later), Ubuntu (14.04 or later), OS X, and Windows.
 
 
 ## Software Requirements
 
-Brooklyn requires Java (JRE or JDK) minimum version 1.8.
-OpenJDK is recommended. Brooklyn has also been tested on IBM J9 and Oracle's JVM.
+Brooklyn requires Java 8 (JRE or JDK) or later.
+OpenJDK is recommended. Brooklyn has also been tested on the Oracle JVM and IBM J9.
 
 
 ## Configuration Requirements
