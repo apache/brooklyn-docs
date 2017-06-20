@@ -3,18 +3,118 @@ title: Versioning
 layout: website-normal
 ---
 
-### Versioning
+Brooklyn supports multiple versions of a type to be installed and used at the same time.
+Versions are a first-class concept and are often prominently displayed in the UI.
 
-Version numbers follow the OSGi convention. This can have a major, minor, micro and qualifier part.
-For example, `1.0`. `1.0.1` or `1.0.1-20150101`.
+In order to do this, Brooklyn requires that the `id:version` string be unique across the catalog:
+it is normally an error to add a type if a type with the same `id:version` is present.
+Exceptions are if the definition is identical, or if the `version` is noted as a `SNAPSHOT`.
+In extraordinary circumstances it is possible to delete a given `id:version` definition
+and then add the new one, but this is discouraged and the usual practice is to:
 
-The combination of `id:version` strings must be unique across the catalog.
-It is an error to deploy the same version of an existing item:
-to update a blueprint, it is recommended to increase its version number;
-alternatively in some cases it is permitted to delete an `id:version` instance
-and then re-deploy.
-If no version is specified, re-deploying will automatically
-increment an internal version number for the catalog item.
+* Use a `-SNAPSHOT` qualifer suffix on your version when developing
+* Increase the version number when making a change to a non-SNAPSHOT type  
 
-When referencing a blueprint, if a version number is not specified 
-the latest non-snapshot version will be loaded when an entity is instantiated.
+When adding to the catalog, if no version is supplied, Brooklyn may automatically 
+increment the version number for the catalog item.
+
+When deploying a blueprint, if a version number is not specified Brooklyn will typically use
+the highest ordered version (see "Ordering" below) in the catalog for the referenced type,
+and will thereafter lock the use of that version in that blueprint.
+(An exception is where types are co-bundled or an explicit search path is defined;
+in the context of evaluating one type, Brooklyn may prefer versions in the same bundle or on the search path.) 
+
+
+#### Versioning Syntax
+
+Version numbers in Brooklyn are recommended to follow the following syntax:
+
+```
+<major> ( "." <minor> ( "." <patch> )? )? ( "-" <qualifier> )?
+```
+
+where the `<major>`, `<minor>`, and `<patch>` parts are numbers
+in accordance with [semver](http://semver.org) semantic versioning,
+assumed to be `0` if omitted,
+and an `<qualifier>` is made up of letters, numbers, `"-"` and `"_"`
+in accordance with [OSGi](https://www.osgi.org/release-4-version-4-3-download/)
+(see sections 1.3.2 and 3.2.5).
+
+Examples:
+
+* `1.2`
+* `2.0.0`
+* `3`
+* `2.0.0-SNAPSHOT`
+* `1.10-rc3-20170619`
+
+
+#### Snapshots and Ordering
+
+The string `SNAPSHOT` appearing anywhere in the version indicates a pre-release version;
+if this string is not present the version is treated as a release version.
+
+When taking an ordering, for instance to find the highest version, 
+snapshot versions are always considered lower than release versions.
+Next, the natural order is taken on the major, minor, and patch fields.
+Next, a version with no qualifier is considered higher than one with a qualifier.
+Finally, the qualifier is taken in natural order.
+
+The natural order here is defined as ASCII-lexicographic comparison
+for any non-numeric segments (`"a" < "b"`) but numeric order for digit sequences 
+(`"9" < "10"`), so it does what is usually expected for versions (`1.9` < `1.10`
+and `"1.1-rc9-b" < "1.1-rc10-a"`).
+
+Thus the _order_ of the list of examples above is:
+
+* `2.0.0-SNAPSHOT`
+* `1.2`
+* `1.10-rc3-20170619`
+* `2.0.0`
+* `3`
+
+
+#### Advanced: Other Version Syntaxes
+
+Other version syntaxes are supported with the following restrictions:
+
+* Version strings MUST NOT contain a colon character (`:`)
+* Version strings MUST NOT be empty
+* Fragments that do not follow the recommended syntax may be ignored
+  when determining version uniqueness
+  (e.g. adding both `"1.0.0-v1.1"` and "1.0.0-v1_1" can result in 
+  one bundle _replacing_ the other rather than both versions being loaded) 
+
+This means in practice that almost any common version scheme can be used.
+However the recommended scheme will fit more neatly alongside types from other sources.
+
+Internally in some places, Brooklyn needs to produce OSGi-compliant versions.
+For the recommended syntax, this mapping consists of replacing the first
+occurrence of `"-"` with `"."` and setting `0` values for absent minor and patch versions.
+Thus when looking at the OSGi view, instead of version `1.10-rc3-20170619`
+you will see `1.10.0.rc3-20170619`.
+This mapping is guaranteed to be one-to-one so no conflicts will occur if the
+recommended syntax is used.
+(If not using the recommended syntax, the mapping proceeds by treating the first dot-separated fragment 
+as the qualifer and converts unsupported characters in a qualifier to an underscore;
+thus `1.x` becomes `1.0.0.x`, `v1` becomes `0.0.0.v1`, and `"1.0.0-v1.1"` becomes `"1.0.0.v1_1"` 
+hence the bundle replacement noted above.)
+
+If you are creating an OSGi `MANIFEST.MF` for a bundle that also contains a `catalog.bom`, 
+you will need to use the mapped rsult (OSGi version syntax) in the manifest,
+but should continue to use the Brooklyn-recommended syntax in the `catalog.bom`.
+ 
+For those who are curious, the reason for the Brooklyn version syntax is to reconcile
+the popular usage of semver and maven with the internal requirement to use OSGi versions.
+Semver, OSGi, and maven conventions agree on up to three numeric dot-separated tokens,
+but differ quite significantly afterwards, with Brooklyn adopting what seems to be the
+most popular choices in each.
+
+A summary of the main differences between Brooklyn and other versioning syntaxes is as follows: 
+
+* `SNAPSHOT` treated specially (maven semantics)
+* Qualifier preceded by hyphen (maven and semver semantics, different to OSGi which wants a dot)
+* Underscores allowed in qualifiers (OSGi and maven semantics, different to semver)
+* Periods and plus not allowed in qualifiers (OSGi semantics and maven convention, 
+  different to semver which gives them special meaning)
+
