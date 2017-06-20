@@ -5,7 +5,25 @@ layout: website-normal
 
 ### Bundling Catalog Resources
 
-It is possible to add an OSGi bundle to AMP. This is useful when you have a blueprint that needs to reference external scripts/resources or when you have multiple blueprints that you want to keep in sync. Brooklyn will persist any uploaded bundles so that they are available after a restart, or a HA failover.
+It is possible to upload catalog items and associated resources as a single bundle to AMP.
+This is useful when you have a blueprint that needs to reference external scripts/resources or 
+when you have multiple blueprints that you want to keep in sync. Brooklyn will persist any 
+uploaded bundles so that they are available after a restart or on HA failover.
+
+The bundle must be a ZIP file including a `catalog.bom` in the root.
+(The `br` CLI will create a ZIP from a local folder, for convenience.)
+The `catalog.bom` must declare a `bundle` identifier and a `version`, 
+following Brooklyn's [versioning](versioning.html) rules.
+Brooklyn will keep track of that bundle, allow SNAPSHOT-version bundles to be replaced,
+and ensure dependent bundles (specified as `brooklyn.libraries` or, for people familiar
+with OSGi, the `Required-bundle` manifest header) are available for searching.
+
+Resources in the bundle can be referenced from the `catalog.bom` by using
+the `classpath:` URL protocol, as in `classpath://path/to/script.sh`.
+This can also be used to load resources in explicitly declared dependent bundles. 
+
+
+### Example
 
 In this example, we will create a simple `my-server` catalog item, bundled with a simple script. The script will be run when launching the server.
 
