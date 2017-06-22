@@ -1,0 +1,66 @@
+brooklyn.catalog:
+  version: 1.0.0-SNAPSHOT
+  iconUrl: https://static-www.elastic.co/assets/blte39224bc57d3e015/icon-logstash.svg
+  items:
+  - id: logstash-standalone
+    name: "Logstash server"
+    description: "Single Logstash server"
+    item:
+      type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+      provisioning.properties:
+        osFamily: ubuntu
+
+      brooklyn.config:
+        install.version: "2.4.0"
+        logstash.config.input: input { file { path => "/var/log/*" } }
+        logstash.config.filter: ''
+        logstash.config.output:
+          $brooklyn:formatString:
+            - |
+              output {
+                elasticsearch {
+                  hosts => %s
+                }
+              }
+            - $brooklyn:config("logstash.elasticsearch.hosts")
+        logstash.config.dir: /etc/logstash/conf.d
+
+      shell.env:
+        LOGSTASH_VERSION: $brooklyn:config("install.version")
+        INPUT_CONFIG: $brooklyn:config("logstash.config.input")
+        FILTER_CONFIG: $brooklyn:config("logstash.config.filter")
+        OUTPUT_CONFIG: $brooklyn:config("logstash.config.output")
+        CONFIG_DIR: $brooklyn:config("logstash.config.dir")
+        ELASTICSEARCH_HOSTS: $brooklyn:config("logstash.elasticsearch.hosts")
+
+      install.command: |
+        #Update the system
+        sudo apt-get update
+        
+        # Download the cert and repository
+        wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+        echo "deb https://packages.elastic.co/logstash/2.4/debian stable main" | sudo tee -a /etc/apt/sources.list
+        sudo apt-get update && sudo apt-get -y install openjdk-8-jre logstash
+
+        # add a config file for logstash
+        sudo mkdir -p ${CONFIG_DIR}
+        echo "${INPUT_CONFIG} ${FILTER_CONFIG} ${OUTPUT_CONFIG}" | sudo tee ${CONFIG_DIR}/01-basic.conf
+
+      launch.command: sudo systemctl start logstash.service
+
+      stop.command: sudo systemctl stop logstash.service
+
+      checkRunning.command: sudo systemctl status logstash.service
+
+  - id: logstash-child
+    name: "Logstash Child"
+    description: |
+       Logstash server to be embedded as a child of a SoftwareProcess that
+       publishes its 'log.location' as a sensor.
+       Callers should configure 'logstash.elasticsearch.hosts' (if using ES)
+       or 'logstash.config.output'.
+
+    item:
+      type: logstash-standalone
+      brooklyn.config:
+        logstash.elasticsearch.host: 127.0.0.1:9200  # must be supplied by caller!
