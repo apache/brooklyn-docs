@@ -1,0 +1,94 @@
+brooklyn.catalog:
+  version: 1.0.0-SNAPSHOT
+  iconUrl: https://avatars0.githubusercontent.com/u/6764390?v=3&s=400
+  license: Apache-2.0
+  issues_url: https://github.com/brooklyncentral/brooklyn-elk/issues  # TODO move this there
+  itemType: template
+  item:
+    type: org.apache.brooklyn.entity.stock.BasicApplication
+    name: ELK Stack
+    id: ELK-Stack
+    description: |
+      Simple ELK stack deployment: provisions Elasticsearch, Kibana and Logstash as a child of Apache Tomcat 8
+
+    brooklyn.parameters:
+    - name: elasticsearch.cluster.initial.size
+      type: integer
+      label: Initial Size of the ElasticSearch Cluster
+      description: The initial size of the cluster of ElasticSearch nodes
+      default: 5
+
+    services:
+      - type: elasticsearch
+        id: es
+        name:  Elasticsearch Cluster
+        brooklyn.config:
+          install.version: 2.4.0
+
+      - type: kibana-standalone
+        id: kibana
+        name: Kibana Server
+        customize.latch: $brooklyn:component("es").attributeWhenReady("service.isUp")
+        brooklyn.config:
+          kibana.elasticsearch.ip: $brooklyn:component("es").attributeWhenReady("host.address.first")
+          kibana.elasticsearch.port: $brooklyn:component("es").config("elasticsearch.http.port")
+
+        provisioning.properties:
+          minRam: 8gb
+          minDisk: 100gb
+          minCores: 4
+          osFamily: ubuntu
+          imageNameRegex: .*16.04.*
+          templateOptions:
+            portSpeed: 1000
+            diskType: "LOCAL"
+          domainName: example.com
+          groupId: kibana
+
+      - type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server
+        id: tomcat
+        customize.latch: $brooklyn:entity("es").attributeWhenReady("service.isUp")
+        brooklyn.config:
+          wars.root: "http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war"
+          children.startable.mode: background_late
+
+        provisioning.properties:
+          minRam: 8gb
+          minDisk: 100gb
+          minCores: 4
+          osFamily: ubuntu
+          imageNameRegex: .*16.04.*
+          templateOptions:
+            portSpeed: 1000
+            diskType: "LOCAL"
+          domainName: example.com
+          groupId: logstash
+
+        brooklyn.children:
+        - type: logstash-child
+          name: Logstash
+          brooklyn.config:
+            logstash.elasticsearch.hosts: $brooklyn:entity("es").attributeWhenReady("urls.http.withBrackets")
+            logstash.config.input:
+              $brooklyn:formatString:
+              - |
+                input {
+                  file {
+                    path => "%s/logs/localhost_access_log.*"
+                    start_position => "beginning"
+                  }
+                }
+              - $brooklyn:entity("tomcat").attributeWhenReady("run.dir")
+            logstash.config.filter: |
+              filter {
+                grok {
+                  match => { "message" => "%{COMBINEDAPACHELOG}" }
+                }
+                date {
+                  match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+                }
+              }
+
+
+
+
