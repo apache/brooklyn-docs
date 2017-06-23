@@ -17,6 +17,14 @@ some other problem has occured which the user is expected to attend to
 Loggers follow the ``package.ClassName`` naming standard.  
 
 
+## Using Logback through OSGi Pax Logging
+
+In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
+
+See: [Logging - OSGi based Apache Brooklyn](../dev/tips/logging.html#osgi-based-apache-brooklyn) <br/>
+[https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
+
+
 ## Standard Configuration
 
 A `logback.xml` file is included in the `conf/` directly of the Brooklyn distro;

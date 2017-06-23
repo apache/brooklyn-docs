@@ -11,6 +11,28 @@ with a default configuration which just works out of the box
 and bindings to the other common libraries (``java.util.logging``, ``log4j``, ...)
 if you prefer one of those.
 
+
+### OSGi based Apache Brooklyn
+
+While developing it may be useful to change logging level of some of the Apache Brooklyn modules.
+The easiest way to do that is via the karaf console which can be started by `bin/client`.
+(Details regarding using [Apache Brooklyn Karaf console](../../blueprints/java/bundle-dependencies.html#karaf-console))
+For example if you would like to inspect jclouds API calls, enable jclouds.wire logging just enable it from karaf client.
+
+    log:set DEBUG jclouds.wire
+
+To check other log levels.
+
+    log:list
+
+If for some reason log level needs modified before the first start of Karaf
+then you can modify the config file `etc/org.ops4j.pax.logging.cfg` before hand.
+For more information check
+[https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration).
+
+
+### Classic - non-OSGI based Apache Brooklyn
+
 To use:
 
 * **Users**:
@@ -25,7 +47,7 @@ and then to put custom logging configuration in either ``logback-custom.xml`` or
 as described below.
 
 
-## Customizing Your Logging
+#### Customizing Your Logging
 
 The project ``brooklyn-logback-xml`` supplies a ``logback.xml`` configuration,
 with a mechanism which allows it to be easily customized, consumed, and overridden.
@@ -82,7 +104,7 @@ You can set a specific logback config file to use with:
 {% endhighlight %}
 
 
-## Assemblies
+#### Assemblies
 
 When building an assembly, it is recommended to create a ``conf/logback.xml`` which 
 simply includes ``logback-main.xml`` (which comes from the classpath).  Users of the assembly
@@ -99,7 +121,7 @@ logging categories and define the log file name) and it should get picked up,
 both in the IDE and in the assembly.   
  
 
-## Tests
+#### Tests
 
 Brooklyn projects ``test`` scope includes the ``brooklyn-utils-test-support`` project
 which supplies a ``logback-test.xml``. logback uses this file in preference to ``logback.xml``
@@ -112,7 +134,7 @@ The only differences of the ``logback-test.xml`` configuration is that:
 * The log file is called ``brooklyn-tests.log`` 
 
 
-## Caveats
+#### Caveats
 
 * logback uses SLF4J version 1.6 which is **not compatible** with 1.5.x. 
   If you have dependent projects using 1.5.x (such as older Grails) things may break.
