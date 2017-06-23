@@ -62,6 +62,10 @@ Integration with systems like Logstash and Splunk is possible using standard log
 Logback can be configured to [write to the syslog](http://logback.qos.ch/manual/appenders.html#SyslogAppender), 
 which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/inputs/syslog).
 
+## Using Logback through OSGi Pax Logging
+
+In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging config file `etc/org.ops4j.pax.logging.cfg`.
+https://ops4j1.jira.com/wiki/display/paxlogging/Configuration
 
 ## For More Information
 
