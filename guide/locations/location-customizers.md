@@ -1,6 +1,9 @@
 ---
 title: Location Customizers
 layout: website-normal
+children:
+- machine-location-customizers/
+- jclouds-location-customizers/
 ---
 
 Apache Brooklyn supports a number of ways to configure and customize locations. These include
@@ -167,3 +170,6 @@ the type and its configuration. For example:
 To register `MachineLocationCustomizer` instances programmatically, set the config key
 `CloudLocationConfig.MACHINE_LOCATION_CUSTOMIZERS` on the location, or pass this 
 config option when calling `location.obtain(options)`.
+
+## Implementations available in Apache Brooklyn
+{% include list-children.html %}
