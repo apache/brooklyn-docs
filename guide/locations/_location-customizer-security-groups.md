@@ -1,11 +1,10 @@
 ---
-section: Customizing Cloud Security Group
-section_position: 1
+section: Customizing Cloud Security Groups
+section_position: 12
 section_type: inline
 ---
 
-
-## Customizing Cloud Security Group
+## Customizing Cloud Security Groups
 
 Before using SharedLocationSecurityGroupCustomizer, please first refer to [Port Inferencing](../../blueprints/custom-entities.html#port-inferencing).
 
