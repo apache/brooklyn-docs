@@ -15,14 +15,16 @@ and then add the new one, but this is discouraged and the usual practice is to:
 * Use a `-SNAPSHOT` qualifer suffix on your version when developing
 * Increase the version number when making a change to a non-SNAPSHOT type  
 
-When adding to the catalog, if no version is supplied, Brooklyn may automatically 
-increment the version number for the catalog item.
+When adding to the catalog, if no version is supplied, Brooklyn will typically use 
+`0.0.0-SNAPSHOT`, and some clients will automatically create and increment the version number 
+for the catalog item.
 
 When deploying a blueprint, if a version number is not specified Brooklyn will typically use
 the highest ordered version (see "Ordering" below) in the catalog for the referenced type,
 and will thereafter lock the use of that version in that blueprint.
 (An exception is where types are co-bundled or an explicit search path is defined;
-in the context of evaluating one type, Brooklyn may prefer versions in the same bundle or on the search path.) 
+in the context of evaluating one type, Brooklyn may prefer versions in the same bundle 
+or on the search path.)
 
 
 #### Versioning Syntax
@@ -60,10 +62,11 @@ Next, the natural order is taken on the major, minor, and patch fields.
 Next, a version with no qualifier is considered higher than one with a qualifier.
 Finally, the qualifier is taken in natural order.
 
-The natural order here is defined as ASCII-lexicographic comparison
-for any non-numeric segments (`"a" < "b"`) but numeric order for digit sequences 
-(`"9" < "10"`), so it does what is usually expected for versions (`1.9` < `1.10`
-and `"1.1-rc9-b" < "1.1-rc10-a"`).
+The natural order here is defined as 
+numeric order for digit sequences (`"9" < "10"`)
+and ASCII-lexicographic comparison elsewhere (`"a" < "b"`),
+which is normally what people will expect for versions 
+(`1.9` < `1.10` and `"1.1-rc9-b" < "1.1-rc10-a"`).
 
 Thus the _order_ of the list of examples above is:
 
@@ -73,7 +76,7 @@ Thus the _order_ of the list of examples above is:
 * `2.0.0`
 * `3`
 
-For practical purposes, `3`, `3.0`, and `3.0.0` are treated as equivalent,
+For most practical purposes, `3`, `3.0`, and `3.0.0` are treated as equivalent,
 but if referencing a version you should use the exact version string defined.
 The version `3.0-0` is different, as the `-0` indicates a qualifier, and
 is ordered before a `3.0.0`.
@@ -106,7 +109,13 @@ and so would conflict and block installation if there is any change
 (and replace if they have a `-SNAPSHOT` qualifier);
 references to bundles can use `3` or `3.0` or `3.0.0`, though as noted above 
 types contained within would have to be referenced using the exact version string supplied. 
-
+(If different versions are specified on individual types than for the bundle itself --
+which is not recommended -- then the conversion to OSGi does not apply, 
+and the versions are not treated as equal;
+in such edge cases the ordering obeys numeric then ASCII ordering on segments,
+so we have `3` < `3.0` < `3.01` < `3.1` < `3.09` < `3.9` < `3.10` 
+and `v-1` < `v.1` < `v_1`.)
+            
 If not using the recommended syntax, the mapping proceeds by treating the first dot-separated fragment 
 as the qualifer and converts unsupported characters in a qualifier to an underscore;
 thus `1.x` becomes `1.0.0.x`, `v1` becomes `0.0.0.v1`, and `"1.0.0-v1.1"` becomes `"1.0.0.v1_1"` 
@@ -124,9 +133,14 @@ most popular choices in each.
 
 A summary of the main differences between Brooklyn and other versioning syntaxes is as follows: 
 
-* `SNAPSHOT` treated specially (maven semantics)
 * Qualifier preceded by hyphen (maven and semver semantics, different to OSGi which wants a dot)
 * Underscores allowed in qualifiers (OSGi and maven semantics, different to semver)
 * Periods and plus not allowed in qualifiers (OSGi semantics and maven convention, 
   different to semver which gives them special meaning)
+* The ordering used in Brooklyn is different to that used in OSGi
+  (where qualifiers come after the unqualified version and don't do a numeric comparison)
+* `SNAPSHOT` treated specially (maven semantics)
+* Maven's internal to-OSGi conversion is different for some non-recommended syntax strings
+  (e.g. `10rc1` becomes `10.0.0.rc1` in Brooklyn but Maven will map it by default to `0.0.0.10rc1`)  
+
 
