@@ -27,7 +27,7 @@ Start the instance with a console in the foreground using the following command
 bin/karaf
 {% endhighlight %}
 
-This will launch the [Karaf console](https://karaf.apache.org/manual/latest/users-guide/console.html)
+This will launch the [Karaf console](https://karaf.apache.org/manual/latest/#_using_the_console)
 where you can interact with the running instance. Note that Brooklyn has already started at this point
 and is reachable at the usual web console url.
 
