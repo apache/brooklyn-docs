@@ -29,11 +29,11 @@ or in a new file included from this.
 
 The default `logback.xml` file references a collection of other log configuration files
 included in the Brooklyn jars. It is necessary to understand the source structure
-in the [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project.
+in the [logback-includes]({{ site.brooklyn.url.git }}/logging/logback-includes) project.
 
 For example, to change the debug log inclusions, create a folder `brooklyn` under `conf`
 and create a file `logback-debug.xml` based on the
-[brooklyn/logback-debug.xml]({{ site.brooklyn.url.git }}/usage/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
+[brooklyn/logback-debug.xml]({{ site.brooklyn.url.git }}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
 from that project.
 
 
