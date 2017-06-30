@@ -26,7 +26,8 @@ This guide covers the basics. You may also wish to configure:
 Check that the server meets the [requirements](requirements.html).
 Then configure the server as follows:
 
-* install Java JRE or JDK (version 7 or later)
+* install Java JRE or JDK (version 8 or later)
+* enable "Java Cryptography Extension" (already enabled out of the box of OpenJDK installs)
 * install an [SSH key]({{ site.path.guide }}/locations/index.html#ssh-keys), if not available
 * if the "localhost" location will be used, enable [passwordless ssh login]({{ site.path.guide }}/locations/index.html#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`

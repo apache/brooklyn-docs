@@ -3,10 +3,12 @@ location: localhost
 services:
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   name: Simple Netcat Server
-  launch.command: |
-    echo $MESSAGE | nc -l $NETCAT_PORT &
-    echo $! > $PID_FILE
-    
-  env:
-    MESSAGE: hello
-    NETCAT_PORT: 4321
+
+  brooklyn.config:
+    launch.command: |
+      echo $MESSAGE | nc -l $NETCAT_PORT &
+      echo $! > $PID_FILE
+
+    shell.env:
+      MESSAGE: hello
+      NETCAT_PORT: 4321

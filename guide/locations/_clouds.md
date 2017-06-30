@@ -211,6 +211,9 @@ For more keys and more detail on the keys below, see
   the software process. One can alternatively use `stopIptables: true` to entirely stop the
   iptables service.
 
+- Use Entity configuration flag `effector.add.openInboundPorts: true` to add an effector for opening ports in a cloud Security Group.
+  The config is supported for all SoftwareProcessImpl implementations.
+
 - Use `installDevUrandom: true` to fall back to using `/dev/urandom` rather than `/dev/random`. This setting
   is useful for cloud VMs where there is not enough random entropy, which can cause `/dev/random` to be
   extremely slow (causing `ssh` to be extremely slow to respond).
@@ -249,7 +252,7 @@ For example, here is a complete blueprint that sets some AWS EC2 specific option
     location: AWS_eu-west-1
     services:
     - type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
-      provisioningProperties:
+      provisioning.properties:
         templateOptions:
           subnetId: subnet-041c8373
           mapNewVolumeToDeviceName: ["/dev/sda1", 100, true]

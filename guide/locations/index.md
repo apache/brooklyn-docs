@@ -2,7 +2,7 @@
 title: Locations
 layout: website-normal
 children:
-- { path: location-customizers.md, section_position: 8 }
+- { path: provisioned-machine-requirements.md, section_position: 8 }
 check_directory_for_children: true
 ---
 

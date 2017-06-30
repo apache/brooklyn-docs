@@ -7,6 +7,8 @@ By this point you should be familiar with the fundamental concepts behind both A
 
 The intention is that this example is used to learn the more in-depth concepts, and also to serve as a reference when writing your own blueprints. This page will first explain what the example application is and how to run it, then it will spotlight interesting features.
 
+Please note, there is now a much more up-to-date ELK blueprint that can be found [here](https://github.com/brooklyncentral/brooklyn-elk/). We've using an older version of this in the tutorial as it highlights some key Brooklyn concepts.
+
 
 ### ELK Stack Example
 
@@ -28,10 +30,10 @@ For more about the ELK stack, please see the documentation [here](https://www.el
 
 There are four blueprints that make up this application. Each of them are used to add one or more catalog items to Brooklyn. You can find them below:
 
-* [Elasticsearch](https://github.com/brooklyncentral/brooklyn-elk/blob/master/brooklyn-elasticsearch-catalog.bom)
-* [Logstash](https://github.com/brooklyncentral/brooklyn-elk/blob/master/brooklyn-logstash-catalog.bom)
-* [Kibana](https://github.com/brooklyncentral/brooklyn-elk/blob/master/brooklyn-kibana-catalog.bom)
-* [ELK](https://github.com/brooklyncentral/brooklyn-elk/blob/master/brooklyn-elk-catalog.bom)
+* [Elasticsearch](example_yaml/brooklyn-elasticsearch-catalog.bom)
+* [Logstash](example_yaml/brooklyn-logstash-catalog.bom)
+* [Kibana](example_yaml/brooklyn-kibana-catalog.bom)
+* [ELK](example_yaml/brooklyn-elk-catalog.bom)
 
 #### Running the example
 First, add all four blueprints to the Brooklyn Catalog. This can be done by clicking the 'Catalog' tab, clicking the '+'

@@ -1,0 +1,58 @@
+brooklyn.catalog:
+  version: 1.0.0-SNAPSHOT
+  iconUrl: https://static-www.elastic.co/assets/blt6c40e42f467aa55c/icon-kibana.svg
+  items:
+  - id: kibana-standalone
+    name: "Kibana server"
+    description: Kibana server. Callers should configure 'kibana.elasticsearch.ip'
+    item:
+      type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+      provisioning.properties:
+        osFamily: ubuntu
+
+      brooklyn.config:
+        install.version: "4.6.1"
+        kibana.elasticsearch.ip: 127.0.0.1  # must be supplied by caller!
+        kibana.elasticsearch.port: 9200  # must be supplied by caller!
+        kibana.port: 5601
+
+      shell.env:
+        KIBANA_VERSION: $brooklyn:config("install.version")
+        ELASTICSEARCH_IP: $brooklyn:config("kibana.elasticsearch.ip")
+        ELASTICSEARCH_PORT: $brooklyn:config("kibana.elasticsearch.port")
+        KIBANA_PORT: $brooklyn:config("kibana.port")
+
+      install.command: |
+        #Update the system
+        sudo apt-get update
+        
+        # Download the cert and repository
+        wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+        echo "deb https://packages.elastic.co/kibana/4.6/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana.list
+
+        # Install pre-reqs and kibana
+        sudo apt-get update && sudo apt-get -y install kibana=${KIBANA_VERSION}
+
+
+        # customize config file for kibana
+        sudo sed -i 's|# elasticsearch.url: "http://localhost:9200"|elasticsearch.url: "http://'"${ELASTICSEARCH_IP}"':'"${ELASTICSEARCH_PORT}"'"|g' /opt/kibana/config/kibana.yml
+        sudo sed -i 's|5601|'"${KIBANA_PORT}"'|g' /opt/kibana/config/kibana.yml
+        sudo sed -i 's|# log_file: ./kibana.log|log_file: ./kibana.log|g' /opt/kibana/config/kibana.yml
+
+        sudo update-rc.d kibana defaults 95 10
+        sudo /bin/systemctl daemon-reload
+        sudo /bin/systemctl enable kibana.service
+        #sudo systemctl start kibana.service
+
+      launch.command: sudo systemctl start kibana.service
+
+      stop.command: sudo systemctl stop kibana.service
+      
+      checkRunning.command: sudo systemctl status kibana.service
+
+      brooklyn.enrichers:
+        - type: org.apache.brooklyn.enricher.stock.Transformer
+          brooklyn.config:
+            enricher.sourceSensor: $brooklyn:sensor("host.address")
+            enricher.targetSensor: $brooklyn:sensor("main.uri")
+            enricher.targetValue: $brooklyn:formatString("http://%s:%s", $brooklyn:attributeWhenReady("host.address"), $brooklyn:config("kibana.port"))

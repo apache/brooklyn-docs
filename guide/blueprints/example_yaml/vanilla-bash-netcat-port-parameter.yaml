@@ -3,13 +3,14 @@ location: localhost
 services:
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   name: Simple Netcat Server
-  launch.command: |
-    echo $MESSAGE | nc -l $NETCAT_PORT &
-    echo $! > $PID_FILE
-    
-  env:
-    MESSAGE: $brooklyn:config("message")
-    NETCAT_PORT: $brooklyn:attributeWhenReady("netcat.port")
+  brooklyn.config:
+    launch.command: |
+      echo $MESSAGE | nc -l $NETCAT_PORT &
+      echo $! > $PID_FILE
+
+    shell.env:
+      MESSAGE: $brooklyn:config("message")
+      NETCAT_PORT: $brooklyn:attributeWhenReady("netcat.port")
   
   brooklyn.parameters:
   - name: message

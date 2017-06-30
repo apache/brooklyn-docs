@@ -8,9 +8,10 @@ services:
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   id: netcat-server
   name: Simple Netcat Server
-  launch.command: |
-    echo hello | nc -l 4321 >> server-input &
-    echo $! > $PID_FILE
+  brooklyn.config:
+    launch.command: |
+      echo hello | nc -l 4321 >> server-input &
+      echo $! > $PID_FILE
 
   # a failure detector and a service restarter work together
   brooklyn.enrichers:
@@ -44,17 +45,18 @@ services:
 # a client to hit netcat
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   name: Simple Pinger
-  
-  # set the hostname of the netcat instance as an env var for the scripts 
-  env:
-    TARGET_HOSTNAME: 
-      $brooklyn:entity("netcat-server").
-        attributeWhenReady("host.name")
+
+  brooklyn.config:
+    # set the hostname of the netcat instance as an env var for the scripts
+    shell.env:
+      TARGET_HOSTNAME:
+        $brooklyn:entity("netcat-server").
+          attributeWhenReady("host.name")
     
-  # start/check/stop are no-op
-  launch.command: ""
-  checkRunning.command: ""
-  stop.command: ""
+    # start/check/stop are no-op
+    launch.command: ""
+    checkRunning.command: ""
+    stop.command: ""
   
   brooklyn.initializers:
   # but there is a sample effector which runs nc in client mode

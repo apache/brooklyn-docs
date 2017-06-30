@@ -28,4 +28,4 @@ services:
   id: db
   name: My DB
   brooklyn.config:
-    creationScriptUrl: https://bit.ly/brooklyn-visitors-creation-script
+    datastore.creation.script.url: https://bit.ly/brooklyn-visitors-creation-script

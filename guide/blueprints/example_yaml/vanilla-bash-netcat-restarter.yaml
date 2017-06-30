@@ -4,9 +4,10 @@ services:
 - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
   id: netcat-server
   name: Simple Netcat Server
-  launch.command: |
-    echo hello | nc -l 4321 &
-    echo $! > $PID_FILE
+  brooklyn.config:
+    launch.command: |
+      echo hello | nc -l 4321 &
+      echo $! > $PID_FILE
   brooklyn.enrichers:
   - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector
     brooklyn.config:

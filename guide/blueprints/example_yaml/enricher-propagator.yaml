@@ -1,0 +1,8 @@
+brooklyn.enrichers:
+- type: org.apache.brooklyn.enricher.stock.Propagator
+  brooklyn.config:
+    enricher.producer: $brooklyn:entity("cluster")
+- type: org.apache.brooklyn.enricher.stock.Propagator
+  brooklyn.config:
+    sensorMapping:
+      $brooklyn:sensor("url"): $brooklyn:sensor("org.apache.brooklyn.core.entity.Attributes", "main.uri")

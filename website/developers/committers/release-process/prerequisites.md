@@ -34,7 +34,7 @@ Software packages
 
 The following software packages are required during the build. Make sure you have them installed.
 
-- A Java Development Kit, version 1.7
+- A Java Development Kit, version 1.8
 - `maven` and `git`
 - Go Language 1.6 - usually provided by the `golang` package on popular distributions
 - The `rpmbuild` command - usually provided by the `rpm` package on popular distributions
