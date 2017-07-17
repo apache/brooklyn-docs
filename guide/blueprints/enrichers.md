@@ -44,7 +44,7 @@ There are a number of additional configuration keys available for the Aggregator
 
 | Configuration Key                 | Default | Description                                                         |
 |-----------------------------------|---------|---------------------------------------------------------------------|
-| enricher.transformation.untyped   | list    | Specifies a transformation, as a function from a collection to the value, or as a string matching a pre-defined named transformation, such as 'average' (for numbers), 'sum' (for numbers), 'isQuorate' (to compute a quorum), or 'list' (the default, putting any collection of items into a list) |
+| enricher.transformation.untyped   | list    | Specifies a transformation, as a function from a collection to the value, or as a string matching a pre-defined named transformation, such as 'average' (for numbers), 'sum' (for numbers), 'isQuorate' (to compute a quorum), 'first' (the first value, or null if empty), or 'list' (the default, putting any collection of items into a list) |
 | quorum.check.type                 |         | The requirement to be considered quorate -- possible values: 'all', 'allAndAtLeastOne', 'atLeastOne', 'atLeastOneUnlessEmpty', 'alwaysHealthy'", "allAndAtLeastOne" |
 | quorum.total.size                 | 1       | The total size to consider when determining if quorate              |
 
