@@ -158,9 +158,8 @@ brooklyn.catalog:
       destroyOnFailure: false
 
       templateOptions:
-      overrideLoginUser: brooklyn
-      overrideLoginPassword: "secretPass1!"
-      resourceGroup: <ResourceGroup-name>
+        overrideLoginUser: brooklyn
+        overrideLoginPassword: "secretPass1!"
         secrets:
         - sourceVault:
             id: "/subscriptions/<Subscription-id>/resourceGroups/<ResourceGroup>/providers/Microsoft.KeyVault/vaults/<KeyVault-name>"
