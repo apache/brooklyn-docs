@@ -145,11 +145,11 @@ The other things you need to set in `brooklyn.properties` are:
 
 **brooklyn.properties example configuration:**
 
-```
+~~~
 brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.LdapSecurityProvider
 brooklyn.webconsole.security.ldap.url=ldap://localhost:10389/????X-BIND-USER=uid=admin%2cou=system,X-BIND-PASSWORD=secret,X-COUNT-LIMIT=1000
 brooklyn.webconsole.security.ldap.realm=example.com
-```
+~~~
 
 After you setup the brooklyn connection to your LDAP server, you can authenticate in brooklyn using your cn (e.g. John Smith) and your password.
 `org.apache.brooklyn.rest.security.provider.LdapSecurityProvider` searches in the LDAP tree in LDAP://cn=John Smith,ou=Users,dc=example,dc=com

@@ -31,9 +31,9 @@ or on the search path.)
 
 Version numbers in Brooklyn are recommended to follow the following syntax:
 
-```
+~~~
 <major> ( "." <minor> ( "." <patch> )? )? ( "-" <qualifier> )?
-```
+~~~
 
 where the `<major>`, `<minor>`, and `<patch>` parts are numbers
 in accordance with [semver](http://semver.org) semantic versioning,
