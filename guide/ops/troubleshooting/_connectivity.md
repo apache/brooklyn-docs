@@ -22,11 +22,11 @@ lets TCP traffic through.
 You can check if a given TCP port is reachable and listening using `telnet <host> <port>`, such as
 `telnet www.google.com 80`, which gives output like:
 
-```
+~~~
     Trying 31.55.163.219...
     Connected to www.google.com.
     Escape character is '^]'.
-```
+~~~
 
 If this is very slow to respond, it can be caused by a firewall blocking access. If it is fast, it could
 be that the server is just not listening on that port.
@@ -49,10 +49,11 @@ Depending on the type of location, brooklyn might use HTTP to provision machines
 One such case is using VirtualBox with host-only or private internal network settings, while using an external proxy for accessing the internet. It is clear that the external proxy won't be able to route HTTP calls properly, but that might not be clear when reading the logs (although brooklyn will present the failing URL).
 
 Try accessing the web-service URLs from a browser via the proxy, or perhaps try running brooklyn with proxy disabled:
-```
+
+~~~
     export http_proxy=
     bin/brooklyn launch
-```
+~~~
 
 If a system-level proxy server has been configured, you can instruct brooklyn to use the proxy server by passing `-Djava.net.useSystemProxies=true` to the JVM
 
@@ -72,10 +73,10 @@ Check that the service is listening on the port, and on the correct NIC(s).
 Execute `netstat -antp` (or on OS X `netstat -antp TCP`) to list the TCP ports in use (or use
 `-anup` for UDP). You should expect to see the something like the output below for a service.
 
-```
+~~~
 Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program name   
 tcp        0      0 :::8080                     :::*                        LISTEN      8276/java           
-```
+~~~
 
 In this case a Java process with pid 8276 is listening on port 8080. The local address `:::8080`
 format means all NICs (in IPv6 address format). You may also see `0.0.0.0:8080` for IPv4 format.

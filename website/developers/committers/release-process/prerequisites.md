@@ -95,11 +95,11 @@ need to change this; sometimes you can omit it completely and your OS will pick 
 two lines cause your passphrase to be cached in memory for a limited period; it will expire from the cache 30 minutes
 after it was most recently accessed, or 4 hours after it was first cached.  
 
-```
+~~~
 pinentry-program /Applications/MacPorts/pinentry-mac.app/Contents/MacOS/pinentry-mac
 default-cache-ttl 1800
 max-cache-ttl 14400
-```
+~~~
 
 If you experience trouble with PGP subsequently (when running maven):
 
