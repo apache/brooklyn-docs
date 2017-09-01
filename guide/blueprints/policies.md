@@ -7,11 +7,8 @@ Policies perform the active management enabled by Brooklyn.
 They can subscribe to entity sensors and be triggered by them (or they can run periodically,
 or be triggered by external systems).
 
-<!---
-TODO, clarify below, members of what?
--->
-Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its
-associated entity, to the child entities, and/or to the members of a "group" entity.
+Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to sensors on
+either its associated entity, that entity's children and/or to the members of a "group" entity.
 
 Common uses of a policy include the following:
 
@@ -57,7 +54,10 @@ brooklyn.policies:
 
 - org.apache.brooklyn.policy.ha.ServiceRestarter
 
-Attaches to a SoftwareProcess (or anything Startable, emitting ENTITY_FAILED or other configurable sensor), and invokes restart on failure; if there is a subsequent failure within a configurable time interval, or if the restart fails, this gives up and emits {@link #ENTITY_RESTART_FAILED}
+Attaches to a SoftwareProcess or to anything Startable which emits `ha.entityFailed` on failure
+(or other configurable sensor), and invokes `restart` on that failure. 
+If there is a subsequent failure within a configurable time interval or if the restart fails, 
+this gives up and emits `ha.entityFailed.restart` for other policies to act upon or for manual intervention.
 
 {% highlight yaml %}
 brooklyn.policies:
@@ -65,6 +65,11 @@ brooklyn.policies:
   brooklyn.config:
     failOnRecurringFailuresInThisDuration: 5m
 {% endhighlight %}
+
+Typically this is used in conjunction with the FailureDetector enricher to emit the trigger sensor.
+The [introduction to policies](../start/policies.html) shows a worked 
+example of these working together.
+
 
 #### StopAfterDuration Policy
 
@@ -100,7 +105,11 @@ The ConnectionFailureDetector is an HA policy for monitoring an http connection,
 
 - org.apache.brooklyn.policy.ha.ServiceReplacer
 
-The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to HASensors.ENTITY_FAILED or other sensor.  The [introduction to policies](../) shows a worked example of the ServiceReplacer policy in user.
+The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to 
+`ha.entityFailed` (or other configurable sensor).  
+The [introduction to policies](../start/policies.html) shows a worked 
+example of this policy in use.
+
 
 #### FollowTheSun Policy
 
