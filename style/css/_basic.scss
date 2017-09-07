@@ -87,10 +87,6 @@ td, th {
 
 abbr.glossarizer_replaced {
   border-bottom: 1px dashed;
-  font-style: italic;
-  &:before {
-    font-family: FontAwesome;
-    content: "\f045";
-    padding-right: 5px;
-  }
+  text-decoration: none;
+  cursor: help;
 }

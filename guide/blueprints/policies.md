@@ -7,11 +7,8 @@ Policies perform the active management enabled by Brooklyn.
 They can subscribe to entity sensors and be triggered by them (or they can run periodically,
 or be triggered by external systems).
 
-<!---
-TODO, clarify below, members of what?
--->
-Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to its
-associated entity, to the child entities, and/or to the members of a "group" entity.
+Policies can add subscriptions to sensors on any entity. Normally a policy will subscribe to sensors on
+either its associated entity, that entity's children and/or to the members of a "group" entity.
 
 Common uses of a policy include the following:
 
@@ -27,8 +24,10 @@ Off-the-Shelf Policies
 ----------------------
 
 Policies are highly reusable as their inputs, thresholds and targets are customizable.
+Config key details for each policy can be found in the Catalog in the Brooklyn UI.
 
-### Management Policies
+
+### HA/DR and Scaling Policies
 
 #### AutoScaler Policy
 
@@ -53,11 +52,15 @@ brooklyn.policies:
 
 {% endhighlight %}
 
-#### ServiceRestarter
+
+#### ServiceRestarter Policy
 
 - org.apache.brooklyn.policy.ha.ServiceRestarter
 
-Attaches to a SoftwareProcess (or anything Startable, emitting ENTITY_FAILED or other configurable sensor), and invokes restart on failure; if there is a subsequent failure within a configurable time interval, or if the restart fails, this gives up and emits {@link #ENTITY_RESTART_FAILED}
+Attaches to a SoftwareProcess or to anything Startable which emits `ha.entityFailed` on failure
+(or other configurable sensor), and invokes `restart` on that failure. 
+If there is a subsequent failure within a configurable time interval or if the restart fails, 
+this gives up and emits `ha.entityFailed.restart` for other policies to act upon or for manual intervention.
 
 {% highlight yaml %}
 brooklyn.policies:
@@ -66,41 +69,37 @@ brooklyn.policies:
     failOnRecurringFailuresInThisDuration: 5m
 {% endhighlight %}
 
-#### StopAfterDuration Policy
+Typically this is used in conjunction with the FailureDetector enricher to emit the trigger sensor.
+The [introduction to policies](../start/policies.html) shows a worked 
+example of these working together.
 
-- org.apache.brooklyn.policy.action.StopAfterDurationPolicy
 
-The StopAfterDurationPolicy can be used to limit the lifetime of an entity.  After a configure time period expires the entity will be stopped.
+#### ServiceReplacer Policy
 
-#### CreateUser Policy
+- org.apache.brooklyn.policy.ha.ServiceReplacer
 
-- org.apache.brooklyn.policy.jclouds.os.CreateUserPolicy
+The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to 
+`ha.entityFailed` (or other configurable sensor).  
+The [introduction to policies](../start/policies.html) shows a worked 
+example of this policy in use.
 
-The CreateUserPolicy Attaches to an Entity and monitors for the addition of a location to that entity, the policy then adds a new user to the VM with a randomly generated password, with the SSH connection details set on the entity as the createuser.vm.user.credentials sensor.
 
-#### AdvertiseWinRMLogin Policy
-
-- org.apache.brooklyn.location.winrm.WinRmMachineLocation
-
-This is similar to the CreateUserPolicy.  It will monitor the addition of WinRmMachineLocation to an entity and then create a sensor advertising the administrative user's credentials.
-
-#### SshMachineFailureDetector
+#### SshMachineFailureDetector Policy
 
 - org.apache.brooklyn.policy.ha.SshMachineFailureDetector
 
 The SshMachineFailureDetector is an HA policy for monitoring an SshMachine, emitting an event if the connection is lost/restored.
 
-#### ConnectionFailureDetector
+
+#### ConnectionFailureDetector Policy
 
 - org.apache.brooklyn.policy.ha.ConnectionFailureDetector
 
 The ConnectionFailureDetector is an HA policy for monitoring an http connection, emitting an event if the connection is lost/restored.
 
-#### ServiceReplacer
 
-- org.apache.brooklyn.policy.ha.ServiceReplacer
+### Optimization Policies
 
-The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to HASensors.ENTITY_FAILED or other sensor.  The [introduction to policies](../) shows a worked example of the ServiceReplacer policy in user.
 
 #### FollowTheSun Policy
 
@@ -108,17 +107,43 @@ The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in
 
 The FollowTheSunPolicy is for moving work around to follow the demand.  The work can be any Movable entity.  This currently available in yaml blueprints.
 
-#### ConditionalSuspend Policy
-
-- org.apache.brooklyn.policy.ha.ConditionalSuspendPolicy
-
-The ConditionalSuspendPolicy will suspend and resume a target policy based on configured suspend and resume sensors.
 
 #### LoadBalancing Policy
 
 - org.apache.brooklyn.policy.loadbalancing.LoadBalancingPolicy
 
 The LoadBalancingPolicy is attached to a pool of "containers", each of which can host one or more migratable "items".  The policy monitors the workrates of the items and effects migrations in an attempt to ensure that the containers are all sufficiently utilized without any of them being overloaded.
+
+
+### Lifecycle and User Management Policies
+
+
+#### StopAfterDuration Policy
+
+- org.apache.brooklyn.policy.action.StopAfterDurationPolicy
+
+The StopAfterDurationPolicy can be used to limit the lifetime of an entity.  After a configure time period expires the entity will be stopped.
+
+
+#### ConditionalSuspend Policy
+
+- org.apache.brooklyn.policy.ha.ConditionalSuspendPolicy
+
+The ConditionalSuspendPolicy will suspend and resume a target policy based on configured suspend and resume sensors.
+
+
+#### CreateUser Policy
+
+- org.apache.brooklyn.policy.jclouds.os.CreateUserPolicy
+
+The CreateUserPolicy Attaches to an Entity and monitors for the addition of a location to that entity, the policy then adds a new user to the VM with a randomly generated password, with the SSH connection details set on the entity as the createuser.vm.user.credentials sensor.
+
+
+#### AdvertiseWinRMLogin Policy
+
+- org.apache.brooklyn.location.winrm.WinRmMachineLocation
+
+This is similar to the CreateUserPolicy.  It will monitor the addition of WinRmMachineLocation to an entity and then create a sensor advertising the administrative user's credentials.
 
 
 Writing a Policy
