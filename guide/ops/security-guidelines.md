@@ -37,7 +37,7 @@ relevant mount points, disks and directories.
 
 For credential storage, users are strongly encouraged to consider using the "externalised 
 configuration" feature. This allows credentials to be retrieved from a store managed by you, 
-rather than being stored within YAML blueprints or brooklyn.properties.
+rather than being stored within YAML blueprints or brooklyn.cfg.
 
 A secure credential store is strongly recommended, such as use of 
 [HashiCorp's Vault](https://www.vaultproject.io) - see

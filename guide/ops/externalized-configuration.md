@@ -9,15 +9,15 @@ plain-text password for a production system, especially if (as we often recommen
 developer's source code control system.
 
 To handle this problem, Apache Brooklyn supports externalized configuration. This allows a blueprint to refer to
-a piece of information that is stored elsewhere. `brooklyn.properties` defines the external suppliers of configuration
+a piece of information that is stored elsewhere. `brooklyn.cfg` defines the external suppliers of configuration
 information. At runtime, when Brooklyn finds a reference to externalized configuration in a blueprint, it consults
-`brooklyn.properties` for information about the supplier, and then requests that the supplier return the information
+`brooklyn.cfg` for information about the supplier, and then requests that the supplier return the information
 required by the blueprint.
 
 Take, as a simple example, a web app which connects to a database. In development, the developer is running a local
 instance of PostgreSQL with a simple username and password. But in production, an enterprise-grade cluster of PostgreSQL
 is used, and a dedicated service is used to provide passwords. The same blueprint can be used to service both groups
-of users, with `brooklyn.properties` changing the behaviour depending on the deployment environment.
+of users, with `brooklyn.cfg` changing the behaviour depending on the deployment environment.
 
 Here is the blueprint:
 
@@ -43,7 +43,7 @@ the first is the name of the configuration supplier, the second is the name of a
 supplier. In this case we are using two different suppliers: `servers` to store the location of the server, and
 `credentials` which is a security-optimized supplier of secrets.
 
-Developers would add lines like this to the `brooklyn.properties` file on their workstation:
+Developers would add lines like this to the `brooklyn.cfg` file on their workstation:
 
 {% highlight properties %}
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
@@ -53,9 +53,9 @@ brooklyn.external.credentials.postgresql-user=admin
 brooklyn.external.credentials.postgresql-password=admin
 {% endhighlight %}
 
-In this case, all of the required information is included in-line in the local `brooklyn.properties`.
+In this case, all of the required information is included in-line in the local `brooklyn.cfg`.
 
-Whereas in production, `brooklyn.properties` might look like this:
+Whereas in production, `brooklyn.cfg` might look like this:
 
 {% highlight properties %}
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.PropertiesFileExternalConfigSupplier
@@ -83,7 +83,7 @@ brooklyn.external.brooklyn-demo-sample.hidden-brooklyn-password=new_password
 
 ## Defining Suppliers
 
-External configuration suppliers are defined in `brooklyn.properties`. The minimal definition is of the form:
+External configuration suppliers are defined in `brooklyn.cfg`. The minimal definition is of the form:
 
 brooklyn.external.*supplierName* = *className*
 
@@ -92,7 +92,7 @@ will provide the behaviour of how to retrieve data from the supplier. Brooklyn i
 implementations; see below for more details.
 
 Suppliers may require additional configuration options. These are given as additional properties in
-`brooklyn.properties`:
+`brooklyn.cfg`:
 
 {% highlight properties %}
 brooklyn.external.supplierName = className
@@ -128,9 +128,9 @@ brooklyn.config:
 {% endhighlight %}
 
 
-## Referring to External Configuration in brooklyn.properties
+## Referring to External Configuration in brooklyn.cfg
 
-The same blueprint language DSL can be used from `brooklyn.properties`. For example:
+The same blueprint language DSL can be used from `brooklyn.cfg`. For example:
 
 {% highlight properties %}
 brooklyn.location.jclouds.aws-ec2.identity=$brooklyn:external("mysupplier", "aws-identity")
@@ -162,7 +162,7 @@ Brooklyn ships with a number of external configuration suppliers ready to use.
 
 ### In-place
 
-**InPlaceExternalConfigSupplier** embeds the configuration keys and values as properties inside `brooklyn.properties`.
+**InPlaceExternalConfigSupplier** embeds the configuration keys and values as properties inside `brooklyn.cfg`.
 For example:
 
 {% highlight properties %}
@@ -198,7 +198,7 @@ Then, a blueprint which referred to `$brooklyn:external("servers", "postgresql")
 able to query the Vault REST API for configuration values. The different suppliers implement alternative authentication
 options that Vault provides.
 
-For *all* of the authentication methods, you must always set these properties in `brooklyn.properties`:
+For *all* of the authentication methods, you must always set these properties in `brooklyn.cfg`:
 
 {% highlight properties %}
 brooklyn.external.supplierName.endpoint=<Vault HTTP/HTTPs endpoint>
@@ -244,7 +244,7 @@ brooklyn.external.supplierName.userId=server3.cluster2.europe
 #### Authentication by fixed token
 
 If you have a fixed token string, then you can use the *VaultTokenExternalConfigSupplier* class and provide the token
-in `brooklyn.properties`:
+in `brooklyn.cfg`:
 
 {% highlight properties %}
 brooklyn.external.supplierName=org.apache.brooklyn.core.config.external.vault.VaultTokenExternalConfigSupplier
@@ -267,4 +267,4 @@ String get(String key);
 {% endhighlight %}
 
 Classes implementing this interface can be placed in the `lib/dropins` folder of Brooklyn, and then the supplier
-defined in `brooklyn.properties` as normal.
+defined in `brooklyn.cfg` as normal.
