@@ -439,7 +439,7 @@ tvZoNUTN   ssh: launching NginxControllerImpl{id...   Sun Dec 20 19:18:08 GMT 20
 {% endhighlight %}
 
 ## YAML Blueprint
-This the YAML blueprint used for this document.
+This the YAML blueprint used for this document, based on the [web cluster](../../blueprints/clusters-and-policies.html) examples.
 
 {% highlight text %}
 name: WebCluster
@@ -465,7 +465,7 @@ services:
       brooklyn.example.db.url: >
         $brooklyn:formatString("jdbc:%s%s?user=%s&password=%s",
         component("db").attributeWhenReady("datastore.url"),
-        "visitors", "brooklyn", "br00k11n")
+        "visitors", "brooklyn", $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password"))
   brooklyn.policies:
   - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
     brooklyn.config:
@@ -481,5 +481,6 @@ services:
   id: db
   name: WebDB
   brooklyn.config:
+    creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
     creationScriptUrl: https://bit.ly/brooklyn-visitors-creation-script
 {% endhighlight %}
