@@ -2,7 +2,7 @@
 title: Persistence
 layout: website-normal
 children:
-- { section: Command Line Options }
+- { section: Configuration }
 - { section: File-based Persistence }
 - { section: Object Store Persistence }
 - { section: Rebinding to State }
@@ -10,98 +10,70 @@ children:
 - { section: Persisted State Backup }
 ---
 
-Brooklyn can be configured to persist its state so that the Brooklyn server can be restarted, 
-or so that a high availability standby server can take over.
+By default Brooklyn persists its state to storage so that a server can be restarted 
+without loss or so a high availability standby server can take over.
 
-Brooklyn can persist its state to one of two places: the file system, or to an Object Store
+Brooklyn can persist its state to one of two places: the file system, or to an [object store](https://en.wikipedia.org/wiki/Object_storage)
 of your choice.
 
-Command Line Options
---------------------
 
-To configure brooklyn, the relevant command line options for the `launch` commands are:
+# Configuration
 
-* `--persist` <persistence mode>
-  The persistence mode.
-* `--persistenceDir` <persistence dir>
-  The directory to read/write persisted state (or container name if using an object store).
-* `--persistenceLocation` <persistence location>
-  The location spec for an object store to read/write persisted state.
+To configure persistence, edit the file `org.apache.brooklyn.osgilauncher.cfg` in the `etc`
+directory of your Brooklyn instance. The following options are available:
 
-For the persistence mode, the possible values are:
+`persistMode` - This is the mode in which persistence is running, in and is set to `AUTO` by default. The possible values are:
 
-* `disabled` means that no state will be persisted or read; when Brooklyn stops all state is lost.
-* `rebind` means that it will read existing state, and recreate entities, locations and policies 
-  from that. If there is no existing state, startup will fail.
-* `clean` means that any existing state will be deleted, and Brooklyn will be started afresh.
-* `auto` means Brooklyn will rebind if there is any existing state, or will start afresh if 
-  there is no state.
+* `AUTO` - will rebind to any existing state, or start up fresh if no state;
+* `DISABLED` - will not read or persist any state;
+* `REBIND` - will rebind to the existing state, or fail if no state available;
+* `CLEAN` - will start up fresh (removing any existing state)
 
-The persistence directory and location can instead be specified from `brooklyn.properties` using
-the following config keys:
+`persistenceDir` - This is the directory to which Apache Brooklyn reads and writes its persistence data. The default location depends
+on your installation method. Checkout [this page](../paths.html) for more information.
 
-* `brooklyn.persistence.dir`
-* `brooklyn.persistence.location.spec`
+`persistenceLocation` - This is the location for an object store to read and write persisted state.
+
+`persistPeriod` - This is an interval period which can be set to reduce the frequency with which persistence
+is carried out, for example `1s`.
 
 
-File-based Persistence
-----------------------
+# File-based Persistence
 
-To persist to the file system, start brooklyn with:
+Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](../paths.html).
+For the rest of this document we will refer to this location as `%persistence-home%`.
 
-{% highlight bash %}
-brooklyn launch --persist auto --persistenceDir /path/to/myPersistenceDir
-{% endhighlight %}
-
-If there is already data at `/path/to/myPersistenceDir`, then a backup of the directory will 
-be made. This will have a name like `/path/to/myPersistenceDir.20140701-142101345.bak`.
+If there is already data at `%persistence-home%/data`, then a backup of the directory will 
+be made. This will have a name like `%persistence-home%/backups/%date%-%time%-jvyX7Wis-promotion-igFH`.
+This means backups of the data directory will be automatically created each time Brooklyn 
+is restarted (or if a standby Brooklyn instances takes over as master).
 
 The state is written to the given path. The file structure under that path is:
 
-* `./entities/`
-* `./locations/`
-* `./policies/`
+* `./catalog/`
 * `./enrichers/`
+* `./entities/`
+* `./feeds/`
+* `./locations/`
+* `./nodes/`
+* `./plane/`
+* `./policies/`
 
 In each of those directories, an XML file will be created per item - for example a file per
 entity in `./entities/`. This file will capture all of the state - for example, an
 entity's: id; display name; type; config; attributes; tags; relationships to locations, child 
 entities, group membership, policies and enrichers; and dynamically added effectors and sensors.
 
-If using the default persistence dir (i.e. no `--persistenceDir` was specified), then Brooklyn will
-write its state to `~/.brooklyn/brooklyn-persisted-state/data`. Copies of this directory
-will be automatically created in `~/.brooklyn/brooklyn-persisted-state/backups/` each time Brooklyn 
-is restarted (or if a standby Brooklyn instances takes over as master).
 
-A custom directory for Brooklyn state can also be configured in `brooklyn.properties` using:
-    
-    # For all Brooklyn files
-    brooklyn.base.dir=/path/to/base/dir
-    
-    # Sub-directory of base.dir for writing persisted state (if relative). If directory
-    # starts with "/" (or "~/", or something like "c:\") then assumed to be absolute. 
-    brooklyn.persistence.dir=data
+# Object Store Persistence
 
-    # Sub-directory of base.dir for creating backup directories (if relative). If directory
-    # starts with "/" (or "~/", or something like "c:\") then assumed to be absolute. 
-    brooklyn.persistence.backups.dir=backups
-
-This `base.dir` will also include temporary files such as the OSGi cache.
-
-If `persistence.dir` is not specified then it will use the sub-directory
-`brooklyn-persisted-state/data` of the `base.dir`. If the `backups.dir` is not specified
-the backup directories will be created in the sub-directory `backups` of the persistence dir.
-
-
-Object Store Persistence
-------------------------
-
-Brooklyn can persist its state to any Object Store API that jclouds supports including 
-S3, Swift and Azure. This gives access to any compatible Object Store product or cloud provider
-including AWS-S3, SoftLayer, Rackspace and Microsoft Azure. For a complete list of supported
+Apache Brooklyn can persist its state to any Object Store API supported by [Apache jclouds](https://jclouds.apache.org/) including 
+[S3](https://aws.amazon.com/s3), [Swift](http://docs.openstack.org/developer/swift) and [Azure](https://azure.microsoft.com/services/storage/). 
+This gives access to any compatible Object Store product or cloud provider including AWS-S3, 
+SoftLayer, Rackspace, HP and Microsoft Azure. For a complete list of supported
 providers, see [jclouds](http://jclouds.apache.org/reference/providers/#blobstore).
 
-To configure the Object Store, add the credentials to `~/.brooklyn/brooklyn.properties` such as:
+To configure the Object Store, add the credentials to `brooklyn.cfg` such as:
 
 {% highlight properties %}
 brooklyn.location.named.aws-s3-eu-west-1=aws-s3:eu-west-1
@@ -118,33 +90,9 @@ brooklyn.location.named.softlayer-swift-ams01.credential=abcdefghijklmnopqrstuvw
 brooklyn.location.named.softlayer-swift-ams01.jclouds.keystone.credential-type=tempAuthCredentials
 {% endhighlight %} 
 
-Start Brooklyn pointing at this target object store, e.g.:
+Then edit the `persistenceLocation` to point at this object store: `softlayer-swift-ams01`.
 
-{% highlight bash %}
-nohup brooklyn launch --persist auto --persistenceDir myContainerName --persistenceLocation named:softlayer-swift-ams01 &
-{% endhighlight %}
-
-
-The following `brooklyn.properties` options can also be used:
-
-    # Location spec string for an object store (e.g. jclouds:openstack-swift:URL) where persisted state 
-    # should be kept; if blank or not supplied, the file system is used.
-    brooklyn.persistence.location.spec=<location>
-
-    # Container name for writing persisted state
-    brooklyn.persistence.dir=/path/to/dataContainer
-
-    # Location spec string for an object store (e.g. jclouds:openstack-swift:URL) where backups of  
-    # persisted state should be kept; defaults to the local file system.
-    brooklyn.persistence.backups.location.spec=<location>
-
-    # Container name for writing backups of persisted state;
-    # defaults to 'backups' inside the default persistence container.
-    brooklyn.persistence.backups.dir=/path/to/backupContainer
-
-
-Rebinding to State
-------------------
+# Rebinding to State
 
 When Brooklyn starts up pointing at existing state, it will recreate the entities, locations 
 and policies based on that persisted state.
@@ -155,93 +103,21 @@ HTTP or JMX). This new state will be reported in the web-console and can also tr
 any registered policies.
 
 
-## CLI Commands for Copying State
-
-Brooklyn includes a command to copy persistence state easily between two locations.
-The `copy-state` CLI command takes the following arguments:
-
-* `--persistenceDir` <source persistence dir>
-  The directory to read persisted state (or container name if using an object store).
-* `--persistenceLocation` <source persistence location>
-  The location spec for an object store to read persisted state.
-* `--destinationDir` <target persistence dir>
-  The directory to copy persistence data to (or container name if using an object store).
-* `--destinationLocation` <target persistence location>
-  The location spec for an object store to copy data to.
-* `--transformations` <transformations>
-  The local transformations file to be applied to the copy of the data before uploading it.
-
-## CLI Commands for Cleaning Orphaned State
-
-Brooklyn includes a command to clean orphaned state which uses the copy state command
-and removes orphaned locations, enrichers, policies and feeds from the copied state.
-The `clean-orphaned-state` CLI command takes the following arguments:
-
-* `--persistenceDir` <source persistence dir>
-  The directory to read persisted state (or container name if using an object store).
-* `--persistenceLocation` <source persistence location>
-  The location spec for an object store to read persisted state.
-* `--destinationDir` <target persistence dir>
-  The directory to copy persistence data to, with orphaned state removed.
-* `--destinationLocation` <target persistence location>
-  The location spec for an object store to copy data to.
-
 ## Handling Rebind Failures
 
 If rebind fails fail for any reason, details of the underlying failures will be reported 
-in the `brooklyn.debug.log`. There are several approaches to resolving problems.
+in the [`brooklyn.debug.log`](../paths.html). This will include the entities, locations or policies which caused an issue, and in what 
+way it failed. There are several approaches to resolving problems.
 
+1) Determine Underlying Cause
 
-### Determine Underlying Cause
+Go through the log and identify the likely areas in the code from the error message.
 
-The problems reported in brooklyn.debug.log will indicate where the problem lies - which 
-entities, locations or policies, and in what way it failed.
+2) Seek Help
 
-### Ignore Errors
+ Help can be found by contacting the Apache Brooklyn mailing list.
 
-The `~/.brooklyn/brooklyn.properties` has several configuration options:
-
-{% highlight properties %}
-rebind.failureMode.danglingRef=continue
-rebind.failureMode.loadPolicy=continue
-rebind.failureMode.addPolicy=continue
-rebind.failureMode.rebind=fail_at_end
-rebind.failureMode.addConfig=fail_at_end
-{% endhighlight %} 
-
-For each of these configuration options, the possible values are:
-
-* `fail_fast`: stop rebind immediately upon errors; do not try to rebind other entities
-* `fail_at_end`: continue rebinding all entities, but then fail so that all errors 
-  encountered are reported
-* `continue`: log a warning, but ignore the error to continue rebinding. Depending on the 
-  type of error, this can cause serious problems later (e.g. if the state of an entity
-  was entirely missing, then all its children would be orphaned).
-
-The meaning of the configuration options is:
-
-* `rebind.failureMode.dangingRef`: if there is a reference to an entity, location or policy 
-  that is missing... whether to continue (discarding the reference) or fail.
-* `rebind.failureMode.loadPolicy`: if there is an error instantiate or reconstituting the 
-  state of a policy or enricher... whether to continue (discarding the policy or enricher) 
-  or fail.
-* `rebind.failureMode.addPolicy`: if there is an error re-adding the policy or enricher to
-  its associated entity... whether to continue (discarding the policy or enricher) 
-  or fail.
-* `rebind.failureMode.addConfig`: if there is invalid config value, or some other error occurs when adding a config.
-* `rebind.failureMode.rebind`: any errors on rebind not covered by the more specific error cases described above.
-
-
-### Seek Help
-
-Help can be found at `dev@brooklyn.apache.org`, where folk will be able to investigate 
-issues and suggest work-arounds.
-
-By sharing the persisted state (with credentials removed), Brooklyn developers will be able to 
-reproduce and debug the problem.
-
-
-### Fix-up the State
+3) Fix-up the State
 
 The state of each entity, location, policy and enricher is persisted in XML. 
 It is thus human readable and editable.
@@ -251,7 +127,7 @@ an offending entity could be removed, or references to that entity removed, or i
 could be fixed to remove the problem.
 
 
-### Fixing with Groovy Scripts
+4) Fixing with Groovy Scripts
 
 The final (powerful and dangerous!) tool is to execute Groovy code on the running Brooklyn 
 instance. If authorized, the REST api allows arbitrary Groovy scripts to be passed in and 
@@ -262,8 +138,8 @@ instance. After fixing the entities, locations and/or policies, the Brooklyn ins
 new persisted state can be copied and used to fix the production instance.
 
 
-Writing Persistable Code
-------------------------
+# Writing Persistable Code
+
 The most common problem on rebind is that custom entity code has not been written in a way
 that can be persisted and/or rebound.
 
@@ -313,7 +189,7 @@ Behaviour on rebind:
 
 * By extending `SoftwareProcess`, entities get a lot of the rebind logic for free. For 
   example, the default `rebind()` method will call `connectSensors()`.
-  See [`SoftwareProcess` Lifecycle]({{site.path.guide}}/blueprints/java/entities.html#SoftwareProcess-lifecycle)
+  See [`SoftwareProcess` Lifecycle](/blueprints/java/entities.html)
   for more details.
 * If necessary, implement rebind. The `entity.rebind()` is called automatically by the
   Brooklyn framework on rebind, after configuring the entity's config/attributes but before 
@@ -339,8 +215,7 @@ Below are tips to make backwards-compatibility easier for persisted state:
   part of an upgrade process.
 
 
-Persisted State Backup
-----------------------
+# Persisted State Backup
 
 ### File system backup
 

@@ -1,5 +1,5 @@
 ---
-title: brooklyn.properties
+title: brooklyn.cfg
 layout: website-normal
 children:
 - { section: Quick Setup }
@@ -12,12 +12,7 @@ children:
 
 {% include fields.md %}
 
-The file `~/.brooklyn/brooklyn.properties` is read when Brooklyn starts
-to load server configuration values.
-
-A template [brooklyn.properties]({{brooklyn_properties_url_path}}) file is available,
-with abundant comments.
-
+The file brooklyn.cfg is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
 
 ## Quick Setup
 
@@ -33,7 +28,7 @@ brooklyn.webconsole.security.user.admin.password=AdminPassw0rd
 brooklyn.webconsole.security.user.bob.password=BobPassw0rd
 {% endhighlight %}
 
-The properties file *must* have permissions 600 
+The config file *must* have permissions 600 
 (i.e. readable and writable only by the file's owner),
 for some security.
 
@@ -52,11 +47,11 @@ More information, including setting up a certificate, is described [further belo
 
 ## Camp YAML Expressions
 
-Values in `brooklyn.properties` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
+Values in `brooklyn.cfg` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
 This allows [externalized configuration]({{ site.path.guide}}/ops/externalized-configuration.html) to be used from 
-brooklyn.properties. For example:
+brooklyn.cfg. For example:
 
 {% highlight properties %}
 brooklyn.location.jclouds.aws-ec2.identity=$brooklyn:external("vault", "aws-identity")
@@ -72,14 +67,9 @@ example.property=$brooklyn:literal("$brooklyn:myexample")
 {% endhighlight %}
 
 
-## Locations
-
-Information on defining locations in the `brooklyn.properties` file is available [here]({{ site.path.guide }}/locations/).
-
-
 ## Java
 
-Arbitrary data can be set in the `brooklyn.properties`.
+Arbitrary data can be set in the `brooklyn.cfg`.
 This can be accessed in java using `ManagementContext.getConfig(KEY)`.
 
 
@@ -91,7 +81,7 @@ to the name of a class implementing `SecurityProvider`.
 An implementation of this could point to Spring, LDAP, OpenID or another identity management system.
 
 The default implementation, `ExplicitUsersSecurityProvider`, reads from a list of users and passwords
-which should be specified as configuration parameters e.g. in `brooklyn.properties`.
+which should be specified as configuration parameters e.g. in `brooklyn.cfg`.
 This configuration could look like:
 
 {% highlight properties %}
@@ -137,13 +127,13 @@ will allow logins with no credentials (e.g. in secure dev/test environments)
 
 `brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.LdapSecurityProvider`
 will cause Brooklyn to call to an LDAP server to authenticate users;
-The other things you need to set in `brooklyn.properties` are:
+The other things you need to set in `brooklyn.cfg` are:
 
 * `brooklyn.webconsole.security.ldap.url` - ldap connection url
 * `brooklyn.webconsole.security.ldap.realm` - ldap dc parameter (domain)
 * `brooklyn.webconsole.security.ldap.ou` *optional, by default it set to Users* -  ldap ou parameter
 
-**brooklyn.properties example configuration:**
+**brooklyn.cfg example configuration:**
 
 ~~~
 brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.LdapSecurityProvider
@@ -214,7 +204,7 @@ or
 
 See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
 
-To enable HTTPS in Brooklyn, add the following to your brooklyn.properties:
+To enable HTTPS in Brooklyn, add the following to your brooklyn.cfg:
 
 {% highlight properties %}
 brooklyn.webconsole.security.https.required=true

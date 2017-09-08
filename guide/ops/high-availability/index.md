@@ -27,15 +27,15 @@ Once one node is running as `MASTER`, other nodes start in either `STANDBY` or `
   entities, as a read-only copy. However this node is not able to become master,
   so it can safely be used to test compatibility across different versions.
 
-To explicitly specify what HA mode a node should be in, the following CLI options are available
-for the parameter `--highAvailability`:
+To explicitly specify what HA mode a node should be in, the following options are available
+for the config option `highAvailabilityMode` in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
-* `disabled`: management node works in isolation; it will not cooperate with any other standby/master nodes in management plane
-* `auto`: will look for other management nodes, and will allocate itself as standby or master based on other nodes' states
-* `master`: will startup as master; if there is already a master then fails immediately
-* `standby`: will start up as lukewarm standby; if there is not already a master then fails immediately
-* `hot_standby`: will start up as hot standby; if there is not already a master then fails immediately
-* `hot_backup`: will start up as hot backup; this can be done even if there is not already a master; this node will not be a master 
+* `DISABLED`: management node works in isolation; it will not cooperate with any other standby/master nodes in management plane
+* `AUTO`: will look for other management nodes, and will allocate itself as standby or master based on other nodes' states
+* `MASTER`: will startup as master; if there is already a master then fails immediately
+* `STANDBY`: will start up as lukewarm standby; if there is not already a master then fails immediately
+* `HOT_STANDBY`: will start up as hot standby; if there is not already a master then fails immediately
+* `HOT_BACKUP`: will start up as hot backup; this can be done even if there is not already a master; this node will not be a master 
 
 The REST API offers live detection and control of the HA mode,
 including setting priority to control which nodes will be promoted on master failure:

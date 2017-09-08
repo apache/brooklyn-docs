@@ -21,7 +21,7 @@ The passwords above should be changed to your own values.  Omit those arguments 
 
 You will then be prompted to enter your name and organization details. This will use (or create, if it does not exist)
 a keystore with the password `mypassword` - you should use your own secure password, which will be the same password
-used in your brooklyn.properties (below). You will also need to replace `<path-to-keystore-directory>` with the full 
+used in your brooklyn.cfg (below). You will also need to replace `<path-to-keystore-directory>` with the full 
 path of the folder where you wish to store your keystore. The keystore will contain the newly generated key, 
 with alias `brooklyn` and password `password`.
 
@@ -48,5 +48,5 @@ and then convert it into a keystore `keystore.jks` as follows:
 
 How to do this depends on whether you are using the traditional or the Karaf distribution. See either of
 
-* [Traditional Distribution](brooklyn_properties.html#https-configuration)
+* [Traditional Distribution](brooklyn_cfg.html#https-configuration)
 * [Karaf Distribution](osgi-configuration.html#https-configuration)

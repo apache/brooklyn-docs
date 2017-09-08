@@ -46,7 +46,7 @@ Brooklyn supports a wide range of locations:
   specifying already-existing hosts to use
 * And many others, including object stores and online services
 
-Configuration can be set in `~/.brooklyn/brooklyn.properties`
+Configuration can be set in `brooklyn.cfg`
 or directly in YAML when specifying a location.
 On some entities, config keys determining matching selection and provisioning behavior
 can also be set in `provisioning.properties`.

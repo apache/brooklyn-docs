@@ -17,7 +17,7 @@ To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. For a production 
 system, or if Apache Brooklyn is publicly reachable, it is strongly recommended to 
-[configure security](brooklyn_properties.html).
+[configure security](brooklyn_cfg.html).
 
 By default, Brooklyn will write log messages at the INFO level or above to `brooklyn.info.log` and messgages at the
 DEBUG level or above to `brooklyn.debug.log`. Redirecting the output to `/dev/null` prevents the default console output
@@ -101,12 +101,12 @@ from earlier ones, if exactly the same property is specified multiple times).
    generic metadata such as jurisdiction and geographic information about Cloud providers.        
 1. The file `~/.brooklyn/location-metadata.properties` (unless `--noGlobalBrooklynProperties` is specified).
    This is intended to contain custom metadata about additional locations.
-1. The file `~/.brooklyn/brooklyn.properties` (unless `--noGlobalBrooklynProperties` is specified).
+1. The file `brooklyn.cfg` (unless `--noGlobalBrooklynProperties` is specified).
 1. Another properties file, if the `--localBrooklynProperties <local brooklyn.properties file>` is specified.
 1. Shell environment variables
 1. System properties, supplied with ``-D`` on the brooklyn (Java) command-line.
 
-These properties are described in more detail [here](brooklyn_properties.html).
+These properties are described in more detail [here](brooklyn_cfg.html).
 
 
 ### Extending the Classpath

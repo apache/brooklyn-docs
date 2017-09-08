@@ -138,7 +138,7 @@ By default, no authentication is required and the web-console will listen on all
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
  
-* [Security]({{ site.path.guide }}/ops/brooklyn_properties.html)
+* [Security]({{ site.path.guide }}/ops/configuration/brooklyn_cfg.html)
 * [Persistence]({{ site.path.guide }}/ops/persistence/)
 * [Cloud credentials]({{ site.path.guide }}/locations/)
 
@@ -182,7 +182,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ systemctl start|stop|restart|status brooklyn
 {% endhighlight %}
 
-The application should then output its logs to `/var/log/brooklyn/apache-brooklyn.debug.log` and `/var/log/brooklyn/apache-brooklyn.info.log`.
+The application should then output its logs to `/var/log/brooklyn/brooklyn.debug.log` and `/var/log/brooklyn/brooklyn.info.log`.
 
 </div>
 <div id="impl-3" class="tab-pane fade">
@@ -195,7 +195,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ sudo service brooklyn start|stop|restart|status
 {% endhighlight %}
 
-The application should then output its logs to `/var/log/brooklyn/apache-brooklyn.debug.log` and `/var/log/brooklyn/apache-brooklyn.info.log`.
+The application should then output its logs to `/var/log/brooklyn/brooklyn.debug.log` and `/var/log/brooklyn/brooklyn.info.log`.
 
 </div>
 <div id="impl-4" class="tab-pane fade">
@@ -205,19 +205,19 @@ The application should then output its logs to `/var/log/brooklyn/apache-brookly
 Now start Apache Brooklyn with the following command:
 
 {% highlight bash %}
-$ bin/brooklyn launch
+$ bin/start
 {% endhighlight %}
 
-The application should then output its log into the console and also `apache-brooklyn.debug.log` and `apache-brooklyn.info.log`
+The application should then output its log to `./data/log/brooklyn.debug.log` and `./data/log/brooklyn.info.log`
 
 </div>
 <div id="impl-5" class="tab-pane fade">
 
 <strong class="hidden started-pdf-include">e) Windows</strong>
 
-You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\brooklyn.bat`
+You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\start.bat`
 
-The application should then output its log into the console and also `c:\Program Files\brooklyn\apache-brooklyn.debug.log` and `c:\Program Files\brooklyn\apache-brooklyn.info.log`
+The application should then output its log into the console and also `c:\Program Files\brooklyn\data\log\brooklyn.debug.log` and `c:\Program Files\brooklyn\data\log\brooklyn.info.log`
 
 </div>
 _Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
