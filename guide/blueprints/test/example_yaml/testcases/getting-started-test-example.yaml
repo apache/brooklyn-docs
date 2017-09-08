@@ -15,11 +15,12 @@ services:
       brooklyn.example.db.url: >
         $brooklyn:formatString("jdbc:%s%s?user=%s&password=%s",
         entity("db").attributeWhenReady("datastore.url"),
-        "visitors", "brooklyn", "br00k11n")
+        "visitors", "brooklyn", $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password"))
 - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
   id: db
   name: My DB
   brooklyn.config:
+    creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
     datastore.creation.script.url: https://bit.ly/brooklyn-visitors-creation-script
 - type: org.apache.brooklyn.test.framework.TestHttpCall
   name: Check HTTP Response Status Code

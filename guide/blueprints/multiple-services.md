@@ -41,8 +41,11 @@ Here there are a few things going on:
 * We've added a second service, which will be the database;
   you'll note the database has been configured to run a custom setup script
 * We've injected the URL of the second service into the appserver as a Java system property
-  (so our app knows where to find the database) 
-
+  (so our app knows where to find the database)
+* We've used externalized config to keep secret information out of the blueprint;
+  this is loaded at runtime from an [externalized config provider](../ops/externalized-config.html),
+  such as a remote credentials store
+ 
 **Caution: Be careful if you write your YAML in an editor which attempts to put "smart-quotes" in.
 All quote characters must be plain ASCII, not fancy left-double-quotes and right-double-quotes!**
 
@@ -80,6 +83,8 @@ Here's an example deploying the same application but with different flavors of t
 {% highlight yaml %}
 {% readj example_yaml/appserver-w-db-other-flavor.yaml %}
 {% endhighlight %}
+
+By changing two lines we've switched from JBoss and MySQL to Tomcat and MariaDB.
 
 We've also brought in the `provisioning.properties` from the VM example earlier
 so our database has 8GB RAM.
