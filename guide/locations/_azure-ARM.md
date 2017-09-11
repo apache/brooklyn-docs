@@ -95,6 +95,16 @@ The loginUser can be anything, as long as it's specified.
 The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on Azure images do not have passwordless sudo 
 configured by default.
 
+#### Useful configuration options for Azure ARM
+
+You can add these options directly under the `brooklyn.config` element in the example above:
+
+* `jclouds.compute.resourcename-prefix` and `jclouds.compute.resourcename-delimiter` - defaults to `jclouds` and `-` respectively. If jclouds is choosing the name for a resource (for example, a virtual machine), these properties will alter the way the resource is named.
+
+You can add these options into the `templateOptions` element inside the `brooklyn.config` element in the example above:
+
+* `resourceGroup` - select a Resource Group to deploy resources into. If not given, jclouds will generate a new resource group with a partly-random name.
+
 #### Using Windows on Azure ARM
 
 This section contains material how to create a Windows location on Azure ARM. Some of the used parameters are explained in the section above.
