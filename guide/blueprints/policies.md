@@ -100,6 +100,39 @@ The ConnectionFailureDetector is an HA policy for monitoring an http connection,
 
 ### Optimization Policies
 
+#### PeriodicEffector Policy
+
+- org.apache.brooklyn.policy.action.PeriodicEffectorPolicy
+
+The `PeriodicEffectorPolicy` calls an effector with a set of arguments at a specified time and date. The following example
+calls a `resize` effector to resize a cluster up to 10 members at 8am and then down to 1 member at 6pm. 
+
+    - type: org.apache.brooklyn.policy.action.PeriodicEffectorPolicy
+      brooklyn.config:
+        effector: resize
+        args:
+          desiredSize: 10
+        period: 1 day
+        time: 08:00:00
+    - type: org.apache.brooklyn.policy.action.PeriodicEffectorPolicy
+      brooklyn.config:
+        effector: resize
+        args:
+          desiredSize: 1
+        period: 1 day
+        time: 18:00:00
+
+#### ScheduledEffector Policy
+
+- org.apache.brooklyn.policy.action.ScheduledEffectorPolicy
+
+The `ScheduledEffectorPolicy` calls an effector after a specified interval has expired. The interval can be triggered from a sensor, `SERVICE_UP` by default. 
+The following example calls a `backup` effector every night at midnight.
+
+    - type: org.apache.brooklyn.policy.action.ScheduledEffectorPolicy
+      brooklyn.config:
+        effector: backup
+        time: 00:00:00
 
 #### FollowTheSun Policy
 
