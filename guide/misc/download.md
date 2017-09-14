@@ -33,57 +33,64 @@ The latest stable release can be accessed on the [main download page]({{ site.pa
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top'>RPM package<br />CentOS7, RHEL7, etc.</td>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-1.noarch.rpm' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-1.noarch.rpm</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-1.noarch.rpm' title='Download RPM package'>apache-brooklyn-{{ site.brooklyn-version }}-1.noarch.rpm</a></td>
 	<td><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-1.noarch.rpm.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.brooklyn.hash_download_prefix }}-1.noarch.rpm.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
+	<td style='text-align:left;vertical-align:top'>DEB package<br />Ubuntu, Debian, etc.</td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}.all.deb' title='Download DEB package'>apache-brooklyn-{{ site.brooklyn-version }}.all.deb</a></td>
+	<td><small>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}.all.deb.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}.all.deb.sha1'>SHA1</a></small></td>
+  </tr>
+  <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='6'>Client CLI only</td>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.tar.gz' title='Download client CLI linux TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.tar.gz</a></td>
 	<td ><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-linux.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.zip</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-linux.zip' title='Download client CLI linux ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-linux.zip</a></td>
 	<td><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-linux.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.tar.gz' title='Download client CLI macosx TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.tar.gz</a></td>
 	<td ><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-macosx.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.zip</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-macosx.zip' title='Download client CLI macosx ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-macosx.zip</a></td>
 	<td><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-macosx.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.tar.gz' title='Download client CLI windows TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.tar.gz</a></td>
 	<td ><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.hash_brooklyn.download_prefix }}-client-cli-windows.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.zip</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-client-cli-windows.zip' title='Download client CLI windows ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-client-cli-windows.zip</a></td>
 	<td><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.brooklyn.hash_download_prefix }}-client-cli-windows.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='2'>Source code</td>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.tar.gz' title='Download source TGZ archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.tar.gz</a></td>
 	<td ><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-src.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.hash_brooklyn.download_prefix }}-src.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.zip' title='Download ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.zip</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}-src.zip' title='Download source ZIP archive'>apache-brooklyn-{{ site.brooklyn-version }}-src.zip</a></td>
 	<td><small>
 	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}-src.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{ site.brooklyn.hash_download_prefix }}-src.zip.sha1'>SHA1</a></small></td>
