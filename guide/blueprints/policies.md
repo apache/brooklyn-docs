@@ -17,7 +17,7 @@ Common uses of a policy include the following:
 *	invoke effectors  (management policies) or,
 *	cause the entity associated with the policy to emit sensor values (enricher policies).
 
-Entities can have zero or more ``Policy`` instances attached to them.
+Entities can have zero or more `Policy` instances attached to them.
 
 
 Off-the-Shelf Policies
@@ -104,8 +104,10 @@ The ConnectionFailureDetector is an HA policy for monitoring an http connection,
 
 - org.apache.brooklyn.policy.action.PeriodicEffectorPolicy
 
-The `PeriodicEffectorPolicy` calls an effector with a set of arguments at a specified time and date. The following example
-calls a `resize` effector to resize a cluster up to 10 members at 8am and then down to 1 member at 6pm. 
+The `PeriodicEffectorPolicy` calls an effector with a set of arguments at a specified time and date. The policy monitors the 
+sensor configured by `start.sensor` and will only start when this is set to `true`. The default sensor checked is `service.isUp`, 
+so that the policy will not execute the effector until the entity is started. The following example calls a `resize` effector 
+to resize a cluster up to 10 members at 8am and then down to 1 member at 6pm.
 
     - type: org.apache.brooklyn.policy.action.PeriodicEffectorPolicy
       brooklyn.config:
@@ -126,7 +128,14 @@ calls a `resize` effector to resize a cluster up to 10 members at 8am and then d
 
 - org.apache.brooklyn.policy.action.ScheduledEffectorPolicy
 
-The `ScheduledEffectorPolicy` calls an effector after a specified interval has expired. The interval can be triggered from a sensor, `SERVICE_UP` by default. 
+The `ScheduledEffectorPolicy` calls an effector at a specific time. The policy monitors the sensor configured by `start.sensor` 
+and will only execute the effector at the specified time if this is set to `true`.
+
+There are two modes of operation, one based solely on policy configuration where the effector will execute at the time set 
+using the `time` key or after the duration set using the `wait` key, or by monitoring sensors. The policy monitors the 
+`scheduler.invoke.now` sensor and will execute the effector immediately when its value changes to `true`. 
+When the `scheduler.invoke.at` sensor changes, it will set a time in the future when the effector should be executed.
+
 The following example calls a `backup` effector every night at midnight.
 
     - type: org.apache.brooklyn.policy.action.ScheduledEffectorPolicy
