@@ -12,7 +12,6 @@ children:
   - { path: /guide/locations/index.md, title_in_menu: Deploying Blueprints }
   - { path: /guide/ops/index.md, title_in_menu: Reference Guide,
       menu_customization: { dropdown_section_header: true } }
-  - { path: /guide/dev/index.md, title_in_menu: Developer Guide }
   - { path: meta/versions.md, title_in_menu: Versions,
       menu_customization: { dropdown_new_section: true } }
   - { path: documentation/other-docs.md, title_in_menu: Other Resources }

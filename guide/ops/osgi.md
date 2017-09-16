@@ -65,6 +65,8 @@ JAVA_DEBUG_OPTS='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5
 For other options please check your JVM JPDA documentation.
 Hotspot JPDA:  https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/
 
+## Quick testing
+
 ## Configuring
 
 Configuration of Brooklyn when running under Karaf is largely done through standard Karaf mechanisms.

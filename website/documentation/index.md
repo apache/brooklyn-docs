@@ -4,7 +4,6 @@ title: Documentation
 started-pdf-exclude: true
 children:
 - /guide/
-- /guide/dev/
 - ../meta/versions.md
 - other-docs.md
 ---
