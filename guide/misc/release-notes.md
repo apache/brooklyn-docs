@@ -17,16 +17,8 @@ to Brooklyn's commercial users for funding much of this development.
 
 ### Backwards Compatibility
 
-Changes since 0.10.0:
-
-1. The usage of `ManagementContext.getConfig()` is deprecated for storing non-config data like
-singletons and cached objects. Use `ManagementContext.getScratchpad()` instead. Affected objects:
-
-  * BrooklynCampConstants.CAMP_PLATFORM
-  * CampYamlParser.YAML_PARSER_KEY
-  * BrooklynServiceAttributes.BROOKLYN_REST_OBJECT_MAPPER
-  * BrooklynWebConfig.SECURITY_PROVIDER_INSTANCE
+Changes since 0.12.0:
 
 
 For changes in prior versions, please refer to the release notes for 
-[0.10.0]({{ site.path.v }}/0.10.0/misc/release-notes.html).
+[0.12.0]({{ site.path.v }}/0.12.0/misc/release-notes.html).

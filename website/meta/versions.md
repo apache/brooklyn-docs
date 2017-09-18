@@ -19,6 +19,8 @@ This documentation was generated {{ site.time | date_to_string }}.
 
 Apache Brooklyn has made the following releases:
 
+* **[0.11.0](/v/0.11.0/)**: Improved cloud support, additional blueprinting features (May 2017)
+
 * **[0.10.0](/v/0.10.0/)**: Improved blueprints and CLI, new DSL features,
   Karaf distribution. (December 2016)
 
