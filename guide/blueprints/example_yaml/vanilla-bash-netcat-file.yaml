@@ -5,3 +5,6 @@ services:
   name: Simple Netcat Server
   brooklyn.config:
     download.url: file:///tmp/netcat-server.tgz
+    launch.command: |
+      ./start.sh &
+      echo $! > $PID_FILE
