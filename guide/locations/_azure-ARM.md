@@ -10,6 +10,79 @@ Azure Resource Manager (ARM) is a framework for deploying and managing applicati
 
 #### Setup the Azure credentials
 
+##### Azure CLI 2.0
+
+Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
+
+You will need to obtain your *subscription ID* and *tenant ID* from Azure. To do this using the CLI, first, log in:
+
+    az login
+
+Or, if you are already logged in, request an account listing:
+
+    az account list
+
+In either case, this will return a subscription listing, similar to that shown below.
+
+    [
+      {
+        "cloudName": "AzureCloud",
+        "id": "012e832d-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+        "isDefault": true,
+        "name": "QA Team",
+        "state": "Enabled",
+        "tenantId": "ba85e8cd-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+        "user": {
+          "name": "qa@example.com",
+          "type": "user"
+        }
+      },
+      {
+        "cloudName": "AzureCloud",
+        "id": "341751b0-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+        "isDefault": false,
+        "name": "Developer Team",
+        "state": "Enabled",
+        "tenantId": "ba85e8cd-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+        "user": {
+          "name": "dev@example.com",
+          "type": "user"
+        }
+      }
+    ]
+
+Choose one of the subscriptions and make a note of its *id* - henceforth the subscription ID - and the *tenantId*.
+
+Next we need to create an *application* and a *service principle*, and grant permissions to the service principle. Use these commands:
+
+    # Create an AAD application with your information.
+    az ad app create --display-name <name> --password <Password> --homepage <home-page> --identifier-uris <identifier-uris>
+    
+    # For example: az ad app create --display-name "myappname"  --password abcd --homepage "https://myappwebsite" --identifier-uris "https://myappwebsite"
+
+Take a note of the *appId* shown.
+
+    # Create a Service Principal
+    az ad sp create --id <Application-id>
+
+Take a note of the *objectId* shown - this will be the service principal object ID. (Note that any of the *servicePrincipalNames* can also be used in place of the object ID.)
+
+    # Assign roles for this service principal. The "principal" can be the "objectId" or any one of the "servicePrincipalNames" from the previous step
+    az role assignment create --assignee <Service-Principal> --role Contributor --scope /subscriptions/<Subscription-ID>/
+
+By this stage you should have the following information:
+
+* A subscription ID
+* A tenant ID
+* An application ID
+* A service principle (either by its object ID, or by any one of its names)
+
+We can now verify this information that this information can be used to log in to Azure:
+
+    az login --service-principal -u <Application-ID> --password abcd --tenant <Tenant-ID>
+
+##### Azure CLI 1.0
+
 Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/azure/cli-install-nodejs).
 
 Using the Azure CLI, run the following commands to create a service principal
