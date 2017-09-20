@@ -46,12 +46,47 @@ before running `launch.command` relative to where that file is installed (or unp
 with the default `launch.command` being `./start.sh`.
 
 So if we create a file `/tmp/netcat-server.tgz` containing just `start.sh` in the root
-which consists of the two lines in the previous example,
+which contains the line `echo hello | nc -l 4321`, 
 we can instead write our example as: 
 
 {% highlight yaml %}
 {% readj example_yaml/vanilla-bash-netcat-file.yaml %}
 {% endhighlight %}
+
+
+#### Determining Successful Launch
+
+The default method used to determine a successful launch of `VanillaSoftwareProcess` is to run a 
+command over ssh to do a health check. The health check is done post-launch (repeating until it 
+succeeds, before then reporting that the entity has started).
+
+The default command used to carry out this health check will determine if the pid, written to 
+`$PID_FILE` is running. This is why we included in the entity's launch script the line 
+`echo $! > $PID_FILE`.
+
+You'll observe this if you connect to one of the netcat services (e.g. via `telnet localhost 4321`):
+the `nc` process exits afterwards, causing Brooklyn to set the entity to an `ON_FIRE` state.
+(You can also test this with a `killall nc`).
+
+There are other options for determining health: you can set `checkRunning.command` and `stop.command` instead,
+as documented on the javadoc and config keys of the 
+{% include java_link.html class_name="VanillaSoftwareProcess" package_path="org/apache/brooklyn/entity/software/base" project_subpath="software/base" %} class, 
+and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`. For example:
+
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-more-commands.yaml %}
+{% endhighlight %}
+
+
+#### Periodic Health Check
+
+After start-up is complete, the health check described above is also run periodically, defaulting 
+to every 5 seconds (configured with the config key `softwareProcess.serviceProcessIsRunningPollPeriod`).
+
+This ssh-based polling can be turned off by configuring `sshMonitoring.enabled: false`. However, if 
+no alternative health-check is defined then failure of the process would never be detected by Brooklyn.
+
+See [Health Check Sensors](#health-check-sensors) for alternative ways of detecting failures.
 
 
 #### Port Inferencing
@@ -126,7 +161,7 @@ This gives us quite a bit more power in writing our blueprint:
   we'll show this in the next section
 
 
-#### Using the Catalog and Clustering
+### Using the Catalog and Clustering
 
 The *Catalog* tab allows you to add blueprints which you can refer to in other blueprints.
 In that tab, click *+* then *YAML*, and enter the following:
@@ -166,30 +201,7 @@ before you have to restart it.  You can also run `restart` on the cluster,
 and if you haven't yet experimented with `resize` on the cluster you might want to do that.
 
 
-#### Determining Successful Launch
-
-One requirement of the launch script is that it store the process ID (PID) in the file
-pointed to by `$PID_FILE`, hence the second line of the script.
-This is because Brooklyn wants to monitor the services under management.
-You'll observe this if you connect to one of the netcat services,
-as the process exits afterwards and Brooklyn sets the entity to an `ON_FIRE` state.
-(You can also test this with a `killall nc` before connecting
-or issueing a `stop` command on the server -- but not on the example,
-as stopping an application root causes it to be removed altogether!) 
-
-There are other options for determining launch: you can set `checkRunning.command` and `stop.command` instead,
-as documented on the javadoc and config keys of the {% include java_link.html class_name="VanillaSoftwareProcess" package_path="org/apache/brooklyn/entity/software/base" project_subpath="software/base" %} class,
-and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`.
-
-{% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-more-commands.yaml %}
-{% endhighlight %}
-
-And indeed, once you've run one `telnet` to the server, you'll see that the 
-service has gone "on fire" in Brooklyn -- because the `nc` process stops after one run. 
-
-
-#### Attaching Policies
+### Attaching Policies
 
 Besides detecting this failure, Brooklyn policies can be added to the YAML to take appropriate 
 action. A simple recovery here might just to automatically restart the process:
@@ -204,15 +216,17 @@ The blueprint above uses one policy to triggering a failure sensor when the serv
 and another responds to such failures by restarting the service.
 This makes it easy to configure various aspects, such as to delay to see if the service itself recovers
 (which here we've set to 15 seconds) or to bail out on multiple failures within a time window (which again we are not doing).
-Running with this blueprint, you'll see that the service shows as on fire for 15s after a `telnet`,
+Running with this blueprint, you'll see that the service shows as on fire for 15s after a `telnet localhost 4321`,
 before the policy restarts it. 
 
 
 ### Sensors and Effectors
 
+#### Effectors
+
 For an even more interesting way to test it, look at the blueprint defining
 [a netcat server and client](example_yaml/vanilla-bash-netcat-w-client.yaml).
-This uses `initializers` to define an effector to `sayHiNetcat` on the `Simple Pinger` client,
+This uses `brooklyn.initializers` to define an effector to `sayHiNetcat` on the `Simple Pinger` client,
 using `env` variables to inject the `netcat-server` location and 
 `parameters` to pass in per-effector data:
 
@@ -230,6 +244,9 @@ using `env` variables to inject the `netcat-server` location and
               description: The string to pass to netcat
               defaultValue: hi netcat
 
+
+#### Sensors
+
 This blueprint also uses initializers to define sensors on the `netcat-server` entity
 so that the `$message` we passed above gets logged and reported back:
 
@@ -243,9 +260,10 @@ so that the `$message` we passed above gets logged and reported back:
           period: 1s
           command: tail -1 server-input
 
-##### Windows Command Sensor
 
-Like the blueprint above, the following example also uses brooklyn.initializers to define sensors on the entity,
+#### Windows Command Sensor
+
+Like the blueprint above, the following example also uses `brooklyn.initializers` to define sensors on the entity,
 this time however it is a windows VM and uses `WinRmCommandSensor`.
 
     - type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
@@ -259,11 +277,67 @@ this time however it is a windows VM and uses `WinRmCommandSensor`.
           period: 60s
           command: hostname
 
+
+#### Health Check Sensors
+
+As mentioned [previously](#periodic-health-check), the default health check is to execute the check-running
+command over ssh every 5 seconds. This can be very CPU intensive when there are many entities. An alternative
+is to disable the ssh-polling (by setting `sshMonitoring.enabled: false`) and to configure a different 
+health-check.
+
+See documentation on the [Entity's error status]({{ site.path.guide }}/ops/troubleshooting/overview.html#entitys-error-status)
+for how Brooklyn models an entity's health.
+
+In the snippet below, we'll define a new health-check sensor (via http polling), and will automatically add this
+to the `service.notUp.indicators`. If that map is non-empty, then the entity's `service.isUp` will be set
+automatically to `false`:
+
+    services:
+    - type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+      brooklyn.config:
+        launch.command: |
+          ...
+        checkRunning.command: true
+        sshMonitoring.enabled: false
+
+      brooklyn.initializers:
+        - type: org.apache.brooklyn.core.sensor.http.HttpRequestSensor
+          brooklyn.config:
+            name: http.healthy
+            period: 5s
+            suppressDuplicates: true
+            jsonPath: "$"
+            uri:
+              $brooklyn:formatString:
+              - "http://%s:8080/healthy"
+              - $brooklyn:attributeWhenReady("host.name")
+
+      brooklyn.enrichers:
+        - type: org.apache.brooklyn.enricher.stock.UpdatingMap
+          brooklyn.config:
+            enricher.sourceSensor: $brooklyn:sensor("http.healthy")
+            enricher.targetSensor: $brooklyn:sensor("service.notUp.indicators")
+            enricher.updatingMap.computing:
+              $brooklyn:object:
+                type: "com.google.guava:com.google.common.base.Functions"
+                factoryMethod.name: "forMap"
+                factoryMethod.args:
+                  - true: null
+                    false: "false"
+                  - "no value"
+
+The `HttpRequestSensor` configures the entity to poll every 5 seconds on the given URI,
+taking the json result as the sensor value.
+
+The `UpdatingMap` enricher uses that sensor to populate an entry in the `service.notUp.indicators`.
+It transforms the `http.healthy` sensor value using the given function: if the http poll returned
+`true`, then it is mapped to `null` (so is removed from the `service.noUp.indicators`); if the
+poll returned `false`, then `"false"` is added to the indicators map; otherwise `"no value"` is
+added to the indicators map.
+ 
+
 #### Summary
 
-These examples are relatively simple example, but they
+These examples do relatively simple things, but they
 illustrate many of the building blocks used in real-world blueprints,
 and how they can often be easily described and combined in Brooklyn YAML blueprints.
-Next, if you need to drive off-piste, or you want to write tests against these blueprints,
-have a look at, for example, `VanillaBashNetcatYamlTest.java` in the Brooklyn codebase,
-or follow the other references below.

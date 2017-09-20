@@ -12,6 +12,10 @@ services:
     # check-running and stop commands. These are optional; default behavior will "do the
     # right thing" with the pid file automatically.
 
-    shell.env:            { CHECK_MARKER: "checkRunning", STOP_MARKER: "stop" }
-    checkRunning.command: echo $CHECK_MARKER >> DATE && test -f "$PID_FILE" && ps -p `cat $PID_FILE` >/dev/null
-    stop.command:         echo $STOP_MARKER  >> DATE && test -f "$PID_FILE" && { kill -9 `cat $PID_FILE`; rm /tmp/vanilla.pid; }
+    shell.env:
+      CHECK_MARKER: "checkRunning"
+      STOP_MARKER: "stop"
+    checkRunning.command: |
+      echo $CHECK_MARKER >> DATE && test -f "$PID_FILE" && ps -p `cat $PID_FILE` >/dev/null
+    stop.command: |
+      echo $STOP_MARKER  >> DATE && test -f "$PID_FILE" && { kill -9 `cat $PID_FILE`; rm $PID_FILE; }
