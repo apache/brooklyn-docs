@@ -181,7 +181,8 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
     3. Confirm that Brooklyn is definitely not running (see step 1 above).
 
-    4. Delete the Brooklyn install directory: `sudo rm -r /opt/brooklyn`.
+    4. Delete the Brooklyn install directory: `sudo rm -r /opt/brooklyn` as well as the Brooklyn log directory:
+       `sudo rm -r /var/log/brooklyn/`
 
 4. Make sure you have Java 8.
    By default CentOS images come with JRE6 which is incompatible version for Brooklyn.
@@ -198,8 +199,6 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
           
           # Ubuntu / Debian
           sudo dpkg -i apache-brooklyn-xxxx.all.deb
-
-   3. Wait for Brooklyn to be fully started (i.e. its web-console to be responsive).
 
 6. Restore the persisted state and configuration.
 
@@ -221,7 +220,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 7. Validate that the new release works, by starting in "HOT_BACKUP" mode.
 
-   1. Before starting Brooklyn, reconfigure `./etc/org.apache.brooklyn.osgilauncher.cfg` and set `highAvailabilityMode=HOT_BACKUP`.
+   1. Before starting Brooklyn, reconfigure `/etc/brooklyn/org.apache.brooklyn.osgilauncher.cfg` and set `highAvailabilityMode=HOT_BACKUP`.
       This way when Brooklyn is started, it will only read and validate the persisted state and will not write into it.
 
    2. Start Apache Brooklyn:
@@ -234,7 +233,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
           # Ubuntu / Debian
           start brooklyn
 
-   3. Check whether you have rebind ERROR messages in `./log/brooklyn.info.log`, e.g. `sudo grep -E "WARN|ERROR" /opt/brooklyn/log/brooklyn.debug.log`.
+   3. Check whether you have rebind ERROR messages in the Brooklyn logs, e.g. `sudo grep -E "Rebind|WARN|ERROR" /var/log/brooklyn/brooklyn.debug.log`.
       If you do not have such errors you can proceed.
 
    4. Stop Brooklyn:
