@@ -12,7 +12,7 @@ children:
 
 {% include fields.md %}
 
-The file brooklyn.cfg is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
+The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
 
 ## Quick Setup
 
@@ -27,10 +27,6 @@ brooklyn.webconsole.security.users=admin,bob
 brooklyn.webconsole.security.user.admin.password=AdminPassw0rd
 brooklyn.webconsole.security.user.bob.password=BobPassw0rd
 {% endhighlight %}
-
-The config file *must* have permissions 600 
-(i.e. readable and writable only by the file's owner),
-for some security.
 
 In many cases, it is preferable instead to use an external credentials store such as LDAP.
 Information on configuring these is [below](#authentication). 
@@ -50,8 +46,8 @@ More information, including setting up a certificate, is described [further belo
 Values in `brooklyn.cfg` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
-This allows [externalized configuration]({{ site.path.guide}}/ops/externalized-configuration.html) to be used from 
-brooklyn.cfg. For example:
+This allows [externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) to be used from 
+`brooklyn.cfg`. For example:
 
 {% highlight properties %}
 brooklyn.location.jclouds.aws-ec2.identity=$brooklyn:external("vault", "aws-identity")
@@ -204,12 +200,4 @@ or
 
 See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
 
-To enable HTTPS in Brooklyn, add the following to your brooklyn.cfg:
-
-{% highlight properties %}
-brooklyn.webconsole.security.https.required=true
-brooklyn.webconsole.security.keystore.url=<path-to-keystore-directory>/server.key
-brooklyn.webconsole.security.keystore.password=mypassword
-brooklyn.webconsole.security.keystore.certificate.alias=brooklyn
-{% endhighlight %}
 
