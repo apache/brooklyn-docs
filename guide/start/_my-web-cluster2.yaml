@@ -12,7 +12,7 @@ services:
       brooklyn.example.db.url: >
         $brooklyn:formatString("jdbc:%s%s?user=%s&password=%s",
         component("db").attributeWhenReady("datastore.url"),
-        "visitors", "brooklyn", "br00k11n")
+        "visitors", "brooklyn", $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password"))
   brooklyn.policies:
   - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
     brooklyn.config:
@@ -28,4 +28,5 @@ services:
   id: db
   name: My DB
   brooklyn.config:
+    creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
     datastore.creation.script.url: https://bit.ly/brooklyn-visitors-creation-script

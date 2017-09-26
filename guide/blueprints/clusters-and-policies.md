@@ -17,8 +17,12 @@ deployment of our `hello-world-sql` application as follows:
 {% endhighlight %}
 
 This sets up Nginx as the controller by default, but that can be configured
-using the `controllerSpec` key. In fact, JBoss is the default appserver,
-and because configuration in Brooklyn is inherited by default,
+using the `controllerSpec` key. 
+This uses the same [externalized config](../ops/externalized-config.html) 
+as in other examples to hide the password.
+
+JBoss is actually the default appserver in the `ControlledDynamicWebAppCluster`,
+so because `brooklyn.config` keys in Brooklyn are inherited by default,
 the same blueprint can be expressed more concisely as:
 
 {% highlight yaml %}

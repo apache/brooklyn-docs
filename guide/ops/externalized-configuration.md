@@ -30,8 +30,12 @@ services:
     wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war
     http.port: 8080+
     java.sysprops:
-      brooklyn.example.db.url: $brooklyn:formatString("jdbc:postgresql://%s/myappdb?user=%s\\&password=%s",
-         external("servers", "postgresql"), external("credentials", "postgresql-user"), external("credentials", "postgresql-password"))
+      brooklyn.example.db.url: 
+        $brooklyn:formatString:
+          - jdbc:postgresql://%s/myappdb?user=%s\\&password=%s
+          - $brooklyn:external("servers", "postgresql")
+          - $brooklyn:external("credentials", "postgresql-user")
+          - $brooklyn:external("credentials", "postgresql-password")
 {% endhighlight %}
 
 You can see that when we are building up the JDBC URL, we are using the `external` function. This takes two parameters:
@@ -64,6 +68,18 @@ brooklyn.external.credentials.appId=MyApp
 
 In this case, the list of servers is stored in a properties file located on an Operations Department web server, and the
 credentials are stored in an instance of [Vault](https://www.vaultproject.io/).
+More information on these providers is below.
+
+For demo purposes, there is a pre-defined external provider called
+`brooklyn-demo-sample` which defines `hidden-brooklyn-password` as `br00k11n`.
+This is used in some of the sample blueprints, referencing `$brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")`. 
+The value used here can be overridden with the following in your `brooklyn.properties`:
+
+{% highlight properties %}
+brooklyn.external.brooklyn-demo-sample=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
+brooklyn.external.brooklyn-demo-sample.hidden-brooklyn-password=new_password
+{% endhighlight %}
+
 
 ## Defining Suppliers
 
