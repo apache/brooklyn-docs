@@ -11,6 +11,45 @@ children:
 ---
 
 <div class="row">
+
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### RPM Package
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 9em;" markdown="1">
+Suitable for version 7 of CentOS and Red Hat Enterprise Linux.
+</div>
+
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}-1.noarch.rpm" role="button">RPM package</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### DEB Package
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 9em;" markdown="1">
+Suitable Ubuntu and Debian distributions.
+</div>
+
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}.all.deb" role="button">DEB package</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+
 <div class="col-md-6" markdown="1">
 
 <div class="panel panel-default">
@@ -32,27 +71,7 @@ A pre-built package that contains Apache Brooklyn and all of its dependencies in
 </div>
 
 </div><!-- col -->
-<div class="col-md-6" markdown="1">
 
-<div class="panel panel-default">
-  <div class="panel-heading" markdown="1">
-#### RPM Package
-  </div>
-  <div class="panel-body" markdown="1">
-<div style="height: 9em;" markdown="1">
-Suitable for version 7 of CentOS and Red Hat Enterprise Linux.
-</div>
-
-<div class="text-center">
-  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}-1.noarch.rpm" role="button">RPM package</a>
-</div>
-  </div>
-</div>
-
-</div><!-- col -->
-</div><!-- row -->
-
-<div class="row">
 <div class="col-md-6" markdown="1">
 
 <div class="panel panel-default">

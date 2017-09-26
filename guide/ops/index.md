@@ -17,6 +17,7 @@ children:
 - https.md
 - externalized-configuration.md
 - requirements.md
+- upgrade.md
 - security-guidelines.md
 - troubleshooting/
 ---
