@@ -182,7 +182,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ systemctl start|stop|restart|status brooklyn
 {% endhighlight %}
 
-The application should then output its logs to `/var/log/brooklyn/brooklyn.debug.log` and `/var/log/brooklyn/brooklyn.info.log`.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-3" class="tab-pane fade">
@@ -195,7 +195,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ sudo service brooklyn start|stop|restart|status
 {% endhighlight %}
 
-The application should then output its logs to `/var/log/brooklyn/brooklyn.debug.log` and `/var/log/brooklyn/brooklyn.info.log`.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-4" class="tab-pane fade">
@@ -208,7 +208,7 @@ Now start Apache Brooklyn with the following command:
 $ bin/start
 {% endhighlight %}
 
-The application should then output its log to `./data/log/brooklyn.debug.log` and `./data/log/brooklyn.info.log`
+The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-5" class="tab-pane fade">

@@ -3,7 +3,7 @@ title: Configuring HA - an example
 layout: website-normal
 ---
 
-This supplements the [High Availability](../) documentation
+This supplements the [High Availability](./) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore
 
 ### Prerequisites
@@ -12,14 +12,14 @@ and provides an example of how to configure a pair of Apache Brooklyn servers to
 - An NFS folder has been mounted on both VMs at `/mnt/brooklyn-persistence` and both machines can write to the folder
 
 \* Brooklyn can be configured to use either an object store such as S3, or a shared NFS mount. The recommended option is to use an object
-store as described in the [Object Store Persistence]({{ site.path.operations }}/ops/persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
+store as described in the [Object Store Persistence](../persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
 is assumed in this example
 
 ### Launching
 To start, download and install the latest Apache Brooklyn release on both VMs following the instructions in
-[Running Apache Brooklyn]({{ site.path.tutorials }}/start/running.html)
+[Running Apache Brooklyn]({{ site.path.guide }}/start/running.html)
 
-On the first VM, which will be the master node, set the following configuration options:
+On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
 - highAvailabilityMode: MASTER
 - persistMode: AUTO
@@ -31,10 +31,10 @@ Then launch Brooklyn with:
 $ bin/start
 {% endhighlight %}
 
-If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{ site.path.tutorials }}/start/running.html) 
+If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{ site.path.guide }}/start/running.html) 
 documentation for the appropriate launch commands
 
-Once Brooklyn has launched, on the second VM, set the following configuration options ([`org.apache.brooklyn.osgilauncher.cfg`](../paths.html)):
+Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
 - highAvailabilityMode: AUTO
 - persistMode: AUTO
@@ -51,7 +51,7 @@ When running as a HA standby node, each standby Brooklyn server (in this case th
 every one second to determine the state of the HA master. If no heartbeat has been recorded for 30 seconds, then an election will be performed
 and one of the standby nodes will be promoted to master. At this point all requests should be directed to the new master node.
 If the master is terminated gracefully, the secondary will be immediately promoted to mater. Otherwise, the secondary will be promoted after 
-heartbeats are missed for a given length of time. This defaults to 30 seconds, and is configured in brooklyn.cfg using 
+heartbeats are missed for a given length of time. This defaults to 30 seconds, and is configured in `brooklyn.cfg` using 
 `brooklyn.ha.heartbeatTimeout`
 
 In the event that tasks - such as the provisioning of a new entity - are running when a failover occurs, the new master will display the current
