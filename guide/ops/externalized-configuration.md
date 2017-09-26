@@ -73,7 +73,7 @@ More information on these providers is below.
 For demo purposes, there is a pre-defined external provider called
 `brooklyn-demo-sample` which defines `hidden-brooklyn-password` as `br00k11n`.
 This is used in some of the sample blueprints, referencing `$brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")`. 
-The value used here can be overridden with the following in your `brooklyn.properties`:
+The value used here can be overridden with the following in your `brooklyn.cfg`:
 
 {% highlight properties %}
 brooklyn.external.brooklyn-demo-sample=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
