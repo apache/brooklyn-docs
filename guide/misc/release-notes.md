@@ -20,8 +20,9 @@ You can now start a new Brooklyn instance pointed at a persistence store,
 and it will automatically load all bundles installed into the previous Brooklyn
 through the REST API.
 
-1. Application deployment "create-or-reuse" semantics by specifying an application ID.
-This supports workflows that require something deployed in a singleton pattern,
+1. Application deployment now supports "create-or-reuse" where an application ID can be supplied,
+and deployment is undertaken only if the ID is not yet present.
+This supports workflows that require idempotency or something deployed in a singleton pattern,
 such as in a continuous integration pipeline.  
 
 1. jclouds latest version: improved Azure support and more.
