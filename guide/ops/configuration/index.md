@@ -1,7 +1,21 @@
 ---
-title: OSGi Configuration
+title_in_menu: Configuring Brooklyn
+title: Brooklyn Configuration and Options
 layout: website-normal
+children:
+- { section: Memory Usage }
+- { section: Authentication }
+- brooklyn_cfg.md
+- https.md
+- cors.md
 ---
+
+Apache Brooklyn contains a number of configuration options managed across several files. 
+Historically Brooklyn has been configured through a brooklyn.properties file, this changed 
+to a [brooklyn.cfg](brooklyn_cfg.html) file when the Karaf release became the default in Brooklyn 0.12.0.
+
+The configurations for [persistence](../persistence/index.html) and [high availability](../high-availability/index.html) are described
+elsewhere in this manual.
 
 Configuration of Apache Brooklyn when running under Karaf is largely done through standard Karaf mechanisms. 
 The Karaf "Configuration Admin" subsystem is used to manage configuration values loaded at first boot from the
@@ -10,7 +24,7 @@ and manipulated by the `config:` commands, see the [Karaf documentation](https:/
 
 ## Configuring Brooklyn Properties
 
-To configure the Brooklyn runtime create an `etc/brooklyn.cfg` file, following the standard `brooklyn.properties`
+To configure the Brooklyn runtime create an `etc/brooklyn.cfg` file. If you have previously used `brooklyn.properties` it follows the same
 file format. Values can be viewed and managed dynamically via the OSGI configuration admin commands in Karaf,
 e.g. `config:property-set`. The global `~/.brooklyn/brooklyn.properties` is still supported and has higher
 priority for duplicate keys, but it's values can't be manipulated with the Karaf commands, so its use is
@@ -31,25 +45,35 @@ Web console related configuration is done through the corresponding Karaf mechan
     to the JAAS realm you would like to use.
    * For other Jetty related configuration consult the Karaf and pax-web docs.
 
-## HTTPS Configuration
+### Memory Usage
+
+The amount of memory required by Apache Brooklyn process depends on the usage - for example the number of entities/VMs under management.
+
+For a standard Brooklyn deployment, the defaults are to start with 256m, and to grow to 2g of memory. These numbers can be overridden 
+by setting the `JAVA_MAX_MEM` and `JAVA_MAX_PERM_MEM` in the `bin/setenv` script:
+
+    export JAVA_MAX_MEM="2G"
+
+Apache Brooklyn stores a task history in-memory using [soft references](http://docs.oracle.com/javase/7/docs/api/java/lang/ref/SoftReference.html). 
+This means that, once the task history is large, Brooklyn will continually use the maximum allocated memory. It will 
+only expunge tasks from memory when this space is required for other objects within the Brooklyn process.
+
+### Authentication and Security
+
+There are two areas of authentication used in Apache Brooklyn, these are as follows:
+
+* Karaf authentication
+
+Apache Brooklyn uses [Apache Karaf](https://karaf.apache.org) as a core platform, this has user level security and
+groups which can be configured as detailed [here](https://karaf.apache.org/manual/latest/security#_users_groups_roles_and_passwords).
+
+* Apache Brooklyn authentication
+
+Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detailed [here](brooklyn_cfg.html#authentication).
+
+### HTTPS Configuration
 
 See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
-
-In `etc/org.ops4j.pax.web.cfg` in the Brooklyn Karaf distribution root, un-comment the settings:
-
-{% highlight properties %}
-org.osgi.service.http.port.secure=8443
-org.osgi.service.http.secure.enabled=true
-org.ops4j.pax.web.ssl.keystore=${karaf.home}/etc/keystores/keystore.jks
-org.ops4j.pax.web.ssl.password=password
-org.ops4j.pax.web.ssl.keypassword=password
-org.ops4j.pax.web.ssl.clientauthwanted=false
-org.ops4j.pax.web.ssl.clientauthneeded=false
-{% endhighlight %}
-
-replacing the passwords with appropriate values, and restart the server. Note the keystore location is relative to 
-the installation root, but a fully qualified path can also be given, if it is desired to use some separate pre-existing
-store.
 
 
 <!--

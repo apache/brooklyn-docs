@@ -26,31 +26,25 @@ files.
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 {% highlight bash %}
-% bin/brooklyn launch > /dev/null 2>&1 & disown
+% bin/start
 {% endhighlight %}
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. It is strongly
-recommended to [configure security](brooklyn_properties.html).
+recommended to [configure security](configuration/).
 
 See the [Server CLI Reference](server-cli-reference.html) for more information
 about the Brooklyn server process.
 
-The Brooklyn startup script will create a file name `pid_java` at the root of
-the Brooklyn directory, which contains the PID of the last Brooklyn process to
-be started.
-
 
 ### Stopping
 
-To stop Brooklyn, simply send a `TERM` signal to the Brooklyn process. The PID
-of the most recently run Brooklyn process can be found in the `pid_java` file at
-the root of the Brooklyn directory.
+To stop Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 For example:
 
 {% highlight bash %}
-% kill $( cat pid_java )
+% bin/stop
 {% endhighlight bash %}
 
 

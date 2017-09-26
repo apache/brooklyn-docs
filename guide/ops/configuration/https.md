@@ -21,7 +21,7 @@ The passwords above should be changed to your own values.  Omit those arguments 
 
 You will then be prompted to enter your name and organization details. This will use (or create, if it does not exist)
 a keystore with the password `mypassword` - you should use your own secure password, which will be the same password
-used in your brooklyn.properties (below). You will also need to replace `<path-to-keystore-directory>` with the full 
+used in your `brooklyn.cfg` (below). You will also need to replace `<path-to-keystore-directory>` with the full 
 path of the folder where you wish to store your keystore. The keystore will contain the newly generated key, 
 with alias `brooklyn` and password `password`.
 
@@ -44,9 +44,20 @@ and then convert it into a keystore `keystore.jks` as follows:
 {% endhighlight %}
 
 
-## Configuring Brooklyn for HTTPS
+## HTTPS Configuration
 
-How to do this depends on whether you are using the traditional or the Karaf distribution. See either of
+In [`org.ops4j.pax.web.cfg`](../paths.html) in the Brooklyn distribution root, un-comment the settings:
 
-* [Traditional Distribution](brooklyn_properties.html#https-configuration)
-* [Karaf Distribution](osgi-configuration.html#https-configuration)
+{% highlight properties %}
+org.osgi.service.http.port.secure=8443
+org.osgi.service.http.secure.enabled=true
+org.ops4j.pax.web.ssl.keystore=${karaf.home}/etc/keystores/keystore.jks
+org.ops4j.pax.web.ssl.password=password
+org.ops4j.pax.web.ssl.keypassword=password
+org.ops4j.pax.web.ssl.clientauthwanted=false
+org.ops4j.pax.web.ssl.clientauthneeded=false
+{% endhighlight %}
+
+replacing the passwords with appropriate values, and restart the server. Note the keystore location is relative to 
+the installation root, but a fully qualified path can also be given, if it is desired to use some separate pre-existing
+store.

@@ -9,12 +9,10 @@ children:
 - cli/
 - gui/
 - rest.md
-- brooklyn_properties.md
+- configuration/
 - persistence/
 - high-availability/
-- osgi.md
 - logging.md
-- https.md
 - externalized-configuration.md
 - requirements.md
 - upgrade.md

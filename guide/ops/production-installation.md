@@ -9,7 +9,7 @@ To install Apache Brooklyn on a production server:
 
 1. [Set up the prerequisites](#prerequisites)
 1. [Download Apache Brooklyn](#download)
-1. [Configuring brooklyn.properties](#configuring-properties)
+1. [Configuring brooklyn.cfg](#configuring-properties)
 1. [Configuring Karaf Security](#configuring-karaf-security)
 1. [Configuring default.catalog.bom](#configuring-catalog)
 1. [Test the installation](#confirm)
@@ -69,21 +69,13 @@ Let's setup some paths for easy commands.
 {% endhighlight %}
 
 
-### <a id="configuring-properties"></a>Configuring brooklyn.properties
+### <a id="configuring-properties"></a>Configuring brooklyn.cfg
 
-Set up `brooklyn.properties` as described [here](brooklyn_properties.html):
+Set up `brooklyn.cfg` as described [here](brooklyn_cfg.html):
 
 * Configure the users who should have access
 * Turn on HTTPS
 * Supply credentials for any pre-defined clouds
-
-It may be useful to use the following script to install an initial `brooklyn.properties`:
-
-{% highlight bash %}
-% mkdir -p ~/.brooklyn
-% wget -O ~/.brooklyn/brooklyn.properties {{brooklyn_properties_url_live}}
-% chmod 600 ~/.brooklyn/brooklyn.properties
-{% endhighlight %}
 
 ### <a id="configuring-karaf-security"></a>Configuring Karaf Security
 

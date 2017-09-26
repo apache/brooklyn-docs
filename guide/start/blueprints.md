@@ -107,7 +107,7 @@ First, log in to brooklyn with the command line interface (CLI) tool by typing:
 $ br login http://localhost:8081/
 {% endhighlight %}
 
-To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here]({{ site.path.guide }}/ops/brooklyn_properties.html){:target="_blank"}. 
+To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here]({{ site.path.guide }}/ops/configuration/brooklyn_cfg.html){:target="_blank"}. 
 If this is configured, the login command will require an additional parameter for the userid and will then prompt for a password.
 
 Now you can create the application with the command below:

@@ -316,7 +316,7 @@ policy       pol
   Add catalog entries from a local YAML file or a URL. The id and version of added entries are displayed.
 
 - `br locations`  
-  List the location catalog. (Includes all locations including those defined in `brooklyn.properties`)
+  List the location catalog. (Includes all locations including those defined in `brooklyn.cfg`)
 
 - `br access`  
   Show if you have access to provision locations.
