@@ -127,7 +127,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 7. Update the catalog, using the br command:
 
-   1. Download the br tool (i.e. from the "CLI Download" link in the web-console).
+   1. [Download](https://brooklyn.apache.org/download/index.html#command-line-client) the br tool.
 
    2. Login with br: `br login http://localhost:8081 <user> <password>`.
 
