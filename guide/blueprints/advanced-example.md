@@ -197,7 +197,7 @@ certain conditions are met before continuing. For example:
 - type: kibana-standalone
   id: kibana
   name: Kibana Server
-  customize.latch: $brooklyn:component("es").attributeWhenReady("service.isUp")
+  latch.customize: $brooklyn:component("es").attributeWhenReady("service.isUp")
 ~~~
 
 This latch is used to stop Kibana customizing until the Elasticsearch cluster is up. We do this to ensure 
@@ -226,7 +226,7 @@ services:
         brooklyn.config:
           launch.command: sleep 2
           checkRunning.command: true
-          launch.latch: $brooklyn:parent().attributeWhenReady("single-executor")
+          latch.launch: $brooklyn:parent().attributeWhenReady("single-executor")
 ~~~
 
 It's important to note that the above setup is not reentrant. This means that users should be careful to

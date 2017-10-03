@@ -151,7 +151,7 @@ There is no specific configuration in AnsibleEntity for Ansible [Roles](http://d
               - command: unzip -o -d /etc/ansible/playbooks /tmp/master.zip
     
       - serviceType: org.apache.brooklyn.entity.stock.BasicApplication
-        start.latch: $brooklyn:entity("bootstrap").attributeWhenReady("service.isUp")
+        latch.start: $brooklyn:entity("bootstrap").attributeWhenReady("service.isUp")
         brooklyn.children:
         - type: org.apache.brooklyn.entity.cm.ansible.AnsibleEntity
           name: test

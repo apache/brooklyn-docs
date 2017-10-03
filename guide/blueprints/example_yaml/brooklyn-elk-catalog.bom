@@ -28,7 +28,7 @@ brooklyn.catalog:
       - type: kibana-standalone
         id: kibana
         name: Kibana Server
-        customize.latch: $brooklyn:component("es").attributeWhenReady("service.isUp")
+        latch.customize: $brooklyn:component("es").attributeWhenReady("service.isUp")
         brooklyn.config:
           kibana.elasticsearch.ip: $brooklyn:component("es").attributeWhenReady("host.address.first")
           kibana.elasticsearch.port: $brooklyn:component("es").config("elasticsearch.http.port")
@@ -47,7 +47,7 @@ brooklyn.catalog:
 
       - type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server
         id: tomcat
-        customize.latch: $brooklyn:entity("es").attributeWhenReady("service.isUp")
+        latch.customize: $brooklyn:entity("es").attributeWhenReady("service.isUp")
         brooklyn.config:
           wars.root: "http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war"
           children.startable.mode: background_late
