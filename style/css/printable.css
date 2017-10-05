@@ -1,9 +1,0 @@
-/*
- * This is a CSS included in the printable version of docs, it's used to mask out large images etc
- */
-.goToTop{
-	display: none; 
-}
-a, a:focus {
-	color: #393939 !important;
-}
