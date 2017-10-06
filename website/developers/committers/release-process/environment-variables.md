@@ -9,7 +9,7 @@ releases. To allow these example commands to run unmodified, set these environme
 
 {% highlight bash %}
 # The version currently set on the master branch (BROOKLYN_VERSION_BELOW)
-OLD_MASTER_VERSION=0.13.0-SNAPSHOT
+OLD_MASTER_VERSION=1.0.0-SNAPSHOT
 # The next version to be set on the master branch
 NEW_MASTER_VERSION=0.10.0-SNAPSHOT
 
