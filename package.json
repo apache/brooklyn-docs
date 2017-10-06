@@ -1,0 +1,15 @@
+{
+  "name": "brooklyn-docs",
+  "version": "0.13.0",
+  "description": "Apache Brooklyn Documentation",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gitbook-plugin-include-highlight": "^0.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0"
+}

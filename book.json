@@ -1,5 +1,16 @@
 {
   "root": "./guide",
+  "plugins" : [ "include-highlight" ],
+  "pluginsConfig": {
+    "include-highlight": {
+      "extensionToLanguage": {
+        "yml": "yaml",
+        "yaml": "yaml",
+        "bom": "yaml",
+        "java": "java"
+      }
+    }
+  },
   "variables": {
     "encoding": "utf-8",
     "markdown": "kramdown",
