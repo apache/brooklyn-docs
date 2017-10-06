@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "gitbook-plugin-include-highlight": "^0.2.1"
+    "gitbook-plugin-include-highlight": "^0.2.1",
+    "gitbook-plugin-theme-api": "^1.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

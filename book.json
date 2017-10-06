@@ -1,6 +1,6 @@
 {
   "root": "./guide",
-  "plugins" : [ "include-highlight" ],
+  "plugins" : ["include-highlight", "theme-api"],
   "pluginsConfig": {
     "include-highlight": {
       "extensionToLanguage": {
@@ -9,6 +9,32 @@
         "bom": "yaml",
         "java": "java"
       }
+    },
+    "theme-api": {
+      "split": false,
+      "languages": [
+        {
+          "lang": "vagrant",
+          "name": "Vagrant",
+          "default": true
+        },
+        {
+          "lang": "centos",
+          "name": "CentOS / RHEL 7"
+        },
+        {
+          "lang": "ubuntu",
+          "name": "Ubuntu / Debian"
+        },
+        {
+          "lang": "osx",
+          "name": "OSX / Linux"
+        },
+        {
+          "lang": "windows",
+          "name": "Windows"
+        }
+      ]
     }
   },
   "variables": {

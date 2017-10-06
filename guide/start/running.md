@@ -15,21 +15,9 @@ To get you up-and-running quickly, the Vagrant option will provision four comput
 
 ## Install Apache Brooklyn
 
-{::options parse_block_html="true" /}
+{% method -%}
 
-<ul class="nav nav-tabs">
-    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Centos / RHEL 7</a></li>
-    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">Ubuntu / Debian</a></li>
-    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
-    <li class="impl-5-tab"><a data-target="#impl-5, .impl-5-tab" data-toggle="tab" href="#">Windows</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="impl-1" class="tab-pane fade in active">
-
-<strong class="hidden started-pdf-include">a) Vagrant</strong>
-
+{% sample lang="vagrant" -%}
 [Vagrant](https://www.vagrantup.com/){:target="_blank"} is a software package which automates the process of setting up virtual machines (VM) such as [Oracle VirtualBox](https://www.virtualbox.org){:target="_blank"}. We recommend it as the easiest way of getting started with Apache Brooklyn.
 
 Firstly, download and install:
@@ -52,12 +40,7 @@ $ tar xvf apache-brooklyn-{{book.brooklyn-version}}-vagrant.tar.gz
 $ cd apache-brooklyn-{{book.brooklyn-version}}-vagrant
 ```
 
-
-</div>
-<div id="impl-2" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
-
+{% sample lang="centos" -%}
 {% if book.brooklyn-version %}<strong>Please note, an RPM is not available for snapshot builds</strong>{% endif %}
 
 For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
@@ -76,11 +59,7 @@ Once downloaded, run the following shell command as root:
 $ yum install apache-brooklyn-{{book.brooklyn-version}}-1.rpm
 ```
 
-</div>
-<div id="impl-3" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">c) Debian / Ubuntu</strong>
-
+{% sample lang="ubuntu" -%}
 For Ubuntu and Debian users, the recommended way to install Apache Brooklyn is to use the deb file. 
 
 The deb file is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The deb package contains all the necessary files associated with the Apache Brooklyn application. 
@@ -97,11 +76,8 @@ Once downloaded, run the following shell command:
 $ sudo dpkg -i apache-brooklyn_{{book.brooklyn-version}}_noarch.deb
 ```
 
-</div>
-<div id="impl-4" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">d) OSX / Linux</strong>
-
+{% sample lang="osx" -%}
 For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{book.path.website}}/download/){:target="_blank"} section.
 
 {% if book.brooklyn-version %}
@@ -122,17 +98,13 @@ $ cd apache-brooklyn-{{ book.brooklyn.version }}
 ```
 {% endif %}
 
-</div>
-<div id="impl-5" class="tab-pane fade">
 
-<strong class="hidden started-pdf-include">e) Windows</strong>
-
+{% sample lang="windows" -%}
 For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{book.path.website}}/download/){:target="_blank"}. 
 
 Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
 
-</div>
-</div>
+{% endmethod %}
 
 ---
 
@@ -147,19 +119,9 @@ to configure security. Documentation of configuration options include:
 
 ## Launch Apache Brooklyn
 
-<ul class="nav nav-tabs">
-    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Centos / RHEL</a></li>
-    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">Ubuntu / Debian</a></li>
-    <li class="impl-4-tab"><a data-target="#impl-4, .impl-4-tab" data-toggle="tab" href="#">OSX / Linux</a></li>
-    <li class="impl-5-tab"><a data-target="#impl-5, .impl-5-tab" data-toggle="tab" href="#">Windows</a></li>
-</ul>
+{% method -%}
 
-<div class="tab-content">
-<div id="impl-1" class="tab-pane fade in active">
-
-<strong class="hidden started-pdf-include">a) Vagrant</strong>
-
+{% sample lang="vagrant" -%}
 Now start Apache Brooklyn with the following command:
 
 ```bash
@@ -172,12 +134,7 @@ You can see if Apache Brooklyn launched OK by viewing the log files with the com
 $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 ```
 
-
-</div>
-<div id="impl-2" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
-
+{% sample lang="centos" -%}
 Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard systemctl commands:
 
 ```bash
@@ -186,11 +143,7 @@ $ systemctl start|stop|restart|status brooklyn
 
 The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
-</div>
-<div id="impl-3" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">c) Ubuntu / Debian</strong>
-
+{% sample lang="ubuntu" -%}
 Apache Brooklyn should now have been installed and be running as a system service. It can be stopped and started with the standard service commands:
 
 ```bash
@@ -199,11 +152,7 @@ $ sudo service brooklyn start|stop|restart|status
 
 The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
-</div>
-<div id="impl-4" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">d) OSX / Linux</strong>
-
+{% sample lang="osx" -%}
 Now start Apache Brooklyn with the following command:
 
 ```bash
@@ -212,11 +161,7 @@ $ bin/start
 
 The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
-</div>
-<div id="impl-5" class="tab-pane fade">
-
-<strong class="hidden started-pdf-include">e) Windows</strong>
-
+{% sample lang="windows" -%}
 You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\start.bat`
 
 The application should then output its log into the console and also `c:\Program Files\brooklyn\data\log\brooklyn.debug.log` and `c:\Program Files\brooklyn\data\log\brooklyn.info.log`
@@ -225,6 +170,8 @@ The application should then output its log into the console and also `c:\Program
 _Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
 Even several minutes before or after the actual time could cause problems._
 </div>
+
+{% endmethod %}
 
 ---
 
