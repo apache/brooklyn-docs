@@ -19,7 +19,7 @@ If you use a passphrase or prefer a different key, these can be configured as fo
 
 
 Alternatively, you can create a specific localhost location through the location wizard tool available within the web console.
-This location will be saved as a [catalog entry]({{ site.path.guide }}/blueprints/catalog/index.html#locations-in-the-catalog) 
+This location will be saved as a [catalog entry]({{ book.path.guide }}/blueprints/catalog/index.html#locations-in-the-catalog) 
 for easy reusability.
 
 
@@ -31,18 +31,18 @@ For some blueprints, passwordless sudo is required. (Try executing `sudo whoami`
 To enable passwordless `sudo` for your account, a line must be added to the system `/etc/sudoers` file.  
 To edit the file, use the `visudo` command:
 
-{% highlight bash %}
+```bash
 sudo visudo
-{% endhighlight %}
+```
 
 Add this line at the bottom of the file, replacing `username` with your own user:
 
-{% highlight bash %}
+```bash
 username ALL=(ALL) NOPASSWD: ALL
-{% endhighlight %}
+```
 
 If executing the following command does not ask for your password, then `sudo` has been setup correctly:
 
-{% highlight bash %}
+```bash
 sudo whoami
-{% endhighlight %}
+```

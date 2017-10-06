@@ -82,7 +82,7 @@ For example, it can show the exception stack trace in the thread that was execut
 ## Log Files
 
 Brooklyn's logging is configurable, for the files created, the logging levels, etc. 
-See [Logging docs]({{ site.path.guide }}/ops/logging.html).
+See [Logging docs]({{ book.path.guide }}/ops/logging.html).
 
 With out-of-the-box logging, `brooklyn.info.log` and `brooklyn.debug.log` files are created. These are by default 
 rolling log files: when the log reaches a given size, it is compressed and a new log file is started.

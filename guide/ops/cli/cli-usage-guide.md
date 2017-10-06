@@ -26,43 +26,43 @@ conjunction with a shell pipeline like `some_command | cut -f 1 -d '|' | xargs -
 First, login to the running Brooklyn server.  This example assumes that the Brooklyn server
 is running on `localhost`; change the URL and credentials as necessary.
 
-{% highlight text %}
+```text
 $ br login http://localhost:8081 admin
 Enter Password: *
 Connected to Brooklyn version 0.9.0-SNAPSHOT at http://localhost:8081
-{% endhighlight %}
+```
 
 The version of the connected Brooklyn server may be viewed with the `version` command:
 
-{% highlight text %}
+```text
 $ br version
 0.9.0-SNAPSHOT
-{% endhighlight %}
+```
 
 ## Applications
 Deploy the application; on success the Id of the new application is displayed:
 
-{% highlight text %}
+```text
 $ br deploy webapp-policy.yaml
 Id:       lmOcZbsT   
 Name:     WebCluster   
 Status:   In progress   
-{% endhighlight %}
+```
 
 The `application` command can be used to list a summary of all the running applications.
 After all of the entities have been started, the application status changes to `RUNNING`:
 
-{% highlight text %}
+```text
 $ br application
 Id         Name         Status    Location   
 YeEQHwgW   AppCluster   RUNNING   CNTBOtjI
 lmOcZbsT   WebCluster   RUNNING   CNTBOtjI  
-{% endhighlight %}
+```
 
 Further details of an application can be seen by using the ApplicationID or Name as a
 parameter for the `application` command:
 
-{% highlight text %}
+```text
 $ br application WebCluster
 Id:              lmOcZbsT   
 Name:            WebCluster   
@@ -74,51 +74,51 @@ LocationId:      CNTBOtjI
 LocationName:    FixedListMachineProvisioningLocation:CNTB   
 LocationSpec:    byon   
 LocationType:    org.apache.brooklyn.location.byon.FixedListMachineProvisioningLocation
-{% endhighlight %}
+```
 
 The configuration details of an application can be seen with the `config` command:
 
-{% highlight text %}
+```text
 $ br application WebCluster config
 Key                    Value   
 camp.template.id       TYWVroRz   
 brooklyn.wrapper_app   true
-{% endhighlight %}
+```
 
 
 ## Entities
 The entities of an application can be viewed with the `entity` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity
 Id        Name    Type   
 xOcMooka  WebApp  org.apache.brooklyn.entity.webapp.ControlledDynamicWebAppCluster
 thHnLFkP  WebDB   org.apache.brooklyn.entity.database.mysql.MySqlNode
-{% endhighlight %}
+```
 
 It is common for an entity to have child entities; these can be listed by providing an
 entity-scope for the `entity` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity WebApp entity
 Id         Name                     Type   
 e5pWAiHf   Cluster of TomcatServer  org.apache.brooklyn.entity.webapp.DynamicWebAppCluster   
 CZ8QUVgX   NginxController:CZ8Q     org.apache.brooklyn.entity.proxy.nginx.NginxController   
-{% endhighlight %}
+```
 
 or by using `-c` (or `--children`) flag with the `entity` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity -c e5pWAiHf
 Id         Name               Type   
 x0P2LRxZ   quarantine         org.apache.brooklyn.entity.group.QuarantineGroup   
 QK6QjmrW   TomcatServer:QK6Q  org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-{% endhighlight %}
+```
 
 As for applications, the configuration details of an entity can be seen with the `config`
 command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity thHnLFkP config
 Key                             Value   
 install.unique_label            MySqlNode_5.6.26   
@@ -129,26 +129,26 @@ camp.plan.id                    db
 onbox.base.dir                  /home/vagrant/brooklyn-managed-processes   
 onbox.base.dir.resolved         true   
 
-{% endhighlight %}
+```
 
 The value of a single configuration item can be displayed by using the configuration key
 as a parameter for the `config` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity thHnLFkP config datastore.creation.script.url
 https://bit.ly/brooklyn-visitors-creation-script
-{% endhighlight %}
+```
 
 The value of a configuration item can be changed by using the `set` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity thHnLFkP config datastore.creation.script.url set \"https://bit.ly/new-script\"
-{% endhighlight %}
+```
 
 ## Sensors
 The sensors associated with an application or entity can be listed with the `sensor` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity CZ8QUVgX sensor
 Name                                    Value
 download.addon.urls:                    {"stickymodule":"https://bitbucket.org/nginx-goodies/n  
@@ -207,28 +207,28 @@ softwareprocess.pid.file:
 softwareservice.provisioningLocation:   {"type":"org.apache.brooklyn.api.location.Location","i  
                                         d":"zhYBc6xt"}
 webapp.url:                             http://192.168.52.102:8000/
-{% endhighlight %}
+```
 
 Details for an individual sensor can be shown by providing the Sensor Name as a
 parameter to the `sensor` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity CZ8QUVgX sensor service.state.expected
 running @ 1449314377781 / Sat Dec 05 11:19:37 GMT 2015
-{% endhighlight %}
+```
 
 ## Effectors
 The effectors for an application or entity can be listed with the `effector` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster effector
 Name      Description                                            Parameters   
 restart   Restart the process/service represented by an entity      
 start     Start the process/service represented by an entity     locations   
 stop      Stop the process/service represented by an entity         
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q effector
 Name                              Description                     Parameters   
 deploy                            Deploys an archive ...
@@ -239,57 +239,57 @@ restart                           Restart the process/service ... restartChildre
 start                             Start the process/service ...   locations
 stop                              Stop the process/service ...    stopProcessMode,stopMachineMode
 update                            Updates the entities ...         
-{% endhighlight %}
+```
 
 Details of an individual effector can be viewed by using the name as a parameter for
 the `effector` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q effector update
 Name:         update
 Description:  Updates the entities configuration, and then forces reload of that configuration
 Parameters:   
-{% endhighlight %}
+```
 
 An effector can be invoked by using the `invoke` command with an effector-scope:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q effector update invoke
-{% endhighlight %}
+```
 
 Parameters can also be passed to the effector:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q effector restart invoke -P restartChildren=true
-{% endhighlight %}
+```
 
 If a parameter value is complex or spans multiple lines, it may be provided in a file and used like this:
 
-{% highlight text %}
+```text
 $ br app WebCluster effector start invoke -P locations=@data.txt
-{% endhighlight %}
+```
 
 Shortcut commands are available for the 3 standard effectors of `start`, `restart` and `stop`.
 These commands can be used directly with an app-scope or entity-scope:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q restart
 $ br app WebCluster stop
-{% endhighlight %}
+```
 
 ## Policies
 The policies associated with an application or entity can be listed with the `policy` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q policy
 Id         Name                         State   
 VcZ0cfeO   Controller targets tracker   RUNNING
-{% endhighlight %}
+```
 
 Details of an individual policy may be viewed by using the PolicyID as a parameter to
 the `policy` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q policy VcZ0cfeO
 Name                 Value                                    Description   
 group                DynamicWebAppClusterImpl{id=TpbkaK4D}    group   
@@ -301,19 +301,19 @@ sensorsToTrack       [Sensor: host.subnet.hostname            Sensors of members
                      (java.lang.Integer)]                     to this list, but that
                                                               behaviour may be deleted in a
                                                               subsequent release!)
-{% endhighlight %}
+```
 
 ## Activities
 The activities for an application or entity may be listed with the `activity` command:
 
-{% highlight text %}
+```text
 $ br app WebCluster activity
 Id         Task                                   Submitted                      Status      Streams   
 Wb6GV5rt   start                                  Sat Dec 19 11:08:01 GMT 2015   Completed      
 q2MbyyTo   invoking start[locations] on 2 nodes   Sat Dec 19 11:08:01 GMT 2015   Completed      
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ br app WebCluster entity NginxController:CZ8Q activity
 Id         Task                                       Submitted                      Status      Streams   
 GVh0pyKG   start                                      Sun Dec 20 19:18:06 GMT 2015   Completed          
@@ -348,13 +348,13 @@ FJfPbNtp   ssh: restarting NginxControllerImpl{i...   Sun Dec 20 19:18:10 GMT 20
 Xm1tjvKf   update                                     Sun Dec 20 19:18:40 GMT 2015   Completed        
 Row67vfa   reload                                     Sun Dec 20 19:18:40 GMT 2015   Completed           
 r8QZXlxJ   ssh: restarting NginxControllerImpl{i...   Sun Dec 20 19:18:40 GMT 2015   Completed   env,stderr,stdin,stdout
-{% endhighlight %}
+```
 
 The detail for an individual activity can be viewed by providing the ActivityID as a
 parameter to the `activity` command (an app-scope or entity-scope is not not needed for viewing
 the details of an activity):
 
-{% highlight text %}
+```text
 $ br activity tvZoNUTN
 Id:                  tvZoNUTN   
 DisplayName:         ssh: launching NginxControllerImpl{id=OxPUBk1p}   
@@ -372,13 +372,13 @@ Streams:             stdin: 1133, stdout: 162, stderr: 0, env 0
 DetailedStatus:      "Completed after 1.05s
 
 Result: 0"
-{% endhighlight %}
+```
 
 The activity command output shows whether any streams were associated with it.  The streams
 and environment for an activity can be viewed with the commands `stdin`, `stdout`,
 `stderr` and `env`:
 
-{% highlight text %}
+```text
 $ br activity tvZoNUTN stdin
 export RUN_DIR="/home/vagrant/brooklyn-managed-processes/apps/V5GQCpIT/entities/NginxController_OxPUBk1p"
 mkdir -p $RUN_DIR
@@ -393,20 +393,20 @@ do
 done
 echo "No explicit error launching nginx but couldn't find process by pid; continuing but may subsequently fail"
 cat /home/vagrant/brooklyn-managed-processes/apps/V5GQCpIT/entities/NginxController_OxPUBk1p/console | tee /dev/stderr
-{% endhighlight %}
+```
 
-{% highlight text %}
+```text
 $ br activity tvZoNUTN stdout
 ./sbin/nginx
   PID TTY          TIME CMD
  6178 ?        00:00:00 nginx
 Executed /tmp/brooklyn-20151220-191808796-CaiI-launching_NginxControllerImpl_.sh, result 0
-{% endhighlight %}
+```
 
 The child activities of an activity may be listed by providing an activity-scope for the
 `activity` command:
 
-{% highlight text %}
+```text
 $ br activity OeZKwM5z
 Id:                  OeZKwM5z   
 DisplayName:         launch   
@@ -428,20 +428,20 @@ No return value (null)"
 $ br activity OeZKwM5z activity
 Id         Task                                       Submitted                      Status      Streams   
 tvZoNUTN   ssh: launching NginxControllerImpl{id...   Sun Dec 20 19:18:08 GMT 2015   Completed   env,stderr,stdin,stdout   
-{% endhighlight %}
+```
 
 or by using the `-c` (or `--children`) flag with the `activity` command:
 
-{% highlight text %}
+```text
 $ br activity -c OeZKwM5z
 Id         Task                                       Submitted                      Status      Streams   
 tvZoNUTN   ssh: launching NginxControllerImpl{id...   Sun Dec 20 19:18:08 GMT 2015   Completed   env,stderr,stdin,stdout   
-{% endhighlight %}
+```
 
 ## YAML Blueprint
 This is the YAML blueprint used for this document, based on the [web cluster](../../blueprints/clusters-and-policies.html) examples.
 
-{% highlight text %}
+```text
 name: WebCluster
 
 location:
@@ -483,4 +483,4 @@ services:
   brooklyn.config:
     creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
     creationScriptUrl: https://bit.ly/brooklyn-visitors-creation-script
-{% endhighlight %}
+```

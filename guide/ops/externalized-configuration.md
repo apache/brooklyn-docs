@@ -21,7 +21,7 @@ of users, with `brooklyn.cfg` changing the behaviour depending on the deployment
 
 Here is the blueprint:
 
-{% highlight yaml %}
+```yaml
 name: MyApplication
 services:
 - type: brooklyn.entity.webapp.jboss.JBoss7Server
@@ -36,7 +36,7 @@ services:
           - $brooklyn:external("servers", "postgresql")
           - $brooklyn:external("credentials", "postgresql-user")
           - $brooklyn:external("credentials", "postgresql-password")
-{% endhighlight %}
+```
 
 You can see that when we are building up the JDBC URL, we are using the `external` function. This takes two parameters:
 the first is the name of the configuration supplier, the second is the name of a key that is stored by the configuration
@@ -45,26 +45,26 @@ supplier. In this case we are using two different suppliers: `servers` to store 
 
 Developers would add lines like this to the `brooklyn.cfg` file on their workstation:
 
-{% highlight properties %}
+```properties
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
 brooklyn.external.servers.postgresql=127.0.0.1
 brooklyn.external.credentials=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
 brooklyn.external.credentials.postgresql-user=admin
 brooklyn.external.credentials.postgresql-password=admin
-{% endhighlight %}
+```
 
 In this case, all of the required information is included in-line in the local `brooklyn.cfg`.
 
 Whereas in production, `brooklyn.cfg` might look like this:
 
-{% highlight properties %}
+```properties
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.PropertiesFileExternalConfigSupplier
 brooklyn.external.servers.propertiesUrl=https://ops.example.com/servers.properties
 brooklyn.external.credentials=org.apache.brooklyn.core.config.external.vault.VaultAppIdExternalConfigSupplier
 brooklyn.external.credentials.endpoint=https://vault.example.com
 brooklyn.external.credentials.path=secret/enterprise-postgres
 brooklyn.external.credentials.appId=MyApp
-{% endhighlight %}
+```
 
 In this case, the list of servers is stored in a properties file located on an Operations Department web server, and the
 credentials are stored in an instance of [Vault](https://www.vaultproject.io/).
@@ -75,10 +75,10 @@ For demo purposes, there is a pre-defined external provider called
 This is used in some of the sample blueprints, referencing `$brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")`. 
 The value used here can be overridden with the following in your `brooklyn.cfg`:
 
-{% highlight properties %}
+```properties
 brooklyn.external.brooklyn-demo-sample=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
 brooklyn.external.brooklyn-demo-sample.hidden-brooklyn-password=new_password
-{% endhighlight %}
+```
 
 
 ## Defining Suppliers
@@ -94,11 +94,11 @@ implementations; see below for more details.
 Suppliers may require additional configuration options. These are given as additional properties in
 `brooklyn.cfg`:
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName = className
 brooklyn.external.supplierName.firstConfig = value
 brooklyn.external.supplierName.secondConfig = value
-{% endhighlight %}
+```
 
 ## Referring to External Configuration in Blueprints
 
@@ -113,29 +113,29 @@ give the supplier the *key*. The returned value will be substituted into the blu
 
 You can use `$brooklyn:external` directly:
 
-{% highlight yaml %}
+```yaml
 name: MyApplication
 brooklyn.config:
   example: $brooklyn:external("supplier", "key")
-{% endhighlight %}
+```
 
 or embed the `external` function inside another `$brooklyn` DSL function, such as `$brooklyn:formatString`:
 
-{% highlight yaml %}
+```yaml
 name: MyApplication
 brooklyn.config:
   example: $brooklyn:formatString("%s", external("supplier", "key"))
-{% endhighlight %}
+```
 
 
 ## Referring to External Configuration in brooklyn.cfg
 
 The same blueprint language DSL can be used from `brooklyn.cfg`. For example:
 
-{% highlight properties %}
+```properties
 brooklyn.location.jclouds.aws-ec2.identity=$brooklyn:external("mysupplier", "aws-identity")
 brooklyn.location.jclouds.aws-ec2.credential=$brooklyn:external("mysupplier", "aws-credential")
-{% endhighlight %}
+```
 
 
 ## Referring to External Configuration in Catalog Items
@@ -165,10 +165,10 @@ Brooklyn ships with a number of external configuration suppliers ready to use.
 **InPlaceExternalConfigSupplier** embeds the configuration keys and values as properties inside `brooklyn.cfg`.
 For example:
 
-{% highlight properties %}
+```properties
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.InPlaceExternalConfigSupplier
 brooklyn.external.servers.postgresql=127.0.0.1
-{% endhighlight %}
+```
 
 Then, a blueprint which referred to `$brooklyn:external("servers", "postgresql")` would receive the value `127.0.0.1`.
 
@@ -179,16 +179,16 @@ file to respond to configuration lookups.
 
 Given this configuration:
 
-{% highlight properties %}
+```properties
 brooklyn.external.servers=org.apache.brooklyn.core.config.external.PropertiesFileExternalConfigSupplier
 brooklyn.external.servers.propertiesUrl=https://ops.example.com/servers.properties
-{% endhighlight %}
+```
 
 This would cause the supplier to download the given URL. Assuming that the file contained this entry:
 
-{% highlight properties %}
+```properties
 postgresql=127.0.0.1
-{% endhighlight %}
+```
 
 Then, a blueprint which referred to `$brooklyn:external("servers", "postgresql")` would receive the value `127.0.0.1`.
 
@@ -200,28 +200,28 @@ options that Vault provides.
 
 For *all* of the authentication methods, you must always set these properties in `brooklyn.cfg`:
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName.endpoint=<Vault HTTP/HTTPs endpoint>
 brooklyn.external.supplierName.path=<path to a Vault object>
-{% endhighlight %}
+```
 
 For example, if the path is set to `secret/brooklyn`, then attempting to retrieve the key `foo` would cause Brooklyn
 to retrieve the value of the `foo` key on the `secret/brooklyn` object. This value can be set using the Vault CLI
 like this:
 
-{% highlight bash %}
+```bash
 vault write secret/brooklyn foo=bar
-{% endhighlight %}
+```
 
 #### Authentication by username and password
 
 The `userpass` plugin for Vault allows authentication with username and password.
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName=org.apache.brooklyn.core.config.external.vault.VaultUserPassExternalConfigSupplier
 brooklyn.external.supplierName.username=fred
 brooklyn.external.supplierName.password=s3kr1t
-{% endhighlight %}
+```
 
 #### Authentication using App ID
 
@@ -230,26 +230,26 @@ of the app. Typically the app ID would be known and shared, but user ID would be
 way. Brooklyn implements this by determining the MAC address of the server running Brooklyn (expressed as 12 lower
 case hexadecimal digits without separators) and passing this as the user ID.
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName=org.apache.brooklyn.core.config.external.vault.VaultAppIdExternalConfigSupplier
 brooklyn.external.supplierName.appId=MyApp
-{% endhighlight %}
+```
 
 If you do not wish to use the MAC address as the user ID, you can override it with your own choice of user ID:
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName.userId=server3.cluster2.europe
-{% endhighlight %}
+```
 
 #### Authentication by fixed token
 
 If you have a fixed token string, then you can use the *VaultTokenExternalConfigSupplier* class and provide the token
 in `brooklyn.cfg`:
 
-{% highlight properties %}
+```properties
 brooklyn.external.supplierName=org.apache.brooklyn.core.config.external.vault.VaultTokenExternalConfigSupplier
 brooklyn.external.supplierName.token=1091fc84-70c1-b266-b99f-781684dd0d2b
-{% endhighlight %}
+```
 
 This supplier is suitable for "smoke testing" the Vault supplier using the Initial Root Token or similar. However it
 is not suitable for production use as it is inherently insecure - should the token be compromised, an attacker could
@@ -261,10 +261,10 @@ other suppliers.
 Supplier implementations must conform to the brooklyn.config.external.ExternalConfigSupplier interface, which is very
 simple:
 
-{% highlight java %}
+```java
 String getName();
 String get(String key);
-{% endhighlight %}
+```
 
 Classes implementing this interface can be placed in the `lib/dropins` folder of Brooklyn, and then the supplier
 defined in `brooklyn.cfg` as normal.

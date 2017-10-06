@@ -37,11 +37,11 @@ Options for speeding up provisioning include those below.
 
 #### Deploying to Bring Your Own Nodes (BYON)
 
-A [BYON location]({{ site.path.guide }}/locations/#byon) can be defined, which avoids the time 
+A [BYON location]({{ book.path.guide }}/locations/#byon) can be defined, which avoids the time 
 required to provision VMs. This is fast, but has the downside that artifacts installed during a 
 previous run can interfere with subsequent runs.
 
-A variant of this is to [use Vagrant]({{ site.path.guide }}/start/running.html) (e.g. with VirtualBox) 
+A variant of this is to [use Vagrant]({{ book.path.guide }}/start/running.html) (e.g. with VirtualBox) 
 to create VMs on your local machine, and to use these as the target for a BYON location.
 
 These VMs should mirror the target environment as much as possible.
@@ -113,7 +113,7 @@ real thing.
 
 ## Writing Entity Tests
 
-Use the [test framework]({{ site.path.guide }}/blueprints/test/) to write test cases. This will make 
+Use the [test framework]({{ book.path.guide }}/blueprints/test/) to write test cases. This will make 
 automated (regression) testing easier, and will allow others to easily confirm that the entity 
 works in their environment.
 
@@ -180,4 +180,4 @@ below may also be of help:
 
 ALWAYS keep logs when there is an error.
 
-See the [Troubleshooting]({{ site.path.guide }}/ops/troubleshooting/) guide for more information. 
+See the [Troubleshooting]({{ book.path.guide }}/ops/troubleshooting/) guide for more information. 

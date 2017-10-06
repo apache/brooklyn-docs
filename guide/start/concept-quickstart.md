@@ -4,7 +4,7 @@ layout: website-normal
 menu_parent: index.md
 ---
 
-The following section provides a quick summary of the main Brooklyn concepts you will encounter in Getting Started.  For further discussion of these concepts see [The Theory Behind Brooklyn]({{site.path.website}}/learnmore/theory.html), and the detailed descriptions in [Brooklyn Concepts]({{site.path.guide}}/concepts/).
+The following section provides a quick summary of the main Brooklyn concepts you will encounter in Getting Started.  For further discussion of these concepts see [The Theory Behind Brooklyn]({{book.path.website}}/learnmore/theory.html), and the detailed descriptions in [Brooklyn Concepts]({{book.path.guide}}/concepts/).
 
 ***Deployment and Management*** Brooklyn is built for agile deployment of applications across cloud and other targets, and real-time autonomic management. "Autonomic computing" is the concept of components looking after themselves where possible (self-healing, self-optimizing, etc).
 

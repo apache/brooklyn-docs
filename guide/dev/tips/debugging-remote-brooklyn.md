@@ -23,21 +23,21 @@ instance. The git commit that was used to build Brooklyn is available via the RE
 
 This should return details of the build as a JSON string similar to the following (formatted for clarity):
 
-{% highlight json %}
+```json
 {
     "version": "1.0.0-SNAPSHOT",  {% comment %}BROOKLYN_VERSION{% endcomment %}
     "buildSha1": "c0fdc15291702281acdebf1b11d431a6385f5224",
     "buildBranch": "UNKNOWN"
 }
-{% endhighlight %}
+```
 
 The value that we're interested in is `buildSha1`. This is the git commit that was used to build Brooklyn. We can now
 checkout and build the Brooklyn code at this commit by running the following in the root of your Brooklyn repo:
 
-{% highlight bash %}
+```bash
 % git checkout c0fdc15291702281acdebf1b11d431a6385f5224
 % mvn clean install -DskipTests
-{% endhighlight %}
+```
 
 Whilst building the code isn't strictly necessary, it can help prevent some IDE issues.
 
@@ -46,12 +46,12 @@ By default, Brooklyn does not listen for a debugger to be attached, however this
 which will require a restart of the Brooklyn node. To do this, SSH to the remote Brooklyn node and run the following in the
 root of the Brooklyn installation:
 
-{% highlight bash %}
+```bash
 # NOTE: Running this kill command will lose existing apps and machines if persistence is disabled.
 % kill `cat pid_java`
 % export JAVA_OPTS="-Xms256m -Xmx1g -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=n"
 % bin/brooklyn launch &
-{% endhighlight %}
+```
 
 If `JAVA_OPTS` is not set, Brooklyn will automatically set it to `"-Xms256m -Xmx1g"`, which is why
 we have prepended the agentlib settings with these values here.
@@ -71,7 +71,7 @@ usually simpler to create an SSH tunnel. This will create an open SSH connection
 on a local interface via SSH to a port on the remote machine. To create the tunnel, run the following on your local
 machine:
 
-{% highlight bash %}
+```bash
 # replace this with the address or IP of the remote Brooklyn node
 REMOTE_HOST=<remote-address>
 # if you wish to use a different port, this value must match the port specified in the JAVA_OPTS
@@ -84,7 +84,7 @@ SSH_USER=root
 PRIVATE_KEY_FILE=~/.ssh/id_rsa 
 
 % ssh -YNf -i $PRIVATE_KEY_FILE -l $SSH_USER -L $LOCAL_PORT:127.0.0.1:$REMOTE_PORT $REMOTE_HOST
-{% endhighlight %}
+```
 
 If you use a password to SSH to the remote Brooklyn node, simply remove the `-i $PRIVATE_KEY_FILE` section like so:
 

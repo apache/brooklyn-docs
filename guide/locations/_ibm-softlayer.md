@@ -20,7 +20,7 @@ For example:
         credential: 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 
 Users are strongly recommended to use 
-[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+[externalized configuration]({{ book.path.guide }}/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

@@ -7,11 +7,9 @@ layout: website-normal
 {% include fields.md %}
 
 ## Introduction
-This section describes some simple tests based on the [Getting Started]({{ site.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:
+This section describes some simple tests based on the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:
 
-{% highlight yaml %}
-{% readj /guide/start/_my-web-cluster.yaml %}
-{% endhighlight %}
+!CODEFILE "/guide/start/_my-web-cluster.yaml"
 
 The following sections contain yaml snippets that be appended to the list of services in the blueprint above, a complete blueprint is also provided [below](#full-example).
 
@@ -23,9 +21,7 @@ Demonstrates the following sensor assertion:
 
 - asserts that the `webappcluster` entity `service.isUp` sensor is `true` within 10 minutes of blueprint being deployed.
 
-{% highlight yaml %}
-{% read example_yaml/testcases/sensor-test-snippet.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/testcases/sensor-test-snippet.yaml"
 
 ### HTTP Call Tests
 Demonstrates the following HTTP Call assertions against the specified `url`, which in these examples are being built from the `webappcluster` entities `host.address` and `proxy.http.port` sensors (the tester having flexibility in how the test URL is to be constructed):
@@ -33,9 +29,7 @@ Demonstrates the following HTTP Call assertions against the specified `url`, whi
 - asserts the response status code is 200 within 10 minutes of the blueprint being deployed.
 - asserts the response body matches the regex `(?s).*Br[o]{2}klyn Deployed.*` within 10 minutes of the blueprint being deployed. Note the presence of the `(?s)` dotall flag to test a multiline response.
 
-{% highlight yaml %}
-{% readj example_yaml/testcases/http-test-snippet.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/testcases/http-test-snippet.yaml"
 
 ### Effector Test (via TestCase entity)
 
@@ -46,13 +40,11 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
   - `deploy` effector invoked to deploy war to a `newcontext` with a 5 minute timeout to allow completion of the deploy task.
   - asserts `/newcontext` url returns a HTTP status code 200 within 5 minutes of the effector being invoked (Note that this timeout is relative to the preceding test entity as they are being sequentially run as children of a `TestCase` entity).
 
-{% highlight yaml %}
-{% readj example_yaml/testcases/effector-test-snippet.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/testcases/effector-test-snippet.yaml"
 
 ### Full Example
 A sample blueprint containing all the tests described above is available [here](./example_yaml/testcases/getting-started-test-example.yaml).
 
-This blueprint will deploy the [Getting Started]({{ site.path.guide }}/start/blueprints.html#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
+This blueprint will deploy the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
 
 [![Successful Getting Started App deployment and Test execution.](images/getting-started-blueprint-test.png)](images/getting-started-blueprint-test-large.png)

@@ -13,4 +13,4 @@ Comments on this support and suggestions for further development are welcome.
 
 This guide assumes you are familiar with the basics of [creating YAML blueprints](../).
 
-{% include list-children.html %}
+

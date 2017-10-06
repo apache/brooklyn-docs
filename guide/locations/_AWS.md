@@ -26,7 +26,7 @@ An example of the expected format is shown below:
         credential: abcdefghijklmnopqrstu+vwxyzabcdefghijklm
 
 Users are strongly recommended to use 
-[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+[externalized configuration]({{ book.path.guide }}/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

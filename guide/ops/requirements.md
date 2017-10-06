@@ -36,7 +36,7 @@ There are three main consumers of disk space:
 * **Log files**: Brooklyn writes info and debug log files. By default, these are
   written to the local filesystem. This can be reconfigured to set the
   destination and to increase or decrease the detail in the logs. See the
-  [Logging]({{ site.path.guide }}/ops/logging.html) section for more details.
+  [Logging]({{ book.path.guide }}/ops/logging.html) section for more details.
 
 The Apache Brooklyn distribution itself, when unpacked, consumes approximately
 75MB of disk space. This includes everything needed to run Brooklyn except for a
@@ -57,7 +57,7 @@ therefore, can consume up to 2GB of disk space.
 
 In the default configuration of Brooklyn's `.tar.gz` and `.zip` distributions,
 logs are saved to the Brooklyn installation directory. You will most likely want
-to [reconfigure Brooklyn's logging]({{ site.path.guide }}/ops/logging.html) to save logs to a location
+to [reconfigure Brooklyn's logging]({{ book.path.guide }}/ops/logging.html) to save logs to a location
 elsewhere. In the `.rpm` and `.deb` packaging, logging files will be located
 under `/var/log`. You can further reconfiguring the logging detail level and log
 rotation according to your organisation's policy.
@@ -109,9 +109,9 @@ It is normally recommended that Brooklyn run as a non-root user with keys instal
 
 ### Linux Kernel Entropy
 
-Check that the [linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient.
+Check that the [linux kernel entropy]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient.
 
 
 ### System Resource Limits
 
-Check that the [ulimit values]({{ site.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high.
+Check that the [ulimit values]({{ book.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high.

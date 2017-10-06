@@ -39,7 +39,7 @@ An AutoScaler policy can take any sensor as a metric, have its watermarks tuned 
 
 e.g. if the average request per second across a cluster of Tomcat servers goes over the high watermark, it will resize the cluster to bring the average back to within the watermarks.
 
-{% highlight yaml %}
+```yaml
 brooklyn.policies:
 - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
   brooklyn.config:
@@ -50,7 +50,7 @@ brooklyn.policies:
     resizeDownStabilizationDelay: 1m
     maxPoolSize: 3
 
-{% endhighlight %}
+```
 
 
 #### ServiceRestarter Policy
@@ -62,12 +62,12 @@ Attaches to a SoftwareProcess or to anything Startable which emits `ha.entityFai
 If there is a subsequent failure within a configurable time interval or if the restart fails, 
 this gives up and emits `ha.entityFailed.restart` for other policies to act upon or for manual intervention.
 
-{% highlight yaml %}
+```yaml
 brooklyn.policies:
 - type: org.apache.brooklyn.policy.ha.ServiceRestarter
   brooklyn.config:
     failOnRecurringFailuresInThisDuration: 5m
-{% endhighlight %}
+```
 
 Typically this is used in conjunction with the FailureDetector enricher to emit the trigger sensor.
 The [introduction to policies](../start/policies.html) shows a worked 
@@ -204,24 +204,24 @@ Writing a policy is straightforward.
 Simply extend [``AbstractPolicy``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/policy/AbstractPolicy.html),
 overriding the [``setEntity``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/objs/AbstractEntityAdjunct.html#setEntity-org.apache.brooklyn.api.entity.EntityLocal-) method to supply any subscriptions desired:
 
-{% highlight java %}
+```java
     @Override
     public void setEntity(EntityLocal entity) {
         super.setEntity(entity)
         subscribe(entity, TARGET_SENSOR, this)
     }
-{% endhighlight %}
+```
 
 and supply the computation and/or activity desired whenever that event occurs:
 
-{% highlight java %}
+```java
     @Override
     public void onEvent(SensorEvent<Integer> event) {
         int val = event.getValue()
         if (val % 2 == 1)
             entity.sayYoureOdd();
     }
-{% endhighlight %}
+```
 
 
 You'll want to do more complicated things, no doubt,

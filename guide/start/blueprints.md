@@ -3,7 +3,7 @@ title: Deploying Blueprints
 layout: website-normal
 ---
 
-Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML){:target="_blank"} and many of the entities available are defined in the __[Brooklyn Catalog]({{ site.path.website }}/learnmore/catalog/)__.
+Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML){:target="_blank"} and many of the entities available are defined in the __[Brooklyn Catalog]({{ book.path.website }}/learnmore/catalog/)__.
 
 ## Launching from a Blueprint
 
@@ -12,13 +12,13 @@ We'll start by deploying an application with a simple YAML blueprint containing 
 Copy the blueprint below into a text file, "myapp.yaml", in your workspace (Note, to copy the file you can
 hover your mouse over the right side of the text box below to get a Javascript "copy" button).
 
-{% highlight yaml %}
+```yaml
 name: Tomcat
 services:
 - type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
   name: tomcatServer
 location: <your-location-definition-goes-here>
-{% endhighlight %}
+```
 
 
 ## Locations
@@ -42,13 +42,13 @@ The Vagrant configuration described in [Running Apache Brooklyn](./running.html)
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.
 
-{% highlight bash %}
+```bash
  $ vagrant up byon1 byon2 byon3 byon4
-{% endhighlight %}
+```
 
 The location in "myapp.yaml" can now be replaced with the following YAML to launch using these vagrant servers.
 
-{% highlight yaml %}
+```yaml
 location:
   byon:
     user: vagrant
@@ -58,30 +58,30 @@ location:
       - 10.10.10.102
       - 10.10.10.103
       - 10.10.10.104
-{% endhighlight %}
+```
 
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ site.path.guide }}/locations/#clouds){:target="_blank"}.
+Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ book.path.guide }}/locations/#clouds){:target="_blank"}.
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com){:target="_blank"}. Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
 
-{% highlight yaml %}
+```yaml
 location:
   jclouds:aws-ec2:
     identity: ABCDEFGHIJKLMNOPQRST
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
-{% endhighlight %}
+```
 
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ site.path.guide }}/locations/#byon){:target="_blank"}. 
+The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ book.path.guide }}/locations/#byon){:target="_blank"}. 
 
 Replace the hosts, user and password in the example below with your own server details, then replace the location in your "myapp.yaml" with this.
 
-{% highlight yaml %}
+```yaml
 location:
   byon:
     user: myuser
@@ -91,30 +91,30 @@ location:
     hosts:
     - 192.168.0.18
     - 192.168.0.19
-{% endhighlight %}
+```
 
 </div>
 </div>
 
 ---
 
-**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ site.path.guide }}/locations)__ in the Operations section of the User Guide.
+**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ book.path.guide }}/locations)__ in the Operations section of the User Guide.
 
 ## Deploying the Application
 
 First, log in to brooklyn with the command line interface (CLI) tool by typing:
-{% highlight bash %}
+```bash
 $ br login http://localhost:8081/
-{% endhighlight %}
+```
 
-To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here]({{ site.path.guide }}/ops/configuration/brooklyn_cfg.html){:target="_blank"}. 
+To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here]({{ book.path.guide }}/ops/configuration/brooklyn_cfg.html){:target="_blank"}. 
 If this is configured, the login command will require an additional parameter for the userid and will then prompt for a password.
 
 Now you can create the application with the command below:
 
-{% highlight bash %}
+```bash
 $ br deploy myapp.yaml 
-{% endhighlight %}
+```
 <pre>
 Id:       hTPAF19s   
 Name:     Tomcat   

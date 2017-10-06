@@ -37,18 +37,20 @@ Firstly, download and install:
  * [Vagrant](https://www.vagrantup.com/downloads.html){:target="_blank"}
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads){:target="_blank"}
  
-Then download the provided Apache Brooklyn vagrant configuration from {% if site.brooklyn-version contains 'SNAPSHOT' %}
-[here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{site.brooklyn-version}}&c=dist&e=zip){:target="_blank"}.
+Then download the provided Apache Brooklyn vagrant configuration from
+{% if book.brooklyn-version %}
+    [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{book.brooklyn-version}}&c=dist&e=zip).
 {% else %}
-[here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz){:target="_blank"}.
-{% endif %} This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
+    [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{book.brooklyn-version}}/apache-brooklyn-{{book.brooklyn-version}}-vagrant.tar.gz).
+{% endif %}
+This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
 
-Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{site.brooklyn-version}}-vagrant` folder {% if site.brooklyn-version contains 'SNAPSHOT' %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
+Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{book.brooklyn-version}}-vagrant` folder {% if book.brooklyn-version %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
 
-{% highlight bash %}
-$ tar xvf apache-brooklyn-{{site.brooklyn-version}}-vagrant.tar.gz
-$ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
-{% endhighlight %}
+```bash
+$ tar xvf apache-brooklyn-{{book.brooklyn-version}}-vagrant.tar.gz
+$ cd apache-brooklyn-{{book.brooklyn-version}}-vagrant
+```
 
 
 </div>
@@ -56,23 +58,23 @@ $ cd apache-brooklyn-{{site.brooklyn-version}}-vagrant
 
 <strong class="hidden started-pdf-include">b) Centos / RHEL 7</strong>
 
-{% if site.brooklyn-version contains 'SNAPSHOT' %}<strong>Please note, an RPM is not available for snapshot builds</strong>{% endif %}
+{% if book.brooklyn-version %}<strong>Please note, an RPM is not available for snapshot builds</strong>{% endif %}
 
 For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
 
 RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
-{% if site.brooklyn-version contains 'SNAPSHOT' %}
-This is a snapshot build and no RPM is available, please download [a different version]({{site.path.website}}/download/).
+{% if book.brooklyn-version %}
+This is a snapshot build and no RPM is available, please download [a different version]({{book.path.website}}/download/).
 {% else %}
-Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
+Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}/apache-brooklyn-{{book.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
 {% endif %}
 
 Once downloaded, run the following shell command as root:
 
-{% highlight bash %}
-$ yum install apache-brooklyn-{{site.brooklyn-version}}-1.rpm
-{% endhighlight %}
+```bash
+$ yum install apache-brooklyn-{{book.brooklyn-version}}-1.rpm
+```
 
 </div>
 <div id="impl-3" class="tab-pane fade">
@@ -83,41 +85,41 @@ For Ubuntu and Debian users, the recommended way to install Apache Brooklyn is t
 
 The deb file is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The deb package contains all the necessary files associated with the Apache Brooklyn application. 
 
-{% if site.brooklyn-version contains 'SNAPSHOT' %}
-Download the Apache Brooklyn [deb distribution](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=deb-packaging&v={{site.brooklyn-version}}&e=deb){:target="_blank"}.
+{% if book.brooklyn-version %}
+Download the Apache Brooklyn [deb distribution](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=deb-packaging&v={{book.brooklyn-version}}&e=deb){:target="_blank"}.
 {% else %}
-Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn_{{site.brooklyn-version}}_noarch.deb){:target="_blank"}.
+Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn_{{book.brooklyn-version}}_noarch.deb){:target="_blank"}.
 {% endif %}
 
 Once downloaded, run the following shell command:
 
-{% highlight bash %}
-$ sudo dpkg -i apache-brooklyn_{{site.brooklyn-version}}_noarch.deb
-{% endhighlight %}
+```bash
+$ sudo dpkg -i apache-brooklyn_{{book.brooklyn-version}}_noarch.deb
+```
 
 </div>
 <div id="impl-4" class="tab-pane fade">
 
 <strong class="hidden started-pdf-include">d) OSX / Linux</strong>
 
-For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{site.path.website}}/download/){:target="_blank"} section.
+For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{book.path.website}}/download/){:target="_blank"} section.
 
-{% if site.brooklyn-version contains 'SNAPSHOT' %}
+{% if book.brooklyn-version %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
-Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{ site.brooklyn-version }}` folder.
+Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{ book.brooklyn-version }}` folder.
 {% endif %}
 
-{% if site.brooklyn-version contains 'SNAPSHOT' %}
-{% highlight bash %}
-$ tar -zxf apache-brooklyn-dist-{{ site.brooklyn-version }}-timestamp-dist.tar.gz
-$ cd apache-brooklyn-{{ site.brooklyn.version }}
-{% endhighlight %}
+{% if book.brooklyn-version %}
+```bash
+$ tar -zxf apache-brooklyn-dist-{{ book.brooklyn-version }}-timestamp-dist.tar.gz
+$ cd apache-brooklyn-{{ book.brooklyn.version }}
+```
 {% else %}
-{% highlight bash %}
-$ tar -zxf apache-brooklyn-{{ site.brooklyn-version }}-dist.tar.gz
-$ cd apache-brooklyn-{{ site.brooklyn.version }}
-{% endhighlight %}
+```bash
+$ tar -zxf apache-brooklyn-{{ book.brooklyn-version }}-dist.tar.gz
+$ cd apache-brooklyn-{{ book.brooklyn.version }}
+```
 {% endif %}
 
 </div>
@@ -125,7 +127,7 @@ $ cd apache-brooklyn-{{ site.brooklyn.version }}
 
 <strong class="hidden started-pdf-include">e) Windows</strong>
 
-For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{site.path.website}}/download/){:target="_blank"}. 
+For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{book.path.website}}/download/){:target="_blank"}. 
 
 Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
 
@@ -138,9 +140,9 @@ By default, no authentication is required and the web-console will listen on all
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
  
-* [Security]({{ site.path.guide }}/ops/configuration/brooklyn_cfg.html)
-* [Persistence]({{ site.path.guide }}/ops/persistence/)
-* [Cloud credentials]({{ site.path.guide }}/locations/)
+* [Security]({{ book.path.guide }}/ops/configuration/brooklyn_cfg.html)
+* [Persistence]({{ book.path.guide }}/ops/persistence/)
+* [Cloud credentials]({{ book.path.guide }}/locations/)
 
 
 ## Launch Apache Brooklyn
@@ -160,15 +162,15 @@ to configure security. Documentation of configuration options include:
 
 Now start Apache Brooklyn with the following command:
 
-{% highlight bash %}
+```bash
 $ vagrant up brooklyn
-{% endhighlight %}
+```
 
 You can see if Apache Brooklyn launched OK by viewing the log files with the command
 
-{% highlight bash %}
+```bash
 $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
-{% endhighlight %}
+```
 
 
 </div>
@@ -178,11 +180,11 @@ $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 
 Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard systemctl commands:
 
-{% highlight bash %}
+```bash
 $ systemctl start|stop|restart|status brooklyn
-{% endhighlight %}
+```
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-3" class="tab-pane fade">
@@ -191,11 +193,11 @@ The application should then output its logs to `brooklyn.debug.log` and `brookly
 
 Apache Brooklyn should now have been installed and be running as a system service. It can be stopped and started with the standard service commands:
 
-{% highlight bash %}
+```bash
 $ sudo service brooklyn start|stop|restart|status
-{% endhighlight %}
+```
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-4" class="tab-pane fade">
@@ -204,11 +206,11 @@ The application should then output its logs to `brooklyn.debug.log` and `brookly
 
 Now start Apache Brooklyn with the following command:
 
-{% highlight bash %}
+```bash
 $ bin/start
-{% endhighlight %}
+```
 
-The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ site.path.guide }}/ops/paths.html) page for the locations of these.
+The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 </div>
 <div id="impl-5" class="tab-pane fade">
@@ -238,23 +240,23 @@ INFO  Started Brooklyn console at http://127.0.0.1:8081/, running classpath://br
 By default it can be accessed by opening [127.0.0.1:8081](http://127.0.0.1:8081){:target="_blank"} in your web browser.
 
 The rest of this getting started guide uses the Apache Brooklyn command line interface (CLI) tool, `br`. 
-This tool is both distributed with Apache Brooklyn or can be downloaded {% if site.brooklyn-version contains 'SNAPSHOT' %}
-from [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-client-cli&v={{site.brooklyn-version}}&c=bin&e=zip).
+This tool is both distributed with Apache Brooklyn or can be downloaded {% if book.brooklyn-version %}
+from [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-client-cli&v={{book.brooklyn-version}}&c=bin&e=zip).
 {% else %}
 using the most appropriate link for your OS:
 
-* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-windows.zip)
-* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-linux.tar.gz)
-* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-client-cli-macosx.tar.gz)
+* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}/apache-brooklyn-{{book.brooklyn-version}}-client-cli-windows.zip)
+* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}/apache-brooklyn-{{book.brooklyn-version}}-client-cli-linux.tar.gz)
+* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}/apache-brooklyn-{{book.brooklyn-version}}-client-cli-macosx.tar.gz)
 {% endif %}
 
-For details on the CLI, see the [Client CLI Reference]({{ site.path.guide }}/ops/cli/) page. 
+For details on the CLI, see the [Client CLI Reference]({{ book.path.guide }}/ops/cli/) page. 
 
 
 ## Next
 
 <div class="started-pdf-exclude">
 
-The first thing we want to do with Brooklyn is **[deploy a blueprint]({{ site.path.guide }}/start/blueprints.html)**.
+The first thing we want to do with Brooklyn is **[deploy a blueprint]({{ book.path.guide }}/start/blueprints.html)**.
 
 </div>

@@ -8,4 +8,4 @@ children:
 - policies.md
 ---
 
-{% include list-children.html %}
+

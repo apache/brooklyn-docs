@@ -10,9 +10,9 @@ A lack of entropy can cause random number generation to be extremely slow.
 This results in tasks like ssh to also be extremely slow.
 One can check the available entropy on a machine by running the command:
 
-{% highlight bash %}
+```bash
 cat /proc/sys/kernel/random/entropy_avail
-{% endhighlight %}
+```
 
 It should be a value above 2000.
 
@@ -25,16 +25,16 @@ to the managed entities. You can install and configure `rng-tools`, or just use 
 
 If you are using a RHEL 6 based OS:
 
-{% highlight bash %}
+```bash
 sudo -i
 yum -y -q install rng-tools
 echo "EXTRAOPTIONS=\"-r /dev/urandom\"" | cat >> /etc/sysconfig/rngd
 /etc/init.d/rngd start
-{% endhighlight %}
+```
 
 If you are using a RHEL 7 or a systemd based system:
 
-{% highlight bash %}
+```bash
 sudo yum -y -q install rng-tools
 
 # Configure rng to use /dev/urandom
@@ -44,26 +44,26 @@ sudo vi /etc/systemd/system/multi-user.target.wants/rngd.service
 
 sudo systemctl daemon-reload
 sudo systemctl start rngd
-{% endhighlight %}
+```
 
 If you are using a Debian-based OS:
 
-{% highlight bash %}
+```bash
 sudo -i
 apt-get -y install rng-tools
 echo "HRNGDEVICE=/dev/urandom" | cat >> /etc/default/rng-tools
 /etc/init.d/rng-tools start
-{% endhighlight %}
+```
 
 
 ### Using /dev/urandom
 
 You can also just `mv /dev/random` then create it again linked to `/dev/urandom`:
 
-{% highlight bash %}
+```bash
 sudo mv /dev/random /dev/random-real
 sudo ln -s /dev/urandom /dev/random
-{% endhighlight %}
+```
 
 Notice! If you map `/dev/random` to use `/dev/urandom` you will need to restart the Apache Brooklyn java process in order for the change to take place.
 

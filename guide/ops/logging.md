@@ -37,11 +37,11 @@ or in a new file included from this.
 
 The default `logback.xml` file references a collection of other log configuration files
 included in the Brooklyn jars. It is necessary to understand the source structure
-in the [logback-includes]({{ site.brooklyn.url.git }}/logging/logback-includes) project.
+in the [logback-includes]({{ book.brooklyn.url.git }}/logging/logback-includes) project.
 
 For example, to change the debug log inclusions, create a folder `brooklyn` under `conf`
 and create a file `logback-debug.xml` based on the
-[brooklyn/logback-debug.xml]({{ site.brooklyn.url.git }}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
+[brooklyn/logback-debug.xml]({{ book.brooklyn.url.git }}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
 from that project.
 
 
@@ -75,6 +75,6 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 
 The following resources may be useful when configuring logging:
 
-* The [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project
-* [Brooklyn Developer Guide]({{ site.path.guide }}/dev/tips/logging.html) logging tips
+* The [logback-includes]({{ book.brooklyn.url.git }}/usage/logback-includes) project
+* [Brooklyn Developer Guide]({{ book.path.guide }}/dev/tips/logging.html) logging tips
 * The [Logback Project](http://logback.qos.ch/) home page

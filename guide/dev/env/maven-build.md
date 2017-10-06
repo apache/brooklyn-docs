@@ -15,15 +15,15 @@ The full build requires the following software to be installed:
 
 With these in place, you should be able to build everything with a:
 
-{% highlight bash %}
+```bash
 % mvn clean install
-{% endhighlight %}
+```
 
 Alternatively you can build most things with just Java and Maven installed using:
 
-{% highlight bash %}
+```bash
 mvn clean install -Dno-go-client -Dno-rpm`
-{% endhighlight %}
+```
 
 Other tips:
 
@@ -90,7 +90,7 @@ including a few warnings (which we have looked into and
 understand to be benign and hard to get rid of them,
 although we'd love to if anyone can help!):
 
-{% highlight bash %}
+```bash
 % mvn clean install
 [INFO] Scanning for projects...
 [INFO] ------------------------------------------------------------------------
@@ -188,4 +188,4 @@ although we'd love to if anyone can help!):
 [INFO] Final Memory: 66M/554M
 [INFO] ------------------------------------------------------------------------
 
-{% endhighlight %}
+```

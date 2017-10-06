@@ -33,11 +33,11 @@ Configuration keys are typically defined as static named fields on the Entity in
 define the configuration values that can be passed to the entity during construction. For
 example:
 
-{% highlight java %}
+```java
 public static final ConfigKey<String> ROOT_WAR = new ConfigKeys.newStringConfigKey(
         "wars.root",
         "WAR file to deploy as the ROOT, as URL (supporting file: and classpath: prefixes)");
-{% endhighlight %}
+```
 
 If supplying a default value, it is important that this be immutable. Otherwise, it risks users
 of the blueprint modifying the default value, which would affect blueprints that are subsequently 
@@ -62,11 +62,11 @@ port starting from 8081 will be used.
 Sensors are typically defined as static named fields on the Entity interface. These define 
 the events published by the entity, which interested parties can subscribe to. For example:
 
-{% highlight java %}
+```java
 AttributeSensor<String> MANAGEMENT_URL = Sensors.newStringSensor(
         "crate.managementUri",
         "The address at which the Crate server listens");
-{% endhighlight %}
+```
 
 
 ### Declaring Effectors
@@ -79,23 +79,23 @@ be defined. Examples of each are given below.
 A method on the entity interface can be annotated to indicate it is an effector, and to provide
 metadata about the effector and its parameters.
 
-{% highlight java %}
+```java
 @org.apache.brooklyn.core.annotation.Effector(description="Retrieve a Gist")
 public String getGist(@EffectorParam(name="id", description="Gist id") String id);
-{% endhighlight %}
+```
 
 
 #### Static Field Effector Declaration
 
 A static field can be defined on the entity to define an effector, giving metadata about that effector.
 
-{% highlight java %}
+```java
 public static final Effector<String> EXECUTE_SCRIPT = Effectors.effector(String.class, "executeScript")
         .description("invokes a script")
         .parameter(ExecuteScriptEffectorBody.SCRIPT)
         .impl(new ExecuteScriptEffectorBody())
         .build();
-{% endhighlight %}
+```
 
 In this example, the implementation of the effector is an instance of `ExecuteScriptEffectorBody`. 
 This implements `EffectorBody`. It will be invoked whenever the effector is called.
@@ -107,7 +107,7 @@ An effector can be added to an entity dynamically - either as part of the entity
 or as separate initialization code. This allows the implementation of the effector to be shared
 amongst multiple entities, without sub-classing. For example:
 
-{% highlight java %}
+```java
 Effector<Void> GET_GIST = Effectors.effector(Void.class, "createGist")
         .description("Create a Gist")
         .parameter(String.class, "id", "Gist id")
@@ -125,7 +125,7 @@ public static void CreateGistEffectorBody implements EffectorBody<Void>() {
 public void init() {
     getMutableEntityType().addEffector(CREATE_GIST, new CreateGistEffectorBody());
 }
-{% endhighlight %}
+```
 
 
 ### Effector Invocation
@@ -172,12 +172,12 @@ marked as done until its queued sub-tasks are complete.
 When creating tasks, the `TaskBuilder` can be used to create simple tasks or to create compound tasks
 whose sub-tasks are to be executed either sequentially or in parallel. For example:
 
-{% highlight java %}
+```java
 TaskBuilder.<Integer>builder()
         .displayName("stdout-example")
         .body(new Callable<Integer>() { public Integer call() { System.out.println("example"; } })
         .build();
-{% endhighlight %}
+```
 
 There are also builder and factory utilities for common types of operation, such as executing SSH 
 commands using `SshTasks`.

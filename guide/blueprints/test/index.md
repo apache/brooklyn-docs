@@ -30,4 +30,4 @@ TargetableTestComponents can be chained together, with the target being inherite
 
 The following sections provide details on each test entity along with examples of their use.
 
-{% include list-children.html %}
+

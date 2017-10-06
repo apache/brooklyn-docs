@@ -281,13 +281,13 @@ Same instructions as above.
 
 This section applies only with you are using the RPM/DEB packages. To perform a rollback, please follow these instructions:
 
-{% highlight bash %}
+```bash
 # CentOS / RHEL
 yum downgrade apache-brooklyn.noarch
 
 # Ubuntu Debian
 dpkg -i apache-brooklyn-xxxx.deb
-{% endhighlight %}
+```
 
 *Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download](../misc/download.html)
 the version you want to downgrade to before hand.*
@@ -295,14 +295,14 @@ the version you want to downgrade to before hand.*
 ## How to stop your service
 
 On systemd: 
-{% highlight bash %}
+```bash
 systemctl stop brooklyn 
-{% endhighlight %}
+```
 
 On upstart: 
-{% highlight bash %}
+```bash
 stop brooklyn
-{% endhighlight %}
+```
 
 ## Web login credentials
 
@@ -312,10 +312,10 @@ stop brooklyn
 
 * Configure a username/password by modifying [`brooklyn.cfg`](paths.html). An example entry is:
  
-{% highlight bash %}
+```bash
 brooklyn.webconsole.security.users=admin
 brooklyn.webconsole.security.user.admin.password=password2
-{% endhighlight %}
+```
 
 ## Persistence
 
@@ -326,18 +326,18 @@ If you have persisted state you wish to rebind to, persistence is now configured
 
 For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`](paths.html):
 
-{% highlight bash %}
+```bash
 brooklyn.location.named.aws-s3-eu-west-1:aws-s3:eu-west-1
 brooklyn.location.named.aws-s3-eu-west-1.identity=<ADD CREDS>
 brooklyn.location.named.aws-s3-eu-west-1.credential=<ADD CREDS>
-{% endhighlight %}
+```
 
 To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`](paths.html):
 
-{% highlight bash %}
+```bash
 persistenceLocation=aws-s3-eu-west-1
 persistenceDir=<ADD HERE>
-{% endhighlight %}
+```
 
 Apache Brooklyn should be stopped before this file is modified, and then restarted with the new configuration.
 
@@ -347,9 +347,9 @@ in the persisted state. Apache Brooklyn needs to know it in order to read the pe
 If binding to existing persisted state, an additional command is required to update the existing catalog with the Brooklyn
 0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`](paths.html) (as is done by the RPM and DEB):
 
-  {% highlight bash %}
+  ```bash
     br catalog add /opt/brooklyn/catalog/catalog.bom
-  {% endhighlight %}
+  ```
 
 All existing custom jars previously added to lib/plugins (e.g. for Java-based entities) need to be converted to OSGi bundles,
 and installed in Karaf. The use of the "brooklyn.libraries" section in catalog.bom files will continue to work.

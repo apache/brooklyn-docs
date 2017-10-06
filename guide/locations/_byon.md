@@ -17,7 +17,7 @@ Your nodes must meet the following prerequisites:
 
 To deploy to machines with known IP's in a blueprint, use the following syntax:
 
-{% highlight yaml %}
+```yaml
 location:
   byon:
     user: brooklyn
@@ -25,7 +25,7 @@ location:
     hosts:
     - 192.168.0.18
     - 192.168.0.19
-{% endhighlight %}
+```
 
 Some of the login properties as described above for jclouds are supported,
 but not `loginUser` (as no users are created), and not any of the
@@ -40,22 +40,22 @@ Named locations can also be configured in your `brooklyn.properties`,
 using the format `byon:(key=value,key2=value2)`.
 For convenience, for hosts wildcard globs are supported.
 
-{% highlight bash %}
+```bash
 brooklyn.location.named.On-Prem\ Iron\ Example=byon:(hosts="10.9.1.1,10.9.1.2,produser2@10.9.2.{10,11,20-29}")
 brooklyn.location.named.On-Prem\ Iron\ Example.user=produser1
 brooklyn.location.named.On-Prem\ Iron\ Example.privateKeyFile=~/.ssh/produser_id_rsa
 brooklyn.location.named.On-Prem\ Iron\ Example.privateKeyPassphrase=s3cr3tpassphrase
-{% endhighlight %}
+```
 
 Alternatively, you can create a specific BYON location through the location wizard tool available within the web console.
-This location will be saved as a [catalog entry]({{ site.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) for easy reusability.
+This location will be saved as a [catalog entry]({{ book.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) for easy reusability.
 
 For more complex host configuration, one can define custom config values per machine. In the example 
 below, there will be two machines. The first will be a machine reachable on
 `ssh -i ~/.ssh/brooklyn.pem -p 8022 myuser@50.51.52.53`. The second is a windows machine, reachable 
 over WinRM. Each machine has also has a private address (e.g. for within a private network).
 
-{% highlight yaml %}
+```yaml
 location:
   byon:
     hosts:
@@ -68,7 +68,7 @@ location:
       password: mypassword
       user: myuser
       osFamily: windows
-{% endhighlight %}
+```
 
 The BYON location also supports a machine chooser, using the config key `byon.machineChooser`. 
 This allows one to plugin logic to choose from the set of available machines in the pool. For

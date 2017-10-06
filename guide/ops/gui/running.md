@@ -17,15 +17,15 @@ If you haven't already done so, you will need to start Brooklyn Server using the
 It is not necessary at this time, but depending on what you are going to do, 
 you may wish to set up some other configuration options first,
  
-* [Security]({{ site.path.guide }}/ops/configuration/brooklyn_cfg.html)
-* [Persistence]({{ site.path.guide }}/ops/persistence/)
+* [Security]({{ book.path.guide }}/ops/configuration/brooklyn_cfg.html)
+* [Persistence]({{ book.path.guide }}/ops/persistence/)
 
 Now start Brooklyn with the following command:
 
-{% highlight bash %}
-$ cd apache-brooklyn-{{ site.brooklyn.version }}
+```bash
+$ cd apache-brooklyn-{{ book.brooklyn.version }}
 $ bin/brooklyn launch
-{% endhighlight %}
+```
 
 Please refer to the [Server CLI Reference](../server-cli-reference.html) for details of other possible command line options.
 

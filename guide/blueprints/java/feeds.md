@@ -37,7 +37,7 @@ important that the entity's `rebind()` method recreates the feed.
 
 An `HttpFeed` polls over http(s). An example is shown below:
 
-{% highlight java %}
+```java
 private HttpFeed feed;
 
 @Override
@@ -61,14 +61,14 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```
 
 
 ##### SSH Feed
 
 An SSH feed executes a command over ssh periodically. An example is shown below:
 
-{% highlight java %}
+```java
 private AbstractCommandFeed feed;
 
 @Override
@@ -91,13 +91,13 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```
 
 ##### WinRm CMD Feed
 
 A WinRM feed executes a windows command over winrm periodically. An example is shown below:
 
-{% highlight java %}
+```java
 private AbstractCommandFeed feed;
 
 //@Override
@@ -118,7 +118,7 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```
 
 ##### Windows Performance Counter Feed
 
@@ -131,7 +131,7 @@ This feed uses WinRM to invoke the windows utility <tt>typeperf</tt> to query fo
 of performance counters, by name. The values are extracted from the response, and published to the
 entity's sensors. An example is shown below:
 
-{% highlight java %}
+```java
 private WindowsPerformanceCounterFeed feed;
 
 @Override
@@ -147,7 +147,7 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```
 
 
 ##### JMX Feed
@@ -160,7 +160,7 @@ or it can be explicitly supplied.
 
 An example is shown below:
 
-{% highlight java %}
+```java
 private JmxFeed feed;
 
 @Override
@@ -184,7 +184,7 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```
 
 
 
@@ -196,7 +196,7 @@ an in-line anonymous inner classes).
 
 An example is shown below:
 
-{% highlight java %}
+```java
 public static class ErrorCountRetriever implements Callable<Integer> {
   private final Entity entity;
   
@@ -230,4 +230,4 @@ protected void disconnectSensors() {
   super.disconnectSensors();
   if (feed != null) feed.stop();
 }
-{% endhighlight %}
+```

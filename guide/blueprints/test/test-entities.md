@@ -12,9 +12,7 @@ layout: website-normal
 ### TestCase
 The `TestCase` entity acts as a container for a list of child entities which are started *sequentially*.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/testcase-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/testcase-entity.yaml"
 
 This can be used to enforce a strict ordering, for example ensuring a sensor has a certain value before attempting to invoke an effector.
 
@@ -26,9 +24,7 @@ The `ParallelTestCase` entity can be added as a child to run a subset of entitie
 ### ParallelTestCase
 The `ParallelTestCase` entity acts as a container for a list of child entities which are started in *parallel*.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/paralleltestcase-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/paralleltestcase-entity.yaml"
 
 This can be used to run a subset of entities in parallel as a single step when nested under a `TestCase` entity.
 
@@ -38,9 +34,7 @@ Timeouts on child entities should be set relative to the start of the `ParallelT
 ### LoopOverGroupMembersTestCase
 The `LoopOverGroupMembersTestCase` entity is configured with a target group and a test specification. For each member of the targeted group, the test case will create a TargetableTestComponent entity from the supplied test specification and set the components target to be the group member.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/loopovergroupmembers-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/loopovergroupmembers-entity.yaml'
 
 #### Parameters
 - `target` - group who's members are to be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -51,9 +45,7 @@ The `LoopOverGroupMembersTestCase` entity is configured with a target group and 
 ### InfrastructureDeploymentTestCase
 The `InfrastructureDeploymentTestCase` will first create and deploy an infrastructure from the `infrastructure.deployment.spec` config. It will then retrieve a deployment location by getting the value of the infrastructures `infrastructure.deployment.location.sensor` sensor. It will then create and deploy all entities from the `infrastructure.deployment.spec` config to the deployment location.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/infrastructuredeploymenttestcase-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/infrastructuredeploymenttestcase-entity.yaml"
 
 #### Parameters
 
@@ -67,9 +59,7 @@ The `InfrastructureDeploymentTestCase` will first create and deploy an infrastru
 ### TestSensor
 The `TestSensor` entity performs an assertion on a specified sensors value.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/testsensor-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/testsensor-entity.yaml"
 
 #### Parameters
 - `target` - entity whose sensor will be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -87,9 +77,8 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 
 ### TestEffector
 The `TestEffector` entity invokes the specified effector on a target entity. If the result of the effector is a String, it will then perform assertions on the result.
-{% highlight yaml %}
-{% readj example_yaml/entities/testeffector-entity.yaml %}
-{% endhighlight %}
+
+!CODEFILE "example_yaml/entities/testeffector-entity.yaml"
 
 #### Parameters
 - `target` - entity whose effector will be invoked, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -108,9 +97,8 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 
 ### TestHttpCall
 The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs an assertion on the response.
-{% highlight yaml %}
-{% readj example_yaml/entities/testhttpcall-entity.yaml %}
-{% endhighlight %}
+
+!CODEFILE "example_yaml/entities/testhttpcall-entity.yaml"
 
 #### Parameters
 - `url` - URL to perform GET request on, this can use DSL for example `$brooklyn:entity("tomcat").attributeWhenReady("webapp.url")`.
@@ -133,9 +121,7 @@ If no assertions are explicitly configured, the default is to assert a non-zero 
 
 Either a bash command may be provided in the YAML, or a URL for a script which will be executed.
 
-{% highlight yaml %}
-{% readj example_yaml/entities/testsshcommand-entity.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/entities/testsshcommand-entity.yaml"
 
 #### Parameters
 - `command` - The shell command to execute. (This and `downloadUrl` are mutually exclusive.)

@@ -9,7 +9,7 @@ collecting the following information.
 
 See [Brooklyn Slow or Unresponse](slow-unresponsive.html) docs for details of these commands.
  
-{% highlight bash %}
+```bash
 BROOKLYN_HOME=/home/users/brooklyn/apache-brooklyn-0.9.0-bin
 BROOKLYN_PID=$(cat $BROOKLYN_HOME/pid_java)
 REPORT_DIR=/tmp/brooklyn-report/
@@ -34,10 +34,10 @@ done
 grep "brooklyn gc" ${DEBUG_LOG} > ${REPORT_DIR}/brooklyn-gc.txt
 grep "events for subscriber" ${DEBUG_LOG} > ${REPORT_DIR}/events-for-subscriber.txt
 tar czf brooklyn-report.tgz ${REPORT_DIR}
-{% endhighlight %}
+```
 
 Also consider providing your log files and persisted state, though extreme care should be taken if
 these might contain cloud or machine credentials (especially if 
-[Externalised Configuration]({{ site.path.guide }}/ops/externalized-configuration.html) 
+[Externalised Configuration]({{ book.path.guide }}/ops/externalized-configuration.html) 
 is not being used for credential storage).
 

@@ -8,9 +8,7 @@ In a nutshell, a new Chef-based entity can be defined as a service by specifying
 `chef:cookbook_name` as the `service_type`, along with a collection of optional configuration.
 An illustrative example is below:
 
-{% highlight yaml %}
-{% readj example_yaml/mysql-chef-1.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/mysql-chef-1.yaml"
 
 *This works without any installation: try it now, copying-and-pasting to the Brooklyn console.
 (Don't forget to add your preferred `location: some-cloud` to the spec.)*  

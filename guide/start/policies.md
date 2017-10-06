@@ -17,7 +17,7 @@ You will need four machines for this example: one for the load-balancer (nginx),
 Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 
 <div class="usermanual-pdf-include started-pdf-include" style="display: none;">
-{% highlight yaml %}
+```yaml
 name: Tomcat Cluster
 
 location:
@@ -77,7 +77,7 @@ services:
   brooklyn.config:
     loadbalancer.serverpool: $brooklyn:entity("cluster")
     nginx.sticky: false
-{% endhighlight %}
+```
 </div>
 
 <!-- WARNING: if modifying either mycluster.yaml or the yaml below, be sure to keep them both in-sync -->
@@ -253,10 +253,6 @@ services:
 
 <script language="JavaScript" type="application/javascript">
 
-{% comment %}
-See blueprint-tour.md for where this CSS/javascript was copied from.
-{% endcomment %} 
-
 if (window.$ != null) {
 	$(function() {
 	  maxCodeWidth = Math.max.apply(Math, $(".annotated_blueprint div.block > div:last-child").map(function(){ return this.scrollWidth; }).get());
@@ -275,7 +271,7 @@ if (window.$ != null) {
 	});
 	}
 </script>
-
+```
 
 ## The Tomcat Cluster
 
@@ -288,9 +284,9 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 
 Deploy the app:
 
-{% highlight bash %}
+```bash
 br deploy mycluster.yaml
-{% endhighlight %}
+```
 
 <pre>
  Id:       nGY58ZZN   
@@ -300,9 +296,9 @@ br deploy mycluster.yaml
 
 And wait for the app to be running, viewing its state with:
 
-{% highlight bash %}
+```bash
 br application
-{% endhighlight %}
+```
 
 <pre>
  Id         Name             Status    Location   
@@ -313,9 +309,9 @@ You can view the list of entities within the cluster with the command below (whi
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists its
 entities):
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
+```
  
 <pre>
  Id         Name            Type   
@@ -353,19 +349,19 @@ service entity is marked as failed and no futher restarts are attempted.
 Try killing the Tomcat process for one of the members in the cluster. The command below will kill
 Tomcat on the vagrant VMs named "byon1" to "byon4":
 
-{% highlight bash %}
+```bash
 for i in byon{1..4}; do
   vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
 done
-{% endhighlight %}
+```
 
 You can view the state of the Tomcat server with the command below (which drills into the  
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then into the  
 first member of the cluster named "Tomcat Server"):
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
-{% endhighlight %}
+```
 
 <pre>
  Id:              tOpMeYYr   
@@ -379,9 +375,9 @@ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
 <!-- COMMENT:
 You can view its activity, to see the call to restart, using:
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" activity
-{% endhighlight %}
+```
 
 TODO Why doesn't the restart() show in the activity view?!
 -->
@@ -404,9 +400,9 @@ You can view the list of Tomcat servers in the cluster with the command below (w
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists the 
 child entities):
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
+```
 
 <pre>
  Id         Name            Type   
@@ -434,7 +430,7 @@ To generate load, you can use your web-browser by repeatedly refreshing that pag
 you could use a load generator like jmeter, or use a script such as the one shown below 
 (changing URL for the URL of your load-balancer):
 
-{% highlight bash %}
+```bash
 URL=http://10.10.10.101:8000/
 for i in {1..600}; do
   for j in {1..50}; do 
@@ -443,14 +439,14 @@ for i in {1..600}; do
   echo "Finished batch $i"
   sleep 1
 done
-{% endhighlight %}
+```
 
 While those curl commands run in a separate terminal, you can look at the metrics for the first
 Tomcat server using the command:
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
-{% endhighlight %}
+```
 
 <pre>
  Name                                            Description                                                                              Value   
@@ -469,9 +465,9 @@ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
  
 You can look at the average requests per second on the cluster with the command:
  
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
-{% endhighlight %}
+```
 
 <pre>
  25.765557404326124
@@ -480,9 +476,9 @@ br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perN
 When this value exceeds 3 for two seconds, the cluster with scale up. You can see the new instance
 using the command:
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
+```
 
 <pre>
  Id         Name            Type   
@@ -495,9 +491,9 @@ br application "Tomcat Cluster" entity "Cluster" entity
 Cancel the curl commands (or wait for them to finish), and then wait for the one minute 
 `resizeDownStabilizationDelay`. The cluster will scale back to the minimum one instance.
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
+```
 
 <pre>
  Id         Name            Type   

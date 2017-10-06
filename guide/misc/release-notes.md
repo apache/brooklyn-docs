@@ -3,7 +3,7 @@ layout: website-normal
 title: Release Notes
 ---
 
-## Version {{ site.brooklyn-version }}
+## Version {{ book.brooklyn-version }}
 
 {% if SNAPSHOT %}
 **You are viewing a SNAPSHOT release (master branch), so this list is in progress!**
@@ -21,4 +21,4 @@ Changes since 0.12.0:
 
 
 For changes in prior versions, please refer to the release notes for 
-[0.12.0]({{ site.path.v }}/0.12.0/misc/release-notes.html).
+[0.12.0]({{ book.path.v }}/0.12.0/misc/release-notes.html).

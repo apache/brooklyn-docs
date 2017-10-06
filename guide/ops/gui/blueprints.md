@@ -7,8 +7,6 @@ children:
 - { section: Launching from the Catalog, title: Launching from the Catalog } 
 ---
 
-{% include fields.md %}
-
 
 ## Launching from a Blueprint
 
@@ -27,18 +25,16 @@ Switch to the YAML tab and copy the blueprint below into the large text box.
 
 But *before* you submit it, modify the YAML to specify the location where the application will be deployed.
 
-{% highlight yaml %}
-{% readj _my-web-cluster.yaml %}
-{% endhighlight %}
+!CODEFILE "_my-web-cluster.yaml"
 
 Replace the `location:` element with values for your chosen target environment, for example to use SoftLayer rather than AWS (updating with your own credentials): 
 
-{% highlight yaml %}
+```yaml
 location:
   jclouds:softlayer:
     identity: ABCDEFGHIJKLMNOPQRST
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
-{% endhighlight %}
+```
 
 **NOTE**: See __[Locations](../locations)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
 

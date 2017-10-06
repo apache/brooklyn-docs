@@ -28,7 +28,7 @@ is a convenient way of building OSGi bundles.
 
 #### OSGi Bundles Declared in Catalog Items  
 
-Within a [catalog item]({{ site.path.guide}}/blueprints/catalog/), a list of URLs can be supplied under
+Within a [catalog item]({{ book.path.guide}}/blueprints/catalog/), a list of URLs can be supplied under
 `brooklyn.libraries`. Each URL should point to an OSGi bundle. This list should include the OSGi 
 bundle that has the Java code for your blueprint, and also the OSGi bundles that it depends
 on (including all transitive dependencies).
@@ -37,8 +37,8 @@ It is vital that these jars are built correctly as OSGi bundles, and that all tr
 dependencies are included. The bundles will be added to Karaf in the order given, so a bundle's
 dependencies should be listed before the bundle(s) that depend on them.
 
-In the [GistGenerator example]({{ site.path.guide}}/blueprints/java/defining-and-deploying.html), the 
-[catalog.bom file]({{ site.path.guide}}/blueprints/java/gist_generator/gist_generator.bom) included
+In the [GistGenerator example]({{ book.path.guide}}/blueprints/java/defining-and-deploying.html), the 
+[catalog.bom file]({{ book.path.guide}}/blueprints/java/gist_generator/gist_generator.bom) included
 the URL of the dependency `org.eclipse.egit.github.core`. It also (before that line) included
 its transitive dependency, which is a specific version of `gson`.
 
@@ -64,7 +64,7 @@ using `./bin/client`, and add the bundles and features as desired.
 
 Examples of some useful commands are shown below:
 
-{% highlight bash %}
+```bash
 karaf@amp> bundle:install -s http://repo1.maven.org/maven2/org/apache/servicemix/bundles/org.apache.servicemix.bundles.egit.github.core/2.1.5_1/org.apache.servicemix.bundles.egit.github.core-2.1.5_1.jar
 Bundle ID: 316
 
@@ -75,7 +75,7 @@ karaf@amp> bundle:headers org.apache.servicemix.bundles.egit.github.core
 ...
 
 karaf@amp> bundle:uninstall org.apache.servicemix.bundles.egit.github.core
-{% endhighlight %}
+```
 
 
 ##### Karaf Deploy Folder

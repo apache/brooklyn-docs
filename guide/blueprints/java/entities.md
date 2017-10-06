@@ -74,7 +74,7 @@ Sensors at base entities are often retrieved by feeds which poll the entity's co
 The ``SoftwareProcess`` provides a good example; by subclassing it and overriding the ``connectSensors()`` method
 you could wire some example sensors using the following: 
 
-{% highlight java %}
+```java
 public void connectSensors() {
 	super.connectSensors()
 	
@@ -95,7 +95,7 @@ protected void disconnectSensors() {
     super.disconnectSensors();
     if (httpFeed != null) httpFeed.stop();
 }
-{% endhighlight %}
+```
 
 In this example (a simplified version of ``JBoss7Server``), the url returns metrics in JSON. 
 We report the entity as up if we get back an http response code of 200, or down if any other response code or exception.

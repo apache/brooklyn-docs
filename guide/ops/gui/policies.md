@@ -9,9 +9,7 @@ layout: website-normal
 To see an example of policy based management, please deploy the following blueprint (changing 
 the location details as for the example shown earlier):
 
-{% highlight yaml %}
-{% readj _my-web-cluster2.yaml %}
-{% endhighlight %}
+!CODEFILE "_my-web-cluster2.yaml"
 
 The app server cluster has an `AutoScalerPolicy`, and the loadbalancer has a `targets` policy.
 

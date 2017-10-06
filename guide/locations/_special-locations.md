@@ -14,11 +14,11 @@ The spec `host`, taking a string argument (the address) or a map (`host`, `user`
 provides a convenient syntax when specifying a single host.
 For example:
 
-{% highlight yaml %}
+```yaml
 location: host:(192.168.0.1)
 services:
 - type: org.apache.brooklyn.entity.webapp.jboss.JBoss7Server
-{% endhighlight %}
+```
 
 Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0.1)`.
 
@@ -37,7 +37,7 @@ machines available.
 In the example below, it provisions the first node to `192.168.0.1`, then it provisions into AWS
 us-east-1 region (because the bring-your-own-nodes region will have run out of nodes).
 
-{% highlight yaml %}
+```yaml
 location:
   multi:
     targets:
@@ -50,7 +50,7 @@ services:
     dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+```
 
 ##### Round-Robin Consumption and Availability Zones for Clustered Applications
 
@@ -67,7 +67,7 @@ In the example below, the cluster will request VMs round-robin across three diff
 locations (in this case, the locations were already added to the catalog, or defined in
 `brooklyn.properties`).
 
-{% highlight yaml %}
+```yaml
 location:
   multi:
     targets:
@@ -82,7 +82,7 @@ services:
     dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+```
 
 Of course, clusters can also be deployed round-robin to real availability zones offered by
 cloud providers, as long as their locations support `AvailabilityZoneExtension`. Currently, only
@@ -91,7 +91,7 @@ AWS EC2 locations support this feature.
 In the example below, the cluster will request VMs round-robin across the availability zones
 provided by AWS EC2 in the "us-east-1" region.
 
-{% highlight yaml %}
+```yaml
 location: jclouds:aws-ec2:us-east-1
 services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
@@ -101,7 +101,7 @@ services:
     dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+```
 
 For more information about AWS EC2 availability zones, see
 [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
@@ -112,6 +112,6 @@ Custom alternatives to round-robin are also possible using the configuration opt
 
 #### The Server Pool
 
-The {% include java_link.html class_name="ServerPool" package_path="org/apache/brooklyn/entity/machine/pool" project_subpath="software/base" %}
+The [ServerPool](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/entity/machine/pool/ServerPool.html)
 entity type allows defining an entity which becomes available as a location.
 

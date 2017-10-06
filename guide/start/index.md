@@ -10,6 +10,6 @@ children:
 - concept-quickstart.md
 ---
 
-{% include list-children.html %}
+
 
 

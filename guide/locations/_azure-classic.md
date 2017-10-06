@@ -19,7 +19,7 @@ for details.
 Microsoft Azure requests are signed by SSL certificate. You need to upload one into your account in order to use an Azure
 location.
 
-{% highlight bash %}
+```bash
 # create the certificate request
 mkdir -m 700 $HOME/.brooklyn
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/.brooklyn/azure.pem -out $HOME/.brooklyn/azure.pem
@@ -27,7 +27,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/.brooklyn/azur
 openssl pkcs12 -export -out $HOME/.brooklyn/azure.p12 -in $HOME/.brooklyn/azure.pem -name "brooklyn :: $USER"
 # create a cer file
 openssl x509 -inform pem -in $HOME/.brooklyn/azure.pem -outform der -out $HOME/.brooklyn/azure.cer
-{% endhighlight %}
+```
 
 Finally, upload .cer file to the management console at https://manage.windowsazure.com/@myId#Workspaces/AdminTasks/ListManagementCertificates to authorize this certificate.
 
@@ -40,7 +40,7 @@ Please note, you can find the "myId" value for this link by looking at the URL w
 
 First, in your `brooklyn.properties` define a location as follows:
 
-{% highlight properties %}
+```properties
 brooklyn.location.jclouds.azurecompute.identity=$HOME/.brooklyn/azure.p12
 brooklyn.location.jclouds.azurecompute.credential=<P12_EXPORT_PASSWORD>
 brooklyn.location.jclouds.azurecompute.endpoint=https://management.core.windows.net/<YOUR_SUBSCRIPTION_ID>
@@ -48,7 +48,7 @@ brooklyn.location.jclouds.azurecompute.vmNameMaxLength=45
 brooklyn.location.jclouds.azurecompute.jclouds.azurecompute.operation.timeout=120000
 brooklyn.location.jclouds.azurecompute.user=<USER_NAME>
 brooklyn.location.jclouds.azurecompute.password=<PASSWORD>
-{% endhighlight %}
+```
 
 During the VM provisioning, Azure will set up the account with `<USER_NAME>` and `<PASSWORD>` automatically.
 Notice, `<PASSWORD>` must be a minimum of 8 characters and must contain 3 of the following: a lowercase character, an uppercase
@@ -85,14 +85,14 @@ rather than "classic".
 
 For convenience, you can define a named location, like:
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.azure-west-europe=jclouds:azurecompute:West Europe
 brooklyn.location.named.azure-west-europe.displayName=Azure West Europe
 brooklyn.location.named.azure-west-europe.imageId=b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04_1-LTS-amd64-server-20150123-en-us-30GB
 brooklyn.location.named.azure-west-europe.hardwareId=BASIC_A2
 brooklyn.location.named.azure-west-europe.user=test
 brooklyn.location.named.azure-west-europe.password=MyPassword1!
-{% endhighlight %}
+```
 
 This will create a location named `azure-west-europe`. It will inherit all the configuration
 defined on `brooklyn.location.jclouds.azurecompute`. It will also augment and override this
@@ -158,7 +158,7 @@ The following configuration options are important for provisioning Windows VMs i
 Below is an example for provisioning a Windows-based entity on Azure. Note the placeholder values 
 for the identity, credential and password.
 
-{% highlight yaml %}
+```yaml
 name: Windows Test @ Azure
 location:
   jclouds:azurecompute:West Europe:
@@ -182,12 +182,12 @@ services:
     install.command: echo install phase
     launch.command: echo launch phase
     checkRunning.command: echo launch phase
-{% endhighlight %}
+```
 
 Below is an example named location for Azure, configured in `brooklyn.properties`. Note the 
 placeholder values for the identity, credential and password.
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.myazure=jclouds:azurecompute:West Europe
 brooklyn.location.named.myazure.displayName=Azure West Europe (windows)
 brooklyn.location.named.myazure.identity=$HOME/.brooklyn/azure.p12
@@ -203,7 +203,7 @@ brooklyn.location.named.myazure.winrm.useHttps=true
 brooklyn.location.named.myazure.user=brooklyn
 brooklyn.location.named.myazure.password=secretPass1!
 brooklyn.location.named.myazure.templateOptions={ overrideLoginUser: amp, overrideLoginPassword: secretPass1! }
-{% endhighlight %}
+```
 
 ###### User and Password Configuration
 

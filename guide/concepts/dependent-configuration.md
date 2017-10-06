@@ -7,10 +7,10 @@ categories: [use, guide, defining-applications]
 
 Under the covers Brooklyn has a sophisticated sensor event and subscription model, but conveniences around this model make it very simple to express cross-entity dependencies. Consider the example where Tomcat instances need to know the URL of a database (or a set of URLs to connect to a Monterey processing fabric, or other entities)
 
-{% highlight java %}
+```java
 setConfiguration(UsesJava.JAVA_OPTIONS, ImmutableMap.of("mysql.url", 
 	    attributeWhenReady(mysql, MySqlNode.MY_SQL_URL) ))
-{% endhighlight %}
+```
 
 The ``attributeWhenReady(Entity, Sensor)`` call (a static method on the class ``DependentConfiguration``)
 causes the configuration value to be set when that given entity's attribue is ready. 

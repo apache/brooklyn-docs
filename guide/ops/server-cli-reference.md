@@ -10,9 +10,9 @@ already running Brooklyn Server, refer to [Client CLI Reference](cli/index.html)
 
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
-{% highlight bash %}
+```bash
 % nohup bin/brooklyn launch > /dev/null 2>&1 &
-{% endhighlight %}
+```
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. For a production 
@@ -27,7 +27,7 @@ You may wish to [add Brooklyn to your path](#path-setup);
 assuming you've done this, to get information the supported CLI options 
 at any time, just run `brooklyn help`:
 
-{% highlight bash %}
+```bash
 % bin/brooklyn help
 
 usage: brooklyn [(-q | --quiet)] [(-v | --verbose)] <command> [<args>]
@@ -38,7 +38,7 @@ The most commonly used brooklyn commands are:
     launch   Starts a brooklyn application. Note that a BROOKLYN_CLASSPATH environment variable needs to be set up beforehand to point to the user application classpath.
 
 See 'brooklyn help <command>' for more information on a specific command.
-{% endhighlight %}
+```
 
 It is important that Brooklyn is launched with either `nohup ... &` or `... & disown`, to ensure 
 it keeps running after the shell terminates.
@@ -54,10 +54,10 @@ The Server CLI arguments for [persistence and HA](persistence/) and the [catalog
 In order to have easy access to the server cli it is useful to configure the PATH environment 
 variable to also point to the cli's bin directory:
 
-{% highlight bash %}
+```bash
 BROOKLYN_HOME=/path/to/brooklyn/
 export PATH=$PATH:$BROOKLYN_HOME/usage/dist/target/brooklyn-dist/bin/
-{% endhighlight %}
+```
 
 
 ### Memory Usage

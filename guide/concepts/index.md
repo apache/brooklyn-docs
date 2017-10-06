@@ -19,4 +19,4 @@ intended for people who are using brooklyn-supported application components (suc
 to be able to use brooklyn to easily start their application in multiple locations with off-the-shelf management
 policies.
 
-{% include list-children.html %}
+

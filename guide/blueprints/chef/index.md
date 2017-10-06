@@ -15,4 +15,4 @@ A plan for the full integration is online [here](https://docs.google.com/a/cloud
 
 This guide assumes you are familiar with the basics of [creating YAML blueprints](../).
 
-{% include list-children.html %}
+

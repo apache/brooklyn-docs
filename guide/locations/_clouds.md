@@ -19,27 +19,27 @@ The identifiers for some of the most commonly used jclouds-supported clouds are
 
 For any of these, of course, Brooklyn needs to be configured with an `identity` and a `credential`:
 
-{% highlight yaml %}
+```yaml
 location:
   jclouds:aws-ec2:
     identity: ABCDEFGHIJKLMNOPQRST
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
-{% endhighlight %} 
+``` 
 
 The above YAML can be embedded directly in blueprints, either at the root or on individual services.
-If you prefer to keep the credentials separate, you can instead store them as a [catalog entry]({{ site.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) or set them in `brooklyn.properties` 
+If you prefer to keep the credentials separate, you can instead store them as a [catalog entry]({{ book.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) or set them in `brooklyn.properties` 
 in the `jclouds.<provider>` namespace:
 
-{% highlight bash %}
+```bash
 brooklyn.location.jclouds.aws-ec2.identity=ABCDEFGHIJKLMNOPQRST  
 brooklyn.location.jclouds.aws-ec2.credential=s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
-{% endhighlight %}
+```
 
 And in this case you can reference the location in YAML with `location: jclouds:aws-ec2`.
 
 Alternatively, you can use the location wizard tool available within the web console
 to create any cloud location supported by <a href="http://jclouds.org">Apache jclouds</a>.
-This location will be saved as a [catalog entry]({{ site.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) for easy reusability.
+This location will be saved as a [catalog entry]({{ book.path.guide }}/blueprints/catalog/index.html#locations-in-catalog) for easy reusability.
 
 Brooklyn irons out many of the differences between clouds so that blueprints run similarly
 in a wide range of locations, including setting up access and configuring images and machine specs.
@@ -88,7 +88,7 @@ These steps can be skipped or customized as described below.
 The following is a subset of the most commonly used configuration keys used to customize 
 cloud provisioning.
 For more keys and more detail on the keys below, see 
-{% include java_link.html class_name="JcloudsLocationConfig" package_path="org/apache/brooklyn/location/jclouds" project_subpath="locations/jclouds" %}.
+[JcloudsLocationConfig](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/location/jclouds/JcloudsLocationConfig.html).
 
 ###### VM Creation
     
@@ -115,10 +115,10 @@ For more keys and more detail on the keys below, see
   including the ID of the app and of the entity.
   (As many cloud portals let you filter views, this can help find a specific entity or all machines for a given application.)
   For more sophisticated control over host naming, you can supply a custom 
-  {% include java_link.html class_name="CloudMachineNamer" package_path="org/apache/brooklyn/core/location/cloud/names" project_subpath="core" %},
+  [CloudMachineNamer](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/location/cloud/names/CloudMachineNamer.html),
   for example
   `cloudMachineNamer: CustomMachineNamer`.
-  {% include java_link.html class_name="CustomMachineNamer" package_path="org/apache/brooklyn/core/location/cloud/names" project_subpath="core" %}
+  [CustomMachineNamer](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/location/cloud/names/CustomMachineNamer.html)
   will use the entity's name or following a template you supply.
   On many clouds, a random suffix will be appended to help guarantee uniqueness;
   this can be removed by setting `vmNameSaltLength: 0` (selected clouds only).
@@ -138,7 +138,7 @@ For more keys and more detail on the keys below, see
   machines with `machineCreateAttempts` (jclouds only). This is useful as an efficient low-level fix
   for those occasions when cloud providers give machines that are dead on arrival.
   You can of course also resolve it at a higher level with a policy such as 
-  {% include java_link.html class_name="ServiceRestarter" package_path="org/apache/brooklyn/policy/ha" project_subpath="policy" %}.
+  [ServiceRestarter](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/ha/ServiceRestarter.html).
 
 - If you want to investigate failures, set `destroyOnFailure: false`
   to keep failed VM's around. (You'll have to manually clean them up.)
@@ -297,7 +297,7 @@ Clouds vary in the format of the identity, credential, endpoint, and region.
 Some also have their own idiosyncracies.  More details for configuring some common clouds
 is included below. You may also find these sources helpful:
 
-* The **[template brooklyn.properties]({{ site.path.guide }}/start/brooklyn.properties)** file
+* The **[template brooklyn.properties]({{ book.path.guide }}/start/brooklyn.properties)** file
   in the Getting Started guide
   contains numerous examples of configuring specific clouds,
   including the format of credentials and options for sometimes-fiddly private clouds.

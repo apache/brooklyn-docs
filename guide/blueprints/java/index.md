@@ -19,7 +19,7 @@ children:
 Java blueprints are powerful, but also rather more difficult to write than YAML.
 Advanced Java skills are required.
 
-{% include list-children.html %}
+
 
 The main uses of Java-based blueprints are:
 

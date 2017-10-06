@@ -75,20 +75,20 @@ providers, see [jclouds](http://jclouds.apache.org/reference/providers/#blobstor
 
 To configure the Object Store, add the credentials to `brooklyn.cfg` such as:
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.aws-s3-eu-west-1=aws-s3:eu-west-1
 brooklyn.location.named.aws-s3-eu-west-1.identity=ABCDEFGHIJKLMNOPQRSTU
 brooklyn.location.named.aws-s3-eu-west-1.credential=abcdefghijklmnopqrstuvwxyz1234567890ab/c
-{% endhighlight %} 
+``` 
 
 or:
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.softlayer-swift-ams01=jclouds:openstack-swift:https://ams01.objectstorage.softlayer.net/auth/v1.0
 brooklyn.location.named.softlayer-swift-ams01.identity=ABCDEFGHIJKLM:myname
 brooklyn.location.named.softlayer-swift-ams01.credential=abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz12
 brooklyn.location.named.softlayer-swift-ams01.jclouds.keystone.credential-type=tempAuthCredentials
-{% endhighlight %} 
+``` 
 
 Then edit the `persistenceLocation` to point at this object store: `softlayer-swift-ams01`.
 

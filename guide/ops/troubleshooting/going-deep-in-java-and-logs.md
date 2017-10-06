@@ -14,7 +14,7 @@ a bash script.
 
 First let's take a look at the `customize()` method of the Tomcat server blueprint:
 
-{% highlight java %}
+```java
 @Override
 public void customize() {
     newScript(CUSTOMIZING)
@@ -34,28 +34,28 @@ public void customize() {
 
     getEntity().deployInitialWars();
 }
-{% endhighlight %}
+```
 
 Here we can see that it's running a script to create four directories before continuing with the customization. Let's
 introduce an error by changing `mkdir` to `mkrid`:
 
-{% highlight java %}
+```java
 newScript(CUSTOMIZING)
     .body.append("mkrid -p conf logs webapps temp") // `mkdir` changed to `mkrid`
     .failOnNonZeroResultCode()
     .execute();
-{% endhighlight %}
+```
 
 Now let's try deploying this using the following YAML:
 
-{% highlight yaml %}
+```yaml
 
 name: Tomcat failure test
 location: localhost
 services:
 - type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
 
-{% endhighlight %}
+```
 
 Shortly after deployment, the entity fails with the following error:
 
@@ -72,9 +72,9 @@ that particular task, including its sub-tasks. We can eventually get to the spec
 
 By clicking on the `stderr` link, we can see the script failed with the following error:
 
-{% highlight console %}
+```console
 /tmp/brooklyn-20150721-132251052-l4b9-customizing_TomcatServerImpl_i.sh: line 10: mkrid: command not found
-{% endhighlight %}
+```
 
 This tells us *what* went wrong, but doesn't tell us *where*. In order to find that, we'll need to look at the
 stack trace that was logged when the exception was thrown.
@@ -82,7 +82,7 @@ stack trace that was logged when the exception was thrown.
 It's always worth looking at the Detailed Status section as sometimes this will give you the information you need.
 In this case, the stack trace is limited to the thread that was used to execute the task that ran the script:
 
-{% highlight console %}
+```console
 Failed after 40ms
 
 STDERR
@@ -103,7 +103,7 @@ java.lang.IllegalStateException: Execution failed, invalid result 127 for custom
     at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
     at java.lang.Thread.run(Thread.java:745)
-{% endhighlight %}
+```
 
 In order to find the exception, we'll need to look in Brooklyn's debug log file. By default, the debug log file
 is named `brooklyn.debug.log`. Usually the easiest way to navigate the log file is to use `less`, e.g.
@@ -117,7 +117,7 @@ performing a reverse-lookup), simply press `n`
 In this case, the `?Tomcat` search takes us directly to the full stack trace (Only the last part of the trace
 is shown here):
 
-{% highlight console %}
+```console
 ... at com.google.common.util.concurrent.ForwardingFuture.get(ForwardingFuture.java:63) ~[guava-17.0.jar:na]
     at org.apache.brooklyn.core.util.task.BasicTask.get(BasicTask.java:343) ~[classes/:na]
     at org.apache.brooklyn.core.util.task.BasicTask.getUnchecked(BasicTask.java:352) ~[classes/:na]
@@ -144,15 +144,15 @@ Caused by: java.lang.IllegalStateException: Execution failed, invalid result 127
     at org.apache.brooklyn.entity.software.base.lifecycle.ScriptHelper$8.call(ScriptHelper.java:289) ~[classes/:na]
     at org.apache.brooklyn.entity.software.base.lifecycle.ScriptHelper$8.call(ScriptHelper.java:287) ~[classes/:na]
     ... 6 common frames omitted
-{% endhighlight %}
+```
 
 Brooklyn's use of tasks and helper classes can make the stack trace a little harder than usual to follow, but a good
 place to start is to look through the stack trace for the node's implementation or ssh driver classes (usually
 named `FooNodeImpl` or `FooSshDriver`). In this case we can see the following:
 
-{% highlight console %}
+```console
 at org.apache.brooklyn.entity.webapp.tomcat.TomcatSshDriver.customize(TomcatSshDriver.java:72) ~[classes/:na]
-{% endhighlight %}
+```
 
 Combining this with the error message of `mkrid: command not found` we can see that indeed `mkdir` has been
 misspelled `mkrid` on line 72 of `TomcatSshDriver.java`.
@@ -165,7 +165,7 @@ a failure in a non-script related part of the code. We'll use the `customize()` 
 but this time, we'll correct the spelling of 'mkdir' and add a line that attempts to copy a nonexistent resource 
 to the remote server:
 
-{% highlight java %}
+```java
 
 newScript(CUSTOMIZING)
     .body.append("mkdir -p conf logs webapps temp")
@@ -176,7 +176,7 @@ copyTemplate(entity.getConfig(TomcatServer.SERVER_XML_RESOURCE), Os.mergePaths(g
 copyTemplate(entity.getConfig(TomcatServer.WEB_XML_RESOURCE), Os.mergePaths(getRunDir(), "conf", "web.xml"));
 copyTemplate("classpath://nonexistent.xml", Os.mergePaths(getRunDir(), "conf", "nonexistent.xml")); // Resource does not exist!
 
-{% endhighlight %}
+```
 
 Let's deploy this using the same YAML from above. Here's the resulting error in the Brooklyn debug console:
 
@@ -185,7 +185,7 @@ Let's deploy this using the same YAML from above. Here's the resulting error in 
 Again, this tells us *what* the error is, but we need to find *where* the code is that attempts to copy this file. In
 this case it's shown in the Detailed Status section, and we don't need to go to the log file:
 
-{% highlight console %}
+```console
 
 Failed after 221ms: Error getting resource 'classpath://nonexistent.xml' for TomcatServerImpl{id=PVZxDKU1}: java.io.IOException: Error accessing classpath://nonexistent.xml: java.io.IOException: nonexistent.xml not found on classpath
 
@@ -213,7 +213,7 @@ Caused by: java.io.IOException: nonexistent.xml not found on classpath
     at org.apache.brooklyn.core.util.ResourceUtils.getResourceFromUrl(ResourceUtils.java:230)
     ... 14 more
 
-{% endhighlight %}
+```
 
 Looking for `Tomcat` in the stack trace, we can see in this case the problem lies at line 79 of `TomcatSshDriver.java`
 
@@ -228,9 +228,9 @@ the entity fails to start.
 We can simulate this type of failure by launching Tomcat with an invalid configuration file. As seen in the previous
 examples, Brooklyn copies two xml configuration files to the server: `server.xml` and `web.xml`
 
-The first few non-comment lines of `server.xml` are as follows (you can see the full file [here]({{ site.brooklyn.url.git }}/software/webapp/src/main/resources/org/apache/brooklyn/entity/webapp/tomcat/server.xml)):
+The first few non-comment lines of `server.xml` are as follows (you can see the full file [here]({{ book.brooklyn.url.git }}/software/webapp/src/main/resources/org/apache/brooklyn/entity/webapp/tomcat/server.xml)):
 
-{% highlight xml %}
+```xml
 
 <Server port="${driver.shutdownPort?c}" shutdown="SHUTDOWN">
      <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
@@ -240,7 +240,7 @@ The first few non-comment lines of `server.xml` are as follows (you can see the 
 
 Let's add an unmatched XML element, which will make this XML file invalid:
 
-{% highlight xml %}
+```xml
 
 <Server port="${driver.shutdownPort?c}" shutdown="SHUTDOWN">
      <unmatched-element> <!-- This is invalid XML as we won't add </unmatched-element> -->
@@ -260,15 +260,15 @@ with `Timeout waiting for SERVICE_UP`:
 If we drill down into the tasks in the `Activities` tab, we can see that all of the installation and launch tasks
 completed successfully, and stdout of the `launch` script is as follows:
 
-{% highlight console %}
+```console
 
 Executed /tmp/brooklyn-20150721-153049139-fK2U-launching_TomcatServerImpl_id_.sh, result 0
 
-{% endhighlight %}
+```
 
 The task that failed was the `post-start` task, and the stack trace from the Detailed Status section is as follows:
 
-{% highlight console %}
+```console
 
 Failed after 5m 1s: Timeout waiting for SERVICE_UP from TomcatServerImpl{id=BUHgQeOs}
 
@@ -286,7 +286,7 @@ java.lang.IllegalStateException: Timeout waiting for SERVICE_UP from TomcatServe
     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 at java.lang.Thread.run(Thread.java:745)
 
-{% endhighlight %}
+```
 
 This doesn't really tell us what we need to know, and looking in the `brooklyn.debug.log` file yields no further
 clues. The key here is the error message `Timeout waiting for SERVICE_UP`. After running the installation and
@@ -300,12 +300,12 @@ The first thing we need to do is to find out how Brooklyn determines the health 
 often implemented in the `isRunning()` method in the entity's ssh driver. Tomcat's implementation of `isRunning()`
 is as follows:
 
-{% highlight java %}
+```java
 @Override
 public boolean isRunning() {
     return newScript(MutableMap.of(USE_PID_FILE, "pid.txt"), CHECK_RUNNING).execute() == 0;
 }
-{% endhighlight %}
+```
 
 The `newScript` method has conveniences for default scripts to check if a process is running based on its PID. In this
 case, it will look for Tomcat's PID in the `pid.txt` file and check if the PID is the PID of a running process
@@ -315,15 +315,15 @@ By default, the pid file is located in the run directory of the entity. You can 
 directory by looking at the `run.dir` sensor. In this case it is `/tmp/brooklyn-martin/apps/jIzIHXtP/entities/TomcatServer_BUHgQeOs`.
 To find the pid, you simply cat the pid.txt file in this directory:
 
-{% highlight console %}
+```console
 $ cat /tmp/brooklyn-martin/apps/jIzIHXtP/entities/TomcatServer_BUHgQeOs/pid.txt
 73714
-{% endhighlight %}
+```
 
 In this case, the PID in the file is 73714. You can then check if the process is running using `ps`. You can also
 pipe the output to `fold` so the full launch command is visible:
 
-{% highlight console %}
+```console
 
 $ ps -p 73714 | fold -w 120
 PID TTY           TIME CMD
@@ -338,23 +338,23 @@ in/apps/jIzIHXtP/entities/TomcatServer_BUHgQeOs -Dcatalina.home=/tmp/brooklyn-ma
 -tomcat-7.0.56 -Djava.io.tmpdir=/tmp/brooklyn-martin/apps/jIzIHXtP/entities/TomcatServer_BUHgQeOs/temp org.apache.catali
 na.startup.Bootstrap start
 
-{% endhighlight %}
+```
 
 This confirms that the process is running. The next thing we can look at is the `service.notUp.indicators` sensor. This
 reads as follows:
 
-{% highlight json %}
+```json
 
 {"service.process.isRunning":"The software process for this entity does not appear to be running"}
 
-{% endhighlight %}
+```
 
 This confirms that the problem is indeed due to the `service.process.isRunning` sensor. We assumed earlier that this was
 set by the `isRunning()` method in `TomcatSshDriver.java`, but this isn't always the case. The `service.process.isRunning`
 sensor is wired up by the `connectSensors()` method in the node's implementation class, in this case 
 `TomcatServerImpl.java`. Tomcat's implementation of `connectSensors()` is as follows:
 
-{% highlight java %}
+```java
 
 @Override
 public void connectSensors() {
@@ -396,7 +396,7 @@ public void connectSensors() {
     }
 }
 
-{% endhighlight %}
+```
 
 We can see here that if jmx is not enabled, the method will call `connectServiceUpIsRunning()` which will use the
 default PID-based method of determining if a process is running. However, as JMX *is* running, the `service.process.isRunning`
@@ -404,12 +404,12 @@ sensor (denoted here by the `SERVICE_PROCESS_IS_RUNNING` variable) is set to tru
 `stateName` JMX attribute equals `STARTED`. We can see from the previous call to `.pollAttribute` that this
 attribute is also published to the `CONNECTOR_STATUS` sensor. The `CONNECTOR_STATUS` sensor is defined as follows:
 
-{% highlight java %}
+```java
 
 AttributeSensor<String> CONNECTOR_STATUS =
     new BasicAttributeSensor<String>(String.class, "webapp.tomcat.connectorStatus", "Catalina connector state name");
 
-{% endhighlight %}
+```
 
 Let's go back to the Brooklyn debug console and look for the `webapp.tomcat.connectorStatus`:
 
@@ -429,11 +429,11 @@ Let's assume that we've checked that and they're all open. There is still one mo
 
 Still on the `Sensors` tab, let's take a look at the `log.location` sensor:
 
-{% highlight console %}
+```console
 
 /tmp/brooklyn-martin/apps/c3bmrlC3/entities/TomcatServer_C1TAjYia/logs/catalina.out
 
-{% endhighlight %}
+```
 
 This is the location of Tomcat's own log file. The location of the log file will differ from process to process
 and when writing a custom entity you will need to check the software's own documentation. If your blueprint's
@@ -444,7 +444,7 @@ automatically be published to the `log.location` sensor. Otherwise, you can publ
 **Note:** The log file will be on the server to which you have deployed Tomcat, and not on the Brooklyn server.
 Let's take a look in the log file:
 
-{% highlight console %}
+```console
 
 $ less /tmp/brooklyn-martin/apps/c3bmrlC3/entities/TomcatServer_C1TAjYia/logs/catalina.out
 
@@ -479,6 +479,6 @@ WARNING: Catalina.start using conf/server.xml: The element type "unmatched-eleme
 Jul 21, 2015 4:12:12 PM org.apache.catalina.startup.Catalina start
 SEVERE: Cannot start server. Server instance is not configured.
 
-{% endhighlight %}
+```
 
 As expected, we can see here that the `unmatched-element` element has not been terminated in the `server.xml` file

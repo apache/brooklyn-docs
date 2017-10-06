@@ -15,7 +15,7 @@ These can be accessed at runtime using the syntax `named:your-group-name` as the
 Some illustrative examples using named locations and
 showing the syntax and properties above are as follows:
 
-{% highlight bash %}
+```bash
 # Production pool of machines for my application (deploy to named:prod1)
 brooklyn.location.named.prod1=byon:(hosts="10.9.1.1,10.9.1.2,produser2@10.9.2.{10,11,20-29}")
 brooklyn.location.named.prod1.user=produser1
@@ -36,7 +36,7 @@ brooklyn.location.named.AWS\ Virginia\ Large\ Centos.region = us-east-1
 brooklyn.location.named.AWS\ Virginia\ Large\ Centos.imageId=us-east-1/ami-7d7bfc14
 brooklyn.location.named.AWS\ Virginia\ Large\ Centos.user=root
 brooklyn.location.named.AWS\ Virginia\ Large\ Centos.minRam=4096
-{% endhighlight %}
+```
 
 Named locations can refer to other named locations using `named:xxx` as their value.
 These will inherit the configuration and can override selected keys.
@@ -58,17 +58,17 @@ an additional public key in all AWS machines,
 and no extra public key in `prod1`: 
 
 <!-- tested in JcloudsLocationResolverTest -->
-{% highlight bash %}
+```bash
 brooklyn.location.extraSshPublicKeyUrls=http://me.com/public_key
 brooklyn.location.jclouds.aws-ec2.extraSshPublicKeyUrls="[ \"http://me.com/public_key\", \"http://me.com/aws_public_key\" ]"
 brooklyn.location.named.prod1.extraSshPublicKeyUrls=
-{% endhighlight %}
+```
 
 And in the example below, a config key is repeatedly overridden. 
 Deploying `location: named:my-extended-aws` will result in an `aws-ec2` machine in `us-west-1` (by inheritance)
 with `VAL6` for `KEY`:
   
-{% highlight bash %}
+```bash
 brooklyn.location.KEY=VAL1
 brooklyn.location.jclouds.KEY=VAL2
 brooklyn.location.jclouds.aws-ec2.KEY=VAL3
@@ -77,4 +77,4 @@ brooklyn.location.named.my-aws=jclouds:aws-ec2:us-west-1
 brooklyn.location.named.my-aws.KEY=VAL5
 brooklyn.location.named.my-extended-aws=named:my-aws
 brooklyn.location.named.my-extended-aws.KEY=VAL6
-{% endhighlight %}
+```

@@ -15,4 +15,4 @@ children:
 - { path: memory-usage.md, title: Monitoring Memory Usage }
 ---
 
-{% include list-children.html %}
+

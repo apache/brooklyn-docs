@@ -20,4 +20,4 @@ children:
 - troubleshooting/
 ---
 
-{% include list-children.html %}
+

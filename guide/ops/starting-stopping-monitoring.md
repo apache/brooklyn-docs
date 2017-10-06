@@ -25,9 +25,9 @@ files.
 
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
-{% highlight bash %}
+```bash
 % bin/start
-{% endhighlight %}
+```
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. It is strongly
@@ -43,7 +43,7 @@ To stop Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 For example:
 
-{% highlight bash %}
+```bash
 % bin/stop
 {% endhighlight bash %}
 
@@ -65,11 +65,11 @@ For example, here is a fragment of a `monitrc` file as used by
 [Monit](https://mmonit.com/monit/), for a Brooklyn `.tar.gz` distribution
 unpacked and installed at `/opt/apache-brooklyn`:
 
-{% highlight text %}
+```text
 check process apachebrooklyn with pidfile /opt/apache-brooklyn/pid_java
     start program = "/bin/bash -c '/opt/apache-brooklyn/bin/brooklyn launch --persist auto & disown'" with timeout 10 seconds
     stop  program = "/bin/bash -c 'kill $( cat /opt/apache-brooklyn/pid_java )'"
-{% endhighlight %}
+```
 
 In addition to monitoring the Brooklyn process itself, you will almost certainly
 want to monitor resource usage of Brooklyn. In particular, please see the

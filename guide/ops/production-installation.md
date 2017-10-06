@@ -3,8 +3,6 @@ layout: website-normal
 title: Production Installation
 ---
 
-{% include fields.md %}
-
 To install Apache Brooklyn on a production server:
 
 1. [Set up the prerequisites](#prerequisites)
@@ -16,7 +14,7 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging]({{ site.path.guide }}/ops/logging.html)
+* [Logging]({{ book.path.guide }}/ops/logging.html)
 * [Persistence](persistence/)
 * [High availability](high-availability/)
 
@@ -28,45 +26,45 @@ Then configure the server as follows:
 
 * install Java JRE or JDK (version 8 or later)
 * enable "Java Cryptography Extension" (already enabled out of the box of OpenJDK installs)
-* install an [SSH key]({{ site.path.guide }}/locations/index.html#ssh-keys), if not available
-* if the "localhost" location will be used, enable [passwordless ssh login]({{ site.path.guide }}/locations/index.html#ssh-keys)
+* install an [SSH key]({{ book.path.guide }}/locations/index.html#ssh-keys), if not available
+* if the "localhost" location will be used, enable [passwordless ssh login]({{ book.path.guide }}/locations/index.html#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
-* check that the [linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient
-* check that the [ulimit values]({{ site.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high
+* check that the [linux kernel entropy]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient
+* check that the [ulimit values]({{ book.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high
 * ensure external libraries are up-to-date, including `nss` for SSL. 
 * ensure the time is continually accurate, ideally by running a service like the [ntp daemon](http://www.ntp.org/).
 
 
 ### <a id="download"></a>Download Apache Brooklyn
 
-Download Brooklyn and obtain a binary build as described on [the download page]({{site.path.website}}/download/).
+Download Brooklyn and obtain a binary build as described on [the download page]({{book.path.website}}/download/).
 
-{% if brooklyn_version contains 'SNAPSHOT' %}
+{% if book.brooklyn-version %}
 Expand the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
 Expand the `tar.gz` archive:
 {% endif %}
 
-{% if brooklyn_version contains 'SNAPSHOT' %}
-{% highlight bash %}
-% tar -zxf apache-brooklyn-dist-{{ site.brooklyn-stable-version }}-timestamp-dist.tar.gz
-{% endhighlight %}
+{% if book.brooklyn-version %}
+```bash
+% tar -zxf apache-brooklyn-dist-{{ book.brooklyn-stable-version }}-timestamp-dist.tar.gz
+```
 {% else %}
-{% highlight bash %}
-% tar -zxf apache-brooklyn-{{ site.brooklyn-stable-version }}-dist.tar.gz
-{% endhighlight %}
+```bash
+% tar -zxf apache-brooklyn-{{ book.brooklyn-stable-version }}-dist.tar.gz
+```
 {% endif %}
 
-This will create a `apache-brooklyn-{{ site.brooklyn-stable-version }}` folder.
+This will create a `apache-brooklyn-{{ book.brooklyn-stable-version }}` folder.
 
 Let's setup some paths for easy commands.
 
-{% highlight bash %}
-% cd apache-brooklyn-{{ site.brooklyn-stable-version }}
+```bash
+% cd apache-brooklyn-{{ book.brooklyn-stable-version }}
 % BROOKLYN_DIR="$(pwd)"
 % export PATH=$PATH:$BROOKLYN_DIR/bin/
-{% endhighlight %}
+```
 
 
 ### <a id="configuring-properties"></a>Configuring brooklyn.cfg
@@ -98,9 +96,9 @@ If you have a preferred catalog, simply replace that file.
 
 Launch Brooklyn in a disconnected session so it will remain running after you have logged out:
 
-{% highlight bash %}
+```bash
 % nohup bin/brooklyn launch > /dev/null 2&>1 &
-{% endhighlight %}
+```
 
 Apache Brooklyn should now be running on port 8081 (or other port if so specified).
 

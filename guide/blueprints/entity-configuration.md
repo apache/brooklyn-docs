@@ -19,14 +19,14 @@ and also it does not work in all contexts such as for an enricher's configuratio
 
 A simple example is shown below:
 
-{% highlight yaml %}
+```yaml
 services:
 - type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
   brooklyn.config:
     webapp.enabledProtocols: http
     http.port: 9080
     wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.9.0/brooklyn-example-hello-world-webapp-0.9.0.war
-{% endhighlight %}
+```
 
 If no config value is supplied, the default for that config key will be used. For example, 
 `http.port` would default to 8080 if not explicitly supplied.
@@ -44,7 +44,7 @@ blueprint (i.e. inside the `brooklyn.config` block).
 It can also explicitly declare config keys, using the `brooklyn.parameters` block. The example 
 below illustrates the principle:
 
-{% highlight yaml %}
+```yaml
 brooklyn.catalog:
   items:
   - id: entity-config-example
@@ -64,19 +64,19 @@ brooklyn.catalog:
           echo "My example launch command: $MESSAGE"
         checkRunning.command: |
           echo "My example checkRunning command: $MESSAGE"
-{% endhighlight %}
+```
 
 Once added to the catalog, it can be used with the simple blueprint below (substituting the location
 of your choice). Because no configuration has been overridden, this will use the default value
 for `custom.message`, and will use the given values for `launch.command` and `checkRunning.command`:
 
-{% highlight yaml %}
+```yaml
 location: aws-ec2:us-east-1
 services:
 - type: entity-config-example
-{% endhighlight %}
+```
 
-For details of how to write and add catalog items, see [Catalog]({{ site.path.guide }}/blueprints/catalog/). 
+For details of how to write and add catalog items, see [Catalog]({{ book.path.guide }}/blueprints/catalog/). 
 
 
 #### Config Key Constraints
@@ -91,7 +91,7 @@ can be any of:
 
 This is illustrated in the example below:
 
-{% highlight yaml %}
+```yaml
 brooklyn.catalog:
   items:
   - id: entity-constraint-example
@@ -121,18 +121,18 @@ brooklyn.catalog:
             factoryMethod.name: lessThan
             factoryMethod.args:
             - 256.0
-{% endhighlight %}
+```
 
 An example usage of this toy example, once added to the catalog, is shown below:
 
-{% highlight yaml %}
+```yaml
 services:
 - type: entity-constraint-example
   brooklyn.config:
     compulsoryExample: foo
     addressExample: 1.1.1.1
     numberExample: 2.0
-{% endhighlight %}
+```
 
 
 ### Inheriting Configuration
@@ -167,7 +167,7 @@ consider the `entity-config-example` added to the catalog in the section
 [Configuration in a Catalog Item](#configuration-in-a-catalog-item).
 We can override these values. If not overridden, then the existing values from the super-type will be used:
 
-{% highlight yaml %}
+```yaml
 location: aws-ec2:us-east-1
 services:
 - type: entity-config-example
@@ -175,7 +175,7 @@ services:
     custom.message: Goodbye
     launch.command: |
       echo "Sub-type launch command: $MESSAGE"
-{% endhighlight %}
+```
 
 
 
@@ -193,7 +193,7 @@ Configuration passed to an entity is inherited by all child entities, unless exp
 In the example below, the `wars.root` config key is inherited by all TomcatServer entities created
 under the cluster, so they will use that war:
 
-{% highlight yaml %}
+```yaml
 services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
@@ -201,7 +201,7 @@ services:
     dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-{% endhighlight %}
+```
 
 In the above example, it would be better to have specified the `wars.root` configuration in the 
 `TomcatServer` entity spec, rather than at the top level. This would make it clearer for the reader
@@ -236,7 +236,7 @@ it retrievies the value of `exampleConfig` which is the DSL expression, and eval
 context of the parent entity that declares it. Therefore `$brooklyn:config("ownConfig")` returns 
 the parent's `ownConfig` value, and the final result for `refExampleConfig` is set to "parentValue":
 
-{% highlight yaml %}
+```yaml
 services:
 - type: org.apache.brooklyn.entity.stock.BasicApplication
   brooklyn.config:
@@ -248,7 +248,7 @@ services:
     brooklyn.config:
       ownConfig: childValue
       refExampleConfig: $brooklyn:config("exampleConfig")
-{% endhighlight %}
+```
 
 _However, the web-console also shows other misleading (incorrect!) config values for the child 
 entity. It shows the inherited config value of `exampleConfig` as "childValue" (because the
@@ -282,7 +282,7 @@ the section [Configuration in a Catalog Item](#configuration-in-a-catalog-item))
 The environment variables will include the `MESSAGE` 
 set in the super-type and the `MESSAGE2` set here:
 
-{% highlight yaml %}
+```yaml
 location: aws-ec2:us-east-1
 services:
 - type: entity-config-example
@@ -291,7 +291,7 @@ services:
       MESSAGE2: Goodbye
     launch.command: |
       echo "Different example launch command: $MESSAGE and $MESSAGE2"
-{% endhighlight %}
+```
 
 To explicitly remove a value from the super-type's map (rather than adding to it), a blank entry
 can be defined. 
@@ -311,7 +311,7 @@ In the example below, the VM will be provisioned with minimum 2G ram and minimum
 also use the merged template options value of 
 `{placementGroup: myPlacementGroup, securityGroupIds: sg-000c3a6a}`:
 
-{% highlight yaml %}
+```yaml
 location:
   aws-ec2:us-east-1:
     minRam: 2G
@@ -324,14 +324,14 @@ services:
       minCores: 2
       templateOptions:
         securityGroupIds: sg-000c3a6a
-{% endhighlight %}
+```
 
 The merging of `templateOptions` is shallow (i.e. maps within the `templateOptions` are not merged). 
 In the example below, the `userMetadata` value within `templateOptions` will be overridden by the 
 entity's value, rather than the maps being merged; the value used when provisioning will be 
 `{key2: val2}`:
 
-{% highlight yaml %}
+```yaml
 location:
   aws-ec2:us-east-1:
     templateOptions:
@@ -343,7 +343,7 @@ services:
     provisioning.properties:
       userMetadata:
         key2: val2
-{% endhighlight %}
+```
 
 
 #### Re-inherited Versus not Re-inherited
@@ -368,7 +368,7 @@ and is co-located on the same VM as Tomcat. We don't want the Tomcat's configura
 entity might re-execute the Tomcat's install command! Instead, the `install.command` config is
 "consumed" by the Tomcat instance and is not re-inherited:
 
-{% highlight yaml %}
+```yaml
 services:
 - type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server
   brooklyn.config:
@@ -378,14 +378,14 @@ services:
     brooklyn.config:
       logstash.elasticsearch.host: $brooklyn:entity("es").attributeWhenReady("urls.http.withBrackets")
 ...
-{% endhighlight %}
+```
 
 "Not re-inherited" differs from "never inherited". The example below illustrates the difference, 
 though this use is discouraged (it is mostly for backwards compatibility). The `post.install.command`
 is not consumed by the `BasicApplication`, so will be inherited by the `Tomcat8Server` which will
 consume it. The config value will therefore not be inherited by the `logstash-child`.
 
-{% highlight yaml %}
+```yaml
 services:
 - type: org.apache.brooklyn.entity.stock.BasicApplication
   brooklyn.config:
@@ -399,7 +399,7 @@ services:
       brooklyn.config:
         logstash.elasticsearch.host: $brooklyn:entity("es").attributeWhenReady("urls.http.withBrackets")
 ...
-{% endhighlight %}
+```
 
 
 #### Never Inherited
@@ -470,7 +470,7 @@ Below is a (contrived!) example of inheriting the `example.map` config key. When
 in a blueprint, the entity's config will be merged with that defined in the super-type, and the 
 parent entity's value will never be inherited:
 
-{% highlight yaml %}
+```yaml
 brooklyn.catalog:
   items:
   - id: entity-config-inheritance-example
@@ -489,7 +489,7 @@ brooklyn.catalog:
       brooklyn.config:
         example.map:
           MESSAGE: Hello
-{% endhighlight %}
+```
 
 The blueprints below demonstrate the various permutations for setting configuration for the
 config `example.map`. This can be inspected by looking at the entity's config. The config
@@ -499,7 +499,7 @@ config from the parent is not inherited because there is an explicit inheritance
 so it just has the value `{MESSAGE: "Hello"}`; in app4 again the parent's config is ignored,
 with the super-type and entity's config being merged to give  `{MESSAGE: "Hello", MESSAGE_IN_CHILD: "InChild"}`.
 
-{% highlight yaml %}
+```yaml
 location: aws-ec2:us-east-1
 services:
 - type: org.apache.brooklyn.entity.stock.BasicApplication
@@ -533,7 +533,7 @@ services:
     brooklyn.config:
       example.map:
         MESSAGE_IN_CHILD: InChild
-{% endhighlight %}
+```
 
 A limitations of `inheritance.parent` is when inheriting values from parent and grandparent 
 entities: a value specified on the parent will override (rather than be merged with) the

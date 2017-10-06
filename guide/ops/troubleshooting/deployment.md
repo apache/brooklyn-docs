@@ -18,16 +18,16 @@ section is missing.
 
 An error like the one shown below means that the given entity type (in this case com.acme.Foo) is not in the catalog or on the classpath:
 
-{% highlight bash %}
+```bash
 Deployment plan item Service[name=<null>,description=<null>,serviceType=com.acme.Foo,characteristics=[],customAttributes={}] cannot be matched
-{% endhighlight %}
+```
 
 
 An error like the one shown below means that the given location (in this case aws-ec3) was unknown:
 
-{% highlight bash %}
+```bash
 Illegal parameter for 'location' (aws-ec3); not resolvable: java.util.NoSuchElementException: Unknown location 'aws-ec3': either this location is not recognised or there is a problem with location resolver configuration
-{% endhighlight %}
+```
 
 This means it does not match any of the named locations in brooklyn.properties, nor any of the clouds enabled in the jclouds support, nor any of the locations added dynamically through the catalog API.
 
@@ -100,15 +100,15 @@ includes the ssl library.
 
 To fix this on CentOS, run:
 
-{% highlight bash %}
+```bash
 sudo yum upgrade nss
-{% endhighlight %}
+```
 
 For a discussion of investigating this kind of issue, see this [Backslasher blog](http://blog.backslasher.net/java-ssl-crash.html).
 
 The full stacktrace is shown below:
 
-{% highlight java %}
+```java
 Caused by: javax.net.ssl.SSLException: java.security.ProviderException: java.security.KeyException
 	at sun.security.ssl.Alerts.getSSLException(Alerts.java:208)
 	at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1949)
@@ -142,7 +142,7 @@ Caused by: java.security.KeyException
 	at sun.security.ec.ECKeyPairGenerator.generateECKeyPair(Native Method)
 	at sun.security.ec.ECKeyPairGenerator.generateKeyPair(ECKeyPairGenerator.java:128)
 	... 83 more
-{% endhighlight %}
+```
 
 
 ## Timeout Waiting For Service-Up
@@ -162,16 +162,16 @@ If you receive an error message similar to the one below when provisioning a VM,
 
 You can workaround the issue by explicitly setting the user that Brooklyn should use to login to the VM  (typically the OS default user).
 
-{% highlight bash %}
+```bash
 error acquiring SFTPClient() (out of retries - max 50)
 Invalid packet: indicated length too large
 java.lang.IllegalStateException
 Invalid packet: indicated length too large
-{% endhighlight %}
+```
 
 An example of how to explicitly set the user is shown below (when defining a Location) by using 'loginUser': 
 
-{% highlight yaml %}
+```yaml
 brooklyn.locations:
 - type: jclouds:aws-ec2
   brooklyn.config:
@@ -180,7 +180,7 @@ brooklyn.locations:
     identity: <add>
     credential: <add>
     loginUser: centos
-{% endhighlight %}
+```
 
 ## SSLException close_notify Exception
 

@@ -28,9 +28,9 @@ and no one snooping on the network can decrypt of any of the traffic.
 
 If you don't have an SSH key, create one with:
 
-{% highlight bash %}
+```bash
 $ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-{% endhighlight %}
+```
 
 
 #### Localhost Setup
@@ -38,10 +38,10 @@ $ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 If you want to deploy to `localhost`, ensure that you have a public and private key,
 and that your key is authorized for ssh access:
 
-{% highlight bash %}
+```bash
 # _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-{% endhighlight %}
+```
 
 Now verify that your setup by running the command: `ssh localhost echo hello world`
 
@@ -85,4 +85,4 @@ If this isn't the case, see below.
   if command-line `ssh` and `scp` work, but Brooklyn/java does not, check the versions enabled in Java and on both servers.
 
 * Missing entropy: creating and using ssh keys requires randomness available on the servers,
-  usually in `/dev/random`; see [here]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) for more information
+  usually in `/dev/random`; see [here]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html) for more information

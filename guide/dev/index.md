@@ -7,7 +7,7 @@ breadcrumbs:
 - /website/documentation/index.md
 - /guide/dev/index.md
 children:
-- { link: "{{ site.path.website }}/developers/code/", title: "Get the Code" }
+- { link: "{{ book.path.website }}/developers/code/", title: "Get the Code" }
 - env/maven-build.md
 - env/ide/
 - code/structure.md
@@ -39,4 +39,4 @@ And for the Brooklyn codebase itself, see:
 (All links are TODO.)
 {% endcomment %}
 
-{% include list-children.html %}
+
