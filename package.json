@@ -5,12 +5,20 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "gitbook-cli": "^2.3.2",
     "gitbook-plugin-include-highlight": "^0.2.1",
     "gitbook-plugin-theme-api": "^1.1.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "gitbook install",
+    "build": "gitbook build",
+    "serve": "gitbook serve"
   },
   "author": "",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apache/brooklyn-docs.git"
+  }
 }

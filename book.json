@@ -1,4 +1,5 @@
 {
+  "gitbook": "^3.2.3",
   "root": "./guide",
   "plugins" : ["include-highlight", "theme-api"],
   "pluginsConfig": {

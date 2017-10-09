@@ -1,6 +1,33 @@
 Brooklyn Website and Docs Source
 ================================
 
+Quick start with the prototype GitBook documentation
+----------------------------------------------------
+
+On the first checkout, run:
+
+```bash
+npm install
+```
+
+Then, to run a local webserver with the documentation:
+
+```bash
+npm run serve
+```
+
+Wait for the message `Serving book on http://localhost:4000`, and then browse to
+that URL to see the book.
+
+To build a static documentation website:
+
+```bash
+npm run build
+```
+
+The generated files will be in `_book`.
+
+
 Contributor Workflow
 --------------------
 
