@@ -27,6 +27,11 @@ npm run build
 
 The generated files will be in `_book`.
 
+**To generate PDF**, first follow [these instructions to install ebook-convert](https://toolchain.gitbook.com/ebook.html), then run:
+
+```bash
+npm run pdf
+```
 
 Contributor Workflow
 --------------------

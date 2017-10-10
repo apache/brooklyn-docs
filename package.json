@@ -13,7 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "gitbook install",
     "build": "gitbook build",
-    "serve": "gitbook serve"
+    "serve": "gitbook serve",
+    "pdf": "gitbook pdf"
   },
   "author": "",
   "license": "Apache-2.0",
