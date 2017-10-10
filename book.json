@@ -40,50 +40,12 @@
   },
   "variables": {
     "brooklyn_version": "1.0.0-SNAPSHOT",
-
-
-
-
-
-
-
-    "encoding": "utf-8",
-    "markdown": "kramdown",
-
+    "brooklyn-stable-version": "0.12.0",
     "url_root": "http://0.0.0.0:4000",
-
     "path": {
-      "style": "/style",
       "guide": "/guide",
       "website": "/website",
       "v": "/v"
-    },
-
-    "dependency_mode": "local",
-    "dependency_urls": {
-      "bootstrap.css": "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css",
-      "bootstrap.js": "https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js",
-      "jquery.js": "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
-    },
-
-    "root_menu_page": "/website/index.md",
-
-    "exclude": ["/Gemfile*", "/README.md"],
-
-    "sass": {
-      "sass_dir": "style/css"
-    },
-
-    "brooklyn-stable-version": "0.11.0",
-    "pdf-default-base-url": "http://brooklyn.apache.org",
-    "pdf-default-versioned-url-subpath": "/v/0.11.0",
-
-    "pdf-rewrite-prefixes": {
-      "/guide": "/v/0.11.0",
-      "/website": ""
-    },
-
-    "brooklyn-version": "0.13.0-SNAPSHOT",
-    "brooklyn-snapshot-git-branch": "master"
+    }
   }
 }
