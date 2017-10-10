@@ -37,7 +37,7 @@ $ br app
  hTPAF19s   Tomcat   RUNNING   ajVVAhER
 </pre>
 
-A full list of abbreviations such as this can be found in the [CLI reference guide]({{ book.path.guide }}/ops/cli/cli-ref-guide.html#abbreviations){:target="_blank"}.
+A full list of abbreviations such as this can be found in the [CLI reference guide]({{ book.path.guide }}/ops/cli/cli-ref-guide.html#abbreviations).
 
 In the above example the Id `hTPAF19s` and the Name `Tomcat` are shown. You can use either of these handles to monitor and control the application. The Id shown for your application will be different to this but the name should be the same, note that if you are running multiple applications the Name may not be unique.
 
@@ -277,7 +277,7 @@ These effectors can also be invoked by appending ```invoke``` to this command. S
 
 These parameters can be supplied using ```--param parm=value``` or just ```-P parm=value```. 
 
-The commands below deploy the Apache Tomcat [hello world example](http://tomcat.apache.org/tomcat-6.0-doc/appdev/index.html){:target="_blank"} to our Tomcat Server. In these commands, a variable is created for the root URL using the appropriate
+The commands below deploy the Apache Tomcat [hello world example](http://tomcat.apache.org/tomcat-6.0-doc/appdev/index.html) to our Tomcat Server. In these commands, a variable is created for the root URL using the appropriate
 sensor and the index page html is displayed. 
 
 ```bash
