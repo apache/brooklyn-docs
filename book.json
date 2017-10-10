@@ -40,7 +40,7 @@
   },
   "variables": {
     "brooklyn_version": "1.0.0-SNAPSHOT",
-    "brooklyn-stable-version": "0.12.0",
+    "brooklyn_version_stable": "0.12.0",
     "url_root": "http://0.0.0.0:4000",
     "path": {
       "guide": "/guide",

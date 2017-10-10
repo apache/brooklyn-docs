@@ -15,7 +15,7 @@ Possible reasons include:
 * SSH'ing is very slow due (e.g. due to lack of entropy)
 * Out of disk space
 
-See [Brooklyn Requirements]({{ book.path.guide }}/ops/requirements.html) for details of server 
+See [Brooklyn Requirements](../requirements.md) for details of server 
 requirements.
 
 
@@ -59,7 +59,7 @@ ulimit -a -u adalovelace
 
 Of particular interest is the limit for "open files".
 
-See [Increase System Resource Limits]({{ book.path.guide }}/ops/troubleshooting/increase-system-resource-limits.html) 
+See [Increase System Resource Limits](increase-system-resource-limits.md) 
 for more information.
 
 
@@ -106,7 +106,7 @@ netstat -an | grep ESTABLISHED | wc -l
 
 A lack of entropy can cause random number generation to be extremely slow. This can cause
 tasks like ssh to also be extremely slow. See 
-[linux kernel entropy]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html)
+[linux kernel entropy](increase-entropy.md)
 for details of how to work around this.
 
 
@@ -158,14 +158,14 @@ appropriate for a production server.
 If the Brooklyn Server was originally run to allow a remote debugger to connect (strongly 
 discouraged in production!), then this provides a convenient way to investigate why Brooklyn
 is being slow or unresponsive. See the Debugging Tips in the 
-tip [Debugging Remote Brooklyn]({{ book.path.guide }}/dev/tips/debugging-remote-brooklyn.html)
+tip [Debugging Remote Brooklyn](../../dev/tips/debugging-remote-brooklyn.md)
 and the [IDE docs]({{ book.path.guide }}/dev/env/ide/) for more information.
 
 
 ## Log Files
 
 Apache Brooklyn will by default create brooklyn.info.log and brooklyn.debug.log files. See the
-[Logging]({{ book.path.guide }}/ops/logging.html) docs for more information.
+[Logging](../logging.md) docs for more information.
 
 The following are useful log messages to search for (e.g. using `grep`). Note the wording of
 these messages (or their very presence) may change in future version of Brooklyn. 

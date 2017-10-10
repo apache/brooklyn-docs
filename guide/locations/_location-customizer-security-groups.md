@@ -6,7 +6,7 @@ section_type: inline
 
 ## Customizing Cloud Security Groups
 
-Before using SharedLocationSecurityGroupCustomizer, please first refer to [Port Inferencing](../../blueprints/custom-entities.html#port-inferencing).
+Before using SharedLocationSecurityGroupCustomizer, please first refer to [Port Inferencing](../blueprints/custom-entities.md#port-inferencing).
 
 A security group is a named collection of network access rules that are use to limit the types of traffic that have access to instances.<br>
 Security group is the standard way to set firewall restrictions on the AWS-EC2 environment.

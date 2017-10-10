@@ -224,7 +224,7 @@ The items this will add to the catalog are:
 
 #### Locations in the Catalog
 
-In addition to blueprints, locations can be added to the Apache Brooklyn catalog. The example below shows a location for the vagrant configuration used in the [getting started guide]({{ book.path.guide }}/start/blueprints.html), formatted as a catalog entry.
+In addition to blueprints, locations can be added to the Apache Brooklyn catalog. The example below shows a location for the vagrant configuration used in the [getting started guide](../../start/blueprints.md), formatted as a catalog entry.
 
 ~~~ yaml
 brooklyn.catalog:

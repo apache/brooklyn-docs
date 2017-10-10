@@ -6,7 +6,7 @@ layout: website-normal
 # {{ page.title }}
 
 ## Introduction
-This section describes some simple tests based on the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:
+This section describes some simple tests based on the [Getting Started](../../start/blueprints.md#launching-from-a-blueprint) example blueprint:
 
 !CODEFILE "../../start/_my-web-cluster.yaml"
 

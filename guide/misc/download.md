@@ -101,7 +101,7 @@ The latest stable release can be accessed on the [main download page]({{ book.pa
 
 ## Release Notes
 
-Release notes can be found [here]({{ book.path.guide }}/misc/release-notes.html).
+Release notes can be found [here](release-notes.md).
 
 <a name="maven"></a>
 

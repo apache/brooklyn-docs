@@ -44,5 +44,5 @@ targets changes.
 
 This guide has given a quick overview of using the Apache Brooklyn GUI to deploy, monitor and manage applications. The GUI also allows you to perform various Advanced management tasks and to explore and use the REST API (from the Script tab).  Please take some time now to become more familiar with the GUI.
 
-Then continue to read through the [Operations Guide](../).
+Then continue to read through the [Operations Guide](../rest.md).
 

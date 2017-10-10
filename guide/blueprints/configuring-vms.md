@@ -17,7 +17,7 @@ ignored if deploying to `localhost` or `byon` fixed-IP machines.*
 
 This will create a VM with the specified parameters in your choice of cloud.
 In the GUI (and in the REST API), the entity is called "VM",
-and the hostname and IP address(es) are reported as [sensors]({{ book.path.guide }}/concepts/entities.html).
+and the hostname and IP address(es) are reported as [sensors](../concepts/entities.md).
 There are many more `provisioning.properties` supported here,
 including:
 
@@ -27,4 +27,4 @@ including:
 * `machineCreateAttempts` (for dodgy clouds, and they nearly all fail occasionally!) 
 * and things like `imageId` and `userMetadata` and disk and networking options (e.g. `autoAssignFloatingIp` for private clouds)
 
-For more information, see [Operations: Locations]({{ book.path.guide }}/locations/index.html).
+For more information, see [Operations: Locations](../locations/index.md).

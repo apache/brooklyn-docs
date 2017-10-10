@@ -22,7 +22,7 @@ Loggers follow the ``package.ClassName`` naming standard.
 
 In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
 
-See: [Logging - OSGi based Apache Brooklyn](../dev/tips/logging.html#osgi-based-apache-brooklyn) <br/>
+See: [Logging - OSGi based Apache Brooklyn](../dev/tips/logging.md#osgi-based-apache-brooklyn) <br/>
 [https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
 
 
@@ -77,5 +77,5 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 The following resources may be useful when configuring logging:
 
 * The [logback-includes]({{ book.brooklyn.url.git }}/usage/logback-includes) project
-* [Brooklyn Developer Guide]({{ book.path.guide }}/dev/tips/logging.html) logging tips
+* [Brooklyn Developer Guide](../dev/tips/logging.md) logging tips
 * The [Logback Project](http://logback.qos.ch/) home page

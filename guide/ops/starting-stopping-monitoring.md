@@ -6,7 +6,7 @@ layout: website-normal
 
 **NOTE:** This document is for information on starting an Apache Brooklyn
 Server.  For information on using the Brooklyn Client CLI to access an already
-running Brooklyn Server, refer to [Client CLI Reference](cli/index.html).
+running Brooklyn Server, refer to [Client CLI Reference](cli/index.md).
 
 ## Packages for RHEL/CentOS and Ubuntu
 
@@ -32,9 +32,9 @@ To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. It is strongly
-recommended to [configure security](configuration/).
+recommended to [configure security](configuration/index.md).
 
-See the [Server CLI Reference](server-cli-reference.html) for more information
+See the [Server CLI Reference](server-cli-reference.md) for more information
 about the Brooklyn server process.
 
 
@@ -46,7 +46,7 @@ For example:
 
 ```bash
 % bin/stop
-{% endhighlight bash %}
+```
 
 
 ## Monitoring
@@ -74,5 +74,5 @@ check process apachebrooklyn with pidfile /opt/apache-brooklyn/pid_java
 
 In addition to monitoring the Brooklyn process itself, you will almost certainly
 want to monitor resource usage of Brooklyn. In particular, please see the
-[Requirements](requirements.html#disk-space) section for a discussion on Brooklyn's disk
+[Requirements](requirements.md#disk-space) section for a discussion on Brooklyn's disk
 space requirements.

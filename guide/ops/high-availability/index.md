@@ -29,7 +29,7 @@ Once one node is running as `MASTER`, other nodes start in either `STANDBY` or `
   so it can safely be used to test compatibility across different versions.
 
 To explicitly specify what HA mode a node should be in, the following options are available
-for the config option `highAvailabilityMode` in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
+for the config option `highAvailabilityMode` in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.md):
 
 * `DISABLED`: management node works in isolation; it will not cooperate with any other standby/master nodes in management plane
 * `AUTO`: will look for other management nodes, and will allocate itself as standby or master based on other nodes' states

@@ -31,7 +31,7 @@ directory of your Brooklyn instance. The following options are available:
 * `CLEAN` - will start up fresh (removing any existing state)
 
 `persistenceDir` - This is the directory to which Apache Brooklyn reads and writes its persistence data. The default location depends
-on your installation method. Checkout [this page](../paths.html) for more information.
+on your installation method. Checkout [this page](../paths.md) for more information.
 
 `persistenceLocation` - This is the location for an object store to read and write persisted state.
 
@@ -41,7 +41,7 @@ is carried out, for example `1s`.
 
 # File-based Persistence
 
-Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](../paths.html).
+Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](../paths.md).
 For the rest of this document we will refer to this location as `%persistence-home%`.
 
 If there is already data at `%persistence-home%/data`, then a backup of the directory will 
@@ -107,7 +107,7 @@ any registered policies.
 ## Handling Rebind Failures
 
 If rebind fails fail for any reason, details of the underlying failures will be reported 
-in the [`brooklyn.debug.log`](../paths.html). This will include the entities, locations or policies which caused an issue, and in what 
+in the [`brooklyn.debug.log`](../paths.md). This will include the entities, locations or policies which caused an issue, and in what 
 way it failed. There are several approaches to resolving problems.
 
 1) Determine Underlying Cause
@@ -190,7 +190,7 @@ Behaviour on rebind:
 
 * By extending `SoftwareProcess`, entities get a lot of the rebind logic for free. For 
   example, the default `rebind()` method will call `connectSensors()`.
-  See [`SoftwareProcess` Lifecycle](/blueprints/java/entities.html)
+  See [`SoftwareProcess` Lifecycle](../../blueprints/java/entities.md)
   for more details.
 * If necessary, implement rebind. The `entity.rebind()` is called automatically by the
   Brooklyn framework on rebind, after configuring the entity's config/attributes but before 

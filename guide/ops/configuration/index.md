@@ -13,9 +13,9 @@ children:
 
 Apache Brooklyn contains a number of configuration options managed across several files. 
 Historically Brooklyn has been configured through a brooklyn.properties file, this changed 
-to a [brooklyn.cfg](brooklyn_cfg.html) file when the Karaf release became the default in Brooklyn 0.12.0.
+to a [brooklyn.cfg](brooklyn_cfg.md) file when the Karaf release became the default in Brooklyn 0.12.0.
 
-The configurations for [persistence](../persistence/index.html) and [high availability](../high-availability/index.html) are described
+The configurations for [persistence](../persistence/index.md) and [high availability](../high-availability/index.md) are described
 elsewhere in this manual.
 
 Configuration of Apache Brooklyn when running under Karaf is largely done through standard Karaf mechanisms. 
@@ -70,21 +70,15 @@ groups which can be configured as detailed [here](https://karaf.apache.org/manua
 
 * Apache Brooklyn authentication
 
-Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detailed [here](brooklyn_cfg.html#authentication).
+Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detailed [here](brooklyn_cfg.md#authentication).
 
 ### HTTPS Configuration
 
-See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
+See [HTTPS Configuration](https.md) for general information on configuring HTTPS.
 
-
-<!--
-----------
--- NOTE: comment out this section on catalog as the behaviour described is not enabled by default since
--- https://github.com/apache/brooklyn-server/pull/233; re-enable this when that changes
-----------
 ## Catalog in Karaf  
 With the traditional launcher, Brooklyn loads the initial contents of the catalog from a `default.catalog.bom` file
-as described in the section on [installation](/guide/ops/production-installation.html). Brooklyn finds Java 
+as described in the section on [installation](../production-installation.md). Brooklyn finds Java 
 implementations to provide for certain things in blueprints (entities, enrichers etc.) by scanning the classpath. 
 
 In the OSGI world this approach is not used, as each bundle only has visibility of its own and its imported Java packages. 
@@ -138,7 +132,5 @@ In the OSGi world specifying class names by string in Brooklyn's configuration w
 for classes living in Brooklyn's core modules. Raise an issue or ping us on IRC if you find
 a case where this doesn't work for you. For custom SecurityProvider implementations refer to the
 documentation of BrooklynLoginModule.
-    
- END Catalog in Karaf comment -->
 
 

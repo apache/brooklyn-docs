@@ -38,7 +38,7 @@ $ br app
  hTPAF19s   Tomcat   RUNNING   ajVVAhER
 </pre>
 
-A full list of abbreviations such as this can be found in the [CLI reference guide]({{ book.path.guide }}/ops/cli/cli-ref-guide.html#abbreviations).
+A full list of abbreviations such as this can be found in the [CLI reference guide](../ops/cli/cli-ref-guide.md#abbreviations).
 
 In the above example the Id `hTPAF19s` and the Name `Tomcat` are shown. You can use either of these handles to monitor and control the application. The Id shown for your application will be different to this but the name should be the same, note that if you are running multiple applications the Name may not be unique.
 
@@ -154,7 +154,7 @@ Id         Name                Type
 Wx7r1C4e   tomcatServer   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer      
 </pre>
 
-This shows one entity is available: `tomcatServer`. Note that this is the name we gave the entity in the YAML in [Launching from a Blueprint](./blueprints.html#launching-from-a-blueprint) on the previous page.
+This shows one entity is available: `tomcatServer`. Note that this is the name we gave the entity in the YAML in [Launching from a Blueprint](blueprints.md#launching-from-a-blueprint) on the previous page.
 
 You can get summary information for this entity by providing its name (or ID).
 
@@ -492,4 +492,4 @@ runs the ```config``` command with application scope of ```Tomcat``` and entity 
 ## Next
 
 We will look next at a slightly more complex example, which will illustrate the capabilities of Brooklyn's
-**[policies](policies.html)** mechanism, and how to configure dependencies between application entities.
+**[policies](policies.md)** mechanism, and how to configure dependencies between application entities.

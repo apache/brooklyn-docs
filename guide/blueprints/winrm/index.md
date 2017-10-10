@@ -73,7 +73,7 @@ A Sample Blueprint
 
 Creating a Windows VM is done using the `org.apache.brooklyn.entity.software.base.VanillaWindowsProcess` entity type. This is very similar
 to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead of Linux. We suggest you read the
-[documentation for VanillaSoftwareProcess]({{ book.path.guide }}/blueprints/custom-entities.html#vanilla-software-using-bash) to find out what you
+[documentation for VanillaSoftwareProcess](../custom-entities.md#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
 Entity authors are strongly encouraged to write Windows Powershell or Batch scripts as separate 
@@ -130,7 +130,7 @@ Brooklyn source code]({{ book.brooklyn.url.git }}/software/database/src/main/res
 Tips and Tricks
 ---------------
 
-The best practices for other entities (e.g. using [VanillaSoftwareProcess]({{ book.path.guide }}/blueprints/custom-entities.html#vanilla-software-using-bash))
+The best practices for other entities (e.g. using [VanillaSoftwareProcess](../custom-entities.md#vanilla-software-using-bash))
 apply for WinRM as well.
 
 ### Execution Phases
@@ -280,7 +280,7 @@ Re-authentication also requires that the password credentials are passed in plai
 script. Please be aware that it is normal for script files - and therefore the plaintext password - 
 to be saved to the VM's disk. The scripts are also accessible via the Brooklyn web-console's 
 activity view. Access to the latter can be controlled via 
-[Entitlements]({{book.path.guide}}/blueprints/java/entitlements.html).
+[Entitlements](../java/entitlements.md).
 
 As an example (taken from MSSQL install), the command below works when run locally, but fails over 
 WinRM:

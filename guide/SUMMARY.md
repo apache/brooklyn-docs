@@ -89,7 +89,7 @@
   * [Production Installation](ops/production-installation.md)
   * [Starting, Stopping and Monitoring](ops/starting-stopping-monitoring.md)
   * [Server CLI Reference](ops/server-cli-reference.md)
-  * Client CLI Reference
+  * [Client CLI Reference](ops/cli/index.md)
     * [CLI Reference Guide](ops/cli/cli-ref-guide.md)
     * [CLI Usage Guide](ops/cli/cli-usage-guide.md)
   * GUI Guide

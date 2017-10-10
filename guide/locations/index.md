@@ -13,11 +13,11 @@ to a pre-provisioned network or to localhost (primarily useful for testing bluep
 
 See also:
 
-* The [Locations yaml guide]({{ book.path.guide }}/blueprints/setting-locations.html)
+* The [Locations yaml guide](../blueprints/setting-locations.md)
 * Use within an entity of the configuration option 
-  [provisioning.properties]({{ book.path.guide }}/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
-* How to add location definitions to the [Catalog]({{ book.path.guide }}/blueprints/catalog/); and 
-* How to use [Externalized Configuration]({{ book.path.guide }}/ops/externalized-configuration.html).
+  [provisioning.properties](../blueprints/entity-configuration.md#entity-provisioningproperties-overriding-and-merging)
+* How to add location definitions to the [Catalog](../blueprints/catalog/index.md); and 
+* How to use [Externalized Configuration](../ops/externalized-configuration.md).
 
 The requirements for how a provisioned machine should behave will depend on the
 entites subsequently deployed there.
@@ -71,7 +71,7 @@ Try executing:
 
     sudo whoami
 
-See [Passwordless Sudo]({{ book.path.guide }}/locations/index.html#passwordless-sudo).
+See [Passwordless Sudo](#passwordless-sudo).
 
 
 ## Advertised Addresses
@@ -156,7 +156,7 @@ The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html).
+See instructions to [Increase Entropy](../ops/troubleshooting/increase-entropy.md).
 
 
 ## File System

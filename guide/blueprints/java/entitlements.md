@@ -36,7 +36,7 @@ which you can see [here]({{ book.brooklyn.url.git }}/core/src/test/java/org/apac
 and include in your project by adding the core tests JAR to your `dropins` folder.
 
 There are some entitlements schemes which exist out of the box, so for a simpler setup,
-see [Operations: Entitlements]({{ book.path.guide }}/ops/configuration/brooklyn_cfg.html#entitlements). 
+see [Operations: Entitlements](../../ops/configuration/brooklyn_cfg.md#entitlements). 
 
 There are also more complex schemes which some users have developed, including LDAP extensions 
 which re-use the LDAP authorization support in Brooklyn, 

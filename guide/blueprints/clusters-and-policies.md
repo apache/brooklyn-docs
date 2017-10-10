@@ -18,7 +18,7 @@ deployment of our `hello-world-sql` application as follows:
 
 This sets up Nginx as the controller by default, but that can be configured
 using the `controllerSpec` key. 
-This uses the same [externalized config](../ops/externalized-config.html) 
+This uses the same [externalized config](../ops/externalized-configuration.md) 
 as in other examples to hide the password.
 
 JBoss is actually the default appserver in the `ControlledDynamicWebAppCluster`,

@@ -14,7 +14,7 @@ with an effector to create new gists.
 
 ## Project Setup
 
-Follow the instructions to create a new Java project using the [archetype](archetype.html), and
+Follow the instructions to create a new Java project using the [archetype](archetype.md), and
 import it into your [favorite IDE]({{ book.path.guide }}/dev/env/ide/). This example assumes you 
 used the groupId `com.acme` and artifact id `autobrick`.
 
@@ -58,7 +58,7 @@ To describe each part of this:
   web-console.
 
 Note there is an alternative way of defining effectors - adding them to the entity dynamically, 
-discussed in the section [Dynamically Added Effectors](common-usage.html#dynamically-added-effectors).
+discussed in the section [Dynamically Added Effectors](common-usage.md#dynamically-added-effectors).
 
 Next lets add the implementation. Create a new Java class named `GistGeneratorImpl`.
 
@@ -114,7 +114,7 @@ inside `src/test/java`.
 
 Again you will need to substitute the github access token you generated in the previous section for
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section on 
-[externalised configuration]({{ book.path.guide }}/ops/externalized-configuration.html) 
+[externalised configuration](../../ops/externalized-configuration.md) 
 for how to store these credentials more securely. 
 
 !CODEFILE "gist_generator/GistGeneratorYamlTest.java"
@@ -139,7 +139,7 @@ artifact (which will be in the `target` sub-directory after running `mvn clean i
 
 !CODEFILE "gist_generator/gist_generator.bom"
 
-See [Handling Bundle Dependencies]({{ book.path.guide}}/blueprints/java/bundle-dependencies.html)
+See [Handling Bundle Dependencies](bundle-dependencies.md)
 for a description of the `brooklyn.libraries` used above, and for other alternative approaches.
 
 The command below will use the `br` CLI to add this to the catalog of a running Brooklyn instance.
@@ -163,5 +163,5 @@ The YAML blueprint below shows an example usage of this blueprint:
 
 Note the type name matches the id defined in the `.bom` file.
 
-You can now call the effector by any of the standard means - [web console]({{ book.path.guide }}/ops/gui/), 
-[REST api]({{ book.path.guide }}/ops/rest.html), or [Client CLI]({{ book.path.guide }}/ops/cli/).
+You can now call the effector by any of the standard means - [web console](../../ops/gui/index.md), 
+[REST api](../../ops/rest.md), or [Client CLI](../../ops/cli/index.md).

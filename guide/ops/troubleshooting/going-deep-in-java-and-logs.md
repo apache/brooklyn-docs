@@ -424,7 +424,7 @@ the "Show/hide empty records" icon (highlighted in yellow above):
 We know from previous steps that the installation and launch scripts completed, and we know the procecess is running,
 but we can see here that the server is not responding to JMX requests. A good thing to check here would be that the
 JMX port is not being blocked by iptables, firewalls or security groups
-(see the [troubleshooting connectivity guide](connectivity.html)). 
+(see the [troubleshooting connectivity guide](connectivity.md)). 
 Let's assume that we've checked that and they're all open. There is still one more thing that Brooklyn can tell us.
 
 

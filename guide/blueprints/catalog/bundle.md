@@ -15,7 +15,7 @@ uploaded bundles so that they are available after a restart or on HA failover.
 The bundle must be a ZIP file including a `catalog.bom` in the root.
 (The `br` CLI will create a ZIP from a local folder, for convenience.)
 The `catalog.bom` must declare a `bundle` identifier and a `version`, 
-following Brooklyn's [versioning](versioning.html) rules.
+following Brooklyn's [versioning](versioning.md) rules.
 Brooklyn will keep track of that bundle, allowing items to be added and removed as a group,
 and associated resources to be versioned and included alongside them. 
 With SNAPSHOT-version bundles, it allows replacement of multiple related items at the same time,

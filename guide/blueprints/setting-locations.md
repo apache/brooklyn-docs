@@ -110,7 +110,7 @@ the User Guide.
 ### Externalized Configuration
 
 For simplicity, the examples above have included the cloud credentials. For a production system, 
-it is strongly recommended to use [Externalized Configuration]({{ book.path.guide }}/ops/externalized-configuration.html)
+it is strongly recommended to use [Externalized Configuration](../ops/externalized-configuration.md)
 to retrieve the credentials from a secure credentials store, such as [Vault](https://www.vaultproject.io).
 
 
@@ -118,5 +118,5 @@ to retrieve the credentials from a secure credentials store, such as [Vault](htt
 
 An entity that represents a "software process" can use the configuration option 
 `provisioning.properties` to augment the location's configuration. For more information, see
-[Entity Configuration]({{ book.path.guide }}/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
+[Entity Configuration](../blueprints/entity-configuration.md#entity-provisioningproperties-overriding-and-merging)
 details.

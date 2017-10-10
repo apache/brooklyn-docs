@@ -67,7 +67,7 @@ If this isn't the case, see below.
 * **MacOS user?** In addition to the above, enable "Remote Login" in "System Preferences > Sharing".
 
 * **Got a passphrase?** Set `brooklyn.location.localhost.privateKeyPassphrase`
-  as described [here](index.html#os-setup).
+  as described [here](index.md#os-setup).
   If you're not sure, or you don't know what a passphrase is, you can test this by executing `ssh-keygen -y`.
   If it does *not* ask for a passphrase, then your key has no passphrase.
   If your key does have a passphrase, you can remove it by running `ssh-keygen -p`.
@@ -85,4 +85,4 @@ If this isn't the case, see below.
   if command-line `ssh` and `scp` work, but Brooklyn/java does not, check the versions enabled in Java and on both servers.
 
 * Missing entropy: creating and using ssh keys requires randomness available on the servers,
-  usually in `/dev/random`; see [here]({{ book.path.guide }}/ops/troubleshooting/increase-entropy.html) for more information
+  usually in `/dev/random`; see [here](../ops/troubleshooting/increase-entropy.md) for more information

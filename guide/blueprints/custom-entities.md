@@ -265,7 +265,7 @@ command over ssh every 5 seconds. This can be very CPU intensive when there are 
 is to disable the ssh-polling (by setting `sshMonitoring.enabled: false`) and to configure a different 
 health-check.
 
-See documentation on the [Entity's error status]({{ book.path.guide }}/ops/troubleshooting/overview.html#entitys-error-status)
+See documentation on the [Entity's error status](../ops/troubleshooting/overview.md#entitys-error-status)
 for how Brooklyn models an entity's health.
 
 In the snippet below, we'll define a new health-check sensor (via http polling), and will automatically add this

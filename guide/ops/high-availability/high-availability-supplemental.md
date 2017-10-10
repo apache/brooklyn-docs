@@ -4,7 +4,7 @@ layout: website-normal
 ---
 # {{ page.title }}
 
-This supplements the [High Availability](./) documentation
+This supplements the [High Availability](index.md) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore
 
 ### Prerequisites
@@ -18,9 +18,9 @@ is assumed in this example
 
 ### Launching
 To start, download and install the latest Apache Brooklyn release on both VMs following the instructions in
-[Running Apache Brooklyn]({{ book.path.guide }}/start/running.html)
+[Running Apache Brooklyn](../../start/running.md)
 
-On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
+On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.md):
 
 - highAvailabilityMode: MASTER
 - persistMode: AUTO
@@ -32,10 +32,10 @@ Then launch Brooklyn with:
 $ bin/start
 ```
 
-If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{ book.path.guide }}/start/running.html) 
+If you are using RPMs/deb to install, please see the [Running Apache Brooklyn](../../start/running.md) 
 documentation for the appropriate launch commands
 
-Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
+Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.md):
 
 - highAvailabilityMode: AUTO
 - persistMode: AUTO

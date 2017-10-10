@@ -440,7 +440,7 @@ tvZoNUTN   ssh: launching NginxControllerImpl{id...   Sun Dec 20 19:18:08 GMT 20
 ```
 
 ## YAML Blueprint
-This is the YAML blueprint used for this document, based on the [web cluster](../../blueprints/clusters-and-policies.html) examples.
+This is the YAML blueprint used for this document, based on the [web cluster](../../blueprints/clusters-and-policies.md) examples.
 
 ```text
 name: WebCluster

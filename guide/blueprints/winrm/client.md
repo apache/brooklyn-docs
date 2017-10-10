@@ -50,7 +50,7 @@ where Apache Brooklyn complains about failing to connect to the IP you should ch
 If the quick list above doesn't help then follow the steps bellow.
 
 To speed up diagnosing the problem we advice to trigger a deployment with the JcloudsLocation flag `destroyOnFailure: false` so you can check status of the provisioned machine
-or try later different WinRM parameters with a Apache Brooklyn [BYON Location](../../locations/index.html#byon).
+or try later different WinRM parameters with a Apache Brooklyn [BYON Location](../../locations/index.md#byon).
 
 After you determined what is the username and the password you can proceed with next steps.
 *(Notice that for cloud providers which use Auto Generated password will not be logged.

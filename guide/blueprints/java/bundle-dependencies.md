@@ -38,8 +38,8 @@ It is vital that these jars are built correctly as OSGi bundles, and that all tr
 dependencies are included. The bundles will be added to Karaf in the order given, so a bundle's
 dependencies should be listed before the bundle(s) that depend on them.
 
-In the [GistGenerator example]({{ book.path.guide}}/blueprints/java/defining-and-deploying.html), the 
-[catalog.bom file]({{ book.path.guide}}/blueprints/java/gist_generator/gist_generator.bom) included
+In the [GistGenerator example](defining-and-deploying.md), the 
+[catalog.bom file](gist_generator/gist_generator.bom) included
 the URL of the dependency `org.eclipse.egit.github.core`. It also (before that line) included
 its transitive dependency, which is a specific version of `gson`.
 

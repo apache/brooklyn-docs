@@ -68,4 +68,4 @@ To stop an application, select the application in the tree view (the top/root en
 
 ## Next
 
-Brooklyn's real power is in using **[Policies](policies.html)**  to automatically *manage* applications. 
+Brooklyn's real power is in using **[Policies](policies.md)**  to automatically *manage* applications. 

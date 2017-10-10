@@ -40,7 +40,7 @@ Here there are a few things going on:
 * We've injected the URL of the second service into the appserver as a Java system property
   (so our app knows where to find the database)
 * We've used externalized config to keep secret information out of the blueprint;
-  this is loaded at runtime from an [externalized config provider](../ops/externalized-config.html),
+  this is loaded at runtime from an [externalized config provider](../ops/externalized-configuration.md),
   such as a remote credentials store
  
 **Caution: Be careful if you write your YAML in an editor which attempts to put "smart-quotes" in.

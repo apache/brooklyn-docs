@@ -39,7 +39,7 @@ In order to configure the location in which Apache Brooklyn launches an applicat
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
-The Vagrant configuration described in [Running Apache Brooklyn](./running.html), on the previous page is the recommended way of running this tutorial. This configuration comes with four blank vagrant configurations called byon1 to byon4.
+The Vagrant configuration described in [Running Apache Brooklyn](running.md), on the previous page is the recommended way of running this tutorial. This configuration comes with four blank vagrant configurations called byon1 to byon4.
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.
 
@@ -108,7 +108,7 @@ First, log in to brooklyn with the command line interface (CLI) tool by typing:
 $ br login http://localhost:8081/
 ```
 
-To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here]({{ book.path.guide }}/ops/configuration/brooklyn_cfg.html). 
+To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here](../ops/configuration/brooklyn_cfg.md). 
 If this is configured, the login command will require an additional parameter for the userid and will then prompt for a password.
 
 Now you can create the application with the command below:
@@ -129,6 +129,6 @@ you can monitor the progress of the application deployment and verify if it was 
 
 <div class="started-pdf-exclude">
 
-Having deployed an application, the next step is **[monitoring and managing](managing.html)** it.
+Having deployed an application, the next step is **[monitoring and managing](managing.md)** it.
 
 </div>

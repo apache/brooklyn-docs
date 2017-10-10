@@ -37,7 +37,7 @@ location:
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
 ```
 
-**NOTE**: See __[Locations](../locations)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
+**NOTE**: See __[Locations](../../locations/index.md)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
 
 With the modified YAML in the dialog, click "Finish". The dialog will close and Brooklyn will begin deploying your
 application. Your application will be shown as "Starting" on the web console's front page.
@@ -62,4 +62,4 @@ See __[Catalog](../catalog/)__ in the Operations section of the User Guide for i
 ## Next 
 
 So far we have touched on Brooklyn's ability to *deploy* an application blueprint to a cloud provider.  
-The next section will show how to **[Monitor and Manage Applications](managing.html)**.
+The next section will show how to **[Monitor and Manage Applications](managing.md)**.
