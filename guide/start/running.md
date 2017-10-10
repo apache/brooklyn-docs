@@ -17,7 +17,14 @@ To get you up-and-running quickly, the Vagrant option will provision four comput
 
 {% method -%}
 
+{% common -%}
+{% if output.name == 'website' %}
+**Hint:** in the top right of this page are buttons to select an operating system. Choose your operating system to see the most appropriate instructions here.
+{% endif %}
+
 {% sample lang="vagrant" -%}
+### Installing with Vagrant
+
 [Vagrant](https://www.vagrantup.com/) is a software package which automates the process of setting up virtual machines (VM) such as [Oracle VirtualBox](https://www.virtualbox.org). We recommend it as the easiest way of getting started with Apache Brooklyn.
 
 Firstly, download and install:
@@ -45,6 +52,8 @@ $ cd apache-brooklyn-{{book.brooklyn_version}}-vagrant
 ```
 
 {% sample lang="centos" -%}
+### Installing on CentOS & Red Hat Enterprise Linux 7
+
 {% if 'SNAPSHOT' in book.brooklyn_version %}<strong>Please note, an RPM is not available for snapshot builds</strong>{% endif %}
 
 For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on RPM-based Linux distributions is by using the RPM package. 
@@ -64,6 +73,8 @@ $ yum install apache-brooklyn-{{book.brooklyn_version}}-1.rpm
 ```
 
 {% sample lang="ubuntu" -%}
+### Installing on Ubuntu 7 Debian
+
 For Ubuntu and Debian users, the recommended way to install Apache Brooklyn is to use the deb file. 
 
 The deb file is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The deb package contains all the necessary files associated with the Apache Brooklyn application. 
@@ -82,6 +93,8 @@ $ sudo dpkg -i apache-brooklyn_{{book.brooklyn_version}}_noarch.deb
 
 
 {% sample lang="osx" -%}
+### Installing on other Linux distributions, OSX and other UNIX-like platforms
+
 For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{book.path.website}}/download/) section.
 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
@@ -104,6 +117,8 @@ $ cd apache-brooklyn-{{ book.brooklyn.version }}
 
 
 {% sample lang="windows" -%}
+### Installing on Windows
+
 For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{book.path.website}}/download/). 
 
 Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
@@ -126,6 +141,8 @@ to configure security. Documentation of configuration options include:
 {% method -%}
 
 {% sample lang="vagrant" -%}
+### Launching in Vagrant
+
 Now start Apache Brooklyn with the following command:
 
 ```bash
@@ -139,6 +156,8 @@ $ vagrant ssh brooklyn --command 'sudo journalctl -n15 -f -u brooklyn'
 ```
 
 {% sample lang="centos" -%}
+### Launching on CentOS & Red Hat Enterprise Linux 7
+
 Apache Brooklyn should now have been installed and be running as a system service. It can stopped and started with the standard systemctl commands:
 
 ```bash
@@ -148,6 +167,8 @@ $ systemctl start|stop|restart|status brooklyn
 The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 {% sample lang="ubuntu" -%}
+### Launching on Ubuntu & Debian
+
 Apache Brooklyn should now have been installed and be running as a system service. It can be stopped and started with the standard service commands:
 
 ```bash
@@ -157,6 +178,8 @@ $ sudo service brooklyn start|stop|restart|status
 The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 {% sample lang="osx" -%}
+### Launching on other Linux distributions, OSX and other UNIX-like platforms
+
 Now start Apache Brooklyn with the following command:
 
 ```bash
@@ -166,6 +189,8 @@ $ bin/start
 The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{ book.path.guide }}/ops/paths.html) page for the locations of these.
 
 {% sample lang="windows" -%}
+### Launching on Windows
+
 You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\start.bat`
 
 The application should then output its log into the console and also `c:\Program Files\brooklyn\data\log\brooklyn.debug.log` and `c:\Program Files\brooklyn\data\log\brooklyn.info.log`
