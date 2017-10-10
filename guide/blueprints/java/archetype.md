@@ -26,7 +26,7 @@ Alternatively, all options can be supplied at the command line. For example,
 if creating a project named "autobrick" for "com.acme":
 
 ```bash
-$ BROOKLYN_VERSION={{ book.brooklyn-version }}
+$ BROOKLYN_VERSION={{ book.brooklyn_version }}
 $ mvn archetype:generate \
 	-DarchetypeGroupId=org.apache.brooklyn \
 	-DarchetypeArtifactId=brooklyn-archetype-quickstart \

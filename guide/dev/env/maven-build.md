@@ -16,32 +16,32 @@ The full build requires the following software to be installed:
 With these in place, you should be able to build everything with a:
 
 ```bash
-% mvn clean install
+mvn clean install
 ```
 
 Alternatively you can build most things with just Java and Maven installed using:
 
 ```bash
-mvn clean install -Dno-go-client -Dno-rpm`
+mvn clean install -Dno-go-client -Dno-rpm
 ```
 
 Other tips:
 
-* Add ``-DskipTests`` to skip tests (builds much faster, but not as safe)
+* Add `-DskipTests` to skip tests (builds much faster, but not as safe)
 
 * You may need more JVM memory, e.g. at the command-line (or in `.profile`):
 
-  ``export MAVEN_OPTS="-Xmx1024m -Xms512m"``
+  `export MAVEN_OPTS="-Xmx1024m -Xms512m"`
 
-* Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
-  ([tests described here](../code/tests.html))
+* Run `-PIntegration` to run integration tests, or `-PLive` to run live tests
+  ([tests described here](../code/tests.md))
 
-* You may need to install ``rpm`` package to build RPM packages: ``brew install rpm`` for Mac OS, ``apt-get install rpm`` for Ubuntu, ``yum install rpm`` for Centos/RHEL.
+* You may need to install `rpm` package to build RPM packages: `brew install rpm` for Mac OS, `apt-get install rpm` for Ubuntu, `yum install rpm` for Centos/RHEL.
   On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.
 
 * If you're looking at the maven internals, note that many of the settings are inherited from parent projects (see for instance `brooklyn-server/parent/pom.xml`)
 
-* For tips on building within various IDEs, look [here](ide/).
+* For tips on building within various IDEs, look [here](ide/index.md).
 
 
 ## When the RAT Bites
@@ -78,10 +78,10 @@ If there is a good reason that a file, pattern, or directory should be permanent
 
 * The **mvnf** script 
   ([get the gist here](https://gist.github.com/2241800)) 
-  simplifies building selected projects, so if you just change something in ``software-webapp`` 
+  simplifies building selected projects, so if you just change something in `software-webapp` 
   and then want to re-run the examples you can do:
   
-  ``examples/simple-web-cluster% mvnf ../../{software/webapp,usage/all}`` 
+  `examples/simple-web-cluster% mvnf ../../{software/webapp,usage/all}` 
 
 ## Appendix: Sample Output
 

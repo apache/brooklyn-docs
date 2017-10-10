@@ -12,13 +12,13 @@ information on starting on a Brooklyn Server, refer to [Server CLI Reference](..
 
 ## Obtaining the CLI tool
 
-A selection of distributions of the CLI tool, `br`, are available to download from the download site {% if book.brooklyn-version %}
-[here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-client-cli&v={{book.brooklyn-version}}&c=bin&e=zip).
+A selection of distributions of the CLI tool, `br`, are available to download from the download site {% if 'SNAPSHOT' in book.brooklyn_version %}
+[here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-client-cli&v={{book.brooklyn_version}}&c=bin&e=zip).
 {% else %} here:
 
-* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}-client-cli-windows.zip)
-* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}-client-cli-linux.tar.gz)
-* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn-version}}-client-cli-macosx.tar.gz)
+* [Windows](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}-client-cli-windows.zip)
+* [Linux](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}-client-cli-linux.tar.gz)
+* [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}-client-cli-macosx.tar.gz)
 {% endif %}
 
 Alternatively the CLI tool is available as an executable binary for many more platforms in the Apache Brooklyn

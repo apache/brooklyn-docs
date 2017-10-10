@@ -3,9 +3,9 @@ layout: website-normal
 title: Release Notes
 ---
 
-## Version {{ book.brooklyn-version }}
+## Version {{ book.brooklyn_version }}
 
-{% if SNAPSHOT %}
+{% if 'SNAPSHOT' in book.brooklyn_version %}
 **You are viewing a SNAPSHOT release (master branch), so this list is in progress!**
 {% endif %}
 

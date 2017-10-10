@@ -39,6 +39,14 @@
     }
   },
   "variables": {
+    "brooklyn_version": "1.0.0-SNAPSHOT",
+
+
+
+
+
+
+
     "encoding": "utf-8",
     "markdown": "kramdown",
 

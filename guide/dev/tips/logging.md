@@ -16,7 +16,7 @@ if you prefer one of those.
 
 While developing it may be useful to change logging level of some of the Apache Brooklyn modules.
 The easiest way to do that is via the karaf console which can be started by `bin/client`.
-(Details regarding using [Apache Brooklyn Karaf console](../../blueprints/java/bundle-dependencies.html#karaf-console))
+(Details regarding using [Apache Brooklyn Karaf console](../../blueprints/java/bundle-dependencies.md#karaf-console))
 For example if you would like to inspect jclouds API calls, enable jclouds.wire logging just enable it from karaf client.
 
     log:set DEBUG jclouds.wire

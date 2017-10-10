@@ -4,18 +4,18 @@ title: Brooklyn Remote Debugging
 toc: /guide/toc.json
 ---
 
-Usually during development, you will be running Brooklyn from your IDE (see [IDE Setup](../env/ide/)), in which case
+Usually during development, you will be running Brooklyn from your IDE (see [IDE Setup](../env/ide/index.md)), in which case
 debugging is as simple as setting a breakpoint. There may however be times when you need to debug an existing remote
 Brooklyn instance (often referred to as Resident Brooklyn, or rBrooklyn) on another machine, usually in the cloud.
 
 Thankfully, the tools are available to do this, and setting it up is quite straightforward. The steps are as follows:
 
-* [Getting the right source code version](#sourceCodeVersion)
-* [Starting Brooklyn with a debug listener](#startingBrooklyn)
-* [Creating an SSH tunnel](#sshTunnel)
-* [Connecting your IDE](#connectingIDE)
+* [Getting the right source code version](#getting-the-right-source-code-version)
+* [Starting Brooklyn with a debug listener](#starting-brooklyn-with-a-debug-listener)
+* [Creating an SSH tunnel](#creating-an-ssh-tunnel)
+* [Connecting your IDE](#connecting-your-ide)
 
-## <a name="sourceCodeVersion"></a>Getting the right source code version
+## Getting the right source code version
 The first step is to ensure that your local copy of the source code is at the version used to build the remote Brooklyn
 instance. The git commit that was used to build Brooklyn is available via the REST API:
 
@@ -25,7 +25,7 @@ This should return details of the build as a JSON string similar to the followin
 
 ```json
 {
-    "version": "1.0.0-SNAPSHOT",  {% comment %}BROOKLYN_VERSION{% endcomment %}
+    "version": "1.0.0-SNAPSHOT",  // BROOKLYN_VERSION
     "buildSha1": "c0fdc15291702281acdebf1b11d431a6385f5224",
     "buildBranch": "UNKNOWN"
 }
@@ -41,7 +41,7 @@ checkout and build the Brooklyn code at this commit by running the following in 
 
 Whilst building the code isn't strictly necessary, it can help prevent some IDE issues.
 
-## <a name="startingBrooklyn"></a>Starting Brooklyn with a debug listener
+## Starting Brooklyn with a debug listener
 By default, Brooklyn does not listen for a debugger to be attached, however this behaviour can be set by setting JAVA_OPTS,
 which will require a restart of the Brooklyn node. To do this, SSH to the remote Brooklyn node and run the following in the
 root of the Brooklyn installation:
@@ -62,7 +62,7 @@ You should see the following in the console output:
 
 This will indicate the Brooklyn is listening on port 8888 for a debugger to be attached.
 
-## <a name="sshTunnel"></a>Creating an SSH tunnel
+## Creating an SSH tunnel
 
 If port 8888 is accessible on the remote Brooklyn server, then you can skip this step and simply use the address of the
 server in place of 127.0.0.1 in the [Connecting your IDE](#connectingIDE) section below. It will normally be possible to
@@ -97,14 +97,14 @@ The SSH tunnel should now be redirecting traffic from port 8888 on the local 127
 tunnel to port 8888 on the remote 127.0.0.1 interface. It should now be possible to connect the debugger and start
 debugging.
 
-## <a name="connectingIDE"></a> Connecting your IDE
+## Connecting your IDE
 
 Setting up your IDE will differ depending upon which IDE you are using. Instructions are given here for Eclipse and
 IntelliJ, and have been tested with Eclipse Luna and IntelliJ Ultimate 14.
 
 ### Eclipse Setup
 
-To debug using Eclipse, first open the Brooklyn project in Eclipse (see [IDE Setup](../env/ide/)).
+To debug using Eclipse, first open the Brooklyn project in Eclipse (see [IDE Setup](../env/ide/index.md)).
 
 Now create a debug configuration by clicking `Run` | `Debug Configurations...`. You will then be presented with the 
 Debug Configuration dialog.
@@ -116,7 +116,7 @@ and the Port should be set to 8888. Click 'Debug' to start debugging.
 
 ### IntelliJ Setup
 
-To debug using IntelliJ, first open the Brooklyn project in IntelliJ (see [IDE Setup](../env/ide/)).
+To debug using IntelliJ, first open the Brooklyn project in IntelliJ (see [IDE Setup](../env/ide/index.md)).
 
 Now create a debug configuration by clicking `Run` | `Edit Configurations`. You will then be presented with the
 Run/Debug Configurations dialog.
@@ -124,7 +124,7 @@ Run/Debug Configurations dialog.
 Click on the `+` button and select 'Remote' to create a new remote configuration. Set the name to something suitable
 such as 'Remote debug on 8888'. The first three sections simply give the command line arguments for starting the java
 process using different versions of java, however we have already done this in 
-[Starting Brooklyn with a debug listener](#startingBrooklyn). The Transport option should be set to 'Socket', the Debugger Mode should be set to 'Attach', the
+[Starting Brooklyn with a debug listener](#starting-brooklyn-with-a-debug-listener). The Transport option should be set to 'Socket', the Debugger Mode should be set to 'Attach', the
 Host should be set to localhost or 127.0.0.1 (or the address of the remote machine if you are not using an SSH tunnel),
 and the Port should be set to 8888. The 'Search sources' section should be set to `<whole project>`. Click OK to save the
 configuration, then select the configuration from the configurations drop-down and click the debug button to start

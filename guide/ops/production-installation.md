@@ -40,13 +40,13 @@ Then configure the server as follows:
 
 Download Brooklyn and obtain a binary build as described on [the download page]({{book.path.website}}/download/).
 
-{% if book.brooklyn-version %}
+{% if 'SNAPSHOT' in book.brooklyn_version %}
 Expand the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
 Expand the `tar.gz` archive:
 {% endif %}
 
-{% if book.brooklyn-version %}
+{% if 'SNAPSHOT' in book.brooklyn_version %}
 ```bash
 % tar -zxf apache-brooklyn-dist-{{ book.brooklyn-stable-version }}-timestamp-dist.tar.gz
 ```
