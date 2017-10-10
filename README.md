@@ -217,7 +217,7 @@ Preparing for a Release
 When doing a release and changing versions:
 
 * Before branching:
-  * Change the `brooklyn-stable-version` variable in `_config.yml`
+  * Change the `brooklyn_stable_version` variable in `_config.yml`
   * Update `website/meta/versions.md` with a bit of info on this release
 *  In the branch, with `change-version.sh` run (e.g. from `N.SNAPSHOT` to `N`)
   * Ensure the `guide/start/release-notes.md` file is current
