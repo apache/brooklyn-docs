@@ -25,13 +25,17 @@ Firstly, download and install:
  * [Vagrant](https://www.vagrantup.com/downloads.html)
  * [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
  
-Then download the provided Apache Brooklyn vagrant configuration from
 {% if 'SNAPSHOT' in book.brooklyn_version %}
-    [here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{book.brooklyn_version}}&c=dist&e=zip).
-{% else %}
-    [here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{book.brooklyn_version}}/apache-brooklyn-{{book.brooklyn_version}}-vagrant.tar.gz).
-{% endif %}
+Then download the provided Apache Brooklyn vagrant configuration from
+[here](https://repository.apache.org/service/local/artifact/maven/redirect?r=snapshots&g=org.apache.brooklyn&a=brooklyn-vagrant&v={{book.brooklyn_version}}&c=dist&e=zip).
 This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
+
+{% else %}
+
+Then download the provided Apache Brooklyn vagrant configuration from
+[here](https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{book.brooklyn_version}}/apache-brooklyn-{{book.brooklyn_version}}-vagrant.tar.gz).
+This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
+{% endif %}
 
 Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{book.brooklyn_version}}-vagrant` folder {% if 'SNAPSHOT' in book.brooklyn_version %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
 
