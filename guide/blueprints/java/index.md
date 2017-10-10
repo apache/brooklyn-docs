@@ -15,6 +15,7 @@ children:
 - service-state.md
 - entitlements.md
 ---
+# {{ page.title }}
 
 Java blueprints are powerful, but also rather more difficult to write than YAML.
 Advanced Java skills are required.

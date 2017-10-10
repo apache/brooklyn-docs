@@ -3,6 +3,7 @@ layout: website-normal
 title: Brooklyn Slow or Unresponsive
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 There are many possible causes for a Brooklyn server becoming slow or unresponsive. This guide 
 describes some possible reasons, and some commands and tools that can help diagnose the problem.

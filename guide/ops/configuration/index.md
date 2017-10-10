@@ -9,6 +9,7 @@ children:
 - https.md
 - cors.md
 ---
+# {{ page.title }}
 
 Apache Brooklyn contains a number of configuration options managed across several files. 
 Historically Brooklyn has been configured through a brooklyn.properties file, this changed 

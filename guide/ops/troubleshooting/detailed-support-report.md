@@ -3,6 +3,7 @@ layout: website-normal
 title: Detailed Support Report
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 If you wish to send a detailed report, then depending on the nature of the problem, consider 
 collecting the following information.

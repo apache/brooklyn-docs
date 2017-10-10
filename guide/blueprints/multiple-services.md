@@ -2,6 +2,7 @@
 title: Multiple Services and Dependency Injection
 layout: website-normal
 ---
+# {{ page.title }}
 
 We've seen the configuration of machines and how to build up clusters.
 Now let's return to our app-server example and explore how more interesting

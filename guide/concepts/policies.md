@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Policies perform the active management enabled by Brooklyn. Entities can have zero or more ``Policy`` instances attached to them. 
 

@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 So far we've covered how to configure and compose entities.
 There's a large library of blueprints available, but

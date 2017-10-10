@@ -2,6 +2,7 @@
 title: Externalized Configuration
 layout: website-normal
 ---
+# {{ page.title }}
 
 Sometimes it is useful that configuration in a blueprint, or in Brooklyn itself, is not given explicitly, but is instead
 replaced with a reference to some other storage system. For example, it is undesirable for a blueprint to contain a

@@ -3,6 +3,7 @@ layout: website-normal
 title: Maven Build
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 ## The Basics
 

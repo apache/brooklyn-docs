@@ -5,6 +5,7 @@ children:
 - { path: provisioned-machine-requirements.md, section_position: 8 }
 check_directory_for_children: true
 ---
+# {{ page.title }}
 
 Locations are the environments to which Brooklyn deploys applications. Most commonly these 
 are cloud services such as AWS, GCE, and IBM Softlayer. Brooklyn also supports deploying 

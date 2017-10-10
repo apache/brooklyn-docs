@@ -10,6 +10,7 @@ children:
 - { section: Effectors  } 
 - { section: Activities } 
 ---
+# {{ page.title }}
 
 
 

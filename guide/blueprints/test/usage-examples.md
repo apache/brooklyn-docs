@@ -3,6 +3,7 @@ title: Example Blueprint Tests
 title_in_menu: Example Tests
 layout: website-normal
 ---
+# {{ page.title }}
 
 ## Introduction
 This section describes some simple tests based on the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:

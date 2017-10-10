@@ -2,6 +2,7 @@
 title: Upgrade
 layout: website-normal
 ---
+# {{ page.title }}
 
 This guide provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
 

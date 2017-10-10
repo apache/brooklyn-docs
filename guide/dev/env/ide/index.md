@@ -3,6 +3,7 @@ layout: website-normal
 title: IDE Setup
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
 neither quite gets along perfectly with Groovy,

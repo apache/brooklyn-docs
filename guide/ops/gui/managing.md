@@ -4,6 +4,7 @@ title_in_menu: Monitoring and Managing Applications
 layout: website-normal
 menu_parent: index.md
 ---
+# {{ page.title }}
 
 From the Home page, click on the application name or open the Applications tab.
 

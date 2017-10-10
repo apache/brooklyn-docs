@@ -3,6 +3,7 @@ title: Creating Blueprints with Ansible
 title_in_menu: Creating Blueprints with Ansible
 layout: website-normal
 ---
+# {{ page.title }}
 
 To write a blueprint to use Ansible with Brooklyn it will help to have a degree of familiarity with Ansible itself. In the 
 sections below, when the Brooklyn configuration is described, the underlying Ansible operation is also noted briefly, for 

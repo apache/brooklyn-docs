@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Now let's bring the concept of the "cluster" back in.
 We could wrap our appserver in the same `DynamicCluster` we used earlier,

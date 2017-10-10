@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Under-the-covers, at heart of the brooklyn management plane is the ``ManagementContext``. 
 This is started automatically when using launching an application using the brooklyn CLI. For programmatic use, see 

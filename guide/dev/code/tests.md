@@ -3,6 +3,7 @@ layout: website-normal
 title: Tests
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 We have the following tests groups:
 

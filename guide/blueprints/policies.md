@@ -2,6 +2,7 @@
 title: Policies
 layout: website-normal
 ---
+# {{ page.title }}
 
 Policies perform the active management enabled by Brooklyn.
 They can subscribe to entity sensors and be triggered by them (or they can run periodically,

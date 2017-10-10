@@ -16,6 +16,7 @@ children:
 - { section: Activities}
 - { section: Miscellaneous}
 ---
+# {{ page.title }}
 
 ## Usage
 ```text

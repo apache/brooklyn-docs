@@ -3,6 +3,7 @@ layout: website-normal
 title: Troubleshooting SoftwareProcess Entities
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 The [troubleshooting overview](overview.html) in Brooklyn gives 
 information for how to find more information about errors.

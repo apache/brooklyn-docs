@@ -2,6 +2,7 @@
 title: Catalog Items YAML Syntax
 layout: website-normal
 ---
+# {{ page.title }}
 
 ### Catalog Items YAML Syntax
 

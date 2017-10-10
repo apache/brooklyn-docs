@@ -2,6 +2,7 @@
 title: Templates and the Add-Application Wizard
 layout: website-normal
 ---
+# {{ page.title }}
 
 ### Templates and the Add-Application Wizard
 

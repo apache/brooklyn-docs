@@ -4,6 +4,7 @@ title_in_menu: Running Apache Brooklyn
 layout: website-normal
 menu_parent: index.md
 ---
+# {{ page.title }}
 
 This guide will walk you through deploying an example 3-tier web application to a public cloud, and demonstrate the autoscaling capabilities of the Brooklyn platform.
 

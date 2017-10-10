@@ -2,6 +2,7 @@
 title: Requirements
 layout: website-normal
 ---
+# {{ page.title }}
 
 ## Server Specification
 

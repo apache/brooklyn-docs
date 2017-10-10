@@ -2,6 +2,7 @@
 layout: website-normal
 title: Downloads
 ---
+# {{ page.title }}
 
 
 {% if book.brooklyn.is_snapshot %}

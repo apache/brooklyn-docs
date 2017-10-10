@@ -3,6 +3,7 @@ layout: website-normal
 title: Troubleshooting Overview
 toc: /guide/toc.json
 ---
+# {{ page.title }}
 
 This guide describes sources of information for understanding when things go wrong.
 

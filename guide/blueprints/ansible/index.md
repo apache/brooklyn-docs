@@ -5,6 +5,7 @@ children:
 - about-ansible.md
 - creating-ansible-blueprints.md
 ---
+# {{ page.title }}
 
 This guide describes how Brooklyn entities can be created using the Ansible infrastructure management tool
  ([ansible.com](http://ansible.com)).

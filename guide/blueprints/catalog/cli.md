@@ -2,6 +2,7 @@
 title: Brooklyn Server Command Line Arguments
 layout: website-normal
 ---
+# {{ page.title }}
 
 ### Brooklyn Server Command Line Arguments
 

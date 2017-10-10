@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Under the covers Brooklyn has a sophisticated sensor event and subscription model, but conveniences around this model make it very simple to express cross-entity dependencies. Consider the example where Tomcat instances need to know the URL of a database (or a set of URLs to connect to a Monterey processing fabric, or other entities)
 

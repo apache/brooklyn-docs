@@ -2,6 +2,7 @@
 layout: website-normal
 title: Miscellaneous Tips and Tricks
 ---
+# {{ page.title }}
 
 ## General Good Ways of Working
 

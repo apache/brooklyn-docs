@@ -2,6 +2,7 @@
 layout: website-normal
 title: Production Installation
 ---
+# {{ page.title }}
 
 To install Apache Brooklyn on a production server:
 

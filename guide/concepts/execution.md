@@ -2,6 +2,7 @@
 title: Execution
 layout: website-normal
 ---
+# {{ page.title }}
 
 All processing, whether an effector invocation or a policy cycle, are tracked as ***tasks***. This allows several important capabilities:
 

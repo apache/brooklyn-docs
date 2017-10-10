@@ -2,6 +2,7 @@
 title: Common Classes and Entities
 layout: website-normal
 ---
+# {{ page.title }}
 
 <!-- TODO old, needs work (refactoring!) and use of java_link -->
 

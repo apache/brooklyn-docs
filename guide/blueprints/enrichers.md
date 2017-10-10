@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Enrichers provide advanced manipulation of an entity's sensor values.
 See below for documentation of the stock enrichers available in Apache Brooklyn.

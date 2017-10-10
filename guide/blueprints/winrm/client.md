@@ -2,6 +2,7 @@
 title: Winrm4j Client
 layout: website-normal
 ---
+# {{ page.title }}
 
 ## Winrm4j parameters
 

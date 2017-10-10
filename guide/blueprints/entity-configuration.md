@@ -4,6 +4,7 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Within a blueprint or catalog item, entities can be configured. The rules for setting this 
 configuration, including when composing and extending existing entities, is described in this 

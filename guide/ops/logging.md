@@ -2,6 +2,7 @@
 title: Logging
 layout: website-normal
 ---
+# {{ page.title }}
 
 Brooklyn uses the SLF4J logging facade, which allows use of many popular frameworks including `logback`, 
 `java.util.logging` and `log4j`.

@@ -4,6 +4,7 @@ layout: website-normal
 children:
 - client.md
 ---
+# {{ page.title }}
 
 Brooklyn can deploy to Windows servers using WinRM to run commands. These deployments can be 
 expressed in pure YAML, and utilise Powershell to install and manage the software process. 

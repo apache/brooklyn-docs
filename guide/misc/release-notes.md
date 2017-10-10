@@ -2,6 +2,7 @@
 layout: website-normal
 title: Release Notes
 ---
+# {{ page.title }}
 
 ## Version {{ book.brooklyn_version }}
 

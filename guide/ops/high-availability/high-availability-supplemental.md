@@ -2,6 +2,7 @@
 title: Configuring HA - an example
 layout: website-normal
 ---
+# {{ page.title }}
 
 This supplements the [High Availability](./) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore

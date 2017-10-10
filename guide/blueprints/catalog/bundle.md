@@ -2,6 +2,7 @@
 title: Bundling
 layout: website-normal
 ---
+# {{ page.title }}
 
 ### Bundling Catalog Resources
 

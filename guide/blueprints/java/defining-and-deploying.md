@@ -2,6 +2,7 @@
 title: Defining and Deploying
 layout: website-normal
 ---
+# {{ page.title }}
 
 ## Intro
 

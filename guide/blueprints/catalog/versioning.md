@@ -2,6 +2,7 @@
 title: Versioning
 layout: website-normal
 ---
+# {{ page.title }}
 
 Brooklyn supports multiple versions of a type to be installed and used at the same time.
 Versions are a first-class concept and are often prominently displayed in the UI.

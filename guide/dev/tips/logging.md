@@ -2,6 +2,7 @@
 title: Logging
 layout: website-normal
 ---
+# {{ page.title }}
 
 ## Logging: A Quick Overview
 

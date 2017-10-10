@@ -2,6 +2,7 @@
 title: REST API
 layout: website-normal
 ---
+# {{ page.title }}
 
 Apache Brooklyn exposes a powerful REST API, 
 allowing it to be scripted from bash or integrated with other systems.

@@ -3,6 +3,7 @@ title: Brooklyn Concepts Quickstart
 layout: website-normal
 menu_parent: index.md
 ---
+# {{ page.title }}
 
 The following section provides a quick summary of the main Brooklyn concepts you will encounter in Getting Started.  For further discussion of these concepts see [The Theory Behind Brooklyn]({{book.path.website}}/learnmore/theory.html), and the detailed descriptions in [Brooklyn Concepts]({{book.path.guide}}/concepts/).
 
