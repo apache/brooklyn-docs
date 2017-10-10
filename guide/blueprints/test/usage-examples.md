@@ -4,12 +4,10 @@ title_in_menu: Example Tests
 layout: website-normal
 ---
 
-{% include fields.md %}
-
 ## Introduction
 This section describes some simple tests based on the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:
 
-!CODEFILE "/guide/start/_my-web-cluster.yaml"
+!CODEFILE "../../start/_my-web-cluster.yaml"
 
 The following sections contain yaml snippets that be appended to the list of services in the blueprint above, a complete blueprint is also provided [below](#full-example).
 

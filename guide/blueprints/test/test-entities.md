@@ -4,8 +4,6 @@ title_in_menu: Test Entities
 layout: website-normal
 ---
 
-{% include fields.md %}
-
 
 ## Structural Test Entities
 

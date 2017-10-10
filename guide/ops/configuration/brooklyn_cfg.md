@@ -10,8 +10,6 @@ children:
 - { section: HTTPS Configuration }
 ---
 
-{% include fields.md %}
-
 The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
 
 ## Quick Setup
