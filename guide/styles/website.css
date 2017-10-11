@@ -1,0 +1,216 @@
+body {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: #393939;
+}
+
+.page-header {
+    background-color: #fafafa;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.page-header .navbar-brand {
+    position: relative;
+    top: 11px;
+    left: 15px;
+}
+
+.book {
+    height: calc(100% - 50px);
+    top: 50px;
+}
+
+.book-header {
+    border-top: 1px solid rgba(0,0,0,.07);
+    top: 50px;
+}
+.book-header .btn.lang-switcher.active {
+    background-color: #449d44;
+}
+.book-summary ul.summary li.active>a,
+.markdown-section a {
+    color : #449d44;
+}
+
+/* YAML EXPLAINED
+   ----------------------------------------------------------------------- */
+div.annotated_blueprint {
+    margin-top: 60px; }
+div.annotated_blueprint div.code_scroller {
+    background-color: #f5f5f5;
+    border: 0.4em solid #666;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 3px;
+    width: 57%;
+    margin-right: 0px;
+    margin-left: auto;
+    background-color: #666;
+    color: #ddd;
+    overflow-x: scroll; }
+div.annotated_blueprint div.code_scroller div {
+    overflow-x: visible !important;
+    overflow-y: visible !important; }
+div.annotated_blueprint div.code_scroller div.code_viewer {
+    width: auto;
+    height: 100%; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block {
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-align-items: center;
+    align-items: center;
+    z-index: -10; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div:last-child {
+    font-family: Consolas, Lucida Console, Monaco, monospace;
+    white-space: pre;
+    word-wrap: normal;
+    overflow-y: scroll;
+    font-size: 80%;
+    /* override color and bg-color on 'code' from bootstrap, and a touch more padding on top since font-size is smaller */
+    color: #393939;
+    background-color: #f5f5f5;
+    padding: 0.4em 0.8em;
+    overflow-x: scroll;
+    /* override border and line-height on 'pre' from bootstrap */
+    border: none;
+    border-radius: 2px;
+    line-height: 1.4;
+    font-size: 13px;
+    border: 0;
+    border-radius: 0;
+    padding: 0px 0.6em;
+    background-color: #666;
+    color: #ddd;
+    min-width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 {
+    position: absolute;
+    -webkit-transform: translateX(-100%) translateY(-50%);
+    -moz-transform: translateX(-100%) translateY(-50%);
+    -o-transform: translateX(-100%) translateY(-50%);
+    transform: translateX(-100%) translateY(-50%);
+    width: 41%;
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-align-items: center;
+    align-items: center; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations {
+    height: auto;
+    width: 100%;
+    padding: 8px 8px;
+    padding-bottom: 11px;
+    color: #393939; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations div.short {
+    font-size: 125%;
+    text-align: right; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations div.long {
+    display: none;
+    font-size: 85%; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations div.long p {
+    margin: 8px 0 8px 0; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations div.long p:first-child {
+    margin-top: 0; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.annotations div.long p:last-child {
+    margin-bottom: 0; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div.annotations_wrapper1 div.annotations_wrapper2 div.connector {
+    height: 7px;
+    width: 48px; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover > div:last-child {
+    background-color: #48a648;
+    color: #fafafa; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover {
+    z-index: 30 !important; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover div.annotations_wrapper1 {
+    z-index: 30 !important; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover div.annotations {
+    background-color: #fafafa;
+    border: 4px solid #48a648;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 2px 10px 20px #aaa; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover div.annotations div.short {
+    font-size: 100% !important;
+    text-align: center !important;
+    color: #393939;
+    margin-bottom: 8px;
+    font-weight: normal;
+    z-index: 10; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover div.annotations div.long {
+    display: inherit !important; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover div.connector {
+    border-style: solid;
+    width: 16px !important;
+    border-width: 5px 0px 5px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #48a648; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block > div:last-child .ann_highlight {
+    font-weight: bold;
+    color: #e8f0e0; }
+div.annotated_blueprint div.code_scroller div.code_viewer div.block:hover > div:last-child .ann_highlight {
+    color: #f8fff8; }
+div.annotated_blueprint div.code_viewer:hover div.annotations div.short {
+    color: #aaa; }
+div.annotated_blueprint div.code_scroller div.initial_notice {
+    display: none;
+    height: 0;
+    width: 0;
+    overflow-x: visible;
+    overflow-y: visible; }
+div.annotated_blueprint div.code_scroller div.initial_notice > div {
+    z-index: 10;
+    background-color: rgba(170, 170, 170, 0.9);
+    position: relative;
+    width: 0;
+    height: 0;
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-align-items: top;
+    align-items: top; }
+div.annotated_blueprint div.code_scroller div.initial_notice > div > div {
+    padding-top: 24px;
+    font-size: 125%;
+    font-weight: bold;
+    text-align: center;
+    width: 100%; }
+div.annotated_blueprint div.code_scroller div.initial_notice > div > div .ann_light {
+    padding-top: 12px;
+    font-weight: 300; }
+div.annotated_blueprint div.code_scroller div.initial_notice > div > div .ann_play {
+    display: block;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    font-size: 600%; }
+div.annotated_blueprint div.code_scroller:hover div.initial_notice {
+    display: none; }

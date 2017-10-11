@@ -45,6 +45,9 @@
   "variables": {
     "brooklyn_version": "1.0.0-SNAPSHOT",
     "brooklyn_version_stable": "0.12.0",
+    "url": {
+      "brooklyn_website": "https://brooklyn.apache.org"
+    },
     "url_root": "http://0.0.0.0:4000",
     "path": {
       "guide": "/guide",
