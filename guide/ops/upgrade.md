@@ -23,16 +23,14 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 ### Upgrade from Apache Brooklyn 0.12.0 onward
 
-{::options parse_block_html="true" /}
+{% method -%}
 
-<ul class="nav nav-tabs">
-    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">RPM / DEB Packages</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Tarball</a></li>
-</ul>
+{% common -%}
+{% if output.name == 'website' %}
+**Hint:** in the top right of this page are buttons to select an installation method. Choose your installation method to see the most appropriate instructions here.
+{% endif %}
 
-<div class="tab-content">
-<div id="impl-1" class="tab-pane fade in active">
-
+{% sample lang="package" -%}
 1. **Important!** Backup persisted state and custom configuration, in case you need to rollback to a previous version.
 
    1. By default, persisted state is located at `/var/lib/brooklyn`.
@@ -72,10 +70,8 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    Wait for Brooklyn to be running (i.e. its web-console is responsive)
 
-</div>
 
-<div id="impl-2" class="tab-pane fade">
-
+{% sample lang="tarball" -%}
 1. Stop Apache Brooklyn:
 
        ./bin/stop brooklyn
@@ -134,19 +130,18 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    3. Update the catalog: `br catalog add /opt/brooklyn/catalog/catalog.bom`.
 
-</div>
-</div>
+{% endmethod %}
 
 ### Upgrade from Apache Brooklyn 0.11.0 and below
 
-<ul class="nav nav-tabs">
-    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">RPM / DEB Packages</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Tarball</a></li>
-</ul>
+{% method -%}
 
-<div class="tab-content">
-<div id="impl-1" class="tab-pane fade in active">
+{% common -%}
+{% if output.name == 'website' %}
+**Hint:** in the top right of this page are buttons to select an installation method. Choose your installation method to see the most appropriate instructions here.
+{% endif %}
 
+{% sample lang="package" -%}
 1. Stop Apache Brooklyn:
 
        # CentOS 7 / RHEL
@@ -269,14 +264,10 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    3. Update the catalog: `br catalog add /opt/brooklyn/catalog/catalog.bom`.
 
-</div>
-
-<div id="impl-2" class="tab-pane fade">
-
+{% sample lang="tarball" -%}
 Same instructions as above.
 
-</div>
-</div>
+{% endmethod %}
 
 ## Rollback
 

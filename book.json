@@ -46,6 +46,14 @@
         {
           "lang": "byon",
           "name": "BYON"
+        },
+        {
+          "lang": "package",
+          "name": "RPM / DEB packages"
+        },
+        {
+          "lang": "tarball",
+          "name": "Tarball"
         }
       ]
     }
