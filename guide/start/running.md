@@ -229,11 +229,7 @@ using the most appropriate link for your OS:
 
 For details on the CLI, see the [Client CLI Reference]({{ book.path.guide }}/ops/cli/) page. 
 
-
+{% if output.name == 'website' %}
 ## Next
-
-<div class="started-pdf-exclude">
-
 The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.md)**.
-
-</div>
+{% endif %}

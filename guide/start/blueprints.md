@@ -125,10 +125,7 @@ Status:   In progress
 Depending on your choice of location it may take some time for the application to start, the next page describes how 
 you can monitor the progress of the application deployment and verify if it was successful.
 
+{% if output.name == 'website' %}
 ## Next
-
-<div class="started-pdf-exclude">
-
 Having deployed an application, the next step is **[monitoring and managing](managing.md)** it.
-
-</div>
+{% endif %}

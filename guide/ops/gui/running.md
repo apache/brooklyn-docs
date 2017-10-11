@@ -50,6 +50,7 @@ No applications have been deployed yet, so the "Create Application" dialog opens
 
 [![Brooklyn web console, showing the YAML tab of the Add Application dialog.](images/add-application-catalog-web-cluster-with-db.png)](images/add-application-catalog-web-cluster-with-db-large.png)
 
-
+{% if output.name == 'website' %}
 ## Next
 The next section will show how to **[deploy a blueprint](blueprints.md)**.
+{% endif %}
