@@ -107,12 +107,12 @@ Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{ 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
 ```bash
 $ tar -zxf apache-brooklyn-dist-{{ book.brooklyn_version }}-timestamp-dist.tar.gz
-$ cd apache-brooklyn-{{ book.brooklyn.version }}
+$ cd apache-brooklyn-{{ book.brooklyn_version }}
 ```
 {% else %}
 ```bash
 $ tar -zxf apache-brooklyn-{{ book.brooklyn_version }}-dist.tar.gz
-$ cd apache-brooklyn-{{ book.brooklyn.version }}
+$ cd apache-brooklyn-{{ book.brooklyn_version }}
 ```
 {% endif %}
 

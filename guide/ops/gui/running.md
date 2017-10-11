@@ -24,7 +24,7 @@ you may wish to set up some other configuration options first,
 Now start Brooklyn with the following command:
 
 ```bash
-$ cd apache-brooklyn-{{ book.brooklyn.version }}
+$ cd apache-brooklyn-{{ book.brooklyn_version }}
 $ bin/brooklyn launch
 ```
 
