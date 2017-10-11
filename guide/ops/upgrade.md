@@ -31,6 +31,8 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 {% endif %}
 
 {% sample lang="package" -%}
+#### Upgrading an RPM or DEB package
+
 1. **Important!** Backup persisted state and custom configuration, in case you need to rollback to a previous version.
 
    1. By default, persisted state is located at `/var/lib/brooklyn`.
@@ -72,6 +74,8 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 
 {% sample lang="tarball" -%}
+#### Upgrading using a .tar.gz archive
+
 1. Stop Apache Brooklyn:
 
        ./bin/stop brooklyn
@@ -142,6 +146,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 {% endif %}
 
 {% sample lang="package" -%}
+#### Upgrading an RPM or DEB package
 1. Stop Apache Brooklyn:
 
        # CentOS 7 / RHEL
@@ -265,6 +270,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
    3. Update the catalog: `br catalog add /opt/brooklyn/catalog/catalog.bom`.
 
 {% sample lang="tarball" -%}
+#### Upgrading using a .tar.gz archive
 Same instructions as above.
 
 {% endmethod %}

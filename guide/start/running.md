@@ -126,11 +126,12 @@ to configure security. Documentation of configuration options include:
 
 ## Launch Apache Brooklyn
 
-{% method -%}
-
-{% common -%}
-**Important**: Before launching Apache Brooklyn, please check the `date` on the local machine.
+> #### warning::Important
+>
+> Before launching Apache Brooklyn, please check the `date` on the local machine.
 Even several minutes before or after the actual time could cause problems.
+
+{% method -%}
 
 {% sample lang="vagrant" -%}
 ### Launching in Vagrant

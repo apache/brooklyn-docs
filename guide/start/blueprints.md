@@ -36,6 +36,8 @@ In order to configure the location in which Apache Brooklyn launches an applicat
 {% endif %}
 
 {% sample lang="vagrant" -%}
+### Vagrant location
+
 The Vagrant configuration described in [Running Apache Brooklyn](running.md), on the previous page is the recommended way of running this tutorial. This configuration comes with four blank vagrant configurations called byon1 to byon4.
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.
@@ -59,6 +61,8 @@ location:
 ```
 
 {% sample lang="clouds" -%}
+### A cloud location
+
 Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ book.path.guide }}/locations/#clouds).
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com). Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
@@ -71,6 +75,8 @@ location:
 ```
 
 {% sample lang="byon" -%}
+### "Bring your own nodes" location
+
 The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ book.path.guide }}/locations/#byon). 
 
 Replace the hosts, user and password in the example below with your own server details, then replace the location in your "myapp.yaml" with this.
