@@ -23,10 +23,8 @@ you may wish to set up some other configuration options first,
 
 Now start Brooklyn with the following command:
 
-```bash
-$ cd apache-brooklyn-{{ book.brooklyn_version }}
-$ bin/brooklyn launch
-```
+<pre><code class="lang-sh">$ cd apache-brooklyn-{{ book.brooklyn_version }}
+$ bin/brooklyn launch</code></pre>
 
 Please refer to the [Server CLI Reference](../server-cli-reference.md) for details of other possible command line options.
 

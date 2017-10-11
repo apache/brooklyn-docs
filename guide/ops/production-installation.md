@@ -48,24 +48,18 @@ Expand the `tar.gz` archive:
 {% endif %}
 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
-```bash
-% tar -zxf apache-brooklyn-dist-{{ book.brooklyn_version_stable }}-timestamp-dist.tar.gz
-```
+<pre><code class="lang-sh">tar -zxf apache-brooklyn-dist-{{ book.brooklyn_version_stable }}-timestamp-dist.tar.gz</code></pre>
 {% else %}
-```bash
-% tar -zxf apache-brooklyn-{{ book.brooklyn_version_stable }}-dist.tar.gz
-```
+<pre><code class="lang-sh">% tar -zxf apache-brooklyn-{{ book.brooklyn_version_stable }}-dist.tar.gz</code></pre>
 {% endif %}
 
-This will create a `apache-brooklyn-{{ book.brooklyn_version_stable }}` folder.
+This will create a <code class="lang-sh">apache-brooklyn-{{ book.brooklyn_version_stable }}</code> folder.
 
 Let's setup some paths for easy commands.
 
-```bash
-% cd apache-brooklyn-{{ book.brooklyn_version_stable }}
+<pre><code class="lang-sh">% cd apache-brooklyn-{{ book.brooklyn_version_stable }}
 % BROOKLYN_DIR="$(pwd)"
-% export PATH=$PATH:$BROOKLYN_DIR/bin/
-```
+% export PATH=$PATH:$BROOKLYN_DIR/bin/</code></pre>
 
 
 ### Configuring brooklyn.cfg

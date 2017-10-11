@@ -45,12 +45,10 @@ Then download the provided Apache Brooklyn vagrant configuration from
 This archive contains everything you need to create an environment for use with this guide, providing an Apache Brooklyn instance and some blank VMs.
 {% endif %}
 
-Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{book.brooklyn_version}}-vagrant` folder {% if 'SNAPSHOT' in book.brooklyn_version %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
+Extract the `tar.gz` archive and navigate into the expanded <code>apache-brooklyn-{{book.brooklyn_version}}-vagrant</code> folder {% if 'SNAPSHOT' in book.brooklyn_version %}(note: as this is a -SNAPSHOT version, your filename will be slightly different){% endif %}
 
-```bash
-$ tar xvf apache-brooklyn-{{book.brooklyn_version}}-vagrant.tar.gz
-$ cd apache-brooklyn-{{book.brooklyn_version}}-vagrant
-```
+<pre><code class="lang-sh">$ tar xvf apache-brooklyn-{{book.brooklyn_version}}-vagrant.tar.gz
+$ cd apache-brooklyn-{{book.brooklyn_version}}-vagrant</code></pre>
 
 {% sample lang="centos" -%}
 ### Installing on CentOS & Red Hat Enterprise Linux 7
@@ -69,9 +67,7 @@ Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/close
 
 Once downloaded, run the following shell command as root:
 
-```bash
-$ yum install apache-brooklyn-{{book.brooklyn_version}}-1.rpm
-```
+<pre><code class="lang-sh">$ yum install apache-brooklyn-{{book.brooklyn_version}}-1.rpm</code></pre>
 
 {% sample lang="ubuntu" -%}
 ### Installing on Ubuntu 7 Debian
@@ -88,10 +84,7 @@ Download the Apache Brooklyn [deb distribution](https://www.apache.org/dyn/close
 
 Once downloaded, run the following shell command:
 
-```bash
-$ sudo dpkg -i apache-brooklyn_{{book.brooklyn_version}}_noarch.deb
-```
-
+<pre><code class="lang-sh">$ sudo dpkg -i apache-brooklyn_{{book.brooklyn_version}}_noarch.deb</code></pre>
 
 {% sample lang="osx" -%}
 ### Installing on other Linux distributions, OSX and other UNIX-like platforms
@@ -101,19 +94,15 @@ For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [
 {% if 'SNAPSHOT' in book.brooklyn_version %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
 {% else %}
-Extract the `tar.gz` archive and navigate into the expanded `apache-brooklyn-{{ book.brooklyn_version }}` folder.
+Extract the `tar.gz` archive and navigate into the expanded <code class="lang-sh">apache-brooklyn-{{ book.brooklyn_version }}</code> folder.
 {% endif %}
 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
-```bash
-$ tar -zxf apache-brooklyn-dist-{{ book.brooklyn_version }}-timestamp-dist.tar.gz
-$ cd apache-brooklyn-{{ book.brooklyn_version }}
-```
+<pre><code class="lang-sh">$ tar -zxf apache-brooklyn-dist-{{ book.brooklyn_version }}-timestamp-dist.tar.gz
+$ cd apache-brooklyn-{{ book.brooklyn_version }}</code></pre>
 {% else %}
-```bash
-$ tar -zxf apache-brooklyn-{{ book.brooklyn_version }}-dist.tar.gz
-$ cd apache-brooklyn-{{ book.brooklyn_version }}
-```
+<pre><code class="lang-sh">tar -zxf apache-brooklyn-{{ book.brooklyn_version }}-dist.tar.gz
+$ cd apache-brooklyn-{{ book.brooklyn_version }}</code></pre>
 {% endif %}
 
 

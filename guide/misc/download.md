@@ -109,19 +109,14 @@ Release notes can be found [here](release-notes.md).
 
 If you use Maven, you can add Brooklyn with the following in your pom:
 
-<!-- the comment is included due to a jekyll/highlight bug which
-     removes indentation on the first line in a highlight block;
-     we want the actual XML indented so you can cut and paste into a pom.xml sensibly -->  
-```xml
-<!-- include all Brooklyn items in our project -->
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.brooklyn</groupId>
-            <artifactId>brooklyn-all</artifactId>
-            <version>{{ book.brooklyn_version }}</version>
-        </dependency>
-    </dependencies>
-```
+<pre><code class="lang-xml">    &lt;!-- include all Brooklyn items in our project --&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.brooklyn&lt;/groupId&gt;
+            &lt;artifactId&gt;brooklyn-all&lt;/artifactId&gt;
+            &lt;version&gt;{{ book.brooklyn_version }}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre>
 
 `brooklyn-all` brings in all dependencies, including jclouds.
 If you prefer a smaller repo you might want just ``brooklyn-core``,  ``brooklyn-policies``, 

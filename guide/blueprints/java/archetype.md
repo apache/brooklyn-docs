@@ -26,8 +26,7 @@ to be created.
 Alternatively, all options can be supplied at the command line. For example, 
 if creating a project named "autobrick" for "com.acme":
 
-```bash
-$ BROOKLYN_VERSION={{ book.brooklyn_version }}
+<pre><code class="lang-sh">$ BROOKLYN_VERSION={{ book.brooklyn_version }}
 $ mvn archetype:generate \
 	-DarchetypeGroupId=org.apache.brooklyn \
 	-DarchetypeArtifactId=brooklyn-archetype-quickstart \
@@ -36,8 +35,7 @@ $ mvn archetype:generate \
 	-DartifactId=autobrick \
 	-Dversion=0.1.0-SNAPSHOT \
 	-DpackageName=com.acme.autobrick \
-	-DinteractiveMode=false
-```
+	-DinteractiveMode=false</code></pre>
 
 This will create a directory with the artifact name (e.g. "autobrick" in the example above).
 Note that if run from a directory containing a pom, it will also modify that pom to add this as 
