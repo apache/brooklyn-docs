@@ -128,6 +128,10 @@ to configure security. Documentation of configuration options include:
 
 {% method -%}
 
+{% common -%}
+**Important**: Before launching Apache Brooklyn, please check the `date` on the local machine.
+Even several minutes before or after the actual time could cause problems.
+
 {% sample lang="vagrant" -%}
 ### Launching in Vagrant
 
@@ -182,11 +186,6 @@ The application should then output its log to `brooklyn.debug.log` and `brooklyn
 You can now start Apache Brooklyn by running `c:\Program Files\brooklyn\bin\start.bat`
 
 The application should then output its log into the console and also `c:\Program Files\brooklyn\data\log\brooklyn.debug.log` and `c:\Program Files\brooklyn\data\log\brooklyn.info.log`
-
-</div>
-_Notice! Before launching Apache Brooklyn, please check the `date` on the local machine.
-Even several minutes before or after the actual time could cause problems._
-</div>
 
 {% endmethod %}
 

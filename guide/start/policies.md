@@ -285,40 +285,31 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 
 Deploy the app:
 
-```bash
-br deploy mycluster.yaml
 ```
-
-<pre>
+$ br deploy mycluster.yaml
  Id:       nGY58ZZN   
  Name:     Tomcat Cluster   
  Status:   In progress   
-</pre>
+```
 
 And wait for the app to be running, viewing its state with:
 
-```bash
-br application
 ```
-
-<pre>
+$ br application
  Id         Name             Status    Location   
  nGY58ZZN   Tomcat Cluster   RUNNING   Mf0CJac6   
-</pre>
+```
 
 You can view the list of entities within the cluster with the command below (which drills into the 
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists its
 entities):
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity
 ```
- 
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  tOpMeYYr   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 The "quarantine" entity is used when Tomcat servers fail to start correctly - this entity is by 
 default added to the quarantine group, where it can later be investigated. This can be disabled using
@@ -360,18 +351,15 @@ You can view the state of the Tomcat server with the command below (which drills
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then into the  
 first member of the cluster named "Tomcat Server"):
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
  Id:              tOpMeYYr   
  Name:            Tomcat Server   
  Status:          ON_FIRE   
  ServiceUp:       false   
  Type:            org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  CatalogItemId:   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer:0.0.0.SNAPSHOT   
-</pre>
+```
 
 <!-- COMMENT:
 You can view its activity, to see the call to restart, using:
@@ -401,16 +389,13 @@ You can view the list of Tomcat servers in the cluster with the command below (w
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists the 
 child entities):
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  tOpMeYYr   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 
 ## Auto-scaling
@@ -445,11 +430,8 @@ done
 While those curl commands run in a separate terminal, you can look at the metrics for the first
 Tomcat server using the command:
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
  Name                                            Description                                                                              Value   
  ...
  webapp.reqs.perSec.last                         Reqs/sec (last datapoint)                                                                0.9980039920159681
@@ -462,42 +444,33 @@ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
  webapp.tomcat.connectorStatus                   Catalina connector state name                                                            "STARTED"
  webapp.url                                      URL                                                                                      "http://10.10.10.103:18082/"
  ...
-</pre>
+```
  
 You can look at the average requests per second on the cluster with the command:
  
-```bash
-br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
  25.765557404326124
-</pre>
+```
 
 When this value exceeds 3 for two seconds, the cluster with scale up. You can see the new instance
 using the command:
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  xpLeJufy   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  CpabLxZE   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 Cancel the curl commands (or wait for them to finish), and then wait for the one minute 
 `resizeDownStabilizationDelay`. The cluster will scale back to the minimum one instance.
 
-```bash
-br application "Tomcat Cluster" entity "Cluster" entity
 ```
-
-<pre>
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```

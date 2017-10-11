@@ -94,7 +94,7 @@ location:
 ## Deploying the Application
 
 First, log in to brooklyn with the command line interface (CLI) tool by typing:
-```bash
+```
 $ br login http://localhost:8081/
 ```
 
@@ -103,14 +103,12 @@ If this is configured, the login command will require an additional parameter fo
 
 Now you can create the application with the command below:
 
-```bash
-$ br deploy myapp.yaml 
 ```
-<pre>
+$ br deploy myapp.yaml 
 Id:       hTPAF19s   
 Name:     Tomcat   
 Status:   In progress  
-</pre>
+```
 
 Depending on your choice of location it may take some time for the application to start, the next page describes how 
 you can monitor the progress of the application deployment and verify if it was successful.

@@ -20,21 +20,16 @@ the beginning. Next we will outline how to *manage* the application that has bee
 ## Applications
 
 Having created the application, we can find a summary of all deployed applications using:
-```bash
-$ br application  
 ```
-
-```bash
+$ br application  
  Id         Name     Status    Location   
  hTPAF19s   Tomcat   RUNNING   ajVVAhER
 ```
 
-```application``` can be shortened to the alias ```app```, for example:
-```bash
-$ br app  
-```
+`application` can be shortened to the alias `app`, for example:
 
-```bash
+```
+$ br app  
  Id         Name     Status    Location   
  hTPAF19s   Tomcat   RUNNING   ajVVAhER
 ```
@@ -49,11 +44,8 @@ In the above example the Id `hTPAF19s` and the Name `Tomcat` are shown. You can 
   
 Using the name `Tomcat` we can get the application details:
 
-```bash
-$ br application Tomcat
 ```
-
-```bash
+$ br application Tomcat
   Id:              hTPAF19s   
   Name:            Tomcat   
   Status:          RUNNING   
@@ -70,11 +62,8 @@ $ br application Tomcat
              
 We can explore the management hierarchy of all applications, which will show us the entities they are composed of.
 
-```bash
-$ br tree
 ```
-
-```text
+$ br tree
 |- Tomcat
 +- org.apache.brooklyn.entity.stock.BasicApplication
   |- tomcatServer
@@ -85,11 +74,8 @@ $ br tree
 
 You can view the blueprint for the application again:
 
-```bash
-$ br application Tomcat spec
 ```
-
-```yaml
+$ br application Tomcat spec
 name: Tomcat
 location: mylocation
 services:
@@ -100,10 +86,8 @@ services:
 
 You can view the configuration of the application:
 
-```bash
-$ br application Tomcat config
 ```
-```bash
+$ br application Tomcat config
 Key                    Value   
 camp.template.id       l67i25CM   
 brooklyn.wrapper_app   true   
@@ -115,10 +99,8 @@ An *Entity* is Apache Brooklyn's representation of a software package or service
 
 To list the entities of the application you can use the `entity` or `ent` command:
 
-```bash
-$ br application Tomcat entity
 ```
-```bash
+$ br application Tomcat entity
 Id         Name                Type   
 Wx7r1C4e   tomcatServer   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer      
 ```
@@ -127,11 +109,8 @@ This shows one entity is available: `tomcatServer`. Note that this is the name w
 
 You can get summary information for this entity by providing its name (or ID).
 
-```bash
-$ br application Tomcat entity tomcatServer
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer
 Id:              Wx7r1C4e   
 Name:            tomcatServer   
 Status:          RUNNING   
@@ -142,11 +121,8 @@ CatalogItemId:   null
 
 Also you can see the configuration of this entity with the ```config``` command.
 
-```bash
-$ br application Tomcat entity tomcatServer config
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer config
 Key                       Value   
 jmx.agent.mode            JMXMP_AND_RMI   
 brooklyn.wrapper_app      true   
@@ -162,11 +138,8 @@ install.unique_label      TomcatServer_7.0.65
 
 You can view the sensors available on the application using:
 
-```bash
-$ br application Tomcat sensor
 ```
-
-```bash
+$ br application Tomcat sensor
 Name                       Description                                                                             Value   
 service.isUp               Whether the service is active and availability (confirmed and monitored)                true   
 service.notUp.indicators   A map of namespaced indicators that the service is not up                               {}   
@@ -177,11 +150,8 @@ service.state.expected     Last controlled change to service state, indicating w
 
 To explore sensors on a specific entity use the `sensor` command with an entity specified:
 
-```bash
-$ br application Tomcat entity tomcatServer sensor
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer sensor
 Name                 Description                                                                                       Value   
 download.addon.urls  URL patterns for downloading named add-ons (will substitute things like ${version} automatically) 
 download.url         URL pattern for downloading the installer (will substitute things like ${version} automatically)  "http://download.nextag.com/apache/tomcat/tomcat-7/v${version}/bin/apache-tomcat-${version}.tar.gz"   
@@ -197,23 +167,18 @@ host.subnet.hostname Host name as known internally in the subnet where it is run
 
 To display the value of a selected sensor, give the command the sensor name as an argument
 
-```bash
+```
 $ br application Tomcat entity tomcatServer sensor webapp.url  
+"http://10.10.10.101:8080/"
 ```
 
-```text
-http://10.10.10.101:8080/
-```
 
 ## Effectors
 
 Effectors are a means by which you can manipulate the entities in an application.  You can list the available effectors for your application using:
 
-```bash
-$ br application Tomcat effector
 ```
-
-```bash
+$ br application Tomcat effector
 Name            Description                                           Parameters   
 restart         Restart the process/service represented by an entity                                                                                                                                      
 start           Start the process/service represented by an entity    locations   
@@ -225,11 +190,8 @@ Note that the three "lifecycle" related effectors, ```start```, ```stop```, and 
 
 You can list the effectors for a specific entity using the command:
 
-```bash
-$ br application Tomcat entity tomcatServer effector
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer effector
 Name                              Description                                                                               Parameters   
 deploy                            Deploys the given artifact, from a source URL, to a given deployment filename/context     url,targetName   
 populateServiceNotUpDiagnostics   Populates the attribute service.notUp.diagnostics, with any available health indicators      
@@ -241,11 +203,8 @@ undeploy                          Undeploys the given context/artifact          
 
 To view the details for a specific effector, append it's name to the command:
 
-```bash
-$ br application Tomcat entity tomcatServer effector deploy
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer effector deploy
 Name     Description                                                                             Parameters   
 deploy   Deploys the given artifact, from a source URL, to a given deployment filename/context   url,targetName   
 ```
@@ -257,21 +216,18 @@ These parameters can be supplied using ```--param parm=value``` or just ```-P pa
 The commands below deploy the Apache Tomcat [hello world example](http://tomcat.apache.org/tomcat-6.0-doc/appdev/index.html) to our Tomcat Server. In these commands, a variable is created for the root URL using the appropriate
 sensor and the index page html is displayed. 
 
-```bash
+```
 $ br application Tomcat entity tomcatServer effector deploy invoke -P url=https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war -P targetName=sample
 $ webapp=$(br application Tomcat entity tomcatServer sensor webapp.url | tr -d '"')
 $ curl $webapp/sample/
+    <html>
+    <head>
+    <title>Sample "Hello, World" Application</title>
+    </head>
+    ...
 ```
 
-```html
-<html>
-<head>
-<title>Sample "Hello, World" Application</title>
-</head>
-...
-```
-
-**Note** that at present a ```tr``` command is required in the second line below to strip quotation characters from the returned sensor value. 
+**Note** that at present a `tr` command is required in the second line below to strip quotation characters from the returned sensor value. 
 
 ## Activities
 
@@ -279,11 +235,8 @@ $ curl $webapp/sample/
 
 To view a list of all activities associated with an entity enter:
 
-```bash
-$ br application Tomcat entity tomcatServer activity
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer activity
 Id         Task                                       Submitted                      Status      Streams   
 LtD5P1cb   start                                      Thu Dec 17 15:04:43 GMT 2015   Completed   
 l2qo4vTl   provisioning (FixedListMachineProvisi...   Thu Dec 17 15:04:43 GMT 2015   Completed   
@@ -295,11 +248,8 @@ jwwcJWmF   start (processes)                          Thu Dec 17 15:04:43 GMT 20
 
 To view the details of an individual activity, add its ID to the command. In our case this is `jwwcJWmF`
 
-```bash
-$ br application Tomcat entity tomcatServer activity jwwcJWmF
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer activity jwwcJWmF
 Id:                  jwwcJWmF   
 DisplayName:         start (processes)   
 Description:            
@@ -326,11 +276,8 @@ If an activity has associated input and output streams, these may be viewed by p
 using the commands, "env", "stdin", "stdout", and "stderr".  For example, for the "initializing on-box base dir"
 activity from the result of the earlier example,
 
-```bash
+```
 $ br application Tomcat entity tomcatServer act KLTxDkoa stdout
-``` 
-
-```bash
 BASE_DIR_RESULT:/home/vagrant/brooklyn-managed-processes:BASE_DIR_RESULT
 ```
 
@@ -355,11 +302,8 @@ $ br application Tomcat entity tomcatServer act KLTxDkoa stderr
 
 If an activity has failed, the "DetailedStatus" value will help us diagnose what went wrong by showing information about the failure.
 
-```bash
-$ br application evHUlq0n entity tomcatServer activity lZZ9x662
 ```
-
-```bash
+$ br application evHUlq0n entity tomcatServer activity lZZ9x662
 Id:                  lZZ9x662   
 DisplayName:         post-start   
 Description:            
@@ -392,11 +336,8 @@ java.lang.IllegalStateException: Software process entity TomcatServerImpl{id=qZe
 Adding the "--children" or "-c" parameter will show the activity's child activities, to allow the hierarchical structure 
 of the activities to be investigated:
 
-```bash
-$ br application Tomcat entity tomcatServer activity -c jwwcJWmF
 ```
-
-```bash
+$ br application Tomcat entity tomcatServer activity -c jwwcJWmF
 Id         Task                         Submitted                      Status   
 UpYRc3fw   copy-pre-install-resources   Thu Dec 17 15:04:43 GMT 2015   Completed   
 ig8sBHQr   pre-install                  Thu Dec 17 15:04:43 GMT 2015   Completed   
@@ -434,7 +375,9 @@ $ br application Tomcat entity tomcatServer config
 ```
 runs the ```config``` command with application scope of ```Tomcat``` and entity scope of ```tomcatServer```.
 
+{% if output.name == 'website' %}
 ## Next
 
 We will look next at a slightly more complex example, which will illustrate the capabilities of Brooklyn's
 **[policies](policies.md)** mechanism, and how to configure dependencies between application entities.
+{% endif %}
