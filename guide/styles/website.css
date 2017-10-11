@@ -36,6 +36,11 @@ body {
 .markdown-section a {
     color : #449d44;
 }
+.markdown-section .glossary-term {
+    color: #393939;
+    background: rgba(235, 235, 235, 0.6);
+    text-decoration: none;
+}
 
 /* YAML EXPLAINED
    ----------------------------------------------------------------------- */
