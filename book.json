@@ -1,7 +1,11 @@
 {
   "gitbook": "^3.2.3",
   "root": "./guide",
-  "plugins" : ["include-highlight", "theme-api"],
+  "plugins" : [
+    "include-highlight",
+    "theme-api",
+    "collapsible-chapters"
+  ],
   "pluginsConfig": {
     "include-highlight": {
       "extensionToLanguage": {

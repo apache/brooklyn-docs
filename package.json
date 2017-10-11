@@ -6,6 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "gitbook-cli": "^2.3.2",
+    "gitbook-plugin-collapsible-chapters": "^0.1.8",
     "gitbook-plugin-include-highlight": "^0.2.1",
     "gitbook-plugin-theme-api": "^1.1.2"
   },
