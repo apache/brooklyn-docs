@@ -33,7 +33,7 @@ Timeouts on child entities should be set relative to the start of the `ParallelT
 ### LoopOverGroupMembersTestCase
 The `LoopOverGroupMembersTestCase` entity is configured with a target group and a test specification. For each member of the targeted group, the test case will create a TargetableTestComponent entity from the supplied test specification and set the components target to be the group member.
 
-!CODEFILE "example_yaml/entities/loopovergroupmembers-entity.yaml'
+!CODEFILE "example_yaml/entities/loopovergroupmembers-entity.yaml"
 
 #### Parameters
 - `target` - group who's members are to be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -67,12 +67,11 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 - `timeout` - duration to wait on assertion to return a result. For example `10s`, `10m`, etc
 - `assert` - assertion to perform on the specified sensor value. See section on assertions below.
 
-<div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestSensor</code> is wrapped within a <code>TestCase</code>, 
-    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
-    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
-</div>
-
+> #### info::Tip
+>
+> If the `TestSensor` is wrapped within a `TestCase`,
+  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target,
+  **you don't need to specify the target**, unless you want to test a different entity.
 
 ### TestEffector
 The `TestEffector` entity invokes the specified effector on a target entity. If the result of the effector is a String, it will then perform assertions on the result.
@@ -87,12 +86,11 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 - `params` - parameters to pass to the effector, these will depend on the entity and effector being tested. The example above shows the `url` and `targetName` parameters being passed to Tomcats `deploy` effector.
 - `assert` - assertion to perform on the returned result. See section on assertions below.
 
-<div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestEffector</code> is wrapped within a <code>TestCase</code>, 
-    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
-    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
-</div>
-
+> #### info::Tip
+>
+> If the `TestEffector` is wrapped within a `TestCase`, 
+  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
+  **you don't need to specify the target**, unless you want to test a different entity.
 
 ### TestHttpCall
 The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs an assertion on the response.
@@ -105,12 +103,11 @@ The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs 
 - `applyAssertionTo` - The filed to apply the assertion to. For example `status`, `body`
 - `assert` - assertion to perform on the response.  See section on assertions below.
 
-<div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestHttpCall</code> is wrapped within a <code>TestCase</code>, 
-    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
-    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
-</div>
-
+> #### info::Tip
+>
+> If the `TestHttpCall` is wrapped within a `TestCase`, 
+  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
+  **you don't need to specify the target**, unless you want to test a different entity.
 
 ### TestSshCommand
 The TestSshCommand runs a command on the host of the target entity.
@@ -132,12 +129,11 @@ Either a bash command may be provided in the YAML, or a URL for a script which w
 - `assertOut` - Assertions on the standard output of the command as a String.
 - `assertErr` -  Assertions on the standard error of the command as a String.
 
-<div class="alert alert-info">
-    <strong>Tip:</strong> If the <code>TestSshCommand</code> is wrapped within a <code>TestCase</code>, 
-    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
-    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
-</div>
-
+> #### info::Tip
+>
+> If the `TestSshCommand` is wrapped within a `TestCase`, 
+  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
+  **you don't need to specify the target**, unless you want to test a different entity.
 
 ## Assertions
 

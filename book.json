@@ -4,7 +4,8 @@
   "plugins" : [
     "include-highlight",
     "theme-api",
-    "collapsible-chapters"
+    "collapsible-chapters",
+    "bootstrap-callout"
   ],
   "pluginsConfig": {
     "include-highlight": {
