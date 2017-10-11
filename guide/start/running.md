@@ -115,8 +115,6 @@ Extract this zip file to a directory on your computer such as `c:\Program Files\
 
 {% endmethod %}
 
----
-
 By default, no authentication is required and the web-console will listen on all network interfaces.
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
@@ -191,8 +189,6 @@ Even several minutes before or after the actual time could cause problems._
 </div>
 
 {% endmethod %}
-
----
 
 ## Control Apache Brooklyn
 
