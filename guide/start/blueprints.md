@@ -28,17 +28,14 @@ Before you can create an application with this configuration, you need to modify
 
 In order to configure the location in which Apache Brooklyn launches an application, replace the ```location:``` element with values for your chosen target environment. Here are some examples of the various location types:
 
-{::options parse_block_html="true" /}
+{% method -%}
 
-<ul class="nav nav-tabs">
-    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">Vagrant</a></li>
-    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Clouds</a></li>
-    <li class="impl-3-tab"><a data-target="#impl-3, .impl-3-tab" data-toggle="tab" href="#">BYON</a></li>
-</ul>
+{% common -%}
+{% if output.name == 'website' %}
+**Hint:** in the top right of this page are buttons to select a location. Choose your location to see the most appropriate instructions here.
+{% endif %}
 
-<div class="tab-content">
-<div id="impl-1" class="tab-pane fade in active">
-
+{% sample lang="vagrant" -%}
 The Vagrant configuration described in [Running Apache Brooklyn](running.md), on the previous page is the recommended way of running this tutorial. This configuration comes with four blank vagrant configurations called byon1 to byon4.
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.
@@ -61,9 +58,7 @@ location:
       - 10.10.10.104
 ```
 
-</div>
-<div id="impl-2" class="tab-pane fade">
-
+{% sample lang="clouds" -%}
 Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ book.path.guide }}/locations/#clouds).
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com). Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
@@ -75,9 +70,7 @@ location:
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
 ```
 
-</div>
-<div id="impl-3" class="tab-pane fade">
-
+{% sample lang="byon" -%}
 The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ book.path.guide }}/locations/#byon). 
 
 Replace the hosts, user and password in the example below with your own server details, then replace the location in your "myapp.yaml" with this.
@@ -94,10 +87,7 @@ location:
     - 192.168.0.19
 ```
 
-</div>
-</div>
-
----
+{% endmethod %}
 
 **Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ book.path.guide }}/locations)__ in the Operations section of the User Guide.
 

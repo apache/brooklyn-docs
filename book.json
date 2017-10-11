@@ -38,6 +38,14 @@
         {
           "lang": "windows",
           "name": "Windows"
+        },
+        {
+          "lang": "clouds",
+          "name": "Clouds"
+        },
+        {
+          "lang": "byon",
+          "name": "BYON"
         }
       ]
     }
