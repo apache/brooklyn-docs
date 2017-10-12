@@ -6,7 +6,8 @@
     "theme-api",
     "collapsible-chapters",
     "bootstrap-callout",
-    "styles-less"
+    "styles-less",
+    "versions"
   ],
   "styles": {
     "website": "./styles/website.less",
@@ -60,6 +61,32 @@
         {
           "lang": "tarball",
           "name": "Tarball"
+        }
+      ]
+    },
+    "versions": {
+      "gitbookConfigURL": "https://raw.githubusercontent.com/tbouron/brooklyn-docs/experiment/gitbook/book.json",
+      "options": [
+        {
+          "value": "https://brooklyn.apache.org/v/latest/",
+          "text": "Latest",
+          "selected": true
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.12.0/",
+          "text": "Version 0.12.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.11.0/",
+          "text": "Version 0.11.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.10.0/",
+          "text": "Version 0.10.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.9.0/",
+          "text": "Version 0.9.0"
         }
       ]
     }
