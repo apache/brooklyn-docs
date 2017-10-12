@@ -31,10 +31,8 @@ function parse_mode() {
     help
     exit 0 ;;
   website-root)
-    JEKYLL_CONFIG=_config.yml,_build/config-production.yml,_build/config-exclude-guide.yml,_build/config-website-root.yml
+    JEKYLL_CONFIG=_config.yml,_build/config-production.yml
     STYLE_SUBDIR=style
-    DIRS_TO_MOVE[0]=website
-    DIRS_TO_MOVE_TARGET[0]=""
     INSTALL_RSYNC_OPTIONS="--exclude v"
     INSTALL_RSYNC_SUBDIR=""
     SUMMARY="website files in the root"
@@ -113,15 +111,6 @@ function make_jekyll() {
   jekyll build --config $JEKYLL_CONFIG || return 1
   echo JEKYLL completed
 
-  for DI in "${!DIRS_TO_MOVE[@]}"; do
-    D=${DIRS_TO_MOVE[$DI]}
-    DT=${DIRS_TO_MOVE_TARGET[$DI]}
-    echo moving _site/$D/ to _site/$DT
-    mkdir -p _site/$DT
-    # the generated files are already in _site/ due to url rewrites along the way, but images etc are not
-    cp -r _site/$D/* _site/$DT
-    rm -rf _site/$D
-  done
   # normally we exclude things but we can also set TARGET as long_grass and it will get destroyed
   rm -rf _site/long_grass
 }
