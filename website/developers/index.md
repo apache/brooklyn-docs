@@ -5,7 +5,9 @@ started-pdf-exclude: true
 children:
 - code/
 - how-to-contribute.md
-- /guide/dev/
+- link: /v/latest/dev/index.html
+  title_in_menu: "Developer Guide"
+  not_external: true
 - committers/
 - code-standards.md
 - links.md

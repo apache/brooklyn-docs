@@ -3,10 +3,19 @@ layout: website-normal
 title: Documentation
 started-pdf-exclude: true
 children:
-- /guide/
-- /guide/dev/
-- ../meta/versions.md
-- other-docs.md
+  - link: /v/latest/index.html
+    title_in_menu: "User Guide"
+    not_external: true
+
+  - link: /v/latest/dev/index.html
+    title_in_menu: Developer Guide
+    not_external: true
+
+  - path: ../meta/versions.md
+    title_in_menu: Versions
+
+  - path: other-docs.md
+    title_in_menu: Other Resources
 ---
 
 {% comment %}

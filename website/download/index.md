@@ -4,9 +4,9 @@ title: Download
 started-pdf-exclude: true
 usermanual-pdf-exclude: true
 children:
-- { path: /guide/misc/download.md, title: Details }
+- { link: /v/latest/misc/download.html, title: Details, not_external: true }
 - { path: verify.md, title: Verify }
-- /guide/misc/release-notes.md
+- { link: /v/latest/misc/release-notes.html, title: Release Notes, not_external: true }
 - ../meta/versions.md
 ---
 

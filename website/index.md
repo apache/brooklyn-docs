@@ -3,22 +3,71 @@ layout: website-landing
 title: Home
 children:
 - learnmore/
-- { path: /guide/start/index.md, title_in_menu: Get Started, href_path: /guide/start/index.md}
+
+- link: /v/latest/start/index.html
+  title_in_menu: Get Started
+  href_link: /v/latest/start/index.md
+  menu:
+  - link: /v/latest/start/running.html
+    title_in_menu: "Running Apache Brooklyn"
+    not_external: true
+
+  - link: /v/latest/start/blueprints.html
+    title_in_menu: "Deploying Blueprints"
+    not_external: true
+
+  - link: /v/latest/start/managing.html
+    title_in_menu: "Monitoring and Managing Applications"
+    not_external: true
+
+  - link: /v/latest/start/policies.html
+    title_in_menu: "Policies"
+    not_external: true
+
+  - link: /v/latest/start/concept-quickstart.html
+    title_in_menu: "Brooklyn Concepts Quickstart"
+    not_external: true
+
 - path: documentation/
   menu:
-  - { path: /guide/index.md, title_in_menu: "User Guide", 
-      menu_customization: { dropdown_section_header: true } }
-  - { path: /guide/blueprints/index.md, title_in_menu: Writing Blueprints, href_path: /guide/blueprints/creating-yaml.md }
-  - { path: /guide/locations/index.md, title_in_menu: Deploying Blueprints }
-  - { path: /guide/ops/index.md, title_in_menu: Reference Guide,
-      menu_customization: { dropdown_section_header: true } }
-  - { path: /guide/dev/index.md, title_in_menu: Developer Guide }
-  - { path: meta/versions.md, title_in_menu: Versions,
-      menu_customization: { dropdown_new_section: true } }
-  - { path: documentation/other-docs.md, title_in_menu: Other Resources }
+
+  - link: /v/latest/index.html
+    title_in_menu: "User Guide"
+    menu_customization: { dropdown_section_header: true }
+    not_external: true
+
+  - link: /v/latest/blueprints/creating-yaml.html
+    title_in_menu: Writing Blueprints
+    not_external: true
+
+  - link: /v/latest/locations/index.html
+    title_in_menu: Deploying Blueprints
+    not_external: true
+
+  - link: /v/latest/ops/index.html
+    title_in_menu: Reference Guide
+    menu_customization: { dropdown_section_header: true }
+    not_external: true
+
+  - link: /v/latest/dev/index.html
+    title_in_menu: Developer Guide
+    not_external: true
+
+  - path: meta/versions.md
+    title_in_menu: Versions
+    menu_customization: { dropdown_new_section: true }
+
+  - path: documentation/other-docs.md
+    title_in_menu: Other Resources
+
 - community/
+
 - developers/
-- { path: download/, menu: null, type: button, menu_customization: {type: button} }
+
+- path: download/
+  menu: null
+  type: button
+  menu_customization: {type: button}
 ---
 
 <section class="text-center hero" markdown="1">
