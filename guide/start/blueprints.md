@@ -4,7 +4,7 @@ layout: website-normal
 ---
 # {{ page.title }}
 
-Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML) and many of the entities available are defined in the __[Brooklyn Catalog]({{ book.path.website }}/learnmore/catalog/)__.
+Blueprints are descriptors or patterns which describe how Apache Brooklyn should deploy applications. Blueprints are written in [YAML](https://en.wikipedia.org/wiki/YAML) and many of the entities available are defined in the __[Brooklyn Catalog]({{ book.url.brooklyn_website }}/learnmore/catalog/)__.
 
 ## Launching from a Blueprint
 

@@ -100,7 +100,6 @@
     },
     "url_root": "http://0.0.0.0:4000",
     "path": {
-      "website": "/website",
       "v": "/v"
     }
   }

@@ -95,7 +95,7 @@ brooklyn.wrapper_app   true
 
 ## Entities
 
-An *Entity* is Apache Brooklyn's representation of a software package or service which it can control or interact with. All of the entities Apache Brooklyn can use are listed in the __[Brooklyn Catalog]({{ book.path.website }}/learnmore/catalog/)__. 
+An *Entity* is Apache Brooklyn's representation of a software package or service which it can control or interact with. All of the entities Apache Brooklyn can use are listed in the __[Brooklyn Catalog]({{ book.url.brooklyn_website }}/learnmore/catalog/)__. 
 
 To list the entities of the application you can use the `entity` or `ent` command:
 

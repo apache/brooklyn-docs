@@ -7,7 +7,7 @@ title: Downloads
 
 {% if book.brooklyn.is_snapshot %}
 **The downloads on this page have not been voted on and should be used at your own risk.
-The latest stable release can be accessed on the [main download page]({{ book.path.website }}/download/).**
+The latest stable release can be accessed on the [main download page]({{ book.url.brooklyn_website }}/download/).**
 {% endif %}
 
 
@@ -17,7 +17,7 @@ The latest stable release can be accessed on the [main download page]({{ book.pa
   <tr>
 	<th style='text-align:left'>Download</th>
 	<th style='text-align:left'>File/Format</th>
-	<th>checksums <small><a href="{{ book.path.website }}/download/verify.html" title='Instructions on verifying the integrity of your downloads.{% if book.brooklyn.is_snapshot %} May not be available for SNAPSHOT artifacts.{% endif %}'>(?)</a></small></th>
+	<th>checksums <small><a href="{{ book.url.brooklyn_website }}/download/verify.html" title='Instructions on verifying the integrity of your downloads.{% if book.brooklyn.is_snapshot %} May not be available for SNAPSHOT artifacts.{% endif %}'>(?)</a></small></th>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='2'>Binary distribution<br />Server &amp; client</td>

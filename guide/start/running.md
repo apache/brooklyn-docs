@@ -60,7 +60,7 @@ For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on
 RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
-This is a snapshot build and no RPM is available, please download [a different version]({{book.path.website}}/download/).
+This is a snapshot build and no RPM is available, please download [a different version]({{book.url.brooklyn_website}}/download/).
 {% else %}
 Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}/apache-brooklyn-{{book.brooklyn_version}}-1.noarch.rpm).
 {% endif %}
@@ -89,7 +89,7 @@ Once downloaded, run the following shell command:
 {% sample lang="osx" -%}
 ### Installing on other Linux distributions, OSX and other UNIX-like platforms
 
-For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{book.path.website}}/download/) section.
+For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{book.url.brooklyn_website}}/download/) section.
 
 {% if 'SNAPSHOT' in book.brooklyn_version %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
@@ -109,7 +109,7 @@ $ cd apache-brooklyn-{{ book.brooklyn_version }}</code></pre>
 {% sample lang="windows" -%}
 ### Installing on Windows
 
-For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{book.path.website}}/download/). 
+For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{book.url.brooklyn_website}}/download/). 
 
 Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
 

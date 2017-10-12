@@ -47,7 +47,7 @@ title: Miscellaneous Tips and Tricks
   Clusters will take such a `MachineProvisioningLocation` (or a singleton list); fabircs take a list of locations.
   Some PaaS systems have their own location model, such as `OpenShiftLocation`.
 
-* Finally, don't be shy about [talking with others]({{book.path.website}}/community/),
+* Finally, don't be shy about [talking with others]({{book.url.brooklyn_website}}/community/),
   that's far better than spinning your wheels (or worse, having a bad experience),
   plus it means we can hopefully improve things for other people!
 
