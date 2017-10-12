@@ -9,6 +9,7 @@
     "gitbook-plugin-bootstrap-callout": "^0.1.2",
     "gitbook-plugin-collapsible-chapters": "^0.1.8",
     "gitbook-plugin-include-highlight": "^0.2.1",
+    "gitbook-plugin-styles-less": "^1.0.0",
     "gitbook-plugin-theme-api": "^1.1.2"
   },
   "scripts": {

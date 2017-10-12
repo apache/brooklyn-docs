@@ -5,8 +5,13 @@
     "include-highlight",
     "theme-api",
     "collapsible-chapters",
-    "bootstrap-callout"
+    "bootstrap-callout",
+    "styles-less"
   ],
+  "styles": {
+    "website": "./styles/website.less",
+    "pdf": "./styles/pdf.less"
+  },
   "pluginsConfig": {
     "include-highlight": {
       "extensionToLanguage": {
