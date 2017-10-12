@@ -21,7 +21,7 @@ defining types:
 
 * `com.acme.brooklyn.package.JavaEntityClass`
 * `java:com.acme.brooklyn.package.JavaEntityClass`
-* `java-entity-class` (where this has been added to the [catalog]({{ book.path.guide }}/blueprints/catalog/))
+* `java-entity-class` (where this has been added to the [catalog](catalog/index.md))
 
 A reference of some of the common service `type` instances used is included in a section below.
 

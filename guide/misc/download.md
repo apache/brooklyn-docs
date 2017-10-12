@@ -153,4 +153,4 @@ with this version in branch [{{ book.brooklyn.git_branch }}]({{ book.brooklyn.ur
 These locations have a `README.md` in the root which explains how to get the code including
 submodules.
 
-Useful information on working with the source is [here]({{ book.path.guide }}/dev/code).
+Useful information on working with the source is [here](../dev/code).

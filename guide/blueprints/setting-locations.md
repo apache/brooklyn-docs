@@ -8,7 +8,7 @@ categories: [use, guide, defining-applications]
 
 Brooklyn supports a very wide range of target locations. 
 With deep integration to [Apache jclouds](https://jclouds.apache.org), most well-known clouds 
-and cloud platforms are supported. See the [Locations guide]({{ book.path.guide }}/locations/) 
+and cloud platforms are supported. See the [Locations guide](../locations/index.md) 
 for details and more examples.
 
 ### Cloud Example
@@ -103,7 +103,7 @@ The examples above have given all the location details within the application bl
 It is also possible (and indeed preferred) to add the location definitions to the catalog
 so that they can be referenced by name in any blueprint.
 
-For more information see the [Operations: Catalog]({{ book.path.guide }}/blueprints/catalog/) section of 
+For more information see the [Operations: Catalog](catalog/index.md) section of 
 the User Guide.
 
 

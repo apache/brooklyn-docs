@@ -364,7 +364,7 @@ on the Microsoft TechNet site.
 Troubleshooting
 ---------------
 
-Much of the [operations troubleshooting guide]({{ book.path.guide }}/ops/troubleshooting/) is applicable for Windows blueprints.  
+Much of the [operations troubleshooting guide](../../ops/troubleshooting/index.md) is applicable for Windows blueprints.  
 
 ### User metadata service requirement
 

@@ -63,7 +63,7 @@ location:
 {% sample lang="clouds" -%}
 ### A cloud location
 
-Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{ book.path.guide }}/locations/#clouds).
+Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here](../locations/index.md#clouds).
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com). Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
 
@@ -77,7 +77,7 @@ location:
 {% sample lang="byon" -%}
 ### "Bring your own nodes" location
 
-The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here]({{ book.path.guide }}/locations/#byon). 
+The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here](../locations/index.md#byon). 
 
 Replace the hosts, user and password in the example below with your own server details, then replace the location in your "myapp.yaml" with this.
 
@@ -95,7 +95,7 @@ location:
 
 {% endmethod %}
 
-**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations]({{ book.path.guide }}/locations)__ in the Operations section of the User Guide.
+**Note**: For instructions on setting up a variety of locations or storing credentials/locations in a file on disk rather than in the blueprint, see __[Locations](../locations/index.md)__ in the Operations section of the User Guide.
 
 ## Deploying the Application
 

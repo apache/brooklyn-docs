@@ -15,7 +15,7 @@ with an effector to create new gists.
 ## Project Setup
 
 Follow the instructions to create a new Java project using the [archetype](archetype.md), and
-import it into your [favorite IDE]({{ book.path.guide }}/dev/env/ide/). This example assumes you 
+import it into your [favorite IDE](../../dev/env/ide/index.md). This example assumes you 
 used the groupId `com.acme` and artifact id `autobrick`.
 
 First ensure you can build this project at the command line, using `mvn clean install`.

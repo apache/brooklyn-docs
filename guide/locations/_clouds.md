@@ -297,7 +297,7 @@ Clouds vary in the format of the identity, credential, endpoint, and region.
 Some also have their own idiosyncracies.  More details for configuring some common clouds
 is included below. You may also find these sources helpful:
 
-* The **[template brooklyn.properties]({{ book.path.guide }}/start/brooklyn.properties)** file
+* The **[template brooklyn.properties](../start/brooklyn.properties)** file
   in the Getting Started guide
   contains numerous examples of configuring specific clouds,
   including the format of credentials and options for sometimes-fiddly private clouds.

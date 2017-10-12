@@ -44,6 +44,6 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
 ### Full Example
 A sample blueprint containing all the tests described above is available [here](./example_yaml/testcases/getting-started-test-example.yaml).
 
-This blueprint will deploy the [Getting Started]({{ book.path.guide }}/start/blueprints.html#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
+This blueprint will deploy the [Getting Started](../../start/blueprints.md#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
 
 [![Successful Getting Started App deployment and Test execution.](images/getting-started-blueprint-test.png)](images/getting-started-blueprint-test-large.png)

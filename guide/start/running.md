@@ -212,7 +212,7 @@ using the most appropriate link for your OS:
 * [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}/apache-brooklyn-{{book.brooklyn_version}}-client-cli-macosx.tar.gz)
 {% endif %}
 
-For details on the CLI, see the [Client CLI Reference]({{ book.path.guide }}/ops/cli/) page. 
+For details on the CLI, see the [Client CLI Reference](../ops/cli/index.md) page. 
 
 {% if output.name == 'website' %}
 ## Next

@@ -27,7 +27,7 @@ could cause subsequent errors if they do not hold. These relate to the machine's
 configuration, rather than additional networking or security that a given Cloud 
 might offer.
 
-Also see the [Troubleshooting]({{ book.path.guide }}/ops/troubleshooting/) docs.
+Also see the [Troubleshooting](../ops/troubleshooting/index.md) docs.
 
 
 ## Remote Access

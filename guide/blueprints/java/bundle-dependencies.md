@@ -29,7 +29,7 @@ is a convenient way of building OSGi bundles.
 
 #### OSGi Bundles Declared in Catalog Items  
 
-Within a [catalog item]({{ book.path.guide}}/blueprints/catalog/), a list of URLs can be supplied under
+Within a [catalog item](../catalog/index.md), a list of URLs can be supplied under
 `brooklyn.libraries`. Each URL should point to an OSGi bundle. This list should include the OSGi 
 bundle that has the Java code for your blueprint, and also the OSGi bundles that it depends
 on (including all transitive dependencies).

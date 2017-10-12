@@ -159,7 +159,7 @@ If the Brooklyn Server was originally run to allow a remote debugger to connect 
 discouraged in production!), then this provides a convenient way to investigate why Brooklyn
 is being slow or unresponsive. See the Debugging Tips in the 
 tip [Debugging Remote Brooklyn](../../dev/tips/debugging-remote-brooklyn.md)
-and the [IDE docs]({{ book.path.guide }}/dev/env/ide/) for more information.
+and the [IDE docs](../../dev/env/ide/index.md) for more information.
 
 
 ## Log Files

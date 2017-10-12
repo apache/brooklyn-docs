@@ -60,7 +60,7 @@ $ mvn clean install
 #### Adding to the Catalog
 
 The build will produce an OSGi bundle in `target/autobrick-0.1.0-SNAPSHOT.jar`, suitable for 
-use in the [Brooklyn catalog]({{ book.path.guide }}/blueprints/catalog/) (using `brooklyn.libraries`).
+use in the [Brooklyn catalog](../catalog/index.md) (using `brooklyn.libraries`).
 
 To use this in your Brooklyn catalog you will first have to copy the target jar to a suitable location. 
 For developing/testing purposes storing on the local filesystem is fine. 
