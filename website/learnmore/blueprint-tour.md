@@ -1,7 +1,6 @@
 ---
 layout: website-normal
 title: A Quick Tour of a Brooklyn Blueprint
-usermanual-pdf-exclude: true
 title_in_menu: Blueprint Tour
 ---
 

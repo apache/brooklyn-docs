@@ -63,9 +63,6 @@ Some issues we've encountered are:
    (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
  * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
 
-If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
-You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use the usual apt-get / yum / brew.
-
 Seeing the Website and Docs
 ---------------------------
 

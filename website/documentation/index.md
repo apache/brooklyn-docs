@@ -1,7 +1,6 @@
 ---
 layout: website-normal
 title: Documentation
-started-pdf-exclude: true
 children:
   - link: /v/latest/index.html
     title_in_menu: "User Guide"

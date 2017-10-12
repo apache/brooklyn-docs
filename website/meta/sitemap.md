@@ -1,6 +1,5 @@
 ---
 layout: website-normal
-usermanual-pdf-exclude: true
 title: Site Map
 ---
 

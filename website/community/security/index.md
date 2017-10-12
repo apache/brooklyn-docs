@@ -1,8 +1,6 @@
 ---
 layout: website-normal
 title: Security Advisories
-started-pdf-exclude: true
-usermanual-pdf-exclude: true
 children:
 ---
 

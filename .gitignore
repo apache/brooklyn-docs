@@ -31,7 +31,6 @@ brooklyn*.log.*
 
 ignored
 _site
-_pdf
 _config_local.yml
 .sass-cache
 style/js/catalog/items.js

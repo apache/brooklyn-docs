@@ -47,13 +47,7 @@ sass:
 
 # TODO the 0.12.0 paths must be changed!
 brooklyn-stable-version: 0.12.0
-pdf-default-base-url: http://brooklyn.apache.org
-pdf-default-versioned-url-subpath: /v/0.12.0
 
-pdf-rewrite-prefixes: 
-    '/guide' : '/v/0.12.0'
-    '/website' : ''
-    
 brooklyn-version: 1.0.0-SNAPSHOT # BROOKLYN_VERSION
 brooklyn-snapshot-git-branch: master   # if line above is SNAPSHOT this should point to corresponding git branch (e.g. master, 0.4)
 
