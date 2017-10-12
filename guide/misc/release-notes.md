@@ -18,8 +18,7 @@ to Brooklyn's commercial users for funding much of this development.
 
 ### Backwards Compatibility
 
-Changes since 0.12.0:
+Changes since {{ book.brooklyn_version_stable }}:
 
 
-For changes in prior versions, please refer to the release notes for 
-[0.12.0]({{ book.path.v }}/0.12.0/misc/release-notes.html).
+For changes in prior versions, please refer to the release notes for those versions by selecting the one you are interested in on the left menu.
