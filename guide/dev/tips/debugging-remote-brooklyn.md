@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Brooklyn Remote Debugging
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

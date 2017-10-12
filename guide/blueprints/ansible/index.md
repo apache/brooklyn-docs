@@ -1,6 +1,5 @@
 ---
 title: Ansible in YAML Blueprints
-layout: website-normal
 children:
 - about-ansible.md
 - creating-ansible-blueprints.md

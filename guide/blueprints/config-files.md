@@ -1,8 +1,5 @@
 ---
 title: Uploading Script and Configuration Files
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
 
 Blueprints often require that parameterized scripts and configuration files are available to be copied to the

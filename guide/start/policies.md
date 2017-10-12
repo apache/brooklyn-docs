@@ -1,7 +1,5 @@
 ---
 title: Getting Started - Policies
-title_in_menu: Policies
-layout: website-normal
 ---
 # {{ page.title }}
 

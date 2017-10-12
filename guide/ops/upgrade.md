@@ -1,6 +1,5 @@
 ---
 title: Upgrade
-layout: website-normal
 ---
 # {{ page.title }}
 

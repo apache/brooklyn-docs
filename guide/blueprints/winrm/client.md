@@ -1,6 +1,5 @@
 ---
 title: Winrm4j Client
-layout: website-normal
 ---
 # {{ page.title }}
 

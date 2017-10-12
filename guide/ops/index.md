@@ -1,7 +1,5 @@
 ---
 title: Reference Guide
-started-pdf-exclude: true
-layout: website-normal
 children:
 - production-installation.md
 - starting-stopping-monitoring.md

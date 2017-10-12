@@ -1,7 +1,5 @@
 ---
 title: Creating Blueprints with Salt
-title_in_menu: Creating Blueprints with Salt
-layout: website-normal
 ---
 # {{ page.title }}
 

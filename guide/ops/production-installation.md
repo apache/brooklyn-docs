@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: Production Installation
 ---
 # {{ page.title }}

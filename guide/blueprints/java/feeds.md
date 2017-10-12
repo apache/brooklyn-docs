@@ -1,6 +1,5 @@
 ---
 title: Feeds
-layout: website-normal
 ---
 # {{ page.title }}
 

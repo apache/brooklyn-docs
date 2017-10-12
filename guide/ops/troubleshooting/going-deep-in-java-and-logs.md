@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: "Troubleshooting: Going Deep in Java and Logs"
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

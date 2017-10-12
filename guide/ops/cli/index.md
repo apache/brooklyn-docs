@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: Client CLI Reference
 children:
 - cli-ref-guide.md

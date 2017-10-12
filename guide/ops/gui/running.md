@@ -1,8 +1,5 @@
 ---
 title: Launching
-title_in_menu: Launching
-layout: website-normal
-menu_parent: index.md
 ---
 # {{ page.title }}
 

@@ -1,7 +1,5 @@
 ---
 title: Using Policies
-title_in_menu: Using Policies
-layout: website-normal
 ---
 # {{ page.title }}
 

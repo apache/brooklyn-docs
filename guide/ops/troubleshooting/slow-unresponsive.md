@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Brooklyn Slow or Unresponsive
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

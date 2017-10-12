@@ -1,6 +1,5 @@
 ---
 title: Blueprinting Tips
-layout: website-normal
 ---
 # {{ page.title }}
 

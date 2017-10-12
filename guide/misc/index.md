@@ -1,7 +1,5 @@
 ---
 title: Other Resources
-layout: website-normal
-started-pdf-exclude: true
 children:
 - { title: Javadoc, path: javadoc/ }
 - download.md
@@ -11,6 +9,7 @@ children:
 - { path: /website/documentation/, title_in_menu: "All Documentation", menu_customization: { force_inactive: true } }
 ---
 
+{% if output.name == 'website' %}
 Further documentation specific to this version of Brooklyn includes:
 
 {% for item in page.menu %}
@@ -18,3 +17,4 @@ Further documentation specific to this version of Brooklyn includes:
 {% endfor %}
 
 Also see the [other versions]({{ book.url.brooklyn_website }}/meta/versions.html) or [general documentation]({{ book.url.brooklyn_website }}/documentation/).
+{% endif %}

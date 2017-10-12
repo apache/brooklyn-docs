@@ -1,6 +1,5 @@
 ---
 title: Custom Entity Development
-layout: website-normal
 ---
 # {{ page.title }}
 

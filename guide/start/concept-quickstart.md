@@ -1,7 +1,5 @@
 ---
 title: Brooklyn Concepts Quickstart
-layout: website-normal
-menu_parent: index.md
 ---
 # {{ page.title }}
 

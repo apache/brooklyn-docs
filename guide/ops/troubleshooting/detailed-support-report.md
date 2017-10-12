@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Detailed Support Report
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

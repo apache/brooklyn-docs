@@ -1,8 +1,5 @@
 ---
 title: Clusters, Specs, and Composition
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
 # {{ page.title }}
 

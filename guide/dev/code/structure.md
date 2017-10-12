@@ -1,6 +1,5 @@
 ---
 title: Code Structure
-layout: website-normal
 ---
 # {{ page.title }}
 

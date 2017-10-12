@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Topology, Dependencies, and Management Policies
-title_in_menu: Topology, Dependencies, and Management Policies
 ---
 # {{ page.title }}
 

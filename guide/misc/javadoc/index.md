@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: API Reference
-toc: ../../toc.json
 ---
 
 *Javadoc is not available as part of this build.*

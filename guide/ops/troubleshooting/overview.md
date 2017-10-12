@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Troubleshooting Overview
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

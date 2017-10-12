@@ -1,6 +1,5 @@
 ---
 title: Effectors
-layout: website-normal
 ---
 # {{ page.title }}
 

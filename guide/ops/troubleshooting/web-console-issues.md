@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Web Console Issues
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

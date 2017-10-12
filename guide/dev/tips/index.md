@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: Miscellaneous Tips and Tricks
 ---
 # {{ page.title }}

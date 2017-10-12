@@ -1,7 +1,5 @@
 ---
 title: Blueprint Test Entities
-title_in_menu: Test Entities
-layout: website-normal
 ---
 # {{ page.title }}
 

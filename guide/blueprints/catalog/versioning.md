@@ -1,6 +1,5 @@
 ---
 title: Versioning
-layout: website-normal
 ---
 # {{ page.title }}
 

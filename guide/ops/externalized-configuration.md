@@ -1,6 +1,5 @@
 ---
 title: Externalized Configuration
-layout: website-normal
 ---
 # {{ page.title }}
 

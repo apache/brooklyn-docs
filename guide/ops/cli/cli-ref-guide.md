@@ -1,7 +1,5 @@
 ---
 title: CLI Reference Guide
-layout: website-normal
-menu_parent: index.md
 children:
 - { section: List of Commands }
 - { section: Scopes }

@@ -1,6 +1,5 @@
 ---
 title: Server CLI Reference
-layout: website-normal
 ---
 # {{ page.title }}
 

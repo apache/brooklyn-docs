@@ -1,6 +1,5 @@
 ---
 title: Bundling
-layout: website-normal
 ---
 # {{ page.title }}
 

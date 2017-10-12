@@ -1,7 +1,5 @@
 ---
 title: About Chef
-title_in_menu: About Chef
-layout: website-normal
 ---
 # {{ page.title }}
 

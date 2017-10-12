@@ -1,6 +1,5 @@
 ---
 title: Handling Bundle Dependencies
-layout: website-normal
 ---
 # {{ page.title }}
 

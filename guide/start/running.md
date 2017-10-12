@@ -1,8 +1,5 @@
 ---
 title: Running Apache Brooklyn
-title_in_menu: Running Apache Brooklyn
-layout: website-normal
-menu_parent: index.md
 ---
 # {{ page.title }}
 

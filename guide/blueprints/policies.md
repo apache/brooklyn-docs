@@ -1,6 +1,5 @@
 ---
 title: Policies
-layout: website-normal
 ---
 # {{ page.title }}
 

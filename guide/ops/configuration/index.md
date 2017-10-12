@@ -1,7 +1,5 @@
 ---
-title_in_menu: Configuring Brooklyn
 title: Brooklyn Configuration and Options
-layout: website-normal
 children:
 - { section: Memory Usage }
 - { section: Authentication }

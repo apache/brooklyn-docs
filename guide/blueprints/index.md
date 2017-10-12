@@ -1,6 +1,5 @@
 ---
 title: Writing Blueprints
-layout: website-normal
 children:
 - creating-yaml.md
 - entity-configuration.md

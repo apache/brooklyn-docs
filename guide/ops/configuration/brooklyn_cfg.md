@@ -1,6 +1,5 @@
 ---
 title: brooklyn.cfg
-layout: website-normal
 children:
 - { section: Quick Setup }
 - { section: Locations }

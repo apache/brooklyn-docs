@@ -1,7 +1,5 @@
 ---
 title: Advanced Chef Integration
-title_in_menu: Advanced Chef Integration
-layout: website-normal
 ---
 # {{ page.title }}
 

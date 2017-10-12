@@ -1,7 +1,5 @@
 ---
 title: About Salt
-title_in_menu: About Salt
-layout: website-normal
 ---
 # {{ page.title }}
 

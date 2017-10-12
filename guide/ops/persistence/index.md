@@ -1,6 +1,5 @@
 ---
 title: Persistence
-layout: website-normal
 children:
 - { section: Configuration }
 - { section: File-based Persistence }

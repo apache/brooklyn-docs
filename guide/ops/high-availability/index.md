@@ -1,6 +1,5 @@
 ---
 title: High Availability
-layout: website-normal
 children:
 - high-availability-supplemental.md
 ---

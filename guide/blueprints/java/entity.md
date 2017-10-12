@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: Writing an Entity
 ---
 # {{ page.title }}

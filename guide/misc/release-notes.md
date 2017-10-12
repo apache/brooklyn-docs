@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: Release Notes
 ---
 # {{ page.title }}

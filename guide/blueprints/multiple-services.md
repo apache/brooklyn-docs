@@ -1,6 +1,5 @@
 ---
 title: Multiple Services and Dependency Injection
-layout: website-normal
 ---
 # {{ page.title }}
 

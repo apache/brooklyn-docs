@@ -1,7 +1,5 @@
 ---
 title: Creating Blueprints from Chef
-title_in_menu: Creating Blueprints from Chef
-layout: website-normal
 ---
 # {{ page.title }}
 

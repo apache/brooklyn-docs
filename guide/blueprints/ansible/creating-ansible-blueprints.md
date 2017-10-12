@@ -1,7 +1,5 @@
 ---
 title: Creating Blueprints with Ansible
-title_in_menu: Creating Blueprints with Ansible
-layout: website-normal
 ---
 # {{ page.title }}
 

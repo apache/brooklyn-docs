@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Troubleshooting SoftwareProcess Entities
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

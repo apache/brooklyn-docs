@@ -1,6 +1,5 @@
 ---
 title: License Considerations
-layout: website-normal
 ---
 # {{ page.title }}
 

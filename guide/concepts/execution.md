@@ -1,6 +1,5 @@
 ---
 title: Execution
-layout: website-normal
 ---
 # {{ page.title }}
 

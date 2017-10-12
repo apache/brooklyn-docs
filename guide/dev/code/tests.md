@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Tests
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

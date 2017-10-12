@@ -1,6 +1,5 @@
 ---
 title: CORS Configuration
-layout: website-normal
 ---
 # {{ page.title }}
 

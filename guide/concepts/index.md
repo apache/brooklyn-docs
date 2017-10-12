@@ -1,7 +1,5 @@
 ---
 title: Brooklyn Concepts
-title_in_menu: Brooklyn Concepts
-layout: website-normal
 children:
 - entities.md
 - application-parent-membership.md
@@ -13,6 +11,7 @@ children:
 - execution.md
 - stop-start-restart-behaviour.md
 ---
+# {{ page.title }}
 
 This introduces brooklyn and describes how it simplifies the deployment and management of big applications. It is
 intended for people who are using brooklyn-supported application components (such as web/app servers, data stores)

@@ -1,6 +1,5 @@
 ---
 title: Configuring HA - an example
-layout: website-normal
 ---
 # {{ page.title }}
 

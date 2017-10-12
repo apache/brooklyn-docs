@@ -1,8 +1,5 @@
 ---
 title: Java Entities
-title_in_menu: Java Entities
-layout: website-normal
-started-pdf-exclude: true
 children:
 - archetype.md
 - defining-and-deploying.md

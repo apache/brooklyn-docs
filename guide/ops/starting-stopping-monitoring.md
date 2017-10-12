@@ -1,6 +1,5 @@
 ---
 title: Starting, Stopping and Monitoring
-layout: website-normal
 ---
 # {{ page.title }}
 

@@ -1,6 +1,5 @@
 ---
 title: Testing YAML Blueprints
-layout: website-normal
 children:
 - test-entities.md
 - usage-examples.md

@@ -1,6 +1,5 @@
 ---
 title: Logging
-layout: website-normal
 ---
 # {{ page.title }}
 

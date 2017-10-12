@@ -1,6 +1,5 @@
 ---
 title: Salt in YAML Blueprints
-layout: website-normal
 children:
 - about-salt.md
 - creating-salt-blueprints.md

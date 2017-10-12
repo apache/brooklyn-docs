@@ -1,6 +1,5 @@
 ---
 title: YAML Blueprint Reference
-layout: website-normal
 ---
 # {{ page.title }}
 

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-layout: website-normal
 children:
 - { path: overview.md, title: Overview }
 - { path: web-console-issues.md, title: Web Console Issues }

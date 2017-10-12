@@ -1,7 +1,5 @@
 ---
 title: Writing Chef for Blueprints
-title_in_menu: Writing Chef for Blueprints
-layout: website-normal
 ---
 # {{ page.title }}
 

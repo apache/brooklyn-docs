@@ -1,6 +1,5 @@
 ---
 title: REST API
-layout: website-normal
 ---
 # {{ page.title }}
 

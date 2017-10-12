@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: IDE Setup
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

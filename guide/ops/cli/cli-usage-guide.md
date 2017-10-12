@@ -1,7 +1,5 @@
 ---
 title: CLI Usage Guide
-layout: website-normal
-menu_parent: index.md
 children:
 - { section: Login }
 - { section: Applications }

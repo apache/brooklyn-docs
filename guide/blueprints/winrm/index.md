@@ -1,6 +1,5 @@
 ---
 title: Windows Blueprints
-layout: website-normal
 children:
 - client.md
 ---

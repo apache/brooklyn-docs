@@ -1,6 +1,5 @@
 ---
 title: Catalog
-layout: website-normal
 children:
 - schema.md
 - templates.md

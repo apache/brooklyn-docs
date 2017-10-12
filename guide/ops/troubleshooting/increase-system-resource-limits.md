@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Increase System Resource Limits
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 

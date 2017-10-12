@@ -1,6 +1,5 @@
 ---
 title: Common Classes and Entities
-layout: website-normal
 ---
 # {{ page.title }}
 

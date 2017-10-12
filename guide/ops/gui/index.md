@@ -1,5 +1,4 @@
 ---
-layout: website-normal
 title: GUI Guide
 children:
 - running.md

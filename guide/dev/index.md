@@ -1,11 +1,5 @@
 ---
 title: Developer Guide
-started-pdf-exclude: true
-layout: website-normal
-menu_parent: /website/documentation/
-breadcrumbs:
-- /website/documentation/index.md
-- /guide/dev/index.md
 children:
 - { link: "{{ book.url.brooklyn_website }}/developers/code/", title: "Get the Code" }
 - env/maven-build.md

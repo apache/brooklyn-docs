@@ -1,6 +1,5 @@
 ---
 title: Deploying Blueprints
-layout: website-normal
 ---
 # {{ page.title }}
 

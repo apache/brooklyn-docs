@@ -1,6 +1,5 @@
 ---
 title: Locations
-layout: website-normal
 children:
 - { path: provisioned-machine-requirements.md, section_position: 8 }
 check_directory_for_children: true

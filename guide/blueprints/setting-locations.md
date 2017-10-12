@@ -1,8 +1,5 @@
 ---
 title: Setting Locations
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
 # {{ page.title }}
 

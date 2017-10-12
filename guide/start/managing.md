@@ -1,8 +1,4 @@
 ---
-title: Monitoring and Managing Applications
-title_in_menu: Monitoring and Managing Applications
-layout: website-normal
-menu_parent: index.md
 children:
 - { section: Applications } 
 - { section: Entities } 

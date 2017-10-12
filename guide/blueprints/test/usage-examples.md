@@ -1,7 +1,5 @@
 ---
 title: Example Blueprint Tests
-title_in_menu: Example Tests
-layout: website-normal
 ---
 # {{ page.title }}
 

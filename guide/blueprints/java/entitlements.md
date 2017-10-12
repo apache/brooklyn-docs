@@ -1,6 +1,5 @@
 ---
 title: Entitlements
-layout: website-normal
 ---
 # {{ page.title }}
 

@@ -1,7 +1,5 @@
 ---
-layout: website-normal
 title: Increase Entropy
-toc: /guide/toc.json
 ---
 # {{ page.title }}
 
