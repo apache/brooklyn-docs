@@ -278,9 +278,6 @@ We use some custom Jekyll plugins, in the `_plugins` dir:
 * include markdown files inside other files (see, for example, the `*.include.md` files 
   which contain text which is used in multiple other files)
 * generate the site structure / menu objects
-* parse JSON which we can loop over in our markdown docs (to build up models; previously used
-  for the TOC in the guide, but now replaced with site_structure)
-* trim whitespace of ends of variables
 
 
 # Versions
