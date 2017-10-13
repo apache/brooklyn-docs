@@ -1,4 +1,4 @@
-# Apache Brooklyn
+# Apache Brooklyn {{ book.brooklyn_version }} Documentation
 
 Welcome to the Apache Brooklyn documentation.
 

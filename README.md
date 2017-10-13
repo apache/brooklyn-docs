@@ -1,38 +1,6 @@
 Brooklyn Website and Docs Source
 ================================
 
-Quick start with the prototype GitBook documentation
-----------------------------------------------------
-
-On the first checkout, run:
-
-```bash
-npm install
-```
-
-Then, to run a local webserver with the documentation:
-
-```bash
-npm run serve
-```
-
-Wait for the message `Serving book on http://localhost:4000`, and then browse to
-that URL to see the book.
-
-To build a static documentation website:
-
-```bash
-npm run build
-```
-
-The generated files will be in `_book`.
-
-**To generate PDF**, first follow [these instructions to install ebook-convert](https://toolchain.gitbook.com/ebook.html), then run:
-
-```bash
-npm run pdf
-```
-
 Contributor Workflow
 --------------------
 
@@ -46,8 +14,8 @@ familiarise yourself with the standard workflow for Apache Brooklyn:
 [CONTRIB]: https://brooklyn.apache.org/community/how-to-contribute-docs.html
 [COMMIT]: https://brooklyn.apache.org/developers/committers/index.html
 
-The documents are written in [kramdown](http://kramdown.gettalong.org/syntax.html) a superset of Markdown 
-which is processed into HTML using [Jekyll](https://jekyllrb.com/). In addition to the standard set of options
+The documents are written in [Github flavoured Markdown](https://toolchain.gitbook.com/syntax/markdown.html) a superset of Markdown 
+which is processed into HTML using [Gitbook](https://github.com/GitbookIO/gitbook). In addition to the standard set of options
 and notation available with these platforms, a number of custom plug-ins have been implemented specifically
 for the Brooklyn docs. These are detailed in the [contributing to docs](https://brooklyn.apache.org/contributing) doc.  
 
@@ -57,159 +25,48 @@ Workstation Setup
 First, if you have not already done so, clone the `brooklyn` repository and subprojects
 and set up the remotes as described in [Guide for committers][COMMIT].
 
-The Brooklyn documentation uses [Jekyll](https://jekyllrb.com/) to process the site content into HTML. 
-This in turn requires Ruby and gems as described in the `Gemfile`:
-install [RVM](http://rvm.io/) to manage Ruby installations and sets of Ruby gems.
+The Brooklyn documentation uses [Gitbook](https://github.com/GitbookIO/gitbook) to process the site content into HTML. 
+This in turn requires `node` and `npm`:
+install node from the their [download page](https://nodejs.org/en/) or via yum / apt-get / brew
+to manage installations and dependencies.
 
-    \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
-
-Close your shell session and start a new one, to get the new
-environment that RVM has configured. Change directory to the location where
-this project is (where this file is located).
-
-RVM should detect its configuration inside `Gemfile` and try to configure itself. 
-Most likely it will report that the required version of Ruby is not installed,
-and it will show the command that you need to run to install the correct version. 
-Follow the instructions it shows, typically something like `rvm install ruby-2.1.2`.
-
-Once the correct version of Ruby is installed, change to your home directory
-and then change back (`cd ~ ; cd -`).
-This will cause RVM to re-load configuration from `Gemfile` with the correct version of Ruby.
-
-Finally, run this command to install all the required Gems 
+Once the `node` and `npm` are installed, run this command to install all the required dependencies 
 at the correct versions:
 
-    bundle install
-
-Any time you need to reset your Ruby environment for `jekyll` to run correctly,
-go to this directory (or the `_build` subdir) and re-run the above command.
-
-On some platforms there may be some fiddling required before `jekyll` runs without errors,
-but the ecosystem is fairly mature and most problems can be resolved with a bit of googling.
-Some issues we've encountered are:
-
- * on Mac, install xcode and its command-line tools
- * if ruby gets confused about versions,
-   [clean out your gems](http://judykat.com/ken-judy/force-bundler-rebuild-ruby-rails-gemset/)
- * if `libxml2` fails, set `bundle config build.nokogiri --use-system-libraries` before the install
-   (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
- * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
-
-If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
-You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use the usual apt-get / yum / brew.
+```bash
+npm install
+```
+If you are building the PDF documentation, this requires [calibre](http://wkhtmltopdf.org/).
+Please refer to the [Gibook documentation](https://toolchain.gitbook.com/ebook.html).
 
 Seeing the Website and Docs
 ---------------------------
 
-To build and most of see the documentation, run this command in this folder:
+To build the documentation, run this command in this folder:
 
-    jekyll serve
-    
-This will start up a local web server. The URL is printed by Jekyll when the server starts,
+```bash
+npm run build
+```
+
+The generated files will be in `_book`.
+
+To build and run a local webserver:
+
+```bash
+npm run serve
+```
+
+The URL is printed by Gitbook when the server starts,
 e.g. http://localhost:4000/ . The server will continue to run until you press Ctrl+C.
-Modified files will be detected and regenerated (but that might take up to 1m).
-Add `--no-watch` argument to turn off regeneration, or use `jekyll build` instead
-to generate a site in `_site` without a server.
+Modified files will be detected and regenerated (but that might take up to 40s).
 
-This does <i>not</i> generate API docs and certain other material;
-see the notes on `_build/build.sh` below for that.
+This does *not* generate API docs, Javadoc nor the website.
 
+**To generate PDF**, first follow [these instructions to install ebook-convert](https://toolchain.gitbook.com/ebook.html), then run:
 
-Project Structure
------------------
-
-Note that there are two interlinked micro-sites in this project:
-
-* `/website`: this contains the main Brooklyn website, including committer instructions,
-  download instructions, and "learn more" pages;
-  this content has **only one instance** on the live website,
-  and as changes are published they replace old content
-  
-* `/guide`: this contains the user guide and information pertaining to a 
-  specific Brooklyn version, including code structure and API documentation;
-  the live website contains a **copy of the guide for each Brooklyn version**,
-  with the code coming from the corresponding branch in `git`
-
-In addition note the following folders:
-
-* `/style`: contains JS, CSS, and image resources;
-  on the live website, this folder is installed at the root *and* 
-  into archived versions of the guide. 
-  
-* `/_build`: contains build scripts and configuration files,
-  and tests for some of the plugins
-
-* `/_plugins`: contains Jekyll plugins which supply tags and generation
-  logic for the sites, including links and tables of contents
-
-* `/_layouts`: contains HTML templates used by pages
-
-* `/_includes`: contains miscellaneous content used by templates and pages
-
-Jekyll automatically excludes any file or folder beginning with `_`
-from direct processing, so these do *not* show up in the `_site` folder
-(except where they are embedded in other files).  
-
-**A word on branches:**  The `/website` folder can be built against any branch;
-typically changes are made and published from `master`, to ensure that all versions
-are listed correctly.
-In contrast the `/guide` folder should be updated and built against the branch for which 
-instructions are being made, e.g. `master` for latest snapshot updates, 
-or `0.7.0-M2` for that milestone release.
-It *is* permitted to make changes to docs (and docs only!) after a release has
-been made. In most cases, these changes should also be made to master.
-
-
-Website Structure
------------------
-
-The two micro-sites above are installed on the live website as follows:
-
-* `/`: contains the website
-* `/v/<version>`: contains specific versions of the guide,
-  with the special folder `/v/latest` containing the recent preferred stable/milestone version 
-
-The site itself is hosted at `brooklyn.apache.org` with a `CNAME`
-record from `brooklyn.io`.
-
-Content is published to the site by updating an 
-Apache subversion repository, `brooklyn-site-public` at
-`https://svn.apache.org/repos/asf/brooklyn/site`.
-See below for more information.
-
-
-Building the Website and Guide
-------------------------------
-
-For most users, the `jekyll serve` command described above is sufficient to test changes locally.
-The main reason to use the build scripts (and to read this section) is to push changes to the server
-(requires Apache Brooklyn commit rights), or to test generated content such as API docs.
-
-The build is controlled by config files in `_build/` and accessed through `_build/build.sh`.
-There are a number of different builds possible; to list these, run:
-
-    _build/build.sh help
-
-The normal build outputs to `_site/`.  The three builds which are most relevant to updating the live site are:
-
-* **website-root**: to build the website only, in the root
-* **guide-latest**: to build the guide only, in `/v/latest/`
-* **guide-version**: to build the guide only, in the versioned namespace e.g. `/v/<version>/`
-
-There are some others, including `test-both`, which apply slightly different configurations
-useful for testing.
-Supported options beyond that include `--serve`, to start a web browser serving the content of `_site/`,
-and `--skip-javadoc`, to speed up the build significantly by skipping javadoc generation.
-A handy command for testing the live files, analogous to `jekyll serve` 
-but with the correct file structure, and then checking links, is:
-
-    _build/build.sh test-both --skip-javadoc --serve
-
-And to run link-checks quickly (without validating external links), use:
-
-    htmlproof --href_ignore "https?://127.*" --alt_ignore ".*" --disable_external _site
-
-
+```bash
+npm run pdf
+```
 
 Preparing for a Release
 -----------------------
@@ -218,15 +75,11 @@ When doing a release and changing versions:
 
 * Before branching:
   * Change the `brooklyn_stable_version` variable in `_config.yml`
-  * Update `website/meta/versions.md` with a bit of info on this release
 *  In the branch, with `change-version.sh` run (e.g. from `N.SNAPSHOT` to `N`)
-  * Ensure the `guide/start/release-notes.md` file is current
-  * Build and publish `website-root`, `guide-latest`, and `guide-version`
+  * Ensure the `start/release-notes.md` file is current
 * In master, with `change-version.sh` run (e.g. to `N+1-SNAPSHOT`)
-  * Clear old stuff in the `guide/start/release-notes.md` file
-  * Optionally build and public `guide-version`
+  * Clear old stuff in the `start/release-notes.md` file
  
-
 Publishing the Website and Guide
 --------------------------------
 
@@ -305,18 +158,6 @@ That command will fail if javadoc has not been generated for that version.
 
 More Notes on the Code
 ----------------------
-
-# Plugins
-
-We use some custom Jekyll plugins, in the `_plugins` dir:
-
-* include markdown files inside other files (see, for example, the `*.include.md` files 
-  which contain text which is used in multiple other files)
-* generate the site structure / menu objects
-* parse JSON which we can loop over in our markdown docs (to build up models; previously used
-  for the TOC in the guide, but now replaced with site_structure)
-* trim whitespace of ends of variables
-
 
 # Versions
 
