@@ -1,8 +1,6 @@
 ---
 title: Client CLI Reference
-children:
-- cli-ref-guide.md
-- cli-usage-guide.md
+partial-summary-depth: 1
 ---
 
 

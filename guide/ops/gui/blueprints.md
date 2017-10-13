@@ -1,8 +1,5 @@
 ---
 title: Deploying Blueprints
-children:
-- { section: Launching from a Blueprint, title: Launching from a Blueprint } 
-- { section: Launching from the Catalog, title: Launching from the Catalog } 
 ---
 # {{ page.title }}
 

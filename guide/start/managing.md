@@ -1,11 +1,3 @@
----
-children:
-- { section: Applications } 
-- { section: Entities } 
-- { section: Sensors  } 
-- { section: Effectors  } 
-- { section: Activities } 
----
 # {{ page.title }}
 
 

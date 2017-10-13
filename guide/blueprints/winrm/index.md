@@ -1,7 +1,5 @@
 ---
 title: Windows Blueprints
-children:
-- client.md
 ---
 # {{ page.title }}
 

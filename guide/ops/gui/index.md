@@ -1,10 +1,5 @@
 ---
 title: GUI Guide
-children:
-- running.md
-- blueprints.md
-- managing.md
-- policies.md
+partial-summary-depth: 1
 ---
-
-
+# {{ page.title }}

@@ -1,10 +1,6 @@
 ---
 title: Chef in YAML Blueprints
-children:
-- about-chef.md
-- creating-blueprints.md
-- writing-chef.md
-- advanced-chef-integration.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

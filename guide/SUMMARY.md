@@ -2,7 +2,7 @@
 
 ### User Guide
 
-* Getting Started
+* [Getting Started](start/index.md)
   * [Running Apache Brooklyn](start/running.md)
   * [Deploying Blueprints](start/blueprints.md)
   * [Monitoring and Managing Applications](start/managing.md)
@@ -19,7 +19,7 @@
   * [Policies](concepts/policies.md)
   * [Execution](concepts/execution.md)
   * [Stop/start/restart behaviour](concepts/stop-start-restart-behaviour.md)
-* Writing Blueprints
+* [Writing Blueprints](blueprints/index.md)
   * [Creating YAML Blueprint](blueprints/creating-yaml.md)
   * [Entity Configuration](blueprints/entity-configuration.md)
   * [Setting Locations](blueprints/setting-locations.md)
@@ -85,14 +85,14 @@
   * [Location Customizers](locations/index.md#location-customizers)
   * [Customizing Cloud Security Groups](locations/index.md#customizing-cloud-security-groups)
   * [Specialized Locations](locations/index.md#specialized-locations)
-* Reference Guide
+* [Reference Guide](ops/index.md)
   * [Production Installation](ops/production-installation.md)
   * [Starting, Stopping and Monitoring](ops/starting-stopping-monitoring.md)
   * [Server CLI Reference](ops/server-cli-reference.md)
   * [Client CLI Reference](ops/cli/index.md)
     * [CLI Reference Guide](ops/cli/cli-ref-guide.md)
     * [CLI Usage Guide](ops/cli/cli-usage-guide.md)
-  * GUI Guide
+  * [GUI Guide](ops/gui/index.md)
     * [Launching](ops/gui/running.md)
     * [Deploying Blueprints](ops/gui/blueprints.md)
     * [Monitoring and Managing Applications](ops/gui/managing.md)
@@ -112,7 +112,7 @@
   * [Requirements](ops/requirements.md)
   * [Upgrade](ops/upgrade.md)
   * [Security Guidelines](ops/security-guidelines.md)
-  * Troubleshooting
+  * [Troubleshooting](ops/troubleshooting/index.md)
     * [Overview](ops/troubleshooting/overview.md)
     * [Web Console Issues](ops/troubleshooting/web-console-issues.md)
     * [Deployment](ops/troubleshooting/deployment.md)
@@ -124,8 +124,8 @@
     * [SoftwareProcess Entities](ops/troubleshooting/softwareprocess.md)
     * [Going Deep in Java and Logs](ops/troubleshooting/going-deep-in-java-and-logs.md)
     * [Monitoring Memory Usage](ops/troubleshooting/memory-usage.md)
-* Other 0.12.0 Resources
-  * [Glossary](https://brooklyn.apache.org/documentation/glossary.html)
+* [Other 0.12.0 Resources](misc/index.md)
+  * [Glossary](GLOSSARY.md)
   * [Versions](https://brooklyn.apache.org/meta/versions.html)
   * [Release Notes](misc/release-notes.md)
 
@@ -145,5 +145,4 @@
 
 ----
 
-* [Versions](https://brooklyn.apache.org/meta/versions.html)
 * [Other Resources](https://brooklyn.apache.org/documentation/other-docs.html)

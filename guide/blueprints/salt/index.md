@@ -1,8 +1,6 @@
 ---
 title: Salt in YAML Blueprints
-children:
-- about-salt.md
-- creating-salt-blueprints.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

@@ -1,14 +1,6 @@
 ---
 title: Catalog
-children:
-- schema.md
-- templates.md
-- versioning.md
-- management.md
-- bundle.md
-- cli.md
-
- 
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

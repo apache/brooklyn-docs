@@ -1,13 +1,5 @@
 ---
 title: Getting Started
-children:
-- running.md
-- blueprints.md
-- managing.md
-- policies.md
-- concept-quickstart.md
+partial-summary-depth: 1
 ---
-
-
-
-
+# {{ page.title }}

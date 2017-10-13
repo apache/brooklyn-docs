@@ -1,13 +1,8 @@
 ---
 title: Other Resources
-children:
-- { title: Javadoc, path: javadoc/ }
-- download.md
-- release-notes.md
-- known-issues.md
-- { path: ../dev/, title_in_menu: "Developer Guide" }
-- { path: /website/documentation/, title_in_menu: "All Documentation", menu_customization: { force_inactive: true } }
+partial-summary-depth: 1
 ---
+# {{ page.title }}
 
 {% if output.name == 'website' %}
 Further documentation specific to this version of Brooklyn includes:

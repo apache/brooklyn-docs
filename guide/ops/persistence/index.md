@@ -1,12 +1,5 @@
 ---
 title: Persistence
-children:
-- { section: Configuration }
-- { section: File-based Persistence }
-- { section: Object Store Persistence }
-- { section: Rebinding to State }
-- { section: Writing Persistable Code }
-- { section: Persisted State Backup }
 ---
 # {{ page.title }}
 

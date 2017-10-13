@@ -1,7 +1,5 @@
 ---
 title: High Availability
-children:
-- high-availability-supplemental.md
 ---
 # {{ page.title }}
 

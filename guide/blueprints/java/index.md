@@ -1,16 +1,6 @@
 ---
 title: Java Entities
-children:
-- archetype.md
-- defining-and-deploying.md
-- bundle-dependencies.md
-- topology-dependencies.md
-- common-usage.md
-- feeds.md
-- entity.md
-- entities.md
-- service-state.md
-- entitlements.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

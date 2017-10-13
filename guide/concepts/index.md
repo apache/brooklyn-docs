@@ -1,15 +1,6 @@
 ---
 title: Brooklyn Concepts
-children:
-- entities.md
-- application-parent-membership.md
-- configuration-sensor-effectors.md
-- lifecycle-managementcontext.md
-- dependent-configuration.md
-- location.md
-- policies.md
-- execution.md
-- stop-start-restart-behaviour.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

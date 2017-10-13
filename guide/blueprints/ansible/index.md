@@ -1,8 +1,6 @@
 ---
 title: Ansible in YAML Blueprints
-children:
-- about-ansible.md
-- creating-ansible-blueprints.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

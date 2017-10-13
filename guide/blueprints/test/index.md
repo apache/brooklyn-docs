@@ -1,8 +1,6 @@
 ---
 title: Testing YAML Blueprints
-children:
-- test-entities.md
-- usage-examples.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

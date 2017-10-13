@@ -1,11 +1,6 @@
 ---
 title: Brooklyn Configuration and Options
-children:
-- { section: Memory Usage }
-- { section: Authentication }
-- brooklyn_cfg.md
-- https.md
-- cors.md
+partial-summary-depth: 1
 ---
 # {{ page.title }}
 

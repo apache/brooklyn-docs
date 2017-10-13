@@ -7,13 +7,17 @@
     "collapsible-chapters",
     "bootstrap-callout",
     "styles-less",
-    "versions"
+    "versions",
+    "partial-summary"
   ],
   "styles": {
     "website": "./styles/website.less",
     "pdf": "./styles/pdf.less"
   },
   "pluginsConfig": {
+    "partial-summary": {
+      "depth": 0
+    },
     "include-highlight": {
       "extensionToLanguage": {
         "yml": "yaml",

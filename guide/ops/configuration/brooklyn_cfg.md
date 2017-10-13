@@ -1,12 +1,5 @@
 ---
 title: brooklyn.cfg
-children:
-- { section: Quick Setup }
-- { section: Locations }
-- { section: Java }
-- { section: Authentication }
-- { section: Entitlements }
-- { section: HTTPS Configuration }
 ---
 # {{ page.title }}
 

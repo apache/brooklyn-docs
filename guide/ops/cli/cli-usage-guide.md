@@ -1,14 +1,5 @@
 ---
 title: CLI Usage Guide
-children:
-- { section: Login }
-- { section: Applications }
-- { section: Entities }
-- { section: Sensors }
-- { section: Effectors }
-- { section: Policies }
-- { section: Activities }
-- { section: YAML Blueprint }
 ---
 # {{ page.title }}
 

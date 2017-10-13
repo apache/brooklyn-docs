@@ -1,18 +1,5 @@
 ---
 title: CLI Reference Guide
-children:
-- { section: List of Commands }
-- { section: Scopes }
-- { section: Abbreviations}
-- { section: Command Reference }
-- { section: Login}
-- { section: Applications}
-- { section: Entities}
-- { section: Sensors}
-- { section: Effectors}
-- { section: Policies}
-- { section: Activities}
-- { section: Miscellaneous}
 ---
 # {{ page.title }}
 
