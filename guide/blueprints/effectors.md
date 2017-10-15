@@ -50,7 +50,7 @@ Here is a simple example of an `SshCommandEffector` definition:
           defaultValue: hi netcat
 ```
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
 
 ### HTTPCommandEffector
 
@@ -96,7 +96,7 @@ brooklyn.initializers:
       Content-Type: "application/x-www-form-urlencoded"
 ```
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
 
 ### AddChildrenEffector
 
@@ -133,7 +133,7 @@ brooklyn.initializers:
 
 One of the config keys `BLUEPRINT_YAML` (containing a YAML blueprint (map or string)) or `BLUEPRINT_TYPE` (containing a string referring to a catalog type) should be supplied, but not both.
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
 
 Writing an Effector
 -------------------
@@ -145,7 +145,7 @@ Each effector instance is associated with an entity,
 and at runtime it will typically exectute an operation, collect the result and, potentially, publish it as sensor on that entity, performing some computation.
 
 Writing an effector is straightforward.
-Simply extend [`AddEffector`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddEffector.html),
+Simply extend [`AddEffector`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/AddEffector.html),
 providing an implementation for `newEffectorBuilder` and adding a constructor that consumes the builder or override an existing effector.
 
 ```java

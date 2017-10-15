@@ -64,7 +64,7 @@ the `nc` process exits afterwards, causing Brooklyn to set the entity to an `ON_
 
 There are other options for determining health: you can set `checkRunning.command` and `stop.command` instead,
 as documented on the javadoc and config keys of the
-[org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/entity/software/base/VanillaSoftwareProcess.html)
+[org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/entity/software/base/VanillaSoftwareProcess.html)
 class, and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`. For example:
 
 !CODEFILE "example_yaml/vanilla-bash-netcat-more-commands.yaml"

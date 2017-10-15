@@ -183,7 +183,7 @@ brooklyn.entitlements.perUser.metrics=minimal
 For more information, see 
 [Java: Entitlements](../../blueprints/java/entitlements.md).
 or
-[EntitlementManager](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).
+[EntitlementManager]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).
 
 
 

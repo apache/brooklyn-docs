@@ -12,14 +12,16 @@
     "gitbook-plugin-partial-summary": "^1.0.0",
     "gitbook-plugin-styles-less": "^1.0.0",
     "gitbook-plugin-theme-api": "^1.1.2",
-    "gitbook-plugin-versions": "^2.1.4"
+    "gitbook-plugin-versions": "^2.1.4",
+    "less": "^3.0.0-alpha.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gitbook install",
-    "build": "gitbook build",
+    "book": "gitbook build",
     "serve": "gitbook serve",
-    "pdf": "gitbook pdf"
+    "pdf": "gitbook pdf",
+    "javadoc": "lessc javadoc/javadoc.less javadoc/stylesheet.css && pushd javadoc && ./build.sh && popd",
+    "build": "npm run book && npm run javadoc"
   },
   "author": "",
   "license": "Apache-2.0",

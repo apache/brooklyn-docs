@@ -43,4 +43,4 @@ allowing permissions objects to be declared in LDAP leveraging regular expressio
 For more information on this, ask on IRC or the mailing list,
 and see 
 
-[EntitlementManager](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).
+[EntitlementManager]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).

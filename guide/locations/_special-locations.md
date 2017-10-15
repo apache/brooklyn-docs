@@ -112,6 +112,6 @@ Custom alternatives to round-robin are also possible using the configuration opt
 
 #### The Server Pool
 
-The [ServerPool](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/entity/machine/pool/ServerPool.html)
+The [ServerPool]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/entity/machine/pool/ServerPool.html)
 entity type allows defining an entity which becomes available as a location.
 

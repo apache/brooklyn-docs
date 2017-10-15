@@ -88,7 +88,7 @@ These steps can be skipped or customized as described below.
 The following is a subset of the most commonly used configuration keys used to customize 
 cloud provisioning.
 For more keys and more detail on the keys below, see 
-[JcloudsLocationConfig](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/location/jclouds/JcloudsLocationConfig.html).
+[JcloudsLocationConfig]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/location/jclouds/JcloudsLocationConfig.html).
 
 ###### VM Creation
     
@@ -115,10 +115,10 @@ For more keys and more detail on the keys below, see
   including the ID of the app and of the entity.
   (As many cloud portals let you filter views, this can help find a specific entity or all machines for a given application.)
   For more sophisticated control over host naming, you can supply a custom 
-  [CloudMachineNamer](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/location/cloud/names/CloudMachineNamer.html),
+  [CloudMachineNamer]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/location/cloud/names/CloudMachineNamer.html),
   for example
   `cloudMachineNamer: CustomMachineNamer`.
-  [CustomMachineNamer](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/location/cloud/names/CustomMachineNamer.html)
+  [CustomMachineNamer]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/location/cloud/names/CustomMachineNamer.html)
   will use the entity's name or following a template you supply.
   On many clouds, a random suffix will be appended to help guarantee uniqueness;
   this can be removed by setting `vmNameSaltLength: 0` (selected clouds only).
@@ -138,7 +138,7 @@ For more keys and more detail on the keys below, see
   machines with `machineCreateAttempts` (jclouds only). This is useful as an efficient low-level fix
   for those occasions when cloud providers give machines that are dead on arrival.
   You can of course also resolve it at a higher level with a policy such as 
-  [ServiceRestarter](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/policy/ha/ServiceRestarter.html).
+  [ServiceRestarter]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/policy/ha/ServiceRestarter.html).
 
 - If you want to investigate failures, set `destroyOnFailure: false`
   to keep failed VM's around. (You'll have to manually clean them up.)
