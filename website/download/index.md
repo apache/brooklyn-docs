@@ -43,7 +43,7 @@ Suitable Ubuntu and Debian distributions.
 </div>
 
 <div class="text-center">
-  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}.all.deb" role="button">DEB package</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}.deb" role="button">DEB package</a>
 </div>
   </div>
 </div>
