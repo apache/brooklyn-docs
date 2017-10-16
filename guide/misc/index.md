@@ -1,6 +1,5 @@
 ---
-# BROOKLYN_VERSION_BELOW
-title: Other 1.0.0-SNAPSHOT Resources
+title: Other Resources
 layout: website-normal
 started-pdf-exclude: true
 children:
