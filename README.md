@@ -39,13 +39,13 @@ npm install
 If you are building the PDF documentation, this requires [calibre](http://wkhtmltopdf.org/).
 Please refer to the [Gibook documentation](https://toolchain.gitbook.com/ebook.html).
 
-Seeing the Website and Docs
+Seeing the docs
 ---------------------------
 
 To build the documentation, run this command in this folder:
 
 ```bash
-npm run build
+npm run book
 ```
 
 The generated files will be in `_book`.
@@ -68,6 +68,29 @@ This does *not* generate API docs, Javadoc nor the website.
 npm run pdf
 ```
 
+Seeing the javadoc
+---------------------------
+
+To build the javadoc, run this command in this folder:
+
+```bash
+npm run javadoc
+```
+
+The generated files will be in `_book/misc/javadoc`.
+
+To build and serve the docs and javadocs, first start the local webserver:
+
+```bash
+npm run serve
+```
+
+then run:
+
+```bash
+npm run javadoc
+```
+
 Preparing for a Release
 -----------------------
 
@@ -80,7 +103,7 @@ When doing a release and changing versions:
 * In master, with `change-version.sh` run (e.g. to `N+1-SNAPSHOT`)
   * Clear old stuff in the `start/release-notes.md` file
  
-Publishing the Website and Guide
+Publishing the docs and javadoc
 --------------------------------
 
 The Apache website publication process is based around the Subversion repository; 
@@ -90,48 +113,38 @@ So, to push changes the live site, you will need to have the website directory c
 from the Apache subversion repository. We recommend setting this up as a sibling to your
 `brooklyn` git project directory:
 
-    # verify we're in the right location and the site does not already exist
-    ls _build/build.sh || { echo "ERROR: you should be in the docs/ directory to run this command" ; exit 1 ; }
-    ls ../../brooklyn-site-public > /dev/null && { echo "ERROR: brooklyn-site-public dir already exists" ; exit 1 ; }
-    pushd `pwd -P`/../..
-    
-    svn --non-interactive --trust-server-cert co https://svn.apache.org/repos/asf/brooklyn/site brooklyn-site-public
-    
-    # verify it
-    cd brooklyn-site-public
-    ls style/img/apache-brooklyn-logo-244px-wide.png || { echo "ERROR: checkout is wrong" ; exit 1 ; }
-    export BROOKLYN_SITE_DIR=`pwd`
-    popd
-    echo "SUCCESS: checked out site in $BROOKLYN_SITE_DIR"
+```bash
+# verify we're in the right location and the site does not already exist
+ls book.json || { echo "ERROR: you should be in the docs/ directory to run this command" ; exit 1 ; }
+ls ../../brooklyn-site-public > /dev/null && { echo "ERROR: brooklyn-site-public dir already exists" ; exit 1 ; }
+pushd `pwd -P`/../..
 
-With this checked out, the `build.sh` script can automatically copy generated files into the right subversion sub-directories
-with the `--install` option.  (This assumes the relative structure described above; if you have a different
-structure, set BROOKLYN_SITE_DIR to point to the directory as above.  Alternatively you can copy files manually,
-using the instructions in `build.sh` as a guide.)
+svn --non-interactive --trust-server-cert co https://svn.apache.org/repos/asf/brooklyn/site brooklyn-site-public
 
-A typical update consists of the following commands (or a subset),
-copied to `${BROOKLYN_SITE_DIR-../../brooklyn-site-public}`:
+# verify it
+cd brooklyn-site-public
+ls style/img/apache-brooklyn-logo-244px-wide.png || { echo "ERROR: checkout is wrong" ; exit 1 ; }
+export BROOKLYN_SITE_DIR=`pwd`
+popd
+echo "SUCCESS: checked out site in $BROOKLYN_SITE_DIR"
+```
 
-    # ensure svn repo is up-to-date (very painful otherwise)
-    cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
-    svn up
-    cd -
+With this checked out, a typical update consists of the following commands (or a subset)
 
-    # versioned guide, safe for snapshots, relative to /v/<version>/
-    _build/build.sh guide-version --install
+```bash
+# Ensure svn repo is up-to-date (very painful otherwise)
+cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
+svn up
+cd -
 
-    # main website, if desired, relative to / 
-    _build/build.sh website-root --install
-    
-    # this version as the latest guide, if desired, relative to /v/latest/
-    _build/build.sh guide-latest --install
-    
-(If HTML-Proofer find failures, then fix the links etc. Unfortunately, the javadoc build 
-gives a lot of warnings. Fixing those is not part of this activity).
+# Build docs and javadocs
+npm run build
 
-You can then preview the public site of [localhost:4000](http://localhost:4000) with:
+# Copy files over
+mkdir -p $BROOKLYN_SITE_DIR/v/<version>
+cp -r _book/ $BROOKLYN_SITE_DIR/v/<version>/
 
-    _build/serve-public-site.sh
+```
 
 Next it is recommended to go to the SVN dir and 
 review the changes using the usual `svn` commands -- `status`, `diff`, `add`, `rm`, etc.
@@ -139,30 +152,31 @@ Note in particular that deleted files need special attention (there is no analog
 `git add -A`!). Look at deletions carefully, to try to avoid breaking links, but once
 you've done that these commands might be useful:
 
-    cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
-    svn add * --force
-    export DELETIONS=$( svn status | sed -e '/^!/!d' -e 's/^!//' )
-    if [ ! -z "${DELETIONS}" ] ; then svn rm ${DELETIONS} ; fi
+```bash
+cd ${BROOKLYN_SITE_DIR-../../brooklyn-site-public}
+svn add * --force
+export DELETIONS=$( svn status | sed -e '/^!/!d' -e 's/^!//' )
+if [ ! -z "${DELETIONS}" ] ; then svn rm ${DELETIONS} ; fi
+```
 
 Then check in the changes (probably picking a better message than shown here):
 
-    svn ci -m 'Update Brooklyn website'
+```bash
+svn ci -m 'Update Brooklyn website'
+```
 
 The changes should become live within a few minutes.
 
 SVN commits can be **slow**, particularly if you've regenerated javadoc.
 (The date is included in all javadoc files so the commands above will cause *all* javadoc to be updated.)
-Use `_build/build.sh guide-version --install --skip-javadoc` to update master while re-using the previously installed javadoc.
-That command will fail if javadoc has not been generated for that version.
-
+Use `npm run book` to update master while re-using the previously installed javadoc.
 
 More Notes on the Code
 ----------------------
 
-# Versions
+### Versions
 
-Archived versions are kept under `/v/` in the website.  New versions should be added with
-the appropriate directory (`_build/build.sh guide-version` above will do this).  
+Archived versions are kept under `/v/` in the website.  New versions should be added with the appropriate directory.  
 These versions take their own copy of the `style` files so that changes there will not affect future versions.
 
 A list of available versions is in `website/meta/versions.md`.
