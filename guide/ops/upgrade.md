@@ -50,7 +50,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
           sudo yum upgrade apache-brooklyn-xxxx.noarch.rpm
           
           # Ubuntu / Debian
-          sudo dpkg -i apache-brooklyn-xxxx.all.deb
+          sudo dpkg -i apache-brooklyn-xxxx.deb
 
       If there are conflicts in configuration files (located in `/etc/brooklyn`), the upgrade will behave differently based 
       on the package you are using:
@@ -198,7 +198,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
           sudo yum install apache-brooklyn-xxxx.noarch.rpm
           
           # Ubuntu / Debian
-          sudo dpkg -i apache-brooklyn-xxxx.all.deb
+          sudo dpkg -i apache-brooklyn-xxxx.deb
 
 6. Restore the persisted state and configuration.
 
@@ -286,7 +286,7 @@ This section applies only with you are using the RPM/DEB packages. To perform a 
 yum downgrade apache-brooklyn.noarch
 
 # Ubuntu Debian
-dpkg -i apache-brooklyn-xxxx.all.deb
+dpkg -i apache-brooklyn-xxxx.deb
 {% endhighlight %}
 
 *Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download](../misc/download.html)

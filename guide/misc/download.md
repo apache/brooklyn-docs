@@ -40,10 +40,10 @@ The latest stable release can be accessed on the [main download page]({{ site.pa
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top'>DEB package<br />Ubuntu, Debian, etc.</td>
-	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}.all.deb' title='Download DEB package'>apache-brooklyn-{{ site.brooklyn-version }}.all.deb</a></td>
+	<td style='text-align:left'><a href='{{ site.brooklyn.download_prefix }}.deb' title='Download DEB package'>apache-brooklyn-{{ site.brooklyn-version }}.deb</a></td>
 	<td><small>
-	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}.all.deb.asc'>PGP</a>, {% endif %}
-	  <a href='{{ site.brooklyn.hash_download_prefix }}.all.deb.sha1'>SHA1</a></small></td>
+	  {% if site.brooklyn.is_release %}<a href='{{ site.brooklyn.hash_download_prefix }}.deb.asc'>PGP</a>, {% endif %}
+	  <a href='{{ site.brooklyn.hash_download_prefix }}.deb.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='6'>Client CLI only</td>

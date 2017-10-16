@@ -14,6 +14,8 @@ to Brooklyn's commercial users for funding much of this development.
 
 ### New Features
 
+1. This Apache Brooklyn release makes the OSGI runtime, based on Karaf, the default. The Brooklyn Karaf release is a substantial change from Brooklyn Classic especially for extending Brooklyn with Java drop-ins and configuring Brooklyn. Please refer to the docs for specific changes around this. The non-Karaf version is still available in 0.12.0 as "Apache Brooklyn Classic".
+
 1. Auto-bundling of BOMs and the ability to manage and persist bundles:  related entities are now grouped in bundles
 and all management activity (deletion, upgrades, persistence) done at the level of the bundle.
 You can now start a new Brooklyn instance pointed at a persistence store,
