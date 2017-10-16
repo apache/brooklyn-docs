@@ -11,10 +11,10 @@ releases. To allow these example commands to run unmodified, set these environme
 # The version currently set on the master branch (BROOKLYN_VERSION_BELOW)
 OLD_MASTER_VERSION=1.0.0-SNAPSHOT
 # The next version to be set on the master branch
-NEW_MASTER_VERSION=0.10.0-SNAPSHOT
+NEW_MASTER_VERSION=1.1.0-SNAPSHOT
 
 # The version we are releasing now.
-VERSION_NAME=0.9.0
+VERSION_NAME=1.0.0
 
 # The release candidate number we are making now.
 RC_NUMBER=1
