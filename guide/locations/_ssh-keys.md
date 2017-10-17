@@ -1,10 +1,4 @@
----
-section: SSH Keys
-section_position: 9
-section_type: inline
----
-
-### SSH Keys
+## SSH Keys
 
 SSH keys are one of the simplest and most secure ways to access remote servers.
 They consist of two parts:
@@ -24,7 +18,7 @@ the remote machine can confirm it is you accessing it (if no one else has the pr
 and no one snooping on the network can decrypt of any of the traffic.
  
 
-#### Creating an SSH Key
+### Creating an SSH Key
 
 If you don't have an SSH key, create one with:
 
@@ -33,7 +27,7 @@ $ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 ```
 
 
-#### Localhost Setup
+### Localhost Setup
 
 If you want to deploy to `localhost`, ensure that you have a public and private key,
 and that your key is authorized for ssh access:
@@ -62,7 +56,7 @@ If this isn't the case, see below.
 
 
 
-#### Potential Problems
+### Potential Problems
 
 * **MacOS user?** In addition to the above, enable "Remote Login" in "System Preferences > Sharing".
 

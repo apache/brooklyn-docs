@@ -1,10 +1,3 @@
----
-section: OpenStack
-title: OpenStack
-section_type: inline
-section_position: 7
----
-
 ## OpenStack
 
 ### Apache jclouds

@@ -1,10 +1,4 @@
----
-section: Localhost
-section_position: 10
-section_type: inline
----
-
-### Localhost
+## Localhost
 
 If passwordless ssh login to `localhost` and passwordless `sudo` is enabled on your 
 machine, you should be able to deploy some blueprints with no special configuration,
@@ -23,7 +17,7 @@ This location will be saved as a [catalog entry](../blueprints/catalog/index.md#
 for easy reusability.
 
 
-#### Passwordless Sudo
+### Passwordless Sudo
 
 If you encounter issues or for more information, see [SSH Keys Localhost Setup](#localhost-setup). 
 

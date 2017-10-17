@@ -1,10 +1,3 @@
----
-section: CloudStack
-title: Apache CloudStack
-section_type: inline
-section_position: 4
----
-
 ## Apache CloudStack
 
 ### Connection Details

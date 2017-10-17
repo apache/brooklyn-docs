@@ -1,10 +1,3 @@
----
-section: Google Compute Engine (GCE)
-title: Google Compute Engine
-section_type: inline
-section_position: 5
----
-
 ## Google Compute Engine (GCE)
 
 ### Credentials

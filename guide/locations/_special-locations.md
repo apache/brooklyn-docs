@@ -1,14 +1,8 @@
----
-section: Specialized Locations
-section_position: 13
-section_type: inline
----
-
-### Specialized Locations
+## Specialized Locations
 
 Some additional location types are supported for specialized situations:
 
-#### Single Host
+### Single Host
 
 The spec `host`, taking a string argument (the address) or a map (`host`, `user`, `password`, etc.),
 provides a convenient syntax when specifying a single host.
@@ -23,12 +17,12 @@ services:
 Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0.1)`.
 
 
-#### The Multi Location
+### The Multi Location
 
 The spec `multi` allows multiple locations, specified as `targets`,
 to be combined and treated as one location.
 
-##### Sequential Consumption
+#### Sequential Consumption
 
 In its simplest form, this will use the first target location where possible,
 and will then switch to the second and subsequent locations when there are no
@@ -52,7 +46,7 @@ services:
         type: org.apache.brooklyn.entity.machine.MachineEntity
 ```
 
-##### Round-Robin Consumption and Availability Zones for Clustered Applications
+#### Round-Robin Consumption and Availability Zones for Clustered Applications
 
 A `DynamicCluster` can be configured to cycle through its deployment targets round-robin when
 provided with a location that supports the `AvailabilityZoneExtension` -- the `multi` location
@@ -110,7 +104,7 @@ Custom alternatives to round-robin are also possible using the configuration opt
 `dynamiccluster.zone.placementStrategy` on `DynamicCluster`.
 
 
-#### The Server Pool
+### The Server Pool
 
 The [ServerPool]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/entity/machine/pool/ServerPool.html)
 entity type allows defining an entity which becomes available as a location.

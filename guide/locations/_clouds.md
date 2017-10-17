@@ -1,10 +1,4 @@
----
-section: Clouds
-section_type: inline
-section_position: 1
----
-
-### Clouds
+## Clouds
 
 For most cloud provisioning tasks, Brooklyn uses
 <a href="http://jclouds.org">Apache jclouds</a>.
@@ -48,7 +42,7 @@ The configuration options are described in more detail below.
 In some cases, cloud providers have special features or unusual requirements. 
 These are outlined in **[More Details for Specific Clouds](#more-details-on-specific-clouds)**.
 
-#### OS Initial Login and Setup
+### OS Initial Login and Setup
 
 Once a machine is provisioned, Brooklyn will normally attempt to log in via SSH and configure the machine sensibly.
 
@@ -83,14 +77,14 @@ Following a successful logon, Brooklyn performs the following steps to configure
 
 These steps can be skipped or customized as described below.
 
-#### jclouds Config Keys
+### jclouds Config Keys
 
 The following is a subset of the most commonly used configuration keys used to customize 
 cloud provisioning.
 For more keys and more detail on the keys below, see 
 [JcloudsLocationConfig]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/location/jclouds/JcloudsLocationConfig.html).
 
-###### VM Creation
+##### VM Creation
     
 - Most providers require exactly one of either `region` (e.g. `us-east-1`) or `endpoint` (the URL, usually for private cloud deployments)
 
@@ -146,7 +140,7 @@ For more keys and more detail on the keys below, see
   
 - You can set `useMachinePublicAddressAsPrivateAddress` to true to overwrite the VMs private IP with its public IP. This is useful as it can be difficult to get VMs communicating via the private IPs they are assigned in some clouds.  Using this config, blueprints which use private IPs can still be deployed to these clouds.
   
-  ###### OS Setup
+##### OS Setup
 
 - `user` and `password` can be used to configure the operating user created on cloud-provisioned machines
 
@@ -230,7 +224,7 @@ For more keys and more detail on the keys below, see
   This setting prevents scripts executed on the VMs from being deleted on completion.
   Note that some scripts run periodically so this can eventually fill a disk; it should only be used for dev/test. 
 
-###### Custom Template Options
+##### Custom Template Options
 
 jclouds supports many additional options for configuring how a virtual machine is created and deployed, many of which
 are for cloud-specific features and enhancements. Brooklyn supports some of these, but if what you are looking for is
@@ -272,7 +266,7 @@ Here you can see that we set three template options:
 If the method call cannot be matched to the template options available - for example if you are trying to set an AWS EC2
 specific option but your location is an OpenStack cloud - then a warning is logged and the option is ignored.
 
-###### Cloud Machine Naming
+##### Cloud Machine Naming
 
 The name that Apache Brooklyn generates for your virtual machine will, by default, be based on your Apache Brooklyn server name and the IDs of the entities involved. This is the name you see in places such as the AWS console and will look something like:
 
@@ -291,7 +285,7 @@ The above example will create a name such as:
     
 Allowing you to more easily identify your virtual machines.
 
-### More Details on Specific Clouds
+## More Details on Specific Clouds
 
 Clouds vary in the format of the identity, credential, endpoint, and region.
 Some also have their own idiosyncracies.  More details for configuring some common clouds

@@ -1,11 +1,4 @@
----
-section: Inheritance and Named Locations
-title: Named Locations
-section_type: inline
-section_position: 7
----
-
-### Inheritance and Named Locations
+## Inheritance and Named Locations
 
 Named locations can be defined for commonly used groups of properties, 
 with the syntax `brooklyn.location.named.your-group-name.`

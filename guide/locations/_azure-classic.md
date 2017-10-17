@@ -1,10 +1,4 @@
----
-section: Azure Compute Classic
-section_type: inline
-section_position: 3
----
-
-### Azure Compute Classic
+## Azure Compute Classic
  
 Azure is a cloud computing platform and infrastructure created by Microsoft. Apache Brooklyn includes support for both Azure Classic and Azure ARM, as
 one of the [Apache jclouds](http://jclouds.org) supported clouds `Microsoft Azure Compute`.
@@ -14,7 +8,7 @@ model. See [https://azure.microsoft.com/en-gb/documentation/articles/resource-ma
 for details.
 
 
-#### Setup the Azure credentials
+### Setup the Azure credentials
 
 Microsoft Azure requests are signed by SSL certificate. You need to upload one into your account in order to use an Azure
 location.
@@ -36,7 +30,7 @@ Please note, you can find the "myId" value for this link by looking at the URL w
 **Note**, you will need to use `.p12` format in the `brooklyn.properties`.
 
 
-#### How to configure Apache Brooklyn to use Azure Compute
+### How to configure Apache Brooklyn to use Azure Compute
 
 First, in your `brooklyn.properties` define a location as follows:
 
@@ -81,7 +75,7 @@ rather than "classic".
  * `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`
 
 
-##### Named location
+#### Named location
 
 For convenience, you can define a named location, like:
 
@@ -102,7 +96,7 @@ On Linux VMs, The `user` and `password` will create a user with that name and se
 disabling the normal login user and password defined on the `azurecompute` location.
 
 
-#### Windows VMs on Azure
+### Windows VMs on Azure
 
 The following configuration options are important for provisioning Windows VMs in Azure:
 
@@ -153,7 +147,7 @@ The following configuration options are important for provisioning Windows VMs i
   This configuration is subject to change in future releases.
 
 
-###### Sample Windows Blueprint
+##### Sample Windows Blueprint
 
 Below is an example for provisioning a Windows-based entity on Azure. Note the placeholder values 
 for the identity, credential and password.
@@ -205,7 +199,7 @@ brooklyn.location.named.myazure.password=secretPass1!
 brooklyn.location.named.myazure.templateOptions={ overrideLoginUser: amp, overrideLoginPassword: secretPass1! }
 ```
 
-###### User and Password Configuration
+##### User and Password Configuration
 
 As described under the configuration options, the username and password must be explicitly supplied
 in the configuration.
@@ -220,7 +214,7 @@ This approach differs from the behaviour of clouds like AWS, where the password 
 by the cloud provider and is then retrieved via the cloud provider's API after provisioning the VM.
 
 
-###### WinRM Configuration
+##### WinRM Configuration
 
 The WinRM initialization in Azure is achieved through configuration options in the VM provisioning request.
 The required configuration is to enabled HTTPS (if Azure is told to use http, the VM comes pre-configured 

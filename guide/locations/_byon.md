@@ -1,10 +1,4 @@
----
-section: BYON
-section_position: 8
-section_type: inline
----
-
-### BYON
+## BYON
 
 "Bring-your-own-nodes" mode is useful in production, where machines have been provisioned by someone else,
 and during testing, to cut down provisioning time.
