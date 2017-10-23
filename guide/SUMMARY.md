@@ -78,7 +78,7 @@
   * [IBM Softlayer](locations/index.md#ibm-softlayer)
   * [OpenStack](locations/index.md#openstack)
   * [Named Locations](locations/index.md#named-locations)
-  * [Provisioned Machine Requirements](locations/index.md#inheritance-and-named-locations)
+  * [Provisioned Machine Requirements](locations/provisioned-machine-requirements.md)
   * [BYON](locations/index.md#byon)
   * [SSH Keys](locations/index.md#ssh-keys)
   * [Localhost](locations/index.md#localhost)
