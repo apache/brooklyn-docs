@@ -1,11 +1,11 @@
 ---
-layout: website-normal
 title: Release Notes
 ---
+# {{ page.title }}
 
-## Version {{ site.brooklyn-version }}
+## Version {{ book.brooklyn_version }}
 
-{% if SNAPSHOT %}
+{% if 'SNAPSHOT' in book.brooklyn_version %}
 **You are viewing a SNAPSHOT release (master branch), so this list is in progress!**
 {% endif %}
 
@@ -17,8 +17,7 @@ to Brooklyn's commercial users for funding much of this development.
 
 ### Backwards Compatibility
 
-Changes since 0.12.0:
+Changes since {{ book.brooklyn_version_stable }}:
 
 
-For changes in prior versions, please refer to the release notes for 
-[0.12.0]({{ site.path.v }}/0.12.0/misc/release-notes.html).
+For changes in prior versions, please refer to the release notes for those versions by selecting the one you are interested in on the left menu.

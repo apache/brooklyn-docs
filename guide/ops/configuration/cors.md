@@ -1,12 +1,12 @@
 ---
 title: CORS Configuration
-layout: website-normal
 ---
+# {{ page.title }}
 
 To enable / configure [cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
-The following file must be added to [`org.apache.brooklyn.rest.filter.cors.cfg`](../paths.html)
+The following file must be added to [`org.apache.brooklyn.rest.filter.cors.cfg`]({{book.path.docs}}/ops/paths.md)
 
-{% highlight properties %}
+```properties
 # Enables experimental support for Cross Origin Resource Sharing (CORS) filtering in Apache Brooklyn REST API.
 cors.enabled=true
 
@@ -38,8 +38,8 @@ cors.preflight.error.status=200
 
 # Do not apply CORS if response is going to be with UNAUTHORIZED status.
 #cors.block.if.unauthorized=false
-{% endhighlight %}
+```
 
-*NOTE*: You must [restart Brooklyn](../starting-stopping-monitoring.html) for these changes to be applied
+*NOTE*: You must [restart Brooklyn]({{book.path.docs}}/ops/starting-stopping-monitoring.md) for these changes to be applied
 
 Further information on client side [usage](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)

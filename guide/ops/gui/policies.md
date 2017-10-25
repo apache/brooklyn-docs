@@ -1,17 +1,14 @@
 ---
 title: Using Policies
-title_in_menu: Using Policies
-layout: website-normal
 ---
+# {{ page.title }}
 
 ## Exploring and Testing Policies
 
 To see an example of policy based management, please deploy the following blueprint (changing 
 the location details as for the example shown earlier):
 
-{% highlight yaml %}
-{% readj _my-web-cluster2.yaml %}
-{% endhighlight %}
+!CODEFILE "_my-web-cluster2.yaml"
 
 The app server cluster has an `AutoScalerPolicy`, and the loadbalancer has a `targets` policy.
 
@@ -45,5 +42,5 @@ targets changes.
 
 This guide has given a quick overview of using the Apache Brooklyn GUI to deploy, monitor and manage applications. The GUI also allows you to perform various Advanced management tasks and to explore and use the REST API (from the Script tab).  Please take some time now to become more familiar with the GUI.
 
-Then continue to read through the [Operations Guide](../).
+Then continue to read through the [Operations Guide]({{book.path.docs}}/ops/rest.md).
 

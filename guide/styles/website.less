@@ -1,0 +1,67 @@
+@import "variables";
+@import "policy-tour";
+
+body {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  color: @text-color;
+}
+
+.page-header {
+  background-color: #fafafa;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .navbar-brand {
+    position: relative;
+    top: 11px;
+    left: 15px;
+  }
+}
+
+.book {
+  height: calc(~"100% - 50px");
+  top: 50px;
+}
+
+.book-header {
+  border-top: 1px solid @border-color;
+  top: 50px;
+
+  .btn.lang-switcher.active {
+    background-color: @accent-color;
+  }
+}
+
+.versions-select select {
+  border: 1px solid @border-color;
+  border-radius: 0;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: @text-color;
+}
+
+.book-summary ul.summary li.active > a,
+.markdown-section a,
+#book-search-results .search-results .has-results .search-results-item a {
+  color: @accent-color;
+}
+
+.markdown-section {
+  padding-bottom: 30px;
+
+  .glossary-term {
+    color: @text-color;
+    background: @background-color;
+    text-decoration: none;
+  }
+
+  .annotated_blueprint .glossary-term {
+    color: inherit;
+    background: none;
+  }
+}

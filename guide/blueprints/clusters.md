@@ -1,18 +1,14 @@
 ---
 title: Clusters, Specs, and Composition
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 What if you want multiple machines?
 
 One way is just to repeat the `- type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess` block,
 but there's another way which will keep your powder [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself):
 
-{% highlight yaml %}
-{% readj example_yaml/cluster-vm.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/cluster-vm.yaml"
 
 Here we've composed the previous blueprint introducing some new important concepts, the `DynamicCluster`
 the `$brooklyn` DSL, and the "entity-spec".  Let's unpack these. 

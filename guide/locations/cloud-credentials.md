@@ -1,6 +1,5 @@
 ---
 title: More Clouds
-layout: website-normal
 ---
 
-This page has moved. See [More Clouds](index.html#more-details-on-specific-clouds) instead.
+This page has moved. See [More Clouds]({{book.path.docs}}/locations/index.md#more-details-on-specific-clouds) instead.

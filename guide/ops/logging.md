@@ -1,7 +1,7 @@
 ---
 title: Logging
-layout: website-normal
 ---
+# {{ page.title }}
 
 Brooklyn uses the SLF4J logging facade, which allows use of many popular frameworks including `logback`, 
 `java.util.logging` and `log4j`.
@@ -21,7 +21,7 @@ Loggers follow the ``package.ClassName`` naming standard.
 
 In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
 
-See: [Logging - OSGi based Apache Brooklyn](../dev/tips/logging.html#osgi-based-apache-brooklyn) <br/>
+See: [Logging - OSGi based Apache Brooklyn]({{book.path.docs}}/dev/tips/logging.md#osgi-based-apache-brooklyn) <br/>
 [https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
 
 
@@ -37,11 +37,11 @@ or in a new file included from this.
 
 The default `logback.xml` file references a collection of other log configuration files
 included in the Brooklyn jars. It is necessary to understand the source structure
-in the [logback-includes]({{ site.brooklyn.url.git }}/logging/logback-includes) project.
+in the [logback-includes]({{book.url.brooklyn_sever_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/logging/logback-includes) project.
 
 For example, to change the debug log inclusions, create a folder `brooklyn` under `conf`
 and create a file `logback-debug.xml` based on the
-[brooklyn/logback-debug.xml]({{ site.brooklyn.url.git }}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
+[brooklyn/logback-debug.xml]({{book.url.brooklyn_sever_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
 from that project.
 
 
@@ -75,6 +75,6 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 
 The following resources may be useful when configuring logging:
 
-* The [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project
-* [Brooklyn Developer Guide]({{ site.path.guide }}/dev/tips/logging.html) logging tips
+* The [logback-includes]({{book.url.brooklyn_sever_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/logging/logback-includes) project
+* [Brooklyn Developer Guide]({{book.path.docs}}/dev/tips/logging.md) logging tips
 * The [Logback Project](http://logback.qos.ch/) home page

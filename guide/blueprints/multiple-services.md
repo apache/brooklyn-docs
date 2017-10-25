@@ -1,7 +1,7 @@
 ---
 title: Multiple Services and Dependency Injection
-layout: website-normal
 ---
+# {{ page.title }}
 
 We've seen the configuration of machines and how to build up clusters.
 Now let's return to our app-server example and explore how more interesting
@@ -12,9 +12,7 @@ services can be configured, composed, and combined.
 
 We'll begin by using more key-value pairs to configure the JBoss server to run a real app:
 
-{% highlight yaml %}
-{% readj example_yaml/appserver-configured.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/appserver-configured.yaml"
 
 (As before, you'll need to add the `location` info; `localhost` will work for these and subsequent examples.)
 
@@ -32,9 +30,7 @@ If you explored the `hello-world-sql` application we just deployed,
 you'll have noticed it tries to access a database.
 And it fails, because we have not set one up.  Let's do that now:
 
-{% highlight yaml %}
-{% readj example_yaml/appserver-w-db.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/appserver-w-db.yaml"
 
 Here there are a few things going on:
 
@@ -43,7 +39,7 @@ Here there are a few things going on:
 * We've injected the URL of the second service into the appserver as a Java system property
   (so our app knows where to find the database)
 * We've used externalized config to keep secret information out of the blueprint;
-  this is loaded at runtime from an [externalized config provider](../ops/externalized-config.html),
+  this is loaded at runtime from an [externalized config provider]({{book.path.docs}}/ops/externalized-configuration.md),
   such as a remote credentials store
  
 **Caution: Be careful if you write your YAML in an editor which attempts to put "smart-quotes" in.
@@ -80,9 +76,7 @@ in superclasses and are portable across multiple implementations.
 
 Here's an example deploying the same application but with different flavors of the components:
 
-{% highlight yaml %}
-{% readj example_yaml/appserver-w-db-other-flavor.yaml %}
-{% endhighlight %}
+!CODEFILE "example_yaml/appserver-w-db-other-flavor.yaml"
 
 By changing two lines we've switched from JBoss and MySQL to Tomcat and MariaDB.
 

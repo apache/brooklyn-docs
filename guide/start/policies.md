@@ -1,8 +1,7 @@
 ---
 title: Getting Started - Policies
-title_in_menu: Policies
-layout: website-normal
 ---
+# {{ page.title }}
 
 ## A Clustered Example
 
@@ -16,72 +15,9 @@ review and/or change the the location where the application will be deployed.
 You will need four machines for this example: one for the load-balancer (nginx), and three for the 
 Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 
-<div class="usermanual-pdf-include started-pdf-include" style="display: none;">
-{% highlight yaml %}
-name: Tomcat Cluster
+{% if output.name == 'website' %}
 
-location:
-  byon:
-    user: vagrant
-    password: vagrant
-    hosts:
-      - 10.10.10.101
-      - 10.10.10.102
-      - 10.10.10.103
-      - 10.10.10.104
- 
-services:
-- type: org.apache.brooklyn.entity.group.DynamicCluster
-  name: Cluster
-  id: cluster
-  brooklyn.config:
-    cluster.initial.size: 1
-    dynamiccluster.memberspec:
-      $brooklyn:entitySpec:
-        type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-        name: Tomcat Server
-        brooklyn.config:
-          wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.8.0-incubating/brooklyn-example-hello-world-webapp-0.8.0-incubating.war
- 
-        brooklyn.policies:
-        - type: org.apache.brooklyn.policy.ha.ServiceRestarter
-          brooklyn.config:
-            failOnRecurringFailuresInThisDuration: 5m
-        brooklyn.enrichers:
-        - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector
-          brooklyn.config:
-            entityFailed.stabilizationDelay: 30s
- 
-  brooklyn.policies:
-  - type: org.apache.brooklyn.policy.ha.ServiceReplacer
- 
-  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
-    brooklyn.config:
-      metric: webapp.reqs.perSec.perNode
-      metricUpperBound: 3
-      metricLowerBound: 1
-      resizeUpStabilizationDelay: 2s
-      resizeDownStabilizationDelay: 1m
-      maxPoolSize: 3
-
-  brooklyn.enrichers:
-  - type: org.apache.brooklyn.enricher.stock.Aggregator
-    brooklyn.config:
-      enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
-      enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
-      enricher.aggregating.fromMembers: true
-      transformation: average
-
-- type: org.apache.brooklyn.entity.proxy.nginx.NginxController
-  name: Load Balancer (nginx)
-  brooklyn.config:
-    loadbalancer.serverpool: $brooklyn:entity("cluster")
-    nginx.sticky: false
-{% endhighlight %}
-</div>
-
-<!-- WARNING: if modifying either mycluster.yaml or the yaml below, be sure to keep them both in-sync -->
-
+{% raw %}
 <div class="jumobotron annotated_blueprint" markdown="1">
   <div class="code_scroller">
     <div class="initial_notice"><div><div>
@@ -246,16 +182,9 @@ services:
   brooklyn.config:
     loadbalancer.serverpool: $brooklyn:entity("cluster")
     nginx.sticky: false
-</div></div>
-
-  </div></div>
-</div>
+</div></div></div></div></div>
 
 <script language="JavaScript" type="application/javascript">
-
-{% comment %}
-See blueprint-tour.md for where this CSS/javascript was copied from.
-{% endcomment %} 
 
 if (window.$ != null) {
 	$(function() {
@@ -275,7 +204,73 @@ if (window.$ != null) {
 	});
 	}
 </script>
+{% endraw %}
 
+{% else %}
+
+```yaml
+name: Tomcat Cluster
+
+location:
+  byon:
+    user: vagrant
+    password: vagrant
+    hosts:
+      - 10.10.10.101
+      - 10.10.10.102
+      - 10.10.10.103
+      - 10.10.10.104
+ 
+services:
+- type: org.apache.brooklyn.entity.group.DynamicCluster
+  name: Cluster
+  id: cluster
+  brooklyn.config:
+    cluster.initial.size: 1
+    dynamiccluster.memberspec:
+      $brooklyn:entitySpec:
+        type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+        name: Tomcat Server
+        brooklyn.config:
+          wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.8.0-incubating/brooklyn-example-hello-world-webapp-0.8.0-incubating.war
+ 
+        brooklyn.policies:
+        - type: org.apache.brooklyn.policy.ha.ServiceRestarter
+          brooklyn.config:
+            failOnRecurringFailuresInThisDuration: 5m
+        brooklyn.enrichers:
+        - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector
+          brooklyn.config:
+            entityFailed.stabilizationDelay: 30s
+ 
+  brooklyn.policies:
+  - type: org.apache.brooklyn.policy.ha.ServiceReplacer
+ 
+  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy
+    brooklyn.config:
+      metric: webapp.reqs.perSec.perNode
+      metricUpperBound: 3
+      metricLowerBound: 1
+      resizeUpStabilizationDelay: 2s
+      resizeDownStabilizationDelay: 1m
+      maxPoolSize: 3
+
+  brooklyn.enrichers:
+  - type: org.apache.brooklyn.enricher.stock.Aggregator
+    brooklyn.config:
+      enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
+      enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
+      enricher.aggregating.fromMembers: true
+      transformation: average
+
+- type: org.apache.brooklyn.entity.proxy.nginx.NginxController
+  name: Load Balancer (nginx)
+  brooklyn.config:
+    loadbalancer.serverpool: $brooklyn:entity("cluster")
+    nginx.sticky: false
+```
+
+{% endif %}
 
 ## The Tomcat Cluster
 
@@ -288,40 +283,31 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 
 Deploy the app:
 
-{% highlight bash %}
-br deploy mycluster.yaml
-{% endhighlight %}
-
-<pre>
+```
+$ br deploy mycluster.yaml
  Id:       nGY58ZZN   
  Name:     Tomcat Cluster   
  Status:   In progress   
-</pre>
+```
 
 And wait for the app to be running, viewing its state with:
 
-{% highlight bash %}
-br application
-{% endhighlight %}
-
-<pre>
+```
+$ br application
  Id         Name             Status    Location   
  nGY58ZZN   Tomcat Cluster   RUNNING   Mf0CJac6   
-</pre>
+```
 
 You can view the list of entities within the cluster with the command below (which drills into the 
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists its
 entities):
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
- 
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  tOpMeYYr   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 The "quarantine" entity is used when Tomcat servers fail to start correctly - this entity is by 
 default added to the quarantine group, where it can later be investigated. This can be disabled using
@@ -353,35 +339,32 @@ service entity is marked as failed and no futher restarts are attempted.
 Try killing the Tomcat process for one of the members in the cluster. The command below will kill
 Tomcat on the vagrant VMs named "byon1" to "byon4":
 
-{% highlight bash %}
+```bash
 for i in byon{1..4}; do
   vagrant ssh ${i} --command 'ps aux | grep -i tomcat |  grep -v grep | awk '\''{print $2}'\'' | xargs kill -9'
 done
-{% endhighlight %}
+```
 
 You can view the state of the Tomcat server with the command below (which drills into the  
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then into the  
 first member of the cluster named "Tomcat Server"):
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server"
  Id:              tOpMeYYr   
  Name:            Tomcat Server   
  Status:          ON_FIRE   
  ServiceUp:       false   
  Type:            org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  CatalogItemId:   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer:0.0.0.SNAPSHOT   
-</pre>
+```
 
 <!-- COMMENT:
 You can view its activity, to see the call to restart, using:
 
-{% highlight bash %}
+```bash
 br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" activity
-{% endhighlight %}
+```
 
 TODO Why doesn't the restart() show in the activity view?!
 -->
@@ -404,16 +387,13 @@ You can view the list of Tomcat servers in the cluster with the command below (w
 application named "Tomcat Cluster", then into its child entity named "Cluster", and then lists the 
 child entities):
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  tOpMeYYr   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 
 ## Auto-scaling
@@ -434,7 +414,7 @@ To generate load, you can use your web-browser by repeatedly refreshing that pag
 you could use a load generator like jmeter, or use a script such as the one shown below 
 (changing URL for the URL of your load-balancer):
 
-{% highlight bash %}
+```bash
 URL=http://10.10.10.101:8000/
 for i in {1..600}; do
   for j in {1..50}; do 
@@ -443,16 +423,13 @@ for i in {1..600}; do
   echo "Finished batch $i"
   sleep 1
 done
-{% endhighlight %}
+```
 
 While those curl commands run in a separate terminal, you can look at the metrics for the first
 Tomcat server using the command:
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
  Name                                            Description                                                                              Value   
  ...
  webapp.reqs.perSec.last                         Reqs/sec (last datapoint)                                                                0.9980039920159681
@@ -465,42 +442,33 @@ br application "Tomcat Cluster" entity "Cluster" entity "Tomcat Server" sensor
  webapp.tomcat.connectorStatus                   Catalina connector state name                                                            "STARTED"
  webapp.url                                      URL                                                                                      "http://10.10.10.103:18082/"
  ...
-</pre>
+```
  
 You can look at the average requests per second on the cluster with the command:
  
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" sensor "webapp.reqs.perSec.perNode"
  25.765557404326124
-</pre>
+```
 
 When this value exceeds 3 for two seconds, the cluster with scale up. You can see the new instance
 using the command:
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  xpLeJufy   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
  CpabLxZE   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```
 
 Cancel the curl commands (or wait for them to finish), and then wait for the one minute 
 `resizeDownStabilizationDelay`. The cluster will scale back to the minimum one instance.
 
-{% highlight bash %}
-br application "Tomcat Cluster" entity "Cluster" entity
-{% endhighlight %}
-
-<pre>
+```
+$ br application "Tomcat Cluster" entity "Cluster" entity
  Id         Name            Type   
  dYfUvLIw   quarantine      org.apache.brooklyn.entity.group.QuarantineGroup   
  mgoRpkKH   Tomcat Server   org.apache.brooklyn.entity.webapp.tomcat.TomcatServer   
-</pre>
+```

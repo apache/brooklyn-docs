@@ -1,18 +1,12 @@
----
-section: Location Customizers
-section_type: inline
-section_position: 11
----
-
-### Location Customizers
+## Location Customizers
 
 Apache Brooklyn supports a number of ways to configure and customize locations. These include
 the `JcloudsLocationCustomizer`, which is for advanced customization of VM provisioning through jclouds.
 There is also a `MachineLocationCustomizer`, which allows customization of machines being obtained 
-from any kind of location (including [Bring Your Own Nodes](index.html#byon)).
+from any kind of location (including [Bring Your Own Nodes]({{book.path.docs}}/locations/index.md#byon)).
 
 
-#### Usage Guidelines
+### Usage Guidelines
 
 Clearly there is an overlap for where things can be done. This section describes the recommended  
 separation of responsibilities.
@@ -20,7 +14,7 @@ separation of responsibilities.
 These are guidelines only - users are obviously free to make alternative usage decisions based on 
 their particular use-cases.
 
-#### Responsibilities of Entity versus Location
+### Responsibilities of Entity versus Location
 
 From an entity's perspective, it calls `location.obtain(options)` and gets back a usable 
 `MachineLocation` that has a standard base operating system that gives remote access
@@ -46,7 +40,7 @@ to the entity type, then it should be done within the entity; but if it is to ha
 to make it comply with an organisation's standards (e.g. to overcome shortcomings of the base 
 image, or to install security patches) then a `MachineLocationCustomizer` is more appropriate.
 
-#### Location Configuration Options
+### Location Configuration Options
 
 This refers to standard location configuration: explicit config keys, and explicit jclouds template 
 configuration that can be passed through.
@@ -57,7 +51,7 @@ provisioning, and should be used wherever possible.
 Note that a jclouds `TemplateBuilder` and cloud-specific `TemplateOptions` are the generic mechanisms 
 within jclouds for specifying the details of the compute resource to be provisioned.
 
-#### Jclouds Location Customizer 
+### Jclouds Location Customizer 
 A `JcloudsLocationCustomizer` has customization hooks to execute code at the various points of building 
 up the jclouds template and provisioning the machine. Where jclouds is being used and where the required 
 use of jclouds goes beyond simple configuration, this is an appropriate solution.
@@ -65,7 +59,7 @@ use of jclouds goes beyond simple configuration, this is an appropriate solution
 For example, there is a `org.apache.brooklyn.location.jclouds.networking.JcloudsLocationSecurityGroupCustomizer`
 which gives more advanced support for setting up security groups (e.g. in AWS-EC2).
 
-#### Machine Customizer
+### Machine Customizer
 
 The `MachineLocationCustomizer` allows customization of machines being obtained from any kind of location.
 For example, this includes for jclouds and for Bring Your Own Nodes (BYON).
@@ -76,7 +70,7 @@ and when the machine is about to be released by the location.
 An example use would be to register (and de-register) the machine in a CMDB.
 
 
-### Jclouds Location Customizers
+## Jclouds Location Customizers
 
 *Warning: additional methods (i.e. customization hooks) may be added to the `JcloudsLocationCustomizer` 
 interface in future releases. Users are therefore strongly encouraged to sub-class 
@@ -143,7 +137,7 @@ where `cidr` can be optionally set to restrict the range that the ports that are
 
 
 
-#### Machine Location Customizers
+### Machine Location Customizers
 
 *Warning: additional methods (i.e. customization hooks) may be added to the `MachineLocationCustomizer` 
 interface in future releases. Users are therefore strongly encouraged to sub-class 
@@ -171,7 +165,7 @@ To register `MachineLocationCustomizer` instances programmatically, set the conf
 `CloudLocationConfig.MACHINE_LOCATION_CUSTOMIZERS` on the location, or pass this 
 config option when calling `location.obtain(options)`.
 
-#### Hostname Customizer
+### Hostname Customizer
 
 [org.apache.brooklyn.entity.machine.SetHostnameCustomizer](https://github.com/apache/brooklyn-server/blob/master/software/base/src/main/java/org/apache/brooklyn/entity/machine/SetHostnameCustomizer.java)
 Sets the hostname on an ssh'able machine. Currently only CentOS and RHEL are supported.

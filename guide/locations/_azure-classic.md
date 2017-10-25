@@ -1,10 +1,4 @@
----
-section: Azure Compute Classic
-section_type: inline
-section_position: 3
----
-
-### Azure Compute Classic
+## Azure Compute Classic
  
 Azure is a cloud computing platform and infrastructure created by Microsoft. Apache Brooklyn includes support for both Azure Classic and Azure ARM, as
 one of the [Apache jclouds](http://jclouds.org) supported clouds `Microsoft Azure Compute`.
@@ -14,12 +8,12 @@ model. See [https://azure.microsoft.com/en-gb/documentation/articles/resource-ma
 for details.
 
 
-#### Setup the Azure credentials
+### Setup the Azure credentials
 
 Microsoft Azure requests are signed by SSL certificate. You need to upload one into your account in order to use an Azure
 location.
 
-{% highlight bash %}
+```bash
 # create the certificate request
 mkdir -m 700 $HOME/.brooklyn
 openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/.brooklyn/azure.pem -out $HOME/.brooklyn/azure.pem
@@ -27,7 +21,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $HOME/.brooklyn/azur
 openssl pkcs12 -export -out $HOME/.brooklyn/azure.p12 -in $HOME/.brooklyn/azure.pem -name "brooklyn :: $USER"
 # create a cer file
 openssl x509 -inform pem -in $HOME/.brooklyn/azure.pem -outform der -out $HOME/.brooklyn/azure.cer
-{% endhighlight %}
+```
 
 Finally, upload .cer file to the management console at https://manage.windowsazure.com/@myId#Workspaces/AdminTasks/ListManagementCertificates to authorize this certificate.
 
@@ -36,11 +30,11 @@ Please note, you can find the "myId" value for this link by looking at the URL w
 **Note**, you will need to use `.p12` format in the `brooklyn.properties`.
 
 
-#### How to configure Apache Brooklyn to use Azure Compute
+### How to configure Apache Brooklyn to use Azure Compute
 
 First, in your `brooklyn.properties` define a location as follows:
 
-{% highlight properties %}
+```properties
 brooklyn.location.jclouds.azurecompute.identity=$HOME/.brooklyn/azure.p12
 brooklyn.location.jclouds.azurecompute.credential=<P12_EXPORT_PASSWORD>
 brooklyn.location.jclouds.azurecompute.endpoint=https://management.core.windows.net/<YOUR_SUBSCRIPTION_ID>
@@ -48,7 +42,7 @@ brooklyn.location.jclouds.azurecompute.vmNameMaxLength=45
 brooklyn.location.jclouds.azurecompute.jclouds.azurecompute.operation.timeout=120000
 brooklyn.location.jclouds.azurecompute.user=<USER_NAME>
 brooklyn.location.jclouds.azurecompute.password=<PASSWORD>
-{% endhighlight %}
+```
 
 During the VM provisioning, Azure will set up the account with `<USER_NAME>` and `<PASSWORD>` automatically.
 Notice, `<PASSWORD>` must be a minimum of 8 characters and must contain 3 of the following: a lowercase character, an uppercase
@@ -81,18 +75,18 @@ rather than "classic".
  * `ExtraSmall`, `Small`, `Medium`, `Large`, `ExtraLarge`
 
 
-##### Named location
+#### Named location
 
 For convenience, you can define a named location, like:
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.azure-west-europe=jclouds:azurecompute:West Europe
 brooklyn.location.named.azure-west-europe.displayName=Azure West Europe
 brooklyn.location.named.azure-west-europe.imageId=b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04_1-LTS-amd64-server-20150123-en-us-30GB
 brooklyn.location.named.azure-west-europe.hardwareId=BASIC_A2
 brooklyn.location.named.azure-west-europe.user=test
 brooklyn.location.named.azure-west-europe.password=MyPassword1!
-{% endhighlight %}
+```
 
 This will create a location named `azure-west-europe`. It will inherit all the configuration
 defined on `brooklyn.location.jclouds.azurecompute`. It will also augment and override this
@@ -102,7 +96,7 @@ On Linux VMs, The `user` and `password` will create a user with that name and se
 disabling the normal login user and password defined on the `azurecompute` location.
 
 
-#### Windows VMs on Azure
+### Windows VMs on Azure
 
 The following configuration options are important for provisioning Windows VMs in Azure:
 
@@ -153,12 +147,12 @@ The following configuration options are important for provisioning Windows VMs i
   This configuration is subject to change in future releases.
 
 
-###### Sample Windows Blueprint
+##### Sample Windows Blueprint
 
 Below is an example for provisioning a Windows-based entity on Azure. Note the placeholder values 
 for the identity, credential and password.
 
-{% highlight yaml %}
+```yaml
 name: Windows Test @ Azure
 location:
   jclouds:azurecompute:West Europe:
@@ -182,12 +176,12 @@ services:
     install.command: echo install phase
     launch.command: echo launch phase
     checkRunning.command: echo launch phase
-{% endhighlight %}
+```
 
 Below is an example named location for Azure, configured in `brooklyn.properties`. Note the 
 placeholder values for the identity, credential and password.
 
-{% highlight properties %}
+```properties
 brooklyn.location.named.myazure=jclouds:azurecompute:West Europe
 brooklyn.location.named.myazure.displayName=Azure West Europe (windows)
 brooklyn.location.named.myazure.identity=$HOME/.brooklyn/azure.p12
@@ -203,9 +197,9 @@ brooklyn.location.named.myazure.winrm.useHttps=true
 brooklyn.location.named.myazure.user=brooklyn
 brooklyn.location.named.myazure.password=secretPass1!
 brooklyn.location.named.myazure.templateOptions={ overrideLoginUser: amp, overrideLoginPassword: secretPass1! }
-{% endhighlight %}
+```
 
-###### User and Password Configuration
+##### User and Password Configuration
 
 As described under the configuration options, the username and password must be explicitly supplied
 in the configuration.
@@ -220,7 +214,7 @@ This approach differs from the behaviour of clouds like AWS, where the password 
 by the cloud provider and is then retrieved via the cloud provider's API after provisioning the VM.
 
 
-###### WinRM Configuration
+##### WinRM Configuration
 
 The WinRM initialization in Azure is achieved through configuration options in the VM provisioning request.
 The required configuration is to enabled HTTPS (if Azure is told to use http, the VM comes pre-configured 

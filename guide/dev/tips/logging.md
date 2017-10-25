@@ -1,7 +1,7 @@
 ---
 title: Logging
-layout: website-normal
 ---
+# {{ page.title }}
 
 ## Logging: A Quick Overview
 
@@ -16,7 +16,7 @@ if you prefer one of those.
 
 While developing it may be useful to change logging level of some of the Apache Brooklyn modules.
 The easiest way to do that is via the karaf console which can be started by `bin/client`.
-(Details regarding using [Apache Brooklyn Karaf console](../../blueprints/java/bundle-dependencies.html#karaf-console))
+(Details regarding using [Apache Brooklyn Karaf console]({{book.path.docs}}/blueprints/java/bundle-dependencies.md#karaf-console))
 For example if you would like to inspect jclouds API calls, enable jclouds.wire logging just enable it from karaf client.
 
     log:set DEBUG jclouds.wire
@@ -65,7 +65,7 @@ For the most common customizations, simply create a ``logback-custom.xml`` on yo
 (ensuring it is loaded *before* brooklyn classes in classpath ordering in the pom)
 and supply your customizations there:  
 
-{% highlight xml %}
+```xml
 <included>
     <!-- filename to log to -->           
     <property name="logging.basename" scope="context" value="acme-app" />
@@ -73,7 +73,7 @@ and supply your customizations there:
     <!-- additional loggers -->
     <logger name="com.acme.app" level="DEBUG"/>
 </included>
-{% endhighlight %}
+```
 
 For other configuration, you can override individual files listed above.
 For example:
@@ -99,9 +99,9 @@ If you wish to supply your own ``logback.xml``, do **not** include ``brooklyn-lo
 
 You can set a specific logback config file to use with:
 
-{% highlight bash %}
+```bash
 -Dlogback.configurationFile=/path/to/config.xml
-{% endhighlight %}
+```
 
 
 #### Assemblies

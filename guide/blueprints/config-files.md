@@ -1,8 +1,5 @@
 ---
 title: Uploading Script and Configuration Files
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
 
 Blueprints often require that parameterized scripts and configuration files are available to be copied to the
@@ -26,7 +23,7 @@ connection details of another entity). Available substitutions are:
 | `${attribute['key']}`     | Equivalent to `entity.sensors().get(key)`                          |
 | `${mgmt['key']}`          | Loads the value for `key` from the management context's properties |
 | `${entity.foo}`           | FreeMarker calls `getFoo` on the entity                            |
-| `${driver.foo}`           | FreeMarker calls `getFoo` on the entity's [driver](http://brooklyn.apache.org/v/latest/java/entity.html#things-to-know) |
+| `${driver.foo}`           | FreeMarker calls `getFoo` on the entity's [driver]({{book.path.docs}}/blueprints/java/entity.md#things-to-know) |
 | `${location.foo}`         | FreeMarker calls `getFoo` on the entity's location                 |
 | `${javaSysProps.foo.bar}` | Loads the system property named `foo.bar`                          |
 

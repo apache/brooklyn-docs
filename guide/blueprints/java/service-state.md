@@ -1,9 +1,7 @@
 ---
 title: Service State
-layout: website-normal
-toc: ../guide_toc.json
-categories: [use, guide, defining-applications]
 ---
+# {{ page.title }}
 
 Any entity can use the standard "service-up" and "service-state" 
 sensors to inform other entities and the GUI about its status.

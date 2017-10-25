@@ -1,10 +1,10 @@
 ---
 title: Effectors
-layout: website-normal
 ---
+# {{ page.title }}
 
 Effectors perform an operation of some kind, carried out by a Brooklyn Entity.
-They can be manually invoked or triggered by a [Policy]({{ site.path.guide }}/blueprints/policies.html).
+They can be manually invoked or triggered by a [Policy]({{book.path.docs}}/blueprints/policies.md).
 
 Common uses of an effector include the following:
 
@@ -36,7 +36,7 @@ There are a number of additional configuration keys available for the `SSHComman
 
 Here is a simple example of an `SshCommandEffector` definition:
 
-{% highlight yaml %}
+```yaml
   brooklyn.initializers:
   - type: org.apache.brooklyn.core.effector.ssh.SshCommandEffector
     brooklyn.config:
@@ -48,9 +48,9 @@ Here is a simple example of an `SshCommandEffector` definition:
         message:
           description: The string to pass to netcat
           defaultValue: hi netcat
-{% endhighlight %}
+```
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
 
 ### HTTPCommandEffector
 
@@ -74,7 +74,7 @@ There are a number of additional configuration keys available for the `HTTPComma
 
 When a the header `HttpHeaders.CONTENT_TYPE` is equals to *application/x-www-form-urlencoded* and the `httpPayload` is a `map`, the payload is transformed into a single string using `URLEncoded`.
 
-{% highlight yaml %}
+```yaml
 brooklyn.initializers:
 - type: org.apache.brooklyn.core.effector.http.HttpCommandEffector
   brooklyn.config:
@@ -94,15 +94,15 @@ brooklyn.initializers:
       $.access_token: access.token
     headers:
       Content-Type: "application/x-www-form-urlencoded"
-{% endhighlight %}
+```
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/http/HttpCommandEffector.html) for more details.
 
 ### AddChildrenEffector
 
 An `Effector` to add a child blueprint to an entity.
 
-{% highlight yaml %}
+```yaml
 brooklyn.initializers:
 - type: org.apache.brooklyn.core.effector.AddChildrenEffector
   brooklyn.config:
@@ -129,11 +129,11 @@ brooklyn.initializers:
             version: 0.1.0
             url: classpath:/brooklyn/osgi/brooklyn-test-osgi-entities.jar
     auto_start: true
-{% endhighlight %}
+```
 
 One of the config keys `BLUEPRINT_YAML` (containing a YAML blueprint (map or string)) or `BLUEPRINT_TYPE` (containing a string referring to a catalog type) should be supplied, but not both.
 
-See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
+See [`here`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/AddChildrenEffector.html) for more details.
 
 Writing an Effector
 -------------------
@@ -145,10 +145,10 @@ Each effector instance is associated with an entity,
 and at runtime it will typically exectute an operation, collect the result and, potentially, publish it as sensor on that entity, performing some computation.
 
 Writing an effector is straightforward.
-Simply extend [`AddEffector`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/AddEffector.html),
+Simply extend [`AddEffector`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/effector/AddEffector.html),
 providing an implementation for `newEffectorBuilder` and adding a constructor that consumes the builder or override an existing effector.
 
-{% highlight java %}
+```java
 
  public MyEffector(ConfigBag params) {
     super(newEffectorBuilder(params).build());
@@ -159,11 +159,11 @@ public static EffectorBuilder<String> newEffectorBuilder(ConfigBag params) {
     eff.impl(new Body(eff.buildAbstract(), params));
     return eff;
 }
-{% endhighlight %}
+```
 
 and supply an `EffectorBody` similar to:
 
-{% highlight java %}
+```java
 
 protected static class Body extends EffectorBody<String> {
     ...
@@ -173,7 +173,7 @@ protected static class Body extends EffectorBody<String> {
      ...
     }
 }
-{% endhighlight %}
+```
 
 ### Best Practice
 

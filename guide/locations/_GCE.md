@@ -1,10 +1,3 @@
----
-section: Google Compute Engine (GCE)
-title: Google Compute Engine
-section_type: inline
-section_position: 5
----
-
 ## Google Compute Engine (GCE)
 
 ### Credentials
@@ -56,7 +49,7 @@ However, this can make it harder to setup and manage multiple Brooklyn servers (
 when using high availability mode).
 
 Users are strongly recommended to use 
-[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+[externalized configuration]({{book.path.docs}}/ops/externalized-configuration.md) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

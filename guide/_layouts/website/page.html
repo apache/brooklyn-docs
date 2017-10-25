@@ -1,0 +1,10 @@
+{% extends template.self %}
+
+{% block body %}
+    <header class="page-header">
+        <a href="{{book.url.brooklyn_website}}" class="navbar-brand">
+            <img src="{{book.url.brooklyn_website}}/v/latest/style/img/apache-brooklyn-logo-244px-wide.png" alt="Apache Brooklyn">
+        </a>
+    </header>
+    {{ super() }}
+{% endblock %}

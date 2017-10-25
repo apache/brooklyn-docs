@@ -1,8 +1,7 @@
 ---
-layout: website-normal
 title: Topology, Dependencies, and Management Policies
-title_in_menu: Topology, Dependencies, and Management Policies
 ---
+# {{ page.title }}
 
 Applications written in YAML can similarly be written in Java. However, the YAML approach is 
 recommended.
@@ -11,12 +10,10 @@ recommended.
 
 The example below creates a three tier web service, composed of an Nginx load-balancer, 
 a cluster of Tomcat app-servers, and a MySQL database. It is similar to the [YAML policies
-example]({{ site.path.guide }}/start/policies.html), but also includes the MySQL database
+example]({{book.path.docs}}/start/policies.md), but also includes the MySQL database
 to demonstrate the use of dependent configuration.
 
-{% highlight java %}
-{% readj java_app/ExampleWebApp.java %}
-{% endhighlight %}
+!CODEFILE "java_app/ExampleWebApp.java"
 
 To describe each part of this:
 

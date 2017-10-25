@@ -1,6 +1,0 @@
-# in production we always set the URL and dependencies should come from the remote source
-
-url: https://brooklyn.apache.org
-url_root: https://brooklyn.apache.org
-
-dependency_mode: remote

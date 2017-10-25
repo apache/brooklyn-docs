@@ -1,0 +1,112 @@
+{
+  "gitbook": "^3.2.3",
+  "root": "./guide",
+  "plugins" : [
+    "include-highlight",
+    "theme-api",
+    "collapsible-chapters",
+    "bootstrap-callout",
+    "styles-less",
+    "versions",
+    "partial-summary"
+  ],
+  "styles": {
+    "website": "./styles/website.less",
+    "pdf": "./styles/pdf.less"
+  },
+  "pluginsConfig": {
+    "partial-summary": {
+      "depth": 0
+    },
+    "include-highlight": {
+      "extensionToLanguage": {
+        "yml": "yaml",
+        "yaml": "yaml",
+        "bom": "yaml",
+        "java": "java"
+      }
+    },
+    "theme-api": {
+      "split": false,
+      "languages": [
+        {
+          "lang": "vagrant",
+          "name": "Vagrant",
+          "default": true
+        },
+        {
+          "lang": "centos",
+          "name": "CentOS / RHEL 7"
+        },
+        {
+          "lang": "ubuntu",
+          "name": "Ubuntu / Debian"
+        },
+        {
+          "lang": "osx",
+          "name": "OSX / Linux"
+        },
+        {
+          "lang": "windows",
+          "name": "Windows"
+        },
+        {
+          "lang": "clouds",
+          "name": "Clouds"
+        },
+        {
+          "lang": "byon",
+          "name": "BYON"
+        },
+        {
+          "lang": "package",
+          "name": "RPM / DEB packages"
+        },
+        {
+          "lang": "tarball",
+          "name": "Tarball"
+        }
+      ]
+    },
+    "versions": {
+      "gitbookConfigURL": "https://raw.githubusercontent.com/tbouron/brooklyn-docs/experiment/gitbook/book.json",
+      "options": [
+        {
+          "value": "https://brooklyn.apache.org/v/latest/",
+          "text": "Latest",
+          "selected": true
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.12.0/",
+          "text": "Version 0.12.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.11.0/",
+          "text": "Version 0.11.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.10.0/",
+          "text": "Version 0.10.0"
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/0.9.0/",
+          "text": "Version 0.9.0"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "brooklyn_version": "1.0.0-SNAPSHOT",
+    "brooklyn_version_stable": "0.12.0",
+    "url": {
+      "brooklyn_website": "https://brooklyn.apache.org",
+      "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc",
+      "brooklyn_git": "https://github.com/apache/brooklyn/tree",
+      "brooklyn_sever_git": "https://github.com/apache/brooklyn-server/tree",
+      "brooklyn_library_git": "https://github.com/apache/brooklyn-library/tree"
+    },
+    "path": {
+      "docs": ""
+    }
+  }
+}

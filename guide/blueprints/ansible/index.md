@@ -1,10 +1,8 @@
 ---
 title: Ansible in YAML Blueprints
-layout: website-normal
-children:
-- about-ansible.md
-- creating-ansible-blueprints.md
+partial-summary-depth: 1
 ---
+# {{ page.title }}
 
 This guide describes how Brooklyn entities can be created using the Ansible infrastructure management tool
  ([ansible.com](http://ansible.com)).
@@ -13,4 +11,4 @@ Comments on this support and suggestions for further development are welcome.
 
 This guide assumes you are familiar with the basics of [creating YAML blueprints](../).
 
-{% include list-children.html %}
+

@@ -1,10 +1,4 @@
----
-section: SSH Keys
-section_position: 9
-section_type: inline
----
-
-### SSH Keys
+## SSH Keys
 
 SSH keys are one of the simplest and most secure ways to access remote servers.
 They consist of two parts:
@@ -24,24 +18,24 @@ the remote machine can confirm it is you accessing it (if no one else has the pr
 and no one snooping on the network can decrypt of any of the traffic.
  
 
-#### Creating an SSH Key
+### Creating an SSH Key
 
 If you don't have an SSH key, create one with:
 
-{% highlight bash %}
+```bash
 $ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-{% endhighlight %}
+```
 
 
-#### Localhost Setup
+### Localhost Setup
 
 If you want to deploy to `localhost`, ensure that you have a public and private key,
 and that your key is authorized for ssh access:
 
-{% highlight bash %}
+```bash
 # _Appends_ id_rsa.pub to authorized_keys. Other keys are unaffected.
 $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-{% endhighlight %}
+```
 
 Now verify that your setup by running the command: `ssh localhost echo hello world`
 
@@ -62,12 +56,12 @@ If this isn't the case, see below.
 
 
 
-#### Potential Problems
+### Potential Problems
 
 * **MacOS user?** In addition to the above, enable "Remote Login" in "System Preferences > Sharing".
 
 * **Got a passphrase?** Set `brooklyn.location.localhost.privateKeyPassphrase`
-  as described [here](index.html#os-setup).
+  as described [here](index.md#os-setup).
   If you're not sure, or you don't know what a passphrase is, you can test this by executing `ssh-keygen -y`.
   If it does *not* ask for a passphrase, then your key has no passphrase.
   If your key does have a passphrase, you can remove it by running `ssh-keygen -p`.
@@ -85,4 +79,4 @@ If this isn't the case, see below.
   if command-line `ssh` and `scp` work, but Brooklyn/java does not, check the versions enabled in Java and on both servers.
 
 * Missing entropy: creating and using ssh keys requires randomness available on the servers,
-  usually in `/dev/random`; see [here]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) for more information
+  usually in `/dev/random`; see [here]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md) for more information
