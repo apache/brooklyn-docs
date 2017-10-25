@@ -24,7 +24,7 @@ as an openrc.sh file. It is usually available from API Access tab in "Access & S
 This file will normally contain the identity and credential.
 
 Users are strongly recommended to use 
-[externalized configuration](../ops/externalized-configuration.md) for better
+[externalized configuration]({{book.path.docs}}/ops/externalized-configuration.md) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

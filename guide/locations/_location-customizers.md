@@ -3,7 +3,7 @@
 Apache Brooklyn supports a number of ways to configure and customize locations. These include
 the `JcloudsLocationCustomizer`, which is for advanced customization of VM provisioning through jclouds.
 There is also a `MachineLocationCustomizer`, which allows customization of machines being obtained 
-from any kind of location (including [Bring Your Own Nodes](index.md#byon)).
+from any kind of location (including [Bring Your Own Nodes]({{book.path.docs}}/locations/index.md#byon)).
 
 
 ### Usage Guidelines

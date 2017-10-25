@@ -70,7 +70,7 @@ brooklyn.policies:
 ```
 
 Typically this is used in conjunction with the FailureDetector enricher to emit the trigger sensor.
-The [introduction to policies](../start/policies.md) shows a worked 
+The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
 example of these working together.
 
 
@@ -80,7 +80,7 @@ example of these working together.
 
 The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to 
 `ha.entityFailed` (or other configurable sensor).  
-The [introduction to policies](../start/policies.md) shows a worked 
+The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
 example of this policy in use.
 
 

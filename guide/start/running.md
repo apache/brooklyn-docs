@@ -116,9 +116,9 @@ By default, no authentication is required and the web-console will listen on all
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
  
-* [Security](../ops/configuration/brooklyn_cfg.md)
-* [Persistence](../ops/persistence/index.md)
-* [Cloud credentials](../locations/index.md)
+* [Security]({{book.path.docs}}/ops/configuration/brooklyn_cfg.md)
+* [Persistence]({{book.path.docs}}/ops/persistence/index.md)
+* [Cloud credentials]({{book.path.docs}}/locations/index.md)
 
 
 ## Launch Apache Brooklyn
@@ -154,7 +154,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ systemctl start|stop|restart|status brooklyn
 ```
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](../ops/paths.md) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{book.path.docs}}/ops/paths.md) page for the locations of these.
 
 {% sample lang="ubuntu" -%}
 ### Launching on Ubuntu & Debian
@@ -165,7 +165,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ sudo service brooklyn start|stop|restart|status
 ```
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](../ops/paths.md) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{book.path.docs}}/ops/paths.md) page for the locations of these.
 
 {% sample lang="osx" -%}
 ### Launching on other Linux distributions, OSX and other UNIX-like platforms
@@ -176,7 +176,7 @@ Now start Apache Brooklyn with the following command:
 $ bin/start
 ```
 
-The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](../ops/paths.md) page for the locations of these.
+The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths]({{book.path.docs}}/ops/paths.md) page for the locations of these.
 
 {% sample lang="windows" -%}
 ### Launching on Windows
@@ -209,9 +209,9 @@ using the most appropriate link for your OS:
 * [OSX](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{book.brooklyn_version}}/apache-brooklyn-{{book.brooklyn_version}}-client-cli-macosx.tar.gz)
 {% endif %}
 
-For details on the CLI, see the [Client CLI Reference](../ops/cli/index.md) page. 
+For details on the CLI, see the [Client CLI Reference]({{book.path.docs}}/ops/cli/index.md) page. 
 
 {% if output.name == 'website' %}
 ## Next
-The first thing we want to do with Brooklyn is **[deploy a blueprint](blueprints.md)**.
+The first thing we want to do with Brooklyn is **[deploy a blueprint]({{book.path.docs}}/start/blueprints.md)**.
 {% endif %}

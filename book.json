@@ -102,6 +102,9 @@
       "brooklyn_website": "https://brooklyn.apache.org",
       "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc"
     },
+    "path": {
+      "docs": ""
+    },
     "url_root": "http://0.0.0.0:4000"
   }
 }

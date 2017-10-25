@@ -6,7 +6,7 @@ title: Detailed Support Report
 If you wish to send a detailed report, then depending on the nature of the problem, consider 
 collecting the following information.
 
-See [Brooklyn Slow or Unresponse](slow-unresponsive.md) docs for details of these commands.
+See [Brooklyn Slow or Unresponse]({{book.path.docs}}/ops/troubleshooting/slow-unresponsive.md) docs for details of these commands.
  
 ```bash
 BROOKLYN_HOME=/home/users/brooklyn/apache-brooklyn-0.9.0-bin
@@ -37,6 +37,6 @@ tar czf brooklyn-report.tgz ${REPORT_DIR}
 
 Also consider providing your log files and persisted state, though extreme care should be taken if
 these might contain cloud or machine credentials (especially if 
-[Externalised Configuration](../externalized-configuration.md) 
+[Externalised Configuration]({{book.path.docs}}/ops/externalized-configuration.md) 
 is not being used for credential storage).
 

@@ -5,7 +5,7 @@ partial-summary-depth: 1
 
 
 **NOTE:** These documents are for using the Brooklyn Client CLI tool to access a running Brooklyn Server.  For
-information on starting on a Brooklyn Server, refer to [Server CLI Reference](../server-cli-reference.md).
+information on starting on a Brooklyn Server, refer to [Server CLI Reference]({{book.path.docs}}/ops/server-cli-reference.md).
 
 ## Obtaining the CLI tool
 

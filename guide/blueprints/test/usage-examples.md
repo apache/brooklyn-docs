@@ -4,7 +4,7 @@ title: Example Blueprint Tests
 # {{ page.title }}
 
 ## Introduction
-This section describes some simple tests based on the [Getting Started](../../start/blueprints.md#launching-from-a-blueprint) example blueprint:
+This section describes some simple tests based on the [Getting Started]({{book.path.docs}}/start/blueprints.md#launching-from-a-blueprint) example blueprint:
 
 !CODEFILE "../../start/_my-web-cluster.yaml"
 
@@ -42,6 +42,6 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
 ### Full Example
 A sample blueprint containing all the tests described above is available [here](./example_yaml/testcases/getting-started-test-example.yaml).
 
-This blueprint will deploy the [Getting Started](../../start/blueprints.md#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
+This blueprint will deploy the [Getting Started]({{book.path.docs}}/start/blueprints.md#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
 
 [![Successful Getting Started App deployment and Test execution.](images/getting-started-blueprint-test.png)](images/getting-started-blueprint-test-large.png)

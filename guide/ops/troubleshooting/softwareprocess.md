@@ -3,7 +3,7 @@ title: Troubleshooting SoftwareProcess Entities
 ---
 # {{ page.title }}
 
-The [troubleshooting overview](overview.md) in Brooklyn gives 
+The [troubleshooting overview]({{book.path.docs}}/ops/troubleshooting/overview.md) in Brooklyn gives 
 information for how to find more information about errors.
 
 If that doesn't give enough information to diagnose, fix or workaround the problem, then it can be required

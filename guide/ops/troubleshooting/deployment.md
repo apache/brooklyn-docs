@@ -152,7 +152,7 @@ This just means that the entity did not get to service-up in the pre-defined tim
 two minutes, and can be configured using the `start.timeout` config key; the timer begins after the 
 start tasks are completed).
 
-See the [overview](overview.md) for where to find additional information, especially the section on
+See the [overview]({{book.path.docs}}/ops/troubleshooting/overview.md) for where to find additional information, especially the section on
 "Entity's Error Status".
 
 ## Invalid packet error

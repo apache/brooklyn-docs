@@ -28,7 +28,7 @@ is a convenient way of building OSGi bundles.
 
 #### OSGi Bundles Declared in Catalog Items  
 
-Within a [catalog item](../catalog/index.md), a list of URLs can be supplied under
+Within a [catalog item]({{book.path.docs}}/blueprints/catalog/index.md), a list of URLs can be supplied under
 `brooklyn.libraries`. Each URL should point to an OSGi bundle. This list should include the OSGi 
 bundle that has the Java code for your blueprint, and also the OSGi bundles that it depends
 on (including all transitive dependencies).
@@ -37,7 +37,7 @@ It is vital that these jars are built correctly as OSGi bundles, and that all tr
 dependencies are included. The bundles will be added to Karaf in the order given, so a bundle's
 dependencies should be listed before the bundle(s) that depend on them.
 
-In the [GistGenerator example](defining-and-deploying.md), the 
+In the [GistGenerator example]({{book.path.docs}}/blueprints/java/defining-and-deploying.md), the 
 [catalog.bom file](gist_generator/gist_generator.bom) included
 the URL of the dependency `org.eclipse.egit.github.core`. It also (before that line) included
 its transitive dependency, which is a specific version of `gson`.

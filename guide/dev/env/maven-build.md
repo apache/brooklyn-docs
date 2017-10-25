@@ -33,14 +33,14 @@ Other tips:
   `export MAVEN_OPTS="-Xmx1024m -Xms512m"`
 
 * Run `-PIntegration` to run integration tests, or `-PLive` to run live tests
-  ([tests described here](../code/tests.md))
+  ([tests described here]({{book.path.docs}}/dev/code/tests.md))
 
 * You may need to install `rpm` package to build RPM packages: `brew install rpm` for Mac OS, `apt-get install rpm` for Ubuntu, `yum install rpm` for Centos/RHEL.
   On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.
 
 * If you're looking at the maven internals, note that many of the settings are inherited from parent projects (see for instance `brooklyn-server/parent/pom.xml`)
 
-* For tips on building within various IDEs, look [here](ide/index.md).
+* For tips on building within various IDEs, look [here]({{book.path.docs}}/dev/env/ide/index.md).
 
 
 ## When the RAT Bites

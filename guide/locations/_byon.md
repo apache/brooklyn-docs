@@ -42,7 +42,7 @@ brooklyn.location.named.On-Prem\ Iron\ Example.privateKeyPassphrase=s3cr3tpassph
 ```
 
 Alternatively, you can create a specific BYON location through the location wizard tool available within the web console.
-This location will be saved as a [catalog entry](../blueprints/catalog/index.md#locations-in-catalog) for easy reusability.
+This location will be saved as a [catalog entry]({{book.path.docs}}/blueprints/catalog/index.md#locations-in-catalog) for easy reusability.
 
 For more complex host configuration, one can define custom config values per machine. In the example 
 below, there will be two machines. The first will be a machine reachable on

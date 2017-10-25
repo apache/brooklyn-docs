@@ -100,7 +100,7 @@ The latest stable release can be accessed on the [main download page]({{ book.ur
 
 ## Release Notes
 
-Release notes can be found [here](release-notes.md).
+Release notes can be found [here]({{book.path.docs}}/misc/release-notes.md).
 
 <a name="maven"></a>
 
@@ -152,4 +152,4 @@ with this version in branch [{{ book.brooklyn.git_branch }}]({{ book.brooklyn.ur
 These locations have a `README.md` in the root which explains how to get the code including
 submodules.
 
-Useful information on working with the source is [here](../dev/code).
+Useful information on working with the source is [here]({{book.path.docs}}/dev/code/structure.md).

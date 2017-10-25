@@ -79,4 +79,4 @@ If this isn't the case, see below.
   if command-line `ssh` and `scp` work, but Brooklyn/java does not, check the versions enabled in Java and on both servers.
 
 * Missing entropy: creating and using ssh keys requires randomness available on the servers,
-  usually in `/dev/random`; see [here](../ops/troubleshooting/increase-entropy.md) for more information
+  usually in `/dev/random`; see [here]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md) for more information

@@ -10,9 +10,9 @@ title: Miscellaneous Tips and Tricks
   This means we can accept pulls more easily (as sandbox items aren't built as part of the main build)
   and speed up collaboration.
 
-* When debugging an entity, make sure the  [brooklyn.SSH logger](logging.md) is set to DEBUG and accessible.
+* When debugging an entity, make sure the  [brooklyn.SSH logger]({{book.path.docs}}/dev/tips/logging.md) is set to DEBUG and accessible.
 
-* Use tests heavily!  These are pretty good to run in the IDE (once you've completed [IDE setup](../env/ide/index.md)),
+* Use tests heavily!  These are pretty good to run in the IDE (once you've completed [IDE setup]({{book.path.docs}}/dev/env/ide/index.md)),
   and far quicker to spot problems than runtime, plus we get early-warning of problems introduced in the future.
   (In particular, Groovy's laxity with compilation means it is easy to introduce silly errors which good test coverage will find much faster.)
 

@@ -42,7 +42,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 2. Upgrade Apache Brooklyn:
 
-   1. [Download](../misc/download.md) the new RPM/DEB package
+   1. [Download]({{book.path.docs}}/misc/download.md) the new RPM/DEB package
 
    2. Upgrade Apache Brooklyn:
 
@@ -92,7 +92,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 3. Install new version of Apache Brooklyn:
 
-   1. [Download](../misc/download.md) the new tarball zip package.
+   1. [Download]({{book.path.docs}}/misc/download.md) the new tarball zip package.
    
    2. Install Brooklyn:
 
@@ -190,7 +190,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 5. Install new version of Apache Brooklyn:
 
-   1. [Download](../misc/download.md) the new RPM/DEB package.
+   1. [Download]({{book.path.docs}}/misc/download.md) the new RPM/DEB package.
    
    2. Install Apache Brooklyn:
 
@@ -286,7 +286,7 @@ yum downgrade apache-brooklyn.noarch
 dpkg -i apache-brooklyn-xxxx.deb
 ```
 
-*Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download](../misc/download.md)
+*Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download]({{book.path.docs}}/misc/download.md)
 the version you want to downgrade to before hand.*
 
 ## How to stop your service
@@ -303,11 +303,11 @@ stop brooklyn
 
 ## Web login credentials
 
-* User credentials should now be recorded in [`brooklyn.cfg`](paths.md).
+* User credentials should now be recorded in [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md).
 
-* Brooklyn will still read them from both [`brooklyn.cfg`](paths.md) and `~/.brooklyn/brooklyn.properties`.
+* Brooklyn will still read them from both [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md) and `~/.brooklyn/brooklyn.properties`.
 
-* Configure a username/password by modifying [`brooklyn.cfg`](paths.md). An example entry is:
+* Configure a username/password by modifying [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md). An example entry is:
  
 ```bash
 brooklyn.webconsole.security.users=admin
@@ -318,10 +318,10 @@ brooklyn.webconsole.security.user.admin.password=password2
 
 If you have persisted state you wish to rebind to, persistence is now configured in the following files:
 
-* [`brooklyn.cfg`](paths.md)
-* [`org.apache.brooklyn.osgilauncher.cfg`](paths.md)
+* [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md)
+* [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md)
 
-For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`](paths.md):
+For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md):
 
 ```bash
 brooklyn.location.named.aws-s3-eu-west-1:aws-s3:eu-west-1
@@ -329,7 +329,7 @@ brooklyn.location.named.aws-s3-eu-west-1.identity=<ADD CREDS>
 brooklyn.location.named.aws-s3-eu-west-1.credential=<ADD CREDS>
 ```
 
-To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`](paths.md):
+To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
 
 ```bash
 persistenceLocation=aws-s3-eu-west-1
@@ -342,7 +342,7 @@ Apache Brooklyn should be stopped before this file is modified, and then restart
 in the persisted state. Apache Brooklyn needs to know it in order to read the persisted state at startup time.***
 
 If binding to existing persisted state, an additional command is required to update the existing catalog with the Brooklyn
-0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`](paths.md) (as is done by the RPM and DEB):
+0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`]({{book.path.docs}}/ops/paths.md) (as is done by the RPM and DEB):
 
   ```bash
     br catalog add /opt/brooklyn/catalog/catalog.bom

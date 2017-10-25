@@ -3,7 +3,7 @@ title: Configuring HA - an example
 ---
 # {{ page.title }}
 
-This supplements the [High Availability](index.md) documentation
+This supplements the [High Availability]({{book.path.docs}}/ops/high-availability/index.md) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore
 
 ### Prerequisites
@@ -12,14 +12,14 @@ and provides an example of how to configure a pair of Apache Brooklyn servers to
 - An NFS folder has been mounted on both VMs at `/mnt/brooklyn-persistence` and both machines can write to the folder
 
 \* Brooklyn can be configured to use either an object store such as S3, or a shared NFS mount. The recommended option is to use an object
-store as described in the [Object Store Persistence](../persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
+store as described in the [Object Store Persistence]({{book.path.docs}}/ops/persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
 is assumed in this example
 
 ### Launching
 To start, download and install the latest Apache Brooklyn release on both VMs following the instructions in
-[Running Apache Brooklyn](../../start/running.md)
+[Running Apache Brooklyn]({{book.path.docs}}/start/running.md)
 
-On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.md):
+On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
 
 - highAvailabilityMode: MASTER
 - persistMode: AUTO
@@ -31,10 +31,10 @@ Then launch Brooklyn with:
 $ bin/start
 ```
 
-If you are using RPMs/deb to install, please see the [Running Apache Brooklyn](../../start/running.md) 
+If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{book.path.docs}}/start/running.md) 
 documentation for the appropriate launch commands
 
-Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.md):
+Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
 
 - highAvailabilityMode: AUTO
 - persistMode: AUTO

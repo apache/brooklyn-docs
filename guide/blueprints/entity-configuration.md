@@ -74,7 +74,7 @@ services:
 - type: entity-config-example
 ```
 
-For details of how to write and add catalog items, see [Catalog](catalog/index.md). 
+For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md). 
 
 
 #### Config Key Constraints

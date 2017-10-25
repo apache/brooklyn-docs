@@ -13,7 +13,7 @@ Possible reasons include:
 * SSH'ing is very slow due (e.g. due to lack of entropy)
 * Out of disk space
 
-See [Brooklyn Requirements](../requirements.md) for details of server 
+See [Brooklyn Requirements]({{book.path.docs}}/ops/requirements.md) for details of server 
 requirements.
 
 
@@ -57,7 +57,7 @@ ulimit -a -u adalovelace
 
 Of particular interest is the limit for "open files".
 
-See [Increase System Resource Limits](increase-system-resource-limits.md) 
+See [Increase System Resource Limits]({{book.path.docs}}/ops/troubleshooting/increase-system-resource-limits.md) 
 for more information.
 
 
@@ -104,7 +104,7 @@ netstat -an | grep ESTABLISHED | wc -l
 
 A lack of entropy can cause random number generation to be extremely slow. This can cause
 tasks like ssh to also be extremely slow. See 
-[linux kernel entropy](increase-entropy.md)
+[linux kernel entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md)
 for details of how to work around this.
 
 
@@ -156,14 +156,14 @@ appropriate for a production server.
 If the Brooklyn Server was originally run to allow a remote debugger to connect (strongly 
 discouraged in production!), then this provides a convenient way to investigate why Brooklyn
 is being slow or unresponsive. See the Debugging Tips in the 
-tip [Debugging Remote Brooklyn](../../dev/tips/debugging-remote-brooklyn.md)
-and the [IDE docs](../../dev/env/ide/index.md) for more information.
+tip [Debugging Remote Brooklyn]({{book.path.docs}}/dev/tips/debugging-remote-brooklyn.md)
+and the [IDE docs]({{book.path.docs}}/dev/env/ide/index.md) for more information.
 
 
 ## Log Files
 
 Apache Brooklyn will by default create brooklyn.info.log and brooklyn.debug.log files. See the
-[Logging](../logging.md) docs for more information.
+[Logging]({{book.path.docs}}/ops/logging.md) docs for more information.
 
 The following are useful log messages to search for (e.g. using `grep`). Note the wording of
 these messages (or their very presence) may change in future version of Brooklyn. 

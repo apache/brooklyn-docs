@@ -10,7 +10,7 @@ recommended.
 
 The example below creates a three tier web service, composed of an Nginx load-balancer, 
 a cluster of Tomcat app-servers, and a MySQL database. It is similar to the [YAML policies
-example](../../start/policies.md), but also includes the MySQL database
+example]({{book.path.docs}}/start/policies.md), but also includes the MySQL database
 to demonstrate the use of dependent configuration.
 
 !CODEFILE "java_app/ExampleWebApp.java"
