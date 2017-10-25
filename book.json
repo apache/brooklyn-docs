@@ -100,11 +100,13 @@
     "brooklyn_version_stable": "0.12.0",
     "url": {
       "brooklyn_website": "https://brooklyn.apache.org",
-      "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc"
+      "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc",
+      "brooklyn_git": "https://github.com/apache/brooklyn/tree",
+      "brooklyn_sever_git": "https://github.com/apache/brooklyn-server/tree",
+      "brooklyn_library_git": "https://github.com/apache/brooklyn-library/tree"
     },
     "path": {
       "docs": ""
-    },
-    "url_root": "http://0.0.0.0:4000"
+    }
   }
 }

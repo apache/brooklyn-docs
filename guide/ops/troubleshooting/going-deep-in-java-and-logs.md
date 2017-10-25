@@ -227,7 +227,7 @@ the entity fails to start.
 We can simulate this type of failure by launching Tomcat with an invalid configuration file. As seen in the previous
 examples, Brooklyn copies two xml configuration files to the server: `server.xml` and `web.xml`
 
-The first few non-comment lines of `server.xml` are as follows (you can see the full file [here]({{ book.brooklyn.url.git }}/software/webapp/src/main/resources/org/apache/brooklyn/entity/webapp/tomcat/server.xml)):
+The first few non-comment lines of `server.xml` are as follows (you can see the full file [here]({{book.url.brooklyn_library_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/software/webapp/src/main/resources/org/apache/brooklyn/entity/webapp/tomcat/server.xml)):
 
 ```xml
 

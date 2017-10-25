@@ -121,7 +121,7 @@ the correct Administrator privileges: you may otherwise get an access denied err
 [How and Why to re-authenticate within a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
-Brooklyn source code]({{ book.brooklyn.url.git }}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
+Brooklyn source code]({{book.url.brooklyn_library_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
 
 
 Tips and Tricks

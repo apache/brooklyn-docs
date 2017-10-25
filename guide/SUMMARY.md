@@ -124,6 +124,7 @@
     * [SoftwareProcess Entities](ops/troubleshooting/softwareprocess.md)
     * [Going Deep in Java and Logs](ops/troubleshooting/going-deep-in-java-and-logs.md)
     * [Monitoring Memory Usage](ops/troubleshooting/memory-usage.md)
+  * [Paths breakdown](ops/paths.md)
 * [Other 0.12.0 Resources](misc/index.md)
   * [Glossary](GLOSSARY.md)
   * [Versions](https://brooklyn.apache.org/meta/versions.html)
