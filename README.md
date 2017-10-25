@@ -94,14 +94,16 @@ npm run javadoc
 Preparing for a Release
 -----------------------
 
-When doing a release and changing versions:
-
-* Before branching:
-  * Change the `brooklyn_stable_version` variable in `_config.yml`
-*  In the branch, with `change-version.sh` run (e.g. from `N.SNAPSHOT` to `N`)
-  * Ensure the `start/release-notes.md` file is current
-* In master, with `change-version.sh` run (e.g. to `N+1-SNAPSHOT`)
-  * Clear old stuff in the `start/release-notes.md` file
+When doing a release, there are couple of thing to do first:
+* create a release branch `<version>` then:
+  * update the following variables in `_config.yml`:
+    * `brooklyn_version` to `<version>` you are currently releasing
+    * `brooklyn_stable_version` to `<version>` you are currently releasing
+    * `path.doc` to `/v/<version>`
+  * run `change-version.sh <version>-SNAPSHOT <version>`
+* In `master` branch:
+  * run `change-version.sh <version>-SNAPSHOT <version+1>-SNAPSHOT`
+  * clear old stuff in the `start/release-notes.md` file
  
 Publishing the docs and javadoc
 --------------------------------
