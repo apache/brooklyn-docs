@@ -1,7 +1,6 @@
 ---
 title: Blueprint Test Entities
 ---
-# {{ page.title }}
 
 
 ## Structural Test Entities

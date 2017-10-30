@@ -1,7 +1,6 @@
 ---
 title: Locations
 ---
-# {{ page.title }}
 
 Locations are the environments to which Brooklyn deploys applications. Most commonly these 
 are cloud services such as AWS, GCE, and IBM Softlayer. Brooklyn also supports deploying 

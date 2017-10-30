@@ -1,7 +1,6 @@
 ---
 title: Getting Started - Policies
 ---
-# {{ page.title }}
 
 ## A Clustered Example
 

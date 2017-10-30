@@ -1,7 +1,6 @@
 ---
 title: Monitoring and Managing Applications
 ---
-# {{ page.title }}
 
 From the Home page, click on the application name or open the Applications tab.
 

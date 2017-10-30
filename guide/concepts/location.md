@@ -1,7 +1,6 @@
 ---
 title: Location
 ---
-# {{ page.title }}
 
 <!-- TODO, Clarify is how geographical location works.
 -->

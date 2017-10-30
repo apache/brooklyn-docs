@@ -1,7 +1,6 @@
 ---
 title: Common Classes and Entities
 ---
-# {{ page.title }}
 
 <!-- TODO old, needs work (refactoring!) and use of java_link -->
 

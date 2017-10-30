@@ -2,7 +2,6 @@
 title: Chef in YAML Blueprints
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 This guide describes how Brooklyn entities can be easily created from Chef cookbooks.
 As of this writing (May 2014) some of the integration points are under active development,

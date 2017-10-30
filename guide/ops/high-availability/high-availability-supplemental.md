@@ -1,7 +1,6 @@
 ---
 title: Configuring HA - an example
 ---
-# {{ page.title }}
 
 This supplements the [High Availability]({{book.path.docs}}/ops/high-availability/index.md) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore

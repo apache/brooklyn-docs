@@ -1,7 +1,6 @@
 ---
 title: Handling Bundle Dependencies
 ---
-# {{ page.title }}
 
 Some Java blueprints will require third party libraries. These need to be made available to the
 Apache Brooklyn runtime. There are a number of ways this can be achieved.

@@ -1,7 +1,6 @@
 ---
 title: Service State
 ---
-# {{ page.title }}
 
 Any entity can use the standard "service-up" and "service-state" 
 sensors to inform other entities and the GUI about its status.

@@ -1,7 +1,6 @@
 ---
 title: CORS Configuration
 ---
-# {{ page.title }}
 
 To enable / configure [cross-origin resource sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 The following file must be added to [`org.apache.brooklyn.rest.filter.cors.cfg`]({{book.path.docs}}/ops/paths.md)

@@ -1,7 +1,6 @@
 ---
 title: Topology, Dependencies, and Management Policies
 ---
-# {{ page.title }}
 
 Applications written in YAML can similarly be written in Java. However, the YAML approach is 
 recommended.

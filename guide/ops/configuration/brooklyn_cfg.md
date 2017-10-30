@@ -1,7 +1,6 @@
 ---
 title: brooklyn.cfg
 ---
-# {{ page.title }}
 
 The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here]({{book.path.docs}}/ops/paths.md) for the location of your Brooklyn configuration folder
 

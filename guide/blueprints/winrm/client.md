@@ -1,7 +1,6 @@
 ---
 title: Winrm4j Client
 ---
-# {{ page.title }}
 
 ## Winrm4j parameters
 

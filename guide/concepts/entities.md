@@ -1,7 +1,6 @@
 ---
 title: Entities
 ---
-# {{ page.title }}
 
 The central concept in a Brooklyn deployment is that of an ***entity***. 
 An entity represents a resource under management, either *base* entities (individual machines or software processes) 

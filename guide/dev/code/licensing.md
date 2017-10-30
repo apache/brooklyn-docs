@@ -1,7 +1,6 @@
 ---
 title: License Considerations
 ---
-# {{ page.title }}
 
 The Apache Software Foundation, quite rightly, place a high standard on code provenance and license compliance. The
 Apache license is flexible and compatible with many other types of license, meaning there is generally little problem

@@ -1,7 +1,6 @@
 ---
 title: Bundling
 ---
-# {{ page.title }}
 
 ### Bundling Catalog Resources
 

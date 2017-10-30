@@ -1,7 +1,6 @@
 ---
 title: Catalog Items YAML Syntax
 ---
-# {{ page.title }}
 
 ### Catalog Items YAML Syntax
 

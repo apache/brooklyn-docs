@@ -1,7 +1,6 @@
 ---
 title: Creating Blueprints from Chef
 ---
-# {{ page.title }}
 
 In a nutshell, a new Chef-based entity can be defined as a service by specifying
 `chef:cookbook_name` as the `service_type`, along with a collection of optional configuration.

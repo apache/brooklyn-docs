@@ -1,7 +1,6 @@
 ---
 title: Code Structure
 ---
-# {{ page.title }}
 
 Brooklyn is split into the following subprojects:
 

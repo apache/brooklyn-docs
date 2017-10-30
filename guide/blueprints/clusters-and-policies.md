@@ -1,7 +1,6 @@
 ---
 title: Clusters and Policies
 ---
-# {{ page.title }}
 
 Now let's bring the concept of the "cluster" back in.
 We could wrap our appserver in the same `DynamicCluster` we used earlier,

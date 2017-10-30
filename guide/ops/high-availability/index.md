@@ -1,7 +1,6 @@
 ---
 title: High Availability
 ---
-# {{ page.title }}
 
 Brooklyn will automatically run in HA mode if multiple Brooklyn instances are started
 pointing at the same persistence store.  One Brooklyn node (e.g. the first one started)

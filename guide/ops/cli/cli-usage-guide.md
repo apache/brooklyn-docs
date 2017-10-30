@@ -1,7 +1,6 @@
 ---
 title: CLI Usage Guide
 ---
-# {{ page.title }}
 
 This document provides a brief overview of using the most common Brooklyn CLI commands,
 by using the CLI to deploy an application then examine various aspects of it.

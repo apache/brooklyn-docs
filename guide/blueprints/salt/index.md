@@ -2,7 +2,6 @@
 title: Salt in YAML Blueprints
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 This guide describes how Brooklyn entities can be created using the Salt infrastructure management tool
  ([saltstack.com](https://saltstack.com/)).

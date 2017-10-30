@@ -1,7 +1,6 @@
 ---
 title: Custom Entity Development
 ---
-# {{ page.title }}
 
 This section details how to create new custom application components or groups as brooklyn entities.
 

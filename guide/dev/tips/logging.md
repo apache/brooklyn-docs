@@ -1,7 +1,6 @@
 ---
 title: Logging
 ---
-# {{ page.title }}
 
 ## Logging: A Quick Overview
 

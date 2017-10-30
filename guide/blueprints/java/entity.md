@@ -1,7 +1,6 @@
 ---
 title: Writing an Entity
 ---
-# {{ page.title }}
 
 ## Ways to write an entity
 

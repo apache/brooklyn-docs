@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting Overview
 ---
-# {{ page.title }}
 
 This guide describes sources of information for understanding when things go wrong.
 

@@ -1,7 +1,6 @@
 ---
 title: Launching
 ---
-# {{ page.title }}
 
 This guide will walk you through connecting to the Brooklyn Server Graphical User Interface and performing various tasks.
 

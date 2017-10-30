@@ -1,7 +1,6 @@
 ---
 title: Using Policies
 ---
-# {{ page.title }}
 
 ## Exploring and Testing Policies
 

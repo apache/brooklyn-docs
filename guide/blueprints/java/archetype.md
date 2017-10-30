@@ -1,7 +1,6 @@
 ---
 title: Creating from a Maven Archetype
 ---
-# {{ page.title }}
 
 ### Maven Archetype
 

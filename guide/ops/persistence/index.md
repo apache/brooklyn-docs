@@ -1,7 +1,6 @@
 ---
 title: Persistence
 ---
-# {{ page.title }}
 
 By default Brooklyn persists its state to storage so that a server can be restarted 
 without loss or so a high availability standby server can take over.

@@ -1,7 +1,6 @@
 ---
 title: About Ansible
 ---
-# {{ page.title }}
 
 ## What you need to know about Ansible
 

@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting Server Connectivity Issues in the Cloud
 ---
-# {{ page.title }}
 
 A common problem when setting up an application in the cloud is getting the basic connectivity right - how
 do I get my service (e.g. a TCP host:port) publicly accessible over the internet?

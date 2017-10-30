@@ -1,7 +1,6 @@
 ---
 title: Creating Blueprints with Salt
 ---
-# {{ page.title }}
 
 To write a blueprint to use Salt with Brooklyn it will help to have a degree of familiarity with Salt itself. In the 
 sections below, when the Brooklyn configuration is described, the underlying Salt operation is also noted briefly, for 

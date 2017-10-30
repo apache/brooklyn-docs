@@ -1,7 +1,6 @@
 ---
 title: Brooklyn Concepts Quickstart
 ---
-# {{ page.title }}
 
 The following section provides a quick summary of the main Brooklyn concepts you will encounter in Getting Started.  For further discussion of these concepts see [The Theory Behind Brooklyn]({{book.url.brooklyn_website}}/learnmore/theory.html), and the detailed descriptions in [Brooklyn Concepts]({{book.path.docs}}/concepts/index.md).
 

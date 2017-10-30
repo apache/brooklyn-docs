@@ -1,7 +1,6 @@
 ---
 title: Catalog Management
 ---
-# {{ page.title }}
 
 ### Catalog Management
 

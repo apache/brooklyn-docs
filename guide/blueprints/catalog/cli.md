@@ -1,7 +1,6 @@
 ---
 title: Brooklyn Server Command Line Arguments
 ---
-# {{ page.title }}
 
 ### Brooklyn Server Command Line Arguments
 
