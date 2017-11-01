@@ -1,7 +1,6 @@
 ---
 title: Application, Parent and Membership
 ---
-# {{ page.title }}
 
 All entities have a ***parent*** entity, which creates and manages it, with one important exception: *applications*.
 Application entities are the top-level entities created and managed externally, manually or programmatically.

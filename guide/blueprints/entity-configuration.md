@@ -1,7 +1,6 @@
 ---
 title: Entity Configuration
 ---
-# {{ page.title }}
 
 Within a blueprint or catalog item, entities can be configured. The rules for setting this 
 configuration, including when composing and extending existing entities, is described in this 

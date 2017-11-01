@@ -1,7 +1,6 @@
 ---
 title: Writing Chef for Blueprints
 ---
-# {{ page.title }}
 
 ## Making it Simpler
 

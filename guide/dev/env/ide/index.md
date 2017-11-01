@@ -1,7 +1,6 @@
 ---
 title: IDE Setup
 ---
-# {{ page.title }}
 
 Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
 neither quite gets along perfectly with Groovy,

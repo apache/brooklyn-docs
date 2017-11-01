@@ -1,7 +1,6 @@
 ---
 title: The Basic Structure
 ---
-# {{ page.title }}
 
 ## A First Blueprint
 

@@ -1,7 +1,6 @@
 ---
 title: Policies
 ---
-# {{ page.title }}
 
 Policies perform the active management enabled by Brooklyn. Entities can have zero or more ``Policy`` instances attached to them. 
 

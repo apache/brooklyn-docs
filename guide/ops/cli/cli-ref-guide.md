@@ -1,7 +1,6 @@
 ---
 title: CLI Reference Guide
 ---
-# {{ page.title }}
 
 ## Usage
 ```text

@@ -1,7 +1,6 @@
 ---
 title: Stop/start/restart behaviour
 ---
-# {{ page.title }}
 
 Many entities expose `start`, `stop` and `restart` effectors. The semantics of these operations (and the parameters they take) depends on the type of entity.
 

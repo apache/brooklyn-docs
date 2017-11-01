@@ -2,7 +2,6 @@
 title: Testing YAML Blueprints
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 Brooklyn provides a selection of test entities which can be used to validate Blueprints via YAML. The basic building block is a TargetableTestComponent, which is used to resolve a target. There are two different groups of entities that inherit from TargetableTestComponent. The first is structural, which effects how the tests are run, for example by affecting the order they are run in. The second group is validation, which is used to confirm the application is deployed as intended, for example by checking some sensor value.
 

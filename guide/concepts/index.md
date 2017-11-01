@@ -2,7 +2,6 @@
 title: Brooklyn Concepts
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 This introduces brooklyn and describes how it simplifies the deployment and management of big applications. It is
 intended for people who are using brooklyn-supported application components (such as web/app servers, data stores)

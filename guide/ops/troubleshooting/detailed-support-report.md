@@ -1,7 +1,6 @@
 ---
 title: Detailed Support Report
 ---
-# {{ page.title }}
 
 If you wish to send a detailed report, then depending on the nature of the problem, consider 
 collecting the following information.

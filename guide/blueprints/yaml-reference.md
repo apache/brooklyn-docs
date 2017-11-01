@@ -1,7 +1,6 @@
 ---
 title: YAML Blueprint Reference
 ---
-# {{ page.title }}
 
 ## Root Elements
 

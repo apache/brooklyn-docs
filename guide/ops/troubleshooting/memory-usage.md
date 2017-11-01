@@ -1,7 +1,6 @@
 ---
 title: "Troubleshooting: Monitoring Memory Usage"
 ---
-# {{ page.title }}
 
 ## Memory Usage
 

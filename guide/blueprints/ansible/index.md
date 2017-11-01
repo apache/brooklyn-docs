@@ -2,7 +2,6 @@
 title: Ansible in YAML Blueprints
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 This guide describes how Brooklyn entities can be created using the Ansible infrastructure management tool
  ([ansible.com](http://ansible.com)).

@@ -2,7 +2,6 @@
 title: Other Resources
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 {% if output.name == 'website' %}
 Further documentation specific to this version of Brooklyn includes:

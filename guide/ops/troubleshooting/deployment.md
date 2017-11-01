@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting Deployment
 ---
-# {{ page.title }}
 
 This guide describes common problems encountered when deploying applications.
 

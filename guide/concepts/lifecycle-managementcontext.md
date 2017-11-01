@@ -1,7 +1,6 @@
 ---
 title: Lifecycle and ManagementContext
 ---
-# {{ page.title }}
 
 Under-the-covers, at heart of the brooklyn management plane is the ``ManagementContext``. 
 This is started automatically when using launching an application using the brooklyn CLI. For programmatic use, see 

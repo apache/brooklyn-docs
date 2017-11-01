@@ -1,7 +1,6 @@
 ---
 title: Security Guidelines
 ---
-# {{ page.title }}
 
 ## Brooklyn Server
 

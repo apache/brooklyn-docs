@@ -1,7 +1,6 @@
 ---
 title: Configuration, Sensors and Effectors
 ---
-# {{ page.title }}
 
 ### Configuration
 

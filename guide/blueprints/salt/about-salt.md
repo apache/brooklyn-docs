@@ -1,7 +1,6 @@
 ---
 title: About Salt
 ---
-# {{ page.title }}
 
 ## What you need to know about Salt
 

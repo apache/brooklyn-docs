@@ -1,7 +1,6 @@
 ---
 title: Brooklyn Remote Debugging
 ---
-# {{ page.title }}
 
 Usually during development, you will be running Brooklyn from your IDE (see [IDE Setup]({{book.path.docs}}/dev/env/ide/index.md)), in which case
 debugging is as simple as setting a breakpoint. There may however be times when you need to debug an existing remote

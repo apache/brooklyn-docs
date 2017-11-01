@@ -1,7 +1,6 @@
 ---
 title: Starting, Stopping and Monitoring
 ---
-# {{ page.title }}
 
 **NOTE:** This document is for information on starting an Apache Brooklyn
 Server.  For information on using the Brooklyn Client CLI to access an already

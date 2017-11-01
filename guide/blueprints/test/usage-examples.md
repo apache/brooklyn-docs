@@ -1,7 +1,6 @@
 ---
 title: Example Blueprint Tests
 ---
-# {{ page.title }}
 
 ## Introduction
 This section describes some simple tests based on the [Getting Started]({{book.path.docs}}/start/blueprints.md#launching-from-a-blueprint) example blueprint:

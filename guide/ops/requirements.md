@@ -1,7 +1,6 @@
 ---
 title: Requirements
 ---
-# {{ page.title }}
 
 ## Server Specification
 

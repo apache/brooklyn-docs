@@ -1,7 +1,6 @@
 ---
 title: Blueprinting Tips
 ---
-# {{ page.title }}
 
 ## YAML Recommended
 

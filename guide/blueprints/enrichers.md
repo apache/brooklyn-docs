@@ -1,7 +1,6 @@
 ---
 title: Enrichers
 ---
-# {{ page.title }}
 
 Enrichers provide advanced manipulation of an entity's sensor values.
 See below for documentation of the stock enrichers available in Apache Brooklyn.

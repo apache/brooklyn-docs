@@ -1,7 +1,6 @@
 ---
 title: Deploying Blueprints
 ---
-# {{ page.title }}
 
 
 ## Launching from a Blueprint

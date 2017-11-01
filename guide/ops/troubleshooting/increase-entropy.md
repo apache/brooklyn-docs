@@ -1,7 +1,6 @@
 ---
 title: Increase Entropy
 ---
-# {{ page.title }}
 
 ### Checking entropy level
 

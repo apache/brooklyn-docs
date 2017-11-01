@@ -1,7 +1,6 @@
 ---
 title: HTTPS Configuration
 ---
-# {{ page.title }}
 
 ## Getting the Certificate
 To enable HTTPS web access, you will need a server certificate in a java keystore. To create a self-signed certificate,

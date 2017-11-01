@@ -1,7 +1,6 @@
 ---
 title: Setting Locations
 ---
-# {{ page.title }}
 
 Brooklyn supports a very wide range of target locations. 
 With deep integration to [Apache jclouds](https://jclouds.apache.org), most well-known clouds 

@@ -1,7 +1,6 @@
 ---
 title: Feeds
 ---
-# {{ page.title }}
 
 <!-- TODO old, needs work (refactoring!) and use of java_link -->
 

@@ -1,7 +1,6 @@
 ---
 title: Entitlements
 ---
-# {{ page.title }}
 
 Brooklyn supports a plug-in system for defining "entitlements" -- 
 essentially permissions.

@@ -1,7 +1,6 @@
 ---
 title: Server CLI Reference
 ---
-# {{ page.title }}
 
 **NOTE:** This document is for information on starting a Brooklyn Server.  For information on using the Brooklyn Client CLI to access an 
 already running Brooklyn Server, refer to [Client CLI Reference]({{book.path.docs}}/ops/cli/index.md).

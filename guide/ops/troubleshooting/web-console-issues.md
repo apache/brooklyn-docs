@@ -1,7 +1,6 @@
 ---
 title: Web Console Issues
 ---
-# {{ page.title }}
 
 ## Page Does Not Load in Chrome, Saying ""Waiting for available socket..."
 

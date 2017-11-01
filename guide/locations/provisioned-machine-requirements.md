@@ -2,7 +2,6 @@
 title: Provisioned Machine Requirements
 layout: website-normal
 ---
-# {{ page.title }}
 
 The requirements for how a provisioned machine should behave will depend on the
 entites subsequently deployed there.

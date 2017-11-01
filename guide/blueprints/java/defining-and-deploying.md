@@ -1,7 +1,6 @@
 ---
 title: Defining and Deploying
 ---
-# {{ page.title }}
 
 ## Intro
 

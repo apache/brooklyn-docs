@@ -1,7 +1,6 @@
 ---
 title: Maven Build
 ---
-# {{ page.title }}
 
 ## The Basics
 

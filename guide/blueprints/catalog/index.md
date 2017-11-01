@@ -2,7 +2,6 @@
 title: Catalog
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 Apache Brooklyn provides a **catalog**, which is a persisted collection of versioned blueprints 
 and other resources. A set of blueprints is loaded from the `default.catalog.bom` in the Brooklyn 

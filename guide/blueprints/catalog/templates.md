@@ -1,7 +1,6 @@
 ---
 title: Templates and the Add-Application Wizard
 ---
-# {{ page.title }}
 
 ### Templates and the Add-Application Wizard
 

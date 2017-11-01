@@ -1,7 +1,6 @@
 ---
 title: Clusters, Specs, and Composition
 ---
-# {{ page.title }}
 
 What if you want multiple machines?
 

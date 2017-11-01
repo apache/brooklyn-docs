@@ -1,7 +1,6 @@
 ---
 title: Increase System Resource Limits
 ---
-# {{ page.title }}
 
 If you encounter the following error:
 

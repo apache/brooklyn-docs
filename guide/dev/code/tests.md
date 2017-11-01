@@ -1,7 +1,6 @@
 ---
 title: Tests
 ---
-# {{ page.title }}
 
 We have the following tests groups:
 

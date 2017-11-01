@@ -2,7 +2,6 @@
 title: Java Entities
 partial-summary-depth: 1
 ---
-# {{ page.title }}
 
 Java blueprints are powerful, but also rather more difficult to write than YAML.
 Advanced Java skills are required.

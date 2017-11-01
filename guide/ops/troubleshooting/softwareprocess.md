@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting SoftwareProcess Entities
 ---
-# {{ page.title }}
 
 The [troubleshooting overview]({{book.path.docs}}/ops/troubleshooting/overview.md) in Brooklyn gives 
 information for how to find more information about errors.

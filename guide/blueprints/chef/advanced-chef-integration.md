@@ -1,7 +1,6 @@
 ---
 title: Advanced Chef Integration
 ---
-# {{ page.title }}
 
 ### Adding Sensors and Effectors
 
