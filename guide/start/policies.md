@@ -16,43 +16,13 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 
 {% if output.name == 'website' %}
 
-{% raw %}
-<div class="jumobotron annotated_blueprint" markdown="1">
-  <div class="code_scroller">
-    <div class="initial_notice"><div><div>
-      Hover over an element to learn more
-      <div class="ann_light">This message will go away in <span id="countdown">3s</span></div>
-      <div class="ann_play fa fa-play-circle-o"></div>
-    </div></div></div>
-    <div class="code_viewer">
-  
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Describe your application
-        </div>
-        <div class="long"><p>
-            Start by giving it a name, optionally adding a version and other metadata.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div><span class="ann_highlight">name: Tomcat Cluster</span>
-</div></div>
+{% tour %}
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Define the target location
-        </div>
-        <div class="long"><p>
-          Blueprints are designed for portability.
-          Pick from dozens of clouds in hundreds of datacenters. 
-          Or machines with fixed IP addresses, localhost, 
-          Docker on <a href="http://clocker.io">Clocker</a>, etc.
-        </p><p>
-          Here we target pre-existing Vagrant VMs.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div><span class="ann_highlight">location:</span>
+{% block title="Describe your application", description="Start by giving it a name, optionally adding a version and other metadata." %}
+<span class="ann_highlight">name: Tomcat Cluster</span>
+
+{% block title="Define the target location", description="Blueprints are designed for portability. Pick from dozens of clouds in hundreds of datacenters. Or machines with fixed IP addresses, localhost, Docker on [Clocker](http://clocker.io), etc." %}
+<span class="ann_highlight">location:</span>
   byon:
     user: vagrant
     password: vagrant
@@ -61,20 +31,9 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
       - 10.10.10.102
       - 10.10.10.103
       - 10.10.10.104
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Define a cluster
-        </div>
-        <div class="long"><p>
-            Choose your cluster type.
-          </p><p>
-            Customize with config keys, such as the initial size. Define the members of the cluster.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div>services:
+{% block title="Define a cluster", description="Customize with config keys, such as the initial size. Define the members of the cluster." %}
+services:
 <span class="ann_highlight">- type: org.apache.brooklyn.entity.group.DynamicCluster</span>
   name: Cluster
   id: cluster
@@ -86,20 +45,9 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
         name: Tomcat Server
         brooklyn.config:
           wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.8.0-incubating/brooklyn-example-hello-world-webapp-0.8.0-incubating.war
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Tomcat auto-repair policy
-        </div>
-        <div class="long"><p>
-            For each member of the cluster, include an auto-repair policy that restarts the service.
-            </p><p>
-            If it repeatedly fails, the service will be propagate a failure notification.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div>        brooklyn.policies:
+{% block title="Tomcat auto-repair policy", description="For each member of the cluster, include an auto-repair policy that restarts the service. If it repeatedly fails, the service will be propagate a failure notification." %}
+        brooklyn.policies:
 <span class="ann_highlight">        - type: org.apache.brooklyn.policy.ha.ServiceRestarter</span>
           brooklyn.config:
             failOnRecurringFailuresInThisDuration: 5m
@@ -107,33 +55,13 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
 <span class="ann_highlight">        - type: org.apache.brooklyn.policy.ha.ServiceFailureDetector</span>
           brooklyn.config:
             entityFailed.stabilizationDelay: 30s
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Cluster auto-replace policy
-        </div>
-        <div class="long"><p>
-            On the cluster, handle a member's failure by replacing it with a brand new member.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div>  brooklyn.policies:
+{% block title="Cluster auto-replace policy", description="On the cluster, handle a member's failure by replacing it with a brand new member." %}
+  brooklyn.policies:
 <span class="ann_highlight">  - type: org.apache.brooklyn.policy.ha.ServiceReplacer</span>
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Auto-scaling policy
-        </div>
-        <div class="long"><p>
-            Auto-scale the cluster, based on runtime metrics of the cluster.
-            </p><p>
-            For a simplistic demonstration, this uses requests per second.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div><span class="ann_highlight">  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy</span>
+{% block title="Auto-scaling policy", description="Auto-scale the cluster, based on runtime metrics of the cluster. For a simplistic demonstration, this uses requests per second." %}
+<span class="ann_highlight">  - type: org.apache.brooklyn.policy.autoscaling.AutoScalerPolicy</span>
     brooklyn.config:
       metric: webapp.reqs.perSec.perNode
       metricUpperBound: 3
@@ -141,69 +69,23 @@ Tomcat cluster (but you can reduce this by changing the `maxPoolSize` below).
       resizeUpStabilizationDelay: 2s
       resizeDownStabilizationDelay: 1m
       maxPoolSize: 3
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Aggregate the member's metrics.
-        </div>
-        <div class="long"><p>
-            Add an enricher to aggregate the member's requests per second.
-            </p><p>
-            For a simplistic demonstration, this uses requests per second.
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div>  brooklyn.enrichers:
+{% block title="Aggregate the member's metrics", description="Add an enricher to aggregate the member's requests per second. For a simplistic demonstration, this uses requests per second." %}
 <span class="ann_highlight">  - type: org.apache.brooklyn.enricher.stock.Aggregator</span>
     brooklyn.config:
       enricher.sourceSensor: $brooklyn:sensor("webapp.reqs.perSec.windowed")
       enricher.targetSensor: $brooklyn:sensor("webapp.reqs.perSec.perNode")
       enricher.aggregating.fromMembers: true
       transformation: average
-</div></div>
 
-<div class="block">
-      <div class="annotations_wrapper1"><div class="annotations_wrapper2"><div class="annotations">
-        <div class="short">
-          Define a load-balancer
-        </div>
-        <div class="long"><p>
-            Add a load balancer entity.
-          </p><p>
-            Configure it to monitor and balance across the cluster of Tomcat servers, which was given:
-          </p><p>
-            id: cluster
-        </p></div>
-      </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div><span class="ann_highlight">- type: org.apache.brooklyn.entity.proxy.nginx.NginxController</span>
+{% block title="Define a load-balancer", description="Add a load balancer entity. Configure it to monitor and balance across the cluster of Tomcat servers, which was given: id: cluster" %}
+<span class="ann_highlight">- type: org.apache.brooklyn.entity.proxy.nginx.NginxController</span>
   name: Load Balancer (nginx)
   brooklyn.config:
     loadbalancer.serverpool: $brooklyn:entity("cluster")
     nginx.sticky: false
-</div></div></div></div></div>
 
-<script language="JavaScript" type="application/javascript">
-
-if (window.$ != null) {
-	$(function() {
-	  maxCodeWidth = Math.max.apply(Math, $(".annotated_blueprint div.block > div:last-child").map(function(){ return this.scrollWidth; }).get());
-	  $(".annotated_blueprint div.block").width(maxCodeWidth);
-	})
-	
-	$(".annotated_blueprint .code_scroller .initial_notice > div").height($(".annotated_blueprint .code_scroller .code_viewer").height());
-	$(".annotated_blueprint .code_scroller .initial_notice > div").width($(".annotated_blueprint .code_scroller").width());
-	$(".annotated_blueprint .code_scroller").hover(function() {
-	  $(".annotated_blueprint .initial_notice").css("display", "none");
-	});
-	$(function() {
-	  setTimeout(function() { $(".annotated_blueprint .initial_notice").hide(400); }, 3000);
-	  setTimeout(function() { $(".annotated_blueprint #countdown").text("2s"); }, 1000);
-	  setTimeout(function() { $(".annotated_blueprint #countdown").text("1s"); }, 2000);
-	});
-	}
-</script>
-{% endraw %}
+{% endtour %}
 
 {% else %}
 
