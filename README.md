@@ -29,6 +29,8 @@ The Brooklyn documentation uses [Gitbook](https://github.com/GitbookIO/gitbook) 
 This in turn requires `node` and `npm`:
 install node from the their [download page](https://nodejs.org/en/) or via yum / apt-get / brew
 to manage installations and dependencies.
+A recent version of `node` is required:  if you get errors consider updating with 
+[`nvm`](http://nvm.sh).
 
 Once the `node` and `npm` are installed, run this command to install all the required dependencies 
 at the correct versions:
