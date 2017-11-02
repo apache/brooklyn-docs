@@ -1,5 +1,5 @@
 ---
-title: Upgrade
+title: Upgrades
 ---
 
 This guide provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
@@ -13,7 +13,7 @@ This will impact any custom scripting around the launching of Brooklyn, and the 
 Use of the `lib/dropins` and `lib/patch` folders will no longer work (because Karaf does not support that kind of classloading).
 Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia.org/wiki/OSGi#Bundles).
 
-## Upgrading
+## Upgrading Brooklyn
 
 * Use of RPM and DEB is now recommended where possible, rather than the tar.gz. This entirely replaces the previous install.
 
@@ -349,3 +349,79 @@ If binding to existing persisted state, an additional command is required to upd
 
 All existing custom jars previously added to lib/plugins (e.g. for Java-based entities) need to be converted to OSGi bundles,
 and installed in Karaf. The use of the "brooklyn.libraries" section in catalog.bom files will continue to work.
+
+
+
+## Upgrading Blueprints and Bundles
+
+You can install and deploy new versions of blueprints at any time.
+Brooklyn tracks multiple versions of the blueprints you install, as can be seen in the catalog.
+
+
+### Defining and Forcing Upgrade Paths
+
+Bundles can declare what bundles and types they can upgrade,
+and they can also force the removal of installed bundles and types on startup/rebind.
+Forcing can be useful when upgrading Brooklyn to replace any installed bundle
+not compatible with the newer version of Brooklyn.
+
+To add these definitions, use the following headers in the bundle's OSGi `META-INF/MANIFEST.MF`:
+
+* `brooklyn-catalog-force-remove-bundles`
+* `brooklyn-catalog-force-remove-legacy-items`
+* `brooklyn-catalog-upgrade-for-bundles`
+* `brooklyn-catalog-upgrade-for-types`
+
+The most common patterns are to indicate that a bundle can replace all previous versions of itself
+and all types thereing with types in the current bundle of the same name, using:
+
+```
+brooklyn-catalog-upgrade-for-bundles: *
+```
+
+And you can indicate that previous bundles should be uninstalled, forcing the above upgrades,
+with:
+
+```
+brooklyn-catalog-force-remove-bundles: *
+```
+
+The above items can also take a range syntax, e.g. `"*:[1,2)"` when releasing a `2.0.0` to restrict to
+versions equal to or greater than `1.0.0` but less than `2.0.0`. (Note that ranges must be quoted.)
+Entries can also take comma-separated lists, and in the case of replacements, they can define
+explicit renamed targets using `sourceNameAndVersionRanges=targetNameAndVersion` entries.   
+These fields are defined in full in the
+[`BundleUpgradeParser`'s javadoc]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/typereg/BundleUpgradeParser.html).
+
+
+### Upgrading the Version of Deployed Blueprints
+
+New versions of blueprints are not automatically applied to existing deployments from
+older versions. This requires a rebind using the above techniques, or programmatic intervention:
+please ask on the mailing list for more information
+(and to help us identify the most common wishes in this area!).
+
+
+## Upgrading Systems Under Management
+
+Blueprints can encode update processes for the systems they describe.
+The mechanisms for updating systems vary, depending whether it is stateless or stateful,
+whether following an immutable pattern (replacing components) 
+or doing it on box (traditional, possibly taking systems out of action while upgrading), 
+and whether applying an upgrade to many resources on a rolling fashion (repaving, blue-green).
+For this reason there is not a one-size-fits-all upgrade pattern to use in blueprints,
+but there are some common patterns that may be applicable:
+
+* Defining an `upgrade` effector on nodes, and on a cluster to apply to all nodes
+* Using a config key such as `version` which can be updated and reapplied
+* Exposing a `deploy` effector to pass files that should be run, such as WAR files,
+  and invoking this effector with newer versions of WAR files to install
+
+There are many more, and if you've written some good pieces to share,
+please consider contributing them so others can take advantage of them!
+
+
+
+ 
+ 
+
