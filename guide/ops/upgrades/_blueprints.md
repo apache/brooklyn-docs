@@ -14,23 +14,23 @@ not compatible with the newer version of Brooklyn.
 
 To add these definitions, use the following headers in the bundle's OSGi `META-INF/MANIFEST.MF`:
 
-* `brooklyn-catalog-force-remove-bundles`
-* `brooklyn-catalog-force-remove-legacy-items`
-* `brooklyn-catalog-upgrade-for-bundles`
-* `brooklyn-catalog-upgrade-for-types`
+* `Brooklyn-Catalog-Force-Remove-Bundles`
+* `Brooklyn-Catalog-Force-Remove-Legacy-Items`
+* `Brooklyn-Catalog-Upgrade-For-Bundles`
+* `Brooklyn-Catalog-Upgrade-For-Types`
 
 The most common patterns are to indicate that a bundle can replace all previous versions of itself
 and all types thereing with types in the current bundle of the same name, using:
 
 ```
-brooklyn-catalog-upgrade-for-bundles: *
+Brooklyn-Catalog-Upgrade-For-Bundles: *
 ```
 
 And you can indicate that previous bundles should be uninstalled, forcing the above upgrades,
 with:
 
 ```
-brooklyn-catalog-force-remove-bundles: *
+Brooklyn-Catalog-Force-Remove-Bundles: *
 ```
 
 The above items can also take a range syntax, e.g. `"*:[1,2)"` when releasing a `2.0.0` to restrict to
