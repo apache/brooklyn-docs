@@ -87,7 +87,10 @@ example of this policy in use.
 
 - org.apache.brooklyn.policy.ha.ServiceFailureDetector
 
-TODO
+The ServiceFailureDetector enricher detects problems and fires an `ha.entityFailed` (or other configurable sensor)
+for use by ServiceRestarter and ServiceReplacer.
+The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
+example of this in use.
 
 
 #### SshMachineFailureDetector Policy

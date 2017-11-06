@@ -1,7 +1,6 @@
 
 There are a collection of policies, enrichers, and effectors to assist with common
-failover scenarios and more general anything which wants a primary elected and
-re-elected.
+failover scenarios and more generally anything which requires the election and re-election of a primary member.
 
 These can be used for:
 
@@ -48,7 +47,7 @@ The ElectPrimaryPolicy acts to keep exactly one of its children or members as pr
 A simple use case is where we have two children, call them North and South, and we wish for North to be primary.  If North fails, however, we want to promote and fail over to South.  This can be done by:
 
 * adding this policy at the parent
-* setting ` ha.primary.weight` on North
+* setting `ha.primary.weight` on North
 * optionally defining `promote` on North and South (if action is required there to promote it)
 * observing the `primary` sensor to see which is primary
 * optionally setting `propagate.primary.sensor: main.uri` to publish `main.uri` from whichever of North or South is active
@@ -63,7 +62,7 @@ If present, this will add the `PropagatePrimaryEnricher` enricher with those sen
 be propagated (but not effectors).
 For more sophisticated configuration, that enricher can be added and configured directly instead.  
 
-If no quorum.up or quorum.running is set on the entity, both will be set to a constant 1.
+If no `quorum.up` or `quorum.running` is set on the entity, both will be set to a constant 1.
 
 
 #### ElectPrimary Effector
