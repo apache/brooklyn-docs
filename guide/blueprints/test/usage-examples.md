@@ -19,14 +19,6 @@ Demonstrates the following sensor assertion:
 
 !CODEFILE "example_yaml/testcases/sensor-test-snippet.yaml"
 
-### HTTP Call Tests
-Demonstrates the following HTTP Call assertions against the specified `url`, which in these examples are being built from the `webappcluster` entities `host.address` and `proxy.http.port` sensors (the tester having flexibility in how the test URL is to be constructed):
-
-- asserts the response status code is 200 within 10 minutes of the blueprint being deployed.
-- asserts the response body matches the regex `(?s).*Br[o]{2}klyn Deployed.*` within 10 minutes of the blueprint being deployed. Note the presence of the `(?s)` dotall flag to test a multiline response.
-
-!CODEFILE "example_yaml/testcases/http-test-snippet.yaml"
-
 ### Effector Test (via TestCase entity)
 
 This `TestEffector` example demonstrates the use of the `TestCase` and `TestSensor` entities to ensure the service has started before invoking an effector using the `TestEffector` entity.
@@ -37,6 +29,14 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
   - asserts `/newcontext` url returns a HTTP status code 200 within 5 minutes of the effector being invoked (Note that this timeout is relative to the preceding test entity as they are being sequentially run as children of a `TestCase` entity).
 
 !CODEFILE "example_yaml/testcases/effector-test-snippet.yaml"
+
+### HTTP Call Tests
+Demonstrates the following HTTP Call assertions against the specified `url`, which in these examples are being built from the `webappcluster` entities `host.address` and `proxy.http.port` sensors (the tester having flexibility in how the test URL is to be constructed):
+
+- asserts the response status code is 200 within 10 minutes of the blueprint being deployed.
+- asserts the response body matches the regex `(?s).*Br[o]{2}klyn Deployed.*` within 10 minutes of the blueprint being deployed. Note the presence of the `(?s)` dotall flag to test a multiline response.
+
+!CODEFILE "example_yaml/testcases/http-test-snippet.yaml"
 
 ### Full Example
 A sample blueprint containing all the tests described above is available [here](./example_yaml/testcases/getting-started-test-example.yaml).
