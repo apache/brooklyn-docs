@@ -22,7 +22,7 @@ services:
   brooklyn.config:
     webapp.enabledProtocols: http
     http.port: 9080
-    wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.9.0/brooklyn-example-hello-world-webapp-0.9.0.war
+    wars.root: https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.12.0/brooklyn-example-hello-world-webapp-0.12.0.war # BROOKLYN_VERSION
 ```
 
 If no config value is supplied, the default for that config key will be used. For example, 
@@ -194,7 +194,7 @@ under the cluster, so they will use that war:
 services:
 - type: org.apache.brooklyn.entity.group.DynamicCluster
   brooklyn.config:
-    wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.9.0/brooklyn-example-hello-world-webapp-0.9.0.war
+    wars.root: https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-webapp/0.12.0/brooklyn-example-hello-world-webapp-0.12.0.war # BROOKLYN_VERSION
     dynamiccluster.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
