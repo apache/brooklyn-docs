@@ -18,7 +18,7 @@ on "Failover Item" will be invoked on failover.
 
 ```
 brooklyn.policies:
-- type: org.apache.brooklyn.policy.ha.ElectPrimaryPolicy
+- type: org.apache.brooklyn.policy.failover.ElectPrimaryPolicy
   brooklyn.config:
     # `best` will cause failback to occur automatically when possible; could use `failover` instead
     primary.selection.mode: best
@@ -26,7 +26,7 @@ brooklyn.policies:
 
 brooklyn.enrichers:
 - # this enricher will cause the parent to report as failed if there is no primary
-  type: org.apache.brooklyn.policy.ha.PrimaryRunningEnricher
+  type: org.apache.brooklyn.policy.failover.PrimaryRunningEnricher
 
 services:
 - type: item
@@ -40,7 +40,7 @@ services:
 
 #### ElectPrimary Policy
 
-- org.apache.brooklyn.policy.ha.ElectPrimaryPolicy
+- org.apache.brooklyn.policy.failover.ElectPrimaryPolicy
 
 The ElectPrimaryPolicy acts to keep exactly one of its children or members as primary, promoting and demoting them when required.
 
@@ -59,15 +59,14 @@ All the `primary.*` parameters accepted by that effector can be defined on the p
 
 The policy also accepts a `propagate.primary.sensors` list of strings or sensors.
 If present, this will add the `PropagatePrimaryEnricher` enricher with those sensors set to
-be propagated (but not effectors).
-For more sophisticated configuration, that enricher can be added and configured directly instead.  
+be propagated.  
 
 If no `quorum.up` or `quorum.running` is set on the entity, both will be set to a constant 1.
 
 
 #### ElectPrimary Effector
 
-- org.apache.brooklyn.policy.ha.ElectPrimaryEffector
+- org.apache.brooklyn.policy.failover.ElectPrimaryEffector
 
 This effector will scan candidates among children or members to determine which should be noted as "primary".  
 The primary is selected from service-up candidates based on a numeric weight as a sensor or config on the candidates 
@@ -142,7 +141,6 @@ so that the parent will only be up/healthy if there is a healthy primary.
 
 - org.apache.brooklyn.policy.ha.PropagatePrimaryEnricher
 
-This allows sensors and effectors from the primary to be available at the parent.
-This takes the same config as `Propagator`, as well as `propagate.effectors` (true or false)
-for whether effectors should be propagated.
+This allows selected sensors from the primary to be available at the parent.
+As the primary changes, the indicated sensors will be updated to reflect the values from the new primaries.
 
