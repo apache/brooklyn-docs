@@ -68,7 +68,7 @@ brooklyn.policies:
     failOnRecurringFailuresInThisDuration: 5m
 ```
 
-Typically this is used in conjunction with the FailureDetector enricher to emit the trigger sensor.
+Typically this is used in conjunction with the ServiceFailureDetector enricher to emit the trigger sensor.
 The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
 example of these working together.
 
@@ -78,9 +78,19 @@ example of these working together.
 - org.apache.brooklyn.policy.ha.ServiceReplacer
 
 The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to 
-`ha.entityFailed` (or other configurable sensor).  
+`ha.entityFailed` (or other configurable sensor) as typically emitted by the ServiceFailureDetector enricher.  
 The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
 example of this policy in use.
+
+
+#### ServiceFailureDetector Enricher
+
+- org.apache.brooklyn.policy.ha.ServiceFailureDetector
+
+The ServiceFailureDetector enricher detects problems and fires an `ha.entityFailed` (or other configurable sensor)
+for use by ServiceRestarter and ServiceReplacer.
+The [introduction to policies]({{book.path.docs}}/start/policies.md) shows a worked 
+example of this in use.
 
 
 #### SshMachineFailureDetector Policy
@@ -95,6 +105,11 @@ The SshMachineFailureDetector is an HA policy for monitoring an SshMachine, emit
 - org.apache.brooklyn.policy.ha.ConnectionFailureDetector
 
 The ConnectionFailureDetector is an HA policy for monitoring an http connection, emitting an event if the connection is lost/restored.
+
+
+### Primary Election / Failover Policies
+
+{% include _elect-primary-policies.md %}
 
 
 ### Optimization Policies
