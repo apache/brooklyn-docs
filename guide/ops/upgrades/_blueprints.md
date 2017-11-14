@@ -20,7 +20,7 @@ To add these definitions, use the following headers in the bundle's OSGi `META-I
 * `Brooklyn-Catalog-Upgrade-For-Types`
 
 The most common patterns are to indicate that a bundle can replace all previous versions of itself
-and all types thereing with types in the current bundle of the same name, using:
+and all types therein with types in the current bundle of the same name, using:
 
 ```
 Brooklyn-Catalog-Upgrade-For-Bundles: *
