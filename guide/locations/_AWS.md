@@ -49,10 +49,10 @@ You can specify a `keyPair` to use for initial provisioning as a configuration o
 If this is omitted, Brooklyn will use jclouds to create a new ad hoc key pair at AWS
 for that machine, and it will delete it afterwards.  This is usually seamless and
 occurs behind the scenes, with the post-provision user set up and configured as normal
-for all locations.  However if you are optimizing for creation of many machines,
-or you are using an image where keypair installation is not reliable (such as [some
-RightImages](https://issues.apache.org/jira/browse/JCLOUDS-1356)), then you may wish
-to use a registered key pair.
+for all locations.  However using AWS heavily or optimizing creation, using a known
+key pairs can  
+[make some images](https://issues.apache.org/jira/browse/JCLOUDS-1356) more reliable
+and speed things up.
 
 First, in the AWS Console, open the EC2 service in the region you are interested in,
 then click "Key Pairs" at the left.  For `us-east-1`, the link is 
@@ -77,14 +77,15 @@ brooklyn.catalog:
   - id: aws-us-east-1
     item:
       type: aws-base
-      region: us-east-1
-      keyPair: XXXXXXXXX
-      login.privateKeyData: |
-        -----BEGIN RSA PRIVATE KEY-----
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        -----END RSA PRIVATE KEY-----
+      brooklyn.config:
+        region: us-east-1
+        keyPair: XXXXXXXXX
+        loginUser.privateKeyData: |
+          -----BEGIN RSA PRIVATE KEY-----
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          -----END RSA PRIVATE KEY-----
 ```
 
 
