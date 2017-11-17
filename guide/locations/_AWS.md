@@ -43,6 +43,52 @@ Below are examples of configuration options that use values specific to AWS EC2:
   For example, `securityGroups: mygroup1` or `securityGroups: [ mygroup1, mygroup2 ]`.
 
 
+### Using a Registered Key Pair
+
+You can specify a `keyPair` to use for initial provisioning as a configuration option.
+If this is omitted, Brooklyn will use jclouds to create a new ad hoc key pair at AWS
+for that machine, and it will delete it afterwards.  This is usually seamless and
+occurs behind the scenes, with the post-provision user set up and configured as normal
+for all locations.  However using AWS heavily or optimizing creation, using a known
+key pairs can  
+[make some images](https://issues.apache.org/jira/browse/JCLOUDS-1356) more reliable
+and speed things up.
+
+First, in the AWS Console, open the EC2 service in the region you are interested in,
+then click "Key Pairs" at the left.  For `us-east-1`, the link is 
+[here](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName).
+Click "Create Key Pair" (or "Import Key Pair" if you want to provide a public key) and
+follow the instructions.
+
+Then define your location as follows for `aws-us-east-1`.  Make sure to replace the
+`XXXX` sections with the key-pair name defined above and the corresponding private key data. 
+
+```yaml
+brooklyn.catalog:
+  version: "1.0"
+  itemType: location
+  items:
+  - id: aws-base
+    item:
+      type: jclouds:aws-ec2
+      brooklyn.config:
+        identity: XXXXXXXXXXXXXXXX
+        credential: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+  - id: aws-us-east-1
+    item:
+      type: aws-base
+      brooklyn.config:
+        region: us-east-1
+        keyPair: XXXXXXXXX
+        loginUser.privateKeyData: |
+          -----BEGIN RSA PRIVATE KEY-----
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+          -----END RSA PRIVATE KEY-----
+```
+
+
 ### Using Subnets and Security Groups
 
 Apache Brooklyn can run with AWS VPC and both public and private subnets.
