@@ -131,7 +131,7 @@ More details of behaviour in edge conditions can be seen and set via the paramet
 
 #### PrimaryRunning Enricher
 
-- org.apache.brooklyn.policy.ha.PrimaryRunningEnricher
+- org.apache.brooklyn.policy.failover.PrimaryRunningEnricher
 
 This adds service not-up and problems entries if the primary is not running, 
 so that the parent will only be up/healthy if there is a healthy primary.
@@ -139,7 +139,7 @@ so that the parent will only be up/healthy if there is a healthy primary.
 
 #### PropagatePrimary Enricher
 
-- org.apache.brooklyn.policy.ha.PropagatePrimaryEnricher
+- org.apache.brooklyn.policy.failover.PropagatePrimaryEnricher
 
 This allows selected sensors from the primary to be available at the parent.
 As the primary changes, the indicated sensors will be updated to reflect the values from the new primaries.
