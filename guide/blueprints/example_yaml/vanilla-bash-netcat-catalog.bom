@@ -28,7 +28,9 @@ brooklyn.catalog:
     - type: org.apache.brooklyn.enricher.stock.Transformer
       brooklyn.config:
         uniqueTag: main-uri-generator
-        enricher.sourceSensor: $brooklyn:sensor("host.address")
+        enricher.triggerSensors:
+        - $brooklyn:sensor("netcat.port")
+        - $brooklyn:sensor("host.address")
         enricher.targetSensor: $brooklyn:sensor("main.uri")
         enricher.targetValue:
           $brooklyn:formatString:
