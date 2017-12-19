@@ -5,7 +5,7 @@ Contributor Workflow
 --------------------
 
 The contributor workflow is identical to that used by the main project, with
-pull requests and contributor licenses requried. Therefore you should 
+pull requests and contributor licenses required. Therefore you should
 familiarise yourself with the standard workflow for Apache Brooklyn:
 
 * [Guide for contributors][CONTRIB]
@@ -39,7 +39,7 @@ at the correct versions:
 npm install
 ```
 If you are building the PDF documentation, this requires [calibre](http://wkhtmltopdf.org/).
-Please refer to the [Gibook documentation](https://toolchain.gitbook.com/ebook.html).
+Please refer to the [Gitbook documentation](https://toolchain.gitbook.com/ebook.html).
 
 Seeing the docs
 ---------------------------
