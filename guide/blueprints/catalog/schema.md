@@ -158,6 +158,9 @@ brooklyn.libraries:
 - name: "symbolic-name"
   version: "1.0"
   url: "http://example.com/bundle-1.0.jar"
+  auth:
+    username: $brooklyn:external("myprovider", "username")
+    password: $brooklyn:external("myprovider", "password")
 ~~~
 The only mandatory property in the long form is `url`. Brooklyn will skip the download when a bundle with matching `name` and `version` is already installed.
 
@@ -166,6 +169,11 @@ if the contents at any of these URLs changes, the behaviour of the blueprint may
 whenever a bundle is reloaded in a Brooklyn server,
 and if entities have been deployed against that version, their behavior may change in subtle or potentially incompatible ways.
 To avoid this situation, it is highly recommended to use OSGi version stamps as part of the URL.
+
+Specify `auth` if the resource at `url` requires authentication to access.
+Do not write the username and password directly into the file; instead
+use [external configuration]({{book.path.docs}}/ops/externalized-configuration.md)
+to reference the values.
 
 **`include`**
 A URL to another catalog file to include, inheriting the meta from the current hierarchy.
