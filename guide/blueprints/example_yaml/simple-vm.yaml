@@ -1,9 +1,0 @@
-name: simple-vm
-services:
-- type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
-  name: VM
-  brooklyn.config:
-    provisioning.properties:
-      minRam: 8192mb
-      minCores: 4
-      minDisk: 100gb

@@ -1,9 +1,0 @@
-name: Simple Netcat Server Example
-location: localhost
-services:
-- type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
-  name: Simple Netcat Server
-  brooklyn.config:
-    launch.command: |
-      echo hello | nc -l 4321 &
-      echo $! > $PID_FILE

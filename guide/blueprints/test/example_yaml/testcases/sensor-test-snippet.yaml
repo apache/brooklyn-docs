@@ -1,8 +1,0 @@
-- type: org.apache.brooklyn.test.framework.TestSensor
-  name: Check webappcluster isUp
-  brooklyn.config:
-    targetId: webappcluster
-    sensor: service.isUp
-    timeout: 10m
-    assert:
-    - equals: true

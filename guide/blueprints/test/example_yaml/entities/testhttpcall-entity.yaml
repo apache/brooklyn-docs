@@ -1,8 +1,0 @@
-- type: org.apache.brooklyn.test.framework.TestHttpCall
-  name: Check HTTP Response Status Code
-  brooklyn.config:
-    url: $brooklyn:entity("tomcat").attributeWhenReady("webapp.url")
-    timeout: 60s
-    applyAssertionTo: status
-    assert:
-    - isEqualTo: 200

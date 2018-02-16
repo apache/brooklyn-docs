@@ -1,7 +1,0 @@
-- type: org.apache.brooklyn.test.framework.LoopOverGroupMembersTestCase
-  brooklyn.config:
-    target: $brooklyn:entity("infrastructure").component("child", "DockerHosts")
-    test.spec:
-      $brooklyn:entitySpec:
-        type: org.apache.brooklyn.test.framework.TestSensor
-        ...

@@ -1,8 +1,0 @@
-name: simple-appserver-with-location
-location:
-  jclouds:aws-ec2:
-    region: us-east-1
-    identity: AKA_YOUR_ACCESS_KEY_ID
-    credential: <access-key-hex-digits>
-services:
-- type: org.apache.brooklyn.entity.webapp.tomcat.Tomcat8Server

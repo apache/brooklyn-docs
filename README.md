@@ -63,9 +63,6 @@ Some issues we've encountered are:
    (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
  * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
 
-If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
-You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use the usual apt-get / yum / brew.
-
 Seeing the Website and Docs
 ---------------------------
 
@@ -281,9 +278,6 @@ We use some custom Jekyll plugins, in the `_plugins` dir:
 * include markdown files inside other files (see, for example, the `*.include.md` files 
   which contain text which is used in multiple other files)
 * generate the site structure / menu objects
-* parse JSON which we can loop over in our markdown docs (to build up models; previously used
-  for the TOC in the guide, but now replaced with site_structure)
-* trim whitespace of ends of variables
 
 
 # Versions
