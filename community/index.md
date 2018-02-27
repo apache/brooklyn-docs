@@ -7,6 +7,7 @@ children:
 - security/index.md
 - { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 - { path: how-to-contribute-docs.md }
+- gsoc.md
 ---
 
 <div class="row">
