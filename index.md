@@ -159,17 +159,17 @@ View and modify using the *web console* or automate using the *REST API*
             <span>bash</span>
           </div>
 {% highlight bash %}
-curl -SL --output apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz "https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-stable-version}}/apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz"
-tar xvf apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant.tar.gz
-cd apache-brooklyn-{{site.brooklyn-stable-version}}-vagrant
-vagrant up brooklyn
+curl -SL --output apache-brooklyn-{{site.brooklyn-stable-version}}-bin.tar.gz "https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{site.brooklyn-stable-version}}/apache-brooklyn-{{site.brooklyn-stable-version}}-bin.tar.gz"
+tar xvf apache-brooklyn-{{site.brooklyn-stable-version}}-bin.tar.gz
+cd apache-brooklyn-{{site.brooklyn-stable-version}}-bin
+./bin/start
 {% endhighlight %}
         </div>
         <div class="text-muted row">
           <div class="col-md-9">Paste the above at a Terminal prompt. It will download and start Brooklyn automatically.</div>
           <div class="col-md-3 text-rigth">Looking for <a href="{{ site.path.guide }}/start/running.html">more installation options?</a></div>
         </div>
-        <p>Congratulation! Next, let's <a href="{{ site.path.guide }}/start/blueprints.html">deploy a blueprint</a>.</p>
+        <p>Now open your browser to <a href="http://localhost:8081/">http://localhost:8081</a> and login in with username <tt>admin</tt> and password <tt>password</tt>. Congratulations, you are running Apache Brooklyn! Next, let's <a href="{{ site.path.guide }}/start/blueprints.html">deploy a blueprint</a>.</p>
       </div>
     </div>
   </div>
