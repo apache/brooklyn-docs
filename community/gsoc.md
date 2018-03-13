@@ -15,7 +15,7 @@ for our project, or look at the [list of project ideas](http://s.apache.org/gsoc
 (note that this list is for *all* of the Foundation's projects, not just
 Brooklyn.)
 
-Applications are **now open** and your final proprosal must be submitted to the
+Applications are **now open** and your final proposal must be submitted to the
 Google Summer of Code website by **March 27th 2018, 16:00 UTC**. It will greatly
 benefit your application if you join our community, discuss your proposals and
 share your draft proposal with us before you submit your final application - see
