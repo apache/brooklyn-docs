@@ -8,18 +8,11 @@ title: Google Summer of Code
 #### Current Status
   </div>
   <div class="panel-body" markdown="1">
-The Apache Software Foundation is participating in 2018's Google Summer of Code!
-Apache Brooklyn, along with our fellow projects at the ASF, are welcoming
-contact from potential GSoC students. You are welcome to work on your own ideas
-for our project, or look at the [list of project ideas](http://s.apache.org/gsoc2018ideas)
-(note that this list is for *all* of the Foundation's projects, not just
-Brooklyn.)
-
-Applications are **now open** and your final proposal must be submitted to the
-Google Summer of Code website by **March 27th 2018, 16:00 UTC**. It will greatly
-benefit your application if you join our community, discuss your proposals and
-share your draft proposal with us before you submit your final application - see
-below for more details.
+Applications for 2018 are **now closed** and The ASF are reviewing the submitted
+proposals. Applicants will hear through the official channels if their application
+has been successful. Applicants should not contact Brooklyn directly as we are
+unable to discuss applications during this phase. We are unable to accept late
+applications.
   </div>
 </div>
 
