@@ -70,9 +70,10 @@ children:
   menu_customization: {type: button}
 ---
 
-<section class="text-center hero" markdown="1">
 {% include apache-promo.html %}
 
+<section class="hero">
+<div class="container text-center" markdown="1">
 
 # <span class="text-apache">apache</span> <span class="text-brooklyn">brooklyn</span>
 
@@ -81,6 +82,7 @@ children:
 <a href="#get-started" class="btn btn-primary btn-lg">Get started</a>
 <a href="https://github.com/apache/brooklyn" class="btn btn-link btn-lg"><i class="fa fa-fw fa-github"></i> View code</a>
 
+</div>
 </section>
 
 <section class="container about">
