@@ -71,6 +71,8 @@ children:
 ---
 
 <section class="text-center hero" markdown="1">
+{% include apache-promo.html %}
+
 
 # <span class="text-apache">apache</span> <span class="text-brooklyn">brooklyn</span>
 
