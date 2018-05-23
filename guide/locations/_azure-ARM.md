@@ -75,6 +75,10 @@ We can now verify this information that this information can be used to log in t
 
     az login --service-principal -u <Application-ID> --password abcd --tenant <Tenant-ID>
 
+Should you need to change the password, you can use the following command:
+
+    az ad app update --id <Application-ID> --password MyNewPassword
+
 #### Azure CLI 1.0
 
 Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/azure/cli-install-nodejs).
