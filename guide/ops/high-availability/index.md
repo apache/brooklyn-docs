@@ -48,3 +48,21 @@ For example, the following cURL command could be used to change the state of a `
 
     curl -v -X POST -d mode=HOT_STANDBY -H "Brooklyn-Allow-Non-Master-Access: true" http://localhost:8082/v1/server/ha/state
 
+When running a single server, you can disable HA mode. You can recovery from a failure
+by restarting the process or launching a replacement machine, pointing at the same 
+persisted state. A single server running in HA mode will have the following differences
+in behaviour:
+
+* If you run Brooklyn and then kill it (e.g. `kill -9` or turn off the
+  VM), when you start Brooklyn again it will wait to confirm the previous
+  server is really dead. It waits for 30 seconds after the old server's last
+  heartbeat, by default.
+* The HA status shows all previous runs of the Brooklyn server (it gets
+  a new node-id each time it restarts). This list will get longer and
+  longer if you keep restarting Brooklyn, while pointing at the same persisted
+  state, until you clear out terminates instances from the list (via the
+  UI or the REST api).
+* The logging at startup can be quite different (e.g. in HA mode, "Brooklyn
+  initialisation (part two) complete" can mean that the server has finished
+  becoming the 'standby'. Care should be taken if searching or parsing the logs.
+
