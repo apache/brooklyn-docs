@@ -104,8 +104,8 @@ example, execute `sudo iptables -n --list` and `iptables -t nat -n --list`.
 ## Cloud firewalls
 Some clouds offer a firewall service, where ports need to be explicitly listed to be reachable.
 
-For example, [security groups for EC2-classic]
-(http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html#ec2-classic-security-groups)
+For example, 
+[security groups for EC2-classic](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html) 
 have rules for the protocols and ports to be reachable from specific CIDRs.
 
 Check these settings via the cloud provider's web-console (or API).
