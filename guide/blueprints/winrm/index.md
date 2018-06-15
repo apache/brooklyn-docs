@@ -466,6 +466,29 @@ Additional logs may be created by some Windows programs. For example, MSSQL crea
 [https://msdn.microsoft.com/en-us/library/ms143702.aspx](https://msdn.microsoft.com/en-us/library/ms143702.aspx).
 
 
+### WinRM Commands Fail on Java Version 8u161
+
+As described in bug [BROOKLYN-592](https://issues.apache.org/jira/browse/BROOKLYN-592),
+WinRM commands in an entity fail for certain versions of Java 8 (from 8u161, fixed in 8u192).
+
+This is caused by the Java bug [JDK-8196491](https://bugs.openjdk.java.net/browse/JDK-8196491).
+
+The error within Brooklyn will look like:
+
+```
+org.apache.brooklyn.util.core.internal.winrm.WinRmException: (Administrator@52.87.226.190:5985) : failed to execute command: SOAPFaultException: Marshalling Error: Entity References are not allowed in SOAP documents
+	at org.apache.brooklyn.util.core.internal.winrm.winrm4j.Winrm4jTool.propagate(Winrm4jTool.java:257)
+	at org.apache.brooklyn.util.core.internal.winrm.winrm4j.Winrm4jTool.exec(Winrm4jTool.java:214)
+	at org.apache.brooklyn.util.core.internal.winrm.winrm4j.Winrm4jTool.executeCommand(Winrm4jTool.java:117)
+    ...
+Caused by: java.lang.UnsupportedOperationException: Entity References are not allowed in SOAP documents
+	at com.sun.xml.internal.messaging.saaj.soap.SOAPDocumentImpl.createEntityReference(SOAPDocumentImpl.java:148)
+    ...
+```
+
+The workaround is to downgrade Java to 8u151 or similar, or upgrade to 8u192 or later.
+
+
 Known Limitations
 -----------------
 
