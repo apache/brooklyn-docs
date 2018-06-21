@@ -246,16 +246,17 @@ The state can be downloaded periodically from the object store, archived and bac
 An example script to be invoked by CRON is shown below:
 
     DATE=`date "+%Y%m%d.%H%M.%S"`
-    BACKUP_FILENAME=/path/to/archives/back-${DATE}.tar.gz
-    TEMP_DATA_DIR=/path/to/tempdir
-    
-    brooklyn copy-state \
-            --persistenceLocation named:my-persistence-location \
-            --persistenceDir /path/to/bucket \
-            --destinationDir $TEMP_DATA_DIR
+    BACKUP_FILENAME=/path/to/archives/back-${DATE}.zip
+    HOSTNAME=localhost
+    USERNAME=admin
+    PASSWORD=pa55wOrd
+
+    curl -v -u "${USERNAME}:${PASSWORD}" \
+            https://${HOSTNAME}:8443/v1/server/ha/persist/export \
+            > ${BACKUP_FILENAME}
 
     tar --exclude '*/backups/*' -czvf $BACKUP_FILENAME $TEMP_DATA_DIR
     # For AWS CLI installation see https://aws.amazon.com/cli
     aws s3 cp $BACKUP_FILENAME s3://mybackupbucket
     rm $BACKUP_FILENAME
-    rm -r $TEMP_DATA_DIR
+

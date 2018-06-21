@@ -78,15 +78,15 @@ brooklyn.webconsole.security.user.admin.sha256=91e16f94509fa8e3dd21c43d69cadfd7d
 
 The `users` line should contain a comma-separated list. The special value `*` is accepted to permit all users.
 
-To generate this, the brooklyn CLI can be used:
+To generate this, there is a script shipped with Brooklyn:
 
 ```bash
-brooklyn generate-password --user admin
+./bin/generate-password.sh --user admin
 
 Enter password: 
 Re-enter password: 
 
-Please add the following to your brooklyn.properies:
+Please add the following to your etc/brooklyn.cfg:
 
 brooklyn.webconsole.security.users=admin
 brooklyn.webconsole.security.user.admin.salt=OHDf
