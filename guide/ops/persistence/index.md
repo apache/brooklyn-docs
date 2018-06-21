@@ -230,8 +230,8 @@ An example script to be invoked by CRON is shown below:
     DATA_DIR=/path/to/base/dir/data
     
     tar --exclude '*/backups/*' -czvf $BACKUP_FILENAME $DATA_DIR
-    # For s3cmd installation see http://s3tools.org/repositories
-    s3cmd put $BACKUP_FILENAME s3://mybackupbucket
+    # For AWS CLI installation see https://aws.amazon.com/cli
+    aws s3 cp $BACKUP_FILENAME s3://mybackupbucket
     rm $BACKUP_FILENAME
 
 
@@ -255,7 +255,7 @@ An example script to be invoked by CRON is shown below:
             --destinationDir $TEMP_DATA_DIR
 
     tar --exclude '*/backups/*' -czvf $BACKUP_FILENAME $TEMP_DATA_DIR
-    # For s3cmd installation see http://s3tools.org/repositories
-    s3cmd put $BACKUP_FILENAME s3://mybackupbucket
+    # For AWS CLI installation see https://aws.amazon.com/cli
+    aws s3 cp $BACKUP_FILENAME s3://mybackupbucket
     rm $BACKUP_FILENAME
     rm -r $TEMP_DATA_DIR
