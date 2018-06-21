@@ -255,7 +255,6 @@ An example script to be invoked by CRON is shown below:
             https://${HOSTNAME}:8443/v1/server/ha/persist/export \
             > ${BACKUP_FILENAME}
 
-    tar --exclude '*/backups/*' -czvf $BACKUP_FILENAME $TEMP_DATA_DIR
     # For AWS CLI installation see https://aws.amazon.com/cli
     aws s3 cp $BACKUP_FILENAME s3://mybackupbucket
     rm $BACKUP_FILENAME
