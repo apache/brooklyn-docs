@@ -73,7 +73,8 @@ services:
 - type: entity-config-example
 ```
 
-For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md). 
+For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md), 
+and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference]({{book.path.docs}}/blueprints/yaml-reference.md). 
 
 
 #### Config Key Constraints
