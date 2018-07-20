@@ -48,11 +48,7 @@ set of attributes will vary between different entity types.
 
 [![Sensors view in the Brooklyn debug console.](images/jmx-sensors.png)](images/jmx-sensors-large.png)
 
-Note that null (or not set) sensors are hidden by default. You can click on the `Show/hide empty records` 
-icon (highlighted in yellow above) to see these sensors as well.
-
-The sensors view is also tabulated. You can configure the numbers of sensors shown per page 
-(at the bottom). There is also a search bar (at the top) to filter the sensors shown.
+There is also a search bar (at the top) to filter the sensors shown.
 
 
 ### Activity View
