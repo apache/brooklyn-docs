@@ -2,9 +2,9 @@
 title: Monitoring and Managing Applications
 ---
 
-From the Home page, click on the application name or open the Applications tab.
+From the Home page, go the "Application Inspector" module.
 
-We can explore the management hierarchy of the application, which will show us the entities it is composed of.  Starting from the application use the arrows to expand out the list of entities, or hover over the arrow until a menu popup is displayed so that you can select `Expand All`.  
+We can explore the management hierarchy of the application, which will show us the entities it is composed of.  Starting from the application use the arrows to expand out the list of entities.
 
  * My Web Cluster (A `BasicApplication`)
      * My DB (A `MySqlNode`)
@@ -25,9 +25,9 @@ cluster that fail will be added. These are excluded from the load-balancer's tar
 
 ## Activities
 
-The Activity tab allows us to drill down into the tasks each entity is currently executing or has recently completed. It is possible to drill down through all child tasks, and view the commands issued, along with any errors or warnings that occurred.
+The "Activities" tab allows us to drill down into the tasks each entity is currently executing or has recently completed. It is possible to drill down through all child tasks, and view the commands issued, along with any errors or warnings that occurred.
 
-For example clicking on the NginxController in the left hand tree and opening its Activity tab you can observe the 'start' task is 'In progress'.
+For example clicking on the NginxController in the left hand tree and opening its Activity tab you can observe the 'start' task is 'Finished' and 'Successful', symbolised by a green circle.
 
 **Note**: You may observe different tasks depending on how far your deployment has progressed).
 
@@ -37,7 +37,7 @@ Clicking on the 'start' task you can discover more details on the actions being 
 
 [![My DB Activities Step 2.](images/my-db-activities-step2.png)](images/my-db-activities-step2-large.png)
 
-Continuing to drill down into the 'In progress' tasks you will eventually reach the currently active task where you can investigate the ssh command executed on the target node including the current stdin, stdout and stderr output.
+Continuing to drill down into the tasks, you will eventually reach the some where you can investigate the ssh command executed on the target node including the current stdin, stdout and stderr output.
 
 [![My DB Activities Step 3.](images/my-db-activities-step3.png)](images/my-db-activities-step3-large.png)
 

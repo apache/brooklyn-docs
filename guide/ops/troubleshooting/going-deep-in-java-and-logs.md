@@ -57,21 +57,21 @@ services:
 
 Shortly after deployment, the entity fails with the following error:
 
-`Failure running task ssh: customizing TomcatServerImpl{id=e1HP2s8x} (HmyPAozV): 
-Execution failed, invalid result 127 for customizing TomcatServerImpl{id=e1HP2s8x}`
+`Error in task: ssh: customizing TomcatServerImpl{id=u9eof0hszp}
+Execution failed, invalid result 127 for customizing TomcatServerImpl{id=u9eof0hszp}`
 
 [![Script failure error in the Brooklyn debug console.](images/script-failure.png)](images/script-failure-large.png)
 
-By selecting the `Activities` tab, we can drill into the task that failed. The list of tasks shown (where the 
-effectors are shown as top-level tasks) are clickable links. Selecting that row will show the details of
+We can drill into the task that failed, directly by clicking the "More information" button or by selecting the `Activities` tab:
+the list of tasks shown (where the effectors are shown as top-level tasks) are clickable links. Selecting that row will show the details of
 that particular task, including its sub-tasks. We can eventually get to the specific sub-task that failed:
 
 [![Task failure error in the Brooklyn debug console.](images/failed-task.png)](images/failed-task-large.png)
 
-By clicking on the `stderr` link, we can see the script failed with the following error:
+By expanding the `stderr` section, we can see the script failed with the following error:
 
 ```console
-/tmp/brooklyn-20150721-132251052-l4b9-customizing_TomcatServerImpl_i.sh: line 10: mkrid: command not found
+/tmp/brooklyn-20180720-121710003-Qh8k-customizing_TomcatServerImpl_i.sh: line 11: mkrid: command not found
 ```
 
 This tells us *what* went wrong, but doesn't tell us *where*. In order to find that, we'll need to look at the
@@ -84,11 +84,10 @@ In this case, the stack trace is limited to the thread that was used to execute 
 Failed after 40ms
 
 STDERR
-/tmp/brooklyn-20150721-132251052-l4b9-customizing_TomcatServerImpl_i.sh: line 10: mkrid: command not found
-
+/tmp/brooklyn-20180720-121710003-Qh8k-customizing_TomcatServerImpl_i.sh: line 11: mkrid: command not found
 
 STDOUT
-Executed /tmp/brooklyn-20150721-132251052-l4b9-customizing_TomcatServerImpl_i.sh, result 127: Execution failed, invalid result 127 for customizing TomcatServerImpl{id=e1HP2s8x}
+Executed /tmp/brooklyn-20180720-121710003-Qh8k-customizing_TomcatServerImpl_i.sh, result 127: Execution failed, invalid result 127 for customizing TomcatServerImpl{id=u9eof0hszp}
 
 java.lang.IllegalStateException: Execution failed, invalid result 127 for customizing TomcatServerImpl{id=e1HP2s8x}
     at org.apache.brooklyn.entity.software.base.lifecycle.ScriptHelper.logWithDetailsAndThrow(ScriptHelper.java:390)
@@ -411,14 +410,9 @@ AttributeSensor<String> CONNECTOR_STATUS =
 
 Let's go back to the Brooklyn debug console and look for the `webapp.tomcat.connectorStatus`:
 
-[![Sensors view in the Brooklyn debug console.](images/jmx-sensors.png)](images/jmx-sensors-large.png)
+[![Sensors view in the Brooklyn debug console.](images/jmx-sensors-connector.png)](images/jmx-sensors-connector-large.png)
 
-As the sensor is not shown, it's likely that it's simply null or not set. We can check this by clicking
-the "Show/hide empty records" icon (highlighted in yellow above):
-
-[![All sensors view in the Brooklyn debug console.](images/jmx-sensors-all.png)](images/jmx-sensors-all-large.png)
-
-We know from previous steps that the installation and launch scripts completed, and we know the procecess is running,
+The sensor value is null or not set. We know from previous steps that the installation and launch scripts completed, and we know the procecess is running,
 but we can see here that the server is not responding to JMX requests. A good thing to check here would be that the
 JMX port is not being blocked by iptables, firewalls or security groups
 (see the [troubleshooting connectivity guide]({{book.path.docs}}/ops/troubleshooting/connectivity.md)). 
