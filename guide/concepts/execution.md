@@ -12,7 +12,7 @@ hierarchical causal chain even when operations are run in parallel
 Some executions create new entities, which can then have tasks associated with them, and the system will record, for example, that a start effector on the new entity is a task associated with that entity, with that task
 created by a task associated with a different entity.
 
-The execution of a typical overall start-up sequence is shown below:
+The execution of a typical overall start-up sequence is shown below (click image to magnify):
 
 [![Brooklyn Flow Diagram](brooklyn-flow-websequencediagrams.com-w400.png "Brooklyn Flow Diagram" )](brooklyn-flow-websequencediagrams.com.png)
 
