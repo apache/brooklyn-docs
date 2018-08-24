@@ -30,4 +30,4 @@ services:
   name: DB HelloWorld Visitors
   brooklyn.config:
     creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
-    datastore.creation.script.url: https://github.com/apache/brooklyn-library/raw/master/examples/simple-web-cluster/src/main/resources/visitors-creation-script.sql
+    datastore.creation.script.template.url: https://github.com/apache/brooklyn-library/raw/master/examples/simple-web-cluster/src/main/resources/visitors-creation-script.sql
