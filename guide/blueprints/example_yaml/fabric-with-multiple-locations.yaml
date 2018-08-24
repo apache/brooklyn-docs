@@ -5,7 +5,7 @@ locations:
 services:
 - type: org.apache.brooklyn.entity.group.DynamicFabric
   brooklyn.config:
-    dynamiccfabric.memberspec:
+    dynamicfabric.memberspec:
       $brooklyn:entitySpec:
         type: org.apache.brooklyn.entity.group.DynamicCluster
         brooklyn.config:
