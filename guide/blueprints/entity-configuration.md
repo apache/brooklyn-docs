@@ -41,37 +41,13 @@ blueprint (i.e. inside the `brooklyn.config` block).
 It can also explicitly declare config keys, using the `brooklyn.parameters` block. The example 
 below illustrates the principle:
 
-```yaml
-brooklyn.catalog:
-  items:
-  - id: entity-config-example
-    itemType: entity
-    name: Entity Config Example
-    item:
-      type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
-      brooklyn.parameters:
-      - name: custom.message
-        type: string
-        description: Message to be displayed
-        default: Hello
-      brooklyn.config:
-        shell.env:
-          MESSAGE: $brooklyn:config("custom.message")
-        launch.command: |
-          echo "My example launch command: $MESSAGE"
-        checkRunning.command: |
-          echo "My example checkRunning command: $MESSAGE"
-```
+!CODEFILE "example_yaml/entity-config-catalog.yaml"
 
 Once added to the catalog, it can be used with the simple blueprint below (substituting the location
 of your choice). Because no configuration has been overridden, this will use the default value
 for `custom.message`, and will use the given values for `launch.command` and `checkRunning.command`:
 
-```yaml
-location: aws-ec2:us-east-1
-services:
-- type: entity-config-example
-```
+!CODEFILE "example_yaml/entity-config-app.yaml"
 
 For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md). 
 

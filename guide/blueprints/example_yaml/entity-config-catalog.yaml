@@ -1,0 +1,19 @@
+brooklyn.catalog:
+  items:
+  - id: entity-config-example
+    itemType: entity
+    name: Entity Config Example
+    item:
+      type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
+      brooklyn.parameters:
+      - name: custom.message
+        type: string
+        description: Message to be displayed
+        default: Hello
+      brooklyn.config:
+        shell.env:
+          MESSAGE: $brooklyn:config("custom.message")
+        launch.command: |
+          echo "My example launch command: $MESSAGE"
+        checkRunning.command: |
+          echo "My example checkRunning command: $MESSAGE"

@@ -1,0 +1,4 @@
+location: aws-ec2:us-east-1
+name: entity-config-example
+services:
+- type: entity-config-example
