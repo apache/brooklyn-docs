@@ -62,12 +62,14 @@ the entity being defined, with these being the most common:
     the given name by running the given command (on an entity which as an winrm-able machine).<br/>
     _`"~"` will use the default execution directory for the WinRm session which is usually `%USERPROFILE%`_
 
-* `brooklyn.parameters`: documents a list of typed parameters the entity accepts. If none
-  are specified the config keys declared in the entity's class are used (including the
-  information from the `@CatalogConfig` annotation). The items have the following properties:
+* `brooklyn.parameters`: documents a list of typed parameters the entity accepts.
+  These define config keys exposed on the type, including metadata for prompting a user to supply them.
+  All config keys inherited from supertypes are available as parameters by default, 
+  and their properties (e.g. default values) can be overridden. 
+  Parameters (config keys) have the following properties:
   * `name` (required): identifier by which to reference the parameter when setting
     or retrieving its value
-  * `label`: a value to present to the user, same as `name` if empty
+  * `label`: an identifier string to present to the user when prompting for a value, same as `name` if empty
   * `description`: short text describing the parameter behaviour/usage, presented
     to the user
   * `type`: the type of the parameter, one of `string`, `integer`, `long`, `float`,
@@ -77,29 +79,30 @@ the entity being defined, with these being the most common:
     `timestamp` accepts most common ISO date formats, `duration` accepts `5m`, and port accepts `8080+`
   * `default`: a default value; this will be coerced to the declared `type`
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
+    (unless an ancestor sets false; config keys from Java types are _not_ pinned)
   * `constraints`: a list of constraints the parameter should meet;
     for details, see [Entity Configuration]({{book.path.docs}}/blueprints/entity-configuration.md#config-key-constraints).
 
-  A shorthand notation is also supported where just the name of the parameter is supplied
+  A shorthand notation is also supported where just the name of the parameter can be supplied
   as an item in the list, with the other values being unset or the default.
   See `displayName` in the following example for an illustration of this:
 
   ~~~ yaml
   brooklyn.parameters:
-  # user.age parameter is required, pinned and fully specified
-  - name: user.age
-  type: integer
-  label: Age
-  description: the age of the user
-  pinned: true
-  constraints:
-  - required
-  # user.name is optional, is not pinned and has a default
-  - name: user.name
-  default: You
-  pinned: false
-  # shorthand notation: displayName will be an optional config of type string with no default
-  - displayName
+    # user.age parameter is required, pinned and fully specified
+    - name: user.age
+      type: integer
+      label: Age
+      description: the age of the user
+      pinned: true
+      constraints:
+      - required
+    # user.name is optional, is not pinned and has a default
+    - name: user.name
+      default: You
+      pinned: false
+    # shorthand notation: displayName will be an optional config of type string with no default
+    - displayName
   ~~~
 
   Entities, policies, and initializers may accept additional key-value pairs,
