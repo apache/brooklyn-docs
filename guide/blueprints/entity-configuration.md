@@ -103,16 +103,7 @@ consider the `entity-config-example` added to the catalog in the section
 [Configuration in a Catalog Item](#configuration-in-a-catalog-item).
 We can override these values. If not overridden, then the existing values from the super-type will be used:
 
-```yaml
-location: aws-ec2:us-east-1
-services:
-- type: entity-config-example
-  brooklyn.config:
-    custom.message: Goodbye
-    launch.command: |
-      echo "Sub-type launch command: $MESSAGE"
-```
-
+!CODEFILE "example_yaml/entity-config-override-app.yaml"
 
 
 In this example, the `custom.message` overrides the default defined on the config key.

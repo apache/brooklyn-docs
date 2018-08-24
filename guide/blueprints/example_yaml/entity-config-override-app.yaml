@@ -1,0 +1,8 @@
+location: aws-ec2:us-east-1
+name: entity-config-override-example
+services:
+- type: entity-config-example
+  brooklyn.config:
+    custom.message: Goodbye
+    launch.command: |
+      echo "Sub-type launch command: $MESSAGE"
