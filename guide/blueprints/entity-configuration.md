@@ -41,37 +41,13 @@ blueprint (i.e. inside the `brooklyn.config` block).
 It can also explicitly declare config keys, using the `brooklyn.parameters` block. The example 
 below illustrates the principle:
 
-```yaml
-brooklyn.catalog:
-  items:
-  - id: entity-config-example
-    itemType: entity
-    name: Entity Config Example
-    item:
-      type: org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess
-      brooklyn.parameters:
-      - name: custom.message
-        type: string
-        description: Message to be displayed
-        default: Hello
-      brooklyn.config:
-        shell.env:
-          MESSAGE: $brooklyn:config("custom.message")
-        launch.command: |
-          echo "My example launch command: $MESSAGE"
-        checkRunning.command: |
-          echo "My example checkRunning command: $MESSAGE"
-```
+!CODEFILE "example_yaml/entity-config-catalog.yaml"
 
 Once added to the catalog, it can be used with the simple blueprint below (substituting the location
 of your choice). Because no configuration has been overridden, this will use the default value
 for `custom.message`, and will use the given values for `launch.command` and `checkRunning.command`:
 
-```yaml
-location: aws-ec2:us-east-1
-services:
-- type: entity-config-example
-```
+!CODEFILE "example_yaml/entity-config-app.yaml"
 
 For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md), 
 and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference]({{book.path.docs}}/blueprints/yaml-reference.md). 
@@ -89,48 +65,11 @@ can be any of:
 
 This is illustrated in the example below:
 
-```yaml
-brooklyn.catalog:
-  items:
-  - id: entity-constraint-example
-    itemType: entity
-    name: Entity Config Example
-    item:
-      type: org.apache.brooklyn.entity.stock.BasicEntity
-      brooklyn.parameters:
-      - name: compulsoryExample
-        type: string
-        constraints:
-        - required
-      - name: addressExample
-        type: string
-        constraints:
-        - regex: ^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$
-      - name: numberExample
-        type: double
-        constraints:
-        - $brooklyn:object:
-            type: org.apache.brooklyn.util.math.MathPredicates
-            factoryMethod.name: greaterThan
-            factoryMethod.args:
-            - 0.0
-        - $brooklyn:object:
-            type: org.apache.brooklyn.util.math.MathPredicates
-            factoryMethod.name: lessThan
-            factoryMethod.args:
-            - 256.0
-```
+!CODEFILE "example_yaml/entity-constraint-catalog.yaml"
 
 An example usage of this toy example, once added to the catalog, is shown below:
 
-```yaml
-services:
-- type: entity-constraint-example
-  brooklyn.config:
-    compulsoryExample: foo
-    addressExample: 1.1.1.1
-    numberExample: 2.0
-```
+!CODEFILE "example_yaml/entity-constraint-app.yaml"
 
 
 ### Inheriting Configuration
@@ -165,16 +104,7 @@ consider the `entity-config-example` added to the catalog in the section
 [Configuration in a Catalog Item](#configuration-in-a-catalog-item).
 We can override these values. If not overridden, then the existing values from the super-type will be used:
 
-```yaml
-location: aws-ec2:us-east-1
-services:
-- type: entity-config-example
-  brooklyn.config:
-    custom.message: Goodbye
-    launch.command: |
-      echo "Sub-type launch command: $MESSAGE"
-```
-
+!CODEFILE "example_yaml/entity-config-override-app.yaml"
 
 
 In this example, the `custom.message` overrides the default defined on the config key.

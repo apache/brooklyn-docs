@@ -21,7 +21,7 @@ services:
   name: My DB
   brooklyn.config:
     creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
-    datastore.creation.script.url: https://bit.ly/brooklyn-visitors-creation-script
+    datastore.creation.script.template.url: https://bit.ly/brooklyn-visitors-creation-script
 - type: org.apache.brooklyn.test.framework.TestHttpCall
   name: Check HTTP Response Status Code
   brooklyn.config:

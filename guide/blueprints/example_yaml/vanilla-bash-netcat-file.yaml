@@ -6,5 +6,6 @@ services:
   brooklyn.config:
     download.url: file:///tmp/netcat-server.tgz
     launch.command: |
+      chmod +x start.sh
       ./start.sh &
       echo $! > $PID_FILE
