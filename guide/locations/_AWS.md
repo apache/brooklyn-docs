@@ -49,6 +49,22 @@ Below are examples of configuration options that use values specific to AWS EC2:
   [security groups](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
   For example, `securityGroups: mygroup1` or `securityGroups: [ mygroup1, mygroup2 ]`.
 
+### EBS boot volume size
+
+The size of the EBS boot volume for a VM can be specified using `mapNewVolumeToDeviceName` in `templateOptions` as shown below:
+
+    location:
+      jclouds:aws-ec2:
+        region: ...
+        templateOptions:
+          mapNewVolumeToDeviceName:
+           - /dev/sda1
+           - 123
+           - true
+
+Where `/dev/sda1` is the device name of the boot volume on the selected AMI, `123` is the size of the volume in gigabytes 
+and `true` is a boolean indicating the volume should be deleted on VM termination.
+        
 
 ### Using a Registered Key Pair
 
