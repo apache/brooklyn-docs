@@ -9,10 +9,7 @@ children:
 - policies.md
 - concept-quickstart.md
 ---
-<<<<<<< HEAD
 
 {% include list-children.html %}
 
 
-=======
->>>>>>> ba27cf1b

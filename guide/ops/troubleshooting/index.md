@@ -14,8 +14,5 @@ children:
 - { path: going-deep-in-java-and-logs.md, title: Going Deep in Java and Logs }
 - { path: memory-usage.md, title: Monitoring Memory Usage }
 ---
-<<<<<<< HEAD
 
 {% include list-children.html %}
-=======
->>>>>>> ba27cf1b

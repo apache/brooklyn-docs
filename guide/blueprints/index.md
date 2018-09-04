@@ -24,9 +24,6 @@ children:
 - blueprinting-tips.md
 - { path: yaml-reference.md, title: YAML Blueprint Reference }
 ---
-<<<<<<< HEAD
 
 
 {% include list-children.html %}
-=======
->>>>>>> ba27cf1b

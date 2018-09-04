@@ -3,11 +3,8 @@ title: Example Blueprint Tests
 title_in_menu: Example Tests
 layout: website-normal
 ---
-<<<<<<< HEAD
 
 {% include fields.md %}
-=======
->>>>>>> ba27cf1b
 
 ## Introduction
 This section describes some simple tests based on the [Getting Started]({{ site.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:

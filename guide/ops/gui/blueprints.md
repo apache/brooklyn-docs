@@ -6,11 +6,8 @@ children:
 - { section: Launching from a Blueprint, title: Launching from a Blueprint } 
 - { section: Launching from the Catalog, title: Launching from the Catalog } 
 ---
-<<<<<<< HEAD
 
 {% include fields.md %}
-=======
->>>>>>> ba27cf1b
 
 
 ## Launching from a Blueprint
