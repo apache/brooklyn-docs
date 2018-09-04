@@ -4,8 +4,11 @@ layout: website-normal
 toc: ../guide_toc.json
 categories: [use, guide, defining-applications]
 ---
+<<<<<<< HEAD
 
 {% include fields.md %}
+=======
+>>>>>>> ba27cf1b
 
 Brooklyn supports a very wide range of target locations. 
 With deep integration to [Apache jclouds](https://jclouds.apache.org), most well-known clouds 

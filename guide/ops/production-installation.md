@@ -2,8 +2,11 @@
 layout: website-normal
 title: Production Installation
 ---
+<<<<<<< HEAD
 
 {% include fields.md %}
+=======
+>>>>>>> ba27cf1b
 
 To install Apache Brooklyn on a production server:
 

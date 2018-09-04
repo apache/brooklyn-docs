@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: Monitoring and Managing Applications
 title_in_menu: Monitoring and Managing Applications
@@ -10,6 +11,8 @@ children:
 - { section: Effectors  } 
 - { section: Activities } 
 ---
+=======
+>>>>>>> ba27cf1b
 
 
 

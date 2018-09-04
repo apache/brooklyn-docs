@@ -3,8 +3,11 @@ title: Blueprint Test Entities
 title_in_menu: Test Entities
 layout: website-normal
 ---
+<<<<<<< HEAD
 
 {% include fields.md %}
+=======
+>>>>>>> ba27cf1b
 
 
 ## Structural Test Entities

@@ -19,5 +19,8 @@ children:
 - security-guidelines.md
 - troubleshooting/
 ---
+<<<<<<< HEAD
 
 {% include list-children.html %}
+=======
+>>>>>>> ba27cf1b
