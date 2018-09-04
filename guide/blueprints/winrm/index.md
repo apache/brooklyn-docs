@@ -1,7 +1,9 @@
 ---
 title: Windows Blueprints
+layout: website-normal
+children:
+- client.md
 ---
-# {{ page.title }}
 
 Brooklyn can deploy to Windows servers using WinRM to run commands. These deployments can be 
 expressed in pure YAML, and utilise Powershell to install and manage the software process. 
@@ -70,7 +72,7 @@ A Sample Blueprint
 
 Creating a Windows VM is done using the `org.apache.brooklyn.entity.software.base.VanillaWindowsProcess` entity type. This is very similar
 to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead of Linux. We suggest you read the
-[documentation for VanillaSoftwareProcess]({{book.path.docs}}/blueprints/custom-entities.md#vanilla-software-using-bash) to find out what you
+[documentation for VanillaSoftwareProcess]({{ site.path.guide }}/blueprints/custom-entities.html#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
 Entity authors are strongly encouraged to write Windows Powershell or Batch scripts as separate 
@@ -121,13 +123,13 @@ the correct Administrator privileges: you may otherwise get an access denied err
 [How and Why to re-authenticate within a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
-Brooklyn source code]({{book.url.brooklyn_library_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
+Brooklyn source code]({{ site.brooklyn.url.git }}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
 
 
 Tips and Tricks
 ---------------
 
-The best practices for other entities (e.g. using [VanillaSoftwareProcess]({{book.path.docs}}/blueprints/custom-entities.md#vanilla-software-using-bash))
+The best practices for other entities (e.g. using [VanillaSoftwareProcess]({{ site.path.guide }}/blueprints/custom-entities.html#vanilla-software-using-bash))
 apply for WinRM as well.
 
 ### Execution Phases
@@ -277,7 +279,7 @@ Re-authentication also requires that the password credentials are passed in plai
 script. Please be aware that it is normal for script files - and therefore the plaintext password - 
 to be saved to the VM's disk. The scripts are also accessible via the Brooklyn web-console's 
 activity view. Access to the latter can be controlled via 
-[Entitlements]({{book.path.docs}}/blueprints/java/entitlements.md).
+[Entitlements]({{site.path.guide}}/blueprints/java/entitlements.html).
 
 As an example (taken from MSSQL install), the command below works when run locally, but fails over 
 WinRM:
@@ -361,7 +363,7 @@ on the Microsoft TechNet site.
 Troubleshooting
 ---------------
 
-Much of the [operations troubleshooting guide]({{book.path.docs}}/ops/troubleshooting/index.md) is applicable for Windows blueprints.  
+Much of the [operations troubleshooting guide]({{ site.path.guide }}/ops/troubleshooting/) is applicable for Windows blueprints.  
 
 ### User metadata service requirement
 

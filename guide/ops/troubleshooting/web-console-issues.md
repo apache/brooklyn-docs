@@ -1,7 +1,8 @@
 ---
+layout: website-normal
 title: Web Console Issues
+toc: /guide/toc.json
 ---
-# {{ page.title }}
 
 ## Page Does Not Load in Chrome, Saying ""Waiting for available socket..."
 

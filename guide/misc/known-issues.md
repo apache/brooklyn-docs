@@ -1,4 +1,5 @@
 ---
+layout: website-normal
 title: Known Issues
 ---
 

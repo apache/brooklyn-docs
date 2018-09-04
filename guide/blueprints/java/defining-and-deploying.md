@@ -1,7 +1,7 @@
 ---
 title: Defining and Deploying
+layout: website-normal
 ---
-# {{ page.title }}
 
 ## Intro
 
@@ -13,8 +13,8 @@ with an effector to create new gists.
 
 ## Project Setup
 
-Follow the instructions to create a new Java project using the [archetype]({{book.path.docs}}/blueprints/java/archetype.md), and
-import it into your [favorite IDE]({{book.path.docs}}/dev/env/ide/index.md). This example assumes you 
+Follow the instructions to create a new Java project using the [archetype](archetype.html), and
+import it into your [favorite IDE]({{ site.path.guide }}/dev/env/ide/). This example assumes you 
 used the groupId `com.acme` and artifact id `autobrick`.
 
 First ensure you can build this project at the command line, using `mvn clean install`.
@@ -27,19 +27,21 @@ a dependency. Add the following to your `pom.xml` inside the `<dependencies>` se
 (see [Maven](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html) 
 for more details):
 
-```xml
+{% highlight xml %}
 <dependency>
   <groupId>org.eclipse.mylyn.github</groupId>
   <artifactId>org.eclipse.egit.github.core</artifactId>
   <version>2.1.5</version>
 </dependency>
-```
+{% endhighlight %}
 
 Create a new Java interface, `GistGenerator`, to describe the entity's interface (i.e. the 
 configuration options, sensors, and effectors). The code below assumes you have created this
 in the package `com.acme` for `src/main/java`.
 
-!CODEFILE "gist_generator/GistGenerator.java"
+{% highlight java %}
+{% readj gist_generator/GistGenerator.java %}
+{% endhighlight %}
 
 To describe each part of this:
 
@@ -57,11 +59,13 @@ To describe each part of this:
   web-console.
 
 Note there is an alternative way of defining effectors - adding them to the entity dynamically, 
-discussed in the section [Dynamically Added Effectors]({{book.path.docs}}/blueprints/java/common-usage.md#dynamically-added-effectors).
+discussed in the section [Dynamically Added Effectors](common-usage.html#dynamically-added-effectors).
 
 Next lets add the implementation. Create a new Java class named `GistGeneratorImpl`.
 
-!CODEFILE "gist_generator/GistGeneratorImpl.java"
+{% highlight java %}
+{% readj gist_generator/GistGeneratorImpl.java %}
+{% endhighlight %}
 
 To describe each part of this:
 
@@ -105,7 +109,9 @@ We will create a similar Java-based test for this blueprint. Create a new Java c
 You will need to substitute the github access token you generated in the previous section for
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
 
-!CODEFILE "gist_generator/GistGeneratorTest.java"
+{% highlight java %}
+{% readj gist_generator/GistGeneratorTest.java %}
+{% endhighlight %}
 
 Similarly, we can write a test that uses the `GistGenerator` from a YAML blueprint. 
 Create a new Java class named `GistGeneratorYamlTest` in the package `com.acme`, 
@@ -113,10 +119,13 @@ inside `src/test/java`.
 
 Again you will need to substitute the github access token you generated in the previous section for
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section on 
-[externalised configuration]({{book.path.docs}}/ops/externalized-configuration.md) 
+[externalised configuration]({{ site.path.guide }}/ops/externalized-configuration.html) 
 for how to store these credentials more securely. 
 
-!CODEFILE "gist_generator/GistGeneratorYamlTest.java"
+{% highlight java %}
+{% readj gist_generator/GistGeneratorYamlTest.java %}
+{% endhighlight %}
+
 
 ## Building the OSGi Bundle
 
@@ -136,18 +145,20 @@ Similar to the `sample.bom` entity that ships with the archetype, we will define
 to add our `GistGenerator` to the catalog. Substitute the URL below for your own newly built 
 artifact (which will be in the `target` sub-directory after running `mvn clean install`).
 
-!CODEFILE "gist_generator/gist_generator.bom"
+{% highlight yaml %}
+{% readj gist_generator/gist_generator.bom %}
+{% endhighlight %}
 
-See [Handling Bundle Dependencies]({{book.path.docs}}/blueprints/java/bundle-dependencies.md)
+See [Handling Bundle Dependencies]({{ site.path.guide}}/blueprints/java/bundle-dependencies.html)
 for a description of the `brooklyn.libraries` used above, and for other alternative approaches.
 
 The command below will use the `br` CLI to add this to the catalog of a running Brooklyn instance.
 Substitute the credentials, URL and port for those of your server.
 
-```bash
+{% highlight bash %}
 $ br login https://127.0.0.1:8443 admin pa55w0rd
 $ br catalog add gist_generator.bom
-```
+{% endhighlight %}
 
 
 ## Using the blueprint
@@ -162,5 +173,5 @@ The YAML blueprint below shows an example usage of this blueprint:
 
 Note the type name matches the id defined in the `.bom` file.
 
-You can now call the effector by any of the standard means - [web console]({{book.path.docs}}/ops/gui/index.md), 
-[REST api]({{book.path.docs}}/ops/rest.md), or [Client CLI]({{book.path.docs}}/ops/cli/index.md).
+You can now call the effector by any of the standard means - [web console]({{ site.path.guide }}/ops/gui/), 
+[REST api]({{ site.path.guide }}/ops/rest.html), or [Client CLI]({{ site.path.guide }}/ops/cli/).

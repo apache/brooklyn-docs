@@ -1,3 +1,10 @@
+---
+section: IBM Softlayer
+title: IBM Softlayer
+section_type: inline
+section_position: 6
+---
+
 ## IBM SoftLayer
 
 ### Credentials
@@ -13,7 +20,7 @@ For example:
         credential: 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 
 Users are strongly recommended to use 
-[externalized configuration]({{book.path.docs}}/ops/externalized-configuration.md) for better
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

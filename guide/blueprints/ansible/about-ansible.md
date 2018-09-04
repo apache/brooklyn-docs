@@ -1,7 +1,8 @@
 ---
 title: About Ansible
+title_in_menu: About Ansible
+layout: website-normal
 ---
-# {{ page.title }}
 
 ## What you need to know about Ansible
 

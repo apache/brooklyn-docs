@@ -1,7 +1,13 @@
 ---
 title: Deploying Blueprints
+layout: website-normal
+menu_parent: index.md
+children:
+- { section: Launching from a Blueprint, title: Launching from a Blueprint } 
+- { section: Launching from the Catalog, title: Launching from the Catalog } 
 ---
-# {{ page.title }}
+
+{% include fields.md %}
 
 
 ## Launching from a Blueprint
@@ -21,18 +27,20 @@ Switch to the YAML tab and copy the blueprint below into the large text box.
 
 But *before* you submit it, modify the YAML to specify the location where the application will be deployed.
 
-!CODEFILE "_my-web-cluster.yaml"
+{% highlight yaml %}
+{% readj _my-web-cluster.yaml %}
+{% endhighlight %}
 
 Replace the `location:` element with values for your chosen target environment, for example to use SoftLayer rather than AWS (updating with your own credentials): 
 
-```yaml
+{% highlight yaml %}
 location:
   jclouds:softlayer:
     identity: ABCDEFGHIJKLMNOPQRST
     credential: s3cr3tsq1rr3ls3cr3tsq1rr3ls3cr3tsq1rr3l
-```
+{% endhighlight %}
 
-**NOTE**: See __[Locations]({{book.path.docs}}/locations/index.md)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
+**NOTE**: See __[Locations](../locations)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
 
 With the modified YAML in the dialog, click "Finish". The dialog will close and Brooklyn will begin deploying your
 application. Your application will be shown as "Starting" on the web console's front page.
@@ -51,10 +59,10 @@ Instead of pasting the YAML blueprint each time, it can be added to the Brooklyn
      rather than extensively document default.catalog.bom.
      also need to include instructions on stopping (currently in help, including stopping apps) -->
 
-See __[Catalog]({{book.path.docs}}/blueprints/catalog/index.md)__ in the Operations section of the User Guide for instructions on creating a new Catalog entry from your Blueprint YAML.
+See __[Catalog](../catalog/)__ in the Operations section of the User Guide for instructions on creating a new Catalog entry from your Blueprint YAML.
 
 
 ## Next 
 
 So far we have touched on Brooklyn's ability to *deploy* an application blueprint to a cloud provider.  
-The next section will show how to **[Monitor and Manage Applications]({{book.path.docs}}/ops/gui/managing.md)**.
+The next section will show how to **[Monitor and Manage Applications](managing.html)**.

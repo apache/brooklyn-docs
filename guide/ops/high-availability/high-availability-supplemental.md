@@ -1,9 +1,9 @@
 ---
 title: Configuring HA - an example
+layout: website-normal
 ---
-# {{ page.title }}
 
-This supplements the [High Availability]({{book.path.docs}}/ops/high-availability/index.md) documentation
+This supplements the [High Availability](./) documentation
 and provides an example of how to configure a pair of Apache Brooklyn servers to run in master-standby mode with a shared NFS datastore
 
 ### Prerequisites
@@ -12,14 +12,14 @@ and provides an example of how to configure a pair of Apache Brooklyn servers to
 - An NFS folder has been mounted on both VMs at `/mnt/brooklyn-persistence` and both machines can write to the folder
 
 \* Brooklyn can be configured to use either an object store such as S3, or a shared NFS mount. The recommended option is to use an object
-store as described in the [Object Store Persistence]({{book.path.docs}}/ops/persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
+store as described in the [Object Store Persistence](../persistence/#object-store-persistence) documentation. For simplicity, a shared NFS folder
 is assumed in this example
 
 ### Launching
 To start, download and install the latest Apache Brooklyn release on both VMs following the instructions in
-[Running Apache Brooklyn]({{book.path.docs}}/start/running.md)
+[Running Apache Brooklyn]({{ site.path.guide }}/start/running.html)
 
-On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
+On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
 - highAvailabilityMode: MASTER
 - persistMode: AUTO
@@ -27,14 +27,14 @@ On the first VM, which will be the master node, set the following configuration 
 
 Then launch Brooklyn with:
 
-```bash
+{% highlight bash %}
 $ bin/start
-```
+{% endhighlight %}
 
-If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{book.path.docs}}/start/running.md) 
+If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{ site.path.guide }}/start/running.html) 
 documentation for the appropriate launch commands
 
-Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
+Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
 - highAvailabilityMode: AUTO
 - persistMode: AUTO
@@ -42,9 +42,9 @@ Once Brooklyn has launched, on the second VM, set the following configuration op
 
 Then launch the standby Brooklyn with:
 
-```bash
+{% highlight bash %}
 $ bin/start
-```
+{% endhighlight %}
 
 ### Failover
 When running as a HA standby node, each standby Brooklyn server (in this case there is only one standby) will check the shared persisted state
@@ -101,19 +101,19 @@ To test a failover, you can simply terminate the process on the first VM and log
 output its PID to the file `pid.txt`; you can force an immediate (non-graceful) termination of the process by running the following command 
 from the same directory from which you launched Brooklyn:
 
-```bash
+{% highlight bash %}
 $ kill -9 $(cat pid.txt)
-```
+{% endhighlight %}
 
 It is also possiblity to check the high availability state of a running Brooklyn server using the following curl command:
 
-```bash
+{% highlight bash %}
 $ curl -k -u myusername:mypassword https://<ip-address>:8443/v1/server/ha/state
-```
+{% endhighlight %}
 
 This will return one of the following states:
 
-```bash
+{% highlight bash %}
 
 "INITIALIZING"
 "STANDBY"
@@ -123,20 +123,20 @@ This will return one of the following states:
 "FAILED"
 "TERMINATED"
 
-```
+{% endhighlight %}
 
 Note: The quotation characters will be included in the reply
 
 To obtain information about all of the nodes in the cluster, run the following command against any of the nodes in the cluster:
 
-```bash
+{% highlight bash %}
 $ curl -k -u myusername:mypassword https://<ip-address>:8443/v1/server/ha/states
-```
+{% endhighlight %}
 
 This will return a JSON document describing the Brooklyn nodes in the cluster. An example of two HA Brooklyn nodes is as follows (whitespace formatting has been
 added for clarity):
 
-```yaml
+{% highlight yaml %}
 
 {
   ownId: "XkJeXUXE",
@@ -160,7 +160,7 @@ added for clarity):
   links: { }
 }
 
-```
+{% endhighlight %}
 
 The examples above show how to use `curl` to manually check the status of Brooklyn via its REST API. The same REST API calls can also be used by
 automated third party monitoring tools such as Nagios 

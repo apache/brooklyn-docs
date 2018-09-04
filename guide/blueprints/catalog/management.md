@@ -1,7 +1,7 @@
 ---
 title: Catalog Management
+layout: website-normal
 ---
-# {{ page.title }}
 
 ### Catalog Management
 

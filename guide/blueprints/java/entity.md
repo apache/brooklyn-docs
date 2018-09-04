@@ -1,7 +1,7 @@
 ---
+layout: website-normal
 title: Writing an Entity
 ---
-# {{ page.title }}
 
 ## Ways to write an entity
 
@@ -13,11 +13,11 @@ There are several ways to write a new entity:
   scripts.
 * For composite entities, use YAML to compose exiting types of entities (potentially overwriting
   parts of their configuration), and wire them together.
-* Use **[Chef recipes]({{book.path.docs}}/blueprints/chef/index.md)**.
-* Use **[Salt formulas]({{book.path.docs}}/blueprints/salt/index.md)**.
-* Use **[Ansible playbooks]({{book.path.docs}}/blueprints/ansible/index.md)**.
+* Use **[Chef recipes]({{site.path.guide}}/blueprints/chef)**.
+* Use **[Salt formulas]({{site.path.guide}}/blueprints/salt)**.
+* Use **[Ansible playbooks]({{site.path.guide}}/blueprints/ansible)**.
 * Write pure-java, extending existing base-classes. For example, the `GistGenerator` 
-  [example]({{book.path.docs}}/blueprints/java/defining-and-deploying.md). These can use utilities such as `HttpTool` and 
+  [example](defining-and-deploying.html). These can use utilities such as `HttpTool` and 
   `BashCommands`.
 * Write pure-Java blueprints that extend `SoftwareProcess`. However, the YAML approach is strongly
   recommended over this approach.
@@ -99,6 +99,6 @@ hierarchy; it is suggested to avoid these, looking at the ones below instead):
 
 You might also find the following helpful:
 
-* **[Entity Design Tips]({{book.path.docs}}/dev/tips/index.md#EntityDesign)**
-* The **[User Guide]({{book.path.docs}})**
+* **[Entity Design Tips]({{site.path.guide}}/dev/tips/index.html#EntityDesign)**
+* The **[User Guide]({{site.path.guide}})**
 * The **[Mailing List](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/)**

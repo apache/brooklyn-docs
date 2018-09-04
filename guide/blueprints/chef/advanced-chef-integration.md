@@ -1,7 +1,8 @@
 ---
 title: Advanced Chef Integration
+title_in_menu: Advanced Chef Integration
+layout: website-normal
 ---
-# {{ page.title }}
 
 ### Adding Sensors and Effectors
 
@@ -29,7 +30,7 @@ indicated earlier.  If you'd like to work with us to implement these, please let
 
 A general schema for the supported YAML is below: 
 
-```yaml
+{% highlight yaml %}
 - type: chef:cookbook_name
   brooklyn.config:
     cookbook_urls:
@@ -39,7 +40,7 @@ A general schema for the supported YAML is below:
     launch_attributes: # map of arguments to set in the chef node
     service_name: cookbook_service
     pid_file: /var/run/cookbook.pid
-```
+{% endhighlight %}
 
 If you are interested in exploring the Java code for creating blueprints,
 start with the `TypedToyMySqlEntiyChef` class, which essentially does what this tutorial has shown;

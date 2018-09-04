@@ -1,7 +1,8 @@
 ---
+layout: website-normal
 title: IDE Setup
+toc: /guide/toc.json
 ---
-# {{ page.title }}
 
 Gone are the days when IDE integration always just works...  Maven and Eclipse fight,
 neither quite gets along perfectly with Groovy,
@@ -24,7 +25,7 @@ working with the Brooklyn project. Optionally you can install the
 Groovy and TestNG plugins, but they are not required for building the project.
 You can install these using Help -> Install New Software, or from the Eclipse Marketplace:
 
-{% include 'eclipse.include.md' %}
+{% readj eclipse.include.md %}
 
 As of this writing, Eclipse 4.5 and Eclipse 4.4 are commonly used,
 and the codebase can be imported (Import -> Existing Maven Projects)
@@ -51,20 +52,20 @@ If you encounter issues, the following hints may be helpful:
   or the filesystem, or use
   the following command to remove these rogue blocks in the generated `.classpath` files:
 
-```bash
+{% highlight bash %}
 % find . -name .classpath -exec sed -i.bak 's/[ ]*..cluding="[\*\/]*\(\.java\)*"//g' {} \;
-```
+{% endhighlight %}
 
 * You may need to ensure ``src/main/{java,resources}`` is created in each project dir,
   if (older versions) complain about missing directories,
   and the same for ``src/test/{java,resources}`` *if* there are tests (``src/test`` exists):
 
-```bash
+{% highlight bash %}
 find . \( -path "*/src/main" -or -path "*/src/test" \) -exec echo {} \; -exec mkdir -p {}/{java,resources} \;
-```
+{% endhighlight %}
 
 If the pain starts to be too much, come find us on IRC #brooklyncentral or
-[elsewhere]({{book.url.brooklyn_website}}/community/) and we can hopefully share our pearls.
+[elsewhere]({{site.path.website}}/community/) and we can hopefully share our pearls.
 (And if you have a tip we haven't mentioned please let us know that too!)
 
 

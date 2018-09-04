@@ -1,7 +1,9 @@
 ---
 title: Custom Entities
+layout: website-normal
+toc: ../guide_toc.json
+categories: [use, guide, defining-applications]
 ---
-# {{ page.title }}
 
 So far we've covered how to configure and compose entities.
 There's a large library of blueprints available, but
@@ -17,7 +19,9 @@ including `bash` and Chef.
 The following blueprint shows how a simple script can be embedded in the YAML
 (the `|` character is special YAML which makes it easier to insert multi-line text):
 
-!CODEFILE "example_yaml/vanilla-bash-netcat.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat.yaml %}
+{% endhighlight %}
 
 This starts a simple `nc` listener on port 4321 which will respond `hello` to the first
 session which connects to it. Test it by running `telnet localhost 4321`
@@ -45,7 +49,9 @@ So if we create a file `/tmp/netcat-server.tgz` containing just `start.sh` in th
 which contains the line `echo hello | nc -l 4321`, 
 we can instead write our example as: 
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-file.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-file.yaml %}
+{% endhighlight %}
 
 
 #### Determining Successful Launch
@@ -63,11 +69,14 @@ the `nc` process exits afterwards, causing Brooklyn to set the entity to an `ON_
 (You can also test this with a `killall nc`).
 
 There are other options for determining health: you can set `checkRunning.command` and `stop.command` instead,
-as documented on the javadoc and config keys of the
-[org.apache.brooklyn.entity.software.base.VanillaSoftwareProcess]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/entity/software/base/VanillaSoftwareProcess.html)
-class, and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`. For example:
+as documented on the javadoc and config keys of the 
+{% include java_link.html class_name="VanillaSoftwareProcess" package_path="org/apache/brooklyn/entity/software/base" project_subpath="software/base" %} class, 
+and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`. For example:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-more-commands.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-more-commands.yaml %}
+{% endhighlight %}
+
 
 #### Periodic Health Check
 
@@ -87,7 +96,9 @@ We can tell Brooklyn to open this port explicitly by specifying `inboundPorts: [
 however a more idiomatic way is to specify a config ending with `.port`,
 such as:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-port.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-port.yaml %}
+{% endhighlight %}
 
 The regex for ports to be opened can be configured using
 the config `inboundPorts.configRegex` (which has `.*\.port` as the default value).
@@ -115,7 +126,9 @@ However config keys which are *not* declared on the type *must* be declared in t
 Blueprint scripts can be parametrised through environment variables, making them reusable in different use-cases.
 Define the variables in the `env` block and then reference them using the standard bash notation:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-env.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-env.yaml %}
+{% endhighlight %}
 
 Non-string objects in the `env` map will be serialized to JSON before passing them to the script.
 
@@ -125,7 +138,9 @@ Non-string objects in the `env` map will be serialized to JSON before passing th
 We can define config keys to be presented to the user 
 using the `brooklyn.parameters` block:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-port-parameter.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-port-parameter.yaml %}
+{% endhighlight %}
 
 The example above will allow a user to specify a message to send back
 and the port where netcat will listen.
@@ -151,7 +166,9 @@ This gives us quite a bit more power in writing our blueprint:
 The *Catalog* tab allows you to add blueprints which you can refer to in other blueprints.
 In that tab, click *+* then *YAML*, and enter the following:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-catalog.bom"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-catalog.bom %}
+{% endhighlight %}
 
 This is the same example as in the previous section, wrapped according to the catalog YAML requirements,
 with one new block added defining an enricher. An enricher creates a new sensor from other values;
@@ -161,7 +178,9 @@ with the sensor values.
 With this added to the catalog, we can reference the type `netcat-example` when we deploy an application.
 Return to the *Home* or *Applications* tab, click *+*, and submit this YAML blueprint:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-reference.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-reference.yaml %}
+{% endhighlight %}
 
 This extends the previous blueprint which we registered in the catalog,
 meaning that we don't need to include it each time.
@@ -171,7 +190,9 @@ More importantly, we can package it for others to consume -- or take items other
 We can go further and use this to deploy a cluster,
 this time giving a custom port as well as a custom message: 
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-cluster.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-cluster.yaml %}
+{% endhighlight %}
 
 In either of the above examples, if you explore the tree in the *Applications* view
 and look at the *Summary* tab of any of the server instances, you'll now see the URL where netcat is running.
@@ -185,7 +206,9 @@ and if you haven't yet experimented with `resize` on the cluster you might want 
 Besides detecting this failure, Brooklyn policies can be added to the YAML to take appropriate 
 action. A simple recovery here might just to automatically restart the process:
 
-!CODEFILE "example_yaml/vanilla-bash-netcat-restarter.yaml"
+{% highlight yaml %}
+{% readj example_yaml/vanilla-bash-netcat-restarter.yaml %}
+{% endhighlight %}
 
 Autonomic management in Brooklyn often follows the principle that complex behaviours emerge
 from composing simple policies.
@@ -262,7 +285,7 @@ command over ssh every 5 seconds. This can be very CPU intensive when there are 
 is to disable the ssh-polling (by setting `sshMonitoring.enabled: false`) and to configure a different 
 health-check.
 
-See documentation on the [Entity's error status]({{book.path.docs}}/ops/troubleshooting/overview.md#entitys-error-status)
+See documentation on the [Entity's error status]({{ site.path.guide }}/ops/troubleshooting/overview.html#entitys-error-status)
 for how Brooklyn models an entity's health.
 
 In the snippet below, we'll define a new health-check sensor (via http polling), and will automatically add this

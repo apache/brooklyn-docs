@@ -1,7 +1,7 @@
 ---
 title: Upgrade
+layout: website-normal
 ---
-# {{ page.title }}
 
 This guide provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
 
@@ -22,15 +22,15 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 ### Upgrade from Apache Brooklyn 0.12.0 onward
 
-{% method -%}
+{::options parse_block_html="true" /}
 
-{% common -%}
-{% if output.name == 'website' %}
-**Hint:** in the top right of this page are buttons to select an installation method. Choose your installation method to see the most appropriate instructions here.
-{% endif %}
+<ul class="nav nav-tabs">
+    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">RPM / DEB Packages</a></li>
+    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Tarball</a></li>
+</ul>
 
-{% sample lang="package" -%}
-#### Upgrading an RPM or DEB package
+<div class="tab-content">
+<div id="impl-1" class="tab-pane fade in active">
 
 1. **Important!** Backup persisted state and custom configuration, in case you need to rollback to a previous version.
 
@@ -42,7 +42,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 2. Upgrade Apache Brooklyn:
 
-   1. [Download]({{book.path.docs}}/misc/download.md) the new RPM/DEB package
+   1. [Download](../misc/download.html) the new RPM/DEB package
 
    2. Upgrade Apache Brooklyn:
 
@@ -71,9 +71,9 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    Wait for Brooklyn to be running (i.e. its web-console is responsive)
 
+</div>
 
-{% sample lang="tarball" -%}
-#### Upgrading using a .tar.gz archive
+<div id="impl-2" class="tab-pane fade">
 
 1. Stop Apache Brooklyn:
 
@@ -92,7 +92,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 3. Install new version of Apache Brooklyn:
 
-   1. [Download]({{book.path.docs}}/misc/download.md) the new tarball zip package.
+   1. [Download](../misc/download.html) the new tarball zip package.
    
    2. Install Brooklyn:
 
@@ -133,19 +133,19 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    3. Update the catalog: `br catalog add /opt/brooklyn/catalog/catalog.bom`.
 
-{% endmethod %}
+</div>
+</div>
 
 ### Upgrade from Apache Brooklyn 0.11.0 and below
 
-{% method -%}
+<ul class="nav nav-tabs">
+    <li class="active impl-1-tab"><a data-target="#impl-1, .impl-1-tab" data-toggle="tab" href="#">RPM / DEB Packages</a></li>
+    <li class="impl-2-tab"><a data-target="#impl-2, .impl-2-tab" data-toggle="tab" href="#">Tarball</a></li>
+</ul>
 
-{% common -%}
-{% if output.name == 'website' %}
-**Hint:** in the top right of this page are buttons to select an installation method. Choose your installation method to see the most appropriate instructions here.
-{% endif %}
+<div class="tab-content">
+<div id="impl-1" class="tab-pane fade in active">
 
-{% sample lang="package" -%}
-#### Upgrading an RPM or DEB package
 1. Stop Apache Brooklyn:
 
        # CentOS 7 / RHEL
@@ -190,7 +190,7 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
 5. Install new version of Apache Brooklyn:
 
-   1. [Download]({{book.path.docs}}/misc/download.md) the new RPM/DEB package.
+   1. [Download](../misc/download.html) the new RPM/DEB package.
    
    2. Install Apache Brooklyn:
 
@@ -268,73 +268,76 @@ Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia
 
    3. Update the catalog: `br catalog add /opt/brooklyn/catalog/catalog.bom`.
 
-{% sample lang="tarball" -%}
-#### Upgrading using a .tar.gz archive
+</div>
+
+<div id="impl-2" class="tab-pane fade">
+
 Same instructions as above.
 
-{% endmethod %}
+</div>
+</div>
 
 ## Rollback
 
 This section applies only with you are using the RPM/DEB packages. To perform a rollback, please follow these instructions:
 
-```bash
+{% highlight bash %}
 # CentOS / RHEL
 yum downgrade apache-brooklyn.noarch
 
 # Ubuntu Debian
 dpkg -i apache-brooklyn-xxxx.deb
-```
+{% endhighlight %}
 
-*Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download]({{book.path.docs}}/misc/download.md)
+*Note that to downgrade a DEB package is essentially installing a previous version therefore you need to [download](../misc/download.html)
 the version you want to downgrade to before hand.*
 
 ## How to stop your service
 
 On systemd: 
-```bash
+{% highlight bash %}
 systemctl stop brooklyn 
-```
+{% endhighlight %}
 
 On upstart: 
-```bash
+{% highlight bash %}
 stop brooklyn
-```
+{% endhighlight %}
 
 ## Web login credentials
 
-* User credentials should now be recorded in [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md).
+* User credentials should now be recorded in [`brooklyn.cfg`](paths.html).
 
-* Brooklyn will still read them from both [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md) and `~/.brooklyn/brooklyn.properties`.
+* Brooklyn will still read them from both [`brooklyn.cfg`](paths.html) and `~/.brooklyn/brooklyn.properties`.
 
-* Configure a username/password by modifying [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md). An example entry is:
+* Configure a username/password by modifying [`brooklyn.cfg`](paths.html). An example entry is:
  
-```bash
+{% highlight bash %}
 brooklyn.webconsole.security.users=admin
 brooklyn.webconsole.security.user.admin.password=password2
-```
+{% endhighlight %}
 
 ## Persistence
 
 If you have persisted state you wish to rebind to, persistence is now configured in the following files:
 
-* [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md)
-* [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md)
+* [`brooklyn.cfg`](paths.html)
+* [`org.apache.brooklyn.osgilauncher.cfg`](paths.html)
 
-For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`]({{book.path.docs}}/ops/paths.md):
+For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`](paths.html):
 
-```bash
+{% highlight bash %}
 brooklyn.location.named.aws-s3-eu-west-1:aws-s3:eu-west-1
 brooklyn.location.named.aws-s3-eu-west-1.identity=<ADD CREDS>
 brooklyn.location.named.aws-s3-eu-west-1.credential=<ADD CREDS>
-```
+{% endhighlight %}
 
-To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`]({{book.path.docs}}/ops/paths.md):
+To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`](paths.html):
 
-```bash
+{% highlight bash %}
 persistenceLocation=aws-s3-eu-west-1
 persistenceDir=<ADD HERE>
-```
+{% endhighlight %}
 
 Apache Brooklyn should be stopped before this file is modified, and then restarted with the new configuration.
 
@@ -342,11 +345,11 @@ Apache Brooklyn should be stopped before this file is modified, and then restart
 in the persisted state. Apache Brooklyn needs to know it in order to read the persisted state at startup time.***
 
 If binding to existing persisted state, an additional command is required to update the existing catalog with the Brooklyn
-0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`]({{book.path.docs}}/ops/paths.md) (as is done by the RPM and DEB):
+0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`](paths.html) (as is done by the RPM and DEB):
 
-  ```bash
+  {% highlight bash %}
     br catalog add /opt/brooklyn/catalog/catalog.bom
-  ```
+  {% endhighlight %}
 
 All existing custom jars previously added to lib/plugins (e.g. for Java-based entities) need to be converted to OSGi bundles,
 and installed in Karaf. The use of the "brooklyn.libraries" section in catalog.bom files will continue to work.

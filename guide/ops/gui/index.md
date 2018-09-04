@@ -1,5 +1,11 @@
 ---
+layout: website-normal
 title: GUI Guide
-partial-summary-depth: 1
+children:
+- running.md
+- blueprints.md
+- managing.md
+- policies.md
 ---
-# {{ page.title }}
+
+{% include list-children.html %}

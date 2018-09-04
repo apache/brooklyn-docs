@@ -1,11 +1,11 @@
 ---
 title: Starting, Stopping and Monitoring
+layout: website-normal
 ---
-# {{ page.title }}
 
 **NOTE:** This document is for information on starting an Apache Brooklyn
 Server.  For information on using the Brooklyn Client CLI to access an already
-running Brooklyn Server, refer to [Client CLI Reference]({{book.path.docs}}/ops/cli/index.md).
+running Brooklyn Server, refer to [Client CLI Reference](cli/index.html).
 
 ## Packages for RHEL/CentOS and Ubuntu
 
@@ -25,15 +25,15 @@ files.
 
 To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 
-```bash
+{% highlight bash %}
 % bin/start
-```
+{% endhighlight %}
 
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. It is strongly
-recommended to [configure security]({{book.path.docs}}/ops/configuration/index.md).
+recommended to [configure security](configuration/).
 
-See the [Server CLI Reference]({{book.path.docs}}/ops/server-cli-reference.md) for more information
+See the [Server CLI Reference](server-cli-reference.html) for more information
 about the Brooklyn server process.
 
 
@@ -43,9 +43,9 @@ To stop Brooklyn, from the directory where Brooklyn is unpacked, run:
 
 For example:
 
-```bash
+{% highlight bash %}
 % bin/stop
-```
+{% endhighlight bash %}
 
 
 ## Monitoring
@@ -65,13 +65,13 @@ For example, here is a fragment of a `monitrc` file as used by
 [Monit](https://mmonit.com/monit/), for a Brooklyn `.tar.gz` distribution
 unpacked and installed at `/opt/apache-brooklyn`:
 
-```text
+{% highlight text %}
 check process apachebrooklyn with pidfile /opt/apache-brooklyn/pid_java
     start program = "/bin/bash -c '/opt/apache-brooklyn/bin/brooklyn launch --persist auto & disown'" with timeout 10 seconds
     stop  program = "/bin/bash -c 'kill $( cat /opt/apache-brooklyn/pid_java )'"
-```
+{% endhighlight %}
 
 In addition to monitoring the Brooklyn process itself, you will almost certainly
 want to monitor resource usage of Brooklyn. In particular, please see the
-[Requirements]({{book.path.docs}}/ops/requirements.md#disk-space) section for a discussion on Brooklyn's disk
+[Requirements](requirements.html#disk-space) section for a discussion on Brooklyn's disk
 space requirements.
