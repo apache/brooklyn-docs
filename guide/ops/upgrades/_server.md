@@ -3,18 +3,7 @@ title: Upgrade
 layout: website-normal
 ---
 
-This guide provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
-
-## Backwards Compatibility
-
-Apache Brooklyn version 0.12.0 onward runs primarily inside a Karaf container. When upgrading from 0.11.0 or below,
-this update changes the mechanisms for launching Brooklyn.
-This will impact any custom scripting around the launching of Brooklyn, and the supplying of command line arguments.
-
-Use of the `lib/dropins` and `lib/patch` folders will no longer work (because Karaf does not support that kind of classloading).
-Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia.org/wiki/OSGi#Bundles).
-
-## Upgrading
+## Upgrading Brooklyn
 
 * Use of RPM and DEB is now recommended where possible, rather than the tar.gz. This entirely replaces the previous install.
 
@@ -353,3 +342,5 @@ If binding to existing persisted state, an additional command is required to upd
 
 All existing custom jars previously added to lib/plugins (e.g. for Java-based entities) need to be converted to OSGi bundles,
 and installed in Karaf. The use of the "brooklyn.libraries" section in catalog.bom files will continue to work.
+
+
