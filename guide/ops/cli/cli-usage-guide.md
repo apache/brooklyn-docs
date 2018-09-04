@@ -120,14 +120,14 @@ command:
 
 {% highlight text %}
 $ br app WebCluster entity thHnLFkP config
-Key                             Value   
-install.unique_label            MySqlNode_5.6.26   
-brooklyn.wrapper_app            true   
-datastore.creation.script.url   https://bit.ly/brooklyn-visitors-creation-script   
-camp.template.id                dnw3GqN0   
-camp.plan.id                    db   
-onbox.base.dir                  /home/vagrant/brooklyn-managed-processes   
-onbox.base.dir.resolved         true   
+Key                                      Value   
+install.unique_label                     MySqlNode_5.6.26   
+brooklyn.wrapper_app                     true   
+datastore.creation.script.template.url   https://bit.ly/brooklyn-visitors-creation-script   
+camp.template.id                         dnw3GqN0   
+camp.plan.id                             db   
+onbox.base.dir                           /home/vagrant/brooklyn-managed-processes   
+onbox.base.dir.resolved                  true   
 
 {% endhighlight %}
 
@@ -135,14 +135,14 @@ The value of a single configuration item can be displayed by using the configura
 as a parameter for the `config` command:
 
 {% highlight text %}
-$ br app WebCluster entity thHnLFkP config datastore.creation.script.url
+$ br app WebCluster entity thHnLFkP config datastore.creation.script.template.url
 https://bit.ly/brooklyn-visitors-creation-script
 {% endhighlight %}
 
 The value of a configuration item can be changed by using the `set` command:
 
 {% highlight text %}
-$ br app WebCluster entity thHnLFkP config datastore.creation.script.url set \"https://bit.ly/new-script\"
+$ br app WebCluster entity thHnLFkP config datastore.creation.script.template.url set \"https://bit.ly/new-script\"
 {% endhighlight %}
 
 ## Sensors

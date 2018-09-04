@@ -13,7 +13,7 @@ setConfiguration(UsesJava.JAVA_OPTIONS, ImmutableMap.of("mysql.url",
 {% endhighlight %}
 
 The ``attributeWhenReady(Entity, Sensor)`` call (a static method on the class ``DependentConfiguration``)
-causes the configuration value to be set when that given entity's attribue is ready. 
+causes the configuration value to be set when that given entity's attribute is ready. 
 In the example, ``attributeWhenReady()`` causes the JVM system property ``mysql.url`` to be set to the value of the ``MySqlNode.MY_SQL_URL`` sensor from ``mysql`` when that value is ready. As soon as the database URL is announced by the MySql entity, the configuration value will be available to the Tomcat cluster. 
 
 By default "ready" means being *set* (non-null) and, if appropriate, *non-empty* (for collections and strings) or *non-zero* (for numbers). Formally the interpretation of ready is that of "Groovy truth" defined by an ``asBoolean()`` method on the class and in the Groovy language extensions. 

@@ -191,3 +191,27 @@ traffic filtering such as child-safe type filtering:
 
 To resolve this try disabling traffic filtering and setting your DNS to a public server such as 8.8.8.8 to use google
 [DNS](https://www.wikiwand.com/en/Google_Public_DNS).  [See here](https://developers.google.com/speed/public-dns/docs/using) for details on how to configure this.
+
+
+## Download with Curl Fails on CentOS 7.0 due to TLS Negotiation
+
+When downloading an install artifact with Curl, using CentOS 7.0, one can get the failure shown below:
+
+    curl: (35) Peer reports incompatible or unsupported protocol version.
+
+This can be caused by incompatible TLS negotiation with the web server (e.g. with github). For more details, see
+[Red Hat bug 1170339, "use the default min/max TLS version provided by NSS [RHEL-7]"](https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=1170339).
+
+To confirm this is the issue, try running the failing curl command on the same machine with `curl -v` for verbose output.
+You should see a more detailed error such as:
+
+    NSS error -12286 (SSL_ERROR_NO_CYPHER_OVERLAP)
+    Cannot communicate securely with peer: no common encryption algorithm(s).
+    Closing connection 1
+
+Possible workarounds include:
+
+1. Use a more recent version of CentOS. On AWS, a good choice is the most recent centos.org image from the 
+[AWS marketplace](https://aws.amazon.com/marketplace/pp/B00O7WM7QW). However, this involves first subscribing to it in the marketplace. The Amazon Linux AMI is another good choice, but this is not a normal CentOS image so it depends what distro(s) the entity was developed/tested against.
+
+2. Change your blueprint to first do `sudo yum update -y curl nss`, before the curl command is executed.

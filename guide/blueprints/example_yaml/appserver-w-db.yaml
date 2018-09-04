@@ -8,7 +8,7 @@ services:
     java.sysprops: 
       brooklyn.example.db.url:
         $brooklyn:formatString:
-          - jdbc:%s%s?user=%s\\&password=%s
+          - "jdbc:%s%s?user=%s&password=%s"
           - $brooklyn:component("db").attributeWhenReady("datastore.url")
           - visitors
           - brooklyn
@@ -18,4 +18,4 @@ services:
   name: DB HelloWorld Visitors
   brooklyn.config:
     creation.script.password: $brooklyn:external("brooklyn-demo-sample", "hidden-brooklyn-password")
-    datastore.creation.script.url: https://github.com/apache/brooklyn-library/raw/master/examples/simple-web-cluster/src/main/resources/visitors-creation-script.sql
+    datastore.creation.script.template.url: https://github.com/apache/brooklyn-library/raw/master/examples/simple-web-cluster/src/main/resources/visitors-creation-script.sql

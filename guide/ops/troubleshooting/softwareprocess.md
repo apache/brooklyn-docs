@@ -42,8 +42,9 @@ in the run directory (such as console output).
 It is worth checking that the process is running, e.g. using `ps aux` to look for the desired process.
 Some entities also write the pid of the process to `pid.txt` in the run directory.
 
-It is also worth checking if the required port is accessible. This is discussed in the guide 
-"Troubleshooting Server Connectivity Issues in the Cloud", including listing the ports in use:
+It is also worth checking if the required port is accessible. This is discussed in the troubleshooting guide 
+[Server Connectivity]({{book.path.docs}}/ops/troubleshooting/connectivity.md), 
+including listing the ports in use:
 execute `netstat -antp` (or on OS X `netstat -antp TCP`) to list the TCP ports in use (or use
 `-anup` for UDP).
 

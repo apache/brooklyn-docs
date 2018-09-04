@@ -1,0 +1,7 @@
+name: entity-constraint-example
+services:
+- type: entity-constraint-example
+  brooklyn.config:
+    compulsoryExample: foo
+    addressExample: 1.1.1.1
+    numberExample: 2.0

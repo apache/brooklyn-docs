@@ -32,7 +32,7 @@ services:
     java.sysprops:
       brooklyn.example.db.url: 
         $brooklyn:formatString:
-          - jdbc:postgresql://%s/myappdb?user=%s\\&password=%s
+          - "jdbc:postgresql://%s/myappdb?user=%s&password=%s"
           - $brooklyn:external("servers", "postgresql")
           - $brooklyn:external("credentials", "postgresql-user")
           - $brooklyn:external("credentials", "postgresql-password")

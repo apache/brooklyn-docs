@@ -91,18 +91,16 @@ Tips from Netbeans users wanted!
 
 ## Debugging Tips
 
-To debug Brooklyn, create a launch configuration which launches the ``BrooklynJavascriptGuiLauncher`` class. NOTE: You may
-need to add additional projects or folders to the classpath of the run configuration (e.g. add the brooklyn-software-nosql
-project if you wish to deploy a MongoDBServer). You will also need to ensure that the working directory is set to the jsgui
-folder. For IntelliJ, you can set the 'Working directory' of the Run/Debug Configuration to ``$MODULE_DIR$/../jsgui``. For
-Eclipse, use the default option of ``${workspace_loc:brooklyn-jsgui}``.
+To debug Brooklyn, you have 2 solutions:
+ 
+1. **Launch the REST server + each UI module manually**
+   Create a launch configuration which launches the ``BrooklynJavascriptGuiLauncher`` class. This will launch only the REST API.
+   If you need the UI on top of it, you can create launch configuration for each of the UI module by calling `npm run start`.
+   See `README.md` files on each UI modules for more information about this.
 
-To debug the jsgui (the Brooklyn web console), you will need to build Brooklyn with -DskipOptimization to prevent the build from minifying the javascript.
-When building via the command line, use the command ``mvn clean install -DskipOptimization``, and if you are using IntelliJ IDEA, you can add the option
-to the Maven Runner by clicking on the Maven Settings icon in the Maven Projects tool window  and adding the ``skipOptimization`` property with no value.
-
-When running at the command line you can enable remote connections so that one can attach a debugger to the Java process:
-    Run Java with the following on the command line or in JAVA_OPTS: ``-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005``
-
-To debug a brooklyn instance that has been run with the above JAVA_OPTS, create a remote build configuration (IntelliJ -
-Run | Edit Configurations | + | Remote) with the default options, ensuring the port matches the address specified in JAVA_OPTS.
+2. **Launch the fully built karaf distribution, attached to a Java debugger**
+   First, you need to build the entire project. Then, create a launch configuration that will execute `brooklyn-dist/karaf/apache-brooklyn/target/assembly/bin/karaf`
+   and have the following Java Options: `JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8888,server=y,suspend=y`.
+   Create a second launch configuration to start the remote debugger on port `8888`. When you start the first launch configuration,
+   it will wait for the Java remote debugger to start. At that point, start the second launch configuration, the first will then 
+   resume as usual. This will give you a fully built Brooklyn including REST server and UI.

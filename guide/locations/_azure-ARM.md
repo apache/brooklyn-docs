@@ -81,7 +81,11 @@ We can now verify this information that this information can be used to log in t
 
     az login --service-principal -u <Application-ID> --password abcd --tenant <Tenant-ID>
 
-##### Azure CLI 1.0
+Should you need to change the password, you can use the following command:
+
+    az ad app update --id <Application-ID> --password MyNewPassword
+
+#### Azure CLI 1.0
 
 Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/azure/cli-install-nodejs).
 
@@ -102,7 +106,7 @@ Using the Azure CLI, run the following commands to create a service principal
     # For example: azure ad app create --name "myappname"  --password abcd --home-page "https://myappwebsite" --identifier-uris "https://myappwebsite"
     
     # Output will include a value for `Application Id`, which will be used for the live tests
-    
+   
     # Create a Service Principal
     azure ad sp create --applicationId <Application-id>
     

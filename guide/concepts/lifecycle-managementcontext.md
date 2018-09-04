@@ -6,7 +6,7 @@ categories: [use, guide, defining-applications]
 ---
 
 Under-the-covers, at heart of the brooklyn management plane is the ``ManagementContext``. 
-This is started automatically when using launching an application using the brooklyn CLI. For programmatic use, see 
+This is started automatically when launching an application using the brooklyn CLI. For programmatic use, see 
 ``BrooklynLauncher.newLauncher().launch()``.
 
 A Brooklyn deployment consists of many entities in a hierarchical tree, with the privileged *application* entity at the top level.
@@ -28,7 +28,7 @@ Typically a Brooklyn deployment has a single management context which records:
 *   all entities under management that are reachable by the application(s) via the parent-child relationships,
 *	the state associated with each entity,
 *	subscribers (listeners) to sensor events arising from the entities,
-*	active tasks (jobs) associated with any the entity,
+*	active tasks (jobs) associated with the entity,
 *	which Brooklyn management node is mastering (managing) each entity.
 
 <!-- TODO Distributed brooklyn not yet supported; needs clarification in docs -->

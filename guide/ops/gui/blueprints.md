@@ -12,7 +12,10 @@ children:
 
 ## Launching from a Blueprint
 
-When you first access the web console on [http://127.0.0.1:8081](http://127.0.0.1:8081) you will be requested to create your first application.
+When you first access the web console on [http://127.0.0.1:8081](http://127.0.0.1:8081) you will be greeted by the GUI homepage
+comprised of:
+- the quick launch panel
+- links to UI modules
 
 We'll start by deploying an application via a YAML blueprint consisting of the following layers.
 
@@ -21,9 +24,10 @@ We'll start by deploying an application via a YAML blueprint consisting of the f
   - Nginx load balancer
   - Tomcat app server cluster
 
-[![Brooklyn web console, showing the YAML tab of the Add Application dialog.](images/add-application-modal-yaml.png)](images/add-application-modal-yaml-large.png)
+[![Brooklyn web console, showing the YAML tab of the Add Application dialog.](images/add-blueprint.png)](images/add-blueprint-large.png)
 
-Switch to the YAML tab and copy the blueprint below into the large text box. 
+Go the "Blueprint Composer" and switch to the YAML editor view (by clicking on the double horizontal arrows icon on the top right corner)
+and copy the blueprint below into the editor. 
 
 But *before* you submit it, modify the YAML to specify the location where the application will be deployed.
 
@@ -42,18 +46,18 @@ location:
 
 **NOTE**: See __[Locations](../locations)__ in the Operations section of the User Guide for instructions on setting up alternate cloud providers, bring-your-own-nodes, or localhost targets, and storing credentials/locations in a file on disk rather than in the blueprint.
 
-With the modified YAML in the dialog, click "Finish". The dialog will close and Brooklyn will begin deploying your
-application. Your application will be shown as "Starting" on the web console's front page.
+With the modified YAML, click on the "Deploy" button. Brooklyn will begin deploying your application and redirect you to the
+"Application Inspector". In this screen, you will see your application as "Starting".
 
-[![Brooklyn web console, showing the application starting.](images/home-app-starting.png)](images/home-app-starting-large.png)
+[![Brooklyn web console, showing the application starting.](images/app-deploying.png)](images/app-deploying-large.png)
 
 Depending on your choice of location it may take some time for the application nodes to start, the next page describes how you can monitor the progress of the application deployment and verify its successful deployment.
 
 ## Launching from the Catalog
 
-Instead of pasting the YAML blueprint each time, it can be added to the Brooklyn Catalog where it will be accessible from the Catalog tab of the Create Application dialog.
+Instead of pasting the YAML blueprint each time, it can be added to the Brooklyn Catalog where it will be accessible from the "Quick Launch" panel or "Catalog" and "Blueprint Composer" UI modules.
 
-[![Viewing Catalog entries in Add Application dialog.](images/add-application-catalog-web-cluster-with-db.png)](images/add-application-catalog-web-cluster-with-db-large.png)
+[![Viewing Catalog entries in Add Application dialog.](images/app-quicklaunch.png)](images/app-quicklaunch-large.png)
 
 <!-- TODO: more detail for adding to catalog? but wait for persistence to be the default, 
      rather than extensively document default.catalog.bom.

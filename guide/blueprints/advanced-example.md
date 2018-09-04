@@ -36,10 +36,10 @@ There are four blueprints that make up this application. Each of them are used t
 * [ELK](example_yaml/brooklyn-elk-catalog.bom)
 
 #### Running the example
-First, add all four blueprints to the Brooklyn Catalog. This can be done by clicking the 'Catalog' tab, clicking the '+'
- symbol and pasting the YAML. Once this is done, click the 'Application' tab, then the '+' button to bring up the add 
-application wizard. A new Catalog application will be available called 'ELK Stack'. Using the add application wizard, 
-you should be able to deploy an ELK stack to a location of your choosing.  Alternatively use the `br` Brooklyn
+First, add all four blueprints to the Brooklyn Catalog. This can be done by going to the "Catalog" module, then clicking the
+buttom "Upload to catalog" and selecting the above blueprints (or drag-and-drop them) Once this is done, search for an
+entity called "ELK Stack". You will be able to deploy it by clicking on the "Deploy" button from the details page.
+Note that you can also perform this operation from the quick launch panel on the homepage. Alternatively use the `br` Brooklyn
 command line tool and add the files with `br catalog add`.
 
 #### Exploring the example

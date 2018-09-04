@@ -32,9 +32,10 @@ Here's a very simple YAML blueprint plan, to explain the structure:
   This is the meat of the blueprint plan, as you'll see below.
 
 Finally, the clipboard in the top-right corner of the example plan box above (hover your cursor over the box)  lets you easily copy-and-paste into the web-console:
-simply [download and launch]({{ site.path.guide }}/start/running.html) Brooklyn,
-then in the "Create Application" dialog at the web console
-(usually [http://127.0.0.1:8081/](http://127.0.0.1:8081/), paste the copied YAML into the "Yaml" tab of the dialog and press "Finish". 
+simply [download and launch]({{book.path.docs}}/start/running.md) Brooklyn, 
+open a new browser window (usually) at [http://127.0.0.1:8081/](http://127.0.0.1:8081/).
+Click on the tile "Blueprint Composer", then on the double-arrow located on the top right of the screen (to switch to the YAML mode),
+paste the copied YAML into the editor and press "Deploy". 
 There are several other ways to deploy, including `curl` and via the command-line,
 and you can configure users, https, persistence, and more, 
 as described [in the ops guide]({{ site.path.guide }}/ops/).
