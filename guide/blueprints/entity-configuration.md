@@ -459,7 +459,7 @@ documented below will be enhanced in a future version of Brooklyn, to better sup
 above._
 
 In a YAML blueprint, within the `brooklyn.parameters` section for declaring new config keys, one can
-set the mode for `inheritance.type` and `inheritance.parent` (i.e. for inheritance from the super-type, and
+set the mode for `inheritance.type` and `inheritance.runtime` (i.e. for inheritance from the super-type, and
 inheritance in the runtime management hierarchy). The possible values are:
 
 * `deep_merge`: the inherited and the given value should be merged; maps within the map will also be merged
@@ -483,7 +483,7 @@ brooklyn.catalog:
       - name: example.map
         type: java.util.Map
         inheritance.type: deep_merge
-        inheritance.parent: none
+        inheritance.runtime: none
         default:
           MESSAGE_IN_DEFAULT: InDefault
       brooklyn.config:
@@ -495,7 +495,7 @@ The blueprints below demonstrate the various permutations for setting configurat
 config `example.map`. This can be inspected by looking at the entity's config. The config
 we see for app1 is the inherited `{MESSAGE: "Hello"}`; in app2 we define additional configuration,
 which will be merged to give `{MESSAGE: "Hello", MESSAGE_IN_CHILD: "InChild"}`; in app3, the 
-config from the parent is not inherited because there is an explicit inheritance.parent of "none",
+config from the parent is not inherited because there is an explicit inheritance.runtime of "none",
 so it just has the value `{MESSAGE: "Hello"}`; in app4 again the parent's config is ignored,
 with the super-type and entity's config being merged to give  `{MESSAGE: "Hello", MESSAGE_IN_CHILD: "InChild"}`.
 
@@ -535,7 +535,7 @@ services:
         MESSAGE_IN_CHILD: InChild
 {% endhighlight %}
 
-A limitations of `inheritance.parent` is when inheriting values from parent and grandparent 
+A limitations of `inheritance.runtime` is when inheriting values from parent and grandparent
 entities: a value specified on the parent will override (rather than be merged with) the
 value on the grandparent.
 
