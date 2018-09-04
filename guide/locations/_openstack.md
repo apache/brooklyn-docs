@@ -7,24 +7,70 @@ section_position: 7
 
 ## OpenStack
 
-### Apache jclouds
 
-Support for OpenStack is provided by Apache jclouds. For more information, see their guide
+Brooklyn requires the following API to deploy an application onto an OpenStack-based provider
+
+- Identity API (a.k.a. OpenStack Keystone): [Identity API v2](https://developer.openstack.org/api-ref/identity/v2/) and [Identity API v3](https://developer.openstack.org/api-ref/identity/v3/) The Identity API provides an authentication and authorization service for other OpenStack services. It also provides a catalog of endpoints for all OpenStack services, like the Compute service, a.k.a OpenStack Nova.
+
+- Compute API (a.k.a. OpenStack Nova): [Compute API](https://developer.openstack.org/api-ref/compute/) manages the lifecycle of compute instances in an OpenStack environment. Responsibilities include spawning, scheduling and decommissioning of machines on demand by talking to different hypervisors.
+In some old OpenStack installations, `Nova SecurityGroupAPI extension` is generally used to  manage Security Groups, when required.
+
+- Networking API (a.k.a OpenStack Neutron): [Network API v2.0](https://developer.openstack.org/api-ref/network/v2) enables network connectivity as a service for other OpenStack services, such as OpenStack Compute. It provides an API for users to define networks and the attachments into them. It has a pluggable architecture that supports many popular networking vendors and technologies.
+
+Apache jclouds may optionally need to talk to the `OpenStack Neutron API` to manage networks, subnets, security groups and ports, by linking [Neutron Context to Nova Context](http://jclouds.apache.org/blog/2018/02/06/nova-neutron/). 
+
+In some cases it may be required to leverage OpenStack Neutron Extensions such as LoadBalancer-aaS, the FloatingIp API, the Router API or the Firewall-aaS API when available. 
+
+Brooklyn offers supports up to [OpenStack Pike](https://releases.openstack.org/pike/index.html) release via Apache jclouds. For more information, see their guide
 [here](https://jclouds.apache.org/guides/openstack/).
-
 
 ### Connection Details
 
-The endpoint URI is that of keystone (normally on port 5000).
+The endpoint URI is that of keystone (normally on port 5000), notice v2 or v3 suffix may be required.
 
-The identity normally consists of a colon-separated tenant and username. The credential is 
-the password. For example:
+The identity normally consists of a colon-separated tenant and username. The credential is the password. For example:
 
     location:
-      jclouds:openstack-nova:
-        endpoint: http://x.x.x.x:5000/v2.0/
-        identity: "your-tenant:your-username"
-        credential: your-password
+      jclouds:openstack-nova
+        brooklyn.config:
+          endpoint: http://x.x.x.x:5000/v3
+          identity: "your-tenant:your-username"
+          credential: password
+          jclouds.keystone.version: 3 # default is `2`
+          # Authorization Scopes - optional
+          # Project scoped authorization (can use the project name or the ID) 
+          # jclouds.keystone.scope: 'project:project-id' # or 'project:project-name' 
+          # Domain scoped authorization (can use the domain name or the ID)
+          # jclouds.keystone.scope: 'domain:domain-id' # or 'domain:domain-name'
+          
+Notice, by default, openstack-nova location tries to manage network concepts required for the deployment in this order:
+
+1. Use OpenStack Networking API to manage security groups and floating IPs, if linked.
+2. Use OpenStack Nova SecurityGroupApi and FloatingIpApi extensions as fallback strategies, if available.
+
+To link Openstack Neutron context use the following YAML schema:
+
+    location:
+      jclouds:openstack-nova
+        brooklyn.config:
+          endpoint: http://x.x.x.x:5000/v3
+          identity: "your-tenant:your-username"
+          credential: password
+          jclouds.keystone.version: 3 # default is `2`
+          # Authorization Scopes - optional
+          # Project scoped authorization (can use the project name or the ID) 
+          # jclouds.keystone.scope: 'project:project-id' # or 'project:project-name' 
+          # Domain scoped authorization (can use the domain name or the ID)
+          # jclouds.keystone.scope: 'domain:domain-id' # or 'domain:domain-name'
+          # neutron
+          jclouds.linkContext:
+            - $brooklyn:object:
+              type: org.apache.brooklyn.location.jclouds.domain.JcloudsContext
+              object.fields:
+                providerOrApi: openstack-neutron
+                # Additional credentials for OpenStack Neutron - optional
+                # identity: identity # by default, it's OpenStack Nova identity
+                # credential: credential # by default, it's OpenStack Nova credential
 
 OpenStack Nova access information can be downloaded from the openstack web interface, for example 
 as an openrc.sh file. It is usually available from API Access tab in "Access & Security" section.
@@ -33,7 +79,6 @@ This file will normally contain the identity and credential.
 Users are strongly recommended to use 
 [externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
-
 
 ### Common Configuration Options
 
