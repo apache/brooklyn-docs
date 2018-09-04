@@ -110,7 +110,7 @@ The ConnectionFailureDetector is an HA policy for monitoring an http connection,
 
 ### Primary Election / Failover Policies
 
-{% include _elect-primary-policies.md %}
+{% include '_elect-primary-policies.md' %}
 
 
 ### Optimization Policies

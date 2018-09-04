@@ -5,7 +5,7 @@ Contributor Workflow
 --------------------
 
 The contributor workflow is identical to that used by the main project, with
-pull requests and contributor licenses requried. Therefore you should 
+pull requests and contributor licenses required. Therefore you should
 familiarise yourself with the standard workflow for Apache Brooklyn:
 
 * [Guide for contributors][CONTRIB]
