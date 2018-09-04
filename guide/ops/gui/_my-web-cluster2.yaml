@@ -7,7 +7,7 @@ services:
 - type: org.apache.brooklyn.entity.webapp.ControlledDynamicWebAppCluster
   name: My Web
   brooklyn.config:
-    wars.root: http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war
+    wars.root: https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.12.0/brooklyn-example-hello-world-sql-webapp-0.12.0.war # BROOKLYN_VERSION
     java.sysprops:
       brooklyn.example.db.url: >
         $brooklyn:formatString("jdbc:%s%s?user=%s&password=%s",

@@ -49,7 +49,7 @@ brooklyn.catalog:
         id: tomcat
         latch.customize: $brooklyn:entity("es").attributeWhenReady("service.isUp")
         brooklyn.config:
-          wars.root: "http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war"
+          wars.root: https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.12.0/brooklyn-example-hello-world-sql-webapp-0.12.0.war # BROOKLYN_VERSION
           children.startable.mode: background_late
 
         provisioning.properties:
