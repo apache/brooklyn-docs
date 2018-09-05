@@ -61,7 +61,7 @@ location:
 {% sample lang="clouds" -%}
 ### A cloud location
 
-Apache Brooklyn uses [Apcahe jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{book.path.docs}}/locations/index.md#clouds).
+Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/) to support a range of cloud locations. More information on the range of providers and configurations is available [here]({{book.path.docs}}/locations/index.md#clouds).
 
 As an example, here is a configuration for [Amazon Web Services (AWS)](http://www.aws.amazon.com). Swap the identity and credential with your AWS account details, then replace the location in your "myapp.yaml" with this.
 
