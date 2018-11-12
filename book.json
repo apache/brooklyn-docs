@@ -96,8 +96,8 @@
     }
   },
   "variables": {
-    "brooklyn_version": "1.0.0-SNAPSHOT",
-    "brooklyn_version_stable": "0.12.0",
+    "brooklyn_version": "1.0.0-M1",
+    "brooklyn_version_stable": "1.0.0-M1",
     "url": {
       "brooklyn_website": "https://brooklyn.apache.org",
       "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc",
