@@ -30,77 +30,77 @@ The latest stable release can be accessed on the [main download page]({{ book.ur
 	<td style='text-align:left'><a href='{{downloadPrefix}}-bin.tar.gz' title='Download TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-bin.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-bin.tar.gz.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-bin.tar.gz.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-bin.tar.gz.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-bin.zip' title='Download ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-bin.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-bin.zip.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-bin.zip.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-bin.zip.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top'>RPM package<br />CentOS7, RHEL7, etc.</td>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-1.noarch.rpm' title='Download RPM package'>apache-brooklyn-{{ book.brooklyn_version }}-1.noarch.rpm</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}_1.noarch.rpm' title='Download RPM package'>apache-brooklyn-{{ book.brooklyn_version }}-1.noarch.rpm</a></td>
 	<td><small>
-	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-1.noarch.rpm.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-1.noarch.rpm.sha1'>SHA1</a></small></td>
+	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}_1.noarch.rpm.asc'>PGP</a>, {% endif %}
+	  <a href='{{downloadHashPrefix}}_1.noarch.rpm.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top'>DEB package<br />Ubuntu, Debian, etc.</td>
 	<td style='text-align:left'><a href='{{downloadPrefix}}.deb' title='Download DEB package'>apache-brooklyn-{{ book.brooklyn_version }}.deb</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}.deb.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}.deb.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}.deb.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='6'>Client CLI only</td>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.tar.gz' title='Download client CLI linux TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-linux.tar.gz.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-linux.tar.gz.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-linux.tar.gz.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.zip' title='Download client CLI linux ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-linux.zip.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-linux.zip.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-linux.zip.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.tar.gz' title='Download client CLI macosx TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-macosx.tar.gz.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-macosx.tar.gz.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-macosx.tar.gz.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.zip' title='Download client CLI macosx ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-macosx.zip.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-macosx.zip.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-macosx.zip.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.tar.gz' title='Download client CLI windows TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-windows.tar.gz.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-windows.tar.gz.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-windows.tar.gz.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.zip' title='Download client CLI windows ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-windows.zip.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-client-cli-windows.zip.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-client-cli-windows.zip.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='2'>Source code</td>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-src.tar.gz' title='Download source TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-src.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-src.tar.gz.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-src.tar.gz.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-src.tar.gz.sha256'>SHA256</a></small></td>
   </tr>
   <tr>
 	<td style='text-align:left'><a href='{{downloadPrefix}}-src.zip' title='Download source ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-src.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-src.zip.asc'>PGP</a>, {% endif %}
-	  <a href='{{downloadHashPrefix}}-src.zip.sha1'>SHA1</a></small></td>
+	  <a href='{{downloadHashPrefix}}-src.zip.sha256'>SHA256</a></small></td>
   </tr>
 </table>
 
