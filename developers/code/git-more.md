@@ -69,8 +69,8 @@ And also optionally, to set up the official Apache repo as a remote ---
 useful if GitHub is slow to update (and required if you're a committer):
  
 {% highlight bash %}
-git remote add apache-git https://git-wip-us.apache.org/repos/asf/brooklyn
-git submodule foreach 'git remote add apache-git https://git-wip-us.apache.org/repos/asf/${name}'
+git remote add apache-git https://gitbox.apache.org/repos/asf/brooklyn
+git submodule foreach 'git remote add apache-git https://gitbox.apache.org/repos/asf/${name}'
 {% endhighlight %}
 
 

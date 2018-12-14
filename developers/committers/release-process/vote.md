@@ -52,7 +52,7 @@ https://dist.apache.org/repos/dist/release/brooklyn/KEYS
 
 The artifacts were built from Git commit ID
 24a23c5a4fd5967725930b8ceaed61dfbd225980
-https://git-wip-us.apache.org/repos/asf?p=brooklyn.git;a=commit;h=24a23c5a4fd5967725930b8ceaed61dfbd225980
+https://gitbox.apache.org/repos/asf?p=brooklyn.git;a=commit;h=24a23c5a4fd5967725930b8ceaed61dfbd225980
 
 
 Please vote on releasing this package as Apache Brooklyn ${VERSION_NAME}.
