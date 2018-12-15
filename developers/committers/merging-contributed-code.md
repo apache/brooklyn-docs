@@ -6,7 +6,7 @@ title: Merging Contributed Code
 The Apache Brooklyn Git repositories are hosted in the ASF infrastructure and mirrored to Github. This is the current
 repository layout:
 
-- [Apache](https://git-wip-us.apache.org/repos/asf?s=brooklyn) - the main and official repository
+- [Apache](https://gitbox.apache.org/repos/asf?s=brooklyn) - the main and official repository
 - [GitHub](https://github.com/apache/brooklyn) - mirror of the ASF repository, used to accept contributions
   and do code reviews
 
@@ -104,5 +104,5 @@ Particularly for new committers, you may find the following ASF information usef
 
 * [Guide for new project committers](https://www.apache.org/dev/new-committers-guide.html)
 * [Committers FAQ](https://www.apache.org/dev/committers.html)
-* [Git at Apache](https://git-wip-us.apache.org/)
+* [Git at Apache](https://gitbox.apache.org/)
 

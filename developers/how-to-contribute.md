@@ -100,11 +100,11 @@ Congratulations and thank you!
 ### Contributing without using GitHub
 
 If you prefer to not use GitHub, then that is fine - we are also happy to accept patches attached to a Jira issue.
-Our canonical root repository is located at `https://git-wip-us.apache.org/repos/asf/brooklyn.git` with others
+Our canonical root repository is located at `https://gitbox.apache.org/repos/asf/brooklyn.git` with others
 in `brooklyn-*.git`; for example:
 
 {% highlight bash %}
-$ git clone https://git-wip-us.apache.org/repos/asf/brooklyn-server.git
+$ git clone https://gitbox.apache.org/repos/asf/brooklyn-server.git
 {% endhighlight %}
 
 When producing patches, please use `git format-patch` or a similar mechanism - this will ensure that you are properly
