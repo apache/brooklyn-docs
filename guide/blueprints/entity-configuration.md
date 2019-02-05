@@ -58,13 +58,19 @@ and for a complete reference on the syntax of `brooklyn.parameters` see that sec
 
 #### Config Key Constraints
 
-The config keys in the `brooklyn.parameters` can also have constraints defined, for what values
+The config keys in the `brooklyn.parameters` can also have a list of constraints defined, for what values
 are valid. If more than one constraint is defined, then they must all be satisfied. The constraints 
 can be any of:
 
-* `required`: deployment will fail if no value is supplied for this config key.
-* `regex: ...`: the value will be compared against the given regular expression.
-* A predicate, declared using the DSL `$brooklyn:object`.  
+* `required`: deployment will fail if no value is supplied for this config key
+* `regex: <pattern>`: the value must match the regular expression `<pattern>`
+* `glob: <pattern>`: the value must match the bash-style wildcard glob `<pattern>`
+* `urlExists: <url>`: the server must be able to resolve and access the URL `<url>`
+* `forbiddenIf: <key>`: setting a value is disallowed if the config key `<key>` has a value set
+* `forbiddenUnless: <key>`: setting a value is disallowed if the config key `<key>` does not have a value set
+* `requiredIf: <key>`: a value is required if the config key `<key>` has a value set
+* `requiredUnless: <key>`: a value is required if the config key `<key>` does not have a value set
+* Any java `Predicate`, declared using the DSL `$brooklyn:object`.  
 
 This is illustrated in the example below:
 

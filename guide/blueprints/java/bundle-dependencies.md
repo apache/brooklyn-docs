@@ -128,8 +128,10 @@ there are a few options for getting an equivalent OSGi bundle:
 
 * Use the `wrap:` prefix. The [PAX URL Wrap protocol](https://ops4j1.jira.com/wiki/display/paxurl/Wrap+Protocol) 
   is an OSGi URL handler that can process your legacy jar at runtime and transform it into an OSGi bundle.  
-  This can be used when declaring a dependency in your feature.xml, and when using the Karaf console's 
-  `bundle:install`. Note that it is not yet supported in Brooklyn's `brooklyn.libraries` catalog items.
+  This can be used when declaring a dependency in your feature.xml, and when using the Karaf console's
+  `bundle:install`. Note that it is not yet supported in Brooklyn's `brooklyn.libraries` catalog items.  
+  When using `wrap:` include the `Bundle-SymbolicName` and `Bundle-Version` headers as parameters. (e.g.
+  `wrap:mvn:javax.xml.ws/jaxws-api/2.3.0$Bundle-Symbolic-Name=javax.xml.ws.api&amp;Bundle-Version=2.3.0`)
 
 * Re-package the bundle yourself, offline, to produce a valid OSGi bundle.
 
