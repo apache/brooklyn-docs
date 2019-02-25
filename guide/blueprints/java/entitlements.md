@@ -31,7 +31,7 @@ brooklyn.entitlements.global=org.apache.brooklyn.core.mgmt.entitlement.AcmeEntit
 
 The example above refers to a sample manager which is included in the test JARs of Brooklyn,
 which you can see [here]({{book.url.brooklyn_sever_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/core/src/test/java/org/apache/brooklyn/core/mgmt/entitlement/AcmeEntitlementManagerTest.java),
-and include in your project by adding the core tests JAR to your `dropins` folder.
+and include in your project by adding the core tests JAR to your `deploy` folder.
 
 There are some entitlements schemes which exist out of the box, so for a simpler setup,
 see [Operations: Entitlements]({{book.path.docs}}/ops/configuration/brooklyn_cfg.md#entitlements). 

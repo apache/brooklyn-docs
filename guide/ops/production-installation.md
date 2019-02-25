@@ -79,7 +79,8 @@ It is recommended that you update the credentials as detailed in the
 ### Configuring the Catalog
 
 By default Brooklyn loads the catalog of available application components and services from 
-`default.catalog.bom` on the classpath. The initial catalog is in `conf/brooklyn/` in the dist.
+`default.catalog.bom` on the classpath. The initial catalog is in `etc` in the dist or in /etc/brooklyn depending on how
+you installed Brooklyn.
 If you have a preferred catalog, simply replace that file.
 
 [More information on the catalog is available here.]({{book.path.docs}}/blueprints/catalog/index.md)

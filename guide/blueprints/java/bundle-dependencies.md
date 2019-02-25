@@ -5,14 +5,6 @@ title: Handling Bundle Dependencies
 Some Java blueprints will require third party libraries. These need to be made available to the
 Apache Brooklyn runtime. There are a number of ways this can be achieved.
 
-### Classic Mode: Dropins Folder
-
-In Brooklyn classic mode (i.e. when not using Karaf), jars can be added to `./lib/dropins/`.
-After restarting Brooklyn, these will be available on the classpath.
-
-In Brooklyn classic mode, there is an embedded OSGi container. This is used for installing 
-libraries referenced in catalog items.
-
 ### OSGi Bundles
 
 #### Introduction to OSGi Bundles
