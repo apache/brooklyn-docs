@@ -78,6 +78,7 @@ children:
 # <span class="text-apache">apache</span> <span class="text-brooklyn">brooklyn</span>
 
 ## Your applications, any clouds, any containers, anywhere.
+### Apache Brooklyn is software for modelling, monitoring and managing cloud applications through autonomic blueprints.
  
 <a href="#get-started" class="btn btn-primary btn-lg">Get started</a>
 <a href="https://github.com/apache/brooklyn" class="btn btn-link btn-lg"><i class="fa fa-fw fa-github"></i> View code</a>
