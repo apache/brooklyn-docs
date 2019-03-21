@@ -8,9 +8,9 @@ children:
 - ../meta/versions.md
 ---
 
-<h4>
- Apache Brooklyn is software for modelling, monitoring and managing cloud applications through autonomic blueprints.
-</h4>
+<h5>
+ Apache Brooklyn is software for modelling, deploying and managing cloud applications through autonomic blueprints.
+</h5>
 
 <div class="row">
 
