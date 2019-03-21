@@ -62,6 +62,28 @@ Some issues we've encountered are:
  * if `libxml2` fails, set `bundle config build.nokogiri --use-system-libraries` before the install
    (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
  * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
+ * if you run into problems with 
+    ```
+    Could not load OpenSSL.
+    You must recompile Ruby with OpenSSL support or change the sources in your Gemfile from 'https' to 'http'. Instructions for compiling with OpenSSL using RVM are
+    available at rvm.io/packages/openssl.
+    ```
+ * then try 
+    ```
+    rvm reinstall 2.1.2 --with-opt-dir=/usr/local --with-openssl-dir=/usr/local/opt/openssl
+    ```
+
+ * if you run into trouble with therubyracer and v8 then try (from [link](https://stackoverflow.com/questions/19673714/error-installing-libv8-error-failed-to-build-gem-native-extension))
+    ```
+    $ gem install libv8 -v '3.16.14.7' -- --with-system-v8
+    $ bundle install
+    $ gem uninstall libv8
+    $ brew install v8
+    $ gem install therubyracer
+    $ bundle install
+    $ gem install libv8 -v '3.16.14.7' -- --with-system-v8
+    $ bundle install
+    ```
 
 Seeing the Website and Docs
 ---------------------------
