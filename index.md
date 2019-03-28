@@ -78,7 +78,7 @@ children:
 # <span class="text-apache">apache</span> <span class="text-brooklyn">brooklyn</span>
 
 ## Your applications, any clouds, any containers, anywhere.
- 
+
 <a href="#get-started" class="btn btn-primary btn-lg">Get started</a>
 <a href="https://github.com/apache/brooklyn" class="btn btn-link btn-lg"><i class="fa fa-fw fa-github"></i> View code</a>
 
@@ -86,7 +86,9 @@ children:
 </section>
 
 <section class="container about">
-<h3 class="text-center">Use Apache brooklyn for &hellip;</h3>
+<h3 class="text-center">
+ Apache Brooklyn is software for managing cloud applications. Use it for:
+</h3>
 <div class="row">
 
 <div class="col-md-4" markdown="1">
