@@ -12,39 +12,24 @@ children:
  Apache Brooklyn is software for modelling, deploying and managing cloud applications through autonomic blueprints.
 </h5>
 
+## Version {{ site.brooklyn-stable-version }} (recommended)
+Version {{ site.brooklyn-stable-version }} is the current version recommended for production use.
+
 <div class="row">
 
 <div class="col-md-6" markdown="1">
 
 <div class="panel panel-default">
   <div class="panel-heading" markdown="1">
-#### RPM Package
+#### Packages
   </div>
   <div class="panel-body" markdown="1">
 <div style="height: 9em;" markdown="1">
-Suitable for version 7 of CentOS and Red Hat Enterprise Linux.
+RPM package for version 7 of CentOS and Red Hat Enterprise Linux, and a DEB package for Ubuntu and Debian distributions.
 </div>
 
 <div class="text-center">
   <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}-1.noarch.rpm" role="button">RPM package</a>
-</div>
-  </div>
-</div>
-
-</div><!-- col -->
-
-<div class="col-md-6" markdown="1">
-
-<div class="panel panel-default">
-  <div class="panel-heading" markdown="1">
-#### DEB Package
-  </div>
-  <div class="panel-body" markdown="1">
-<div style="height: 9em;" markdown="1">
-Suitable Ubuntu and Debian distributions.
-</div>
-
-<div class="text-center">
   <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-{{ site.brooklyn-stable-version }}/apache-brooklyn-{{ site.brooklyn-stable-version }}.deb" role="button">DEB package</a>
 </div>
   </div>
@@ -121,6 +106,103 @@ contribute code changes to Apache Brooklyn, we recommend you get the source code
 
 </div><!-- col -->
 </div><!-- row -->
+
+## Version 1.0.0-M1 (preview “milestone” release)
+Version 1.0.0-M1 is the first milestone to our 1.0.0 release.
+
+<div class="row">
+
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### Packages
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 9em;" markdown="1">
+RPM package for version 7 of CentOS and Red Hat Enterprise Linux, and a DEB package for Ubuntu and Debian distributions.
+</div>
+
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1_1.noarch.rpm" role="button">RPM package</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1.deb" role="button">DEB package</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### Distribution
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 9em;" markdown="1">
+A pre-built package that contains Apache Brooklyn and all of its dependencies in a single, easy-to-run package. 
+*Suitable for Linux and Windows servers and workstations with Java installed
+(Java 1.8 is supported, including OpenJDK, Oracle, and IBM varieties).*
+</div>
+
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-bin.tar.gz" role="button">Tarball</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-bin.zip" role="button">Zip</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### Command line client
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 6.5em;" markdown="1">
+Already got a Brooklyn server? Download just the CLI client here.
+</div>
+
+<div class="text-center" style="margin-bottom: 0.5em">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-linux.tar.gz" role="button">Linux Tarball</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-macosx.tar.gz" role="button">Mac OSX Tarball</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-windows.tar.gz" role="button">Windows Tarball</a>
+</div>
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-linux.zip" role="button">Linux Zip</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-macosx.zip" role="button">Mac OSX Zip</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-client-cli-windows.zip" role="button">Windows Zip</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+<div class="col-md-6" markdown="1">
+
+<div class="panel panel-default">
+  <div class="panel-heading" markdown="1">
+#### Source Code
+  </div>
+  <div class="panel-body" markdown="1">
+<div style="height: 9em;" markdown="1">
+The source code for Apache Brooklyn. Use this to build your own binaries and make private modifications. *If you want to
+contribute code changes to Apache Brooklyn, we recommend you get the source code from version control. Visit the
+[Developers pages](../developers/index.html) to find out more.*
+</div>
+
+<div class="text-center">
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-src.tar.gz" role="button">Tarball</a>
+  <a class="btn btn-default" href="https://www.apache.org/dyn/closer.lua?action=download&filename=brooklyn/apache-brooklyn-1.0.0-M1/apache-brooklyn-1.0.0-M1-src.zip" role="button">Zip</a>
+</div>
+  </div>
+</div>
+
+</div><!-- col -->
+</div><!-- row -->
+
+## All other versions
 
 A full list of download links including Maven coordinates are [here]({{ site.path.guide }}/misc/download.html).
 <br/><br/>
