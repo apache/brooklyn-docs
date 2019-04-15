@@ -22,10 +22,12 @@ for the Brooklyn docs. These are detailed in the [contributing to docs](https://
 Workstation Setup
 -----------------
 
+### Manual installation
+
 First, if you have not already done so, clone the `brooklyn` repository and subprojects
 and set up the remotes as described in [Guide for committers][COMMIT].
 
-The Brooklyn documentation uses [Jekyll](https://jekyllrb.com/) to process the site content into HTML. 
+The Brooklyn website uses [Jekyll](https://jekyllrb.com/) to process the site content into HTML. 
 This in turn requires Ruby and gems as described in the `Gemfile`:
 install [RVM](http://rvm.io/) to manage Ruby installations and sets of Ruby gems.
 
@@ -85,8 +87,24 @@ Some issues we've encountered are:
     $ bundle install
     ```
 
-Seeing the Website and Docs
----------------------------
+### Using Docker
+
+The project comes with a `Dockerfile` that contains everything you need to build. First, build the docker image
+
+```sh
+docker build -t brooklyn:docs-website .
+```
+
+Then run the build:
+
+```sh
+docker run -it --rm -v ${PWD}:/usr/workspace brooklyn:docs-website "./_build/build.sh website-root"
+```
+
+Seeing the Website
+------------------
+
+### Manual installation
 
 To build and most of see the documentation, run this command in this folder:
 
@@ -101,23 +119,16 @@ to generate a site in `_site` without a server.
 This does <i>not</i> generate API docs and certain other material;
 see the notes on `_build/build.sh` below for that.
 
+### Using Docker
+
+Run the following command
+
+```sh
+docker run -it --rm -v ${PWD}:/usr/workspace -p4000:4000 brooklyn:docs-website "./_build/build.sh website-root --serve"
+```
 
 Project Structure
 -----------------
-
-Note that there are two interlinked micro-sites in this project:
-
-* `/website`: this contains the main Brooklyn website, including committer instructions,
-  download instructions, and "learn more" pages;
-  this content has **only one instance** on the live website,
-  and as changes are published they replace old content
-  
-* `/guide`: this contains the user guide and information pertaining to a 
-  specific Brooklyn version, including code structure and API documentation;
-  the live website contains a **copy of the guide for each Brooklyn version**,
-  with the code coming from the corresponding branch in `git`
-
-In addition note the following folders:
 
 * `/style`: contains JS, CSS, and image resources;
   on the live website, this folder is installed at the root *and* 
@@ -137,14 +148,8 @@ Jekyll automatically excludes any file or folder beginning with `_`
 from direct processing, so these do *not* show up in the `_site` folder
 (except where they are embedded in other files).  
 
-**A word on branches:**  The `/website` folder can be built against any branch;
-typically changes are made and published from `master`, to ensure that all versions
-are listed correctly.
-In contrast the `/guide` folder should be updated and built against the branch for which 
-instructions are being made, e.g. `master` for latest snapshot updates, 
-or `0.7.0-M2` for that milestone release.
-It *is* permitted to make changes to docs (and docs only!) after a release has
-been made. In most cases, these changes should also be made to master.
+**A word on branches:**  The website lives in the `website` branch whereas the documentation lives in the `master` branch.
+The 2 are completely separated micro-site, with their own build tools and process.
 
 
 Website Structure
@@ -165,8 +170,8 @@ Apache subversion repository, `brooklyn-site-public` at
 See below for more information.
 
 
-Building the Website and Guide
-------------------------------
+Building the Website
+--------------------
 
 For most users, the `jekyll serve` command described above is sufficient to test changes locally.
 The main reason to use the build scripts (and to read this section) is to push changes to the server
@@ -180,17 +185,12 @@ There are a number of different builds possible; to list these, run:
 The normal build outputs to `_site/`.  The three builds which are most relevant to updating the live site are:
 
 * **website-root**: to build the website only, in the root
-* **guide-latest**: to build the guide only, in `/v/latest/`
-* **guide-version**: to build the guide only, in the versioned namespace e.g. `/v/<version>/`
 
-There are some others, including `test-both`, which apply slightly different configurations
-useful for testing.
-Supported options beyond that include `--serve`, to start a web browser serving the content of `_site/`,
-and `--skip-javadoc`, to speed up the build significantly by skipping javadoc generation.
+If you which to serve the website locally, you can use the option `--serve` to start a web server, serving the content of `_site/`.
 A handy command for testing the live files, analogous to `jekyll serve` 
 but with the correct file structure, and then checking links, is:
 
-    _build/build.sh test-both --skip-javadoc --serve
+    _build/build.sh website-root --serve
 
 And to run link-checks quickly (without validating external links), use:
 
@@ -214,8 +214,8 @@ When doing a release and changing versions:
   * Optionally build and public `guide-version`
  
 
-Publishing the Website and Guide
---------------------------------
+Publishing the Website
+----------------------
 
 The Apache website publication process is based around the Subversion repository; 
 the generated HTML files must be checked in to Subversion, whereupon an automated process 
@@ -251,14 +251,8 @@ copied to `${BROOKLYN_SITE_DIR-../../brooklyn-site-public}`:
     svn up
     cd -
 
-    # versioned guide, safe for snapshots, relative to /v/<version>/
-    _build/build.sh guide-version --install
-
     # main website, if desired, relative to / 
     _build/build.sh website-root --install
-    
-    # this version as the latest guide, if desired, relative to /v/latest/
-    _build/build.sh guide-latest --install
     
 (If HTML-Proofer find failures, then fix the links etc. Unfortunately, the javadoc build 
 gives a lot of warnings. Fixing those is not part of this activity).
@@ -300,12 +294,3 @@ We use some custom Jekyll plugins, in the `_plugins` dir:
 * include markdown files inside other files (see, for example, the `*.include.md` files 
   which contain text which is used in multiple other files)
 * generate the site structure / menu objects
-
-
-# Versions
-
-Archived versions are kept under `/v/` in the website.  New versions should be added with
-the appropriate directory (`_build/build.sh guide-version` above will do this).  
-These versions take their own copy of the `style` files so that changes there will not affect future versions.
-
-A list of available versions is in `website/meta/versions.md`.
