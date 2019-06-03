@@ -13,7 +13,7 @@ conjunction with a shell pipeline like `some_command | cut -f 1 -d '|' | xargs -
 
 ## Login
 First, login to the running Brooklyn server.  This example assumes that the Brooklyn server
-is running on `localhost`; change the URL and credentials as necessary.
+is running on `localhost` configured to use basic authorization; change the URL and credentials as necessary.
 
 ```text
 $ br login http://localhost:8081 admin
