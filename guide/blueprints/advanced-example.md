@@ -27,7 +27,7 @@ For more about the ELK stack, please see the documentation [here](https://www.el
 #### The Blueprints
 -----------
 
-There are four blueprints that make up this application. Each of them are used to add one or more catalog items to Brooklyn. You can find them below:
+There are four blueprints that make up this application. Each of them is used to add one or more catalog items to Brooklyn. You can find them below:
 
 * [Elasticsearch](example_yaml/brooklyn-elasticsearch-catalog.bom)
 * [Logstash](example_yaml/brooklyn-logstash-catalog.bom)
@@ -36,10 +36,10 @@ There are four blueprints that make up this application. Each of them are used t
 
 #### Running the example
 First, add all four blueprints to the Brooklyn Catalog. This can be done by going to the "Catalog" module, then clicking the
-buttom "Upload to catalog" and selecting the above blueprints (or drag-and-drop them) Once this is done, search for an
+button "Upload to catalog" and selecting the above blueprints (or drag-and-drop them). Alternatively, use the `br` Brooklyn
+command line tool and add the files with `br catalog add`. Once this is done, search for an
 entity called "ELK Stack". You will be able to deploy it by clicking on the "Deploy" button from the details page.
-Note that you can also perform this operation from the quick launch panel on the homepage. Alternatively use the `br` Brooklyn
-command line tool and add the files with `br catalog add`.
+Note that you can also perform this operation from the quick launch panel on the homepage.
 
 #### Exploring the example
 After the application has been deployed, you can ensure it is working as expected by checking the following:
@@ -98,7 +98,7 @@ customize.command: |
 The purpose of this section is to create a YAML file with all of the required configuration. We use the YAML 
 literal style `|` indicator to write a multi line command. We start our series of commands by using the `rm` command to remove the 
 previous config file. We then use `echo` and `tee` to create the new config file and insert the config. Part 
-of the configuration is a list of all hosts that is set on the parent entity- this is done by using a combination
+of the configuration is a list of all hosts that is set on the parent entity – this is done by using a combination
  of the `component` and  `attributeWhenReady` DSL commands. More on how this is generated later.
 
 ##### Check running
