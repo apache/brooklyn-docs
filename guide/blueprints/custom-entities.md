@@ -240,7 +240,7 @@ so that the `$message` we passed above gets logged and reported back:
 #### Windows Command Sensor
 
 Like the blueprint above, the following example also uses `brooklyn.initializers` to define sensors on the entity,
-this time however it is a windows VM and uses `WinRmCommandSensor`.
+this time however it is a Windows VM and uses `WinRmCommandSensor`.
 
     - type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
       brooklyn.config:
@@ -264,7 +264,7 @@ health-check.
 See documentation on the [Entity's error status]({{book.path.docs}}/ops/troubleshooting/overview.md#entitys-error-status)
 for how Brooklyn models an entity's health.
 
-In the snippet below, we'll define a new health-check sensor (via http polling), and will automatically add this
+In the snippet below, we'll define a new health-check sensor (via HTTP polling), and will automatically add this
 to the `service.notUp.indicators`. If that map is non-empty, then the entity's `service.isUp` will be set
 automatically to `false`:
 
@@ -303,10 +303,10 @@ automatically to `false`:
                   - "no value"
 
 The `HttpRequestSensor` configures the entity to poll every 5 seconds on the given URI,
-taking the json result as the sensor value.
+taking the JSON result as the sensor value.
 
 The `UpdatingMap` enricher uses that sensor to populate an entry in the `service.notUp.indicators`.
-It transforms the `http.healthy` sensor value using the given function: if the http poll returned
+It transforms the `http.healthy` sensor value using the given function: if the HTTP poll returned
 `true`, then it is mapped to `null` (so is removed from the `service.noUp.indicators`); if the
 poll returned `false`, then `"false"` is added to the indicators map; otherwise `"no value"` is
 added to the indicators map.

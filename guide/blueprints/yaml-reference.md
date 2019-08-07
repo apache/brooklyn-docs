@@ -59,7 +59,7 @@ the entity being defined, with these being the most common:
 
   * `org.apache.brooklyn.core.sensor.windows.WinRmCommandSensor`: For a command supplied via WinRm. Takes a `name`, `command`,
     and optionally a `period` and `executionDir`, to create a sensor feed which populates the sensor with
-    the given name by running the given command (on an entity which as an winrm-able machine).<br/>
+    the given name by running the given command (on an entity which as an WinRM-able machine).<br/>
     _`"~"` will use the default execution directory for the WinRm session which is usually `%USERPROFILE%`_
 
 * `brooklyn.parameters`: documents a list of typed parameters the entity accepts.

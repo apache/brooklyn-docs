@@ -130,7 +130,7 @@ try connecting to a specific TCP port using `telnet <address> <port>`.
 ### Firewalls
 
 What firewall(s) are running on the machine, and are the required ports open?
-On linux, check things like `iptables`, `firewalld`, `ufw` or other commercial
+On Linux, check things like `iptables`, `firewalld`, `ufw` or other commercial
 firewalls. On Windows, check the settings of the 
 [Windows Firewall](https://en.wikipedia.org/wiki/Windows_Firewall).
 

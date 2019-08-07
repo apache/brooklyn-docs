@@ -3,7 +3,7 @@ title: Windows Blueprints
 ---
 
 Brooklyn can deploy to Windows servers using WinRM to run commands. These deployments can be 
-expressed in pure YAML, and utilise Powershell to install and manage the software process. 
+expressed in pure YAML, and utilise PowerShell to install and manage the software process. 
 This approach is similar to the use of SSH for UNIX-like servers.
 
 
@@ -72,7 +72,7 @@ to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead o
 [documentation for VanillaSoftwareProcess]({{book.path.docs}}/blueprints/custom-entities.md#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
-Entity authors are strongly encouraged to write Windows Powershell or Batch scripts as separate 
+Entity authors are strongly encouraged to write Windows PowerShell or Batch scripts as separate 
 files, to configure these to be uploaded, and then to configure the appropriate command as a 
 single line that executes given script.
 
@@ -117,7 +117,7 @@ The installation script - referred to as `/Users/richard/install7zip.ps1` in the
 
 Where security-related operation are to be executed, it may require the use of `CredSSP` to obtain
 the correct Administrator privileges: you may otherwise get an access denied error. See the sub-section 
-[How and Why to re-authenticate within a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
+[How and Why to re-authenticate within a PowerShell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
 Brooklyn source code]({{book.url.brooklyn_library_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
@@ -135,23 +135,23 @@ Blueprint authors are strongly encouraged to provide an implementation for insta
 and checkRunning. These are vital for the generic effectors such as stopping and restarting the 
 process.
 
-### Powershell
+### PowerShell
 
-Powershell commands can be supplied using config options such as `launch.powershell.command`.
+PowerShell commands can be supplied using config options such as `launch.powershell.command`.
 
 This is an alternative to supplying a standard batch command using config such as `launch.command`.
-For a given phase, only one of the commands (Powershell or Batch) should be supplied.
+For a given phase, only one of the commands (PowerShell or Batch) should be supplied.
 
 ### Getting the Right Exit Codes
 
 WinRM (or at least the chosen WinRM client!) can return a zero exit code even on error in certain 
 circumstances. It is therefore advisable to follow the guidelines below.
 
-*For a given command, write the Powershell or Batch script as a separate multi-command file. 
+*For a given command, write the PowerShell or Batch script as a separate multi-command file. 
 Upload this (e.g. by including it in the `files.preinstall` configuration). For the configuration
 of the given command, execute the file.*
 
-When you have a command inside the powershell script which want to report its non zero exiting, 
+When you have a command inside the PowerShell script which want to report its non zero exiting, 
 please consider adding a check for its exit code after it.
 Example:
 
@@ -160,7 +160,7 @@ Example:
         exit $lastexitcode
     }
 
-For Powershell files, consider including 
+For PowerShell files, consider including 
 
     $ErrorActionPreference = "Stop"
 
@@ -175,7 +175,7 @@ See [Incorrect Exit Codes](#incorrect-exit-codes) under Known Limitations below.
 
 ### Executing Scripts From Batch Commands
 
-In a batch command, you can execute a batch file or Powershell file. For example:
+In a batch command, you can execute a batch file or PowerShell file. For example:
 
     install.command: powershell -NonInteractive -NoProfile -Command "C:\\install7zip.ps1"
 
@@ -183,10 +183,10 @@ Or alternatively:
 
     install.command: C:\\install7zip.bat
 
-### Executing Scripts From Powershell
+### Executing Scripts From PowerShell
 
-In a Powershell command, you can execute a batch file or Powershell file. There are many ways
-to do this (see official Powershell docs). For example:
+In a PowerShell command, you can execute a batch file or PowerShell file. There are many ways
+to do this (see official PowerShell docs). For example:
  
     install.powershell.command: "& C:\\install7zip.ps1"
 
@@ -198,12 +198,12 @@ Note the quotes around the command. This is because the "&" has special meaning 
 
 ### Parameterised Scripts
 
-Calling parameterised Batch and Powershell scripts is done in the normal Windows way - see
+Calling parameterised Batch and PowerShell scripts is done in the normal Windows way - see
 offical Microsoft docs. For example:
 
     install.command: "c:\\myscript.bat myarg1 myarg2"
 
-Or as a Powershell example:
+Or as a PowerShell example:
 
     install.powershell.command: "& c:\\myscript.ps1 -key1 myarg1 -key2 myarg2"
 
@@ -212,13 +212,13 @@ other entities using the standard `attributeWhenReady` mechanism. For example:
 
     install.command: $brooklyn:formatString("c:\\myscript.bat %s", component("db").attributeWhenReady("datastore.url"))
 
-### Powershell - Using Start-Process
+### PowerShell - Using Start-Process
 
-When you are invoking a command from a powershell script with `Start-Process` cmdlet,
+When you are invoking a command from a PowerShell script with `Start-Process` cmdlet,
 please use the `-Wait` and the `-PassThru` arguments.
 Example `Start-Process C:\mycommand -Wait -PassThru`
 
-Using `-Wait` guarantees that the script process and its children and thus the winrm session won't be terminated until it is finished.
+Using `-Wait` guarantees that the script process and its children and thus the WinRM session won't be terminated until it is finished.
 `-PassThru` Returns a process object for each process that the cmdlet started. By default, this cmdlet does not generate any output.
 See https://technet.microsoft.com/en-us/library/hh849848.aspx
 
@@ -229,15 +229,15 @@ config like `pre.install.reboot.required` and `install.reboot.required`. If requ
 installation commands can be split between the pre-install, install and post-install phases
 in order to do a reboot at the appropriate point of the VM setup.
 
-We Strongly recommend to **write blueprints in a way that they do NOT restart automatically windows** and
+We Strongly recommend to **write blueprints in a way that they do NOT restart automatically Windows** and
 use one of the `pre.install.reboot.required` or `install.reboot.required` parameters to perform restart.
 
 ### Install Location
 
 Blueprint authors are encouraged to explicitly specify the full path for file uploads, and 
-for paths in their Powershell scripts (e.g. for installation, configuration files, log files, etc).
+for paths in their PowerShell scripts (e.g. for installation, configuration files, log files, etc).
 
-### How and Why to re-authenticate within a powershell script
+### How and Why to re-authenticate within a PowerShell script
 
 Some installation scripts require the use of security-related operations. In some environments,  
 these fail by default when executed over WinRM, even though the script may succeed when run locally   
@@ -251,15 +251,15 @@ solution is to obtain a new set of credentials within the script and use those c
 required commands.
 
 The WinRM client uses Negotiate+NTLM to authenticate against the machine.
-This mechanism applies certain restrictions to executing commands on the windows host.
+This mechanism applies certain restrictions to executing commands on the Windows host.
 
-For this reason you should enable CredSSP on the windows host which grants all privileges available to the user.
+For this reason you should enable CredSSP on the Windows host which grants all privileges available to the user.
  https://technet.microsoft.com/en-us/library/hh849719.aspx#sectionSection4
 
 To use `Invoke-Command -Authentication CredSSP` the Windows Machine has to have:
-- Up and running WinRM over http. The custom-enable-credssp.ps1 script enables winrm over http because `Invoke-Command` use winrm over http by default.
-  Invoke-Command can be used with -UseSSL option but this will lead to modifying powershell scripts.
-  With always enabling winrm over http on the host, blueprint's powershell scripts remain consistent and not depend on the winrm https/http environments.
+- Up and running WinRM over HTTP. The custom-enable-credssp.ps1 script enables WinRM over HTTP because `Invoke-Command` use WinRM over HTTP by default.
+  Invoke-Command can be used with -UseSSL option but this will lead to modifying PowerShell scripts.
+  With always enabling WinRM over HTTP on the host, blueprint's PowerShell scripts remain consistent and not depend on the WinRM HTTPS/HTTP environments.
   We hope future versions of winrm4j will support CredSSP out of the box and wrapping commands in Invoke-Command will not be needed.
 - Added trusted host entries which will use Invoke-Command
 - Allowed CredSSP
@@ -332,9 +332,9 @@ a similarly named AMI. For example:
     brooklyn.location.named.AWS\ Oregon\ Win.imageOwner = 801119661308
     ...
 
-## stdout and stderr in a Powershell script
+## stdout and stderr in a PowerShell script
 
-When calling an executable in a Powershell script, the stdout and stderr will usually be output to the console.
+When calling an executable in a PowerShell script, the stdout and stderr will usually be output to the console.
 This is captured by Brooklyn, and shown in the activities view under the specific tasks.
 
 An alternative is to redirect stdout and stderr to a file on the VM, which can be helpful if one expects sys admins
@@ -350,7 +350,7 @@ For example, instead of running the following:
 
 The `-ArgumentList` is simply the arguments that are to be passed to the executable, `-RedirectStandardOutput` and
 `RedirectStandardError` take file locations for the output (if the file already exists, it will be overwritten). The
-`-PassThru` argument indicates that Powershell should write to the file *in addition* to the console, rather than
+`-PassThru` argument indicates that PowerShell should write to the file *in addition* to the console, rather than
 *instead* of the console. The `-Wait` argument will cause the scriptlet to block until the process is complete.
 
 Further details can be found on the [Start-Process documentation page](https://technet.microsoft.com/en-us/library/hh849848.aspx)
@@ -379,7 +379,7 @@ else then the setup will not be done and the VM may not not be accessible remote
 When a script is run over WinRM over HTTP, the credentials under which the script are run are marked as
 'remote' credentials, which are prohibited from running certain security-related operations. This may prevent certain
 operations. The installer from Microsoft SQL Server is known to fail in this case, for example. For a workaround, please
-refer to [How and Why to re-authenticate withing a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) 
+refer to [How and Why to re-authenticate withing a PowerShell script](#how-and-why-to-re-authenticate-within-a-powershell-script) 
 above.
 
 ### WebServiceException: Could not send Message
@@ -411,7 +411,7 @@ Logging in the host and search for System event of type 1074 in Windows Event Vi
     The process C:\Windows\system32\winlogon.exe (W2K12-STD) has initiated the restart of computer WIN-XXXX on behalf of user
     NT AUTHORITY\SYSTEM for the following reason: Operating System: Upgrade (Planned) Reason Code: 0x80020003 Shutdown Type: restart Comment:
 
-Normally on other clouds only one restart event is registered and the first time winrm connection is made the Windows VM is ready for use. 
+Normally on other clouds only one restart event is registered and the first time WinRM connection is made the Windows VM is ready for use. 
 
 For this particular case when you want this second restart to finish we made `waitWindowsToStart` location parameter
 which basically adds additional check assuring the Windows VM provisioning is done.
@@ -419,7 +419,7 @@ which basically adds additional check assuring the Windows VM provisioning is do
 
 For example when using `waitWindowsToStart: 5m` location parameter, Apache Brooklyn will wait 5 minutes to see if a disconnect occurs.
 If it does, then it will again wait 5m for the machine to come back up.
-The default behaviour in Apache Brooklyn is to consider provisioning done on the first successful winrm connection, without waiting for restart. 
+The default behaviour in Apache Brooklyn is to consider provisioning done on the first successful WinRM connection, without waiting for restart. 
 
 
 To determine whether you should use this parameter you should carefully inspect how the image you choose to provision is behaving.
@@ -506,9 +506,9 @@ Currently Apache Brooklyn will accept any certificate used in a HTTPS WinRM conn
 
 Some limitations with WinRM (or at least the chosen WinRM Client!) are listed below:
 
-##### Single-line Powershell files
+##### Single-line PowerShell files
 
-When a Powershell file contains just a single command, the execution of that file over WinRM returns exit code 0
+When a PowerShell file contains just a single command, the execution of that file over WinRM returns exit code 0
 even if the command fails! This is the case for even simple examples like `exit 1` or `thisFileDoesNotExist.exe`.
 
 A workaround is to add an initial command, for example:
@@ -516,9 +516,9 @@ A workaround is to add an initial command, for example:
     Write-Host dummy line for workaround 
     exit 1
 
-##### Direct Configuration of Powershell commands
+##### Direct Configuration of PowerShell commands
 
-If a command is directly configured with Powershell that includes `exit`, the return code over WinRM
+If a command is directly configured with PowerShell that includes `exit`, the return code over WinRM
 is not respected. For example, the command below will receive an exit code of 0.
 
     launch.powershell.command: |
@@ -534,10 +534,10 @@ is not respected. For example, the command below will receive an exit code of 0.
 
 ##### Non-zero Exit Code Returned as One
 
-If a batch or Powershell file exits with an exit code greater than one (or negative), this will 
+If a batch or PowerShell file exits with an exit code greater than one (or negative), this will 
 be reported as 1 over WinRM.
 
-We advise you to use native commands (non-powershell ones) since executing it as a native command
+We advise you to use native commands (non-PowerShell ones) since executing it as a native command
 will return the exact exit code rather than 1.
 For instance if you have installmssql.ps1 script use `install.command: powershell -command "C:\\installmssql.ps1"`
 rather than using `install.powershell.command: "C:\\installmssql.ps1"`
@@ -590,18 +590,18 @@ of the exit code for the commands executed.
 ### Install location
 
 Work is required to better configure a default install location on the VM (e.g. so that 
-environment variables are set). The installation pattern for linux-based blueprints,
+environment variables are set). The installation pattern for Linux-based blueprints,
 of using brooklyn-managed-processes/installs, is not used or recommended on Windows.
 Files will be uploaded to C:\ if no explicit directory is supplied, which is untidy, 
 unnecessarily exposes the scripts to the user, and could cause conflicts if multiple 
 entities are installed.
 
 Blueprint authors are strongly encourages to explicitly specific directories for file
-uploads and in their Powershell scripts.
+uploads and in their PowerShell scripts.
 
 ### Windows template settings for an Unattended Installation
 
-Windows template needs certain configuration to be applied to prevent windows setup UI from being displayed.
+Windows template needs certain configuration to be applied to prevent Windows setup UI from being displayed.
 The default behavior is to display it if there are incorrect or empty settings. Showing Setup UI will prevent the proper
 deployment, because it will expect interaction by the user such as agreeing on the license agreement or some of the setup dialogs.
 

@@ -183,7 +183,7 @@ placeholder values for the identity, credential and password.
 
 ```properties
 brooklyn.location.named.myazure=jclouds:azurecompute:West Europe
-brooklyn.location.named.myazure.displayName=Azure West Europe (windows)
+brooklyn.location.named.myazure.displayName=Azure West Europe (Windows)
 brooklyn.location.named.myazure.identity=$HOME/.brooklyn/azure.p12
 brooklyn.location.named.myazure.credential=<P12_EXPORT_PASSWORD>
 brooklyn.location.named.myazure.endpoint=https://management.core.windows.net/<YOUR_SUBSCRIPTION_ID>
@@ -217,7 +217,7 @@ by the cloud provider and is then retrieved via the cloud provider's API after p
 ##### WinRM Configuration
 
 The WinRM initialization in Azure is achieved through configuration options in the VM provisioning request.
-The required configuration is to enabled HTTPS (if Azure is told to use http, the VM comes pre-configured 
+The required configuration is to enabled HTTPS (if Azure is told to use HTTP, the VM comes pre-configured 
 with WinRM encrypted over HTTP). The default is then to support NTLM protocol.
 
 The setup of Windows VMs on Azure differs from that on other clouds, such as AWS. In contrast, on AWS an 

@@ -31,7 +31,7 @@ simply [download and launch]({{book.path.docs}}/start/running.md) Brooklyn, open
 Click on the tile "Blueprint Composer", then on the double-arrow located on the top right of the screen (to switch to the YAML mode),
 paste the copied YAML into the editor and press "Deploy". 
 There are several other ways to deploy, including `curl` and via the command-line,
-and you can configure users, https, persistence, and more, 
+and you can configure users, HTTPS, persistence, and more, 
 as described [in the ops guide]({{book.path.docs}}/ops/index.md).
 
 [![Web Console](web-console-yaml-700.png "YAML via Web Console")](web-console-yaml.png)

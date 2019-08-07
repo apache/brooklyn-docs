@@ -104,7 +104,7 @@ The SshMachineFailureDetector is an HA policy for monitoring an SshMachine, emit
 
 - org.apache.brooklyn.policy.ha.ConnectionFailureDetector
 
-The ConnectionFailureDetector is an HA policy for monitoring an http connection, emitting an event if the connection is lost/restored.
+The ConnectionFailureDetector is an HA policy for monitoring an HTTP connection, emitting an event if the connection is lost/restored.
 
 
 ### Primary Election / Failover Policies

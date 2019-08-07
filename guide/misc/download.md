@@ -54,37 +54,37 @@ The latest stable release can be accessed on the [main download page]({{ book.ur
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='6'>Client CLI only</td>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.tar.gz' title='Download client CLI linux TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.tar.gz' title='Download client CLI Linux TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-linux.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-linux.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.zip' title='Download client CLI linux ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.zip</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-linux.zip' title='Download client CLI Linux ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-linux.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-linux.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-linux.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.tar.gz' title='Download client CLI macosx TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.tar.gz' title='Download client CLI Mac OS X TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-macosx.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-macosx.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.zip' title='Download client CLI macosx ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.zip</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-macosx.zip' title='Download client CLI Mac OS X ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-macosx.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-macosx.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-macosx.zip.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.tar.gz' title='Download client CLI windows TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.tar.gz</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.tar.gz' title='Download client CLI Windows TGZ archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.tar.gz</a></td>
 	<td ><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-windows.tar.gz.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-windows.tar.gz.sha1'>SHA1</a></small></td>
   </tr>
   <tr>
-	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.zip' title='Download client CLI windows ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.zip</a></td>
+	<td style='text-align:left'><a href='{{downloadPrefix}}-client-cli-windows.zip' title='Download client CLI Windows ZIP archive'>apache-brooklyn-{{ book.brooklyn_version }}-client-cli-windows.zip</a></td>
 	<td><small>
 	  {% if not isSnapshot %}<a href='{{downloadHashPrefix}}-client-cli-windows.zip.asc'>PGP</a>, {% endif %}
 	  <a href='{{downloadHashPrefix}}-client-cli-windows.zip.sha1'>SHA1</a></small></td>

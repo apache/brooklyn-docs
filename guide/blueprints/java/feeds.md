@@ -34,7 +34,7 @@ important that the entity's `rebind()` method recreates the feed.
 
 ##### HTTP Feed
 
-An `HttpFeed` polls over http(s). An example is shown below:
+An `HttpFeed` polls over HTTP(S). An example is shown below:
 
 ```java
 private HttpFeed feed;
@@ -94,7 +94,7 @@ protected void disconnectSensors() {
 
 ##### WinRm CMD Feed
 
-A WinRM feed executes a windows command over winrm periodically. An example is shown below:
+A WinRM feed executes a Windows command over WinRM periodically. An example is shown below:
 
 ```java
 private AbstractCommandFeed feed;
@@ -126,7 +126,7 @@ This type of feed retrieves performance counters from a Windows host, and posts 
 One must supply a collection of mappings between Windows performance counter names and Brooklyn 
 attribute sensors.
 
-This feed uses WinRM to invoke the windows utility <tt>typeperf</tt> to query for a specific set 
+This feed uses WinRM to invoke the Windows utility <tt>typeperf</tt> to query for a specific set 
 of performance counters, by name. The values are extracted from the response, and published to the
 entity's sensors. An example is shown below:
 

@@ -9,7 +9,7 @@ Brooklyn is split into the following subprojects:
     * **camp**: the components for a server which speaks with the CAMP REST API and understands the CAMP YAML plan language
     * **core**: the base class implementations for entities and applications, entity traits, locations, policies, sensor and effector support, tasks, and more
     * **karaf**: OSGi support
-    * **launcher**: for launching brooklyn, either using a main method or invoked from the cli project
+    * **launcher**: for launching brooklyn, either using a main method or invoked from the CLI project
     * **locations**: specific location integrations
         * **jclouds**: integration with many cloud APIs and providers via Apache jclouds
     * **logging**: how we enable configurable logging

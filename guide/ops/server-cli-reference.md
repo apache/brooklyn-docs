@@ -50,8 +50,8 @@ The Server CLI arguments for [persistence and HA]({{book.path.docs}}/ops/persist
 
 ### Path Setup
 
-In order to have easy access to the server cli it is useful to configure the PATH environment 
-variable to also point to the cli's bin directory:
+In order to have easy access to the server CLI it is useful to configure the PATH environment 
+variable to also point to the CLI's bin directory:
 
 ```bash
 BROOKLYN_HOME=/path/to/brooklyn/
