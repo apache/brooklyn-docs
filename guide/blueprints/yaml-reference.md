@@ -217,7 +217,7 @@ concise DSL defined here:
   * `parent`: returns the parent entity (ignores the `ID`)
   * `this`: returns this entity (ignores the `ID`)
 * `$brooklyn:root()` will return the topmost entity (the application)
-* `$broopklyn:scopeRoot()` will return the root entity in the current plan scope.
+* `$brooklyn:scopeRoot()` will return the root entity in the current plan scope.
   For catalog items it's the topmost entity in the plan, for application plans it is the same as
   `$brooklyn:root()`.
 * `$brooklyn:formatString("pattern e.g. %s %s", "field 1", "field 2")` returns a future which creates the formatted string
@@ -249,7 +249,7 @@ elements for more information:
   which use `bash` commands to install and the PID to stop and restart
 * **Chef** in `ChefSoftwareProcess`: makes it easy to use Chef cookbooks to build entities,
   either with recipes following conventions or with configuration in the `ServiceSpecification`
-  to use artibitrary recipes 
+  to use arbitrary recipes 
 * `DynamicCluster`: provides resizable clusters given a `dynamiccluster.memberspec` set with `$brooklyn.entitySpec(Map)` as described above 
 * `DynamicFabric`: provides a set of homogeneous instances started in different locations,
   with an effector to `addLocation`, i.e. add a new instance in a given location, at runtime
