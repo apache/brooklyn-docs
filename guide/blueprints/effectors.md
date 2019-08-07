@@ -66,8 +66,8 @@ There are a number of additional configuration keys available for the `HTTPComma
 | httpUsername                      |                  | user name for the authentication                                                                              |
 | httpPassword                      |                  | password for the authentication                                                                               |
 | headers                           | application/json | It explicitly supports `application/x-www-form-urlencoded`                                                    |
-| httpPayload                       |                  | The body of the http request                                                                                  |
-| jsonPath                          |                  | A jsonPath expression to extract values from a json object                                                    |
+| httpPayload                       |                  | The body of the HTTP request                                                                                  |
+| jsonPath                          |                  | A jsonPath expression to extract values from a JSON object                                                    |
 | jsonPathAndSensors                |                  | A map where keys are jsonPath expressions and values the name of the sensor where to publish extracted values |
 
 

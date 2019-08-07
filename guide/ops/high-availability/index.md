@@ -61,7 +61,7 @@ in behaviour:
   a new node-id each time it restarts). This list will get longer and
   longer if you keep restarting Brooklyn, while pointing at the same persisted
   state, until you clear out terminated instances from the list (via the
-  UI or the REST api).
+  UI or the REST API).
 * The logging at startup can be quite different (e.g. in HA mode, "Brooklyn
   initialisation (part two) complete" can mean that the server has finished
   becoming the 'standby'. Care should be taken if searching or parsing the logs.

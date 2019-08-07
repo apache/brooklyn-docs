@@ -29,7 +29,7 @@ Then configure the server as follows:
 * if the "localhost" location will be used, enable [passwordless ssh login]({{book.path.docs}}/locations/index.md#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
-* check that the [linux kernel entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md) is sufficient
+* check that the [Linux kernel entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md) is sufficient
 * check that the [ulimit values]({{book.path.docs}}/ops/troubleshooting/increase-system-resource-limits.md) are sufficiently high
 * ensure external libraries are up-to-date, including `nss` for SSL. 
 * ensure the time is continually accurate, ideally by running a service like the [ntp daemon](http://www.ntp.org/).

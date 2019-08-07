@@ -178,7 +178,7 @@ For more keys and more detail on the keys below, see
   
   `sudo yum-config-manager --disable reponame`
     
-  Base64 encoding can be done with a with a tool such as [this](https://www.base64encode.org/) or a linux command such as:
+  Base64 encoding can be done with a with a tool such as [this](https://www.base64encode.org/) or a Linux command such as:
   
   `echo "sudo yum-config-manager --disable reponame" | base64`
   

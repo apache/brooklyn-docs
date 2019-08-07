@@ -150,5 +150,5 @@ Normally your best bet is then to abandon the guest wifi (e.g. to tether to a mo
 
 There are some unconventional workarounds such as [configuring sshd to listen on port 80 so you can
 use an ssh tunnel](http://askubuntu.com/questions/107173/is-it-possible-to-ssh-through-port-80).
-However, the firewall may well inspect traffic so sending non-http traffic over port 80 may still fail.
+However, the firewall may well inspect traffic so sending non-HTTP traffic over port 80 may still fail.
 

@@ -52,7 +52,7 @@ To describe each part of this:
   and tracked as such. Execution of the effector is intercepted, to track it as a task and show its
   execution in the Activity view.
 * The `@EffectorParam` annotations give metadata about the effector's parameters. This metadata,
-  such as the parameter description, is available to those using the client CLI, rest API and 
+  such as the parameter description, is available to those using the client CLI, REST API and 
   web-console.
 
 Note there is an alternative way of defining effectors - adding them to the entity dynamically, 
@@ -162,4 +162,4 @@ The YAML blueprint below shows an example usage of this blueprint:
 Note the type name matches the id defined in the `.bom` file.
 
 You can now call the effector by any of the standard means - [web console]({{book.path.docs}}/ops/gui/index.md), 
-[REST api]({{book.path.docs}}/ops/rest.md), or [Client CLI]({{book.path.docs}}/ops/cli/index.md).
+[REST API]({{book.path.docs}}/ops/rest.md), or [Client CLI]({{book.path.docs}}/ops/cli/index.md).

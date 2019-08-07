@@ -24,7 +24,7 @@ COMMANDS:
 
    access		Show access control
    activity		Show the activity for an application / entity
-   add-catalog		(deprecated, use catalog add) Add a new catalog item from the supplied YAML (a file or http URL)
+   add-catalog		(deprecated, use catalog add) Add a new catalog item from the supplied YAML (a file or HTTP URL)
    add-children		* Add a child or children to this entity from the supplied YAML
    application		Show the status and location of running applications
    catalog		Catalog operations

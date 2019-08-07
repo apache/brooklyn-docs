@@ -4,13 +4,13 @@ title: Security Guidelines
 
 ## Brooklyn Server
 
-### Web-console and REST api
+### Web-console and REST API
 
 Users are strongly encouraged to use HTTPS, rather than HTTP.
 
 The use of LDAP is encouraged, rather than basic auth.
 
-Configuration of "entitlements" is encouraged, to lock down access to the REST api for different 
+Configuration of "entitlements" is encouraged, to lock down access to the REST API for different 
 users.
 
 

@@ -122,7 +122,7 @@ could be fixed to remove the problem.
 4) Fixing with Groovy Scripts
 
 The final (powerful and dangerous!) tool is to execute Groovy code on the running Brooklyn 
-instance. If authorized, the REST api allows arbitrary Groovy scripts to be passed in and 
+instance. If authorized, the REST API allows arbitrary Groovy scripts to be passed in and 
 executed. This allows the state of entities to be modified (and thus fixed) at runtime.
 
 If used, it is strongly recommended that Groovy scripts are run against a disconnected Brooklyn

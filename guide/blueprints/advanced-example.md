@@ -77,7 +77,7 @@ When composing a YAML blueprint, the VanillaSoftwareProcess is a very useful ent
 A VanillaSoftwareProcess will instruct Brooklyn to provision an instance, and run a series of shell 
 commands to setup, run, monitor and teardown your program. The commands are specified as configuration 
 on the VanillaSoftwareProcess and there are several available. We will spotlight a few now. To simplify
- this blueprint, we have specified ubuntu only installs so that our commands can be tailored to this 
+ this blueprint, we have specified Ubuntu only installs so that our commands can be tailored to this 
  system (e.g. use apt-get rather than yum).
 
 ##### Customize Command

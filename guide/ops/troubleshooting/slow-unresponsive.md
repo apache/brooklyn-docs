@@ -103,7 +103,7 @@ netstat -an | grep ESTABLISHED | wc -l
 
 A lack of entropy can cause random number generation to be extremely slow. This can cause
 tasks like ssh to also be extremely slow. See 
-[linux kernel entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md)
+[Linux kernel entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md)
 for details of how to work around this.
 
 
