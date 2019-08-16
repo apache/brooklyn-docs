@@ -32,8 +32,6 @@ Typically a Brooklyn deployment has a single management context which records:
 
 In a multi-location deployment, management operates in all regions, with brooklyn entity instances being mastered in the relevant region.
 
-When management is distributed a Brooklyn deployment may consist of multiple Brooklyn management nodes each with a ``ManagementContext`` instance.
-
 <!-- TODO - Clarify the following statements.
 The management context entity forms part of the management plane. 
 The management plane is responsible for the distribution of the ``Entity`` instances across multiple machines and multiple locations, 
