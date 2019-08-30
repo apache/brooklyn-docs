@@ -33,7 +33,7 @@ public class ExampleWebApp extends AbstractApplication {
                 .displayName("Cluster")
                 .configure(DynamicCluster.MEMBER_SPEC, EntitySpec.create(TomcatServer.class)
                         .configure(TomcatServer.ROOT_WAR, 
-                                "http://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war")
+                                "https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.12.0/brooklyn-example-hello-world-sql-webapp-0.12.0.war" /* BROOKLYN_VERSION */ )
                         .configure(TomcatServer.JAVA_SYSPROPS.subKey("brooklyn.example.db.url"),
                                 DependentConfiguration.formatString("jdbc:%s%s?user=%s&password=%s",
                                         DependentConfiguration.attributeWhenReady(db, MySqlNode.DATASTORE_URL),
