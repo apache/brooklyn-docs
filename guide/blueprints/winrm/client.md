@@ -33,8 +33,9 @@ and it will be used to instantiate a `org.apache.brooklyn.util.core.internal.win
 
 ## WinRM Connectivity Diagnostics
 
-If you are experiencing problems with a Windows blueprint against a jclouds location 
-where Apache Brooklyn complains about failing to connect to the IP you should check those things.
+If you are experiencing problems with a Windows blueprint,
+with an error about failing to connect (or about an authorization conduit),
+try the following quick list:
 
 1. Apache Brooklyn is using correct username and password
 1. Apache Brooklyn can reach the IP of the provisioned machine. WinRM port 5985 or 5986 is also reachable from Apache Brooklyn.
@@ -42,15 +43,15 @@ where Apache Brooklyn complains about failing to connect to the IP you should ch
    This script should be passed to the cloud and executed in order to configure WinRM according to Apache Brooklyn requirements for authentication.
    So far Windows startup script are known to be supported on AWS EC2 and VCloud Director.
    If your cloud doesn't use this script then tune WinRM parameters accordingly.
-1. Check whether you use WinRM over HTTP or over HTTPS.
-  1. If you are using WinRM over HTTP then make sure WinRM service on target VM has `AllowUnencrypted = true`
+1. Check whether you use WinRM over HTTP or over HTTPS. If you are using WinRM over HTTP then make sure WinRM service on target VM has `AllowUnencrypted = true` (see below).
 
-If the quick list above doesn't help then follow the steps bellow.
+If the quick list above doesn't help then follow the steps below.
 
-To speed up diagnosing the problem we advice to trigger a deployment with the JcloudsLocation flag `destroyOnFailure: false` so you can check status of the provisioned machine
+To speed up diagnosing the problem if you don't already have a static machine to target,
+we advise to trigger a deployment with the JcloudsLocation flag `destroyOnFailure: false` so you can check status of the provisioned machine
 or try later different WinRM parameters with a Apache Brooklyn [BYON Location]({{book.path.docs}}/locations/index.md#byon).
 
-After you determined what is the username and the password you can proceed with next steps.
+After you determine what is the username and the password you can proceed with next steps.
 *(Notice that for cloud providers which use Auto Generated password will not be logged.
 For these cases use Java Debug to retrieve ot or provision a VM manually with the same parameters when using Apache Brooklyn to provision a jclouds location.)*
 
@@ -102,8 +103,9 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 
 1. Check IP is reachable from Apache Brooklyn instance
    Check whether `telnet 10.0.0.1 5985` makes successfully a socket.
-1. If AllowUnencrypted is false and you are using WinRM over HTTP then apply `winrm set winrm/config/service @{AllowUnencrypted="true"}`
-   *If jclouds or the cloud provider doesn't support passing `sysprep-specialize-script-cmd` then consider modifying Windows VM Image.* 
+1. Check that WinRM works, before delving deep in to the client: `Test-WSMan TARGET` and/or `winrs -r:10.0.2.15 -unencrypted -u:Administrator -p:pa55w0rd ipconfig`;
+   many of the tips below will fix underlying WinRM problems, not just Winrm4j.
+   *If the cloud provider doesn't support passing `sysprep-specialize-script-cmd` it may be necessary to modify the source Windows VM image to enable WinRM.* 
 1. Check your username and password. Notice in Windows passwords are case sensitive.
    Here is how it looks log from a wrong password:
 
@@ -113,12 +115,12 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
         org.apache.cxf.interceptor.Fault: Could not send Message.
         at org.apache.cxf.interceptor.MessageSenderInterceptor$MessageSenderEndingInterceptor.handleMessage(MessageSenderInterceptor.java:64)
 
-1. When having wrong password you may want to try logging on a different domain
-   This is possible from `brooklyn.winrm.config.winrm.computerName` location config.
+1. Try `./User` instead of `User`.
+1. Check whether you need to specify a different domain: this is possible from `brooklyn.winrm.config.winrm.computerName` location config.
+1. Ensure all windows machines consider the other side a "trusted host". On a private subnet, it may be appropriate to run: `Set-Item wsman:\localhost\client\trustedhosts *`
+   whereas in other environments you will need to specify the list of machines.
+1. Restart WinRM on both machines (some changes need a restart to take effect): `Restart-Service WinRM`
 1. If you want to configure Windows target host with HTTPS then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)
-1. If you are still seeing authorization errors then try connecting via WinRM with the embedded winrs client.
-   First make sure you have the server in trusted hosts.
 
-Then execute a simple command like
+In some cases the problems may be outwith the client, and it might be useful to look at [Troubleshooting](troubleshooting.md).
 
-    winrs -r:10.0.2.15 -unencrypted -u:Administrator -p:pa55w0rd ipconfig

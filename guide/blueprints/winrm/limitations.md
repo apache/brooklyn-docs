@@ -43,14 +43,11 @@ is not respected. For example, the command below will receive an exit code of 0.
 
 ##### Non-zero Exit Code Returned as One
 
-If a batch or PowerShell file exits with an exit code greater than one (or negative), this will 
-be reported as 1 over WinRM.
-
-We advise you to use native commands (non-PowerShell ones) since executing it as a native command
-will return the exact exit code rather than 1.
-For instance if you have installmssql.ps1 script use `install.command: powershell -command "C:\\installmssql.ps1"`
-rather than using `install.powershell.command: "C:\\installmssql.ps1"`
-The first will give you an exact exit code rather than 1
+In some configurations, scripts can report any non-zero exit code as `1`.
+It may be possible to workaround this where the exit code is needeed by using
+e.g. `install.command: powershell -command "C:\\installmssql.ps1"`
+instead of `install.powershell.command: "C:\\installmssql.ps1"`
+If this is problematic, please consider submitting a patch to `VanillaWindowsProcess`!
 
 ### PowerShell "Preparing modules for first use"
 
@@ -110,7 +107,7 @@ uploads and in their PowerShell scripts.
 
 ### Windows template settings for an Unattended Installation
 
-Windows template needs certain configuration to be applied to prevent Windows setup UI from being displayed.
+Windows template needs certain configuration to be applied to prevent windows setup UI from being displayed.
 The default behavior is to display it if there are incorrect or empty settings. Showing Setup UI will prevent the proper
 deployment, because it will expect interaction by the user such as agreeing on the license agreement or some of the setup dialogs.
 

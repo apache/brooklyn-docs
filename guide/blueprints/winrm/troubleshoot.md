@@ -1,7 +1,16 @@
-Troubleshooting
----------------
+---
+title: Troubleshooting
+---
 
-Much of the [operations troubleshooting guide]({{book.path.docs}}/ops/troubleshooting/index.md) is applicable for Windows blueprints.  
+Note: in addition to the Windows-specific points here,
+much of the [operations troubleshooting guide]({{book.path.docs}}/ops/troubleshooting/index.md) is applicable for Windows blueprints. 
+
+
+### WinRM Basics
+
+If you can't get WinRM to work at all, see the notes on [the Winrm4j client](client.md) which includes detailed troubleshooting
+for basic connectivity.
+
 
 ### User metadata service requirement
 
@@ -15,20 +24,26 @@ If the configuration options `userMetadata` or `userMetadataString` are used on 
 the default setup script. This allows one to supply a custom setup script. However, if userMetadata contains something
 else then the setup will not be done and the VM may not not be accessible remotely over WinRM.
 
-### Credentials issue requiring special configuration
+
+### Credentials and privileges requiring special configuration
 
 When a script is run over WinRM over HTTP, the credentials under which the script are run are marked as
 'remote' credentials, which are prohibited from running certain security-related operations. This may prevent certain
 operations. The installer from Microsoft SQL Server is known to fail in this case, for example. For a workaround, please
-refer to [How and Why to re-authenticate withing a PowerShell script](#how-and-why-to-re-authenticate-within-a-powershell-script) 
+refer to [How and Why to re-authenticate withing a PowerShell script](tips.md#how-and-why-to-re-authenticate-within-a-powershell-script) 
 above.
+
+In some cases where security-related operation are to be executed, it may require the use of `CredSSP` to obtain
+the correct Administrator privileges: you may otherwise get an access denied error. See the sub-section
+[How and Why to re-authenticate within a powershell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
+
 
 ### WebServiceException: Could not send Message
 
 We detected a `WebServiceException` and different `SocketException`
-during deployment of long lasting Application Blueprint against VcloudDirector.
+during deployment of long-lasting Application Blueprint against VcloudDirector.
 
-Launching the blueprint bellow was giving constantly this type of error on launch step.
+Launching the blueprint below was giving constantly this type of error on launch step.
 
     services:
       type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
@@ -46,7 +61,7 @@ Launching the blueprint bellow was giving constantly this type of error on launc
         stop.command: echo stopCommand
         
 With series of tests we concluded that on the Vcloud Director environment we were using
-a restart was happening ~2 minutes after the VM is provisioned.
+a restart was happening about 2 minutes after the VM is provisioned.
 Logging in the host and search for System event of type 1074 in Windows Event Viewer, we found two 1074 events where the second one was
 
     The process C:\Windows\system32\winlogon.exe (W2K12-STD) has initiated the restart of computer WIN-XXXX on behalf of user
@@ -68,12 +83,13 @@ If the description above matches your case and you are getting **connection fail
 a restart probably occurred and you should try this parameter.
 
 Before using this parameter we advice to check whether this is really your case.
-To verify the behavior check as described above.
+
 
 ### AMIs not found
 
 If using the imageId of a Windows community AMI, you may find that the AMI is deleted after a few weeks.
 See [Windows AMIs on AWS](#windows-amis-on-aws) above.
+
 
 ### VM Provisioning Times Out
 
@@ -87,11 +103,12 @@ several times) before the VM is usable.
 This could cause the WinRM connection attempts to timeout. The location configuration option 
 `waitForWinRmAvailable` defaults to `30m` (i.e. 30 minutes). This can be increased if required.
 
-Incorrectly prepared Windows template can cause the deployment to time-out expecting an interaction by the user.
-You can verify if this is the case by RDP to the deployment which is taking to much time to complete. 
-It is recommended to manually deploy a single VM for every newly created Windows template to verify that it can be
+Incorrectly prepared Windows templates can cause the deployment to time-out expecting an interaction by the user.
+You can verify if this is the case by RDPing to the in-progress deployment.
+It is recommended that any new Windows template be tested with a manually deployment to verify that it can be
 used for unattended installations and it doesn't wait and/or require an input by the user.
-See [Windows template settings for an Unattended Installation](#windows-template-settings-for-an-unattended-installation) under Known Limitations below. 
+See [Windows template settings for an Unattended Installation](limitations.md#windows-template-settings-for-an-unattended-installation) under Known Limitations below. 
+
 
 ### Windows log files
 
