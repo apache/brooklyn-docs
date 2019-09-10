@@ -107,7 +107,7 @@ uploads and in their PowerShell scripts.
 
 ### Windows template settings for an Unattended Installation
 
-Windows template needs certain configuration to be applied to prevent windows setup UI from being displayed.
+Windows template needs certain configuration to be applied to prevent Windows setup UI from being displayed.
 The default behavior is to display it if there are incorrect or empty settings. Showing Setup UI will prevent the proper
 deployment, because it will expect interaction by the user such as agreeing on the license agreement or some of the setup dialogs.
 

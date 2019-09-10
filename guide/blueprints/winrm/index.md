@@ -116,4 +116,5 @@ A few other WinRM resources are available:
 * [Tips and Tricks](tips.md)
 * [About the Winrm4j Client](client.md)
 * [Troubleshooting](troubleshoot.md)
+* [Limitations](limitations.md)
 

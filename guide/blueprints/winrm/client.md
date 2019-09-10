@@ -117,7 +117,7 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 
 1. Try `./User` instead of `User`.
 1. Check whether you need to specify a different domain: this is possible from `brooklyn.winrm.config.winrm.computerName` location config.
-1. Ensure all windows machines consider the other side a "trusted host". On a private subnet, it may be appropriate to run: `Set-Item wsman:\localhost\client\trustedhosts *`
+1. Ensure all Windows machines consider the other side a "trusted host". On a private subnet, it may be appropriate to run: `Set-Item wsman:\localhost\client\trustedhosts *`
    whereas in other environments you will need to specify the list of machines.
 1. Restart WinRM on both machines (some changes need a restart to take effect): `Restart-Service WinRM`
 1. If you want to configure Windows target host with HTTPS then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)

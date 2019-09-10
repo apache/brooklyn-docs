@@ -109,7 +109,7 @@ config like `pre.install.reboot.required` and `install.reboot.required`. If requ
 installation commands can be split between the pre-install, install and post-install phases
 in order to do a reboot at the appropriate point of the VM setup.
 
-We strongly recommend to **write blueprints in a way that they do NOT restart automatically windows** and
+We strongly recommend to **write blueprints in a way that they do NOT restart automatically Windows** and
 use one of the `pre.install.reboot.required` or `install.reboot.required` parameters to perform restart,
 as script and Brooklyn connectivity behaviour is difficult to continue across reboots!
 
