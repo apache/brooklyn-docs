@@ -23,7 +23,16 @@ and no one snooping on the network can decrypt of any of the traffic.
 If you don't have an SSH key, create one with:
 
 ```bash
-$ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+$ ssh-keygen -t rsa -N "" -m PEM -f ~/.ssh/id_rsa
+```
+
+**Note:** For previous versions of OpenSSL, the `-m PEM` flag is not necessary.
+However, for newer versions of OpenSSL, if the `-m PEM` flag is omitted, the
+key produced will be in OPENSSL format, not RSA format. To determine if a key
+is in the correct format, `cat` the key and the first line should read as follows:
+
+```bash
+-----BEGIN RSA PRIVATE KEY-----
 ```
 
 
