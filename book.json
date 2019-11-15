@@ -8,7 +8,8 @@
     "bootstrap-callout",
     "styles-less",
     "versions",
-    "partial-summary"
+    "partial-summary",
+    "blueprint-tour"
   ],
   "styles": {
     "website": "./styles/website.less",
