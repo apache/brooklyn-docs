@@ -26,13 +26,15 @@ If you don't have an SSH key, create one with:
 $ ssh-keygen -t rsa -N "" -m PEM -f ~/.ssh/id_rsa
 ```
 
-**Note:** For previous versions of OpenSSL, the `-m PEM` flag is not necessary.
-However, for newer versions of OpenSSL, if the `-m PEM` flag is omitted, the
-key produced will be in OPENSSL format, not RSA format. To determine if a key
-is in the correct format, `cat` the key and the first line should read as follows:
+**Note:** For previous versions of OpenSSH, the `-m PEM` flag is not necessary.
+However, for newer versions of OpenSSH, if the `-m PEM` flag is omitted, the
+generated key will be in RFC4716 format, not PEM format. Check the first line of
+the generated secret key file, which should be as follows:
 
 ```bash
+$ head -n 1 ~/.ssh/id_rsa
 -----BEGIN RSA PRIVATE KEY-----
+$
 ```
 
 
