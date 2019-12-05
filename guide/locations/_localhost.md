@@ -4,6 +4,12 @@ If passwordless ssh login to `localhost` and passwordless `sudo` is enabled on y
 machine, you should be able to deploy some blueprints with no special configuration,
 just by specifying `location: localhost` in YAML.
 
+For example:
+
+    location: localhost
+    services:
+    - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
+
 If you use a passphrase or prefer a different key, these can be configured as follows:
 
     location:

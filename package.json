@@ -13,7 +13,8 @@
     "gitbook-plugin-styles-less": "^1.0.0",
     "gitbook-plugin-theme-api": "^1.1.2",
     "gitbook-plugin-versions": "^2.1.4",
-    "less": "^3.0.0-alpha.3"
+    "less": "^3.0.0-alpha.3",
+    "natives": "latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
