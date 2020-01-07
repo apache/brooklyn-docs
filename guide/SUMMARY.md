@@ -28,6 +28,7 @@
   * [Custom Entities](blueprints/custom-entities.md)
   * [Catalog](blueprints/catalog/index.md)
     * [Catalog Items YAML Syntax](blueprints/catalog/schema.md)
+    * [Adding Catalog Items to Quick Launch](blueprints/catalog/quick-launch.md)
     * [Templates and the Add-Application Wizard](blueprints/catalog/templates.md)
     * [Versioning](blueprints/catalog/versioning.md)
     * [Catalog Management](blueprints/catalog/management.md)

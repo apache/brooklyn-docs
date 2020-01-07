@@ -53,6 +53,7 @@ brooklyn.catalog:
 ~~~
 
 
+
 #### Catalog Metadata
 
 Catalog metadata fields supply the additional information required in order to register an item in the catalog.
