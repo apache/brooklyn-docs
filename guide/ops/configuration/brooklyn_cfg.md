@@ -185,9 +185,23 @@ or
 [EntitlementManager]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).
 
 
-
 ## HTTPS Configuration
 
 See [HTTPS Configuration]({{book.path.docs}}/ops/configuration/https.md) for general information on configuring HTTPS.
 
 
+## Session configuration
+
+Apache Brooklyn uses a util class, `org.apache.brooklyn.rest.util.MultiSessionAttributeAdapter` for ensuring requests 
+in different bundles can get a consistent shared view of the data stored in the session.
+
+This class marks as used the session on the other modules by resetting the max inactive interval and also allows to 
+set up a max age time for the sessions, if not, it will be managed by Jetty the server.
+ 
+The default value for the max inactive interval is 3600s but both properties can be modified adding the time in seconds as a properties on `brooklyn.cfg`:
+
+```properties
+org.apache.brooklyn.server.maxSessionAge = 3600
+org.apache.brooklyn.server.maxInactiveInterval = 3600
+```
+  
