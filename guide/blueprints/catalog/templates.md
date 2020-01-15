@@ -28,6 +28,9 @@ Of course other tags can be added as usual.
 
 Similarly with locations, if any locations have that tag, then only locations with that tag will be available in the deploy dropdown.
 If there is only one location, it is pre-selected. So by tagging just one location, it can be ensured to be automatically selected.
+Additionally if any locations have that tag, the "Create Location" option is suppressed,
+as it is assumed the Quick Launch is being used in a curated environment where that option is not meant for end-users.
+(This can be changed through config options in the code, for users who wish to produce their own UI.)
 
 For example, the following catalog BOM will add a template for a single server to the catalog,
 ensuring it appears in Quick Launch (with the tag),
