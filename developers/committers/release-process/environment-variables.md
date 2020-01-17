@@ -21,7 +21,7 @@ RC_NUMBER=1
 
 # Modules and submodules - these will come in handy later
 SUBMODULES="$( perl -n -e 'if ($_ =~ /path += +(.*)$/) { print $1."\n" }' < .gitmodules )"
-MODULES=". ${SUBMODULES}"
+MODULES=".\n${SUBMODULES}"
 {% endhighlight %}
 
 Alternatively, use the command `eval $( ./brooklyn-dist/release/environment.sh )` to set these values automatically.
