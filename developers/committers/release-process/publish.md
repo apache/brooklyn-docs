@@ -33,7 +33,7 @@ mkdir apache-brooklyn-${VERSION_NAME}
 {% endhighlight %}
 
 Refer back to the pre-release area Subversion (see [Publish to the staging area](publish-temp.html)), and copy all of
-the release candidate artifacts - `-src` and `-bin`, `.tar.gz` and `.zip`, and all associated `.md5`, `.sha1`, `.sha256`
+the release candidate artifacts - `-src` and `-bin`, `.tar.gz` and `.zip`, and all associated `.sha256`
 and `.asc` signatures - into this new folder.
 
 Rename all of the files to remove the `-rcN` designation:
@@ -45,7 +45,7 @@ for f in *; do mv $f ${f//-rc${RC_NUMBER}/}; done
 The hash files will need patching to refer to the filenames without the `-rcN` designation:
 
 {% highlight bash %}
-sed -i.bak 's/-rc'$RC_NUMBER'-/-/' *.md5 *.sha1 *.sha256
+sed -i.bak 's/-rc'$RC_NUMBER'-/-/' *.sha256
 rm -f *.bak
 {% endhighlight %}
 
@@ -54,9 +54,7 @@ Note that the PGP signatures do not embed the filename so they do not need to be
 As a final check, re-test the hashes and signatures:
 
 {% highlight bash %}
-for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
-    md5sum -c ${artifact}.md5 && \
-    shasum -a1 -c ${artifact}.sha1 && \
+for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
     shasum -a256 -c ${artifact}.sha256 && \
     gpg2 --verify ${artifact}.asc ${artifact} \
       || { echo "Invalid signature for $artifact. Aborting!"; break; }
@@ -151,7 +149,7 @@ git checkout master
 
 1. Edit the file `brooklyn-docs/_config.yml` - change `brooklyn-stable-version` to be the newly-release version, and
    `brooklyn-version` to be the current SNAPSHOT version on the master branch.
-2. Edit the file `brooklyn-docs/website/download/verify.md` to add links to the MD5/SHA1/SHA256 hashes and PGP signatures for the
+2. Edit the file `brooklyn-docs/website/download/verify.md` to add links to the SHA256 hashes and PGP signatures for the
    new version.
 3. Edit the file `brooklyn-docs/website/meta/versions.md` to add the new version.
 4. Build the updated site with `./_build/build.sh website-root --install`.

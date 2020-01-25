@@ -46,6 +46,6 @@ The release script will:
 3. Invoke Maven to build the source code (including running unit tests), and deploy artifacts to a Maven remote
    repository
 4. Save the .tar.gz and .zip artifacts produced by the build of `brooklyn-dist`
-5. For each of the produced files, produce MD5, SHA1, SHA256 and GnuPG signatures
+5. For each of the produced files, produce SHA256 and GnuPG signatures
 
 At the end of the script, it will show you the files it has produced and their location.

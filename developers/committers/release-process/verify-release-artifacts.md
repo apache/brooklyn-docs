@@ -7,7 +7,7 @@ navgroup: developers
 Below is described a series of "sanity checks" that should be performed before uploading the artifacts to the
 pre-release area. They are also useful for community members that want to check the artifact before voting (community
 members may also want to check the [list of required software packages](prerequisites.html#software-packages) to ensure
-they have the GnuPG and md5sum/sha1sum installed.
+they have the GnuPG installed.
 
 Setup
 -----
@@ -66,7 +66,7 @@ Check that all archives are correctly annotated with license information.
 Check NOTICE is included:
 
 {% highlight bash %}
-for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
+for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
   REL_ARCHIVE=${ARCHIVE/-rc?}
   case $ARCHIVE in
     *.tar.gz)
@@ -98,9 +98,7 @@ Verify the hashes and signatures of artifacts
 Then check the hashes and signatures, ensuring you get a positive message from each one:
 
 {% highlight bash %}
-for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.md5' -o -name '*.sha1' -o -name '*.sha256' \) ); do
-    md5sum -c ${artifact}.md5 && \
-    shasum -a1 -c ${artifact}.sha1 && \
+for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
     shasum -a256 -c ${artifact}.sha256 && \
     gpg2 --verify ${artifact}.asc ${artifact} \
       || { echo "Invalid signature for $artifact. Aborting!"; break; }

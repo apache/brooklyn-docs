@@ -44,8 +44,6 @@ The following software packages are required during the build. Make sure you hav
 - `gnupg2`, and `gnupg-agent` if it is packaged separately (it is on Ubuntu Linux)
 - `pinentry` for secure entry of GPG passphrases. If you are building remotely on a Linux machine, `pinentry-curses` is
   recommended; building on a mac, `port install pinentry-mac` is recommended.
-- `md5sum` and `sha1sum` - these are often present by default on Linux, but not on Mac;
-  `port install md5sha1sum` should remedy that.
 - if `gpg` does not resolve (it is needed for maven), create an alias or script pointing at `gpg2 "$@"`
 - the `mmv` command (usually in a package named `mmv`) will help with the final steps of the release process
 
