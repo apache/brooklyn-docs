@@ -34,7 +34,7 @@ mkdir apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
 {% endhighlight %}
 
 Copy into this directory all of the artifacts from the previous step - `-src` and `-bin`, `.tar.gz`, `.zip` and `.rpm`,
-and all associated `.md5`, `.sha1`, `.sha256` and `.asc` signatures. Then commit:
+and all associated `.sha256` and `.asc` signatures. Then commit:
 
 {% highlight bash %}
 svn add apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}
