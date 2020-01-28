@@ -79,7 +79,11 @@ for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
       ;;
     *.rpm)
       LIST="rpm -qlp"
-      PREFIX="/opt/brooklyn"
+      PREFIX="/opt/brooklyn-${VERSION_NAME}"
+      ;;
+    *.deb)
+      LIST="dpkg -c"
+      PREFIX="/opt/brooklyn-${VERSION_NAME}"
       ;;
     *)
       echo "Unrecognized file type $ARCHIVE. Aborting!"
@@ -98,9 +102,16 @@ Verify the hashes and signatures of artifacts
 Then check the hashes and signatures, ensuring you get a positive message from each one:
 
 {% highlight bash %}
+GPG_COMMAND=$((which gpg >> /dev/null && echo gpg) || (which gpg2 >> /dev/null && echo gpg2))
+
+if [ -z "${GPG_COMMAND}" ]; then
+    echo "gpg or gpg2 must be installed, exiting"
+    exit
+fi
+
 for artifact in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
     shasum -a256 -c ${artifact}.sha256 && \
-    gpg2 --verify ${artifact}.asc ${artifact} \
+    $GPG_COMMAND --verify ${artifact}.asc ${artifact} \
       || { echo "Invalid signature for $artifact. Aborting!"; break; }
 done
 {% endhighlight %}
