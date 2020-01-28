@@ -79,7 +79,11 @@ for ARCHIVE in $(find * -type f ! \( -name '*.asc' -o -name '*.sha256' \) ); do
       ;;
     *.rpm)
       LIST="rpm -qlp"
-      PREFIX="/opt/brooklyn"
+      PREFIX="/opt/brooklyn-${VERSION_NAME}"
+      ;;
+    *.deb)
+      LIST="dpkg -c"
+      PREFIX="/opt/brooklyn-${VERSION_NAME}"
       ;;
     *)
       echo "Unrecognized file type $ARCHIVE. Aborting!"
