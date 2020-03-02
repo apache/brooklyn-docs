@@ -23,7 +23,7 @@ This should return details of the build as a JSON string similar to the followin
 
 ```json
 {
-    "version": "1.0.0-SNAPSHOT",  // BROOKLYN_VERSION
+    "version": "1.1.0-SNAPSHOT",  // BROOKLYN_VERSION
     "buildSha1": "c0fdc15291702281acdebf1b11d431a6385f5224",
     "buildBranch": "UNKNOWN"
 }
