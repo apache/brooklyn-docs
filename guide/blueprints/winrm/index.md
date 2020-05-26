@@ -104,9 +104,6 @@ The installation script - referred to as `/path/to/install7zip.ps1` in the examp
 
     Start-Process "msiexec" -ArgumentList '/qn','/i',$Dl -RedirectStandardOutput ( [System.IO.Path]::Combine($Path, "stdout.txt") ) -RedirectStandardError ( [System.IO.Path]::Combine($Path, "stderr.txt") ) -Wait
 
-This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
-Brooklyn source code]({{book.url.brooklyn_library_git}}/{{"master" if 'SNAPSHOT' in book.brooklyn_version else book.brooklyn_version}}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
-
 
 Learn More
 ----------
