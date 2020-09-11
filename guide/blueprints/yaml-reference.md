@@ -30,7 +30,8 @@ the entity being defined, with these being the most common:
 
 * `location` (or `locations`): as defined in the root element 
   
-* `brooklyn.config`: configuration key-value pairs passed to the service entity being created
+* `brooklyn.config`: configuration key-value pairs passed to the service entity being created;
+  complex values are supported if they are JSON-deserializable beans that have been added as registered types
 
 * `brooklyn.children`: a list of `ServiceSpecifications` which will be configured as children of this entity
 
@@ -42,10 +43,11 @@ the entity being defined, with these being the most common:
   <!-- TODO assert that this yaml maches the yaml we test against -->
 
 * `brooklyn.initializers`: a list of `EntityInitializer` instances to be constructed and run against the entity, 
-  each as a map described with their `type` and their `brooklyn.config` as keys.
-  An `EntityInitiailzer` can perform arbitrary customization to an entity whilst it is being constructed,
-  such as adding dynamic sensors and effectors. These classes must expose a public constructor taking
-  a single `Map` where the `brooklyn.config` is passed in.
+  each as a map described with their `type` (Java or a registered type in the catalog) and JSON-serializable fields. 
+  
+  An `EntityInitializer` can perform arbitrary customization to an entity whilst it is being constructed,
+  such as adding dynamic sensors and effectors.
+  
   Some common initializers are:
   
   * `org.apache.brooklyn.core.effector.ssh.SshCommandEffector`: takes a `name` and `command`,
@@ -61,6 +63,23 @@ the entity being defined, with these being the most common:
     and optionally a `period` and `executionDir`, to create a sensor feed which populates the sensor with
     the given name by running the given command (on an entity which as an WinRM-able machine).<br/>
     _`"~"` will use the default execution directory for the WinRm session which is usually `%USERPROFILE%`_
+  
+  When specifying the type of an initializer, registered types (added to the catalog) are preferred,
+  but Java types are permitted.
+  
+  Advanced note:  When implementing is preferred to use standard Jackson serialization methods to read/set fields, 
+  with the same semantics as for `brooklyn.config` above.
+  However it is permitted, for backwards compatibility, to supply `brooklyn.config` keys, 
+  historically (prior to 1.1) exposing a public constructor taking a single `ConfigBag` (or sometimes a `Map`) 
+  where the `brooklyn.config` key-values are passed in.
+  This approach has several constraints however. 
+  The config inheritance modes which are used on entities and other spec types are not recognised here.
+  If the type is added to the catalog and referred to by its registered type name,
+  or if registered types are being passed as config,
+  the class must support JSON deserialization of `brooklyn.config`,
+  and that is strongly recommended since Apache Brooklyn v1.1.
+  This can be done by ensuring a no-arg constructor is defined and
+  supplying a `@JsonSetter("brooklyn.config") initializeConfig(Map<String,Object)` method.
 
 * `brooklyn.parameters`: documents a list of typed parameters the entity accepts.
   These define config keys exposed on the type, including metadata for prompting a user to supply them.
@@ -105,16 +124,23 @@ the entity being defined, with these being the most common:
     - displayName
   ~~~
 
-  Entities, policies, and initializers may accept additional key-value pairs,
-  usually documented in their documentation (e.g. javadoc), or in the case of Java
-  often as static fields in the underlying Java class.
-  Often there are config keys or flags (indicated by `@SetFromFlag`) declared on the class;
-  these declared flags and config keys may be passed in at the root of the `ServiceSpecification` or in `brooklyn.config`.
-  (Undeclared config is only accepted in the `brooklyn.config` map.)
   Referencing the parameters from within java classes is identical to using config keys. In yaml it's
   usually referenced using `$brooklyn:scopeRoot().config("displayName")`. See below for more details on scopes.
 
-* `brooklyn.tags`: documents a list of tag objects which should be assigned to the entity.
+* `brooklyn.tags`: a list of tag objects which should be attached to the entity.
+
+Entities (and policies and enrichers) will typically accept additional key-value pairs
+as per the config keys (parameters) they expose.  In some cases they may accept other fields
+(where fields in a Java class are annotated `@SetFromFlag` although this is discouraged),
+but undeclared config is only accepted in the `brooklyn.config` map.
+Global config can be passed in either at the root of the `ServiceSpecification` 
+or in a root `brooklyn.config` section.
+
+Initializers and custom types used as config/parameters are treated as beans, with fields at the root.
+However in many cases initializers also accept configuration passed in a `brooklyn.config` section.
+To accept expressions using the Brooklyn DSL (`$brooklyn:xxx`) in fields of beans,
+the field type should be declared as a `WrappedValue<T>`, where `T` is the desired type.
+(Config key values will always accept the Brooklyn DSL without this, but fields will not.)
 
 
 ## Location Specification Elements
