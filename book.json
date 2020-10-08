@@ -69,12 +69,15 @@
       ]
     },
     "versions": {
-      "gitbookConfigURL": "https://raw.githubusercontent.com/tbouron/brooklyn-docs/experiment/gitbook/book.json",
       "options": [
         {
           "value": "https://brooklyn.apache.org/v/latest/",
           "text": "Latest",
           "selected": true
+        },
+        {
+          "value": "https://brooklyn.apache.org/v/1.0.0/",
+          "text": "Version 1.0.0"
         },
         {
           "value": "https://brooklyn.apache.org/v/0.12.0/",
@@ -96,8 +99,8 @@
     }
   },
   "variables": {
-    "brooklyn_version": "1.0.0-SNAPSHOT",
-    "brooklyn_version_stable": "0.12.0",
+    "brooklyn_version": "1.0.0",
+    "brooklyn_version_stable": "1.0.0",
     "url": {
       "brooklyn_website": "https://brooklyn.apache.org",
       "brooklyn_javadoc": "https://brooklyn.apache.org/v/latest/misc/javadoc",
