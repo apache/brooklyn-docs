@@ -68,13 +68,13 @@ Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detail
 
 See [HTTPS Configuration]({{book.path.docs}}/ops/configuration/https.md) for general information on configuring HTTPS.
 
-## Catalog in Karaf  
+## Catalog in OSGi  
 With the traditional launcher, Brooklyn loads the initial contents of the catalog from a `default.catalog.bom` file
 as described in the section on [installation]({{book.path.docs}}/ops/production-installation.md). Brooklyn finds Java 
 implementations to provide for certain things in blueprints (entities, enrichers etc.) by scanning the classpath. 
 
 In the OSGI world this approach is not used, as each bundle only has visibility of its own and its imported Java packages. 
-Instead, in Karaf, each bundle can declare its own `catalog.bom` file, in the root of the bundle,
+Instead, in the Karaf OSGi container, each bundle can declare its own `catalog.bom` file, in the root of the bundle,
 with the catalog declarations for any entities etc. that the bundle contains.
 
 For example, the `catalog.bom` file for Brooklyn's Webapp bundle looks like (abbreviated):
@@ -103,7 +103,7 @@ In the above YAML the first item declares that the bundle provides an entity who
 item declares that the bundle provides a template application, with id  `resilient-bash-web-cluster-template`, and
 includes a description for what this is.
 
-## Configuring the applications in the Catalog
+### Configuring applications in the Catalog
 
 When running some particular deployment of Brooklyn it may not be desirable for the sample applications to appear in
 the catalog (for clarity, "application" here in the sense of an item with `itemType: template`).
@@ -118,7 +118,78 @@ Each property value is a comma-separated list of regular expressions.  The symbo
 the regular expressions on the whitelist, and not match any expression on the blacklist, if its applications
 are to be added to the bundle.  The default values of these properties are to admit all bundles, and forbid none.
 
-## Caveats
+
+### Configuring custom bundle resolvers, type-plan transformers, and other bundles
+
+As described throughout this user guide, 
+Apache Brooklyn by default uses the CAMP YAML format to define types, including entities, 
+and supports the `catalog.bom` format defined elsewhere and ZIP bundles containing `catalog.bom`
+or OSGi metadata information.
+
+It is possible to extend this, and supply additional item type definition formats
+and bundle resolution strategies.
+This is done by defining OSGi services in an OSGi bundle blueprint,
+implementing `BrooklynTypePlanTransformer` and/or `BrooklynCatalogBundleResolver`.
+This can be used to add support for any type of plan or bundle format,
+such as Kubernetes Helm charts, TOSCA YAML topology definitions, or TOSCA CSAR bundles.
+
+These services, or any additional bundles to install, can be specified in any of several ways:
+
+* As part of Karaf startup, by specifying it in `etc/startup.properties` or as a boot feature/bundle
+
+* Adding it to the `/etc/default.catalog.bom`
+
+* Putting it in the OSGi `/deploy` folder (before or after startup)
+
+* Manually after startup through the API or CLI (e.g. via `br catalog add`) 
+  and subsequently restored through rebind
+
+*Note*: If the initial catalog `/etc/default.catalog.bom` requires those bundles to be installed,
+you must use the first option, otherwise, because OSGi startup can be non-deterministic, the bundles
+might not be installed when the initial catalog is loaded. In addition, you must specify that the
+services from those bundles are required prior to starting the initial catalog (and before rebind).
+This can be done with the following setting in `brooklyn.cfg`: 
+
+    brooklyn.osgi.dependencies.services.filters=<osgi-filter-or-list>
+    
+Where `<osgi-filter-or-list>` is of any of the following forms, using properties of the OSGi
+service, the most common of which is `osgi.service.blueprint.compname`, the registered name 
+of the OSGi service component in the blueprint:
+
+    (osgi.service.blueprint.compname=myCustomBundleResolver)
+    (&(osgi.service.blueprint.compname=myCustomBundleResolver)(customProp=customValue))
+    ["(osgi.service.blueprint.compname=myCustomBundleResolver)","(osgi.service.blueprint.compname=myCustomPlanTransformer)"]
+
+The first of these will block for the presence of a service registered with component name `myCustomBundleResolver`;
+the second will block for a service with that component name _and_ the custom property set;
+the third will block for two services, `myCustomBundleResolver` and one with component name `myCustomPlanTransformer`.
+
+In addition, two other settings in that file may be relevant:
+
+    brooklyn.osgi.dependencies.services.timeout = 2m
+    brooklyn.osgi.startlevel.postinit           = 200
+
+The first of these will cause catalog init / rebind to proceed after a timeout if the dependencies are not fulfilled,
+after logging an error.  (By default it will block indefinitely, logging a debug message periodically.)
+
+The second of these will change the OSGi start level after catalog init / rebind has completed.
+This can be useful e.g. if using the hot-deploy `/deploy` folder but bundles there should not be activated
+until _after_ the Brooklyn catalog has been initialized (or rebinding on a subsequent start).
+It can be used along with these standard `org.apache.felix.fileinstall-deploy.cfg` settings
+which should be changed to a level above `100` but less than or equal to the `brooklyn.osgi.startlevel.postinit` level:
+
+    felix.fileinstall.start.level  = 180
+    felix.fileinstall.active.level = 180
+
+*Note #2*: It is recommended that bundles that provide OSGi services _not_ contain a `catalog.bom`,
+as that can in some situations cause a race between loading the services and installing the `catalog.bom`.
+A clear separation between service bundles and catalog bundles prevents that situation.
+(On rebind, bundles that have OSGi metadata and not a `catalog.bom` are loaded first,
+to ensure any OSGi services they provide are available to other bundles,
+for any of the bundle installation techniques listed above.)
+
+
+### Caveats
 
 In the OSGi world specifying class names by string in Brooklyn's configuration will work only
 for classes living in Brooklyn's core modules. Raise an issue or ping us on IRC if you find
