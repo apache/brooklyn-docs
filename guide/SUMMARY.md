@@ -152,7 +152,7 @@
 * [Logging](dev/tips/logging.md)
 * [Brooklyn Remote Debugging](dev/tips/debugging-remote-brooklyn.md)
 * [GitHub](http://github.com/apache/brooklyn)
-* [Javadoc]({{book.url.brooklyn_javadoc}})
+* [Javadoc](https://brooklyn.apache.org/v/latest/misc/javadoc)
 
 ----
 
