@@ -67,10 +67,10 @@ the entity being defined, with these being the most common:
   When specifying the type of an initializer, registered types (added to the catalog) are preferred,
   but Java types are permitted.
   
-  Advanced note:  When implementing is preferred to use standard Jackson serialization methods to read/set fields, 
-  with the same semantics as for `brooklyn.config` above.
-  However it is permitted, for backwards compatibility, to supply `brooklyn.config` keys, 
-  historically (prior to 1.1) exposing a public constructor taking a single `ConfigBag` (or sometimes a `Map`) 
+  Advanced note:  When implementing an initializer in Java, it is preferred to rely on standard Jackson serialization techniques to initialize fields, 
+  i.e. have a no-arg constructor and fields which can be specified in YAML.
+  However it is permitted for backwards compatibility, to supply configuration under a `brooklyn.config` key;
+  via a public constructor taking a single `ConfigBag` (or sometimes a `Map`) 
   where the `brooklyn.config` key-values are passed in.
   This approach has several constraints however. 
   The config inheritance modes which are used on entities and other spec types are not recognised here.
@@ -80,6 +80,7 @@ the entity being defined, with these being the most common:
   and that is strongly recommended since Apache Brooklyn v1.1.
   This can be done by ensuring a no-arg constructor is defined and
   supplying a `@JsonSetter("brooklyn.config") initializeConfig(Map<String,Object)` method.
+  There are convenience abstract classes in `EntityInitializers` which can be useful for more complicated configurations.
 
 * `brooklyn.parameters`: documents a list of typed parameters the entity accepts.
   These define config keys exposed on the type, including metadata for prompting a user to supply them.
