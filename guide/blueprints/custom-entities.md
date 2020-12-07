@@ -202,7 +202,9 @@ before the policy restarts it.
 
 For an even more interesting way to test it, look at the blueprint defining
 [a netcat server and client](example_yaml/vanilla-bash-netcat-w-client.yaml).
-This uses `brooklyn.initializers` to define an effector to `sayHiNetcat` on the `Simple Pinger` client,
+This uses `brooklyn.initializers`
+(see in the [YAML reference](yaml-reference.md)) 
+to define an effector to `sayHiNetcat` on the `Simple Pinger` client,
 using `env` variables to inject the `netcat-server` location and 
 `parameters` to pass in per-effector data:
 
