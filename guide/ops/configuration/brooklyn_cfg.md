@@ -195,9 +195,34 @@ or
 {% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
 
 
-
 ## HTTPS Configuration
 
 See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
 
 
+## Session configuration
+
+Apache Brooklyn uses a util class, `org.apache.brooklyn.rest.util.MultiSessionAttributeAdapter` for ensuring requests 
+in different bundles can get a consistent shared view of the data stored in the session.
+
+To choose the preferred session for a given request you should call one of the static methods `of` in the class.
+It will look on the server for a previously marked _preferred session handler_ and return the _preferred session_.
+If there is no _preferred session handler_, a new one will be created on the CXF bundle. If there is not a 
+_preferred session_ on the _preferred session handler_, a new one will be created. The new elements will be marked as
+preferred.    
+
+Any processing that wants to set, get or remove an attribute from the session should use the methods in this class,
+as opposed to calling request.getSession().
+
+This class marks as used the session on the other modules by resetting the max inactive interval for avoiding the server
+housekeeper service scavenging it due to inactivity. It also allows you to set up a max age time for the sessions, 
+otherwise, the default configuration of the Jetty the server will be applied.
+ 
+The default value for the max inactive interval is 3600s but both values can be modified by adding the time in 
+seconds as properties on `brooklyn.cfg`:
+
+```properties
+org.apache.brooklyn.server.maxSessionAge = 3600
+org.apache.brooklyn.server.maxInactiveInterval = 3600
+```
+  
