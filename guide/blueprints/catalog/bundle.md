@@ -5,7 +5,7 @@ layout: website-normal
 
 ### Bundling Catalog Resources
 
-It is possible to upload catalog items and associated resources as a single bundle to AMP.
+It is possible to upload catalog items and associated resources as a single bundle to Brooklyn.
 This is useful when you have a blueprint that needs to reference external scripts, icons,
 config files or other resources, or 
 when you have multiple blueprints that you want to keep in sync. Brooklyn will persist any 

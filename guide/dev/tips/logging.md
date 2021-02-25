@@ -5,10 +5,10 @@ layout: website-normal
 
 ## Logging: A Quick Overview
 
-For logging, we use **logback** which implements the slf4j API.
+For logging, we use **log4j** which implements the slf4j API.
 This means you can use any slf4j compliant logging framework,
 with a default configuration which just works out of the box
-and bindings to the other common libraries (``java.util.logging``, ``log4j``, ...)
+and bindings to the other common libraries (``java.util.logging``, ``logback``, ...)
 if you prefer one of those.
 
 
@@ -30,6 +30,35 @@ then you can modify the config file `etc/org.ops4j.pax.logging.cfg` before hand.
 For more information check
 [https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration).
 
+#### Karaf Log commands
+
+Logging commands are available through the karaf console.  These let you interact with the logs and dynamically change
+logging configuration in a running application.
+
+Some useful log: commands are:
+
+log:display mylogger -p "%d - %c - %m%n"    - Show the log entries for a specific logger with a different pattern.
+
+log:get/set                                 - Show / set the currently configured log levels
+
+log:tail                                    - As display but will show continuously
+
+log:exception-display                       - Display the last exception
+ 
+#### Bundles
+
+You can capture logs from a specific bundle or set of bundles and e.g. write that to a different file.
+
+    log4j.appender.sift=org.apache.log4j.sift.MDCSiftingAppender
+    log4j.appender.sift.key=myBundle
+    log4j.appender.sift.default=karaf
+    log4j.appender.sift.appender=org.apache.log4j.FileAppender
+    log4j.appender.sift.appender.layout=org.apache.log4j.PatternLayout
+    log4j.appender.sift.appender.layout.ConversionPattern=%d{ISO8601} | %-5.5p | %-16.16t | %-32.32c{1} | %m%n
+    log4j.appender.sift.appender.file=${karaf.data}/log/mybundle.debug.log
+    log4j.appender.sift.appender.append=true
+
+For a detailed reference to the sift appender see [Karaf Advanced configuration](https://karaf.apache.org/manual/latest/#_advanced_configuration)
 
 ### Classic - non-OSGI based Apache Brooklyn
 
@@ -119,25 +148,14 @@ With this mechanism, you can include ``logback-custom.xml`` and/or other files u
 ``src/main/resources/`` of a project, as described above (for instance to include custom
 logging categories and define the log file name) and it should get picked up, 
 both in the IDE and in the assembly.   
- 
 
 #### Tests
 
-Brooklyn projects ``test`` scope includes the ``brooklyn-utils-test-support`` project
+For unit testing, where no karaf context exits, Brooklyn uses logback.  Brooklyn project's ``test`` scope includes the ``brooklyn-utils-test-support`` project
 which supplies a ``logback-test.xml``. logback uses this file in preference to ``logback.xml``
-when available (ie when running tests). However the ``logback-test.xml`` Brooklyn uses
-includes the same ``logback-main.xml`` call path above, so your configurations should still work.
-
-The only differences of the ``logback-test.xml`` configuration is that:
-
-* Debug logging is included for all Brooklyn packages
-* The log file is called ``brooklyn-tests.log`` 
-
+when available (ie when running tests). 
 
 #### Caveats
-
-* logback uses SLF4J version 1.6 which is **not compatible** with 1.5.x. 
-  If you have dependent projects using 1.5.x (such as older Grails) things may break.
 
 * If you're not getting the logging you expect in the IDE, make sure 
   ``src/main/resources`` is included in the classpath.

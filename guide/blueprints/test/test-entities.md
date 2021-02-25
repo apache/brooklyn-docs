@@ -22,6 +22,11 @@ Timeouts on child entities should be set relative to the completion of the prece
 
 The `ParallelTestCase` entity can be added as a child to run a subset of entities in parallel as a single step.
 
+#### Parameters
+
+- `on.error.spec` - Spec of entity to instantiate (and start, if startable) if the test-case fails
+- `on.finally.spec` - Spec of entity to instantiate (and start, if startable) after a test-case either passes or fails
+- `continueOnFailure` - Whether to continue executing subsequent children if an earlier child fails
 
 ### ParallelTestCase
 The `ParallelTestCase` entity acts as a container for a list of child entities which are started in *parallel*.

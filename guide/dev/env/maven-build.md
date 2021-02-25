@@ -8,10 +8,12 @@ toc: /guide/toc.json
 
 The full build requires the following software to be installed:
 
-* Maven (v3.1+)
-* Java (v1.7+, 1.8 recommended)
+* Maven (v3.5.4+)
+* Java (v1.8)
 * Go (v1.6+) [if building the CLI client]
-* rpm tools [if building the dist packages for those platforms]
+* rpm tools (latest) [if building the dist packages for those platforms]
+* deb tools (latest) [if building the dist packages for those platforms]
+* docker (latest) [if building the dist package for this platform]
 
 With these in place, you should be able to build everything with a:
 
@@ -19,10 +21,16 @@ With these in place, you should be able to build everything with a:
 % mvn clean install
 {% endhighlight %}
 
-Alternatively you can build most things with just Java and Maven installed using:
+By default, only tarball and zip packages for `brooklyn-dist` will be built. You can enable each dist artifact with the following arguments:
+- for CLI client: `-Dcli` (requires `Go`)
+- for RPM package: `-Drpm` (requires `rpm tools`)
+- for DEB package: `-Ddeb` (requires `deb tools`)
+- for docker image: `-Ddocker` (requires `docker`)
+
+Alternatively, you can build everything by using the `release` profile:
 
 {% highlight bash %}
-mvn clean install -Dno-go-client -Dno-rpm`
+mvn clean install -Prelease
 {% endhighlight %}
 
 Other tips:
@@ -36,8 +44,10 @@ Other tips:
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
   ([tests described here](../code/tests.html))
 
-* You may need to install ``rpm`` package to build RPM packages: ``brew install rpm`` for Mac OS, ``apt-get install rpm`` for Ubuntu, ``yum install rpm`` for Centos/RHEL.
+* If building the `rpm` package, you can install rpm tools with: `brew install rpm` for Mac OS, `apt-get install rpm` for Ubuntu, `yum install rpm` for Centos/RHEL.
   On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.
+
+* If building the `deb` package, you can install deb tools with: `brew install dpkg` for Mac OS, `apt-get install deb` for Ubuntu, `yum install deb` for Centos/RHEL.
 
 * If you're looking at the maven internals, note that many of the settings are inherited from parent projects (see for instance `brooklyn-server/parent/pom.xml`)
 
@@ -73,9 +83,6 @@ If there is a good reason that a file, pattern, or directory should be permanent
 
 ## Other Handy Hints
 
-* On some **Ubuntu** (e.g. 10.4 LTS) maven v3 is not currently available from the repositories.
-  Some instructions for installing at are [at superuser.com](http://superuser.com/questions/298062/how-do-i-install-maven-3).
-
 * The **mvnf** script 
   ([get the gist here](https://gist.github.com/2241800)) 
   simplifies building selected projects, so if you just change something in ``software-webapp`` 
@@ -92,100 +99,110 @@ although we'd love to if anyone can help!):
 
 {% highlight bash %}
 % mvn clean install
-[INFO] Scanning for projects...
+
+...
+
 [INFO] ------------------------------------------------------------------------
-[INFO] Reactor Build Order:
-[INFO] 
-[INFO] Brooklyn REST JavaScript Web GUI
-[INFO] Brooklyn Server Root
-[INFO] Brooklyn Parent Project
-[INFO] Brooklyn Test Support Utilities
-[INFO] Brooklyn Logback Includable Configuration
-[INFO] Brooklyn Common Utilities
-
-...
-
-[WARNING] Ignoring project type war - supportedProjectTypes = [jar]
-
-...
-
-[WARNING] We have a duplicate org/xmlpull/v1/XmlPullParser.class in ~/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar
-
-...
-
-[INFO] — maven-assembly-plugin:2.3:single (build-distribution-dir) @ brooklyn-dist —
-[INFO] Reading assembly descriptor: src/main/config/build-distribution-dir.xml
-{% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:1.0.0-SNAPSHOT; it doesn't have an associated file or directory.
-[INFO] Copying files to ~/repos/apache/brooklyn/usage/dist/target/brooklyn-dist
-[WARNING] Assembly file: ~/repos/apache/brooklyn/usage/dist/target/brooklyn-dist is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.
-
-...
-
-[INFO] — maven-assembly-plugin:2.3:single (build-distribution-archive) @ brooklyn-dist —
-[INFO] Reading assembly descriptor: src/main/config/build-distribution-archive.xml
-{% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:1.0.0-SNAPSHOT; it doesn't have an associated file or directory.
-{% comment %}BROOKLYN_VERSION{% endcomment %}[INFO] Building tar: /Users/aled/repos/apache/brooklyn/usage/dist/target/brooklyn-1.0.0-SNAPSHOT-dist.tar.gz
-{% comment %}BROOKLYN_VERSION{% endcomment %}[WARNING] Cannot include project artifact: io.brooklyn:brooklyn-dist:jar:1.0.0-SNAPSHOT; it doesn't have an associated file or directory.
-
-...
-
-[WARNING] Don't override file /Users/aled/repos/apache/brooklyn/usage/archetypes/quickstart/target/test-classes/projects/integration-test-1/project/brooklyn-sample/src/main/resources/sample-icon.png
-
-...
-
-[INFO] Reactor Summary:
-[INFO] 
-[INFO] Brooklyn Parent Project ........................... SUCCESS [3.072s]
-[INFO] Brooklyn Utilities to Support Testing (listeners etc)  SUCCESS [3.114s]
-[INFO] Brooklyn Logback Includable Configuration ......... SUCCESS [0.680s]
-[INFO] Brooklyn Common Utilities ......................... SUCCESS [7.263s]
-[INFO] Brooklyn Groovy Utilities ......................... SUCCESS [5.193s]
-[INFO] Brooklyn API ...................................... SUCCESS [2.146s]
-[INFO] Brooklyn Test Support ............................. SUCCESS [2.517s]
-[INFO] CAMP Server Parent Project ........................ SUCCESS [0.075s]
-[INFO] CAMP Base ......................................... SUCCESS [4.079s]
-[INFO] Brooklyn REST Swagger Apidoc Utilities ............ SUCCESS [1.983s]
-[INFO] Brooklyn Logback Configuration .................... SUCCESS [0.625s]
-[INFO] CAMP Server ....................................... SUCCESS [5.446s]
-[INFO] Brooklyn Core ..................................... SUCCESS [1:24.122s]
-[INFO] Brooklyn Policies ................................. SUCCESS [44.425s]
-[INFO] Brooklyn Hazelcast Storage ........................ SUCCESS [7.143s]
-[INFO] Brooklyn Jclouds Location Targets ................. SUCCESS [16.488s]
-[INFO] Brooklyn Secure JMXMP Agent ....................... SUCCESS [8.634s]
-[INFO] Brooklyn JMX RMI Agent ............................ SUCCESS [2.315s]
-[INFO] Brooklyn Software Base ............................ SUCCESS [28.538s]
-[INFO] Brooklyn Network Software Entities ................ SUCCESS [3.896s]
-[INFO] Brooklyn OSGi Software Entities ................... SUCCESS [4.589s]
-[INFO] Brooklyn Web App Software Entities ................ SUCCESS [17.484s]
-[INFO] Brooklyn Messaging Software Entities .............. SUCCESS [7.106s]
-[INFO] Brooklyn Database Software Entities ............... SUCCESS [5.229s]
-[INFO] Brooklyn NoSQL Data Store Software Entities ....... SUCCESS [11.901s]
-[INFO] Brooklyn Monitoring Software Entities ............. SUCCESS [4.027s]
-[INFO] Brooklyn CAMP REST API ............................ SUCCESS [15.285s]
-[INFO] Brooklyn REST API ................................. SUCCESS [4.489s]
-[INFO] Brooklyn REST Server .............................. SUCCESS [30.270s]
-[INFO] Brooklyn REST Client .............................. SUCCESS [7.007s]
-[INFO] Brooklyn REST JavaScript Web GUI .................. SUCCESS [24.397s]
-[INFO] Brooklyn Launcher ................................. SUCCESS [15.923s]
-[INFO] Brooklyn Command Line Interface ................... SUCCESS [9.279s]
-[INFO] Brooklyn All Things ............................... SUCCESS [13.875s]
-[INFO] Brooklyn Distribution ............................. SUCCESS [49.370s]
-[INFO] Brooklyn Quick-Start Project Archetype ............ SUCCESS [12.053s]
-[INFO] Brooklyn Examples Aggregator Project .............. SUCCESS [0.085s]
-[INFO] Brooklyn Examples Support Aggregator Project - Webapps  SUCCESS [0.053s]
-[INFO] hello-world-webapp Maven Webapp ................... SUCCESS [0.751s]
-[INFO] hello-world-sql-webapp Maven Webapp ............... SUCCESS [0.623s]
-[INFO] Brooklyn Simple Web Cluster Example ............... SUCCESS [5.398s]
-[INFO] Brooklyn Global Web Fabric Example ................ SUCCESS [3.176s]
-[INFO] Brooklyn Simple Messaging Publish-Subscribe Example  SUCCESS [3.217s]
-[INFO] Brooklyn NoSQL Cluster Examples ................... SUCCESS [6.790s]
-[INFO] Brooklyn QA ....................................... SUCCESS [7.117s]
+[INFO] Reactor Summary for Brooklyn Root 1.0.0-SNAPSHOT:
+[INFO]
+[INFO] Brooklyn Server Root ............................... SUCCESS [  0.567 s]
+[INFO] Brooklyn Parent Project ............................ SUCCESS [  1.552 s]
+[INFO] Brooklyn Test Support Utilities .................... SUCCESS [  2.719 s]
+[INFO] Brooklyn Logback Includable Configuration .......... SUCCESS [  0.355 s]
+[INFO] Brooklyn Common Utilities .......................... SUCCESS [  7.237 s]
+[INFO] Brooklyn API ....................................... SUCCESS [  1.229 s]
+[INFO] CAMP Server Parent Project ......................... SUCCESS [  0.109 s]
+[INFO] CAMP Base .......................................... SUCCESS [  0.893 s]
+[INFO] Brooklyn Test Support .............................. SUCCESS [  0.897 s]
+[INFO] Brooklyn REST Swagger Apidoc Utilities ............. SUCCESS [  0.733 s]
+[INFO] Brooklyn Logback Configuration ..................... SUCCESS [  0.299 s]
+[INFO] CAMP Server ........................................ SUCCESS [  1.385 s]
+[INFO] Brooklyn Felix Runtime ............................. SUCCESS [  0.534 s]
+[INFO] Brooklyn Groovy Utilities .......................... SUCCESS [  0.500 s]
+[INFO] Brooklyn Core ...................................... SUCCESS [ 31.521 s]
+[INFO] Brooklyn Policies .................................. SUCCESS [  3.556 s]
+[INFO] Brooklyn WinRM Software Entities ................... SUCCESS [  1.778 s]
+[INFO] Brooklyn Secure JMXMP Agent ........................ SUCCESS [  1.108 s]
+[INFO] Brooklyn JMX RMI Agent ............................. SUCCESS [  0.334 s]
+[INFO] Brooklyn Jclouds Location Targets .................. SUCCESS [  5.202 s]
+[INFO] Brooklyn Software Base ............................. SUCCESS [  6.690 s]
+[INFO] Brooklyn CAMP ...................................... SUCCESS [  4.282 s]
+[INFO] Brooklyn Launcher Common ........................... SUCCESS [  1.719 s]
+[INFO] Brooklyn REST API .................................. SUCCESS [  3.866 s]
+[INFO] Brooklyn REST Resources ............................ SUCCESS [  4.475 s]
+[INFO] Brooklyn REST Server ............................... SUCCESS [  1.523 s]
+[INFO] Brooklyn Launcher .................................. SUCCESS [  2.765 s]
+[INFO] Brooklyn Container Location Targets ................ SUCCESS [  2.413 s]
+[INFO] Brooklyn Command Line Interface .................... SUCCESS [  2.101 s]
+[INFO] Brooklyn Test Framework ............................ SUCCESS [  2.537 s]
+[INFO] Brooklyn OSGi init ................................. SUCCESS [  1.517 s]
+[INFO] Brooklyn OSGi start ................................ SUCCESS [  1.497 s]
+[INFO] Brooklyn Karaf ..................................... SUCCESS [  0.037 s]
+[INFO] Jetty config fragment .............................. SUCCESS [  1.381 s]
+[INFO] Apache Http Component extension .................... SUCCESS [  0.369 s]
+[INFO] Brooklyn Karaf Features ............................ SUCCESS [  0.867 s]
+[INFO] Brooklyn Karaf Shell Commands ...................... SUCCESS [  2.625 s]
+[INFO] Brooklyn UI :: Parent .............................. SUCCESS [ 25.412 s]
+[INFO] Brooklyn UI :: Modularity Server (parent) .......... SUCCESS [  0.138 s]
+[INFO] Brooklyn UI :: Modularity Server :: UI Module API .. SUCCESS [  1.085 s]
+[INFO] Brooklyn UI :: Modularity Server :: UI Module Registry SUCCESS [  0.802 s]
+[INFO] Brooklyn UI :: Modularity Server :: UI Proxy ....... SUCCESS [  0.602 s]
+[INFO] Brooklyn UI :: Modularity Server :: UI Metadata Registry SUCCESS [  0.595 s]
+[INFO] Brooklyn UI :: Modularity Server :: External UI Modules Registration Hooks SUCCESS [  1.134 s]
+[INFO] Brooklyn UI :: Modularity Server :: Features ....... SUCCESS [  2.050 s]
+[INFO] Brooklyn UI :: Modules (parent) .................... SUCCESS [  9.488 s]
+[INFO] Brooklyn UI :: Modules - UI Utils .................. SUCCESS [  7.689 s]
+[INFO] Brooklyn UI :: Modules - Home ...................... SUCCESS [ 34.523 s]
+[INFO] Brooklyn UI :: Modules - App inspector ............. SUCCESS [ 37.624 s]
+[INFO] Brooklyn UI :: Modules - Blueprint composer ........ SUCCESS [ 39.765 s]
+[INFO] Brooklyn UI :: Modules - Blueprint importer ........ SUCCESS [ 31.316 s]
+[INFO] Brooklyn UI :: Modules - Catalog ................... SUCCESS [ 32.420 s]
+[INFO] Brooklyn UI :: Modules - Location manager .......... SUCCESS [ 30.421 s]
+[INFO] Brooklyn UI :: Modules - REST API Docs ............. SUCCESS [ 29.679 s]
+[INFO] Brooklyn UI :: Modules - Groovy console ............ SUCCESS [ 27.595 s]
+[INFO] Brooklyn UI :: Modules - Logout .................... SUCCESS [ 25.890 s]
+[INFO] Brooklyn UI :: Modules - Features .................. SUCCESS [  1.720 s]
+[INFO] Brooklyn UI :: Features ............................ SUCCESS [  0.160 s]
+[INFO] Brooklyn Library Root .............................. SUCCESS [  0.318 s]
+[INFO] Brooklyn CM Chef ................................... SUCCESS [  3.157 s]
+[INFO] Brooklyn CM SaltStack .............................. SUCCESS [  1.531 s]
+[INFO] Brooklyn CM Ansible ................................ SUCCESS [  1.414 s]
+[INFO] Brooklyn CM Integration Root ....................... SUCCESS [  0.172 s]
+[INFO] Brooklyn Network Software Entities ................. SUCCESS [  1.458 s]
+[INFO] Brooklyn OSGi Software Entities .................... SUCCESS [  1.105 s]
+[INFO] Brooklyn Database Software Entities ................ SUCCESS [  2.084 s]
+[INFO] Brooklyn Web App Software Entities ................. SUCCESS [  2.996 s]
+[INFO] Brooklyn Messaging Software Entities ............... SUCCESS [  3.046 s]
+[INFO] Brooklyn NoSQL Data Store Software Entities ........ SUCCESS [  4.885 s]
+[INFO] Brooklyn Monitoring Software Entities .............. SUCCESS [  1.048 s]
+[INFO] Brooklyn Web App Software Entities ................. SUCCESS [  0.272 s]
+[INFO] Brooklyn QA ........................................ SUCCESS [  3.819 s]
+[INFO] Brooklyn Examples Aggregator Project ............... SUCCESS [  0.111 s]
+[INFO] Brooklyn Examples Aggregator Project - Webapps ..... SUCCESS [  0.158 s]
+[INFO] hello-world-webapp Maven Webapp .................... SUCCESS [  0.526 s]
+[INFO] hello-world-sql-webapp Maven Webapp ................ SUCCESS [  0.591 s]
+[INFO] Brooklyn Simple Web Cluster Example ................ SUCCESS [  1.919 s]
+[INFO] Brooklyn Library Karaf integration ................. SUCCESS [  0.087 s]
+[INFO] Brooklyn Library Catalog ........................... SUCCESS [  0.316 s]
+[INFO] Brooklyn Library Karaf Features .................... SUCCESS [  0.238 s]
+[INFO] Brooklyn Downstream Project Parent ................. SUCCESS [  0.082 s]
+[INFO] Brooklyn Dist Root ................................. SUCCESS [  0.489 s]
+[INFO] Brooklyn All Things ................................ SUCCESS [  1.868 s]
+[INFO] Brooklyn Distribution .............................. SUCCESS [  7.541 s]
+[INFO] Brooklyn Karaf Distribution Parent ................. SUCCESS [  0.064 s]
+[INFO] Brooklyn Karaf Server Configuration ................ SUCCESS [  0.446 s]
+[INFO] Brooklyn Dist Karaf Features ....................... SUCCESS [  0.152 s]
+[INFO] Brooklyn Karaf Distribution ........................ SUCCESS [ 10.222 s]
+[INFO] Brooklyn Karaf pax-exam itest ...................... SUCCESS [  2.030 s]
+[INFO] Brooklyn Vagrant Getting Started Environment ....... SUCCESS [  0.190 s]
+[INFO] Brooklyn Quick-Start Project Archetype ............. SUCCESS [  0.723 s]
+[INFO] Brooklyn Shared Package Files ...................... SUCCESS [  0.328 s]
+[INFO] Brooklyn Root ...................................... SUCCESS [  0.439 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 8:33.983s
-[INFO] Finished at: Mon Jul 21 14:56:46 BST 2014
-[INFO] Final Memory: 66M/554M
+[INFO] Total time:  08:21 min
+[INFO] Finished at: 2019-04-08T15:52:28+01:00
 [INFO] ------------------------------------------------------------------------
 
 {% endhighlight %}
