@@ -80,10 +80,10 @@ OpenJDK is recommended. Brooklyn has also been tested on the Oracle JVM and IBM 
 
 The ports used by Brooklyn are:
 
-* 8443 for https, to expose the web-console and REST api.
-* 8081 for http, to expose the web-console and REST api.
+* 8443 for HTTPS, to expose the web-console and REST API.
+* 8081 for HTTP, to expose the web-console and REST API.
 
-Whether to use https rather than http is configurable using the CLI option `--https`; 
+Whether to use HTTPS rather than HTTP is configurable using the CLI option `--https`; 
 the port to use is configurable using the CLI option `--port <port>`.
 
 To enable remote Brooklyn access, ensure these ports are open in the firewall.
@@ -109,7 +109,7 @@ It is normally recommended that Brooklyn run as a non-root user with keys instal
 
 ### Linux Kernel Entropy
 
-Check that the [linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient.
+Check that the [Linux kernel entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html) is sufficient.
 
 
 ### System Resource Limits

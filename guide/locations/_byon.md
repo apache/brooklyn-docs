@@ -52,7 +52,7 @@ This location will be saved as a [catalog entry]({{ site.path.guide }}/blueprint
 
 For more complex host configuration, one can define custom config values per machine. In the example 
 below, there will be two machines. The first will be a machine reachable on
-`ssh -i ~/.ssh/brooklyn.pem -p 8022 myuser@50.51.52.53`. The second is a windows machine, reachable 
+`ssh -i ~/.ssh/brooklyn.pem -p 8022 myuser@50.51.52.53`. The second is a Windows machine, reachable 
 over WinRM. Each machine has also has a private address (e.g. for within a private network).
 
 {% highlight yaml %}

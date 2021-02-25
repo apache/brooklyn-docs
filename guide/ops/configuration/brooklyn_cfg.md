@@ -17,7 +17,7 @@ The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any
 ## Quick Setup
 
 The most common properties set in this file are for access control. Without this, Brooklyn's 
-web-console and REST api will require no authentication.
+web-console and REST API will require no authentication.
 
 The simplest way to specify users and passwords is shown below (but see the 
 [Authentication](#authentication) section for how to avoid storing passwords in plain text):

@@ -11,11 +11,11 @@ parameters available for WinRM.
 * host <String>: Host to connect to (required).Default value `null`
 * port <Integer>: WinRM port to use when connecting to the remote machine.<br>
   If no port is specified then it defaults to a port depending on the `winrm.useHttps` flag.
-* winrm.useHttps <Boolean>: The parameter tells the machine sensors whether the winrm port is over https. If the parameter is true then 5986 will be used as a winrm port.<br>
+* winrm.useHttps <Boolean>: The parameter tells the machine sensors whether the WinRM port is over HTTPS. If the parameter is true then 5986 will be used as a WinRM port.<br>
   Default value: `false`
 * retriesOfNetworkFailures <Integer>: The parameter sets the number of retries for connection failures. If you use high value, consider taking care for the machine's network.<br>
   Default value: `4`
-* winrm.useNtlm <Boolean>: The parameter configures tells the machine sensors whether the winrm port is over https. If the parameter is true then 5986 will be used as a winrm port.<br>
+* winrm.useNtlm <Boolean>: The parameter configures tells the machine sensors whether the WinRM port is over HTTPS. If the parameter is true then 5986 will be used as a WinRM port.<br>
   Default value: `true`
 * winrm.computerName <String>: Windows Computer Name to use for authentication.<br>
   Default value: `null`
@@ -34,17 +34,17 @@ and it will be used to instantiate a `org.apache.brooklyn.util.core.internal.win
 
 ## WinRM Connectivity Diagnostics
 
-If you are experiencing problems with a windows blueprint against a jclouds location 
+If you are experiencing problems with a Windows blueprint against a jclouds location 
 where Apache Brooklyn complains about failing to connect to the IP you should check those things.
 
 1. Apache Brooklyn is using correct username and password
 1. Apache Brooklyn can reach the IP of the provisioned machine. WinRM port 5985 or 5986 is also reachable from Apache Brooklyn.
 1. Check whether `WinRmMachineLocation#getDefaultUserMetadataString(ConfigurationSupportInternal)` is applied on the VM.
    This script should be passed to the cloud and executed in order to configure WinRM according to Apache Brooklyn requirements for authentication.
-   So far windows startup script are known to be supported on AWS EC2 and VCloud Director.
+   So far Windows startup script are known to be supported on AWS EC2 and VCloud Director.
    If your cloud doesn't use this script then tune WinRM parameters accordingly.
-1. Check whether you use winrm over http or over https.
-  1. If you are using WinRM over http then make sure WinRM service on target VM has `AllowUnencrypted = true`
+1. Check whether you use WinRM over HTTP or over HTTPS.
+  1. If you are using WinRM over HTTP then make sure WinRM service on target VM has `AllowUnencrypted = true`
 
 If the quick list above doesn't help then follow the steps bellow.
 
@@ -55,12 +55,12 @@ After you determined what is the username and the password you can proceed with 
 *(Notice that for cloud providers which use Auto Generated password will not be logged.
 For these cases use Java Debug to retrieve ot or provision a VM manually with the same parameters when using Apache Brooklyn to provision a jclouds location.)*
 
-The first step is to find what is the winrm service configuration on the target host.
+The first step is to find what is the WinRM service configuration on the target host.
 
-1. If you have RDP access or KVM like access to the VM then check the winrm service status with the command bellow.
+1. If you have RDP access or KVM like access to the VM then check the WinRM service status with the command bellow.
    `winrm get winrm/config/service`
-   If you are using http you should have AllowUnencrypted to false.
-   Encryption is supported only over https.
+   If you are using HTTP you should have AllowUnencrypted to false.
+   Encryption is supported only over HTTPS.
    Sample output:
 
         MaxConcurrentOperations = 4294967295
@@ -103,7 +103,7 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 
 1. Check IP is reachable from Apache Brooklyn instance
    Check whether `telnet 10.0.0.1 5985` makes successfully a socket.
-1. If AllowUnencrypted is false and you are using winrm over http then apply `winrm set winrm/config/service @{AllowUnencrypted="true"}`
+1. If AllowUnencrypted is false and you are using WinRM over HTTP then apply `winrm set winrm/config/service @{AllowUnencrypted="true"}`
    *If jclouds or the cloud provider doesn't support passing `sysprep-specialize-script-cmd` then consider modifying Windows VM Image.* 
 1. Check your username and password. Notice in Windows passwords are case sensitive.
    Here is how it looks log from a wrong password:
@@ -116,8 +116,8 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 
 1. When having wrong password you may want to try logging on a different domain
    This is possible from `brooklyn.winrm.config.winrm.computerName` location config.
-1. If you want to configure Windows target host with https then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)
-1. If you are still seeing authorization errors then try connecting via winrm with the embedded winrs client.
+1. If you want to configure Windows target host with HTTPS then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)
+1. If you are still seeing authorization errors then try connecting via WinRM with the embedded winrs client.
    First make sure you have the server in trusted hosts.
 
 Then execute a simple command like

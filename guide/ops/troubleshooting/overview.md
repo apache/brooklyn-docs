@@ -32,7 +32,7 @@ Many entities have some common sensors (i.e. attributes) that give details of th
   possible for some entities to set this attribute directly.
 * `service.notUp.indicators` is a map of errors. This often gives much more information than the single 
   `service.isUp` attribute. For example, there may be many health-check indicators for a component: 
-  is the root URL reachable, it the management api reporting healthy, is the process running, etc.
+  is the root URL reachable, it the management API reporting healthy, is the process running, etc.
 * `service.problems` is a map of namespaced indicators of problems with a service.
 * `service.state` is the actual state of the service - e.g. CREATED, STARTING, RUNNING, STOPPING, STOPPED, 
   DESTROYED and ON_FIRE.

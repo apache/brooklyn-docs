@@ -189,7 +189,7 @@ services:
 
 _However, the web-console also shows other misleading (incorrect!) config values for the child 
 entity. It shows the inherited config value of `exampleConfig` as "childValue" (because the
-REST api did not evaluate the DSL in the correct context, when retrieving the value! 
+REST API did not evaluate the DSL in the correct context, when retrieving the value! 
 See https://issues.apache.org/jira/browse/BROOKLYN-455._
 
 
@@ -296,7 +296,7 @@ Some common config keys that will not re-inherited include:
 * `launch.command` (and the ``pre.launch.command` and `post.launch.command`)
 * `checkRunning.command`
 * `stop.command`
-* The similar commands for `VanillaWindowsProcess` powershell.
+* The similar commands for `VanillaWindowsProcess` PowerShell.
 * The file and template install config keys (e.g. `files.preinstall`, `templates.preinstall`, etc)
 
 An example is shown below. Here, the "logstash-child" is a sub-type of `VanillaSoftwareProcess`,

@@ -33,8 +33,8 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
 
 - `TestCase` entity starts its children sequentially
   - asserts that the `webappcluster` entity `service.isUp` sensor is `true` within 10 minutes of the parent `TestCase` entity starting. Blocks start of the next child until it obtains a result (or times out).
-  - `deploy` effector invoked to deploy war to a `newcontext` with a 5 minute timeout to allow completion of the deploy task.
-  - asserts `/newcontext` url returns a HTTP status code 200 within 5 minutes of the effector being invoked (Note that this timeout is relative to the preceding test entity as they are being sequentially run as children of a `TestCase` entity).
+  - `deploy` effector invoked to deploy WAR to a `newcontext` with a 5 minute timeout to allow completion of the deploy task.
+  - asserts `/newcontext` URL returns a HTTP status code 200 within 5 minutes of the effector being invoked (Note that this timeout is relative to the preceding test entity as they are being sequentially run as children of a `TestCase` entity).
 
 {% highlight yaml %}
 {% readj example_yaml/testcases/effector-test-snippet.yaml %}

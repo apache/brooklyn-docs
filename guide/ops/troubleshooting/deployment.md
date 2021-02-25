@@ -96,7 +96,7 @@ be more easily investigated.
 
 The exception `java.security.KeyException` can be thrown when jclouds is attempting the SSL handshake,
 to make cloud API calls. This can happen if the version of nss is older than 3.16 - the nss package
-includes the ssl library.
+includes the SSL library.
 
 To fix this on CentOS, run:
 

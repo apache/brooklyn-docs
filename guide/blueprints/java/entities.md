@@ -97,8 +97,8 @@ protected void disconnectSensors() {
 }
 {% endhighlight %}
 
-In this example (a simplified version of ``JBoss7Server``), the url returns metrics in JSON. 
-We report the entity as up if we get back an http response code of 200, or down if any other response code or exception.
+In this example (a simplified version of ``JBoss7Server``), the URL returns metrics in JSON. 
+We report the entity as up if we get back an HTTP response code of 200, or down if any other response code or exception.
 We retrieve the request count from the response body, and convert it to an integer.
 
 Note the first line (``super.connectSensors()``); as one descends into specific convenience subclasses (such as for Java web-apps), the work done by the parent class's overridden methods may be relevant, and will want to be invoked or even added to a resulting list.

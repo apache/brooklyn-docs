@@ -11,8 +11,8 @@ section_position: 4
 
 The endpoint URI will normally have the suffix `/client/api/`.
 
-The identity is the "api key" and the credential is the "secret key". These can be generated in 
-the CloudStack gui: under accounts, select "view users", then "generate key".
+The identity is the "API key" and the credential is the "secret key". These can be generated in 
+the CloudStack GUI: under accounts, select "view users", then "generate key".
 
     location:
       jclouds:cloudstack:

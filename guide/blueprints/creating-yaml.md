@@ -37,7 +37,7 @@ open a new browser window (usually) at [http://127.0.0.1:8081/](http://127.0.0.1
 Click on the tile "Blueprint Composer", then on the double-arrow located on the top right of the screen (to switch to the YAML mode),
 paste the copied YAML into the editor and press "Deploy". 
 There are several other ways to deploy, including `curl` and via the command-line,
-and you can configure users, https, persistence, and more, 
+and you can configure users, HTTPS, persistence, and more, 
 as described [in the ops guide]({{ site.path.guide }}/ops/).
 
 [![Web Console](web-console-yaml-700.png "YAML via Web Console")](web-console-yaml.png)

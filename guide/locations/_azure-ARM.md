@@ -187,7 +187,7 @@ You can add these options into the `templateOptions` element inside the `brookly
 This section contains material how to create a Windows location on Azure ARM. Some of the used parameters are explained in the section above.
 
 Windows on Azure ARM requires manually created [Azure KeyVault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-get-started)
-Azure KeyVaults can be created [via Azure cli](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#create-a-key-vault)
+Azure KeyVaults can be created [via Azure CLI](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-manage-with-cli2#create-a-key-vault)
 or [Azure portal UI](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-keyvault-parameter). KeyVault's secret is a key
 stored in protected .PFX file. It needs to be prepared upfront or created with the [Add-AzureKeyVaultKey](https://docs.microsoft.com/en-us/powershell/module/azurerm.keyvault/add-azurekeyvaultkey?view=azurermps-4.0.0) cmdlet.
 
@@ -215,7 +215,7 @@ stored in protected .PFX file. It needs to be prepared upfront or created with t
 
 * `additionalUnattendContent` Additional content. Normally it can be defined as `null`
 
-* `enableAutomaticUpdates` whether to enable the automatic windows updates. It can be set to `false`, if automatic updates are not desired
+* `enableAutomaticUpdates` whether to enable the automatic Windows updates. It can be set to `false`, if automatic updates are not desired
 
 ###### Sample Windows Blueprint
 
