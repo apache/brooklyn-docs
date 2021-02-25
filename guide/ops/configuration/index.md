@@ -27,7 +27,7 @@ and manipulated by the `config:` commands, see the [Karaf documentation](https:/
 To configure the Brooklyn runtime create an `etc/brooklyn.cfg` file. If you have previously used `brooklyn.properties` it follows the same
 file format. Values can be viewed and managed dynamically via the OSGI configuration admin commands in Karaf,
 e.g. `config:property-set`. The global `~/.brooklyn/brooklyn.properties` is still supported and has higher
-priority for duplicate keys, but it's values can't be manipulated with the Karaf commands, so its use is
+priority for duplicate keys, but its values can't be manipulated with the Karaf commands, so its use is
 discouraged.
 
 You can use the standard `~/.brooklyn/brooklyn.properties` file to configure Brooklyn. Alternatively

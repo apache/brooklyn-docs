@@ -12,13 +12,13 @@ Another simple blueprint will just create a VM which you can use, without any so
 {% endhighlight %}
 
 
-*We've omitted the `location` section here and in many of the examples below;
+*We've omitted the `location` section here and in many of the examples elsewhere;
 add the appropriate choice when you paste your YAML. Note that the `provisioning.properties` will be
 ignored if deploying to `localhost` or `byon` fixed-IP machines.* 
 
 This will create a VM with the specified parameters in your choice of cloud.
 In the GUI (and in the REST API), the entity is called "VM",
-and the hostname and IP address(es) are reported as [sensors]({{ site.path.guide }}/concepts/entities.html).
+and the hostname and IP address(es) are reported as [sensors]({{ site.path.guide }}/concepts/configuration-sensor-effectors.html).
 There are many more `provisioning.properties` supported here,
 including:
 

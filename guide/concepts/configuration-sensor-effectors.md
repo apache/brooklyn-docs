@@ -34,7 +34,7 @@ Sensors can be updated by the entity or associated tasks, and sensors from an en
 
 Effectors can be invoked by an entity's parent remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!
 
-An entity consists of a Java interface (used when interacting with the entity) and a Java class. For resilience. it is recommended to store 
+An entity consists of a Java interface (used when interacting with the entity) and a Java class. For resilience, it is recommended to store 
 the entity's state in attributes (see `getAttribute(AttributeKey)`). If internal fields are used then the data will be lost on brooklyn
 restart, and may cause problems if the entity is to be moved to a different brooklyn management node.
 

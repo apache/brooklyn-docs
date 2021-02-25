@@ -204,7 +204,7 @@ and if you haven't yet experimented with `resize` on the cluster you might want 
 ### Attaching Policies
 
 Besides detecting this failure, Brooklyn policies can be added to the YAML to take appropriate 
-action. A simple recovery here might just to automatically restart the process:
+action. A simple recovery here might be just to restart the process automatically:
 
 {% highlight yaml %}
 {% readj example_yaml/vanilla-bash-netcat-restarter.yaml %}
@@ -212,7 +212,7 @@ action. A simple recovery here might just to automatically restart the process:
 
 Autonomic management in Brooklyn often follows the principle that complex behaviours emerge
 from composing simple policies.
-The blueprint above uses one policy to triggering a failure sensor when the service is down,
+The blueprint above uses one policy to trigger a failure sensor when the service is down,
 and another responds to such failures by restarting the service.
 This makes it easy to configure various aspects, such as to delay to see if the service itself recovers
 (which here we've set to 15 seconds) or to bail out on multiple failures within a time window (which again we are not doing).

@@ -63,11 +63,11 @@ The following configuration keys can be specified for dynamic cluster:
 
 ### Effectors
 
-Dynamic cluster has a set of effectors which allow it's members to be manipulated, these are detailed below.
+Dynamic cluster has a set of effectors which allow its members to be manipulated, these are detailed below.
 
 | Effector Name | Parameters  | Description                                                     |
 |---------------|-------------|-----------------------------------------------------------------|
-| replaceMember | memberId    | Replaces a specific member of the cluster given by it's ID      |
+| replaceMember | memberId    | Replaces a specific member of the cluster given its ID          |
 | resize        | desiredSize | Resizes the cluster to a `desiredSize`                          |
 | resizeByDelta | delta       | Resizes the cluster by a `delta`                                |
 

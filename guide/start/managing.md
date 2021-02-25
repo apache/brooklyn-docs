@@ -13,7 +13,7 @@ children:
 
 
 
-So far we have gone through Apache Brooklyn's ability to *deploy* an application blueprint to a location, but this just 
+So far we have gone through Apache Brooklyn's ability to *deploy* an application blueprint to a location, but this is just 
 the beginning. Next we will outline how to *manage* the application that has been deployed.
 
 ## Applications
@@ -263,7 +263,7 @@ stop                              Stop the process/service represented by an ent
 undeploy                          Undeploys the given context/artifact                                                      targetName   
 </pre>
 
-To view the details for a specific effector, append it's name to the command:
+To view the details for a specific effector, append its name to the command:
 
 {% highlight bash %}
 $ br application Tomcat entity tomcatServer effector deploy

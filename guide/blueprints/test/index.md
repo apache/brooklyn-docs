@@ -26,7 +26,7 @@ Validation test entities include:
   number of different formats: a string in the form of `ip:port` or URI format; or a 
   `com.google.common.net.HostAndPort` instance; or a `java.net.URI` instance; or a `java.net.URL` instance.
 
-TargetableTestComponents can be chained together, with the target being inherited by the components children. For example, a ParallelTestCase could be created that has a TestHttpCall as a child. As long as the TestHttpCall itself does not have a target, it will use the target of it's parent, ParallelTestCase. Using this technique, we can build up complex test scenarios.
+TargetableTestComponents can be chained together, with the target being inherited by the components children. For example, a ParallelTestCase could be created that has a TestHttpCall as a child. As long as the TestHttpCall itself does not have a target, it will use the target of its parent, ParallelTestCase. Using this technique, we can build up complex test scenarios.
 
 The following sections provide details on each test entity along with examples of their use.
 
