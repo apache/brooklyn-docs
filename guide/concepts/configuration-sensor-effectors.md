@@ -30,9 +30,10 @@ in the entity's interface is the recommended mechanism for exposing configuratio
 
 ***Sensors*** (activity information and notifications) and ***effectors*** (operations that can be invoked on the entity) are defined by entities as static fields on the `Entity` subclass.
 
-Sensors can be updated by the entity or associated tasks, and sensors from an entity can be subscribed to by its parent or other entities to track changes in an entity's activity.
+Sensors can be updated by the entity or associated tasks – each update generates an event. An entity can subscribe to sensor events from itself or other entities.
+A common pattern is for an entity to subscribe to its children (or for a group to subscribe to its members), to aggregate the sensor data and to respond to those events.
 
-Effectors can be invoked by an entity's parent remotely, and the invoker is able to track the execution of that effector. Effectors can be invoked by other entities, but use this functionality with care to prevent too many managers!
+Effectors can be invoked by an entity's parent, and the invoker is able to track the execution of that effector. Effectors can also be invoked by other entities, but use this functionality with care to prevent too many managers!
 
 An entity consists of a Java interface (used when interacting with the entity) and a Java class. For resilience, it is recommended to store 
 the entity's state in attributes (see `getAttribute(AttributeKey)`). If internal fields are used then the data will be lost on brooklyn

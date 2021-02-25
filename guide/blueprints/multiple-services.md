@@ -73,7 +73,7 @@ to include the credentials for the database (which are defined in the database c
 
 ### An Aside: Substitutability
 
-Don't like JBoss?  Is there something about Maria?
+Don't like JBoss?  Is there something about MariaDB?
 One of the modular principles we follow in Brooklyn is substitutability:
 in many cases, the config keys, sensors, and effectors are defined
 in superclasses and are portable across multiple implementations.

@@ -88,7 +88,7 @@ management hierarchy. This applies to entities and locations. In a future releas
 extended to also apply to policies and enrichers.
 
 When a blueprint author defines a config key, they can explicitly specify the rules for inheritance 
-(both for super/sub-types, and for the runtime management hiearchy). This gives great flexibilty,
+(both for super/sub-types, and for the runtime management hierarchy). This gives great flexibilty,
 but should be used with care so as not to surprise users of the blueprint.
 
 The default behaviour is outlined below, along with examples and details of how to explilcitly 
@@ -123,7 +123,7 @@ is inherited unchanged.
 It will write out: `Sub-type launch command: Goodbye`.
 
 
-#### Inheriting Configuration from a Parent in the Runtime Management Hieararchy
+#### Inheriting Configuration from a Parent in the Runtime Management Hierarchy
 
 Configuration passed to an entity is inherited by all child entities, unless explicitly overridden.
 
@@ -244,7 +244,7 @@ itself.
 When deploying to a jclouds location, one can specify `templateOptions` (of type map). Rather than
 overriding, these will be merged with any templateOptions defined on the location.
 
-In the example below, the VM will be provisioned with minimum 2G ram and minimum 2 cores. It will 
+In the example below, the VM will be provisioned with minimum 2GB RAM and minimum 2 cores. It will 
 also use the merged template options value of 
 `{placementGroup: myPlacementGroup, securityGroupIds: sg-000c3a6a}`:
 
@@ -342,7 +342,7 @@ services:
 #### Never Inherited
 
 For some configuration values, the most logical behaviour is for the value to never be inherited
-in the runtime management hiearchy.
+in the runtime management hierarchy.
 
 Some common config keys that will never inherited include:
 

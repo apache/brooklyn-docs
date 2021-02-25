@@ -8,7 +8,6 @@ All processing, whether an effector invocation or a policy cycle, are tracked as
 *	active and historic processing can be observed by operators
 *	the invocation context is available in the thread, to check entitlement (permissions) and maintain a
 hierarchical causal chain even when operations are run in parallel
-*	processing can be managed across multiple management nodes
 
 Some executions create new entities, which can then have tasks associated with them, and the system will record, for example, that a start effector on the new entity is a task associated with that entity, with that task
 created by a task associated with a different entity.

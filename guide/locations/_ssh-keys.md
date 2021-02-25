@@ -29,8 +29,19 @@ and no one snooping on the network can decrypt of any of the traffic.
 If you don't have an SSH key, create one with:
 
 {% highlight bash %}
-$ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+$ ssh-keygen -t rsa -N "" -m PEM -f ~/.ssh/id_rsa
 {% endhighlight %}
+
+**Note:** For previous versions of OpenSSH, the `-m PEM` flag is not necessary.
+However, for newer versions of OpenSSH, if the `-m PEM` flag is omitted, the
+generated key will be in RFC4716 format, not PEM format. Check the first line of
+the generated secret key file, which should be as follows:
+
+```bash
+$ head -n 1 ~/.ssh/id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+$
+```
 
 
 #### Localhost Setup

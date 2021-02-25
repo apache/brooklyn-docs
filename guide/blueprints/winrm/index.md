@@ -42,7 +42,6 @@ In particular, you will most likely want to set these properties on your locatio
 
 In your YAML blueprint:
 
-    ...
     location:
       jclouds:aws-ec2:
         region: us-west-2
@@ -53,17 +52,16 @@ In your YAML blueprint:
         hardwareId: m3.medium
         useJcloudsSshInit: false
         templateOptions: {mapNewVolumeToDeviceName: ["/dev/sda1", 100, true]}
-    ...
 
-Alternatively, you can define a new named location in `brooklyn.properties`:
+Or for an existing Windows machine:
 
-    brooklyn.location.named.AWS\ Oregon\ Win = jclouds:aws-ec2:us-west-2
-    brooklyn.location.named.AWS\ Oregon\ Win.displayName = AWS Oregon (Windows)
-    brooklyn.location.named.AWS\ Oregon\ Win.imageNameRegex = Windows_Server-2012-R2_RTM-English-64Bit-Base-.*
-    brooklyn.location.named.AWS\ Oregon\ Win.imageOwner = 801119661308
-    brooklyn.location.named.AWS\ Oregon\ Win.hardwareId = m3.medium
-    brooklyn.location.named.AWS\ Oregon\ Win.useJcloudsSshInit = false
-    brooklyn.location.named.AWS\ Oregon\ Win.templateOptions = {mapNewVolumeToDeviceName: ["/dev/sda1", 100, true]}
+    location:
+      byon:
+        hosts:
+        - winrm: 10.0.0.1
+          user: Administrator
+          password: pa55w0rd
+          osFamily: windows
 
 
 
@@ -79,26 +77,17 @@ Entity authors are strongly encouraged to write Windows PowerShell or Batch scri
 files, to configure these to be uploaded, and then to configure the appropriate command as a 
 single line that executes given script.
 
-For example - here is a simplified blueprint (but see [Tips and Tricks](#tips-and-tricks) below!):
+For example here is a simplified blueprint:
 
     name: Server with 7-Zip
 
-    location:
-      jclouds:aws-ec2:
-        region: us-west-2
-        identity: AKA_YOUR_ACCESS_KEY_ID
-        credential: <access-key-hex-digits>
-        imageNameRegex: Windows_Server-2012-R2_RTM-English-64Bit-Base-.*
-        imageOwner: 801119661308
-        hardwareId: m3.medium
-        useJcloudsSshInit: false
-        templateOptions: {mapNewVolumeToDeviceName: ["/dev/sda1", 100, true]}
+    location: windows-machine       # register this, or inject the above instead
 
     services:
     - type: org.apache.brooklyn.entity.software.base.VanillaWindowsProcess
       brooklyn.config:
         templates.preinstall:
-          file:///Users/richard/install7zip.ps1: "C:\\install7zip.ps1"
+          /path/to/install7zip.ps1: "C:\\install7zip.ps1"
         install.command: powershell -command "C:\\install7zip.ps1"
         customize.command: echo true
         launch.command: echo true
@@ -106,7 +95,7 @@ For example - here is a simplified blueprint (but see [Tips and Tricks](#tips-an
         checkRunning.command: echo true
         installer.download.url: http://www.7-zip.org/a/7z938-x64.msi
 
-The installation script - referred to as `/Users/richard/install7zip.ps1` in the example above - is:
+The installation script - referred to as `/path/to/install7zip.ps1` in the example above (but put this on your Brooklyn server or in the bundle classpath) - is:
 
     $Path = "C:\InstallTemp"
     New-Item -ItemType Directory -Force -Path $Path
@@ -117,10 +106,6 @@ The installation script - referred to as `/Users/richard/install7zip.ps1` in the
     $WebClient.DownloadFile( $Url, $Dl )
 
     Start-Process "msiexec" -ArgumentList '/qn','/i',$Dl -RedirectStandardOutput ( [System.IO.Path]::Combine($Path, "stdout.txt") ) -RedirectStandardError ( [System.IO.Path]::Combine($Path, "stderr.txt") ) -Wait
-
-Where security-related operation are to be executed, it may require the use of `CredSSP` to obtain
-the correct Administrator privileges: you may otherwise get an access denied error. See the sub-section 
-[How and Why to re-authenticate within a PowerShell script](#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 This is only a very simple example. A more complex example can be found in the [Microsoft SQL Server blueprint in the
 Brooklyn source code]({{ site.brooklyn.url.git }}/software/database/src/main/resources/org/apache/brooklyn/entity/database/mssql).
@@ -602,11 +587,14 @@ entities are installed.
 Blueprint authors are strongly encourages to explicitly specific directories for file
 uploads and in their PowerShell scripts.
 
-### Windows template settings for an Unattended Installation
 
-Windows template needs certain configuration to be applied to prevent Windows setup UI from being displayed.
-The default behavior is to display it if there are incorrect or empty settings. Showing Setup UI will prevent the proper
-deployment, because it will expect interaction by the user such as agreeing on the license agreement or some of the setup dialogs.
+Learn More
+----------
 
-Detailed instruction how to prepare an Unattended installation are provided at [https://technet.microsoft.com/en-us/library/cc722411%28v=ws.10%29.aspx](https://technet.microsoft.com/en-us/library/cc722411%28v=ws.10%29.aspx).
+A few other WinRM resources are available:
+
+* [Tips and Tricks](tips.md)
+* [About the Winrm4j Client](client.md)
+* [Troubleshooting](troubleshoot.md)
+* [Limitations](limitations.md)
 

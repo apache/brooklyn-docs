@@ -31,4 +31,7 @@ Typically this does the right thing, blocking when necessary to generate the rig
 without the developer having to think through the order, but it can take some getting used to.
 Be careful not to request config information until really necessary (or to use non-blocking "raw" mechanisms),
 and in complicated situations be ready to attend to circular dependencies.
+Trying to resolve a circular dependency leads to a deadlock in those activities. The presence of such deadlocks can
+be seen by viewing the web-console's 'activities' tab of the (hung) entities – it will show what the executing
+activities are waiting for. Automated detection/alerting of deadlocks is currently not supported in Brooklyn.
 The management console gives useful information for understanding what is happening and resolving the cycle.

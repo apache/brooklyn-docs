@@ -40,4 +40,5 @@ style/js/catalog/items.js
 javadoc
 _book
 node_modules
-
+javadoc/stylesheet.css
+javadoc/javadoc.log
