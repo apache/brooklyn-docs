@@ -115,10 +115,16 @@ policy       pol
 ### Login
 
 - `br login <URL> [username [password]]`  
-  Login to Brooklyn.  The CLI will prompt for a password if it is not provided.  If the Brooklyn server is running on 
-  localhost with no security enabled, the username and password may be omitted.  
+  Login to Brooklyn using basic authorization (implicit --authorization=Basic).  The CLI will prompt for a password if 
+  it is not provided.  If the Brooklyn server is running on localhost with no security enabled, the username and 
+  password may be omitted.  
   On successful login, the version of the connected Brooklyn server is shown.
 
+- `br login <URL> --authorization=Bearer:<JWT-token>`  
+  Login to Brooklyn using oauth. The CLI will try to use the provided token for login in the Brooklyn server.
+  On successful login, the version of the connected Brooklyn server is shown. If not, it will show the server error 
+  response
+  
 - `br version`
   Show the version of the connected Brooklyn server.
 
