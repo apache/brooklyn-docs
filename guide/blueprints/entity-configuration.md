@@ -81,6 +81,18 @@ An example usage of this toy example, once added to the catalog, is shown below:
 !CODEFILE "example_yaml/entity-constraint-app.yaml"
 
 
+### Complex Types in Configuration
+
+Often configuration objects will be "primitives" -- `string`, `integer`, `boolean`, `char`.
+But they can be more sophisticated:
+
+* `list` and `map` are supported, and can be declared with generics, e.g. `type: map<string,boolean>` 
+* a `value-wrapper` that can be a value or can be a Brooklyn DSL expression
+* a `port` which allows specifying a range or set of values, eg `8080+` or `80,443,[8000-8999]`
+* a `duration` which recognises textual input, eg `2 minutes`
+* any type registered with the catalog as a `bean` using `bean-with-type`
+  (see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md))
+
 ### Inheriting Configuration
 
 Configuration can be inherited from a super-type, and from a parent entity in the runtime 

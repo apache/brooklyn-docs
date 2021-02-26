@@ -62,16 +62,18 @@ These fields can be supplied as `key: value` entries
 where either the `<catalog-metadata>` or `<additional-catalog-metadata>` placeholders are in the examples above,
 with the latter overriding the former unless otherwise specified below.
 
-The following metadata is *required* for all items:
 
-###### Required Metadata
+###### Definitional Metadata
 
 **`id`**
 A human-friendly unique identifier for how this catalog item will be referenced from blueprints.
+This is required.
 
 **`version`**
 Multiple versions of a blueprint can be installed and used simultaneously;
 this field disambiguates between blueprints of the same `id`.
+This can be omitted where the `version` is defined at an ancestor node, and in
+practice it usually is, so that all items in a bundle take the same version. 
 Note that this is typically *not* the version of the software being installed,
 but rather the version of the blueprint. For more information on versioning, see [Versioning]({{book.path.docs}}/blueprints/catalog/versioning.md).
 (Also note YAML treats numbers differently to Strings. Explicit quotes are recommended, to avoid
@@ -87,9 +89,22 @@ services:
 ~~~
 
 **`itemType`**
-The type of the item being defined. The supported item types are: `entity`, `template`, `policy`, and `location`.
+The type of the item being defined. The supported common spec item types are: `application`, `entity`, `policy`, and `location`.
+Two additional item types are `template`, which is a not-necessarily-deployable application for use as a starting
+point in composer (the YAML can even be invalid); and `bean` which defines types for use in config, initializers,
+and elsewhere. If the type can be inferred from the definition this can be omitted.
 
-In addition to `id`, `version`, and `itemType`, exactly **one** of `item` and `items` is also required:
+**`format`**
+The schema format used for the item definitions.
+This determines the transformer to use; if omitted at a level it is inherited from ancestors,
+and if `auto` (or omitted on ancestors) then the format is autodetected.
+Transformer formats that ship with Apache Brooklyn include:
+`brooklyn-camp` (the primary format used throughout, where a key `type: <parent-spec-type>` identifies the parent spec
+for entities, policies, etc, and config under `brooklyn.config`) 
+and `bean-with-type` (where a key `type: <parent-type>` is used to define a bean and fields as siblings).
+Extensions may provide additional formats.
+
+Exactly **one** of `item` and `items` is also required:
 
 **`item`**
 The YAML for an entity, or policy, or location specification

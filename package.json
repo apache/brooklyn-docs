@@ -21,7 +21,7 @@
     "book": "gitbook build",
     "serve": "gitbook serve",
     "pdf": "gitbook pdf",
-    "javadoc": "lessc javadoc/javadoc.less javadoc/stylesheet.css && pushd javadoc && ./build.sh && popd",
+    "javadoc": "bash -c 'lessc javadoc/javadoc.less javadoc/stylesheet.css && pushd javadoc && ./build.sh && popd'",
     "build": "npm run book && npm run javadoc"
   },
   "author": "",
