@@ -221,8 +221,7 @@ otherwise, the default configuration of the Jetty the server will be applied.
 The default value for the max inactive interval is 3600s but both values can be modified by adding the time in 
 seconds as properties on `brooklyn.cfg`:
 
-```properties
+{% highlight properties %}
 org.apache.brooklyn.server.maxSessionAge = 3600
 org.apache.brooklyn.server.maxInactiveInterval = 3600
-```
-  
+{% endhighlight %}

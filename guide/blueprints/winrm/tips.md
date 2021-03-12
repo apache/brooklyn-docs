@@ -1,5 +1,6 @@
 ---
 title: WinRM Tips and Tricks
+layout: website-normal
 ---
 
 ### PowerShell

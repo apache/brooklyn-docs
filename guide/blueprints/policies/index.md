@@ -1,6 +1,7 @@
 ---
 title: Policies
 partial-summary-depth: 1
+layout: website-normal
 ---
 
 Policies perform the active management enabled by Brooklyn.

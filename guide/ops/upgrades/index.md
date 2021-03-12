@@ -1,5 +1,6 @@
 ---
 title: Upgrades
+layout: website-normal
 ---
 
 This section provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
