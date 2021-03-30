@@ -99,6 +99,15 @@ each `<username>` specified in the `brooklyn.webconsole.security.users` list.
 
 Other security providers available include:
 
+### Random Password with Localhost Always Allowed
+
+`brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.BrooklynUserWithRandomPasswordSecurityProvider`
+will create and log a randomly-created password for use with a user named `brooklyn`. Localhost access will be allowed without a password.
+Search in the logs for a message of the form:
+
+`BrooklynUserWithRandomPasswordSecurityProvider [...] Allowing access to web console from localhost or with brooklyn:<password>`
+
+
 ### No one
 
 `brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.BlackholeSecurityProvider`
