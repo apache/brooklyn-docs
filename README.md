@@ -62,6 +62,10 @@ Some issues we've encountered are:
  * if `libxml2` fails, set `bundle config build.nokogiri --use-system-libraries` before the install
    (more details [here](http://www.nokogiri.org/tutorials/installing_nokogiri.html))
  * on Ubuntu, `sudo apt-get install libxslt-dev libxml2-dev libcurl4-openssl-dev python-minimal`
+ * if openssl library headers are not found, set the dir explicitly, eg for `eventmachine` try `gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1`
+ * if `libv8` complains: `gem install libv8 -- --with-system-v8` or eg `gem install libv8 -v '3.16.14.19' -- --with-system-v8`
+ * for rubyracer to find v8: `gem install therubyracer -- --with-v8-dir=/usr/local/opt/v8@3.15`
+
 
 If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
 You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use the usual apt-get / yum / brew.

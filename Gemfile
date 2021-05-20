@@ -1,8 +1,8 @@
-#ruby=ruby-2.1.2
+#ruby=ruby-3.0.1
 #ruby-gemset=brooklyn-site
 
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '3.0.1'
 
 gem 'jekyll'
 gem 'therubyracer'
