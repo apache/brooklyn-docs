@@ -109,6 +109,15 @@ each `<username>` specified in the `brooklyn.webconsole.security.users` list.
 
 Other security providers available include:
 
+### Random Password with Localhost Always Allowed
+
+`brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.BrooklynUserWithRandomPasswordSecurityProvider`
+will create and log a randomly-created password for use with a user named `brooklyn`. Localhost access will be allowed without a password.
+Search in the logs for a message of the form:
+
+`BrooklynUserWithRandomPasswordSecurityProvider [...] Allowing access to web console from localhost or with brooklyn:<password>`
+
+
 ### No one
 
 `brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.BlackholeSecurityProvider`
@@ -127,6 +136,8 @@ The other things you need to set in `brooklyn.cfg` are:
 
 * `brooklyn.webconsole.security.ldap.url` - ldap connection url
 * `brooklyn.webconsole.security.ldap.realm` - ldap dc parameter (domain)
+* `brooklyn.webconsole.security.ldap.allowed_realms_regex` - allows multiple realms (domains) that match regex - username must 
+  be of form domain\user
 * `brooklyn.webconsole.security.ldap.ou` *optional, by default it set to Users* -  ldap ou parameter
 
 **brooklyn.cfg example configuration:**
@@ -225,3 +236,15 @@ seconds as properties on `brooklyn.cfg`:
 org.apache.brooklyn.server.maxSessionAge = 3600
 org.apache.brooklyn.server.maxInactiveInterval = 3600
 {% endhighlight %}
+  
+## Login Page
+
+When using a username/password based authentication mechanism, Apache Brooklyn will be default respond with a 401
+response code and a [WWW_Authenticate](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/WWW-Authenticate) header set.  This relies on your browser asking for your basic auth credentials.  
+Alternatively you can configure brooklyn to use a login page by setting the following keys:
+
+```
+brooklyn.webconsole.security.unauthenticated.endpoints=brooklyn-ui-login
+brooklyn.webconsole.security.login.form=brooklyn-ui-login
+```
+

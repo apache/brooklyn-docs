@@ -163,7 +163,7 @@ This gives us quite a bit more power in writing our blueprint:
 
 ### Using the Catalog and Clustering
 
-The *Catalog* tab allows you to add blueprints which you can refer to in other blueprints.
+The *Catalog* component allows you to add blueprints which you can refer to in other blueprints.
 In that tab, click *+* then *YAML*, and enter the following:
 
 {% highlight yaml %}
