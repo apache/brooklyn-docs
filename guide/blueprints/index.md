@@ -11,7 +11,7 @@ children:
 - catalog/
 - clusters.md
 - enrichers.md
-- policies.md
+- policies/
 - effectors.md
 - clusters-and-policies.md
 - java/
