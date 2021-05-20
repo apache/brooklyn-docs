@@ -10,3 +10,5 @@ gem 'therubyracer'
 gem 'html-proofer'
 gem 'json'
 
+
+gem "webrick", "~> 1.7"
