@@ -1,5 +1,5 @@
 ---
-title: Policies
+title: Off-the-Shelf Policies
 layout: website-normal
 ---
 
