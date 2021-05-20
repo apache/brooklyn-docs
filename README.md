@@ -74,7 +74,7 @@ You can download it from [here](http://wkhtmltopdf.org/downloads.html) or use th
 Seeing the Website and Docs
 ---------------------------
 
-To build and most of see the documentation, run this command in this folder:
+To build and see most of the documentation, run this command in this folder:
 
     jekyll serve
     
