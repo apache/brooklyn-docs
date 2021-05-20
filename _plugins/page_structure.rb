@@ -213,7 +213,7 @@ module PageStructureUtils
 
         # render the included content with the current page renderer
         info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => page } }
-        page.render_liquid($content, site.site_payload, info)
+        page.render_liquid($content, site.site_payload, info, nil)
       end
     end
 end

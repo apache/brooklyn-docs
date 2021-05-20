@@ -65,6 +65,7 @@ Some issues we've encountered are:
  * if openssl library headers are not found, set the dir explicitly, eg for `eventmachine` try `gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1`
  * if `libv8` complains: `gem install libv8 -- --with-system-v8` or eg `gem install libv8 -v '3.16.14.19' -- --with-system-v8`
  * for rubyracer to find v8: `gem install therubyracer -- --with-v8-dir=/usr/local/opt/v8@3.15`
+    * needs v8 installed by brew as: brew install v8-315
 
 
 If you are building the PDF documentation, this requires [wkhtmltopdf](http://wkhtmltopdf.org/). 
