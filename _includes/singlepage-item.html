@@ -28,8 +28,7 @@
 	   {% push visited item_title %}
 	   <ul>
 	    {% push site_items item %}
-	    {% assign last_item = site_items[-1] %}
-	    {% for item in last_item['menu'] %}
+	    {% for item in site_items[-1]['menu'] %}
 	     {% push site_items item %}
 	     {% include singlepage-item.html %}
 	    {% endfor %}

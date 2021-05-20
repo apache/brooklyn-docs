@@ -24,8 +24,7 @@
    {% push visited item_path %}
    <ul>
     {% push site_items item %}
-    {% assign last_item = site_items[-1] %}
-    {% for item in last_item['menu'] %}
+    {% for item in site_items[-1]['menu'] %}
      {% push site_items item %}
      {% include sitemap-item.html %}
     {% endfor %}
