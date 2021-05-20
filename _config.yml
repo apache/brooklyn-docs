@@ -42,6 +42,8 @@ root_menu_page: /website/index.md
 # These files should not be included in the final build (in addition to _* contents)
 exclude: ['/Gemfile*','/README.md']
 
+theme: minima
+
 sass:
     sass_dir: style/css
 
