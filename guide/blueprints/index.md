@@ -8,6 +8,7 @@ children:
 - configuring-vms.md
 - multiple-services.md
 - custom-entities.md
+- config-files.md
 - catalog/
 - clusters.md
 - enrichers.md

@@ -1,9 +1,9 @@
 ---
-title: Winrm4j Client
+title: WinRM4j Client
 layout: website-normal
 ---
 
-## Winrm4j parameters
+## WinRM4j parameters
 
 Check [org.apache.brooklyn.location.winrm.WinRmMachineLocation](https://github.com/apache/brooklyn-server/blob/master/software/winrm/src/main/java/org/apache/brooklyn/location/winrm/WinRmMachineLocation.java#L82-L112)
 parameters available for WinRM.

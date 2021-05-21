@@ -1,15 +1,20 @@
-Known Limitations
------------------
+---
+title: WinRM4j Limitations
+layout: website-normal
+---
 
-WinRM 2.0 supports encryption mechanisms on top of HTTP. However those are not supported in Apache Brooklyn.
-For production adoptions please make sure you follow Microsoft Guidelines https://msdn.microsoft.com/en-us/library/ee309366(v=vs.85).aspx
 
 ### Apache Brooklyn limitations on using WinRM over HTTP and HTTPS
 
-By default Apache Brooklyn is currently using unencrypted HTTP for WinRM communication. It does not support encrypted HTTP for WinRM.
+HTTPS is supported and recommended for use with WinRM via Apache Brooklyn in any wide-area scenario.
+Note however that there is no straightforward way to configure specific certificates to trust,
+and thus Apache Brooklyn will accept any certificate used in a HTTPS WinRM connection;
+traffic will be encrypted but other means will be necessary to protect against MITM attacks.
 
-HTTPS is supported but there is no mechanism of specifying which certificates to trust.
-Currently Apache Brooklyn will accept any certificate used in a HTTPS WinRM connection.
+WinRM 2.0 supports encryption mechanisms on top of HTTP. However those are not supported in Apache Brooklyn.
+
+For production usage also see the [Microsoft Guidelines](https://msdn.microsoft.com/en-us/library/ee309366(v=vs.85).aspx).
+
 
 ### Incorrect Exit Codes
 
