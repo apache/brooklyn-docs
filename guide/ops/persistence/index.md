@@ -1,5 +1,13 @@
 ---
 title: Persistence
+layout: website-normal
+children:
+- { section: Configuration }
+- { section: File-based Persistence }
+- { section: Object Store Persistence }
+- { section: Rebinding to State }
+- { section: Writing Persistable Code }
+- { section: Persisted State Backup }
 ---
 
 By default Brooklyn persists its state to storage so that a server can be restarted 
@@ -22,7 +30,7 @@ directory of your Brooklyn instance. The following options are available:
 * `CLEAN` - will start up fresh (removing any existing state)
 
 `persistenceDir` - This is the directory to which Apache Brooklyn reads and writes its persistence data. The default location depends
-on your installation method. Checkout [this page]({{book.path.docs}}/ops/paths.md) for more information.
+on your installation method. Checkout [this page](../paths.html) for more information.
 
 `persistenceLocation` - This is the location for an object store to read and write persisted state.
 
@@ -32,7 +40,7 @@ is carried out, for example `1s`.
 
 # File-based Persistence
 
-Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder]({{book.path.docs}}/ops/paths.md).
+Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](../paths.html).
 For the rest of this document we will refer to this location as `%persistence-home%`.
 
 If there is already data at `%persistence-home%/data`, then a backup of the directory will 
@@ -67,20 +75,20 @@ providers, see [jclouds](http://jclouds.apache.org/reference/providers/#blobstor
 
 To configure the Object Store, add the credentials to `brooklyn.cfg` such as:
 
-```properties
+{% highlight properties %}
 brooklyn.location.named.aws-s3-eu-west-1=aws-s3:eu-west-1
 brooklyn.location.named.aws-s3-eu-west-1.identity=ABCDEFGHIJKLMNOPQRSTU
 brooklyn.location.named.aws-s3-eu-west-1.credential=abcdefghijklmnopqrstuvwxyz1234567890ab/c
-``` 
+{% endhighlight %} 
 
 or:
 
-```properties
+{% highlight properties %}
 brooklyn.location.named.softlayer-swift-ams01=jclouds:openstack-swift:https://ams01.objectstorage.softlayer.net/auth/v1.0
 brooklyn.location.named.softlayer-swift-ams01.identity=ABCDEFGHIJKLM:myname
 brooklyn.location.named.softlayer-swift-ams01.credential=abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz12
 brooklyn.location.named.softlayer-swift-ams01.jclouds.keystone.credential-type=tempAuthCredentials
-``` 
+{% endhighlight %} 
 
 Then edit the `persistenceLocation` to point at this object store: `softlayer-swift-ams01`.
 
@@ -98,7 +106,7 @@ any registered policies.
 ## Handling Rebind Failures
 
 If rebind fails fail for any reason, details of the underlying failures will be reported 
-in the [`brooklyn.debug.log`]({{book.path.docs}}/ops/paths.md). This will include the entities, locations or policies which caused an issue, and in what 
+in the [`brooklyn.debug.log`](../paths.html). This will include the entities, locations or policies which caused an issue, and in what 
 way it failed. There are several approaches to resolving problems.
 
 1) Determine Underlying Cause
@@ -181,7 +189,7 @@ Behaviour on rebind:
 
 * By extending `SoftwareProcess`, entities get a lot of the rebind logic for free. For 
   example, the default `rebind()` method will call `connectSensors()`.
-  See [`SoftwareProcess` Lifecycle]({{book.path.docs}}/blueprints/java/entities.md)
+  See [`SoftwareProcess` Lifecycle](/blueprints/java/entities.html)
   for more details.
 * If necessary, implement rebind. The `entity.rebind()` is called automatically by the
   Brooklyn framework on rebind, after configuring the entity's config/attributes but before 

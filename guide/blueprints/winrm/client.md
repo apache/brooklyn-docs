@@ -1,8 +1,9 @@
 ---
-title: Winrm4j Client
+title: WinRM4j Client
+layout: website-normal
 ---
 
-## Winrm4j parameters
+## WinRM4j parameters
 
 Check [org.apache.brooklyn.location.winrm.WinRmMachineLocation](https://github.com/apache/brooklyn-server/blob/master/software/winrm/src/main/java/org/apache/brooklyn/location/winrm/WinRmMachineLocation.java#L82-L112)
 parameters available for WinRM.
@@ -49,7 +50,7 @@ If the quick list above doesn't help then follow the steps below.
 
 To speed up diagnosing the problem if you don't already have a static machine to target,
 we advise to trigger a deployment with the JcloudsLocation flag `destroyOnFailure: false` so you can check status of the provisioned machine
-or try later different WinRM parameters with a Apache Brooklyn [BYON Location]({{book.path.docs}}/locations/index.md#byon).
+or try later different WinRM parameters with a Apache Brooklyn [BYON Location](../../locations/index.html#byon).
 
 After you determine what is the username and the password you can proceed with next steps.
 *(Notice that for cloud providers which use Auto Generated password will not be logged.

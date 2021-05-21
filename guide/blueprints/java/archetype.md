@@ -1,5 +1,8 @@
 ---
 title: Creating from a Maven Archetype
+layout: website-normal
+toc: ../guide_toc.json
+categories: [use, guide, defining-applications]
 ---
 
 ### Maven Archetype
@@ -11,9 +14,9 @@ developing a new Java entity, and generating the OSGi bundle for it.
 #### Generating the Project
 
 The archetype can be used interactively, by running:
-```bash
+{% highlight bash %}
 $ mvn archetype:generate
-```
+{% endhighlight %}
 
 The user will be prompted for the archetype to use (i.e. group "org.apache.brooklyn" 
 and artifact "brooklyn-archetype-quickstart"), as well as options for the project 
@@ -22,7 +25,8 @@ to be created.
 Alternatively, all options can be supplied at the command line. For example, 
 if creating a project named "autobrick" for "com.acme":
 
-<pre><code class="lang-sh">$ BROOKLYN_VERSION={{ book.brooklyn_version }}
+{% highlight bash %}
+$ BROOKLYN_VERSION={{ site.brooklyn-version }}
 $ mvn archetype:generate \
 	-DarchetypeGroupId=org.apache.brooklyn \
 	-DarchetypeArtifactId=brooklyn-archetype-quickstart \
@@ -31,7 +35,8 @@ $ mvn archetype:generate \
 	-DartifactId=autobrick \
 	-Dversion=0.1.0-SNAPSHOT \
 	-DpackageName=com.acme.autobrick \
-	-DinteractiveMode=false</code></pre>
+	-DinteractiveMode=false
+{% endhighlight %}
 
 This will create a directory with the artifact name (e.g. "autobrick" in the example above).
 Note that if run from a directory containing a pom, it will also modify that pom to add this as 
@@ -47,16 +52,16 @@ The `README.md` file within the project gives further guidance.
 
 To build, run the commands:
 
-```bash
+{% highlight bash %}
 $ cd autobrick
 $ mvn clean install
-```
+{% endhighlight %}
 
 
 #### Adding to the Catalog
 
 The build will produce an OSGi bundle in `target/autobrick-0.1.0-SNAPSHOT.jar`, suitable for 
-use in the [Brooklyn catalog]({{book.path.docs}}/blueprints/catalog/index.md) (using `brooklyn.libraries`).
+use in the [Brooklyn catalog]({{ site.path.guide }}/blueprints/catalog/) (using `brooklyn.libraries`).
 
 To use this in your Brooklyn catalog you will first have to copy the target jar to a suitable location. 
 For developing/testing purposes storing on the local filesystem is fine. 
@@ -67,7 +72,7 @@ The project comes with a `catalog.bom` file, located in `src/main/resources`.
 Modify this file by adding a 'brooklyn.libraries' statement to the bom pointing to the jar. 
 For example:
 
-```yaml
+{% highlight yaml %}
 brooklyn.catalog:
     brooklyn.libraries:
     - file:///path/to/jar/autobrick-0.1.0-SNAPSHOT.jar
@@ -77,13 +82,13 @@ brooklyn.catalog:
     - id: com.acme.autobrick.MySample
       item:
         type: com.acme.autobrick.MySample
-```
+{% endhighlight %}
 
 The command below will use the CLI to add this to the catalog of a running Brooklyn instance:
 
-```bash
+{% highlight bash %}
     br catalog add catalog.bom
-```
+{% endhighlight %}
 
 After running that command, the OSGi bundle will have been added to the OSGi container, and the
 entity will have been added to your catalog. It can then be used in the same way as regular Brooklyn 
@@ -91,10 +96,10 @@ entities.
 
 For example, you can use the blueprint:
 
-```yaml
+{% highlight yaml %}
 services:
 - type: com.acme.autobrick.MySample
-```
+{% endhighlight %}
 
 
 ### Testing Entities

@@ -1,5 +1,6 @@
 ---
 title: Logging
+layout: website-normal
 ---
 
 Brooklyn uses the SLF4J logging facade, which allows use of many popular frameworks including `logback`, 
@@ -21,6 +22,14 @@ where the past 10 files will be kept. INFO level, and above, messages
 will be logged to the karaf console. Use the `log:` commands in the 
 karaf client, e.g. `log:tail`, to read these messages.
 
+
+## Using Logback through OSGi Pax Logging
+
+In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
+
+See: [Logging - OSGi based Apache Brooklyn](../dev/tips/logging.html#osgi-based-apache-brooklyn) <br/>
+[https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
+
 ## Standard Configuration
 
 A `org.ops4j.pax.logging.cfg` file is included in the `etc/` directly of the Brooklyn distro;
@@ -29,6 +38,17 @@ such as new appenders or different log levels, can be made directly in this file
 
 Karaf logging is highly configurable. For example enable the sift appender to log to separate log files for
 each bundle as described here: [Advanced configuration](https://karaf.apache.org/manual/latest/#_advanced_configuration)
+
+## Advanced Configuration
+
+The default `logback.xml` file references a collection of other log configuration files
+included in the Brooklyn jars. It is necessary to understand the source structure
+in the [logback-includes]({{ site.brooklyn.url.git }}/logging/logback-includes) project.
+
+For example, to change the debug log inclusions, create a folder `brooklyn` under `conf`
+and create a file `logback-debug.xml` based on the
+[brooklyn/logback-debug.xml]({{ site.brooklyn.url.git }}/logging/logback-includes/src/main/resources/brooklyn/logback-debug.xml)
+from that project.
 
 A full explanation of logging in karaf is available [here](https://karaf.apache.org/manual/latest/#_log).
 
@@ -62,5 +82,8 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 
 The following resources may be useful when configuring logging:
 
+* The [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project
+* [Brooklyn Developer Guide]({{ site.path.guide }}/dev/tips/logging.html) logging tips
+* The [Logback Project](http://logback.qos.ch/) home page
 * [Brooklyn Developer Guide]({{book.path.docs}}/dev/tips/logging.md) logging tips
 * [OPS4J Pax Logging](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)

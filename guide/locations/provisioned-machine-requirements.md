@@ -11,7 +11,7 @@ could cause subsequent errors if they do not hold. These relate to the machine's
 configuration, rather than additional networking or security that a given Cloud 
 might offer.
 
-Also see the [Troubleshooting]({{book.path.docs}}/ops/troubleshooting/) docs.
+Also see the [Troubleshooting]({{ site.path.guide }}/ops/troubleshooting/) docs.
 
 
 ## Remote Access
@@ -23,19 +23,18 @@ the software.
 
 An example of disabling all ssh'ing is shown below:
 
-```yaml
-location:
-  aws-ec2:us-east-1:
-    identity: XXXXXXXX
-    credential: XXXXXXXX
-    waitForSshable: false
-    pollForFirstReachableAddress: false
-services:
-- type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
-  brooklyn.config:
-    onbox.base.dir.skipResolution: true
-    sshMonitoring.enabled: false
-```
+    location:
+      aws-ec2:us-east-1:
+        identity: XXXXXXXX
+        credential: XXXXXXXX
+        waitForSshable: false
+        pollForFirstReachableAddress: false
+    services:
+    - type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
+      brooklyn.config:
+        onbox.base.dir.skipResolution: true
+        sshMonitoring.enabled: false
+
 
 ### Parsing SSH stdout: No Extra Lines
 
@@ -54,11 +53,9 @@ Does passwordless sudo work?
 
 Try executing:
 
-```bash
-sudo whoami
-```
+    sudo whoami
 
-See [Passwordless Sudo]({{book.path.docs}}/locations/index.html#passwordless-sudo).
+See [Passwordless Sudo]({{ site.path.guide }}/locations/index.html#passwordless-sudo).
 
 
 ## Advertised Addresses
@@ -69,9 +66,7 @@ Does the hostname known at the box resolve at the box?
 
 Try executing:
 
-```bash
-ping $(hostname)
-```
+    ping $(hostname)
 
 if not, consider setting `generate.hostname: true` in the location config, for jclouds-based locations.
 
@@ -83,18 +78,15 @@ can the machine reach that IP?
 
 Get the sensor value, and then try executing:
 
-```bash
-ping ${PRIVATE_IP}
-```
+    ping ${PRIVATE_IP}
 
 Is there a public IP (advertised using the sensor `host.addresses.public`, or `host.address`), and can the 
 machine reach it?
 
 Get the sensor value, and then try executing:
 
-```bash
-ping ${PUBLIC_IP}
-```
+    ping ${PUBLIC_IP}
+
 
 ## Networking
 
@@ -104,9 +96,8 @@ Can the machine reach the public internet, and does DNS resolve?
 
 Try executing:
 
-```bash
-ping www.example.org
-```
+    ping www.example.org
+
 
 ### Machine's Hostname in DNS
 
@@ -143,15 +134,13 @@ Is there sufficient entropy on the machine, for `/dev/random` to respond quickly
 
 Try executing:
 
-```bash
-{ cat /dev/random > /tmp/x & } ; sleep 10 ; kill %1 ; { cat /dev/random > /tmp/x & } ; sleep 1 ; kill %1 ; wc /tmp/x | awk '{print $3}'
-```
+    { cat /dev/random > /tmp/x & } ; sleep 10 ; kill %1 ; { cat /dev/random > /tmp/x & } ; sleep 1 ; kill %1 ; wc /tmp/x | awk '{print $3}'
 
 The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.html).
+See instructions to [Increase Entropy]({{ site.path.guide }}/ops/troubleshooting/increase-entropy.html).
 
 
 ## File System
@@ -162,14 +151,11 @@ Is `/tmp` writable?
 
 Try executing:
 
-```bash
-touch /tmp/amp-test-file ; rm /tmp/amp-test-file
-```
+    touch /tmp/amp-test-file ; rm /tmp/amp-test-file
 
 Are files in `/tmp` executable (e.g. some places it has been mounted NO_EXECUTE)?
 
 Try executing:
 
-```bash
-echo date > /tmp/brooklyn-test.sh && chmod +x /tmp/brooklyn-test.sh && /tmp/brooklyn-test.sh && rm /tmp/brooklyn-test.sh
-```
+    echo date > /tmp/brooklyn-test.sh && chmod +x /tmp/brooklyn-test.sh && /tmp/brooklyn-test.sh && rm /tmp/brooklyn-test.sh
+

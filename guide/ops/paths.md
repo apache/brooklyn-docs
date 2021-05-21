@@ -1,5 +1,6 @@
 ---
-title: Paths breakdown
+layout: website-normal
+title: System Paths Summary
 ---
 
 Based on the installation method you choose, the paths to the installed components of Apache Brooklyn will be different. The

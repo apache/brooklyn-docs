@@ -1,5 +1,7 @@
 ---
+layout: website-normal
 title: Tests
+toc: /guide/toc.json
 ---
 
 We have the following tests groups:

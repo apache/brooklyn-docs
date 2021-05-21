@@ -1,5 +1,7 @@
 ---
 title: Creating Blueprints with Salt
+title_in_menu: Creating Blueprints with Salt
+layout: website-normal
 ---
 
 To write a blueprint to use Salt with Brooklyn it will help to have a degree of familiarity with Salt itself. In the 

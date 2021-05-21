@@ -1,6 +1,10 @@
 ---
 title: Blueprint Test Entities
+title_in_menu: Test Entities
+layout: website-normal
 ---
+
+{% include fields.md %}
 
 
 ## Structural Test Entities
@@ -8,7 +12,9 @@ title: Blueprint Test Entities
 ### TestCase
 The `TestCase` entity acts as a container for a list of child entities which are started *sequentially*.
 
-!CODEFILE "example_yaml/entities/testcase-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/testcase-entity.yaml %}
+{% endhighlight %}
 
 This can be used to enforce a strict ordering, for example ensuring a sensor has a certain value before attempting to invoke an effector.
 
@@ -25,7 +31,9 @@ The `ParallelTestCase` entity can be added as a child to run a subset of entitie
 ### ParallelTestCase
 The `ParallelTestCase` entity acts as a container for a list of child entities which are started in *parallel*.
 
-!CODEFILE "example_yaml/entities/paralleltestcase-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/paralleltestcase-entity.yaml %}
+{% endhighlight %}
 
 This can be used to run a subset of entities in parallel as a single step when nested under a `TestCase` entity.
 
@@ -35,7 +43,9 @@ Timeouts on child entities should be set relative to the start of the `ParallelT
 ### LoopOverGroupMembersTestCase
 The `LoopOverGroupMembersTestCase` entity is configured with a target group and a test specification. For each member of the targeted group, the test case will create a TargetableTestComponent entity from the supplied test specification and set the components target to be the group member.
 
-!CODEFILE "example_yaml/entities/loopovergroupmembers-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/loopovergroupmembers-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 - `target` - group who's members are to be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -46,7 +56,9 @@ The `LoopOverGroupMembersTestCase` entity is configured with a target group and 
 ### InfrastructureDeploymentTestCase
 The `InfrastructureDeploymentTestCase` will first create and deploy an infrastructure from the `infrastructure.deployment.spec` config. It will then retrieve a deployment location by getting the value of the infrastructures `infrastructure.deployment.location.sensor` sensor. It will then create and deploy all entities from the `infrastructure.deployment.spec` config to the deployment location.
 
-!CODEFILE "example_yaml/entities/infrastructuredeploymenttestcase-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/infrastructuredeploymenttestcase-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 
@@ -60,7 +72,9 @@ The `InfrastructureDeploymentTestCase` will first create and deploy an infrastru
 ### TestSensor
 The `TestSensor` entity performs an assertion on a specified sensors value.
 
-!CODEFILE "example_yaml/entities/testsensor-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/testsensor-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 - `target` - entity whose sensor will be tested, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -69,16 +83,18 @@ The `TestSensor` entity performs an assertion on a specified sensors value.
 - `timeout` - duration to wait on assertion to return a result. For example `10s`, `10m`, etc
 - `assert` - assertion to perform on the specified sensor value. See section on assertions below.
 
-> #### info::Tip
->
-> If the `TestSensor` is wrapped within a `TestCase`,
-  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target,
-  **you don't need to specify the target**, unless you want to test a different entity.
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestSensor</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
+</div>
+
 
 ### TestEffector
 The `TestEffector` entity invokes the specified effector on a target entity. If the result of the effector is a String, it will then perform assertions on the result.
-
-!CODEFILE "example_yaml/entities/testeffector-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/testeffector-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 - `target` - entity whose effector will be invoked, specified via DSL. For example, `$brooklyn:entity("tomcat")`. See also the `targetId` parameter.
@@ -88,16 +104,18 @@ The `TestEffector` entity invokes the specified effector on a target entity. If 
 - `params` - parameters to pass to the effector, these will depend on the entity and effector being tested. The example above shows the `url` and `targetName` parameters being passed to Tomcats `deploy` effector.
 - `assert` - assertion to perform on the returned result. See section on assertions below.
 
-> #### info::Tip
->
-> If the `TestEffector` is wrapped within a `TestCase`, 
-  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
-  **you don't need to specify the target**, unless you want to test a different entity.
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestEffector</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
+</div>
+
 
 ### TestHttpCall
 The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs an assertion on the response.
-
-!CODEFILE "example_yaml/entities/testhttpcall-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/testhttpcall-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 - `url` - URL to perform GET request on, this can use DSL for example `$brooklyn:entity("tomcat").attributeWhenReady("webapp.url")`.
@@ -105,11 +123,12 @@ The `TestHttpCall` entity performs a HTTP GET on the specified URL and performs 
 - `applyAssertionTo` - The filed to apply the assertion to. For example `status`, `body`
 - `assert` - assertion to perform on the response.  See section on assertions below.
 
-> #### info::Tip
->
-> If the `TestHttpCall` is wrapped within a `TestCase`, 
-  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
-  **you don't need to specify the target**, unless you want to test a different entity.
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestHttpCall</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
+</div>
+
 
 ### TestSshCommand
 The TestSshCommand runs a command on the host of the target entity.
@@ -119,7 +138,9 @@ If no assertions are explicitly configured, the default is to assert a non-zero 
 
 Either a bash command may be provided in the YAML, or a URL for a script which will be executed.
 
-!CODEFILE "example_yaml/entities/testsshcommand-entity.yaml"
+{% highlight yaml %}
+{% readj example_yaml/entities/testsshcommand-entity.yaml %}
+{% endhighlight %}
 
 #### Parameters
 - `command` - The shell command to execute. (This and `downloadUrl` are mutually exclusive.)
@@ -131,11 +152,12 @@ Either a bash command may be provided in the YAML, or a URL for a script which w
 - `assertOut` - Assertions on the standard output of the command as a String.
 - `assertErr` -  Assertions on the standard error of the command as a String.
 
-> #### info::Tip
->
-> If the `TestSshCommand` is wrapped within a `TestCase`, 
-  `ParallelTestCase` or `LoopOverGroupMembersTestCase` that set the target, 
-  **you don't need to specify the target**, unless you want to test a different entity.
+<div class="alert alert-info">
+    <strong>Tip:</strong> If the <code>TestSshCommand</code> is wrapped within a <code>TestCase</code>, 
+    <code>ParallelTestCase</code> or <code>LoopOverGroupMembersTestCase</code> that set the target, 
+    <strong>you don't need to specify the target</strong>, unless you want to test a different entity.
+</div>
+
 
 ## Assertions
 

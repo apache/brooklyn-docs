@@ -1,5 +1,6 @@
 ---
 title: License Considerations
+layout: website-normal
 ---
 
 The Apache Software Foundation, quite rightly, place a high standard on code provenance and license compliance. The

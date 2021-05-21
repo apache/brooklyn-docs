@@ -1,5 +1,7 @@
 ---
+layout: website-normal
 title: Troubleshooting Server Connectivity Issues in the Cloud
+toc: /guide/toc.json
 ---
 
 A common problem when setting up an application in the cloud is getting the basic connectivity right - how

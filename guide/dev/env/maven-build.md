@@ -1,5 +1,7 @@
 ---
+layout: website-normal
 title: Maven Build
+toc: /guide/toc.json
 ---
 
 ## The Basics
@@ -15,9 +17,9 @@ The full build requires the following software to be installed:
 
 With these in place, you should be able to build everything with a:
 
-```bash
-mvn clean install
-```
+{% highlight bash %}
+% mvn clean install
+{% endhighlight %}
 
 By default, only tarball and zip packages for `brooklyn-dist` will be built. You can enable each dist artifact with the following arguments:
 - for CLI client: `-Dcli` (requires `Go`)
@@ -27,20 +29,20 @@ By default, only tarball and zip packages for `brooklyn-dist` will be built. You
 
 Alternatively, you can build everything by using the `release` profile:
 
-```bash
+{% highlight bash %}
 mvn clean install -Prelease
-```
+{% endhighlight %}
 
 Other tips:
 
-* Add `-DskipTests` to skip tests (builds much faster, but not as safe)
+* Add ``-DskipTests`` to skip tests (builds much faster, but not as safe)
 
 * You may need more JVM memory, e.g. at the command-line (or in `.profile`):
 
-  `export MAVEN_OPTS="-Xmx1024m -Xms512m"`
+  ``export MAVEN_OPTS="-Xmx1024m -Xms512m"``
 
-* Run `-PIntegration` to run integration tests, or `-PLive` to run live tests
-  ([tests described here]({{book.path.docs}}/dev/code/tests.md))
+* Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
+  ([tests described here](../code/tests.html))
 
 * If building the `rpm` package, you can install rpm tools with: `brew install rpm` for Mac OS, `apt-get install rpm` for Ubuntu, `yum install rpm` for Centos/RHEL.
   On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.
@@ -49,7 +51,7 @@ Other tips:
 
 * If you're looking at the maven internals, note that many of the settings are inherited from parent projects (see for instance `brooklyn-server/parent/pom.xml`)
 
-* For tips on building within various IDEs, look [here]({{book.path.docs}}/dev/env/ide/index.md).
+* For tips on building within various IDEs, look [here](ide/).
 
 
 ## When the RAT Bites
@@ -83,10 +85,10 @@ If there is a good reason that a file, pattern, or directory should be permanent
 
 * The **mvnf** script 
   ([get the gist here](https://gist.github.com/2241800)) 
-  simplifies building selected projects, so if you just change something in `software-webapp` 
+  simplifies building selected projects, so if you just change something in ``software-webapp`` 
   and then want to re-run the examples you can do:
   
-  `examples/simple-web-cluster% mvnf ../../{software/webapp,usage/all}` 
+  ``examples/simple-web-cluster% mvnf ../../{software/webapp,usage/all}`` 
 
 ## Appendix: Sample Output
 
@@ -95,7 +97,7 @@ including a few warnings (which we have looked into and
 understand to be benign and hard to get rid of them,
 although we'd love to if anyone can help!):
 
-```bash
+{% highlight bash %}
 % mvn clean install
 
 ...
@@ -202,4 +204,5 @@ although we'd love to if anyone can help!):
 [INFO] Total time:  08:21 min
 [INFO] Finished at: 2019-04-08T15:52:28+01:00
 [INFO] ------------------------------------------------------------------------
-```
+
+{% endhighlight %}

@@ -1,5 +1,7 @@
 ---
 title: Creating Blueprints with Ansible
+title_in_menu: Creating Blueprints with Ansible
+layout: website-normal
 ---
 
 To write a blueprint to use Ansible with Brooklyn it will help to have a degree of familiarity with Ansible itself. In the 
@@ -210,4 +212,6 @@ services:
             https_port: 8443
             admin_username: admin
             admin_password: secret
- ```
+```
+
+

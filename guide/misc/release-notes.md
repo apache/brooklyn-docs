@@ -1,10 +1,11 @@
 ---
+layout: website-normal
 title: Release Notes
 ---
 
-## Version {{ book.brooklyn_version }}
+## Version {{ site.brooklyn-version }}
 
-{% if 'SNAPSHOT' in book.brooklyn_version %}
+{% if SNAPSHOT %}
 **You are viewing a SNAPSHOT release (master branch), so this list is in progress!**
 {% endif %}
 
@@ -16,7 +17,7 @@ to Brooklyn's commercial users for funding much of this development.
 
 ### Backwards Compatibility
 
-Changes since {{ book.brooklyn_version_stable }}:
+Changes since 0.12.0:
 
 1. BOM files that do not declare a version now give the version of the bundle to their entities,
    rather than the default `0.0.0-SNAPSHOT` version.
@@ -44,4 +45,5 @@ Changes since {{ book.brooklyn_version_stable }}:
    be expanded as a list `[1, 2]` (but default values would not be expanded, as per previous point,
    but now they are). 
 
-For changes in prior versions, please refer to the release notes for those versions by selecting the one you are interested in on the left menu.
+For changes in prior versions, please refer to the release notes for 
+[0.12.0]({{ site.path.v }}/0.12.0/misc/release-notes.html).

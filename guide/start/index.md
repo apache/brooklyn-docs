@@ -1,4 +1,15 @@
 ---
+layout: website-normal
 title: Getting Started
-partial-summary-depth: 1
+usermanual-pdf-exclude: true
+children:
+- running.md
+- blueprints.md
+- managing.md
+- policies.md
+- concept-quickstart.md
 ---
+
+{% include list-children.html %}
+
+

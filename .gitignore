@@ -8,6 +8,9 @@
 atlassian-ide-plugin.xml
 *.class
 
+target/
+test-output/
+
 .project
 .classpath
 .settings/
@@ -19,7 +22,25 @@ atlassian-ide-plugin.xml
 nbactions.xml
 nb-configuration.xml
 
+prodDb.*
+
+*.log
+brooklyn*.log.*
+
+*brooklyn-persisted-state/
+
+ignored
+_site
+_pdf
+_config_local.yml
+.sass-cache
+style/js/catalog/items.js
+
+
+javadoc
 _book
 node_modules
 javadoc/stylesheet.css
 javadoc/javadoc.log
+
+.jekyll-cache

@@ -1,5 +1,8 @@
 ---
 title: Application, Parent and Membership
+layout: website-normal
+toc: ../guide_toc.json
+categories: [use, guide, defining-applications]
 ---
 
 All entities have a ***parent*** entity, which creates and manages it, with one important exception: *applications*.

@@ -1,5 +1,6 @@
 ---
 title: YAML Blueprint Reference
+layout: website-normal
 ---
 
 ## Root Elements
@@ -19,7 +20,7 @@ defining types:
 
 * `com.acme.brooklyn.package.JavaEntityClass`
 * `java:com.acme.brooklyn.package.JavaEntityClass`
-* `java-entity-class` (where this has been added to the [catalog]({{book.path.docs}}/blueprints/catalog/index.md))
+* `java-entity-class` (where this has been added to the [catalog]({{ site.path.guide }}/blueprints/catalog/))
 
 A reference of some of the common service `type` instances used is included in a section below.
 
@@ -101,7 +102,7 @@ the entity being defined, with these being the most common:
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
     (unless an ancestor sets false; config keys from Java types are _not_ pinned)
   * `constraints`: a list of constraints the parameter should meet;
-    for details, see [Entity Configuration]({{book.path.docs}}/blueprints/entity-configuration.md#config-key-constraints).
+    for details, see [Entity Configuration]({{ site.path.guide }}/blueprints/entity-configuration.html#config-key-constraints).
 
   A shorthand notation is also supported where just the name of the parameter can be supplied
   as an item in the list, with the other values being unset or the default.

@@ -1,5 +1,8 @@
 ---
 title: Service State
+layout: website-normal
+toc: ../guide_toc.json
+categories: [use, guide, defining-applications]
 ---
 
 Any entity can use the standard "service-up" and "service-state" 

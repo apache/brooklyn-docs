@@ -1,5 +1,6 @@
 ---
 title: REST API
+layout: website-normal
 ---
 
 Apache Brooklyn exposes a powerful REST API, 

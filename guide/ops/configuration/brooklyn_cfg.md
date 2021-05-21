@@ -1,8 +1,18 @@
 ---
 title: brooklyn.cfg
+layout: website-normal
+children:
+- { section: Quick Setup }
+- { section: Locations }
+- { section: Java }
+- { section: Authentication }
+- { section: Entitlements }
+- { section: HTTPS Configuration }
 ---
 
-The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here]({{book.path.docs}}/ops/paths.md) for the location of your Brooklyn configuration folder
+{% include fields.md %}
+
+The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
 
 ## Quick Setup
 
@@ -12,11 +22,11 @@ web-console and REST API will require no authentication.
 The simplest way to specify users and passwords is shown below (but see the 
 [Authentication](#authentication) section for how to avoid storing passwords in plain text):
  
-```properties
+{% highlight properties %}
 brooklyn.webconsole.security.users=admin,bob
 brooklyn.webconsole.security.user.admin.password=AdminPassw0rd
 brooklyn.webconsole.security.user.bob.password=BobPassw0rd
-```
+{% endhighlight %}
 
 In many cases, it is preferable instead to use an external credentials store such as LDAP.
 Information on configuring these is [below](#authentication). 
@@ -24,9 +34,9 @@ Information on configuring these is [below](#authentication).
 If coming over a network it is highly recommended additionally to use `https`.
 This can be configured with:
 
-```properties
+{% highlight properties %}
 brooklyn.webconsole.security.https.required=true
-```
+{% endhighlight %}
 
 More information, including setting up a certificate, is described [further below](#https-configuration).
 
@@ -36,21 +46,21 @@ More information, including setting up a certificate, is described [further belo
 Values in `brooklyn.cfg` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
-This allows [externalized configuration]({{book.path.docs}}/ops/externalized-configuration.md) to be used from 
+This allows [externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) to be used from 
 `brooklyn.cfg`. For example:
 
-```properties
+{% highlight properties %}
 brooklyn.location.jclouds.aws-ec2.identity=$brooklyn:external("vault", "aws-identity")
 brooklyn.location.jclouds.aws-ec2.credential=$brooklyn:external("vault", "aws-credential")
-```
+{% endhighlight %}
 
 If for some reason one requires a literal value that really does start with `$brooklyn:` (i.e.
 for the value to not be parsed), then this can be achieved by using the syntax below. This 
 example returns the property value `$brooklyn:myexample`:
 
-```properties
+{% highlight properties %}
 example.property=$brooklyn:literal("$brooklyn:myexample")
-```
+{% endhighlight %}
 
 
 ## Java
@@ -70,17 +80,17 @@ The default implementation, `ExplicitUsersSecurityProvider`, reads from a list o
 which should be specified as configuration parameters e.g. in `brooklyn.cfg`.
 This configuration could look like:
 
-```properties
+{% highlight properties %}
 brooklyn.webconsole.security.users=admin
 brooklyn.webconsole.security.user.admin.salt=OHDf
 brooklyn.webconsole.security.user.admin.sha256=91e16f94509fa8e3dd21c43d69cadfd7da6e7384051b18f168390fe378bb36f9
-```
+{% endhighlight %}
 
 The `users` line should contain a comma-separated list. The special value `*` is accepted to permit all users.
 
 To generate this, there is a script shipped with Brooklyn:
 
-```bash
+{% highlight bash %}
 ./bin/generate-password.sh --user admin
 
 Enter password: 
@@ -91,7 +101,7 @@ Please add the following to your etc/brooklyn.cfg:
 brooklyn.webconsole.security.users=admin
 brooklyn.webconsole.security.user.admin.salt=OHDf
 brooklyn.webconsole.security.user.admin.sha256=91e16f94509fa8e3dd21c43d69cadfd7da6e7384051b18f168390fe378bb36f9
-```
+{% endhighlight %}
 
 Alternatively, in dev/test environments where a lower level of security is required,
 the syntax `brooklyn.webconsole.security.user.<username>=<password>` can be used for
@@ -154,9 +164,9 @@ using a plug-in **Entitlement Manager**.
 
 This can be set globally with the property:
 
-```properties
+{% highlight properties %}
 brooklyn.entitlements.global=<class>
-```
+{% endhighlight %}
 
 The default entitlement manager is one which responds to per-user entitlement rules,
 and understands:
@@ -171,34 +181,34 @@ These keywords are also understood at the `global` level, so to grant full acces
 read-only access to `support`, limited access to `metrics` and regular access to `user`
 you can write:
 
-```properties
+{% highlight properties %}
 brooklyn.entitlements.global=user
 brooklyn.entitlements.perUser.admin=root
 brooklyn.entitlements.perUser.support=readonly
 brooklyn.entitlements.perUser.metrics=minimal
-```
+{% endhighlight %}
 
 Under the covers this invokes the `PerUserEntitlementManager`, 
 with a `default` set (and if not specified `default` defaults to `minimal`); 
 so the above can equivalently be written:
 
-```properties
+{% highlight properties %}
 brooklyn.entitlements.global=org.apache.brooklyn.core.mgmt.entitlement.PerUserEntitlementManager
 brooklyn.entitlements.perUser.default=user
 brooklyn.entitlements.perUser.admin=root
 brooklyn.entitlements.perUser.support=readonly
 brooklyn.entitlements.perUser.metrics=minimal
-```
+{% endhighlight %}
 
 For more information, see 
-[Java: Entitlements]({{book.path.docs}}/blueprints/java/entitlements.md).
+[Java: Entitlements]({{ site.path.guide }}/blueprints/java/entitlements.html).
 or
-[EntitlementManager]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/api/mgmt/entitlement/EntitlementManager.html).
+{% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
 
 
 ## HTTPS Configuration
 
-See [HTTPS Configuration]({{book.path.docs}}/ops/configuration/https.md) for general information on configuring HTTPS.
+See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
 
 
 ## Session configuration
@@ -222,10 +232,10 @@ otherwise, the default configuration of the Jetty the server will be applied.
 The default value for the max inactive interval is 3600s but both values can be modified by adding the time in 
 seconds as properties on `brooklyn.cfg`:
 
-```properties
+{% highlight properties %}
 org.apache.brooklyn.server.maxSessionAge = 3600
 org.apache.brooklyn.server.maxInactiveInterval = 3600
-```
+{% endhighlight %}
   
 ## Login Page
 
@@ -237,3 +247,4 @@ Alternatively you can configure brooklyn to use a login page by setting the foll
 brooklyn.webconsole.security.unauthenticated.endpoints=brooklyn-ui-login
 brooklyn.webconsole.security.login.form=brooklyn-ui-login
 ```
+

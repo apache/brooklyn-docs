@@ -1,3 +1,10 @@
+---
+section: Amazon Web Services (AWS)
+title: Amazon Web Services
+section_type: inline
+section_position: 2
+---
+
 ## Amazon Web Services (AWS)
 
 ### Credentials
@@ -19,7 +26,7 @@ An example of the expected format is shown below:
         credential: abcdefghijklmnopqrstu+vwxyzabcdefghijklm
 
 Users are strongly recommended to use 
-[externalized configuration]({{book.path.docs}}/ops/externalized-configuration.md) for better
+[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

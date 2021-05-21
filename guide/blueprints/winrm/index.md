@@ -1,5 +1,11 @@
 ---
 title: Windows Blueprints
+layout: website-normal
+children:
+- client.md
+- tips.md
+- limitations.md
+- troubleshoot.md
 ---
 
 Brooklyn can deploy to Windows servers using WinRM to run commands. These deployments can be 
@@ -67,7 +73,7 @@ A Sample Blueprint
 
 Creating a Windows VM is done using the `org.apache.brooklyn.entity.software.base.VanillaWindowsProcess` entity type. This is very similar
 to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead of Linux. We suggest you read the
-[documentation for VanillaSoftwareProcess]({{book.path.docs}}/blueprints/custom-entities.md#vanilla-software-using-bash) to find out what you
+[documentation for VanillaSoftwareProcess]({{ site.path.guide }}/blueprints/custom-entities.html#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
 Entity authors are strongly encouraged to write Windows PowerShell or Batch scripts as separate 

@@ -1,5 +1,6 @@
 ---
 title: Versioning
+layout: website-normal
 ---
 
 Brooklyn supports multiple versions of a type to be installed and used at the same time.

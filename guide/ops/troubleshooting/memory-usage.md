@@ -1,5 +1,7 @@
 ---
+layout: website-normal
 title: "Troubleshooting: Monitoring Memory Usage"
+toc: /guide/toc.json
 ---
 
 ## Memory Usage

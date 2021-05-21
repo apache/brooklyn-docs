@@ -1,5 +1,8 @@
 ---
 title: Entities
+layout: website-normal
+toc: ../guide_toc.json
+categories: [use, guide, defining-applications]
 ---
 
 The central concept in a Brooklyn deployment is that of an ***entity***. 

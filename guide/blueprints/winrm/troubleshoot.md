@@ -1,5 +1,6 @@
 ---
-title: Troubleshooting
+title: WinRM4j Troubleshooting
+layout: website-normal
 ---
 
 Note: in addition to the Windows-specific points here,

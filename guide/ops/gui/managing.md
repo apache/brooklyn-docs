@@ -1,5 +1,8 @@
 ---
 title: Monitoring and Managing Applications
+title_in_menu: Monitoring and Managing Applications
+layout: website-normal
+menu_parent: index.md
 ---
 
 From the Home page, go the "Application Inspector" module.
@@ -64,4 +67,4 @@ To stop an application, select the application in the tree view (the top/root en
 
 ## Next
 
-Brooklyn's real power is in using **[Policies]({{book.path.docs}}/ops/gui/policies.md)**  to automatically *manage* applications. 
+Brooklyn's real power is in using **[Policies](policies.html)**  to automatically *manage* applications. 

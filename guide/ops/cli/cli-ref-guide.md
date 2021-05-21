@@ -1,21 +1,36 @@
 ---
 title: CLI Reference Guide
+layout: website-normal
+menu_parent: index.md
+children:
+- { section: List of Commands }
+- { section: Scopes }
+- { section: Abbreviations}
+- { section: Command Reference }
+- { section: Login}
+- { section: Applications}
+- { section: Entities}
+- { section: Sensors}
+- { section: Effectors}
+- { section: Policies}
+- { section: Activities}
+- { section: Miscellaneous}
 ---
 
 ## Usage
-```text
+{% highlight text %}
 NAME:
    br - A Brooklyn command line client application
 
 USAGE:
    br [global options] command [command options] [arguments...]
-```
+{% endhighlight %}
 
 ## List of Commands
 Commands whose description begins with a `*` character are particularly experimental
 and likely to change in upcoming releases.  
 
-```text
+{% highlight text %}
 COMMANDS:
 
    Commands whose description begins with a "*" character are particularly experimental and likely to change in upcoming
@@ -59,7 +74,7 @@ GLOBAL OPTIONS:
    --skipSslChecks	Skip verification of server's certificate chain and hostname (for use with self-signed certs)
    --help, -h		show help
    --version, -v	print the version
-```
+{% endhighlight %}
 
 
 ## Scopes
@@ -88,12 +103,12 @@ The various scopes should be replaced on the command line as:
 ## Abbreviations
 Many of the commands and scopes have shortened aliases:
 
-```text
+{% highlight text %}
 activity     act
 application  app
 entity       ent
 policy       pol
-```
+{% endhighlight %}
 
 ## Command Reference
 

@@ -1,5 +1,6 @@
 ---
 title: Templates and Quick Launch
+layout: website-normal
 ---
 
 A `template` item type is a full application or service. It consists of one or more entities together with policies, configuration, parameters and locations.

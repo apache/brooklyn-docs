@@ -1,5 +1,6 @@
 ---
 title: Writing a Policy
+layout: website-normal
 ---
 
 ### Your First Policy

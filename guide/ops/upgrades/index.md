@@ -1,5 +1,6 @@
 ---
 title: Upgrades
+layout: website-normal
 ---
 
 This section provides all necessary information to upgrade Apache Brooklyn for both the RPM/DEB and Tarball packages.
@@ -14,9 +15,9 @@ Use of the `lib/dropins` and `lib/patch` folders will no longer work (because Ka
 Instead, code must be built and installed as [OSGi bundles](https://en.wikipedia.org/wiki/OSGi#Bundles).
 
 
-{% include '_server.md' %}
+{% include_relative _server.md %}
 
-{% include '_blueprints.md' %}
+{% include_relative _blueprints.md %}
 
-{% include '_systems-under-mgmt.md' %}
+{% include_relative _systems-under-mgmt.md %}
 

@@ -1,12 +1,25 @@
 ---
 title: Java Entities
-partial-summary-depth: 1
+title_in_menu: Java Entities
+layout: website-normal
+started-pdf-exclude: true
+children:
+- archetype.md
+- defining-and-deploying.md
+- bundle-dependencies.md
+- topology-dependencies.md
+- common-usage.md
+- feeds.md
+- entity.md
+- entities.md
+- service-state.md
+- entitlements.md
 ---
 
 Java blueprints are powerful, but also rather more difficult to write than YAML.
 Advanced Java skills are required.
 
-
+{% include list-children.html %}
 
 The main uses of Java-based blueprints are:
 

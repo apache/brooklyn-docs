@@ -1,5 +1,6 @@
 ---
 title: Code Structure
+layout: website-normal
 ---
 
 Brooklyn is split into the following subprojects:

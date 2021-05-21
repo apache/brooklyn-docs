@@ -1,5 +1,6 @@
 ---
 title: Catalog Management
+layout: website-normal
 ---
 
 ### Catalog Management

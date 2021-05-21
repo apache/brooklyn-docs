@@ -1,5 +1,6 @@
 ---
 title: YAML Blueprint Advanced Example
+layout: website-normal
 ---
 
 By this point you should be familiar with the fundamental concepts behind both Apache Brooklyn and YAML blueprints. This section of the documentation is intended to show a complete, advanced example of a YAML blueprint.

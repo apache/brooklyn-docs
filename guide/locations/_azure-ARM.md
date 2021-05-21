@@ -1,10 +1,16 @@
-## Azure Compute ARM
+---
+section: Azure Compute ARM
+section_type: inline
+section_position: 2
+---
+
+### Azure Compute ARM
 
 Azure Resource Manager (ARM) is a framework for deploying and managing applications across resources and managing groups of resources as single logical units on the Microsoft Azure cloud computing platform.
 
-### Setup the Azure credentials
+#### Setup the Azure credentials
 
-#### Azure CLI 2.0
+##### Azure CLI 2.0
 
 Firstly, install and configure Azure CLI following [these steps](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
 
@@ -100,7 +106,7 @@ Using the Azure CLI, run the following commands to create a service principal
     # For example: azure ad app create --name "myappname"  --password abcd --home-page "https://myappwebsite" --identifier-uris "https://myappwebsite"
     
     # Output will include a value for `Application Id`, which will be used for the live tests
-    
+   
     # Create a Service Principal
     azure ad sp create --applicationId <Application-id>
     
@@ -122,7 +128,7 @@ Verify service principal
 
     azure login -u <Application-id> -p <Password> --service-principal --tenant <Tenant-id>
 
-### Using the Azure ARM Location
+#### Using the Azure ARM Location
 
 Below is an example Azure ARM location in YAML which will launch a Ubuntu instance in south east asia:
 
@@ -166,7 +172,7 @@ The loginUser can be anything, as long as it's specified.
 The `overrideAuthenticateSudo: true` key tells Apache Brooklyn that default on Azure images do not have passwordless sudo 
 configured by default.
 
-### Useful configuration options for Azure ARM
+#### Useful configuration options for Azure ARM
 
 You can add these options directly under the `brooklyn.config` element in the example above:
 
@@ -176,7 +182,7 @@ You can add these options into the `templateOptions` element inside the `brookly
 
 * `resourceGroup` - select a Resource Group to deploy resources into. If not given, jclouds will generate a new resource group with a partly-random name.
 
-### Using Windows on Azure ARM
+#### Using Windows on Azure ARM
 
 This section contains material how to create a Windows location on Azure ARM. Some of the used parameters are explained in the section above.
 
@@ -211,11 +217,11 @@ stored in protected .PFX file. It needs to be prepared upfront or created with t
 
 * `enableAutomaticUpdates` whether to enable the automatic Windows updates. It can be set to `false`, if automatic updates are not desired
 
-##### Sample Windows Blueprint
+###### Sample Windows Blueprint
 
 Placeholders surrounded with `<>` have to be replcaced with their respective values.
 
-```yaml
+{% highlight yaml %}
 brooklyn.catalog:
   id: my-azure-arm-location
   name: "My Azure ARM location"
@@ -255,9 +261,9 @@ brooklyn.catalog:
               certificateUrl: "<KeyVault-uri>"
           additionalUnattendContent: null
           enableAutomaticUpdates: true
-```
+{% endhighlight %}
 
-### Known issues
+#### Known issues
 There are currently two known issues with Azure ARM:
 
 * It can take a long time for VMs to be provisioned

@@ -1,5 +1,6 @@
 ---
 title: Security Guidelines
+layout: website-normal
 ---
 
 ## Brooklyn Server
