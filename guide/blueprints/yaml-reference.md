@@ -281,3 +281,43 @@ elements for more information:
 * `DynamicCluster`: provides resizable clusters given a `dynamiccluster.memberspec` set with `$brooklyn.entitySpec(Map)` as described above 
 * `DynamicFabric`: provides a set of homogeneous instances started in different locations,
   with an effector to `addLocation`, i.e. add a new instance in a given location, at runtime
+
+## Notable Tags
+
+Some tags are used by convention and in the UI for special purposes.
+These are:
+
+* `ui-composer-annotation`: text (interpreted as markdown without HTML support) which will be displayed on a node in the blueprint composer,
+  or a map containing a key with the `text` and optionally any/all of `{x, y, width, height, background, style, styleInnerDiv}` for displaying it.
+For example:
+
+  ~~~ yaml
+  name: Annotation Sample
+  services:
+  - type: server
+    brooklyn.tags:
+      - ui-composer-annotation: A simple default annotation
+      - ui-composer-annotation:
+          text: >-
+            Shown below, yellow text, centered with CSS. Because it's long, scroll bars horizontally and vertically shown when
+            needed.
+          styleInnerDiv: 'margin: auto; color: yellow;'
+          'y': 120
+  - type: server
+    brooklyn.tags:
+      - ui-composer-annotation:
+          text: |
+            ## Big Example
+            A **red** tag at _right_, using markdown, in a big box.
+          width: 300
+          height: 200
+          x: 220
+          'y': 0
+          background: '#ffcccc'
+          style: 'font-size: 9px;'
+  ~~~
+
+* `ui-composer-hints`: a collection of tags typically on an entity definitiion providing hints to composers,
+  including `config-widgets` (setting custom widgets to render fields) and `config-quick-fixes` (proposals for fixing common errors);
+  see the code for the Blueprint Composer for more details
+
