@@ -287,9 +287,10 @@ elements for more information:
 Some tags are used by convention and in the UI for special purposes.
 These are:
 
-* `ui-composer-annotation`: text (interpreted as markdown without HTML support) which will be displayed on a node in the blueprint composer,
+* `ui-composer-annotation`: text (interpreted as markdown without HTML support) which will be displayed on a node in the Blueprint Composer,
   or a map containing a key with the `text` and optionally any/all of `{x, y, width, height, background, style, styleInnerDiv}` for displaying it.
-For example:
+  The display of these can be toggled in the Blueprint Composer by selecting "Layers > Annotations".
+  This is illustrated in the following blueprint:
 
   ~~~ yaml
   name: Annotation Sample
@@ -302,7 +303,7 @@ For example:
             Shown below, yellow text, centered with CSS. Because it's long, scroll bars horizontally and vertically shown when
             needed.
           styleInnerDiv: 'margin: auto; color: yellow;'
-          'y': 120
+          y: 120
   - type: server
     brooklyn.tags:
       - ui-composer-annotation:
@@ -312,7 +313,7 @@ For example:
           width: 300
           height: 200
           x: 220
-          'y': 0
+          y: 0
           background: '#ffcccc'
           style: 'font-size: 9px;'
   ~~~
