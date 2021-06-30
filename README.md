@@ -38,7 +38,7 @@ this project is (where this file is located).
 RVM should detect its configuration inside `Gemfile` and try to configure itself. 
 Most likely it will report that the required version of Ruby is not installed,
 and it will show the command that you need to run to install the correct version. 
-Follow the instructions it shows, typically something like `rvm install ruby-2.1.2`.
+Follow the instructions it shows, typically something like `rvm install ruby-3.0.1`.
 
 Once the correct version of Ruby is installed, change to your home directory
 and then change back (`cd ~ ; cd -`).
