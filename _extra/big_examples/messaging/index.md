@@ -168,7 +168,7 @@ messages, as follows:
 ### Cloud Deployment
 
 With appropriate setup (as described
-[here]({{ site.path.guide }}/use/guide/management/index.html#startup-config))
+[here](/guide/use/guide/management/index.html#startup-config))
 this can also be deployed to your favourite cloud, let's pretend
 it's Amazon Ireland, as follows:
 
@@ -177,5 +177,5 @@ it's Amazon Ireland, as follows:
 {% endhighlight %}
 
 If you encounter any difficulties, please
-[tell us]({{ site.path.guide }}/meta/contact.html) and we'll do our best
+[tell us](/guide/meta/contact.html) and we'll do our best
 to help.

@@ -25,7 +25,7 @@ Here's a very simple YAML blueprint plan, to explain the structure:
 * The `name` is just for the benefit of us humans.
 
 * The `location` specifies where this should be deployed.
-  If you've [set up passwordless localhost SSH access]({{ site.path.guide }}/locations/#localhost) 
+  If you've [set up passwordless localhost SSH access](/guide/locations/#localhost) 
   you can use `localhost` as above, but if not, just wait ten seconds for the next example.
   
 * The `services` block takes a list of the typed services we want to deploy.
@@ -38,7 +38,7 @@ Click on the tile "Blueprint Composer", then on the double-arrow located on the 
 paste the copied YAML into the editor and press "Deploy". 
 There are several other ways to deploy, including `curl` and via the command-line,
 and you can configure users, HTTPS, persistence, and more, 
-as described [in the ops guide]({{ site.path.guide }}/ops/).
+as described [in the ops guide](/guide/ops/).
 
 [![Web Console](web-console-yaml-700.png "YAML via Web Console")](web-console-yaml.png)
 
@@ -65,13 +65,13 @@ Brooklyn lived as a Java framework for many years before we felt confident
 to make a declarative front-end, so you can do pretty much anything you want to
 by dropping to the JVM. For more information on Java:
 
-* start with a [Maven archetype]({{site.path.guide}}/blueprints/java/archetype.html)
-* see all [Brooklyn Java guide]({{site.path.guide}}/blueprints/java/) topics
+* start with a [Maven archetype](/guide/blueprints/java/archetype.html)
+* see all [Brooklyn Java guide](/guide/blueprints/java/) topics
 * look at test cases in the [codebase](https://github.com/apache/brooklyn)
 
 <!-- 
 TODO
-* review some [examples]({{site.path.guide}}/use/examples/index.html)
+* review some [examples](/guide/use/examples/index.html)
 -->
 
 You can also come talk to us, on IRC (#brooklyncentral on Freenode) or

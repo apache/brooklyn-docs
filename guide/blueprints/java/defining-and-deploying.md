@@ -14,7 +14,7 @@ with an effector to create new gists.
 ## Project Setup
 
 Follow the instructions to create a new Java project using the [archetype](archetype.html), and
-import it into your [favorite IDE]({{ site.path.guide }}/dev/env/ide/). This example assumes you 
+import it into your [favorite IDE](/guide/dev/env/ide/). This example assumes you 
 used the groupId `com.acme` and artifact id `autobrick`.
 
 First ensure you can build this project at the command line, using `mvn clean install`.
@@ -119,7 +119,7 @@ inside `src/test/java`.
 
 Again you will need to substitute the github access token you generated in the previous section for
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section on 
-[externalised configuration]({{ site.path.guide }}/ops/externalized-configuration.html) 
+[externalised configuration](/guide/ops/externalized-configuration.html) 
 for how to store these credentials more securely. 
 
 {% highlight java %}
@@ -149,7 +149,7 @@ artifact (which will be in the `target` sub-directory after running `mvn clean i
 {% readj gist_generator/gist_generator.bom %}
 {% endhighlight %}
 
-See [Handling Bundle Dependencies]({{ site.path.guide}}/blueprints/java/bundle-dependencies.html)
+See [Handling Bundle Dependencies](/guide/blueprints/java/bundle-dependencies.html)
 for a description of the `brooklyn.libraries` used above, and for other alternative approaches.
 
 The command below will use the `br` CLI to add this to the catalog of a running Brooklyn instance.
@@ -173,5 +173,5 @@ The YAML blueprint below shows an example usage of this blueprint:
 
 Note the type name matches the id defined in the `.bom` file.
 
-You can now call the effector by any of the standard means - [web console]({{ site.path.guide }}/ops/gui/), 
-[REST API]({{ site.path.guide }}/ops/rest.html), or [Client CLI]({{ site.path.guide }}/ops/cli/).
+You can now call the effector by any of the standard means - [web console](/guide/ops/gui/), 
+[REST API](/guide/ops/rest.html), or [Client CLI](/guide/ops/cli/).

@@ -12,7 +12,7 @@ To use the examples, you'll need ``curl``, ``git``, ``java`` (1.6+), and ``maven
 
 First, grab a copy of the Brooklyn snapshot distribution you wish to use from 
 [the maven repository]({{ this_dist_url_list }})
-(or build it yourself following instructions [here]({{ site.path.guide }}/dev/build/)),
+(or build it yourself following instructions [here](/guide/dev/build/)),
 unpack it to your favourite location (e.g. `$(pwd)`), 
 and export `BROOKLYN_HOME`:
 
@@ -51,6 +51,6 @@ For the latest stable version, go [here](/meta/versions.html).
 {% endif %}
 
 For more information on ways to download Brooklyn please
-see the [download page]({{site.path.guide}}/start/download.html).
+see the [download page](/guide/start/download.html).
 For more information on the Brooklyn CLI and launching apps,
-please visit [this section of the user guide]({{site.path.guide}}/use/guide/management/index.html#cli).
+please visit [this section of the user guide](/guide/use/guide/management/index.html#cli).

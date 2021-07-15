@@ -21,7 +21,7 @@ the CloudStack GUI: under accounts, select "view users", then "generate key".
         credential: mycred-abcdefghijklmnopqrstuvwxyz01234567890-abcdefghijklmnopqrstuvwxyz01234567890-abc
 
 Users are strongly recommended to use 
-[externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) for better
+[externalized configuration](/guide/ops/externalized-configuration.html) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

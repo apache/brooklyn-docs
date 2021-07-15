@@ -83,7 +83,7 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 The following resources may be useful when configuring logging:
 
 * The [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project
-* [Brooklyn Developer Guide]({{ site.path.guide }}/dev/tips/logging.html) logging tips
+* [Brooklyn Developer Guide](/guide/dev/tips/logging.html) logging tips
 * The [Logback Project](http://logback.qos.ch/) home page
 * [Brooklyn Developer Guide]({{book.path.docs}}/dev/tips/logging.md) logging tips
 * [OPS4J Pax Logging](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
