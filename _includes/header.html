@@ -16,19 +16,19 @@
                 {% for item in site.data.menu %}
                 <li class="dropdown{% if page.breadcrumb_paths contains item.path %} active{% endif %}">
                     {% if item.menu_customization.type == "button" %}
-                    <a href="{{item.url}}" class="btn btn-default navbar-btn">{{ item.title_in_menu | downcase }}</a>
+                    <a href="{{item.url | relative_url}}" class="btn btn-default navbar-btn">{{ item.title_in_menu | downcase }}</a>
                     {% else %}
-                    <a href="{{item.url}}" data-toggle="dropdown">{{ item.title_in_menu | downcase }} {% if item.menu %}<span class="caret"></span>{% endif %}</a>
+                    <a href="{{item.url | relative_url}}" data-toggle="dropdown">{{ item.title_in_menu | downcase }} {% if item.menu %}<span class="caret"></span>{% endif %}</a>
                     {% if item.menu %}
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="{{item.url}}">{{item.title_in_menu}}</a>
+                            <a href="{{item.url | relative_url}}">{{item.title_in_menu}}</a>
                         </li>
                         <li class="divider"></li>
                         {% for item2 in item.menu %}
                         {% if item2.menu_customization.dropdown_new_section %}<li class="divider"></li>{% endif %}
                         <li {% if item2.menu_customization.dropdown_section_header %}class="section"{% endif %}>
-                            <a href="{{item2.url}}">{{item2.title_in_menu}}
+                            <a href="{{item2.url | relative_url}}">{{item2.title_in_menu}}
                                 {% if item2.external %}&nbsp;<span class="octicon octicon-link-external"></span>{% endif %}</a>
                         </li>
                         {% if item2.menu_customization.dropdown_section_header %}<li class="divider"></li>{% endif %}

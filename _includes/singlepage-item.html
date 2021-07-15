@@ -17,7 +17,7 @@
 	 {% if visited contains item_title %}
 	  {{ item['title'] }} &nbsp; <a href="#link-{{pid}}"><span class="octicon octicon-link-external flip"></span></a>
 	 {% elsif item['external'] %}
-	  {{ item['title'] }} &nbsp; <a href="{{ item['url'] }}"><span class="octicon octicon-link-external"></span></a>
+	  {{ item['title'] }} &nbsp; <a href="{{ item['url'] | relative_url }}"><span class="octicon octicon-link-external"></span></a>
 	 {% else %}
 	 	 {% if item['content'] != null %}
 	   		<a href="#contentsLink-{{pid}}" id="link-{{pid}}">{{ item['title'] }}</a>
