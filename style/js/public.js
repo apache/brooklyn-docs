@@ -115,7 +115,7 @@
             if (thisversion != 'latest' && (!$.cookie('brooklyn_versions') ||
                 (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
                 ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1))) ){
-                msg += "<div class='warning_banner_image'><img src='{{ site.path.style }}/img/warning.png'/></div>";
+                msg += "<div class='warning_banner_image'><img src='{{ site.path.style | prepend: site.baseurl }}/img/warning.png'/></div>";
                 msg += "<p>You are browsing the archive site for version <strong>"+thisversion+"</strong>.</p>";
                 if (thisversion.indexOf("SNAPSHOT") >= 0) {
                     msg += "<p>Note that SNAPSHOT versions have not been voted on and are not endorsed by the Apache Software Foundation.</p>";
