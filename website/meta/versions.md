@@ -8,7 +8,7 @@ title: Versions
 
 The current stable version of Brooklyn is {{ site.brooklyn-stable-version }}:
 
-* [Download]({{ site.path.website }}/download/)
+* [Download](/website/download/)
 * [User Guide]({{ site.path.guide }}/)
 * [Release Notes]({{ site.path.guide }}/misc/release-notes.html)
 

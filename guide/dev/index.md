@@ -7,7 +7,7 @@ breadcrumbs:
 - /website/documentation/index.md
 - /guide/dev/index.md
 children:
-- { link: "{{ site.path.website }}/developers/code/", title: "Get the Code" }
+- { link: "/website/developers/code/", title: "Get the Code" }
 - env/maven-build.md
 - env/ide/
 - code/structure.md

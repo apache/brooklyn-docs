@@ -125,8 +125,8 @@
                 }
                 msg += "<center><p class='warning_banner_buttons'>";
                 msg += "<a href = 'javascript:void(0);' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
-                msg += "<a href = '{{ site.path.v }}/latest/'>No, take me to the latest version guide</a>";
-                msg += "<a href = '{{ site.path.website }}/meta/versions.html'>Show all versions</a>";
+                msg += "<a href = '{{ site.path.v | prepend: site.baseurl }}/latest/'>No, take me to the latest version guide</a>";
+                msg += "<a href = '{{ site.path.website | prepend: site.baseurl}}/meta/versions.html'>Show all versions</a>";
                 msg += "</p></center>"
 
                 $('#page_notes').html(msg).fadeIn('slow');

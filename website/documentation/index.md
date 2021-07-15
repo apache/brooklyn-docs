@@ -22,10 +22,10 @@ Our main user manual is organised by release version. Please pick the version th
 - [{{ site.brooklyn-stable-version }}]({{ site.path.v }}/latest) -
   This is the latest stable version.
 
-- [Older versions]({{ site.path.website }}/meta/versions.html)
+- [Older versions](/website/meta/versions.html)
 
 
 ## Other Docs
 
 Other mini-docs are available [here](other-docs.html),
-or see the [Learn More]({{ site.path.website }}/learnmore) section of the site.
+or see the [Learn More](/website/learnmore/) section of the site.

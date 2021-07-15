@@ -63,7 +63,7 @@ For Centos 7 and RHEL 7 users, the recommended way to install Apache Brooklyn on
 RPM is the de facto standard for packaging software on these Linux distributions and provides a mechanism for installing, upgrading and removing packages such as Apache Brooklyn. The RPM package contains all the necessary files associated with the Apache Brooklyn application. 
 
 {% if site.brooklyn-version contains 'SNAPSHOT' %}
-This is a snapshot build and no RPM is available, please download [a different version]({{site.path.website}}/download/).
+This is a snapshot build and no RPM is available, please download [a different version](/website/download/).
 {% else %}
 Download the Apache Brooklyn [RPM distribution](https://www.apache.org/dyn/closer.lua/brooklyn/apache-brooklyn-{{site.brooklyn-version}}/apache-brooklyn-{{site.brooklyn-version}}-1.noarch.rpm){:target="_blank"}.
 {% endif %}
@@ -100,7 +100,7 @@ $ sudo dpkg -i apache-brooklyn_{{site.brooklyn-version}}_noarch.deb
 
 <strong class="hidden started-pdf-include">d) OSX / Linux</strong>
 
-For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download]({{site.path.website}}/download/){:target="_blank"} section.
+For Linux or OSX please download the Apache Brooklyn `tar.gz` archive from the [download](/website/download/){:target="_blank"} section.
 
 {% if site.brooklyn-version contains 'SNAPSHOT' %}
 Extract the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
@@ -125,7 +125,7 @@ $ cd apache-brooklyn-{{ site.brooklyn.version }}
 
 <strong class="hidden started-pdf-include">e) Windows</strong>
 
-For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here]({{site.path.website}}/download/){:target="_blank"}. 
+For all versions of Microsoft Windows, please download the Apache Brooklyn zip file from [here](/website/download/){:target="_blank"}. 
 
 Extract this zip file to a directory on your computer such as `c:\Program Files\brooklyn` where `c` is the letter of your operating system drive.
 

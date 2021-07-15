@@ -40,7 +40,7 @@ Then configure the server as follows:
 
 ### <a id="download"></a>Download Apache Brooklyn
 
-Download Brooklyn and obtain a binary build as described on [the download page]({{site.path.website}}/download/).
+Download Brooklyn and obtain a binary build as described on [the download page](/website/download/).
 
 {% if brooklyn_version contains 'SNAPSHOT' %}
 Expand the `tar.gz` archive (note: as this is a -SNAPSHOT version, your filename will be slightly different):
