@@ -46,4 +46,4 @@ Changes since 0.12.0:
    but now they are). 
 
 For changes in prior versions, please refer to the release notes for 
-[0.12.0]({{ site.path.v }}/0.12.0/misc/release-notes.html).
+[0.12.0]({{ site.path.v | prepend: site.baseurl }}/0.12.0/misc/release-notes.html).
