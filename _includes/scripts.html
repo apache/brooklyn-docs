@@ -18,11 +18,11 @@
   -->
 
 <script type="text/javascript" src="{% dependency_url bootstrap.js %}"></script>
-<script type="text/javascript" src="{{ site.path.style | prepend: site.baseurl }}/deps/jquery.cookie.js"></script>
-<script type="text/javascript" src="{{ site.path.style | prepend: site.baseurl }}/js/zeroclipboard/ZeroClipboard.min.js"></script>
-<script type="text/javascript" src="{{ site.path.style | prepend: site.baseurl }}/deps/tooltip.js"></script>
+<script type="text/javascript" src="{{ site.path.style | relative_url }}/deps/jquery.cookie.js"></script>
+<script type="text/javascript" src="{{ site.path.style | relative_url }}/js/zeroclipboard/ZeroClipboard.min.js"></script>
+<script type="text/javascript" src="{{ site.path.style | relative_url }}/deps/tooltip.js"></script>
 {% if page.url contains "/start/" %}
-<script type="text/javascript" src="{{ site.path.style | prepend: site.baseurl }}/deps/glossarizer.js"></script>
+<script type="text/javascript" src="{{ site.path.style | relative_url }}/deps/glossarizer.js"></script>
 <script type="text/javascript">
     $(function(){
         $('body').glossarizer({
@@ -35,6 +35,6 @@
     </script>
 {% endif %}
 <script type="text/javascript">
-    ZeroClipboard.config({ moviePath: '{{ site.path.style | prepend: site.baseurl }}/js/zeroclipboard/ZeroClipboard.swf' });
+    ZeroClipboard.config({ moviePath: '{{ site.path.style | relative_url }}/js/zeroclipboard/ZeroClipboard.swf' });
 </script>
-<script src="{{ site.path.style | prepend: site.baseurl }}/js/public.js"></script>
+<script src="{{ site.path.style | relative_url }}/js/public.js"></script>

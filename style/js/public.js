@@ -115,7 +115,7 @@
             if (thisversion != 'latest' && (!$.cookie('brooklyn_versions') ||
                 (($.inArray('ALL', $.cookie('brooklyn_versions').split(",")) === -1) &&
                 ($.inArray(thisversion, $.cookie('brooklyn_versions').split(",")) === -1))) ){
-                msg += "<div class='warning_banner_image'><img src='{{ site.path.style | prepend: site.baseurl }}/img/warning.png'/></div>";
+                msg += "<div class='warning_banner_image'><img src='{{ site.path.style | relative_url }}/img/warning.png'/></div>";
                 msg += "<p>You are browsing the archive site for version <strong>"+thisversion+"</strong>.</p>";
                 if (thisversion.indexOf("SNAPSHOT") >= 0) {
                     msg += "<p>Note that SNAPSHOT versions have not been voted on and are not endorsed by the Apache Software Foundation.</p>";
@@ -125,8 +125,8 @@
                 }
                 msg += "<center><p class='warning_banner_buttons'>";
                 msg += "<a href = 'javascript:void(0);' onclick=\"set_user_version('"+thisversion+"');\">Yes, hide this warning</a>";
-                msg += "<a href = '{{ site.path.v | prepend: site.baseurl }}/latest/'>No, take me to the latest version guide</a>";
-                msg += "<a href = '{{ site.path.website | prepend: site.baseurl}}/meta/versions.html'>Show all versions</a>";
+                msg += "<a href = '{{ site.path.v | relative_url }}/latest/'>No, take me to the latest version guide</a>";
+                msg += "<a href = '{{ site.path.website | relative_url}}/meta/versions.html'>Show all versions</a>";
                 msg += "</p></center>"
 
                 $('#page_notes').html(msg).fadeIn('slow');

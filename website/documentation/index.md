@@ -19,7 +19,7 @@ TODO add FAQ
 
 Our main user manual is organised by release version. Please pick the version that you are using:
 
-- [{{ site.brooklyn-stable-version }}]({{ site.path.v | prepend: baseurl }}/latest) -
+- [{{ site.brooklyn-stable-version }}]({{ site.path.v | relative_url }}/latest) -
   This is the latest stable version.
 
 - [Older versions](/website/meta/versions.html)

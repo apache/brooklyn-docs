@@ -33,7 +33,7 @@ path:
   # these are only used in a few places, either where
   # - html needs to know the final path
   # - the file doesn't exist in this build (but does when deployed)
-  # should almost always be used as {{ site.path.guide | prepend: site.baseurl }}
+  # should almost always be used as {{ site.path.guide | relative_url }}
   guide: /guide
   website: /website
   v: /v
