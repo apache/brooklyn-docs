@@ -2,7 +2,9 @@
 
 # normally we'd add it to Gemfile and include { plugins: [ jekyll-relative-links ] } in the config.yml
 # but the last released version 0.6.1 is too old and doesn't support absolute links, so we copy head here instead
-# no significant changes
+
+# additional changes are in commit history
+# - speculatively map .html to .md when doing the lookup
 
 # distributed under the MIT License as follows (note this is only used to build the docs, not included with any brooklyn output):
 
@@ -85,6 +87,11 @@ module JekyllRelativeLinks
 
         path = path_from_root(link.path, url_base)
         url  = url_for_path(path)
+
+        # also try html and / mapped to md - useful if using a baseurl
+        url  = url_for_path(path.sub(%r!\.html!.freeze, ".md")) unless url
+        url  = url_for_path(path + "/index.md") unless url
+
         next original unless url
 
         link.path = url
