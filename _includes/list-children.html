@@ -4,6 +4,6 @@ TODO style this much better
 
 <div class="list-children"><ul>
 {% for item in page.menu %}
-<li> <a href="{{ item.url }}">{{ item.title }}</a> </li>
+<li> <a href="{{ item.url | relative_url }}">{{ item.title }}</a> </li>
 {% endfor %}
 </ul></div>
