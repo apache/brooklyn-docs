@@ -65,7 +65,7 @@ find . \( -path "*/src/main" -or -path "*/src/test" \) -exec echo {} \; -exec mk
 {% endhighlight %}
 
 If the pain starts to be too much, come find us on IRC #brooklyncentral or
-[elsewhere]({{site.path.website}}/community/) and we can hopefully share our pearls.
+[elsewhere](/website/community/) and we can hopefully share our pearls.
 (And if you have a tip we haven't mentioned please let us know that too!)
 
 

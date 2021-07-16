@@ -22,7 +22,7 @@ mvn clean install
 {% endhighlight %}
 
 This will produce an artifact in `brooklyn-dist/dist/brooklyn-dist-1.0.0-SNAPSHOT-dist.tar.gz` <!-- BROOKLYN_VERSION -->
-which you can use [in the usual way]({{ site.path.guide }}/start/running.html).
+which you can use [in the usual way](/guide/start/running.html).
 Some options which may be useful:
 
 * Use `--depth 1` with `git clone` to skip the history (much faster but your `git log` will be incomplete)
@@ -54,7 +54,7 @@ Whether you use this uber-project or not, to [contribute](../how-to-contribute.h
 you'll need to follow the usual fork->work->push->pull-request process.
 
 To understand where you might want to make your change,
-look at the [code structure]({{ site.path.guide }}/dev/code/structure.html).
+look at the [code structure](/guide/dev/code/structure.html).
 
 
 ### Bigger and Regular Changes
@@ -68,15 +68,15 @@ and will probably want some other settings and tips [as described here](git-more
 * See the [detailed Brooklyn & Git guide](git-more.html) to 
   [set up forks](git-more.html#set-up-forks) or [handy git aliases](git-more.html#useful-aliases-and-commands)
 
-* Visit the [Developer Guide]({{ site.path.guide }}/dev/) has information on 
-  [project structure]({{ site.path.guide }}/dev/code/structure.html),
-  [Maven setup]({{ site.path.guide }}/dev/env/maven-build.html) and more
+* Visit the [Developer Guide](/guide/dev/) has information on 
+  [project structure](/guide/dev/code/structure.html),
+  [Maven setup](/guide/dev/env/maven-build.html) and more
 
 * Review [How to Contribute](../how-to-contribute.html) 
   to [file your CLA](../how-to-contribute.html#contributor-license-agreement)
   or 
-  [project structure]({{ site.path.guide }}/dev/code/structure.html),
-  [Maven setup]({{ site.path.guide }}/dev/env/maven-build.html) and more
+  [project structure](/guide/dev/code/structure.html),
+  [Maven setup](/guide/dev/env/maven-build.html) and more
 
 Where things aren't documented **please ask us** at 
 [the brooklyn mailing list](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/)

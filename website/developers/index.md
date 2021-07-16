@@ -45,6 +45,6 @@ When you have a blueprint or an improvement you want to share,
 there are a few instructions to note on [how to contribute](how-to-contribute.html).
 
 If you're looking to learn more about the codebase itself, 
-have a look at [Developer Guide]({{ site.path.guide }}/dev/).
+have a look at [Developer Guide](/guide/dev/).
 There are also a number of [development bookmarks](links.html) for the tools we use
 (git, jenkins, jira).

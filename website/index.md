@@ -118,9 +118,10 @@ vagrant up brooklyn
         </div>
         <div class="text-muted row">
           <div class="col-md-9">Paste the above at a Terminal prompt. It will download and start Brooklyn automatically.</div>
-          <div class="col-md-3 text-rigth">Looking for <a href="{{ site.path.guide }}/start/running.html">more installation options?</a></div>
+          <div class="col-md-3 text-rigth">Looking for 
+            <span markdown="1">[more installation options?](/guide/start/running.html)</span></div>
         </div>
-        <p>Congratulation! Next, let's <a href="{{ site.path.guide }}/start/blueprints.html">deploy a blueprint</a>.</p>
+        <p>Congratulation! Next, let's <span markdown="1">[deploy a blueprint](/guide/start/blueprints.html)</span>.</p>
       </div>
     </div>
   </div>

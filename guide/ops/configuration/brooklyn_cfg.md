@@ -46,7 +46,7 @@ More information, including setting up a certificate, is described [further belo
 Values in `brooklyn.cfg` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
-This allows [externalized configuration]({{ site.path.guide }}/ops/externalized-configuration.html) to be used from 
+This allows [externalized configuration](/guide/ops/externalized-configuration.html) to be used from 
 `brooklyn.cfg`. For example:
 
 {% highlight properties %}
@@ -201,7 +201,7 @@ brooklyn.entitlements.perUser.metrics=minimal
 {% endhighlight %}
 
 For more information, see 
-[Java: Entitlements]({{ site.path.guide }}/blueprints/java/entitlements.html).
+[Java: Entitlements](/guide/blueprints/java/entitlements.html).
 or
 {% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
 

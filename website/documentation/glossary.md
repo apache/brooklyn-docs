@@ -35,7 +35,7 @@ relationships), along with policies for runtime management. The blueprint can
 be described in [YAML][].
 
 ###### See also
-* [Documentation]({{site.path.website}}/learnmore/catalog/index.html) for the entity,
+* [Documentation](/website/learnmore/catalog/) for the entity,
   policy and enricher blueprints that Apache Brooklyn supports out-of-the-box.
 
 

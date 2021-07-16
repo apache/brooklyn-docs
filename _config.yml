@@ -23,9 +23,17 @@ markdown: kramdown
 # where this will publish
 url_root: http://0.0.0.0:4000
 
-# absolute base directories where things will land on the server
+# This can be set eg "/brooklyn-docs" to specify a context path / prefix for all links
+baseurl: ""
+
 path:
+  #
   style: /style
+
+  # these are only used in a few places, either where
+  # - html needs to know the final path
+  # - the file doesn't exist in this build (but does when deployed)
+  # should almost always be used as {{ site.path.guide | relative_url }}
   guide: /guide
   website: /website
   v: /v
@@ -46,6 +54,7 @@ theme: minima
 
 sass:
     sass_dir: style/css
+    style: compressed
 
 # TODO the 0.12.0 paths must be changed!
 brooklyn-stable-version: 0.12.0
