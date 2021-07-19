@@ -9,16 +9,7 @@ Blueprints are descriptors or patterns which describe how Apache Brooklyn should
 
 We'll start by deploying an application with a simple YAML blueprint containing an [Apache Tomcat](https://tomcat.apache.org/){:target="_blank"} server.
 
-Copy the blueprint below into a text file, "myapp.yaml", in your workspace (Note, to copy the file you can
-hover your mouse over the right side of the text box below to get a Javascript "copy" button).
-
-{% highlight yaml %}
-name: Tomcat
-services:
-- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-  name: tomcatServer
-location: <your-location-definition-goes-here>
-{% endhighlight %}
+{% include_relative _blueprints.camp.md %}
 
 
 ## Locations

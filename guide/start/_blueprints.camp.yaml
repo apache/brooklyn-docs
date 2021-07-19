@@ -1,0 +1,5 @@
+name: Tomcat
+services:
+- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+  name: tomcatServer
+location: <your-location-definition-goes-here>
