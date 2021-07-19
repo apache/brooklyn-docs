@@ -2,16 +2,16 @@
 # Builds a hierarchical structure for the site, based on the YAML front matter of each page
 #
 # Starts from a page called "/index.md" (or the value of `root_menu_page` in _config.yml),
-# and follows `children` links in the YAML front matter, building up a variable called `data` 
+# and follows `children` links in the YAML front matter, building up a variable called `data`
 # on `site` and on each referred `page`.
 #
-# In Ruby data is in page.data['menu'], but in templates `page.data` is promoted, 
+# In Ruby data is in page.data['menu'], but in templates `page.data` is promoted,
 # so you should just refer to things in markdown as `{{ page.menu }}`.
 #
 # Each `page.menu` entry will contain:
 # * `url` - URL (relative or absolute) to link to
 # * `title_in_menu` - title to show
-# * `menu_path` - the path of this page for the purposes of looking in breadcrumbs (usually page.path, unless overriden) 
+# * `menu_path` - the path of this page for the purposes of looking in breadcrumbs (usually page.path, unless overriden)
 # * `breadcrumbs_pages` - page items for ancestor items (and self)
 # * `breadcrumbs_paths` - paths of breadcrumb pages (useful for `if .. contains` jekyll tests)
 # * `menu_parent` - the parent menu which contains this page
@@ -21,7 +21,7 @@
 # To build, set `children` as a list of either strings (the relative or absolute path to the child .md file),
 # or as maps indicating the target, one of:
 # * `path` to a markdownfile
-# * `link` as an URL 
+# * `link` as an URL
 # * `section` anchored in this file (annotated with `<a name="#section"></a>`)
 # And optionally:
 # * a `title` (required for `link`), to override the title from the file
@@ -33,14 +33,14 @@
 #
 #children:
 #- child.md
-#- { path: child.md }  
+#- { path: child.md }
 #  # identical to above
-#- { path: subchild.md, title: "Sub Child" }   
+#- { path: subchild.md, title: "Sub Child" }
 #  # different child, with custom title
-#- { path: subchild.md, href_path: subchild_alt.md }  
+#- { path: subchild.md, href_path: subchild_alt.md }
 #  # takes title and menu from subchild page, but links to subchild_alt
-#- { path: child.md, menu: [ { path: subchild.md, title: "Sub-Child with New Name" } ] } 
-#  # child, but with custom sub-menu and custom title in there 
+#- { path: child.md, menu: [ { path: subchild.md, title: "Sub-Child with New Name" } ] }
+#  # child, but with custom sub-menu and custom title in there
 #- { path: child.md, menu: null }  # suppress sub-menu (note `null` not `nil` because this is yaml)
 #  # child again, but suppressing sub-menu (note `null` not `nil` because this is yaml)
 #- { section: Foo }
@@ -52,9 +52,9 @@
 # You can also set `breadcrumbs` as a list of paths in a page to force breadcrumbs, and
 # `menu_proxy_for` to have `menu_path` set differently to the usual `path` (highlight another page in a menu via breadcrumbs)
 # or `menu_parent` to a path to the menu which should be the parent of the current node.
-# 
+#
 # The hash `menu_customization` allows you to pass arbitrary data around, e.g. for use in styling.
-# 
+#
 # Additionally URL rewriting is done if a path map is set in _config.yaml,
 # with `path: { xxx: /new_xxx }` causing `/xxx/foo.html` to be rewritten as `/new_xxx/foo.html`.
 #
@@ -62,57 +62,56 @@ module SiteStructure
 
   DEBUG = false
 
-  require 'yaml'  
+  require 'yaml'
 #  require 'pp'
 
-  class RewritePaths < Liquid::Tag
-    def initialize(tag_name, text, tokens)
-      super
-      @text = text
+  class RewritePaths
+    def initialize(relative_url)
+      @relative_url = relative_url
     end
-    def render(context)
-      page = context['page']
-      site = context['site']
-      RewritePaths.rewrite_paths(site, page)
-    end
-    
-    def self.rewrite_paths(site, page)
+
+    def rewrite_paths(site, page)
       path = page['path']
+
       page_hash = (page.is_a? Hash) ? page : page.data
       # set url_basedir and apply path mapping
       page_hash['url_basedir'] = File.dirname(path)+"/"
       page_hash['url_basedir'].prepend("/") unless page_hash['url_basedir'].start_with? "/"
-      
+
       config_hash = (site.is_a? Hash) ? site : site.config
-      
+
       if ((config_hash['path']) && (config_hash['path'].is_a? Hash))
-        config_hash['path'].each {|key, value| 
+        config_hash['path'].each {|key, value|
           if (path.start_with?(key))
             if ((!page.is_a? Hash) && page.url)
               page.url.slice!("/"+key)
               page.url.prepend(value)
             end
-            
+
             page_hash['url_basedir'].slice!("/"+key)
             page_hash['url_basedir'].prepend(value)
           end
         }
       end
-      
+
       nil
     end
   end
-  
-  Liquid::Template.register_tag('rewrite_paths', SiteStructure::RewritePaths)
 
-  
+
   class Generator < Jekyll::Generator
 
     @@verbose = false;
-    
-    def self.find_page_with_path_absolute_or_relative_to(site, path, referrent, structure_processed_pages)
+
+    def initialize(config)
+      @config = config
+      @relative_url = JekyllRelativeLinks::Generator.new(@config)
+      @rewrite = RewritePaths.new(@relative_url)
+    end
+
+    def find_page_with_path_absolute_or_relative_to(site, path, referrent, structure_processed_pages)
       uncleaned_path = path
-      
+
       # Pathname API ignores first arg below if second is absolute
       puts "converting #{path} wrt #{referrent ? referrent.path : ""}" if @@verbose
       file = Pathname.new(File.dirname(referrent ? referrent.path : "")) + path
@@ -131,11 +130,11 @@ module SiteStructure
       # is there a better way to trim a leading / ?
       file = file.relative_path_from(Pathname.new("/")) unless file.relative?
       path = "#{file}"
-        
-      # look in our cache        
+
+      # look in our cache
       page = structure_processed_pages[path]
       return page if page != nil
-      
+
       # look in site cache
       page = site.pages.detect { |page| page.path == path }
       if !page
@@ -146,47 +145,50 @@ module SiteStructure
       unless page
         # could not load it from pages, look on disk
 
-        if file.exist?                 
+        if file.exist?
           puts "INFO: reading excluded file #{file} for site structure generation" if SiteStructure::DEBUG
           page = Jekyll::Page.new(site, site.source, File.dirname(file), File.basename(file))
           # make sure right url is set
-          RewritePaths.rewrite_paths(site, page)
+          @rewrite.rewrite_paths(site, page)
         end
- 
+
         unless page
           raise "No such file #{path} in site_structure call (from #{referrent ? referrent.path : ""})" unless SiteStructure::DEBUG
           puts "Could not find a page called: #{path} (referenced from #{referrent ? referrent.path : "root"}); skipping"
           return nil
         end
       end
-      
+
       # and put in cache
       structure_processed_pages[path] = page
- 
-      page     
+
+      page
     end
 
     def generate(site)
+      @relative_url.prepare_for_site(site)
+
       # rewrite paths
-      site.pages.each { |p| RewritePaths.rewrite_paths(site, p) }
+      site.pages.each { |p| @rewrite.rewrite_paths(site, p) }
       structure_processed_pages = {}
       # process root page
       root_menu_page = site.config['root_menu_page']
       puts "site_structure processing root menu page #{root_menu_page}" if @@verbose
-      site.data.merge!( Generator.gen_structure(site, { 'path' => root_menu_page }, nil, [], [], structure_processed_pages).data ) if root_menu_page
+      site.data.merge!( gen_structure(site, { 'path' => root_menu_page }, nil, [], [], structure_processed_pages).data ) if root_menu_page
       # process all pages
       puts "site_structure now processing all pages" if @@verbose
-      site.pages.each { |p| 
-        Generator.gen_structure(site, { 'path' => p.path }, nil, [], [], structure_processed_pages) if (p.path.end_with?(".md") || p.path.end_with?(".html")) && (!p['menu_processed'])
+      site.pages.each { |p|
+        gen_structure(site, { 'path' => p.path }, nil, [], [], structure_processed_pages) if (p.path.end_with?(".md") || p.path.end_with?(".html")) && (!p['menu_processed'])
       }
       site.data['structure_processed_pages'] = structure_processed_pages
+
 #      puts "ROOT menu is #{site.data['menu']}"
 #      puts "PAGE menu is #{structure_processed_pages['website/documentation/index.'].data['menu']}"
 # (but note, in the context hash map 'data' on pages is promoted, so you access it like {{ page.menu }})
     end
 
     # processes liquid tags, e.g. in a link or path object
-    def self.render_liquid_with_page(site, page, content, path=nil)
+    def render_liquid_with_page(site, page, content, path=nil)
       return content unless page
       if (!path)
         # path must be unique to the content ... ideally use a hash, but for now just:
@@ -195,8 +197,8 @@ module SiteStructure
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => page } }
       page.render_liquid(content, site.site_payload, info, path)
     end
-    
-    def self.gen_structure(site, item, parent, breadcrumb_pages_in, breadcrumb_paths_in, structure_processed_pages)
+
+    def gen_structure(site, item, parent, breadcrumb_pages_in, breadcrumb_paths_in, structure_processed_pages)
       puts "gen_structure #{item} from #{parent ? parent.path : 'root'} (#{breadcrumb_paths_in})" if @@verbose
       breadcrumb_pages = breadcrumb_pages_in.dup
       breadcrumb_paths = breadcrumb_paths_in.dup
@@ -225,8 +227,8 @@ module SiteStructure
           data = page.data.dup
           data['data'] = data
           result = data
-        end 
-        
+        end
+
         ##
         # This is added for inline seperate child files
         # see: page_structure.rb
@@ -245,7 +247,7 @@ module SiteStructure
             end
           end
         end
-        
+
         ##
         # This sorts child pages by the YAML property section_position. This uses a versioning format so 1.1.0 > 1.0.4
         # Any sections missing numbers will use their current position to determine their order
@@ -253,7 +255,7 @@ module SiteStructure
         if data['children']
           data['children'] = PageStructureUtils::ChildPage.sortYAMLSectionPositions(data['children'])
         end
-        
+
         data['path'] = page.path
         if item['href_path']
           puts "finding from href #{item['href_path']}" if @@verbose
@@ -262,11 +264,12 @@ module SiteStructure
           href_page = page
         end
         data['url'] = href_page.url
+        data['final_url'] = relative_url( data['url'] )
         puts "data is #{data}" if @@verbose
         data['page'] = page
         breadcrumb_pages << page
         breadcrumb_paths << page.path
-        
+
       elsif (item['section'])
         puts "setting up #{item} as section" if @@verbose
         section = item['section']
@@ -274,17 +277,17 @@ module SiteStructure
         section_cleaned.slice!(1) if section_cleaned.start_with?("-")
         section_cleaned.chomp!("-") # 0..-1) if section_cleaned.end_with?("-")
         link = (parent ? parent.url : "") + '#' + section_cleaned
-        data = { 'link' => link, 'url' => link, 'section' => section_cleaned, 'section_title' => section }
+        data = { 'link' => link, 'url' => link, 'final_url' => relative_url(link), 'section' => section_cleaned, 'section_title' => section }
         data['title'] = item['title'] if item['title']
         data['title'] = section unless data['title']
         # nothing for breadcrumbs
         data['data'] = data
         result = data
-        
+
       elsif (item['link'])
         puts "setting up #{item} as link" if @@verbose
         link = render_liquid_with_page(site, parent, item['link'])
-        data = { 'link' => link, 'url' => link, 'external' => true }
+        data = { 'link' => link, 'url' => link, 'final_url' => relative_url(link), 'external' => true }
         data['title'] = item['title'] if item['title']
         breadcrumb_pages << data
         breadcrumb_paths << data['link']
@@ -295,20 +298,20 @@ module SiteStructure
       end
 
       data['menu_customization'] = {}.merge(data['menu_customization'] || {}).merge(item['menu_customization'] || {})
-      
+
       data['breadcrumb_pages'] ||= breadcrumb_pages
       data['breadcrumb_paths'] ||= breadcrumb_paths
       data['menu_parent'] ||= parent
-      
+
       data['title_in_menu'] = render_liquid_with_page(site, parent, item['title_in_menu'] || item['title'] || data['title_in_menu'] || data['title'])
       data['title'] ||= data['title_in_menu']
 #      puts "built #{data}, now looking at children"
 
       # if already processed then return now that we have set custom item overrides (don't recurse through children)
       return result if data['menu']
-      
+
       data['menu_path'] = page.path if page
-      
+
       if data['menu_proxy_for']
         menu_proxy_for = gen_structure(site, { 'path' => data['menu_proxy_for'], 'no_copy' => "because breadcrumbs won't be right" }, page, [], [], structure_processed_pages)
         raise "missing menu_proxy_for #{data['menu_proxy_for']} in #{page.path}" unless menu_proxy_for
@@ -316,7 +319,7 @@ module SiteStructure
         # copy other data across
         data.merge!(menu_proxy_for.select {|key, value| ['breadcrumb_paths', 'breadcrumb_pages', 'menu', 'title_in_menu', 'menu_parent', 'menu_customization'].include?(key) })
       end
-      
+
       if data['breadcrumbs']
         # if custom breadcrumbs set on page, use them instead
         breadcrumb_pages = data['breadcrumb_pages'] = data['breadcrumbs'].collect { |path|
@@ -328,11 +331,11 @@ module SiteStructure
         breadcrumb_paths = data['breadcrumb_paths'] = data['breadcrumb_pages'].collect { |p| p.path }
       end
 
-      if data['menu_parent'] 
+      if data['menu_parent']
         if data['menu_parent'].is_a? String
           # if custom menu_parent was set as a string then load it
           puts "finding from menu #{data['menu_parent']}" if @@verbose
-          parent_result = find_page_with_path_absolute_or_relative_to(site, render_liquid_with_page(site, parent, data['menu_parent']), page, structure_processed_pages)        
+          parent_result = find_page_with_path_absolute_or_relative_to(site, render_liquid_with_page(site, parent, data['menu_parent']), page, structure_processed_pages)
           raise "missing parent #{data['menu_parent']} in #{page['path']}" unless parent_result
           data['menu_parent'] = parent_result
           if !data['breadcrumbs']
@@ -345,7 +348,7 @@ module SiteStructure
       end
 
       if (data['children'])
-                
+
         data['menu'] = []
         puts "children of #{data['path']} - #{data['children']}" if @@verbose
         data['children'].each do |child|
@@ -359,7 +362,7 @@ module SiteStructure
                   puts "yaml child paths either #{data['path']} or #{page.path}" if @@verbose
                   sub['menu'] = YAML.load(render_liquid_with_page(site, page, sub['menu'])) if sub['menu'].is_a? String
                 end
-                sub['menu'] = sub['menu'].collect { |mi| 
+                sub['menu'] = sub['menu'].collect { |mi|
                   gen_structure(site, mi, page, breadcrumb_pages, breadcrumb_paths, structure_processed_pages)
                 }
                 sub['menu'].compact!
@@ -373,10 +376,14 @@ module SiteStructure
         end
         puts "end children of #{data['path']}" if @@verbose
       end
-      
+
       data['menu_processed']=true
       puts "done #{item}" if @@verbose
       result
+    end
+
+    def relative_url(path)
+      @relative_url.url_for_path_absolute(path) || path
     end
   end
 end

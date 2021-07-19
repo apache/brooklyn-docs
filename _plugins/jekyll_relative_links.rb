@@ -5,6 +5,7 @@
 
 # additional changes are in commit history
 # - speculatively map .html to .md when doing the lookup
+# - make url_for_path public, and have way to inject site and initialize context outside of normal generator usage
 
 # distributed under the MIT License as follows (note this is only used to build the docs, not included with any brooklyn output):
 
@@ -18,7 +19,6 @@
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-# changed to support absolute links properly
 
 module JekyllRelativeLinks
   class Context
@@ -59,6 +59,12 @@ module JekyllRelativeLinks
       @config = config
     end
 
+    def prepare_for_site(site)
+      @potential_targets = nil
+      @site = site
+      @context = context
+    end
+
     def generate(site)
       return if disabled?
 
@@ -88,10 +94,6 @@ module JekyllRelativeLinks
         path = path_from_root(link.path, url_base)
         url  = url_for_path(path)
 
-        # also try html and / mapped to md - useful if using a baseurl
-        url  = url_for_path(path.sub(%r!\.html!.freeze, ".md")) unless url
-        url  = url_for_path(path + "/index.md") unless url
-
         next original unless url
 
         link.path = url
@@ -103,7 +105,39 @@ module JekyllRelativeLinks
       raise e unless e.to_s.start_with?("invalid byte sequence in UTF-8")
     end
 
+    def url_for_path_absolute(path)
+      is_absolute = path.start_with? "/"
+
+      path = path.sub(%r!\A/!, "")
+      # puts "lookup #{path} / #{path.sub(%r!\.html!.freeze, ".md")}"
+      url = url_for_path_internal(path)
+      # also try html and / mapped to md - useful if using a baseurl
+      url = url_for_path_internal(path.sub(%r!\.html!.freeze, ".md")) unless url
+      url = url_for_path_internal(path.sub(%r!\.md!.freeze, ".html")) unless url
+      url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
+      url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.html") unless url
+      url = "/" + url if url && is_absolute && !url.start_with?("/")
+      url
+    end
+
     private
+
+    def url_for_path(path)
+      path.sub!(%r!\A/!, "")
+      # puts "lookup #{path} / #{path.sub(%r!\.html!.freeze, ".md")}"
+      url = url_for_path_internal(path)
+      # also try html and / mapped to md - useful if using a baseurl
+      url = url_for_path_internal(path.sub(%r!\.html!.freeze, ".md")) unless url
+      url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
+      url
+    end
+
+    def url_for_path_internal(path)
+      path = path.sub(%r!\A/!, "")
+      path = CGI.unescape(path)
+      target = potential_targets.find { |p| p.relative_path.sub(%r!\A/!, "") == path }
+      relative_url(target.url) if target&.url
+    end
 
     # Stores info on a Markdown Link (avoid rubocop's Metrics/ParameterLists warning)
     Link = Struct.new(:link_type, :text, :path, :fragment, :title)
@@ -128,12 +162,6 @@ module JekyllRelativeLinks
 
     def markdown_converter
       @markdown_converter ||= site.find_converter_instance(CONVERTER_CLASS)
-    end
-
-    def url_for_path(path)
-      path = CGI.unescape(path)
-      target = potential_targets.find { |p| p.relative_path.sub(%r!\A/!, "") == path }
-      relative_url(target.url) if target&.url
     end
 
     def potential_targets
