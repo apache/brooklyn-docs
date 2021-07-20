@@ -7,7 +7,7 @@ layout: website-normal
 {% include fields.md %}
 
 ## Introduction
-This section describes some simple tests based on the [Getting Started]({{ site.path.guide }}/start/blueprints.html#launching-from-a-blueprint) example blueprint:
+This section describes some simple tests based on the [Getting Started](/guide/start/blueprints.html#launching-from-a-blueprint) example blueprint:
 
 {% highlight yaml %}
 {% readj /guide/start/_my-web-cluster.yaml %}
@@ -53,6 +53,6 @@ Demonstrates the following HTTP Call assertions against the specified `url`, whi
 ### Full Example
 A sample blueprint containing all the tests described above is available [here](./example_yaml/testcases/getting-started-test-example.yaml).
 
-This blueprint will deploy the [Getting Started]({{ site.path.guide }}/start/blueprints.html#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
+This blueprint will deploy the [Getting Started](/guide/start/blueprints.html#launching-from-a-blueprint) application and run all of the test entities, which if successful should appear in the web console as follows.
 
 [![Successful Getting Started App deployment and Test execution.](images/getting-started-blueprint-test.png)](images/getting-started-blueprint-test-large.png)

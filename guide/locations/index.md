@@ -12,11 +12,11 @@ to a pre-provisioned network or to localhost (primarily useful for testing bluep
 
 See also:
 
-* The [Locations yaml guide]({{ site.path.guide }}/blueprints/setting-locations.html)
+* The [Locations yaml guide](/guide/blueprints/setting-locations.html)
 * Use within an entity of the configuration option 
-  [provisioning.properties]({{ site.path.guide }}/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
-* How to add location definitions to the [Catalog]({{ site.path.guide }}/blueprints/catalog/); and 
-* How to use [Externalized Configuration]({{ site.path.guide }}/ops/externalized-configuration.html).
+  [provisioning.properties](/guide/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
+* How to add location definitions to the [Catalog](/guide/blueprints/catalog/); and 
+* How to use [Externalized Configuration](/guide/ops/externalized-configuration.html).
 
 The requirements for how a provisioned machine should behave will depend on the
 entites subsequently deployed there.
@@ -176,18 +176,18 @@ Try executing:
 
     echo date > /tmp/brooklyn-test.sh && chmod +x /tmp/brooklyn-test.sh && /tmp/brooklyn-test.sh && rm /tmp/brooklyn-test.sh
 
-{% include '_clouds.md' %}
-{% include '_AWS.md' %}
-{% include '_azure-ARM.md' %}
-{% include '_azure-classic.md' %}
-{% include '_cloudstack.md' %}
-{% include '_GCE.md' %}
-{% include '_ibm-softlayer.md' %}
-{% include '_openstack.md' %}
-{% include '_inheritance-and-named-locations.md' %}
-{% include '_byon.md' %}
-{% include '_ssh-keys.md' %}
-{% include '_localhost.md' %}
-{% include '_location-customizers.md' %}
-{% include '_location-customizer-security-groups.md' %}
-{% include '_special-locations.md' %}
+{% include_relative _clouds.md %}
+{% include_relative _AWS.md %}
+{% include_relative _azure-ARM.md %}
+{% include_relative _azure-classic.md %}
+{% include_relative _cloudstack.md %}
+{% include_relative _GCE.md %}
+{% include_relative _ibm-softlayer.md %}
+{% include_relative _openstack.md %}
+{% include_relative _inheritance-and-named-locations.md %}
+{% include_relative _byon.md %}
+{% include_relative _ssh-keys.md %}
+{% include_relative _localhost.md %}
+{% include_relative _location-customizers.md %}
+{% include_relative _location-customizer-security-groups.md %}
+{% include_relative _special-locations.md %}

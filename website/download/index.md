@@ -120,7 +120,7 @@ contribute code changes to Apache Brooklyn, we recommend you get the source code
 </div><!-- col -->
 </div><!-- row -->
 
-A full list of download links including Maven coordinates are [here]({{ site.path.guide }}/misc/download.html).
+A full list of download links including Maven coordinates are [here](/guide/misc/download.html).
 <br/><br/>
 
 ## What Next?
@@ -151,7 +151,7 @@ A full list of download links including Maven coordinates are [here]({{ site.pat
 Take a look at our guide to getting started.
 
 <div class="text-center">
-  <a class="btn btn-primary" href="{{ site.path.guide }}/start/running.html" role="button">Get Started!</a>
+  <a class="btn btn-primary" href="/guide/start/running.html" role="button">Get Started!</a>
 </div>
 
 </div>

@@ -17,7 +17,7 @@ is assumed in this example
 
 ### Launching
 To start, download and install the latest Apache Brooklyn release on both VMs following the instructions in
-[Running Apache Brooklyn]({{ site.path.guide }}/start/running.html)
+[Running Apache Brooklyn](/guide/start/running.html)
 
 On the first VM, which will be the master node, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):
 
@@ -31,7 +31,7 @@ Then launch Brooklyn with:
 $ bin/start
 {% endhighlight %}
 
-If you are using RPMs/deb to install, please see the [Running Apache Brooklyn]({{ site.path.guide }}/start/running.html) 
+If you are using RPMs/deb to install, please see the [Running Apache Brooklyn](/guide/start/running.html) 
 documentation for the appropriate launch commands
 
 Once Brooklyn has launched, on the second VM, set the following configuration options in [`org.apache.brooklyn.osgilauncher.cfg`](../paths.html):

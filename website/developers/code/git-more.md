@@ -101,7 +101,7 @@ Open the PRs in dependency order and assist reviewers by including the URLs of a
 in the dependent PR to help reviewers 
 (dependency PRs will then include a "mention" comment of the dependent PR).
 
-For information on reviewing and committing PRs, see [the committer's guide]({{site.path.website}}/developers/committers/merging-contributed-code.html).
+For information on reviewing and committing PRs, see [the committer's guide](/website/developers/committers/merging-contributed-code.md).
 
 
 ## How We Use Branches

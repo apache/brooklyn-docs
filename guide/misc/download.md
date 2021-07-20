@@ -6,7 +6,7 @@ title: Downloads
 
 {% if site.brooklyn.is_snapshot %}
 **The downloads on this page have not been voted on and should be used at your own risk.
-The latest stable release can be accessed on the [main download page]({{ site.path.website }}/download/).**
+The latest stable release can be accessed on the [main download page](/website/download/).**
 {% endif %}
 
 
@@ -16,7 +16,7 @@ The latest stable release can be accessed on the [main download page]({{ site.pa
   <tr>
 	<th style='text-align:left'>Download</th>
 	<th style='text-align:left'>File/Format</th>
-	<th>checksums <small><a href="{{ site.path.website }}/download/verify.html" title='Instructions on verifying the integrity of your downloads.{% if site.brooklyn.is_snapshot %} May not be available for SNAPSHOT artifacts.{% endif %}'>(?)</a></small></th>
+	<th>checksums <small><a href="/website/download/verify.html" title='Instructions on verifying the integrity of your downloads.{% if site.brooklyn.is_snapshot %} May not be available for SNAPSHOT artifacts.{% endif %}'>(?)</a></small></th>
   </tr>
   <tr>
 	<td style='text-align:left;vertical-align:top' rowspan='2'>Binary distribution<br />Server &amp; client</td>
@@ -100,7 +100,7 @@ The latest stable release can be accessed on the [main download page]({{ site.pa
 
 ## Release Notes
 
-Release notes can be found [here]({{ site.path.guide }}/misc/release-notes.html).
+Release notes can be found [here](/guide/misc/release-notes.html).
 
 {% comment %}
 TODO
@@ -110,7 +110,7 @@ TODO
 
 Examples can be found in the main Brooklyn codebase, in the `/examples` directory.
 
-A good example to start with is the [Elastic Web Cluster]({{site.path.guide}}/use/examples/webcluster.html).
+A good example to start with is the [Elastic Web Cluster](/guide/use/examples/webcluster.html).
 
 {% endcomment %}
 
@@ -169,4 +169,4 @@ with this version in branch [{{ site.brooklyn.git_branch }}]({{ site.brooklyn.ur
 These locations have a `README.md` in the root which explains how to get the code including
 submodules.
 
-Useful information on working with the source is [here]({{ site.path.guide }}/dev/code).
+Useful information on working with the source is [here](/guide/dev/code).

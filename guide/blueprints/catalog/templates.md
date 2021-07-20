@@ -77,3 +77,13 @@ brooklyn.catalog:
 
 [![Quick Launch Template Example](quick-launch-template-w700.png "Quick Launch Template Example")](quick-launch-template.png) 
 
+
+### Editing from Catalog and from Templates
+
+Only bundles created by uploading to the catalog a single BOM fle containing a single entity -- eg `br catalog add my.bom` or added from the Composer -- are able to be edited directly from the Catalog.  When a ZIP/JAR/directory is uploaded to the catalog, the type it contains are not editable via the UI.  This is because the UI does not support editing multiple files and a folder structure, and to prevent confusion where items from a multi-type bundle (an archive, eg `br catalog add my.zip`) are edited and subsequently saved back as a new, different single-type BOM-based bundle.
+
+It is of course possible to copy the source code of a type to the composer (from a source control project or from the Catalog), edit it in the composer, edit it in your source control project, and then create and upload a new bundle.
+
+It is supported standard practice for items labeled as "templates", to be opened in the Composer via the Quick Launch, edited, and saved back as a new item (new name and bundle); this is creating a new type from an existing template, rather than attempting to update the template in situ, so does not expose users to the confusion of the same type in multiple bundles.
+
+

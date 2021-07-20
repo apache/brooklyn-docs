@@ -20,7 +20,7 @@ defining types:
 
 * `com.acme.brooklyn.package.JavaEntityClass`
 * `java:com.acme.brooklyn.package.JavaEntityClass`
-* `java-entity-class` (where this has been added to the [catalog]({{ site.path.guide }}/blueprints/catalog/))
+* `java-entity-class` (where this has been added to the [catalog](/guide/blueprints/catalog/))
 
 A reference of some of the common service `type` instances used is included in a section below.
 
@@ -102,7 +102,7 @@ the entity being defined, with these being the most common:
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
     (unless an ancestor sets false; config keys from Java types are _not_ pinned)
   * `constraints`: a list of constraints the parameter should meet;
-    for details, see [Entity Configuration]({{ site.path.guide }}/blueprints/entity-configuration.html#config-key-constraints).
+    for details, see [Entity Configuration](/guide/blueprints/entity-configuration.html#config-key-constraints).
 
   A shorthand notation is also supported where just the name of the parameter can be supplied
   as an item in the list, with the other values being unset or the default.
@@ -281,3 +281,44 @@ elements for more information:
 * `DynamicCluster`: provides resizable clusters given a `dynamiccluster.memberspec` set with `$brooklyn.entitySpec(Map)` as described above 
 * `DynamicFabric`: provides a set of homogeneous instances started in different locations,
   with an effector to `addLocation`, i.e. add a new instance in a given location, at runtime
+
+## Notable Tags
+
+Some tags are used by convention and in the UI for special purposes.
+These are:
+
+* `ui-composer-annotation`: text (interpreted as markdown without HTML support) which will be displayed on a node in the Blueprint Composer,
+  or a map containing a key with the `text` and optionally any/all of `{x, y, width, height, background, style, styleInnerDiv}` for displaying it.
+  The display of these can be toggled in the Blueprint Composer by selecting "Layers > Annotations".
+  This is illustrated in the following blueprint:
+
+  ~~~ yaml
+  name: Annotation Sample
+  services:
+  - type: server
+    brooklyn.tags:
+      - ui-composer-annotation: A simple default annotation
+      - ui-composer-annotation:
+          text: >-
+            Shown below, yellow text, centered with CSS. Because it's long, scroll bars horizontally and vertically shown when
+            needed.
+          styleInnerDiv: 'margin: auto; color: yellow;'
+          y: 120
+  - type: server
+    brooklyn.tags:
+      - ui-composer-annotation:
+          text: |
+            ## Big Example
+            A **red** tag at _right_, using markdown, in a big box.
+          width: 300
+          height: 200
+          x: 220
+          y: 0
+          background: '#ffcccc'
+          style: 'font-size: 9px;'
+  ~~~
+
+* `ui-composer-hints`: a collection of tags typically on an entity definitiion providing hints to composers,
+  including `config-widgets` (setting custom widgets to render fields) and `config-quick-fixes` (proposals for fixing common errors);
+  see the code for the Blueprint Composer for more details
+

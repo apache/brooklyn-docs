@@ -8,10 +8,9 @@ usage:
 
 
 {% endcomment %}{% if include.project_subpath %}<code>{{ include.class_name }}</code>
-  ({% comment %}<a href="{{ site.path.guide }}/misc/javadoc/{{ include.package_path }}/{{ include.class_name }}.html">javadoc</a>, 
+  ({% comment %}<a href="/guide/misc/javadoc/{{ include.package_path }}/{{ include.class_name }}.html">javadoc</a>,
   {% endcomment %}<a href="{{ site.brooklyn.url.git }}/{{ include.project_subpath }}/src/main/java/{{ include.package_path }}/{{ include.class_name }}.java">src</a>){% comment %}
-{% endcomment %}{% else %}<a href="{{ site.path.guide }}/misc/javadoc/{{ include.package_path }}/{{ include.class_name }}.html">
-<code>{{ include.class_name }}</code></a>
+{% endcomment %}{% else %}<span markdown="1">(<code>{{ include.class_name }}</code>)[/guide/misc/javadoc/{{ include.package_path }}/{{ include.class_name }}.html]</span>
 {% endif %}{% comment %}
 
 must NOT have a newline at the end here, as the include is often done inline

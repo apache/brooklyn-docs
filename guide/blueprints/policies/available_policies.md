@@ -1,5 +1,5 @@
 ---
-title: Policies
+title: Off-the-Shelf Policies
 layout: website-normal
 ---
 
@@ -90,7 +90,7 @@ The ConnectionFailureDetector is an HA policy for monitoring an HTTP connection,
 
 ### Primary Election / Failover Policies
 
-{% include '_elect-primary-policies.md' %}
+{% include_relative _elect-primary-policies.md %}
 
 
 ### Optimization Policies

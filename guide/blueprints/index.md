@@ -8,10 +8,11 @@ children:
 - configuring-vms.md
 - multiple-services.md
 - custom-entities.md
+- config-files.md
 - catalog/
 - clusters.md
 - enrichers.md
-- policies.md
+- policies/
 - effectors.md
 - clusters-and-policies.md
 - java/

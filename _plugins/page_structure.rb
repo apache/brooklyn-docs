@@ -213,7 +213,8 @@ module PageStructureUtils
 
         # render the included content with the current page renderer
         info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => page } }
-        page.render_liquid($content, site.site_payload, info)
+        path_for_cache = "include_page-#{context['page']}"
+        page.render_liquid($content, site.site_payload, info, path_for_cache)
       end
     end
 end

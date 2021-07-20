@@ -15,7 +15,8 @@ children:
 - logging.md
 - externalized-configuration.md
 - requirements.md
-- upgrade.md
+- paths.md
+- upgrades/
 - security-guidelines.md
 - troubleshooting/
 ---

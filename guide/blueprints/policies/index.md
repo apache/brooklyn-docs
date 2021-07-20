@@ -2,6 +2,9 @@
 title: Policies
 partial-summary-depth: 1
 layout: website-normal
+children:
+- available_policies.md
+- writing_policies.md
 ---
 
 Policies perform the active management enabled by Brooklyn.
@@ -19,4 +22,6 @@ Common uses of a policy include the following:
 * cause the entity associated with the policy to emit sensor values (enricher policies).
 
 Entities can have zero or more `Policy` instances attached to them.
+
+{% include list-children.html %}
 

@@ -1,7 +1,7 @@
 # tag to write the correct URL depending whether we are running with dependencies local (for offline) or remote (eg using a CDN)
 
 # specify a map of <basename>: <remote_url> in the key `dependency_urls` in your `_config.yml`,
-# then, if `dependency_mode: local` is defined, the path `{{site.path.style}}/deps/<basename>` will be used,
+# then, if `dependency_mode: local` is defined, the path `{{site.path.style | relative_url}}/deps/<basename>` will be used,
 # otherwise the <remote_url> will be used
 
 module JekyllDependencyUrl
@@ -20,7 +20,7 @@ module JekyllDependencyUrl
           end
         end
         if result.to_s == ''
-          result = context['site']['path']['style'] + "/deps/" + @text.strip
+          result = context['site']['baseurl'] + context['site']['path']['style'] + "/deps/" + @text.strip
         end
         return result
     end
