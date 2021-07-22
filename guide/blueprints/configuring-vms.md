@@ -8,7 +8,7 @@ categories: [use, guide, defining-applications]
 Another simple blueprint will just create a VM which you can use, without any software installed upon it:
 
 {% highlight yaml %}
-{% readj example_yaml/simple-vm.yaml %}
+{% read example_yaml/simple-vm.yaml %}
 {% endhighlight %}
 
 

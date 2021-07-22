@@ -20,7 +20,7 @@ The following blueprint shows how a simple script can be embedded in the YAML
 (the `|` character is special YAML which makes it easier to insert multi-line text):
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat.yaml %}
+{% read example_yaml/vanilla-bash-netcat.yaml %}
 {% endhighlight %}
 
 This starts a simple `nc` listener on port 4321 which will respond `hello` to the first
@@ -50,7 +50,7 @@ which contains the line `echo hello | nc -l 4321`,
 we can instead write our example as: 
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-file.yaml %}
+{% read example_yaml/vanilla-bash-netcat-file.yaml %}
 {% endhighlight %}
 
 
@@ -74,7 +74,7 @@ as documented on the javadoc and config keys of the
 and those scripts will be used instead of checking and stopping the process whose PID is in `$PID_FILE`. For example:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-more-commands.yaml %}
+{% read example_yaml/vanilla-bash-netcat-more-commands.yaml %}
 {% endhighlight %}
 
 
@@ -97,7 +97,7 @@ however a more idiomatic way is to specify a config ending with `.port`,
 such as:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-port.yaml %}
+{% read example_yaml/vanilla-bash-netcat-port.yaml %}
 {% endhighlight %}
 
 The regex for ports to be opened can be configured using
@@ -127,7 +127,7 @@ Blueprint scripts can be parametrised through environment variables, making them
 Define the variables in the `env` block and then reference them using the standard bash notation:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-env.yaml %}
+{% read example_yaml/vanilla-bash-netcat-env.yaml %}
 {% endhighlight %}
 
 Non-string objects in the `env` map will be serialized to JSON before passing them to the script.
@@ -139,7 +139,7 @@ We can define config keys to be presented to the user
 using the `brooklyn.parameters` block:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-port-parameter.yaml %}
+{% read example_yaml/vanilla-bash-netcat-port-parameter.yaml %}
 {% endhighlight %}
 
 The example above will allow a user to specify a message to send back
@@ -167,7 +167,7 @@ The *Catalog* component allows you to add blueprints which you can refer to in o
 In that tab, click *+* then *YAML*, and enter the following:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-catalog.bom %}
+{% read example_yaml/vanilla-bash-netcat-catalog.bom %}
 {% endhighlight %}
 
 This is the same example as in the previous section, wrapped according to the catalog YAML requirements,
@@ -179,7 +179,7 @@ With this added to the catalog, we can reference the type `netcat-example` when 
 Return to the *Home* or *Applications* tab, click *+*, and submit this YAML blueprint:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-reference.yaml %}
+{% read example_yaml/vanilla-bash-netcat-reference.yaml %}
 {% endhighlight %}
 
 This extends the previous blueprint which we registered in the catalog,
@@ -191,7 +191,7 @@ We can go further and use this to deploy a cluster,
 this time giving a custom port as well as a custom message: 
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-cluster.yaml %}
+{% read example_yaml/vanilla-bash-netcat-cluster.yaml %}
 {% endhighlight %}
 
 In either of the above examples, if you explore the tree in the *Applications* view
@@ -207,7 +207,7 @@ Besides detecting this failure, Brooklyn policies can be added to the YAML to ta
 action. A simple recovery here might be just to restart the process automatically:
 
 {% highlight yaml %}
-{% readj example_yaml/vanilla-bash-netcat-restarter.yaml %}
+{% read example_yaml/vanilla-bash-netcat-restarter.yaml %}
 {% endhighlight %}
 
 Autonomic management in Brooklyn often follows the principle that complex behaviours emerge

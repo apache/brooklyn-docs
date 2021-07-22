@@ -6,7 +6,7 @@ toc: /guide/toc.json
 
 We currently have the following examples on the site:
 
-{% capture ltocs %}{% readj toc.json %}{% endcapture %}
+{% capture ltocs %}{% read_jekyll toc.json %}{% endcapture %}
 {% jsonball ltoc from var ltocs %}
 
 {% for x in ltoc %}

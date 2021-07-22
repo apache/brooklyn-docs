@@ -4,4 +4,4 @@ title: Cassandra Clusters
 toc: /guide/toc.json
 ---
 
-{% readj cassandra.include.md %}
+{% read cassandra.include.md %}

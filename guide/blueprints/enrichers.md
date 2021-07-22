@@ -15,7 +15,7 @@ See below for documentation of the stock enrichers available in Apache Brooklyn.
 Takes a source sensor and modifies it in some way before publishing the result in a new sensor. See below an example using `$brooklyn:formatString`.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-transformer.yaml %}
+{% read example_yaml/enricher-transformer.yaml %}
 {% endhighlight %}
 
 #### Propagator
@@ -27,7 +27,7 @@ The other use of Propagator is where you specify a producer (using `$brooklyn:en
 from which to take sensors; in that mode you can specify `propagate` as a list of sensors whose names are unchanged, instead of (or in addition to) this map.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-propagator.yaml %}
+{% read example_yaml/enricher-propagator.yaml %}
 {% endhighlight %}
 
 #### Custom Aggregating
@@ -37,7 +37,7 @@ from which to take sensors; in that mode you can specify `propagate` as a list o
 Aggregates multiple sensor values (usually across a tier, esp. a cluster) and performs a supplied aggregation method to them to return an aggregate figure, e.g. sum, mean, median, etc.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-aggregator.yaml %}
+{% read example_yaml/enricher-aggregator.yaml %}
 {% endhighlight %}
 
 There are a number of additional configuration keys available for the Aggregators:
@@ -55,7 +55,7 @@ There are a number of additional configuration keys available for the Aggregator
 Joins a sensor whose output is a list into a single item joined by a separator.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-joiner.yaml %}
+{% read example_yaml/enricher-joiner.yaml %}
 {% endhighlight %}
 
 There are a number of additional configuration keys available for the joiner:
@@ -82,7 +82,7 @@ Converts an absolute sensor into a delta sensor (i.e. the difference between the
 Converts absolute sensor values into a difference over time. The `enricher.delta.period` indicates the measurement interval.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-time-weighted-delta.yaml %}
+{% read example_yaml/enricher-time-weighted-delta.yaml %}
 {% endhighlight %}
 
 ####	Rolling Mean
@@ -131,7 +131,7 @@ is actually a sensor on a different entity called `load.balancer`. In this case,
 `enricher.producer` value.
 
 {% highlight yaml %}
-{% readj example_yaml/enricher-transformer.yaml %}
+{% read example_yaml/enricher-transformer.yaml %}
 {% endhighlight %}
 
 It is important to note that the value supplied to `enricher.producer` must be immediately resolvable. While it would be valid

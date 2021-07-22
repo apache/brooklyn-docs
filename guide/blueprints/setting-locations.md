@@ -17,7 +17,7 @@ for details and more examples.
 The following example is for Amazon EC2:
 
 {% highlight yaml %}
-{% readj example_yaml/simple-appserver-with-location.yaml %}
+{% read example_yaml/simple-appserver-with-location.yaml %}
 {% endhighlight %}
 
 (You'll need to replace the `identity` and `credential` with the 
@@ -37,7 +37,7 @@ The example below shows a pool of machines that will be used by the entities wit
 application.
 
 {% highlight yaml %}
-{% readj example_yaml/simple-appserver-with-location-byon.yaml %}
+{% read example_yaml/simple-appserver-with-location-byon.yaml %}
 {% endhighlight %}
 
 
@@ -72,7 +72,7 @@ The example below will deploy Tomcat and JBoss App Server to different Bring You
 locations:
 
 {% highlight yaml %}
-{% readj example_yaml/simple-appserver-with-location-per-entity.yaml %}
+{% read example_yaml/simple-appserver-with-location-per-entity.yaml %}
 {% endhighlight %}
 
 The rules for precedence when defining a location for an entity are:
@@ -96,7 +96,7 @@ used for each `DynamicCluster`; all app-servers inside that cluster will obtain 
 that given location.
 
 {% highlight yaml %}
-{% readj example_yaml/fabric-with-multiple-locations.yaml %}
+{% read example_yaml/fabric-with-multiple-locations.yaml %}
 {% endhighlight %}
 
 The entity hierarchy at runtime will have a `DynamicFabric` with two children, each of type 

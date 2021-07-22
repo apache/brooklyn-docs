@@ -15,7 +15,7 @@ example](/guide/start/policies.html), but also includes the MySQL database
 to demonstrate the use of dependent configuration.
 
 {% highlight java %}
-{% readj java_app/ExampleWebApp.java %}
+{% read java_app/ExampleWebApp.java %}
 {% endhighlight %}
 
 To describe each part of this:
