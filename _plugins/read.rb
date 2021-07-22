@@ -21,7 +21,7 @@
 # (like include, but in the dir where it is invoked)
 
 # there is also readj which reads a file and applies jekyll processing to it
-# handy if we want to include a toc.json file which itself calls {% readj child/toc.json %}
+# handy if we want to include a toc.json file which itself calls {% read_jekyll child/toc.json %}
 # (note however variables do not seem to be exported when use readj (TODO),
 # although they are exported if you have _includes/file.md and use the standard include file)
 
@@ -35,47 +35,73 @@ module JekyllRead
     def initialize(tag_name, text, tokens)
       super
       @text = text
+      @mode = :auto
     end
-    def render(context)
-      filename = @text.strip
-      filename = context[filename] || filename
 
+    def load_file(context, filename, context_page)
       # Pathname API ignores first arg below if second is absolute
-      file = Pathname.new(File.dirname(context['page']['path'])) + filename
+      file = Pathname.new(File.dirname(context_page['path'])) + filename
       file = file.cleanpath
+
       # is there a better way to trim a leading / ?
       file = file.relative_path_from(Pathname.new("/")) unless file.relative?
       raise "No such file #{file} in read call (from #{context['page']['path']})" unless file.exist?
+      file
+    end
+
+    def render_jekyll(context, filename)
+      file = load_file(context, filename, context['page'] || context.registers[:page])
+
+      # support vars and paths relative to a file being readj'd
+      jekyllSite = context.registers[:site]
+      targetPage = Jekyll::Page.new(jekyllSite, jekyllSite.source, File.dirname(file), File.basename(file))
+      targetPage.render(jekyllSite.layouts, jekyllSite.site_payload)
+      targetPage.output
+    end
+
+    def render_literal(context, filename)
+      file = load_file(context, filename, context['page'])
 
       file = File.open(file, "rb")
       return file.read
     end
-  end
 
-  class ReadjTag < Liquid::Tag
-    def initialize(tag_name, text, tokens)
-      super
-      @text = text
-    end
     def render(context)
       filename = @text.strip
-      filename = context[filename] || filename
-      # Pathname API ignores first arg below if second is absolute
-      page = context['page'] || context.registers[:page]
-      file = Pathname.new(File.dirname(page['path'])) + filename
-      file = file.cleanpath
-      # is there a better way to trim a leading / ?
-      file = file.relative_path_from(Pathname.new("/")) unless file.relative?
-      raise "No such file #{file} in readj call (from #{context['page']['path']})" unless file.exist?
+      context[filename] || filename
 
-      # with readj we support vars and paths relative to a file being readj'd
-      jekyllSite = context.registers[:site]
-      targetPage = Jekyll::Page.new(jekyllSite, jekyllSite.source, File.dirname(file), File.basename(file))
-      targetPage.render(jekyllSite.layouts, jekyllSite.site_payload)
-      return targetPage.output
+      mode = @mode
+      if (mode == :auto)
+        mode = filename.end_with?(".md") ? :jekyll : :literal
+      end
+      if (mode == :jekyll)
+        render_jekyll(context, filename)
+      elsif (mode == :literal)
+        render_literal(context, filename)
+      else
+        raise "Unknown mode #{mode}"
+      end
+
+    end
+  end
+
+  class ReadJekyllTag < ReadTag
+    def initialize(tag_name, text, tokens)
+      super
+      @mode = :jekyll
+    end
+  end
+  class ReadLiteralTag < ReadTag
+    def initialize(tag_name, text, tokens)
+      super
+      @mode = :literal
     end
   end
 end
 
 Liquid::Template.register_tag('read', JekyllRead::ReadTag)
-Liquid::Template.register_tag('readj', JekyllRead::ReadjTag)
+Liquid::Template.register_tag('read_jekyll', JekyllRead::ReadJekyllTag)
+Liquid::Template.register_tag('read_literal', JekyllRead::ReadLiteralTag)
+
+# for compatibility with old markdown
+Liquid::Template.register_tag('readj', JekyllRead::ReadJekyllTag)

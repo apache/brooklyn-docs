@@ -285,6 +285,14 @@ We use some custom Jekyll plugins, in the `_plugins` dir:
 
 * include markdown files inside other files (see, for example, the `*.include.md` files 
   which contain text which is used in multiple other files)
+  * `read_jekyll` will read a file and jekyll-process it (eg for nested `{% ... readj ` calls;
+    it's just like `include_relative` but with two differences: when `readj` is used
+    nested `read_jekyll` calls are relative to the included file where it is contained,
+    rather than relative to the root md file which made the first `read_jekyll` call
+    (so in general it's more intuitive than `include_relative`),
+    and `include_relative` processes front matter whereas `read_jekyll` mangles it
+  * `read_literal` is like `read_jekyll` but without the jekyll/tag processing
+  * `read` will autodetect based on filename -- jekyll for `*.md` and literal for all others
 * generate the site structure / menu objects
 * parse JSON which we can loop over in our markdown docs (to build up models; previously used
   for the TOC in the guide, but now replaced with site_structure)
