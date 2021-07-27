@@ -101,3 +101,26 @@ For other artifacts, users should consider hosting these artifacts in their own 
 configuring Brooklyn to use this. See the documentation for 
 `org.apache.brooklyn.core.entity.drivers.downloads.DownloadProducerFromProperties`.
 
+## Controlling Sensitive Information in the Logs
+
+By default, Brooklyn does not log any data considered sensitive. Blueprints added to the catalog or deployed are scanned 
+for information that could be considered sensitive. Any blueprint containing any of the following is considered to 
+possibly be containing sensitive data:
+
+- "password"
+- "passwd" 
+- "credential"
+- "secret"
+- "private"
+- "access.cert"
+- "access.key
+
+If sensitive information is found, all log entries related to the blueprint are written with the TRACE log level. 
+Since there is no configuration for this level, data is not saved in the Brooklyn standard log files. 
+
+For in-depth advanced investigations purposes, a commented sample configuration for enabling TRACE logging is available in 
+the `org.ops4j.pax.logging.cfg` logging configuration file. With the trace configuration enabled, all TRACE log entries 
+are written to the `brooklyn.trace.log` file.
+
+As a general rule, avoid or minimize writing sensitive data in clear text in blueprints. For bundles that contain Java 
+types, use TRACE logging for sensitive information. 
