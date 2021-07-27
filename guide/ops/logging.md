@@ -80,7 +80,7 @@ which can then [feed its logs to Logstash](http://www.logstash.net/docs/1.4.2/in
 
 ## Logbook
 
-The logbook offers the possibility to query and view logs in the UI. By default, logs stored in files as per configuration
+The logbook offers the possibility to query and view logs in the UI. By default, logs are stored in files as per configuration
 in `etc/org.ops4j.pax.logging.cfg`. The logbook can be configured against different log aggregation sources by adding the
 following parameters in `brooklyn.cfg`:
 
@@ -105,7 +105,7 @@ Activity view where logs filtered by entity ID and activity ID respectively.
 
 ### Elasticsearch setup
 
-Refer the [official documentation](https://opendistro.github.io/for-elasticsearch/downloads.html#try) for
+Refer to the [official documentation](https://opendistro.github.io/for-elasticsearch/downloads.html#try) for
  installation guide. [Fluentd](https://www.fluentd.org/download) daemon can be configured to read the log files
 for Elasticsearch. See example of Fluentd `td-agent.conf` below:
 
