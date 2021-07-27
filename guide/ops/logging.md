@@ -10,9 +10,10 @@ The convention for log levels is as follows:
 
 * `ERROR` and above:  exceptional situations which indicate that something has unexpectedly failed or
 some other problem has occurred which the user is expected to attend to
-* `WARN`:  exceptional situations which the user may which to know about but which do not necessarily indicate failure or require a response
-* `INFO`:  a synopsis of activity, but which should not generate large volumes of events nor overwhelm a human observer
-* `DEBUG` and lower:  detail of activity which is not normally of interest, but which might merit closer inspection under certain circumstances.
+* `WARN`:  exceptional situations which the user may which to know about but which do not necessarily indicate failure or require a response.
+* `INFO`:  a synopsis of activity, but which should not generate large volumes of events nor overwhelm a human observer.
+* `DEBUG`:  detail of activity which might merit closer inspection under certain circumstances.
+* `TRACE` and lower: detail of activity which is not normally of interest, but which might merit closer inspection under certain circumstances including sensitive information (e.g. secrets) that should not be exposed in higher lover levels. A configuration example for TRACE level is present in the log configuration file, but is commented because of security concerns.  
 
 Loggers follow the ``package.ClassName`` naming standard.  
 
