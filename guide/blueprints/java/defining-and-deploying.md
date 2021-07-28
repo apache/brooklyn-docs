@@ -40,7 +40,7 @@ configuration options, sensors, and effectors). The code below assumes you have 
 in the package `com.acme` for `src/main/java`.
 
 {% highlight java %}
-{% readj gist_generator/GistGenerator.java %}
+{% read gist_generator/GistGenerator.java %}
 {% endhighlight %}
 
 To describe each part of this:
@@ -64,7 +64,7 @@ discussed in the section [Dynamically Added Effectors](common-usage.html#dynamic
 Next lets add the implementation. Create a new Java class named `GistGeneratorImpl`.
 
 {% highlight java %}
-{% readj gist_generator/GistGeneratorImpl.java %}
+{% read gist_generator/GistGeneratorImpl.java %}
 {% endhighlight %}
 
 To describe each part of this:
@@ -110,7 +110,7 @@ You will need to substitute the github access token you generated in the previou
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`.
 
 {% highlight java %}
-{% readj gist_generator/GistGeneratorTest.java %}
+{% read gist_generator/GistGeneratorTest.java %}
 {% endhighlight %}
 
 Similarly, we can write a test that uses the `GistGenerator` from a YAML blueprint. 
@@ -123,7 +123,7 @@ the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section
 for how to store these credentials more securely. 
 
 {% highlight java %}
-{% readj gist_generator/GistGeneratorYamlTest.java %}
+{% read gist_generator/GistGeneratorYamlTest.java %}
 {% endhighlight %}
 
 
@@ -146,7 +146,7 @@ to add our `GistGenerator` to the catalog. Substitute the URL below for your own
 artifact (which will be in the `target` sub-directory after running `mvn clean install`).
 
 {% highlight yaml %}
-{% readj gist_generator/gist_generator.bom %}
+{% read gist_generator/gist_generator.bom %}
 {% endhighlight %}
 
 See [Handling Bundle Dependencies](/guide/blueprints/java/bundle-dependencies.html)

@@ -25,7 +25,7 @@ working with the Brooklyn project. Optionally you can install the
 Groovy and TestNG plugins, but they are not required for building the project.
 You can install these using Help -> Install New Software, or from the Eclipse Marketplace:
 
-{% readj eclipse.include.md %}
+{% read eclipse.include.md %}
 
 As of this writing, Eclipse 4.5 and Eclipse 4.4 are commonly used,
 and the codebase can be imported (Import -> Existing Maven Projects)

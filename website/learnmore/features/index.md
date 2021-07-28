@@ -10,9 +10,9 @@ children:
 
 <div class="feature-list">
 
-{% readj blueprinting.md %}
-{% readj policy-based-mgmt.md %}
-{% readj operations.md %}
-{% readj java.md %}
+{% read blueprinting.md %}
+{% read policy-based-mgmt.md %}
+{% read operations.md %}
+{% read java.md %}
 
 </div>

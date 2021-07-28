@@ -52,7 +52,7 @@ It is then started in a localhost location (other locations are shown in the nex
 The Tomcat's configuration indicates that the given WAR should be deployed to the Tomcat server when it is started.
 
 {% highlight java %}
-{% readj example_files/tomcat_simple.java %}
+{% read example_files/tomcat_simple.java %}
 {% endhighlight %}
 
 The ``wars`` config is also supported (with config keys ``ROOT_WAR`` and ``NAMED_WARS`` the long-hand syntax);
@@ -78,7 +78,7 @@ brooklyn launch --app TomcatServerApp --location aws-ec2:eu-west-1
 The code below starts a Tomcat cluster along with an Nginx instance, where each Tomcat server in the cluster is registered with the Nginx instance.
 
 {% highlight java %}
-{% readj example_files/tomcat_nginx.java %}
+{% read example_files/tomcat_nginx.java %}
 {% endhighlight %}
 
 This creates a cluster that of Tomcat servers, along with an Nginx instance. The ``NginxController`` instance
@@ -106,7 +106,7 @@ The ``ControlledDynamicWebAppCluster`` entity used above can also be used with a
 a web-cluster in each location.
 
 {% highlight java %}
-{% readj example_files/tomcat_multi-location.java %}
+{% read example_files/tomcat_multi-location.java %}
 {% endhighlight %}
 
 

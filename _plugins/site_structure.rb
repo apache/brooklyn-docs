@@ -368,7 +368,7 @@ module SiteStructure
                 sub['menu'].compact!
               end
             end
-            data['menu'] << sub
+            data['menu'] << sub unless @config['exclude'] && @config['exclude'].any? { |ex| File.fnmatch?(ex, sub['url']) }
             puts "sub is #{sub['url']}" if @@verbose
           else
             raise "could not find #{child} in #{page.path}"

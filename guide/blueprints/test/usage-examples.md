@@ -10,7 +10,7 @@ layout: website-normal
 This section describes some simple tests based on the [Getting Started](/guide/start/blueprints.html#launching-from-a-blueprint) example blueprint:
 
 {% highlight yaml %}
-{% readj /guide/start/_my-web-cluster.yaml %}
+{% read /guide/start/_my-web-cluster.yaml %}
 {% endhighlight %}
 
 The following sections contain yaml snippets that be appended to the list of services in the blueprint above, a complete blueprint is also provided [below](#full-example).
@@ -37,7 +37,7 @@ This `TestEffector` example demonstrates the use of the `TestCase` and `TestSens
   - asserts `/newcontext` URL returns a HTTP status code 200 within 5 minutes of the effector being invoked (Note that this timeout is relative to the preceding test entity as they are being sequentially run as children of a `TestCase` entity).
 
 {% highlight yaml %}
-{% readj example_yaml/testcases/effector-test-snippet.yaml %}
+{% read example_yaml/testcases/effector-test-snippet.yaml %}
 {% endhighlight %}
 
 ### HTTP Call Tests
@@ -47,7 +47,7 @@ Demonstrates the following HTTP Call assertions against the specified `url`, whi
 - asserts the response body matches the regex `(?s).*Br[o]{2}klyn Deployed.*` within 10 minutes of the blueprint being deployed. Note the presence of the `(?s)` dotall flag to test a multiline response.
 
 {% highlight yaml %}
-{% readj example_yaml/testcases/http-test-snippet.yaml %}
+{% read example_yaml/testcases/http-test-snippet.yaml %}
 {% endhighlight %}
 
 ### Full Example

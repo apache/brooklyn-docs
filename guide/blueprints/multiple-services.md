@@ -13,7 +13,7 @@ services can be configured, composed, and combined.
 We'll begin by using more key-value pairs to configure the JBoss server to run a real app:
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-configured.yaml %}
+{% read example_yaml/appserver-configured.yaml %}
 {% endhighlight %}
 
 (As before, you'll need to add the `location` info; `localhost` will work for these and subsequent examples.)
@@ -33,7 +33,7 @@ you'll have noticed it tries to access a database.
 And it fails, because we have not set one up.  Let's do that now:
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-w-db.yaml %}
+{% read example_yaml/appserver-w-db.yaml %}
 {% endhighlight %}
 
 Here there are a few things going on:
@@ -81,7 +81,7 @@ in superclasses and are portable across multiple implementations.
 Here's an example deploying the same application but with different flavors of the components:
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-w-db-other-flavor.yaml %}
+{% read example_yaml/appserver-w-db-other-flavor.yaml %}
 {% endhighlight %}
 
 By changing two lines we've switched from JBoss and MySQL to Tomcat and MariaDB.

@@ -10,7 +10,7 @@ these examples we will use the Apache [Qpid](http://qpid.apache.org/)
 Java AMQP message broker and clients using the
 [JMS](http://docs.oracle.com/javaee/6/tutorial/doc/bnceh.html) API.
 
-{% readj ../before-begin.include.md %}
+{% read ../before-begin.include.md %}
 
 Now, go to this particular example's directory:
 

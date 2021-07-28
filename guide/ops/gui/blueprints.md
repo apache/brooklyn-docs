@@ -32,7 +32,7 @@ and copy the blueprint below into the editor.
 But *before* you submit it, modify the YAML to specify the location where the application will be deployed.
 
 {% highlight yaml %}
-{% readj _my-web-cluster.yaml %}
+{% read _my-web-cluster.yaml %}
 {% endhighlight %}
 
 Replace the `location:` element with values for your chosen target environment, for example to use SoftLayer rather than AWS (updating with your own credentials): 

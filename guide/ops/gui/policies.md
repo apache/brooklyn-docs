@@ -10,7 +10,7 @@ To see an example of policy based management, please deploy the following bluepr
 the location details as for the example shown earlier):
 
 {% highlight yaml %}
-{% readj _my-web-cluster2.yaml %}
+{% read _my-web-cluster2.yaml %}
 {% endhighlight %}
 
 The app server cluster has an `AutoScalerPolicy`, and the loadbalancer has a `targets` policy.

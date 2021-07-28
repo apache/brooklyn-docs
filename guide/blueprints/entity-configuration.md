@@ -44,13 +44,17 @@ blueprint (i.e. inside the `brooklyn.config` block).
 It can also explicitly declare config keys, using the `brooklyn.parameters` block. The example 
 below illustrates the principle:
 
-!CODEFILE "example_yaml/entity-config-catalog.yaml"
+{% highlight yaml %}
+{% read example_yaml/entity-config-catalog.yaml %}
+{% endhighlight yaml %}
 
 Once added to the catalog, it can be used with the simple blueprint below (substituting the location
 of your choice). Because no configuration has been overridden, this will use the default value
 for `custom.message`, and will use the given values for `launch.command` and `checkRunning.command`:
 
-!CODEFILE "example_yaml/entity-config-app.yaml"
+{% highlight yaml %}
+{% read example_yaml/entity-config-app.yaml %}
+{% endhighlight yaml %}
 
 For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md), 
 and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference]({{book.path.docs}}/blueprints/yaml-reference.md). 
@@ -74,11 +78,15 @@ can be any of:
 
 This is illustrated in the example below:
 
-!CODEFILE "example_yaml/entity-constraint-catalog.yaml"
+{% highlight yaml %}
+{% read example_yaml/entity-constraint-catalog.yaml %}
+{% endhighlight yaml %}
 
 An example usage of this toy example, once added to the catalog, is shown below:
 
-!CODEFILE "example_yaml/entity-constraint-app.yaml"
+{% highlight yaml %}
+{% read example_yaml/entity-constraint-app.yaml %}
+{% endhighlight yaml %}
 
 
 ### Complex Types in Configuration
@@ -125,7 +133,9 @@ consider the `entity-config-example` added to the catalog in the section
 [Configuration in a Catalog Item](#configuration-in-a-catalog-item).
 We can override these values. If not overridden, then the existing values from the super-type will be used:
 
-!CODEFILE "example_yaml/entity-config-override-app.yaml"
+{% highlight yaml %}
+{% read example_yaml/entity-config-override-app.yaml %}
+{% endhighlight yaml %}
 
 
 In this example, the `custom.message` overrides the default defined on the config key.

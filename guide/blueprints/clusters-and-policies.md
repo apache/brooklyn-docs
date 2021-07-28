@@ -13,7 +13,7 @@ It takes the same `dynamiccluster.memberspec`, so we can build a fully functiona
 deployment of our `hello-world-sql` application as follows:
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-clustered-w-db.yaml %}
+{% read example_yaml/appserver-clustered-w-db.yaml %}
 {% endhighlight %}
 
 This sets up Nginx as the controller by default, but that can be configured
@@ -26,7 +26,7 @@ so because `brooklyn.config` keys in Brooklyn are inherited by default,
 the same blueprint can be expressed more concisely as:
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-clustered-w-db-concise.yaml %}
+{% read example_yaml/appserver-clustered-w-db-concise.yaml %}
 {% endhighlight %}
  
 The other nicety supplied by the `ControlledDynamicWebAppCluster` blueprint is that
@@ -38,7 +38,7 @@ We can set up our blueprint to do autoscaling based on requests per second
 as follows: 
 
 {% highlight yaml %}
-{% readj example_yaml/appserver-w-policy.yaml %}
+{% read example_yaml/appserver-w-policy.yaml %}
 {% endhighlight %}
 
 Use your favorite load-generation tool (`jmeter` is one good example) to send a huge
