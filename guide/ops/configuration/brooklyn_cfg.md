@@ -172,6 +172,7 @@ The default entitlement manager is one which responds to per-user entitlement ru
 and understands:
 
 * `root`:  full access, including to the Groovy console
+* `poweruser`:  full access, excluding to the Groovy console
 * `user`:  access to everything but actions that affect the server itself. Such actions include the
   Groovy console, stopping the server and retrieving management context configuration.
 * `readonly`:  read-only access to almost all information
