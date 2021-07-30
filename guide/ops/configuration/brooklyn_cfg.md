@@ -174,7 +174,8 @@ and understands:
 * `root`:  full access, including to the Groovy console
 * `poweruser`:  full access, excluding to the Groovy console
 * `user`:  access to everything but actions that affect the server itself. Such actions include the
-  Groovy console, stopping the server and retrieving management context configuration.
+  Groovy console, stopping the server and retrieving management context configuration
+* `blueprintAuthor`:  same as user but cannot install bundles containing jar or class files
 * `readonly`:  read-only access to almost all information
 * `minimal`:  access only to server stats, for use by monitoring systems
 
