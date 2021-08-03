@@ -103,24 +103,43 @@ configuring Brooklyn to use this. See the documentation for
 
 ## Controlling Sensitive Information in the Logs
 
-By default, Brooklyn does not log any data considered sensitive. Blueprints added to the catalog or deployed are scanned 
-for information that could be considered sensitive. Any blueprint containing any of the following is considered to 
-possibly be containing sensitive data:
+Log messages which may contain sensitive information are normally logged at TRACE level.
+Sensitive information is identified heuristically, including config keys and environment variables
+which contain any of the words below (case insensitive):
 
-- "password"
-- "passwd" 
-- "credential"
-- "secret"
-- "private"
-- "access.cert"
-- "access.key
+- `password`
+- `passwd` 
+- `credential`
+- `secret`
+- `private`
+- `access.cert`
+- `access.key`
 
-If sensitive information is found, all log entries related to the blueprint are written with the TRACE log level. 
-Since there is no configuration for this level, data is not saved in the Brooklyn standard log files. 
+Logging should configured such that TRACE is excluded or appropriately secured
+to prevent the values of these keys and variables from being logged at too high a level.
+A commented sample configuration for enabling TRACE logging is available in 
+the `org.ops4j.pax.logging.cfg` logging configuration file. 
+With this configuration enabled, all TRACE log entries are written to the `brooklyn.trace.log` file.
 
-For in-depth advanced investigations purposes, a commented sample configuration for enabling TRACE logging is available in 
-the `org.ops4j.pax.logging.cfg` logging configuration file. With the trace configuration enabled, all TRACE log entries 
-are written to the `brooklyn.trace.log` file.
+Blueprint source code and some activity may be logged at DEBUG level or higher, 
+so secrets should not be included in plain text in blueprints 
+unless the Apache Brooklyn environment and its logs are appropriately secured.
+It is recommend to use [Externalized Configuration](externalized-configuration.md) 
+to store credentials securely externally and read them as needed
+for blueprints and to prevent their inclusion in logs (and also in the UI). 
 
-As a general rule, avoid or minimize writing sensitive data in clear text in blueprints. For bundles that contain Java 
-types, use TRACE logging for sensitive information. 
+If it is desired to suppress information that is logged at DEBUG or higher level,
+which should not ordinarily be needed but may be desired on occasion,
+this can be done by setting filter(s) and/or appender(s) on the appropriate logging category in
+`org.ops4j.pax.logging.cfg`. Some of the categories (or individual sub-categories of these) 
+which may be relevant for exclusion or higher security are:
+
+* `org.apache.brooklyn.core.typereg`:
+  resolution of bundles and registration of types
+* `org.apache.brooklyn.rest.resources`:
+  log REST activity, including blueprints deployed
+* `org.apache.brooklyn.camp.brooklyn.spi.creation`:
+  creation of entities from CAMP
+* `org.apache.brooklyn.camp.brooklyn.spi.dsl`:
+  resolution of DSL expressions
+
