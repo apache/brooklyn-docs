@@ -19,7 +19,7 @@ it's easy to add new extensions using your favorite JVM language.)
 Here's a very simple YAML blueprint plan, to explain the structure:
 
 {% highlight yaml %}
-{% readj example_yaml/simple-appserver.yaml %}
+{% read example_yaml/simple-appserver.yaml %}
 {% endhighlight %}
 
 * The `name` is just for the benefit of us humans.

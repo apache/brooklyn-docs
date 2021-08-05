@@ -12,7 +12,7 @@ It can combine with the [Simple Web Cluster](../webcluster) example
 or the [Portable Cloud Foundry](https://github.com/cloudsoft/brooklyn-cloudfoundry) example,
 but does not assume knowledge of either of these.
 
-{% readj ../before-begin.include.md %}
+{% read ../before-begin.include.md %}
 
 Now, go to this particular example's directory:
 

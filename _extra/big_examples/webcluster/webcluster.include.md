@@ -1,5 +1,5 @@
       
-{% readj ../before-begin.include.md %}
+{% read ../before-begin.include.md %}
 
 ## Simple Web Server
 
