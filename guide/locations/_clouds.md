@@ -12,7 +12,7 @@ The identifiers for some of the most commonly used jclouds-supported clouds are
 (or [see the full list](http://jclouds.apache.org/reference/providers/)):
 
 * `jclouds:aws-ec2:<region>`: Amazon EC2, where `:<region>` might be `us-east-1` or `eu-west-1` (or omitted)
-* `jclouds:softlayer:<region>`: IBM Softlayer, where `:<region>` might be `dal05` or `ams01` (or omitted)
+* `jclouds:azurecompute-arm`: Azure (ARM templates)
 * `jclouds:google-compute-engine`: Google Compute Engine
 * `jclouds:openstack-nova:<endpoint>`: OpenStack, where `:<endpoint>` is the access URL (required)
 * `jclouds:cloudstack:<endpoint>`: Apache CloudStack, where `:<endpoint>` is the access URL (required)
