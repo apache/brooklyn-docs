@@ -7,7 +7,7 @@ check_directory_for_children: true
 ---
 
 Locations are the environments to which Brooklyn deploys applications. Most commonly these 
-are cloud services such as AWS, GCE, and IBM Softlayer. Brooklyn also supports deploying 
+are cloud services such as AWS, Azure, and GCE. Brooklyn also supports deploying 
 to a pre-provisioned network or to localhost (primarily useful for testing blueprints).
 
 See also:

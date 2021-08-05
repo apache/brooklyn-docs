@@ -101,3 +101,45 @@ For other artifacts, users should consider hosting these artifacts in their own 
 configuring Brooklyn to use this. See the documentation for 
 `org.apache.brooklyn.core.entity.drivers.downloads.DownloadProducerFromProperties`.
 
+## Controlling Sensitive Information in the Logs
+
+Log messages which may contain sensitive information are normally logged at TRACE level.
+Sensitive information is identified heuristically, including config keys and environment variables
+which contain any of the words below (case insensitive):
+
+- `password`
+- `passwd` 
+- `credential`
+- `secret`
+- `private`
+- `access.cert`
+- `access.key`
+
+Logging should configured such that TRACE is excluded or appropriately secured
+to prevent the values of these keys and variables from being logged at too high a level.
+A commented sample configuration for enabling TRACE logging is available in 
+the `org.ops4j.pax.logging.cfg` logging configuration file. 
+With this configuration enabled, all TRACE log entries are written to the `brooklyn.trace.log` file.
+
+Blueprint source code and some activity may be logged at DEBUG level or higher, 
+so secrets should not be included in plain text in blueprints 
+unless the Apache Brooklyn environment and its logs are appropriately secured.
+It is recommend to use [Externalized Configuration](externalized-configuration.md) 
+to store credentials securely externally and read them as needed
+for blueprints and to prevent their inclusion in logs (and also in the UI). 
+
+If it is desired to suppress information that is logged at DEBUG or higher level,
+which should not ordinarily be needed but may be desired on occasion,
+this can be done by setting filter(s) and/or appender(s) on the appropriate logging category in
+`org.ops4j.pax.logging.cfg`. Some of the categories (or individual sub-categories of these) 
+which may be relevant for exclusion or higher security are:
+
+* `org.apache.brooklyn.core.typereg`:
+  resolution of bundles and registration of types
+* `org.apache.brooklyn.rest.resources`:
+  log REST activity, including blueprints deployed
+* `org.apache.brooklyn.camp.brooklyn.spi.creation`:
+  creation of entities from CAMP
+* `org.apache.brooklyn.camp.brooklyn.spi.dsl`:
+  resolution of DSL expressions
+
