@@ -1,4 +1,5 @@
 name: Tomcat
+version: 1.0.0-SNAPSHOT
 services:
 - type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
   name: tomcat-server
