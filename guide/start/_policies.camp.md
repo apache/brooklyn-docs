@@ -283,7 +283,7 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 Deploy the app:
 
 {% highlight bash %}
-br deploy mycluster.yaml
+br deploy mycluster.camp.yaml
 {% endhighlight %}
 
 <pre>
