@@ -23,7 +23,7 @@ the software.
 
 An example of disabling all ssh'ing is shown below:
 
-{% read _provisioned-machine-requirements.md %}
+{% read _provisioned-machine-requirements.camp.md %}
 
 ### Parsing SSH stdout: No Extra Lines
 
