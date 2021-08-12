@@ -89,8 +89,9 @@ the same scope identifier.
 It is also possible with many blueprints to specify this as one of the
 `provisioning.properties` on an *application*:
 
+```yaml
 {% read snippets/_location-with-templateoptions.camp.yaml%}
-
+```
 
 If you are writing an entity in Java, you can also use the helper
 method `forScope(String)` to create the customizer. Configure the
