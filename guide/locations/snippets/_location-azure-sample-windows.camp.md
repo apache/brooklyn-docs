@@ -1,3 +1,4 @@
+```yaml
 brooklyn.catalog:
   id: my-azure-arm-location
   name: "My Azure ARM location"
@@ -37,3 +38,4 @@ brooklyn.catalog:
                 certificateUrl: "<KeyVault-uri>"
           additionalUnattendContent: null
           enableAutomaticUpdates: true
+```
