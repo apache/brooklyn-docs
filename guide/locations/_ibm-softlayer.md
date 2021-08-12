@@ -89,16 +89,8 @@ the same scope identifier.
 It is also possible with many blueprints to specify this as one of the
 `provisioning.properties` on an *application*:
 
-    services:
-    - type: org.apache.brooklyn.entity.stock.BasicApplication
-      id: same-vlan-application
-      brooklyn.config:
-        provisioning.properties:
-          customizers:
-          - $brooklyn:object:
-              type: org.apache.brooklyn.location.jclouds.softlayer.SoftLayerSameVlanLocationCustomizer
-        softlayer.vlan.scopeUid: "my-custom-scope"
-        softlayer.vlan.timeout: 10m
+{% read snippets/_location-with-templateoptions.camp.yaml%}
+
 
 If you are writing an entity in Java, you can also use the helper
 method `forScope(String)` to create the customizer. Configure the
