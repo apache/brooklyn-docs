@@ -48,14 +48,7 @@ newScript(CUSTOMIZING)
 
 Now let's try deploying this using the following YAML:
 
-{% highlight yaml %}
-
-name: Tomcat failure test
-location: localhost
-services:
-- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
-
-{% endhighlight %}
+{% read _going-deep-in-java-and-logs.camp.yaml %}
 
 Shortly after deployment, the entity fails with the following error:
 
