@@ -48,7 +48,7 @@ newScript(CUSTOMIZING)
 
 Now let's try deploying this using the following YAML:
 
-{% read _going-deep-in-java-and-logs.camp.yaml %}
+{% read _going-deep-in-java-and-logs.camp.md %}
 
 Shortly after deployment, the entity fails with the following error:
 
