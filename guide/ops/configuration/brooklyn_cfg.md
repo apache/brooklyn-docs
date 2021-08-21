@@ -139,8 +139,14 @@ The other things you need to set in `brooklyn.cfg` are:
 * `brooklyn.webconsole.security.ldap.allowed_realms_regex` - allows multiple realms (domains) that match regex - username must 
   be of form domain\user
 * `brooklyn.webconsole.security.ldap.ou` *optional, by default it set to Users* -  ldap ou parameter
-
-**brooklyn.cfg example configuration:**
+* `brooklyn.webconsole.security.ldap.group_config_key` *optional* to be used in combination with the next. Name of the 
+  config key prefix for the valid LDAP groups to be mapped to AMP entitlements. If used only mapped groups will be added 
+  to the user groups. If empty, user LDAP groups will be ignored.
+* `brooklyn.webconsole.security.ldap.fetch_user_group` *optional, by default it set to false* - whether or not the LDAP
+  groups for the user should be gathered. If true, the groups will be stored in the user session and the security context
+* `brooklyn.webconsole.security.ldap.login_info_log` *optional, by default it set to false* - whether or not the user attempts
+  to log in the system must be added to the info log
+  **brooklyn.cfg example configuration:**
 
 ~~~
 brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.LdapSecurityProvider
