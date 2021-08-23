@@ -86,10 +86,13 @@ The logbook offers the possibility to query and view logs in the UI. By default,
 in `etc/org.ops4j.pax.logging.cfg`. The logbook can be configured against different log aggregation sources by setting the
 `brooklyn.logbook.logStore` parameter in `brooklyn.cfg`, and depending which backend is used, other parameters.
 
-For example to use the local log files written by Apache Brooklyn, assuming `/var/logs`, you could configure (note these are the default values):
+For example to use the local log files written by Apache Brooklyn in a production environment, assuming `/var/logs`, 
+you could configure:
 
         brooklyn.logbook.logStore=org.apache.brooklyn.util.core.logbook.file.FileLogStore
         brooklyn.logbook.fileLogStore.path=/var/logs/brooklyn/brooklyn.debug.log
+
+The default mode is to use the local log file in `data/log/` relative to the launch directory.
 
 In production environments where log data is desired to be retained, Apache Brooklyn supports Elasticsearch backends.
 This can be a dedicated ES environment for use by Apache Brooklyn or a shared/managed ES facility that handles many logs,
