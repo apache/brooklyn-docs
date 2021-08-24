@@ -221,9 +221,7 @@ stored in protected .PFX file. It needs to be prepared upfront or created with t
 
 Placeholders surrounded with `<>` have to be replcaced with their respective values.
 
-```yaml
 {% read snippets/_location-azure-sample-windows.camp.md%}
-```
 
 #### Known issues
 There are currently two known issues with Azure ARM:

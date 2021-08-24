@@ -249,9 +249,7 @@ value of the key should be an array, containing the argument for each parameter.
 
 For example, here is a complete blueprint that sets some AWS EC2 specific options:
 
-```yaml
 {% read snippets/_location-with-templateoptions.camp.md%}
-```
 
 Here you can see that we set three template options:
 
