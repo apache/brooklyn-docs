@@ -33,7 +33,7 @@ machines available.
 In the example below, it provisions the first node to `192.168.0.1`, then it provisions into AWS
 us-east-1 region (because the bring-your-own-nodes region will have run out of nodes).
 
-{% read _location-special-sequential.camp.md %}
+{% read snippets/_location-special-sequential.camp.md %}
 
 ##### Round-Robin Consumption and Availability Zones for Clustered Applications
 

@@ -17,7 +17,7 @@ It is easy to add additional rules to the initial security group using `org.apac
 
 YAML Example:
 
-{% read _location_customizing_security_groups.md %}
+{% read snippets/_location-customizing-security-groups.camp.md %}
 
 Make sure that you have rule which makes port 22 accessible from Apache Brooklyn.
 

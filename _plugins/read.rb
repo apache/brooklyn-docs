@@ -45,7 +45,7 @@ module JekyllRead
 
       # is there a better way to trim a leading / ?
       file = file.relative_path_from(Pathname.new("/")) unless file.relative?
-      raise "No such file #{file} in read call (from #{context['page']['path']})" unless file.exist?
+      raise "No such file #{file} in read call" unless file.exist?
       file
     end
 
