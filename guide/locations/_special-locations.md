@@ -14,11 +14,7 @@ The spec `host`, taking a string argument (the address) or a map (`host`, `user`
 provides a convenient syntax when specifying a single host.
 For example:
 
-{% highlight yaml %}
-location: host:(192.168.0.1)
-services:
-- type: org.apache.brooklyn.entity.webapp.jboss.JBoss7Server
-{% endhighlight %}
+{% read snippets/_location-special-single.camp.md %}
 
 Or, in `brooklyn.properties`, set `brooklyn.location.named.host1=host:(192.168.0.1)`.
 
@@ -37,20 +33,7 @@ machines available.
 In the example below, it provisions the first node to `192.168.0.1`, then it provisions into AWS
 us-east-1 region (because the bring-your-own-nodes region will have run out of nodes).
 
-{% highlight yaml %}
-location:
-  multi:
-    targets:
-    - byon:(hosts=192.168.0.1)
-    - jclouds:aws-ec2:us-east-1
-services:
-- type: org.apache.brooklyn.entity.group.DynamicCluster
-  brooklyn.config:
-    cluster.initial.size: 3
-    dynamiccluster.memberspec:
-      $brooklyn:entitySpec:
-        type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+{% read _location-special-sequential.camp.md %}
 
 ##### Round-Robin Consumption and Availability Zones for Clustered Applications
 
@@ -67,22 +50,7 @@ In the example below, the cluster will request VMs round-robin across three diff
 locations (in this case, the locations were already added to the catalog, or defined in
 `brooklyn.properties`).
 
-{% highlight yaml %}
-location:
-  multi:
-    targets:
-    - my-location-1
-    - my-location-2
-    - my-location-3
-services:
-- type: org.apache.brooklyn.entity.group.DynamicCluster
-  brooklyn.config:
-    dynamiccluster.zone.enable: true
-    cluster.initial.size: 3
-    dynamiccluster.memberspec:
-      $brooklyn:entitySpec:
-        type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+{% read snippets/_location-special-round.camp.md %}
 
 Of course, clusters can also be deployed round-robin to real availability zones offered by
 cloud providers, as long as their locations support `AvailabilityZoneExtension`. Currently, only
@@ -91,17 +59,7 @@ AWS EC2 locations support this feature.
 In the example below, the cluster will request VMs round-robin across the availability zones
 provided by AWS EC2 in the "us-east-1" region.
 
-{% highlight yaml %}
-location: jclouds:aws-ec2:us-east-1
-services:
-- type: org.apache.brooklyn.entity.group.DynamicCluster
-  brooklyn.config:
-    dynamiccluster.zone.enable: true
-    cluster.initial.size: 3
-    dynamiccluster.memberspec:
-      $brooklyn:entitySpec:
-        type: org.apache.brooklyn.entity.machine.MachineEntity
-{% endhighlight %}
+{% read snippets/_location-special-availability.camp.md %}
 
 For more information about AWS EC2 availability zones, see
 [this guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).

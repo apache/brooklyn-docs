@@ -40,18 +40,7 @@ the software.
 
 An example of disabling all ssh'ing is shown below:
 
-    location:
-      aws-ec2:us-east-1:
-        identity: XXXXXXXX
-        credential: XXXXXXXX
-        waitForSshable: false
-        pollForFirstReachableAddress: false
-    services:
-    - type: org.apache.brooklyn.entity.software.base.EmptySoftwareProcess
-      brooklyn.config:
-        onbox.base.dir.skipResolution: true
-        sshMonitoring.enabled: false
-
+{% read _provisioned-machine-requirements.camp.md %}
 
 ### Parsing SSH stdout: No Extra Lines
 
