@@ -40,6 +40,11 @@ such as new appenders or different log levels, can be made directly in this file
 Karaf logging is highly configurable. For example enable the sift appender to log to separate log files for
 each bundle as described here: [Advanced configuration](https://karaf.apache.org/manual/latest/#_advanced_configuration)
 
+Using the default configuration the log entries are reported in UTC time. If you want the logging to be reported using the server local time you can replace the `log4j2.pattern` removing the UTC flag and the Z suffix: 
+```properties
+log4j2.pattern = %d{ISO8601} %X{task.id}-%X{entity.ids} %-5.5p %3X{bundle.id} %c{1.} [%.16t] %m%n
+```
+
 ## Advanced Configuration
 
 The default `logback.xml` file references a collection of other log configuration files
@@ -135,7 +140,7 @@ is a good simple way to forward content added to the log files:
  @log_level debug
  <parse>
   @type multiline
-  format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+  format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
   time_format %Y-%m-%dT%H:%M:%S,%L
  </parse>
  path /var/logs/brooklyn/brooklyn.debug.log
