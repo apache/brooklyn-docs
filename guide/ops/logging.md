@@ -131,12 +131,26 @@ backend that works well with Apache Brooklyn, with this configuration in `brookl
 
 There are many solutions to routing log messages from Apache Brooklyn to Elasticsearch, either plugging in to the log4j subsystem
 or routing the log files from disk. [Fluentd](https://www.fluentd.org/download), with the following configuration in `td-agent.conf`, 
-is a good simple way to forward content added to the log files:
+is a good simple way to forward content added to the info and debug log files:
 
 ```
 <source>
  @type tail
- @id input_tail_brooklyn
+ @id input_tail_brooklyn_info
+ @log_level info
+ <parse>
+  @type multiline
+  format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+  time_format %Y-%m-%dT%H:%M:%S,%L
+ </parse>
+ path /var/logs/brooklyn/brooklyn.info.log
+ pos_file /var/log/td-agent/brooklyn.info.log.pos
+ tag brooklyn.info
+</source>
+
+<source>
+ @type tail
+ @id input_tail_brooklyn_debug
  @log_level debug
  <parse>
   @type multiline
@@ -145,9 +159,10 @@ is a good simple way to forward content added to the log files:
  </parse>
  path /var/logs/brooklyn/brooklyn.debug.log
  pos_file /var/log/td-agent/brooklyn.debug.log.pos
- tag td.apachebrokyn.debug
+ tag brooklyn.debug
 </source>
-<match td.apachebrokyn.*>
+
+<match brooklyn.*>
   @type elasticsearch
   hosts https://localhost:9200
   user admin
@@ -183,11 +198,11 @@ Instructions and links to assist with this are below.
 
 #### Index partitioning
 
-It’s possible to configure fluentd for sending the information to an index using an index name generated using datetime markers.
+It’s possible to configure Fluentd for sending the information to an index using an index name generated using datetime markers.
 This example will create and send the data to a new index every day:
 
 ```
-<match td.apachebrokyn.*>
+<match brooklyn.*>
   @type elasticsearch
   hosts https://localhost:9200
   user admin
@@ -195,7 +210,7 @@ This example will create and send the data to a new index every day:
   ssl_verify false
 
   include_timestamp true
-  index_name brooklyn-rotating-%Y.%m.%d
+  index_name ${tag}-%Y.%m.%d
   flush_interval 5s
   <buffer tag, time>
     timekey 60 # chunks per hours ("3600" also available)
@@ -205,14 +220,14 @@ This example will create and send the data to a new index every day:
 ```
 
 Apache Brooklyn can be configured to use an index _pattern_ for querying, eg:
-
-    brooklyn.logbook.openSearchLogStore.index = brooklyn-rotating-*
-
+```properties
+    brooklyn.logbook.openSearchLogStore.index = brooklyn*
+```
 
 #### Index lifecycle management
 
 Policies also allow handling the lifecycle of the indexes.
-For example, to delete indexes after a period of time:
+For example, to delete debug indexes after a period of time based on the index naming pattern used in this page:
 
 ```
 {
@@ -242,7 +257,7 @@ For example, to delete indexes after a period of time:
       }
     ],
     "ism_template": {
-        "index_patterns": ["brooklyn-rotating*"],
+        "index_patterns": ["brooklyn.debug*"],
         "priority": 100
       }
   }
