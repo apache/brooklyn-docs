@@ -99,6 +99,8 @@ you could configure:
 
 The default mode is to use the local log file in `data/log/` relative to the launch directory.
 
+The `FileLogStore` implementation is not compatible with multiline logs, only the first line will be print.
+
 In production environments where log data is desired to be retained, Apache Brooklyn supports Elasticsearch backends.
 This can be a dedicated ES environment for use by Apache Brooklyn or a shared/managed ES facility that handles many logs,
 or -- for lightweight usage -- a simple local ES server running on the same instance as Apache Brooklyn.
@@ -154,6 +156,7 @@ is a good simple way to forward content added to the info and debug log files:
  @log_level debug
  <parse>
   @type multiline
+  format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
   format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
   time_format %Y-%m-%dT%H:%M:%S,%L
  </parse>
