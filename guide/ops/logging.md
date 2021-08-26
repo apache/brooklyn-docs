@@ -142,6 +142,7 @@ is a good simple way to forward content added to the info and debug log files:
  @log_level info
  <parse>
   @type multiline
+  format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
   format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
   time_format %Y-%m-%dT%H:%M:%S,%L
  </parse>
