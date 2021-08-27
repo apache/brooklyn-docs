@@ -137,34 +137,39 @@ is a good simple way to forward content added to the info and debug log files:
 
 ```
 <source>
- @type tail
- @id input_tail_brooklyn_info
- @log_level info
- <parse>
-  @type multiline
-  format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
-  format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
-  time_format %Y-%m-%dT%H:%M:%S,%L
- </parse>
- path /var/logs/brooklyn/brooklyn.info.log
- pos_file /var/log/td-agent/brooklyn.info.log.pos
- tag brooklyn.info
+  @type tail
+  @id input_tail_brooklyn_info
+  @log_level info
+  <parse>
+    @type multiline
+    format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
+    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+    time_format %Y-%m-%dT%H:%M:%S,%L
+  </parse>
+  path /var/logs/brooklyn/brooklyn.info.log
+  pos_file /var/log/td-agent/brooklyn.info.log.pos
+  tag brooklyn.info
 </source>
 
 <source>
- @type tail
- @id input_tail_brooklyn_debug
- @log_level debug
- <parse>
-  @type multiline
-  format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
-  format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
-  time_format %Y-%m-%dT%H:%M:%S,%L
- </parse>
- path /var/logs/brooklyn/brooklyn.debug.log
- pos_file /var/log/td-agent/brooklyn.debug.log.pos
- tag brooklyn.debug
+  @type tail
+  @id input_tail_brooklyn_debug
+  @log_level debug
+  <parse>
+    @type multiline
+    format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
+    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+    time_format %Y-%m-%dT%H:%M:%S,%L
+  </parse>
+  path /var/logs/brooklyn/brooklyn.debug.log
+  pos_file /var/log/td-agent/brooklyn.debug.log.pos
+  tag brooklyn.debug
 </source>
+
+<filter brooklyn.debug>
+  @type grep
+  regexp1 level DEBUG
+</filter>
 
 <match brooklyn.*>
   @type elasticsearch
@@ -176,6 +181,9 @@ is a good simple way to forward content added to the info and debug log files:
   index_name brooklyn
 </match>
 ```
+
+The filter block is needed for only picking up the `debug` log level from the debug source, as the `info` and upper
+levels are already present in the info file.
 
 #### Sizing and Rotating Logs
 
