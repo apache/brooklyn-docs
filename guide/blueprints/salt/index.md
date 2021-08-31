@@ -11,6 +11,6 @@ This guide describes how Brooklyn entities can be created using the Salt infrast
 At present Brooklyn provides basic support for Salt, operating in a 'masterless' mode. 
 Comments on this support and suggestions for further development are welcome.
 
-This guide assumes you are familiar with the basics of [creating YAML blueprints](../).
+This guide assumes you are familiar with the basics of [creating YAML blueprints](/guide/blueprints).
 
 {% include list-children.html %}

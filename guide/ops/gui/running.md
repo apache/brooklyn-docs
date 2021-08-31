@@ -7,7 +7,7 @@ menu_parent: index.md
 
 This guide will walk you through connecting to the Brooklyn Server Graphical User Interface and performing various tasks.
 
-For an explanation of common Brooklyn Concepts see the [Brooklyn Concepts Quickstart](/guide/start/concept-quickstart) or see the  full guide in the [Brooklyn Concepts](../../concepts) chapter of the [User Guide](../../).
+For an explanation of common Brooklyn Concepts see the [Brooklyn Concepts Quickstart](/guide/start/concept-quickstart) or see the  full guide in the [Brooklyn Concepts](/guide/concepts) chapter of the [User Guide](/guide).
 
 This guide assumes that you are using Linux or Mac OS X and that Brooklyn Server will be running on your local system.
 

@@ -23,7 +23,7 @@ Management](https://msdn.microsoft.com/en-us/library/aa384426(v=vs.85).aspx).
 
 WinRM is available by default in Windows Server, but is not enabled by default. Brooklyn will, in most cases, be able
 to switch on WinRM support, but this is dependent on your cloud provider supporting a user metadata service with script
-execution.
+execution (see [below](/guide/blueprints/winrm/troubleshoot#user-metadata-service-requirement))
 
 
 Locations for Windows
