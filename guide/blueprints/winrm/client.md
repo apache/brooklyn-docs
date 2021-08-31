@@ -15,7 +15,7 @@ parameters available for WinRM.
   Default value: `false`
 * retriesOfNetworkFailures <Integer>: The parameter sets the number of retries for connection failures. If you use high value, consider taking care for the machine's network.<br>
   Default value: `4`
-* winrm.useNtlm <Boolean>: The parameter configures tells the machine sensors whether the WinRM port is over HTTPS. If the parameter is true then 5986 will be used as a WinRM port.<br>
+* winrm.useNtlm <Boolean>: The parameter configures whether to use NTLM for authentication (recommended, as this will encrypt traffic after authentication).<br>
   Default value: `true`
 * winrm.computerName <String>: Windows Computer Name to use for authentication.<br>
   Default value: `null`
