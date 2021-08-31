@@ -1,5 +1,5 @@
-Below is the annotated blueprint. [Download the blueprint](example_yaml/mycluster.yaml) into a
-text file, `mycluster.yaml`, in your workspace. *Before* you create an application with it,
+Below is the annotated blueprint. [Download the blueprint](example_yaml/mycluster.camp.yaml) into a
+text file, `mycluster.camp.yaml`, in your workspace. *Before* you create an application with it,
 review and/or change the the location where the application will be deployed.
 
 You will need four machines for this example: one for the load-balancer (nginx), and three for the
@@ -69,7 +69,7 @@ services:
   {% endhighlight %}
 </div>
 
-<!-- WARNING: if modifying either mycluster.yaml or the yaml below, be sure to keep them both in-sync -->
+<!-- WARNING: if modifying either mycluster.camp.yaml or the yaml below, be sure to keep them both in-sync -->
 
 <div class="jumobotron annotated_blueprint" markdown="1">
   <div class="code_scroller">
@@ -89,7 +89,12 @@ services:
             Start by giving it a name, optionally adding a version and other metadata.
         </p></div>
       </div><div class="connector"><div>&nbsp;</div></div></div></div>
-<div><span class="ann_highlight">name: Tomcat Cluster</span>
+<div>
+<span class="ann_highlight">
+id: tomcatCluster
+name: Tomcat Cluster
+version: 0.1.0-SNAPSHOT
+</span>
 </div></div>
 
 <div class="block">
@@ -278,7 +283,7 @@ in the cluster. In our example, each is a Tomcat server with a WAR deployed at t
 Deploy the app:
 
 {% highlight bash %}
-br deploy mycluster.yaml
+br deploy mycluster.camp.yaml
 {% endhighlight %}
 
 <pre>

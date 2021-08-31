@@ -183,6 +183,7 @@ The CreateUserPolicy Attaches to an Entity and monitors for the addition of a lo
 This is similar to the CreateUserPolicy.  It will monitor the addition of WinRmMachineLocation to an entity and then create a sensor advertising the administrative user's credentials.
 
 
+
 Writing a Policy
 ----------------
 
