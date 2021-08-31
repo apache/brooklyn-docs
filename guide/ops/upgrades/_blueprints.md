@@ -38,7 +38,7 @@ versions equal to or greater than `1.0.0` but less than `2.0.0`. (Note that rang
 Entries can also take comma-separated lists, and in the case of replacements, they can define
 explicit renamed targets using `sourceNameAndVersionRanges=targetNameAndVersion` entries.   
 These fields are defined in full in the
-[`BundleUpgradeParser`'s javadoc]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/typereg/BundleUpgradeParser.html).
+[`BundleUpgradeParser`'s javadoc](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/typereg/BundleUpgradeParser.html).
 
 
 ### Upgrading the Version of Deployed Blueprints

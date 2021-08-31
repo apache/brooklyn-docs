@@ -50,7 +50,7 @@ If the quick list above doesn't help then follow the steps below.
 
 To speed up diagnosing the problem if you don't already have a static machine to target,
 we advise to trigger a deployment with the JcloudsLocation flag `destroyOnFailure: false` so you can check status of the provisioned machine
-or try later different WinRM parameters with a Apache Brooklyn [BYON Location](../../locations/index.html#byon).
+or try later different WinRM parameters with a Apache Brooklyn [BYON Location](/guide/locations#byon).
 
 After you determine what is the username and the password you can proceed with next steps.
 *(Notice that for cloud providers which use Auto Generated password will not be logged.
@@ -123,5 +123,5 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 1. Restart WinRM on both machines (some changes need a restart to take effect): `Restart-Service WinRM`
 1. If you want to configure Windows target host with HTTPS then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)
 
-In some cases the problems may be outwith the client, and it might be useful to look at [Troubleshooting](troubleshooting.md).
+In some cases the problems may be outwith the client, and it might be useful to look at [Troubleshooting](troubleshoot).
 

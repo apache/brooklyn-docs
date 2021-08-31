@@ -31,7 +31,7 @@ layout: website-normal
 
 2. Upgrade Apache Brooklyn:
 
-   1. [Download](../misc/download.html) the new RPM/DEB package
+   1. [Download](/guide/misc/download) the new RPM/DEB package
 
    2. Upgrade Apache Brooklyn:
 
@@ -81,7 +81,7 @@ layout: website-normal
 
 3. Install new version of Apache Brooklyn:
 
-   1. [Download](../misc/download.html) the new tarball zip package.
+   1. [Download](/guide/misc/download) the new tarball zip package.
    
    2. Install Brooklyn:
 
@@ -179,7 +179,7 @@ layout: website-normal
 
 5. Install new version of Apache Brooklyn:
 
-   1. [Download](../misc/download.html) the new RPM/DEB package.
+   1. [Download](/guide/misc/download) the new RPM/DEB package.
    
    2. Install Apache Brooklyn:
 
@@ -295,11 +295,11 @@ stop brooklyn
 
 ## Web login credentials
 
-* User credentials should now be recorded in [`brooklyn.cfg`](paths.html).
+* User credentials should now be recorded in [`brooklyn.cfg`](/guide/ops/configuration/brooklyn_cfg).
 
-* Brooklyn will still read them from both [`brooklyn.cfg`](paths.html) and `~/.brooklyn/brooklyn.properties`.
+* Brooklyn will still read them from both [`brooklyn.cfg`](/guide/ops/configuration/brooklyn_cfg) and `~/.brooklyn/brooklyn.properties`.
 
-* Configure a username/password by modifying [`brooklyn.cfg`](paths.html). An example entry is:
+* Configure a username/password by modifying [`brooklyn.cfg`](/guide/ops/configuration/brooklyn_cfg). An example entry is:
  
 {% highlight bash %}
 brooklyn.webconsole.security.users=admin
@@ -310,10 +310,10 @@ brooklyn.webconsole.security.user.admin.password=password2
 
 If you have persisted state you wish to rebind to, persistence is now configured in the following files:
 
-* [`brooklyn.cfg`](paths.html)
-* [`org.apache.brooklyn.osgilauncher.cfg`](paths.html)
+* [`brooklyn.cfg`](/guide/ops/configuration/brooklyn_cfg)
+* [`org.apache.brooklyn.osgilauncher.cfg`](/guide/ops/paths)
 
-For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`](paths.html):
+For example, to use S3 for the persisted state, add the following to [`brooklyn.cfg`](/guide/ops/configuration/brooklyn_cfg):
 
 {% highlight bash %}
 brooklyn.location.named.aws-s3-eu-west-1:aws-s3:eu-west-1
@@ -321,7 +321,7 @@ brooklyn.location.named.aws-s3-eu-west-1.identity=<ADD CREDS>
 brooklyn.location.named.aws-s3-eu-west-1.credential=<ADD CREDS>
 {% endhighlight %}
 
-To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`](paths.html):
+To continue the S3 example, for the persisted state, add the following to [`org.apache.brooklyn.osgilauncher.cfg`](/guide/ops/paths):
 
 {% highlight bash %}
 persistenceLocation=aws-s3-eu-west-1
@@ -334,7 +334,7 @@ Apache Brooklyn should be stopped before this file is modified, and then restart
 in the persisted state. Apache Brooklyn needs to know it in order to read the persisted state at startup time.***
 
 If binding to existing persisted state, an additional command is required to update the existing catalog with the Brooklyn
-0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`](paths.html) (as is done by the RPM and DEB):
+0.12.0 versions. Assuming Brooklyn has been installed to [`/opt/brooklyn`](/guide/ops/paths) (as is done by the RPM and DEB):
 
   {% highlight bash %}
     br catalog add /opt/brooklyn/catalog/catalog.bom

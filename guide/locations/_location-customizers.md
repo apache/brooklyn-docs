@@ -27,8 +27,7 @@ From an entity's perspective, it calls `location.obtain(options)` and gets back 
 (e.g. for Linux it expects credentials for a user with `sudo` rights, and ssh access).
 
 However, there are special cases - for example the `location.obtain(options)` could return
-a Docker container with the software pre-installed, and no remote access (see the 
-[Clocker project](http://clocker.io) for more information on use of Docker with Brooklyn).
+a Docker container with the software pre-installed, and no remote access.
 
 The entity is then responsible for configuring that machine according to the needs of the software 
 to be installed.

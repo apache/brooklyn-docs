@@ -13,8 +13,8 @@ This action might be invoking an effector or emitting a new sensor,
 depending the desired behavior is.
 
 Writing a policy is straightforward.
-Simply extend [``AbstractPolicy``]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/policy/AbstractPolicy.html),
-overriding the [``setEntity``]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/objs/AbstractEntityAdjunct.html#setEntity-org.apache.brooklyn.api.entity.EntityLocal-) method to supply any subscriptions desired:
+Simply extend [``AbstractPolicy``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/policy/AbstractPolicy.html),
+overriding the [``setEntity``](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/objs/AbstractEntityAdjunct.html#setEntity-org.apache.brooklyn.api.entity.EntityLocal-) method to supply any subscriptions desired:
 
 ```java
     @Override
@@ -74,4 +74,4 @@ Order policies carefully, and mark sensors as "handled" (or potentially "swallow
 
 ### Implementation Classes
 
-Extend [`AbstractPolicy`]({{book.url.brooklyn_javadoc}}/org/apache/brooklyn/core/policy/AbstractPolicy.html), or override an existing policy.
+Extend [`AbstractPolicy`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/policy/AbstractPolicy.html), or override an existing policy.

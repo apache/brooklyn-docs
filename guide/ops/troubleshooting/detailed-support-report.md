@@ -7,7 +7,7 @@ toc: /guide/toc.json
 If you wish to send a detailed report, then depending on the nature of the problem, consider 
 collecting the following information.
 
-See [Brooklyn Slow or Unresponse](slow-unresponsive.html) docs for details of these commands.
+See [Brooklyn Slow or Unresponse](slow-unresponsive) docs for details of these commands.
  
 {% highlight bash %}
 BROOKLYN_HOME=/home/users/brooklyn/apache-brooklyn-0.9.0-bin
@@ -38,6 +38,6 @@ tar czf brooklyn-report.tgz ${REPORT_DIR}
 
 Also consider providing your log files and persisted state, though extreme care should be taken if
 these might contain cloud or machine credentials (especially if 
-[Externalised Configuration](/guide/ops/externalized-configuration.html) 
+[Externalised Configuration](/guide/ops/externalized-configuration) 
 is not being used for credential storage).
 

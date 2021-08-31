@@ -5,7 +5,7 @@ toc: /guide/toc.json
 ---
 
 If Apache Brooklyn does not start, or starts with errors, the problem is usually easy to resolve.
-The first place to look is the [logs](/guide/ops/logging.html):  `grep` for the first `ERROR`,
+The first place to look is the [logs](/guide/ops/logging):  `grep` for the first `ERROR`,
 and sometimes look backwards for the first `WARN` message.
 
 There are a handful of common causes.
@@ -72,9 +72,9 @@ If a rebind problem does occur, all is not lost.  There are several ways that re
 * If the broken persisted state is critical, it is possible to edit them:  they are simply an XML model of the items
   using a lot of unique identifiers designed so that references can be easily found using `grep`
 * Finally, if all else fails, open a support ticket:  there are a number of other advanced techniques available,
-  such as specifying that types should be automatically renamed or migrated by new bundles ([see the Persistence section here](../upgrades/)).
+  such as specifying that types should be automatically renamed or migrated by new bundles ([see the Persistence section here](/guide/ops/upgrades)).
 
-It may also be useful to review the sections on [Persistence](../persistence/) and [HA](../high-availability/).
+It may also be useful to review the sections on [Persistence](/guide/ops/persistence) and [HA](/guide/ops/high-availability).
 
 
 

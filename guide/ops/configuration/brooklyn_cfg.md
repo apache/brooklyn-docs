@@ -12,7 +12,7 @@ children:
 
 {% include fields.md %}
 
-The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](../paths.html) for the location of your Brooklyn configuration folder
+The file `brooklyn.cfg` is read when Apache Brooklyn starts in order to load any server configuration values. It can be found in the Brooklyn configuration folder. You can check [here](/guide/ops/paths) for the location of your Brooklyn configuration folder
 
 ## Quick Setup
 
@@ -46,7 +46,7 @@ More information, including setting up a certificate, is described [further belo
 Values in `brooklyn.cfg` can use the Camp YAML syntax. Any value starting `$brooklyn:` is 
 parsed as a Camp YAML expression.
 
-This allows [externalized configuration](/guide/ops/externalized-configuration.html) to be used from 
+This allows [externalized configuration](/guide/ops/externalized-configuration) to be used from 
 `brooklyn.cfg`. For example:
 
 {% highlight properties %}
@@ -209,14 +209,14 @@ brooklyn.entitlements.perUser.metrics=minimal
 {% endhighlight %}
 
 For more information, see 
-[Java: Entitlements](/guide/blueprints/java/entitlements.html).
+[Java: Entitlements](/guide/blueprints/java/entitlements).
 or
 {% include java_link.html class_name="EntitlementManager" package_path="org/apache/brooklyn/api/mgmt/entitlement" project_subpath="api" %}.
 
 
 ## HTTPS Configuration
 
-See [HTTPS Configuration](https.html) for general information on configuring HTTPS.
+See [HTTPS Configuration](https) for general information on configuring HTTPS.
 
 
 ## Session configuration

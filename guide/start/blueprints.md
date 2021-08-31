@@ -45,6 +45,6 @@ you can monitor the progress of the application deployment and verify if it was 
 
 <div class="started-pdf-exclude" markdown="1">
 
-Having deployed an application, the next step is **[monitoring and managing](managing.html)** it.
+Having deployed an application, the next step is **[monitoring and managing](managing)** it.
 
 </div>

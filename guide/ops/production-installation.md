@@ -16,24 +16,24 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging](/guide/ops/logging.html)
-* [Persistence](persistence/)
-* [High availability](high-availability/)
+* [Logging](/guide/ops/logging)
+* [Persistence](persistence)
+* [High availability](high-availability)
 
 
 ### <a id="prerequisites"></a>Set up the Prerequisites
 
-Check that the server meets the [requirements](requirements.html).
+Check that the server meets the [requirements](requirements).
 Then configure the server as follows:
 
 * install Java JRE or JDK (version 8 or later)
 * enable "Java Cryptography Extension" (already enabled out of the box of OpenJDK installs)
-* install an [SSH key](/guide/locations/index.html#ssh-keys), if not available
-* if the "localhost" location will be used, enable [passwordless ssh login](/guide/locations/index.html#ssh-keys)
+* install an [SSH key](/guide/locations#ssh-keys), if not available
+* if the "localhost" location will be used, enable [passwordless ssh login](/guide/locations#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
-* check that the [Linux kernel entropy](/guide/ops/troubleshooting/increase-entropy.html) is sufficient
-* check that the [ulimit values](/guide/ops/troubleshooting/increase-system-resource-limits.html) are sufficiently high
+* check that the [Linux kernel entropy](/guide/ops/troubleshooting/increase-entropy) is sufficient
+* check that the [ulimit values](/guide/ops/troubleshooting/increase-system-resource-limits) are sufficiently high
 * ensure external libraries are up-to-date, including `nss` for SSL. 
 * ensure the time is continually accurate, ideally by running a service like the [ntp daemon](http://www.ntp.org/).
 
@@ -71,7 +71,7 @@ Let's setup some paths for easy commands.
 
 ### <a id="configuring-properties"></a>Configuring brooklyn.cfg
 
-Set up `brooklyn.cfg` as described [here](brooklyn_cfg.html):
+Set up `brooklyn.cfg` as described [here](configuration/brooklyn_cfg):
 
 * Configure the users who should have access
 * Turn on HTTPS
@@ -91,7 +91,7 @@ By default Brooklyn loads the catalog of available application components and se
 `default.catalog.bom` on the classpath. The initial catalog is in `conf/brooklyn/` in the dist.
 If you have a preferred catalog, simply replace that file.
 
-[More information on the catalog is available here.](catalog/)
+[More information on the catalog is available here.](/guide/blueprints/catalog)
 
 
 ### <a id="confirm"></a>Confirm Installation
