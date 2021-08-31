@@ -176,18 +176,3 @@ Try executing:
 
     echo date > /tmp/brooklyn-test.sh && chmod +x /tmp/brooklyn-test.sh && /tmp/brooklyn-test.sh && rm /tmp/brooklyn-test.sh
 
-{% include_relative _clouds.md %}
-{% include_relative _AWS.md %}
-{% include_relative _azure-ARM.md %}
-{% include_relative _azure-classic.md %}
-{% include_relative _cloudstack.md %}
-{% include_relative _GCE.md %}
-{% include_relative _ibm-softlayer.md %}
-{% include_relative _openstack.md %}
-{% include_relative _inheritance-and-named-locations.md %}
-{% include_relative _byon.md %}
-{% include_relative _ssh-keys.md %}
-{% include_relative _localhost.md %}
-{% include_relative _location-customizers.md %}
-{% include_relative _location-customizer-security-groups.md %}
-{% include_relative _special-locations.md %}
