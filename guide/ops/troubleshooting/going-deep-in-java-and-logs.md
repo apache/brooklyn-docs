@@ -475,4 +475,6 @@ SEVERE: Cannot start server. Server instance is not configured.
 
 {% endhighlight %}
 
-As expected, we can see here that the `unmatched-element` element has not been terminated in the `server.xml` file
+As expected, we can see here that the `unmatched-element` element has not been terminated in the `server.xml` file.
+
+

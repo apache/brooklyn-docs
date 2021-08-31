@@ -105,37 +105,9 @@ any registered policies.
 
 ## Handling Rebind Failures
 
-If rebind fails fail for any reason, details of the underlying failures will be reported 
-in the [`brooklyn.debug.log`](../paths.html). This will include the entities, locations or policies which caused an issue, and in what 
-way it failed. There are several approaches to resolving problems.
-
-1) Determine Underlying Cause
-
-Go through the log and identify the likely areas in the code from the error message.
-
-2) Seek Help
-
- Help can be found by contacting the Apache Brooklyn mailing list.
-
-3) Fix-up the State
-
-The state of each entity, location, policy and enricher is persisted in XML. 
-It is thus human readable and editable.
-
-After first taking a backup of the state, it is possible to modify the state. For example,
-an offending entity could be removed, or references to that entity removed, or its XML 
-could be fixed to remove the problem.
-
-
-4) Fixing with Groovy Scripts
-
-The final (powerful and dangerous!) tool is to execute Groovy code on the running Brooklyn 
-instance. If authorized, the REST API allows arbitrary Groovy scripts to be passed in and 
-executed. This allows the state of entities to be modified (and thus fixed) at runtime.
-
-If used, it is strongly recommended that Groovy scripts are run against a disconnected Brooklyn
-instance. After fixing the entities, locations and/or policies, the Brooklyn instance's 
-new persisted state can be copied and used to fix the production instance.
+It is possible to confuse Apache Brooklyn such that it is unable to rebind to previously persisted
+state after a restart or when running from a different instance.
+Detailed steps to troubleshoot and correct these situations can be found [here](../troubleshooting/fails-to-start.md).
 
 
 # Writing Persistable Code
