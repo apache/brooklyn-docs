@@ -30,7 +30,7 @@ directory of your Brooklyn instance. The following options are available:
 * `CLEAN` - will start up fresh (removing any existing state)
 
 `persistenceDir` - This is the directory to which Apache Brooklyn reads and writes its persistence data. The default location depends
-on your installation method. Checkout [this page](../paths.html) for more information.
+on your installation method. Checkout [this page](/guide/ops/paths) for more information.
 
 `persistenceLocation` - This is the location for an object store to read and write persisted state.
 
@@ -40,7 +40,7 @@ is carried out, for example `1s`.
 
 # File-based Persistence
 
-Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](../paths.html).
+Apache Brooklyn starts with file-based persistence by default, saving data in the [persisted state folder](/guide/ops/paths).
 For the rest of this document we will refer to this location as `%persistence-home%`.
 
 If there is already data at `%persistence-home%/data`, then a backup of the directory will 
@@ -107,7 +107,7 @@ any registered policies.
 
 It is possible to confuse Apache Brooklyn such that it is unable to rebind to previously persisted
 state after a restart or when running from a different instance.
-Detailed steps to troubleshoot and correct these situations can be found [here](../troubleshooting/fails-to-start.md).
+Detailed steps to troubleshoot and correct these situations can be found [here](/guide/ops/troubleshooting/fails-to-start).
 
 
 # Writing Persistable Code
@@ -161,7 +161,7 @@ Behaviour on rebind:
 
 * By extending `SoftwareProcess`, entities get a lot of the rebind logic for free. For 
   example, the default `rebind()` method will call `connectSensors()`.
-  See [`SoftwareProcess` Lifecycle](/blueprints/java/entities.html)
+  See [`SoftwareProcess` Lifecycle](/guide/blueprints/java/entities)
   for more details.
 * If necessary, implement rebind. The `entity.rebind()` is called automatically by the
   Brooklyn framework on rebind, after configuring the entity's config/attributes but before 

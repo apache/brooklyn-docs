@@ -25,7 +25,7 @@ If you use a passphrase or prefer a different key, these can be configured as fo
 
 
 Alternatively, you can create a specific localhost location through the location wizard tool available within the web console.
-This location will be saved as a [catalog entry](/guide/blueprints/catalog/index.html#locations-in-the-catalog) 
+This location will be saved as a [catalog entry](/guide/blueprints/catalog#locations-in-the-catalog) 
 for easy reusability.
 
 

@@ -10,7 +10,7 @@ following table will help you to easily locate these:
     <thead>
         <tr>
             <th>Installation method</th>
-            <th>Brooklyn Home</td>
+            <th>Brooklyn Home</th>
             <th>Brooklyn Logs</th>
             <th>Brooklyn Configuration</th>
             <th>Brooklyn Persisted state</th>

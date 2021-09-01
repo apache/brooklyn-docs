@@ -11,7 +11,7 @@ could cause subsequent errors if they do not hold. These relate to the machine's
 configuration, rather than additional networking or security that a given Cloud 
 might offer.
 
-Also see the [Troubleshooting](/guide/ops/troubleshooting/) docs.
+Also see the [Troubleshooting](/guide/ops/troubleshooting) docs.
 
 
 ## Remote Access
@@ -44,7 +44,7 @@ Try executing:
 
     sudo whoami
 
-See [Passwordless Sudo](/guide/locations/index.html#passwordless-sudo).
+See [Passwordless Sudo](/guide/locations#passwordless-sudo).
 
 
 ## Advertised Addresses
@@ -129,7 +129,7 @@ The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy.html).
+See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy).
 
 
 ## File System

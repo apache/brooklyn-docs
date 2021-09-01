@@ -17,7 +17,7 @@ There are several ways to write a new entity:
 * Use **[Salt formulas](/guide/blueprints/salt)**.
 * Use **[Ansible playbooks](/guide/blueprints/ansible)**.
 * Write pure-java, extending existing base-classes. For example, the `GistGenerator` 
-  [example](defining-and-deploying.html). These can use utilities such as `HttpTool` and 
+  [example](defining-and-deploying). These can use utilities such as `HttpTool` and 
   `BashCommands`.
 * Write pure-Java blueprints that extend `SoftwareProcess`. However, the YAML approach is strongly
   recommended over this approach.
@@ -99,6 +99,6 @@ hierarchy; it is suggested to avoid these, looking at the ones below instead):
 
 You might also find the following helpful:
 
-* **[Entity Design Tips](/guide/dev/tips/index.html#EntityDesign)**
+* **[Entity Design Tips](/guide/dev/tips#EntityDesign)**
 * The **[User Guide](/guide)**
 * The **[Mailing List](https://mail-archives.apache.org/mod_mbox/brooklyn-dev/)**

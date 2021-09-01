@@ -21,7 +21,7 @@ Here are some examples of the various location types:
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
-The Vagrant configuration described in [Running Apache Brooklyn](./running.html) is the recommended way of setting up a Vagrant environment. 
+The Vagrant configuration described in [Running Apache Brooklyn](running) is the recommended way of setting up a Vagrant environment. 
 This configuration comes with four basic servers configured, called `byon1` to `byon4`.
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.
@@ -36,7 +36,7 @@ $ vagrant up byon1 byon2 byon3 byon4
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here](/guide/locations/#clouds){:target="_blank"}.
+Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here](/guide/locations#clouds){:target="_blank"}.
 
 {% read _jclouds.camp.md %}
 
@@ -44,7 +44,7 @@ Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blan
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here](/guide/locations/#byon){:target="_blank"}.
+The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here](/guide/locations#byon){:target="_blank"}.
 
 {% read _byon.camp.md %}
 

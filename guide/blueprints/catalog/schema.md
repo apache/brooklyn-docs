@@ -75,7 +75,7 @@ this field disambiguates between blueprints of the same `id`.
 This can be omitted where the `version` is defined at an ancestor node, and in
 practice it usually is, so that all items in a bundle take the same version. 
 Note that this is typically *not* the version of the software being installed,
-but rather the version of the blueprint. For more information on versioning, see [Versioning]({{book.path.docs}}/blueprints/catalog/versioning.md).
+but rather the version of the blueprint. For more information on versioning, see [Versioning](/guide/blueprints/catalog/versioning).
 (Also note YAML treats numbers differently to Strings. Explicit quotes are recommended, to avoid
 `1.10` being interpretted as the number `1.1`.)
 
@@ -189,7 +189,7 @@ To avoid this situation, it is highly recommended to use OSGi version stamps as 
 
 Specify `auth` if the resource at `url` requires authentication to access.
 Do not write the username and password directly into the file; instead
-use [external configuration]({{book.path.docs}}/ops/externalized-configuration.md)
+use [external configuration](/guide/ops/externalized-configuration.md)
 to reference the values.
 
 **`include`**

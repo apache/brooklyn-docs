@@ -124,7 +124,7 @@ With this configuration enabled, all TRACE log entries are written to the `brook
 Blueprint source code and some activity may be logged at DEBUG level or higher, 
 so secrets should not be included in plain text in blueprints 
 unless the Apache Brooklyn environment and its logs are appropriately secured.
-It is recommend to use [Externalized Configuration](externalized-configuration.md) 
+It is recommend to use [Externalized Configuration](externalized-configuration) 
 to store credentials securely externally and read them as needed
 for blueprints and to prevent their inclusion in logs (and also in the UI). 
 

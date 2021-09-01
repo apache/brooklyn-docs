@@ -12,11 +12,11 @@ to a pre-provisioned network or to localhost (primarily useful for testing bluep
 
 See also:
 
-* The [Locations yaml guide](/guide/blueprints/setting-locations.html)
+* The [Locations yaml guide](/guide/blueprints/setting-locations)
 * Use within an entity of the configuration option 
-  [provisioning.properties](/guide/blueprints/entity-configuration.html#entity-provisioningproperties-overriding-and-merging)
-* How to add location definitions to the [Catalog](/guide/blueprints/catalog/); and 
-* How to use [Externalized Configuration](/guide/ops/externalized-configuration.html).
+  [provisioning.properties](/guide/blueprints/entity-configuration#entity-provisioningproperties-overriding-and-merging)
+* How to add location definitions to the [Catalog](/guide/blueprints/catalog); and 
+* How to use [Externalized Configuration](/guide/ops/externalized-configuration).
 
 The requirements for how a provisioned machine should behave will depend on the
 entites subsequently deployed there.
@@ -26,7 +26,7 @@ could cause subsequent errors if they do not hold. These relate to the machine's
 configuration, rather than additional networking or security that a given Cloud 
 might offer.
 
-Also see the [Troubleshooting]({{book.path.docs}}/ops/troubleshooting/index.md) docs.
+Also see the [Troubleshooting](/guide/ops/troubleshooting) docs.
 
 {% child_content %}
 
@@ -157,7 +157,7 @@ The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy]({{book.path.docs}}/ops/troubleshooting/increase-entropy.md).
+See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy).
 
 
 ## File System

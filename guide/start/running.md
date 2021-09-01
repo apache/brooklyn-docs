@@ -138,7 +138,7 @@ By default, no authentication is required and the web-console will listen on all
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
  
-* [Security](/guide/ops/configuration/brooklyn_cfg.html)
+* [Security](/guide/ops/configuration/brooklyn_cfg)
 * [Persistence](/guide/ops/persistence/)
 * [Cloud credentials](/guide/locations/)
 
@@ -255,6 +255,6 @@ For details on the CLI, see the [Client CLI Reference](/guide/ops/cli/) page.
 
 <div class="started-pdf-exclude">
 
-The first thing we want to do with Brooklyn is **[deploy a blueprint](/guide/start/blueprints.html)**.
+The first thing we want to do with Brooklyn is **[deploy a blueprint](/guide/start/blueprints)**.
 
 </div>

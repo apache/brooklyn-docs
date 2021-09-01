@@ -56,8 +56,8 @@ for `custom.message`, and will use the given values for `launch.command` and `ch
 {% read example_yaml/entity-config-app.yaml %}
 {% endhighlight yaml %}
 
-For details of how to write and add catalog items, see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md), 
-and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference]({{book.path.docs}}/blueprints/yaml-reference.md). 
+For details of how to write and add catalog items, see [Catalog](/guide/blueprints/catalog), 
+and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference](/guide/blueprints/yaml-reference). 
 
 
 #### Config Key Constraints
@@ -99,7 +99,7 @@ But they can be more sophisticated:
 * a `port` which allows specifying a range or set of values, eg `8080+` or `80,443,[8000-8999]`
 * a `duration` which recognises textual input, eg `2 minutes`
 * any type registered with the catalog as a `bean` using `bean-with-type`
-  (see [Catalog]({{book.path.docs}}/blueprints/catalog/index.md))
+  (see [Catalog](/guide/blueprints/catalog))
 
 ### Inheriting Configuration
 

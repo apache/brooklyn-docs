@@ -37,11 +37,11 @@ Options for speeding up provisioning include those below.
 
 #### Deploying to Bring Your Own Nodes (BYON)
 
-A [BYON location](/guide/locations/#byon) can be defined, which avoids the time 
+A [BYON location](/guide/locations#byon) can be defined, which avoids the time 
 required to provision VMs. This is fast, but has the downside that artifacts installed during a 
 previous run can interfere with subsequent runs.
 
-A variant of this is to [use Vagrant](/guide/start/running.html) (e.g. with VirtualBox) 
+A variant of this is to [use Vagrant](/guide/start/running) (e.g. with VirtualBox) 
 to create VMs on your local machine, and to use these as the target for a BYON location.
 
 These VMs should mirror the target environment as much as possible.
@@ -62,11 +62,6 @@ This is fast and simple, but has some obvious downsides:
 
 Docker containers provide a convenient way to test blueprints (and also to run blueprints in
 production!).
-
-The [Clocker project](http://www.clocker.io) allows the simple setup of Docker Engine(s), and for Docker
-containers to be used instead of VMs. For testing, this allows each run to start from a fresh 
-container (i.e. no install artifacts from previous runs), while taking advantage of the speed
-of starting containers.
 
 
 #### Local Repository of Install Artifacts
@@ -113,7 +108,7 @@ real thing.
 
 ## Writing Entity Tests
 
-Use the [test framework](/guide/blueprints/test/) to write test cases. This will make 
+Use the [test framework](/guide/blueprints/test) to write test cases. This will make 
 automated (regression) testing easier, and will allow others to easily confirm that the entity 
 works in their environment.
 
@@ -180,4 +175,4 @@ below may also be of help:
 
 ALWAYS keep logs when there is an error.
 
-See the [Troubleshooting](/guide/ops/troubleshooting/) guide for more information. 
+See the [Troubleshooting](/guide/ops/troubleshooting) guide for more information. 
