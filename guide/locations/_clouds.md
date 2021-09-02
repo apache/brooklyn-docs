@@ -142,7 +142,7 @@ For more keys and more detail on the keys below, see
 
 - If you want to investigate failures, set `destroyOnFailure: false`
   to keep failed VM's around. (You'll have to manually clean them up.)
-  The default is false: if a VM fails to start, or is never ssh'able, then the VM will be terminated.
+  The default is true: if a VM fails to start, or is never ssh-able, then the VM will be terminated.
   
 - You can set `useMachinePublicAddressAsPrivateAddress` to true to overwrite the VMs private IP with its public IP. This is useful as it can be difficult to get VMs communicating via the private IPs they are assigned in some clouds.  Using this config, blueprints which use private IPs can still be deployed to these clouds.
   
