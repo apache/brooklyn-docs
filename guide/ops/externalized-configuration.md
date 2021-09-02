@@ -21,22 +21,7 @@ of users, with `brooklyn.cfg` changing the behaviour depending on the deployment
 
 Here is the blueprint:
 
-{% highlight yaml %}
-name: MyApplication
-services:
-- type: brooklyn.entity.webapp.jboss.JBoss7Server
-  name: AppServer HelloWorld
-  brooklyn.config:
-    wars.root: https://search.maven.org/remotecontent?filepath=org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.12.0/brooklyn-example-hello-world-sql-webapp-0.12.0.war # BROOKLYN_VERSION
-    http.port: 8080+
-    java.sysprops:
-      brooklyn.example.db.url: 
-        $brooklyn:formatString:
-          - "jdbc:postgresql://%s/myappdb?user=%s&password=%s"
-          - $brooklyn:external("servers", "postgresql")
-          - $brooklyn:external("credentials", "postgresql-user")
-          - $brooklyn:external("credentials", "postgresql-password")
-{% endhighlight %}
+{% read external/_externalised-configuration-blueprint.camp.md %}
 
 You can see that when we are building up the JDBC URL, we are using the `external` function. This takes two parameters:
 the first is the name of the configuration supplier, the second is the name of a key that is stored by the configuration
@@ -111,22 +96,7 @@ function takes two parameters:
 When resolving the external reference, Brooklyn will first identify the *supplier* of the information, then it will
 give the supplier the *key*. The returned value will be substituted into the blueprint.
 
-You can use `$brooklyn:external` directly:
-
-{% highlight yaml %}
-name: MyApplication
-brooklyn.config:
-  example: $brooklyn:external("supplier", "key")
-{% endhighlight %}
-
-or embed the `external` function inside another `$brooklyn` DSL function, such as `$brooklyn:formatString`:
-
-{% highlight yaml %}
-name: MyApplication
-brooklyn.config:
-  example: $brooklyn:formatString("%s", external("supplier", "key"))
-{% endhighlight %}
-
+{% read external/_externalised-configuration-twoways.camp.md %}
 
 ## Referring to External Configuration in brooklyn.cfg
 
@@ -140,21 +110,7 @@ brooklyn.location.jclouds.aws-ec2.credential=$brooklyn:external("mysupplier", "a
 
 ## Referring to External Configuration in Catalog Items
 
-The same blueprint language DSL can be used within YAML catalog items. For example:
-
-    brooklyn.catalog:
-      id: com.example.myblueprint
-      version: "1.2.3"
-      itemType: entity
-      brooklyn.libraries:
-      - >
-        $brooklyn:formatString("https://%s:%s@repo.example.com/libs/myblueprint-1.2.3.jar", 
-        external("mysupplier", "username"), external("mysupplier", "password"))
-      item:
-        type: com.example.MyBlueprint
-
-Note the `>` in the example above is used to split across multiple lines.
-
+{% read external/_externalised-configuration-catalog.camp.md %}
 
 ## Suppliers available with Brooklyn
 

@@ -107,6 +107,9 @@ module JekyllRelativeLinks
 
     def url_for_path_absolute(path)
       is_absolute = path.start_with? "/"
+      is_section = path.include? "#"
+      fragment = path.sub(/[^#]*#/, "") if is_section
+      path = path.sub(/#.*/,"") if is_section
 
       path = path.sub(%r!\A/!, "")
       # puts "lookup #{path} / #{path.sub(%r!\.html!.freeze, ".md")}"
@@ -117,6 +120,7 @@ module JekyllRelativeLinks
       url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
       url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.html") unless url
       url = "/" + url if url && is_absolute && !url.start_with?("/")
+      url = "#{url}##{fragment}" if is_section
       url
     end
 
