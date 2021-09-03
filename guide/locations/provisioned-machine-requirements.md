@@ -129,7 +129,7 @@ The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy).
+See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy.md).
 
 
 ## File System

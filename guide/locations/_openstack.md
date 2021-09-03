@@ -10,7 +10,7 @@ section_position: 7
 
 Brooklyn requires the following API to deploy an application onto an OpenStack-based provider
 
-- Identity API (a.k.a. OpenStack Keystone): [Identity API v2](https://developer.openstack.org/api-ref/identity/v2/) and [Identity API v3](https://developer.openstack.org/api-ref/identity/v3/) The Identity API provides an authentication and authorization service for other OpenStack services. It also provides a catalog of endpoints for all OpenStack services, like the Compute service, a.k.a OpenStack Nova.
+- Identity API (a.k.a. OpenStack Keystone): [Identity API v2](https://developer.openstack.org/api-ref/identity/v2-ext/) and [Identity API v3](https://developer.openstack.org/api-ref/identity/v3/) The Identity API provides an authentication and authorization service for other OpenStack services. It also provides a catalog of endpoints for all OpenStack services, like the Compute service, a.k.a OpenStack Nova.
 
 - Compute API (a.k.a. OpenStack Nova): [Compute API](https://developer.openstack.org/api-ref/compute/) manages the lifecycle of compute instances in an OpenStack environment. Responsibilities include spawning, scheduling and decommissioning of machines on demand by talking to different hypervisors.
 In some old OpenStack installations, `Nova SecurityGroupAPI extension` is generally used to  manage Security Groups, when required.
@@ -77,7 +77,7 @@ as an openrc.sh file. It is usually available from API Access tab in "Access & S
 This file will normally contain the identity and credential.
 
 Users are strongly recommended to use 
-[externalized configuration](/guide/ops/externalized-configuration) for better
+[externalized configuration](/guide/ops/externalized-configuration.md) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 ### Common Configuration Options

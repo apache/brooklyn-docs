@@ -23,7 +23,7 @@ Management](https://msdn.microsoft.com/en-us/library/aa384426(v=vs.85).aspx).
 
 WinRM is available by default in Windows Server, but is not enabled by default. Brooklyn will, in most cases, be able
 to switch on WinRM support, but this is dependent on your cloud provider supporting a user metadata service with script
-execution (see [below](/guide/blueprints/winrm/troubleshoot#user-metadata-service-requirement))
+execution (see [below](/guide/blueprints/winrm/troubleshoot.md#user-metadata-service-requirement))
 
 
 Locations for Windows
@@ -73,7 +73,7 @@ A Sample Blueprint
 
 Creating a Windows VM is done using the `org.apache.brooklyn.entity.software.base.VanillaWindowsProcess` entity type. This is very similar
 to `VanillaSoftwareProcess`, but adapted to work for Windows and WinRM instead of Linux. We suggest you read the
-[documentation for VanillaSoftwareProcess](/guide/blueprints/custom-entities#vanilla-software-using-bash) to find out what you
+[documentation for VanillaSoftwareProcess](/guide/blueprints/custom-entities.md#vanilla-software-using-bash) to find out what you
 can do with this entity.
 
 Entity authors are strongly encouraged to write Windows PowerShell or Batch scripts as separate 
@@ -116,8 +116,8 @@ Learn More
 
 A few other WinRM resources are available:
 
-* [Tips and Tricks](tips)
-* [About the Winrm4j Client](client)
-* [Troubleshooting](troubleshoot)
-* [Limitations](limitations)
+* [Tips and Tricks](tips.md)
+* [About the Winrm4j Client](client.md)
+* [Troubleshooting](troubleshoot.md)
+* [Limitations](limitations.md)
 

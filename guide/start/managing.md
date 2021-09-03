@@ -37,7 +37,7 @@ $ br app
  hTPAF19s   Tomcat   RUNNING   ajVVAhER
 </pre>
 
-A full list of abbreviations such as this can be found in the [CLI reference guide](/guide/ops/cli/cli-ref-guide#abbreviations){:target="_blank"}.
+A full list of abbreviations such as this can be found in the [CLI reference guide](/guide/ops/cli/cli-ref-guide.md#abbreviations){:target="_blank"}.
 
 In the above example the Id `hTPAF19s` and the Name `Tomcat` are shown. You can use either of these handles to monitor and control the application. The Id shown for your application will be different to this but the name should be the same, note that if you are running multiple applications the Name may not be unique.
 
@@ -492,4 +492,4 @@ runs the ```config``` command with application scope of ```Tomcat``` and entity 
 ## Next
 
 We will look next at a slightly more complex example, which will illustrate the capabilities of Brooklyn's
-**[policies](policies)** mechanism, and how to configure dependencies between application entities.
+**[policies](policies.md)** mechanism, and how to configure dependencies between application entities.

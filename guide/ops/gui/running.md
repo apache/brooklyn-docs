@@ -7,7 +7,7 @@ menu_parent: index.md
 
 This guide will walk you through connecting to the Brooklyn Server Graphical User Interface and performing various tasks.
 
-For an explanation of common Brooklyn Concepts see the [Brooklyn Concepts Quickstart](/guide/start/concept-quickstart) or see the  full guide in the [Brooklyn Concepts](/guide/concepts) chapter of the [User Guide](/guide).
+For an explanation of common Brooklyn Concepts see the [Brooklyn Concepts Quickstart](/guide/start/concept-quickstart.md) or see the  full guide in the [Brooklyn Concepts](/guide/concepts) chapter of the [User Guide](/guide).
 
 This guide assumes that you are using Linux or Mac OS X and that Brooklyn Server will be running on your local system.
 
@@ -17,7 +17,7 @@ If you haven't already done so, you will need to start Brooklyn Server using the
 It is not necessary at this time, but depending on what you are going to do, 
 you may wish to set up some other configuration options first,
  
-* [Security](/guide/ops/configuration/brooklyn_cfg)
+* [Security](/guide/ops/configuration/brooklyn_cfg.md)
 * [Persistence](/guide/ops/persistence)
 
 Now start Brooklyn with the following command:
@@ -27,7 +27,7 @@ $ cd apache-brooklyn-{{ site.brooklyn.version }}
 $ bin/brooklyn launch
 {% endhighlight %}
 
-Please refer to the [Server CLI Reference](/guide/ops/server-cli-reference) for details of other possible command line options.
+Please refer to the [Server CLI Reference](/guide/ops/server-cli-reference.md) for details of other possible command line options.
 
 Brooklyn will output the address of the management interface:
 
@@ -51,4 +51,4 @@ No applications have been deployed yet, so the "Create Application" dialog opens
 
 
 ## Next
-The next section will show how to **[deploy a blueprint](blueprints)**.
+The next section will show how to **[deploy a blueprint](blueprints.md)**.

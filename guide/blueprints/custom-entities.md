@@ -227,7 +227,7 @@ before the policy restarts it.
 For an even more interesting way to test it, look at the blueprint defining
 [a netcat server and client](example_yaml/vanilla-bash-netcat-w-client.yaml).
 This uses `brooklyn.initializers`
-(see in the [YAML reference](yaml-reference)) 
+(see in the [YAML reference](yaml-reference.md)) 
 to define an effector to `sayHiNetcat` on the `Simple Pinger` client,
 using `env` variables to inject the `netcat-server` location and 
 `parameters` to pass in per-effector data:
@@ -287,7 +287,7 @@ command over ssh every 5 seconds. This can be very CPU intensive when there are 
 is to disable the ssh-polling (by setting `sshMonitoring.enabled: false`) and to configure a different 
 health-check.
 
-See documentation on the [Entity's error status](/guide/ops/troubleshooting/overview#entitys-error-status)
+See documentation on the [Entity's error status](/guide/ops/troubleshooting/overview.md#entitys-error-status)
 for how Brooklyn models an entity's health.
 
 In the snippet below, we'll define a new health-check sensor (via HTTP polling), and will automatically add this

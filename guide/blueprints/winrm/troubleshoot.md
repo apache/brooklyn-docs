@@ -9,7 +9,7 @@ much of the [operations troubleshooting guide](/guide/ops/troubleshooting) is ap
 
 ### WinRM Basics
 
-If you can't get WinRM to work at all, see the notes on [the Winrm4j client](client) which includes detailed troubleshooting
+If you can't get WinRM to work at all, see the notes on [the Winrm4j client](client.md) which includes detailed troubleshooting
 for basic connectivity.
 
 
@@ -31,12 +31,12 @@ else then the setup will not be done and the VM may not not be accessible remote
 When a script is run over WinRM over HTTP, the credentials under which the script are run are marked as
 'remote' credentials, which are prohibited from running certain security-related operations. This may prevent certain
 operations. The installer from Microsoft SQL Server is known to fail in this case, for example. For a workaround, please
-refer to [How and Why to re-authenticate withing a PowerShell script](tips#how-and-why-to-re-authenticate-within-a-powershell-script) 
+refer to [How and Why to re-authenticate withing a PowerShell script](tips.md#how-and-why-to-re-authenticate-within-a-powershell-script) 
 above.
 
 In some cases where security-related operation are to be executed, it may require the use of `CredSSP` to obtain
 the correct Administrator privileges: you may otherwise get an access denied error. See the sub-section
-[How and Why to re-authenticate within a powershell script](tips#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
+[How and Why to re-authenticate within a powershell script](tips.md#how-and-why-to-re-authenticate-within-a-powershell-script) for more details.
 
 
 ### WebServiceException: Could not send Message

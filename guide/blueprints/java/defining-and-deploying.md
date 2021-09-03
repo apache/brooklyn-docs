@@ -119,7 +119,7 @@ inside `src/test/java`.
 
 Again you will need to substitute the github access token you generated in the previous section for
 the placeholder text `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`. See the section on 
-[externalised configuration](/guide/ops/externalized-configuration) 
+[externalised configuration](/guide/ops/externalized-configuration.md) 
 for how to store these credentials more securely. 
 
 {% highlight java %}

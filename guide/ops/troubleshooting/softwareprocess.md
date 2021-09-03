@@ -4,7 +4,7 @@ title: Troubleshooting SoftwareProcess Entities
 toc: /guide/toc.json
 ---
 
-The [troubleshooting overview](overview) in Brooklyn gives 
+The [troubleshooting overview](overview.md) in Brooklyn gives 
 information for how to find more information about errors.
 
 If that doesn't give enough information to diagnose, fix or workaround the problem, then it can be required
@@ -43,7 +43,7 @@ It is worth checking that the process is running, e.g. using `ps aux` to look fo
 Some entities also write the pid of the process to `pid.txt` in the run directory.
 
 It is also worth checking if the required port is accessible. This is discussed in the troubleshooting guide 
-[Server Connectivity](/guide/ops/troubleshooting/connectivity), 
+[Server Connectivity](/guide/ops/troubleshooting/connectivity.md), 
 including listing the ports in use:
 execute `netstat -antp` (or on OS X `netstat -antp TCP`) to list the TCP ports in use (or use
 `-anup` for UDP).

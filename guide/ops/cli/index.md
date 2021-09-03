@@ -8,7 +8,7 @@ children:
 
 
 **NOTE:** These documents are for using the Brooklyn Client CLI tool to access a running Brooklyn Server.  For
-information on starting on a Brooklyn Server, refer to [Server CLI Reference](/guide/ops/server-cli-reference).
+information on starting on a Brooklyn Server, refer to [Server CLI Reference](/guide/ops/server-cli-reference.md).
 
 ## Obtaining the CLI tool
 

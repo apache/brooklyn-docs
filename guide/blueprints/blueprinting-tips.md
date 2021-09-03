@@ -41,7 +41,7 @@ A [BYON location](/guide/locations#byon) can be defined, which avoids the time
 required to provision VMs. This is fast, but has the downside that artifacts installed during a 
 previous run can interfere with subsequent runs.
 
-A variant of this is to [use Vagrant](/guide/start/running) (e.g. with VirtualBox) 
+A variant of this is to [use Vagrant](/guide/start/running.md) (e.g. with VirtualBox) 
 to create VMs on your local machine, and to use these as the target for a BYON location.
 
 These VMs should mirror the target environment as much as possible.

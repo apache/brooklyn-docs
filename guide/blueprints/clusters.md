@@ -92,4 +92,4 @@ A set of sensors are defined for dynamic cluster to feed back information on its
 ### Policies
 
 Dynamic cluster has a set of policies which can auto-replace and resize the members as well as determine primary nodes and other
-higher level actions. These policies are detailed on the [clusters and policies](clusters-and-policies) page.
+higher level actions. These policies are detailed on the [clusters and policies](clusters-and-policies.md) page.

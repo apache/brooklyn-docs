@@ -123,5 +123,5 @@ Use an Apache Brooklyn BYON blueprint to try easily other connection options.
 1. Restart WinRM on both machines (some changes need a restart to take effect): `Restart-Service WinRM`
 1. If you want to configure Windows target host with HTTPS then check the article [Configuring WINRM for HTTPS](https://support.microsoft.com/en-us/kb/2019527)
 
-In some cases the problems may be outwith the client, and it might be useful to look at [Troubleshooting](troubleshoot).
+In some cases the problems may be outwith the client, and it might be useful to look at [Troubleshooting](troubleshoot.md).
 

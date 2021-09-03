@@ -46,7 +46,7 @@ and then convert it into a keystore `keystore.jks` as follows:
 
 ## HTTPS Configuration
 
-In [`org.ops4j.pax.web.cfg`](/guide/ops/paths) in the Brooklyn distribution root, un-comment the settings:
+In [`org.ops4j.pax.web.cfg`](/guide/ops/paths.md) in the Brooklyn distribution root, un-comment the settings:
 
 {% highlight properties %}
 org.osgi.service.http.port.secure=8443

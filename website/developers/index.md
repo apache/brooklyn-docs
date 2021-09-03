@@ -33,18 +33,18 @@ and are comfortable doing so.
 
 We heartily welome contributions and new members.
 There's nothing official needed to get involved; 
-simply come say hello somewhere in the [community](../community/index.html):
+simply come say hello somewhere in the [community](../community/index.md):
 
-- [Mailing lists](../community/mailing-lists.html)
-- [IRC channel](../community/irc.html)
+- [Mailing lists](../community/mailing-lists.md)
+- [IRC channel](../community/irc.md)
 - [JIRA for bug tracking](https://issues.apache.org/jira/browse/BROOKLYN)
 
 Then [get the code](code/).
 
 When you have a blueprint or an improvement you want to share, 
-there are a few instructions to note on [how to contribute](how-to-contribute.html).
+there are a few instructions to note on [how to contribute](how-to-contribute.md).
 
 If you're looking to learn more about the codebase itself, 
 have a look at [Developer Guide](/guide/dev/).
-There are also a number of [development bookmarks](links.html) for the tools we use
+There are also a number of [development bookmarks](links.md) for the tools we use
 (git, jenkins, jira).

@@ -24,7 +24,7 @@ Publish the source and binary distributions to the pre-release area
 -------------------------------------------------------------------
 
 You will need to have checked out the Apache distribution Subversion repository located at
-https://dist.apache.org/repos/dist/dev/brooklyn. Please refer to [Prerequisites](prerequisites.html) for
+https://dist.apache.org/repos/dist/dev/brooklyn. Please refer to [Prerequisites](prerequisites.md) for
 information.
 
 In your workspace for the `dist.apache.org` repo, create a directory with the artifact name and version:
