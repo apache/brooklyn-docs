@@ -7,7 +7,7 @@
 # - speculatively map .html to .md when doing the lookup
 # - make url_for_path public, and have way to inject site and initialize context outside of normal generator usage
 
-# distributed under the MIT License as follows (note this is only used to build the docs, not included with any brooklyn output):
+# distributed under the MIT License as follows (note this is only used to build the docs, not included with any AMP output):
 
 # MIT License
 #
@@ -92,7 +92,7 @@ module JekyllRelativeLinks
         next original unless replaceable_link?(link.path)
 
         path = path_from_root(link.path, url_base)
-        url  = url_for_path(path)
+        url  = url_for_path(path, document.relative_path)
 
         next original unless url
 
@@ -126,13 +126,26 @@ module JekyllRelativeLinks
 
     private
 
-    def url_for_path(path)
+    def url_for_path(path, src)
       path.sub!(%r!\A/!, "")
       # puts "lookup #{path} / #{path.sub(%r!\.html!.freeze, ".md")}"
       url = url_for_path_internal(path)
-      # also try html and / mapped to md - useful if using a baseurl
-      url = url_for_path_internal(path.sub(%r!\.html!.freeze, ".md")) unless url
-      url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
+
+      pathWithText = %r!^(.*\.(png|jpg|gif|svg))( .*)\z!.freeze.match(path)
+      # don't match images
+      if (!pathWithText)
+        # try to find it with .html suffix or if path to folder with or without / or if extension omitted
+        url = url_for_path_internal(path.sub(%r!\.html!.freeze, ".md")) unless url
+        url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
+        url = url_for_path_internal(path.sub(%r!\z!.freeze, "") + "/index.md") unless url
+        url = url_for_path_internal(path.sub(%r!\z!.freeze, ".md")) unless url
+        puts "WARN: unresolved link in #{src}:  #{path}" if !url
+
+      else
+        url = url_for_path(pathWithText[1], src) if pathWithText
+        url = url + pathWithText[2] if url
+        url = path unless url
+      end
       url
     end
 

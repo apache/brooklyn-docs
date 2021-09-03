@@ -55,6 +55,11 @@ module JekyllRead
       # support vars and paths relative to a file being readj'd
       jekyllSite = context.registers[:site]
       targetPage = Jekyll::Page.new(jekyllSite, jekyllSite.source, File.dirname(file), File.basename(file))
+
+      @relative_link_parser = JekyllRelativeLinks::Generator.new(nil)
+      @relative_link_parser.prepare_for_site(jekyllSite)
+      @relative_link_parser.replace_relative_links!(targetPage)
+
       targetPage.render(jekyllSite.layouts, jekyllSite.site_payload)
       targetPage.output
     end
