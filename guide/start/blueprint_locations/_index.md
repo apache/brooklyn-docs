@@ -21,7 +21,7 @@ Here are some examples of the various location types:
 <div class="tab-content">
 <div id="impl-1" class="tab-pane fade in active">
 
-The Vagrant configuration described in [Running Apache Brooklyn](running) is the recommended way of setting up a Vagrant environment. 
+The Vagrant configuration described in [Running Apache Brooklyn](running.md) is the recommended way of setting up a Vagrant environment. 
 This configuration comes with four basic servers configured, called `byon1` to `byon4`.
 
 These can be launched by entering the following command into the terminal in the vagrant configuration directory.

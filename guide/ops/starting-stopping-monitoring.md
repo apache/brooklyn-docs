@@ -33,7 +33,7 @@ With no configuration, this will launch the Brooklyn web console and REST API on
 listening on all network interfaces. No credentials are required by default. It is strongly
 recommended to [configure security](configuration).
 
-See the [Server CLI Reference](server-cli-reference) for more information
+See the [Server CLI Reference](server-cli-reference.md) for more information
 about the Brooklyn server process.
 
 
@@ -73,5 +73,5 @@ check process apachebrooklyn with pidfile /opt/apache-brooklyn/pid_java
 
 In addition to monitoring the Brooklyn process itself, you will almost certainly
 want to monitor resource usage of Brooklyn. In particular, please see the
-[Requirements](requirements#disk-space) section for a discussion on Brooklyn's disk
+[Requirements](requirements.md#disk-space) section for a discussion on Brooklyn's disk
 space requirements.

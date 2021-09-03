@@ -16,14 +16,14 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging](/guide/ops/logging)
+* [Logging](/guide/ops/logging.md)
 * [Persistence](persistence)
 * [High availability](high-availability)
 
 
 ### <a id="prerequisites"></a>Set up the Prerequisites
 
-Check that the server meets the [requirements](requirements).
+Check that the server meets the [requirements](requirements.md).
 Then configure the server as follows:
 
 * install Java JRE or JDK (version 8 or later)
@@ -32,8 +32,8 @@ Then configure the server as follows:
 * if the "localhost" location will be used, enable [passwordless ssh login](/guide/locations#ssh-keys)
 * create a `~/.brooklyn` directory on the host with `$ mkdir ~/.brooklyn`
 * check your `iptables` or other firewall service, making sure that incoming connections on port 8443 is not blocked
-* check that the [Linux kernel entropy](/guide/ops/troubleshooting/increase-entropy) is sufficient
-* check that the [ulimit values](/guide/ops/troubleshooting/increase-system-resource-limits) are sufficiently high
+* check that the [Linux kernel entropy](/guide/ops/troubleshooting/increase-entropy.md) is sufficient
+* check that the [ulimit values](/guide/ops/troubleshooting/increase-system-resource-limits.md) are sufficiently high
 * ensure external libraries are up-to-date, including `nss` for SSL. 
 * ensure the time is continually accurate, ideally by running a service like the [ntp daemon](http://www.ntp.org/).
 
@@ -71,7 +71,7 @@ Let's setup some paths for easy commands.
 
 ### <a id="configuring-properties"></a>Configuring brooklyn.cfg
 
-Set up `brooklyn.cfg` as described [here](configuration/brooklyn_cfg):
+Set up `brooklyn.cfg` as described [here](configuration/brooklyn_cfg.md):
 
 * Configure the users who should have access
 * Turn on HTTPS

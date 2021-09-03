@@ -4,7 +4,7 @@ layout: website-normal
 ---
 
 Effectors perform an operation of some kind, carried out by a Brooklyn Entity.
-They can be manually invoked or triggered by a [Policy](/guide/blueprints/policies).
+They can be manually invoked or triggered by a [Policy](/guide/blueprints/policies/).
 
 Common uses of an effector include the following:
 

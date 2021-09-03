@@ -120,7 +120,7 @@ the User Guide.
 ### Externalized Configuration
 
 For simplicity, the examples above have included the cloud credentials. For a production system, 
-it is strongly recommended to use [Externalized Configuration](/guide/ops/externalized-configuration)
+it is strongly recommended to use [Externalized Configuration](/guide/ops/externalized-configuration.md)
 to retrieve the credentials from a secure credentials store, such as [Vault](https://www.vaultproject.io).
 
 

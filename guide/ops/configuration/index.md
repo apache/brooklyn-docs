@@ -12,7 +12,7 @@ children:
 
 Apache Brooklyn contains a number of configuration options managed across several files. 
 Historically Brooklyn has been configured through a brooklyn.properties file, this changed 
-to a [brooklyn.cfg](brooklyn_cfg) file when the Karaf release became the default in Brooklyn 0.12.0.
+to a [brooklyn.cfg](brooklyn_cfg.md) file when the Karaf release became the default in Brooklyn 0.12.0.
 
 The configurations for [persistence](/guide/ops/persistence) and [high availability](/guide/ops/high-availability) are described
 elsewhere in this manual.
@@ -73,7 +73,7 @@ Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detail
 
 ### HTTPS Configuration
 
-See [HTTPS Configuration](https) for general information on configuring HTTPS.
+See [HTTPS Configuration](https.md) for general information on configuring HTTPS.
 
 
 <!--
@@ -83,7 +83,7 @@ See [HTTPS Configuration](https) for general information on configuring HTTPS.
 ----------
 ## Catalog in OSGi  
 With the traditional launcher, Brooklyn loads the initial contents of the catalog from a `default.catalog.bom` file
-as described in the section on [installation](/guide/ops/production-installation). Brooklyn finds Java 
+as described in the section on [installation](/guide/ops/production-installation.md). Brooklyn finds Java 
 implementations to provide for certain things in blueprints (entities, enrichers etc.) by scanning the classpath. 
 
 In the OSGI world this approach is not used, as each bundle only has visibility of its own and its imported Java packages. 

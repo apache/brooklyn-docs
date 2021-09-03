@@ -6,7 +6,7 @@ To use the examples, you'll need ``curl``, ``git``, ``java`` (1.6+), and ``maven
 
 ### Installing Brooklyn
 
-(If you followed the [Getting Started](/use/guide/quickstart/index.html) instructions, you can skip to Installing the Examples.)
+(If you followed the [Getting Started](/use/guide/quickstart/) instructions, you can skip to Installing the Examples.)
 
 {% if SNAPSHOT %}
 
@@ -47,10 +47,10 @@ Grab a copy of the brooklyn-examples source code and build it with Maven:
 {% if SNAPSHOT %}
 Please note, these instructions are for a SNAPSHOT release of Brooklyn,
 so proceed with caution. 
-For the latest stable version, go [here](/meta/versions.html). 
+For the latest stable version, go [here](/meta/versions.md). 
 {% endif %}
 
 For more information on ways to download Brooklyn please
-see the [download page](/guide/start/download.html).
+see the [download page](/guide/start/download.md).
 For more information on the Brooklyn CLI and launching apps,
 please visit [this section of the user guide](/guide/use/guide/management/index.html#cli).

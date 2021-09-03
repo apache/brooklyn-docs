@@ -65,4 +65,4 @@ Instead of pasting the YAML blueprint each time, it can be added to the Brooklyn
 ## Next 
 
 So far we have touched on Brooklyn's ability to *deploy* an application blueprint to a cloud provider.  
-The next section will show how to **[Monitor and Manage Applications](managing)**.
+The next section will show how to **[Monitor and Manage Applications](managing.md)**.

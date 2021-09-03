@@ -100,7 +100,7 @@ The latest stable release can be accessed on the [main download page](/website/d
 
 ## Release Notes
 
-Release notes can be found [here](/guide/misc/release-notes).
+Release notes can be found [here](/guide/misc/release-notes.md).
 
 {% comment %}
 TODO
@@ -110,7 +110,7 @@ TODO
 
 Examples can be found in the main Brooklyn codebase, in the `/examples` directory.
 
-A good example to start with is the [Elastic Web Cluster](/guide/use/examples/webcluster).
+A good example to start with is the [Elastic Web Cluster](/guide/use/examples/webcluster.md).
 
 {% endcomment %}
 

@@ -279,4 +279,4 @@ If you want to try this with a real example application using the Cassandra clus
 
 ## Contact us!
 
-If you encounter any difficulties or have any comments, please [tell us](/guide/meta/contact.html) and we'll do our best to help.
+If you encounter any difficulties or have any comments, please [tell us](/guide/meta/contact.md) and we'll do our best to help.

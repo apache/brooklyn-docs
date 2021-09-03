@@ -57,7 +57,7 @@ for `custom.message`, and will use the given values for `launch.command` and `ch
 {% endhighlight yaml %}
 
 For details of how to write and add catalog items, see [Catalog](/guide/blueprints/catalog), 
-and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference](/guide/blueprints/yaml-reference). 
+and for a complete reference on the syntax of `brooklyn.parameters` see that section of the [YAML Reference](/guide/blueprints/yaml-reference.html). 
 
 
 #### Config Key Constraints

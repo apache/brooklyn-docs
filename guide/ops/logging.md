@@ -28,7 +28,7 @@ karaf client, e.g. `log:tail`, to read these messages.
 
 In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
 
-See: [Logging - OSGi based Apache Brooklyn](/guide/dev/tips/logging#osgi-based-apache-brooklyn) <br/>
+See: [Logging - OSGi based Apache Brooklyn](/guide/dev/tips/logging.md#osgi-based-apache-brooklyn) <br/>
 [https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
 
 ## Standard Configuration
@@ -286,7 +286,7 @@ balancing the trade-off between data availability and resource usage.
 The following resources may be useful when configuring logging:
 
 * The [logback-includes]({{ site.brooklyn.url.git }}/usage/logback-includes) project
-* [Brooklyn Developer Guide](/guide/dev/tips/logging) logging tips
+* [Brooklyn Developer Guide](/guide/dev/tips/logging.md) logging tips
 * The [Logback Project](http://logback.qos.ch/) home page
 * [OPS4J Pax Logging](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
 * [Elasticsearch Best Practices](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/best_practices.html)

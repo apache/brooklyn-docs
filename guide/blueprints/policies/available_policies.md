@@ -50,7 +50,7 @@ brooklyn.policies:
 {% endhighlight %}
 
 Typically this is used in conjunction with the ServiceFailureDetector enricher to emit the trigger sensor.
-The [introduction to policies](/guide/start/policies) shows a worked 
+The [introduction to policies](/guide/start/policies.md) shows a worked 
 example of these working together.
 
 
@@ -60,7 +60,7 @@ example of these working together.
 
 The ServiceReplacer attaches to a DynamicCluster and replaces a failed member in response to 
 `ha.entityFailed` (or other configurable sensor) as typically emitted by the ServiceFailureDetector enricher.  
-The [introduction to policies](/guide/start/policies) shows a worked 
+The [introduction to policies](/guide/start/policies.md) shows a worked 
 example of this policy in use.
 
 
@@ -70,7 +70,7 @@ example of this policy in use.
 
 The ServiceFailureDetector enricher detects problems and fires an `ha.entityFailed` (or other configurable sensor)
 for use by ServiceRestarter and ServiceReplacer.
-The [introduction to policies](/guide/start/policies) shows a worked 
+The [introduction to policies](/guide/start/policies.md) shows a worked 
 example of this in use.
 
 
