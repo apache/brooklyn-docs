@@ -5,7 +5,7 @@ section_type: inline
 section_position: 6
 ---
 
-## IBM SoftLayer
+## IBM Cloud (previously IBM SoftLayer)
 
 ### Credentials
 
@@ -28,20 +28,20 @@ credential management, for example using [Vault](https://www.vaultproject.io/).
 
 Below are examples of configuration options that use values specific to Softlayer:
 
-* The `region` is the [Softlayer datacenter](http://www.softlayer.com/data-centers).
+* The `region` is the datacenter where the vm will be deployed.
   For example, `region: dal05`.
 
 * The `hardwareId` is an auto-generated combination of the hardware configuration options.
   This is because there is no concept of hardwareId or hardware profile names in Softlayer. 
   An example value is `hardwareId: "cpu=1,memory=1024,disk=25,type=LOCAL"`.
 
-* The `imageId` is the [Image template](https://knowledgelayer.softlayer.com/learning/introduction-image-templates).
+* The `imageId` is the [Image template](https://cloud.ibm.com/docs/image-templates?topic=image-templates-ordering-an-instance-from-an-image-template).
   For example, `imageId: CENTOS_6_64`.
 
 
 ### VLAN Selection
 
-SoftLayer may provision VMs in different VLANs, even within the same region.
+IBM Cloud may provision VMs in different VLANs, even within the same region.
 Some applications require VMs to be on the *same* internal subnet; blueprints
 for these can specify this behaviour in SoftLayer in one of two ways.
 
@@ -119,7 +119,7 @@ are:
 An entity being deployed to a customized location will have the VLAN ids set as
 sensors, with the same names as the last two configuration keys.
 
-***NOTE*** If the SoftLayer location is already configured with specific VLANs
+***NOTE*** If the IBM Cloud location is already configured with specific VLANs
 then this customizer will have no effect.
 
 
