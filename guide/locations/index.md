@@ -12,11 +12,11 @@ to a pre-provisioned network or to localhost (primarily useful for testing bluep
 
 See also:
 
-* The [Locations yaml guide](/guide/blueprints/setting-locations)
+* The [Locations yaml guide](/guide/blueprints/setting-locations.md)
 * Use within an entity of the configuration option 
-  [provisioning.properties](/guide/blueprints/entity-configuration#entity-provisioningproperties-overriding-and-merging)
+  [provisioning.properties](/guide/blueprints/entity-configuration.md#entity-provisioningproperties-overriding-and-merging)
 * How to add location definitions to the [Catalog](/guide/blueprints/catalog); and 
-* How to use [Externalized Configuration](/guide/ops/externalized-configuration).
+* How to use [Externalized Configuration](/guide/ops/externalized-configuration.md).
 
 The requirements for how a provisioned machine should behave will depend on the
 entites subsequently deployed there.
@@ -146,7 +146,7 @@ The result should be more than 1M.
 
 If not, consider setting `installDevUrandom: true` for jclouds-based locations.
 
-See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy).
+See instructions to [Increase Entropy](/guide/ops/troubleshooting/increase-entropy.md).
 
 
 ## File System

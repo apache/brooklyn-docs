@@ -7,7 +7,7 @@ toc: /guide/toc.json
 If you wish to send a detailed report, then depending on the nature of the problem, consider 
 collecting the following information.
 
-See [Brooklyn Slow or Unresponse](slow-unresponsive) docs for details of these commands.
+See [Brooklyn Slow or Unresponse](slow-unresponsive.md) docs for details of these commands.
  
 {% highlight bash %}
 BROOKLYN_HOME=/home/users/brooklyn/apache-brooklyn-0.9.0-bin

@@ -120,7 +120,7 @@ contribute code changes to Apache Brooklyn, we recommend you get the source code
 </div><!-- col -->
 </div><!-- row -->
 
-A full list of download links including Maven coordinates are [here](/guide/misc/download.html).
+A full list of download links including Maven coordinates are [here](/guide/misc/download.md).
 <br/><br/>
 
 ## What Next?
@@ -134,7 +134,7 @@ A full list of download links including Maven coordinates are [here](/guide/misc
   </div>
   <div class="panel-body" markdown="1" style="height: 7em;">
 
-[Hashes and signatures](verify.html) of all our artifacts are available, if you wish to verify that they are genuine.
+[Hashes and signatures](verify.md) of all our artifacts are available, if you wish to verify that they are genuine.
 
   </div>
 </div>

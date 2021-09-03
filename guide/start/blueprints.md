@@ -22,7 +22,7 @@ First, log in to brooklyn with the command line interface (CLI) tool by typing:
 $ br login http://localhost:8081/
 {% endhighlight %}
 
-To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here](/guide/ops/configuration/brooklyn_cfg.html){:target="_blank"}. 
+To secure the Apache Brooklyn instance, you can add a username and password to Brooklyn's properties file, as described in the User Guide [here](/guide/ops/configuration/brooklyn_cfg.md){:target="_blank"}. 
 If this is configured, the login command will require an additional parameter for the userid and will then prompt for a password.
 
 {% read blueprint_locations/_adding_to_catalog.langs.md %}
@@ -45,6 +45,6 @@ you can monitor the progress of the application deployment and verify if it was 
 
 <div class="started-pdf-exclude" markdown="1">
 
-Having deployed an application, the next step is **[monitoring and managing](managing)** it.
+Having deployed an application, the next step is **[monitoring and managing](managing.md)** it.
 
 </div>

@@ -42,7 +42,7 @@ Other tips:
   ``export MAVEN_OPTS="-Xmx1024m -Xms512m"``
 
 * Run ``-PIntegration`` to run integration tests, or ``-PLive`` to run live tests
-  ([tests described here](/guide/dev/code/tests))
+  ([tests described here](/guide/dev/code/tests.md))
 
 * If building the `rpm` package, you can install rpm tools with: `brew install rpm` for Mac OS, `apt-get install rpm` for Ubuntu, `yum install rpm` for Centos/RHEL.
   On Mac OS you may also need to set `%_tmppath /tmp` in `~/.rpmmacros`.

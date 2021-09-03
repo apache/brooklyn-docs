@@ -7,7 +7,7 @@ layout: website-normal
 {% include fields.md %}
 
 ## Introduction
-This section describes some simple tests based on the [Getting Started](/guide/start/blueprints#launching-from-a-blueprint) example blueprint:
+This section describes some simple tests based on the [Getting Started](/guide/start/blueprints.md#launching-from-a-blueprint) example blueprint:
 
 {% highlight yaml %}
 {% read /guide/start/_my-web-cluster.yaml %}

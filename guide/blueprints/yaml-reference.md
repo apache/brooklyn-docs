@@ -102,7 +102,7 @@ the entity being defined, with these being the most common:
   * `pinned`: mark the parameter as pinned (always displayed) for the UI. The default is `true`
     (unless an ancestor sets false; config keys from Java types are _not_ pinned)
   * `constraints`: a list of constraints the parameter should meet;
-    for details, see [Entity Configuration](/guide/blueprints/entity-configuration#config-key-constraints).
+    for details, see [Entity Configuration](/guide/blueprints/entity-configuration#config-key-constraints.md).
 
   A shorthand notation is also supported where just the name of the parameter can be supplied
   as an item in the list, with the other values being unset or the default.

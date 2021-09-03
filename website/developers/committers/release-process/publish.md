@@ -23,7 +23,7 @@ Publish the source and binary distributions to the pre-release area
 -------------------------------------------------------------------
 
 You will need to have checked out the Apache distribution Subversion repository located at
-https://dist.apache.org/repos/dist/release/brooklyn. Please refer to [Prerequisites](prerequisites.html) for
+https://dist.apache.org/repos/dist/release/brooklyn. Please refer to [Prerequisites](prerequisites.md) for
 information.
 
 In your workspace for the `dist.apache.org` repo, create a directory with the artifact name and version:
@@ -32,7 +32,7 @@ In your workspace for the `dist.apache.org` repo, create a directory with the ar
 mkdir apache-brooklyn-${VERSION_NAME}
 {% endhighlight %}
 
-Refer back to the pre-release area Subversion (see [Publish to the staging area](publish-temp.html)), and copy all of
+Refer back to the pre-release area Subversion (see [Publish to the staging area](publish-temp.md)), and copy all of
 the release candidate artifacts - `-src` and `-bin`, `.tar.gz` and `.zip`, and all associated `.md5`, `.sha1`, `.sha256`
 and `.asc` signatures - into this new folder.
 
@@ -170,5 +170,5 @@ git push apache apache-brooklyn-${VERSION_NAME}
 {% endhighlight %}
 
 Note the tag `apache-brooklyn-${VERSION_NAME}-rc${RC_NUMBER}` should have been created as part of the
-RC creation - see [make-release-artifacts](make-release-artifacts.html).
+RC creation - see [make-release-artifacts](make-release-artifacts.md).
 

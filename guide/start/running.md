@@ -138,7 +138,7 @@ By default, no authentication is required and the web-console will listen on all
 For a production system, or if Apache Brooklyn is publicly reachable, it is strongly recommended 
 to configure security. Documentation of configuration options include:
  
-* [Security](/guide/ops/configuration/brooklyn_cfg)
+* [Security](/guide/ops/configuration/brooklyn_cfg.md)
 * [Persistence](/guide/ops/persistence/)
 * [Cloud credentials](/guide/locations/)
 
@@ -182,7 +182,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ systemctl start|stop|restart|status brooklyn
 {% endhighlight %}
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.html) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.md) page for the locations of these.
 
 </div>
 <div id="impl-3" class="tab-pane fade">
@@ -195,7 +195,7 @@ Apache Brooklyn should now have been installed and be running as a system servic
 $ sudo service brooklyn start|stop|restart|status
 {% endhighlight %}
 
-The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.html) page for the locations of these.
+The application should then output its logs to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.md) page for the locations of these.
 
 </div>
 <div id="impl-4" class="tab-pane fade">
@@ -208,7 +208,7 @@ Now start Apache Brooklyn with the following command:
 $ bin/start
 {% endhighlight %}
 
-The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.html) page for the locations of these.
+The application should then output its log to `brooklyn.debug.log` and `brooklyn.info.log`, please refer to the [paths](/guide/ops/paths.md) page for the locations of these.
 
 </div>
 <div id="impl-5" class="tab-pane fade">
@@ -255,6 +255,6 @@ For details on the CLI, see the [Client CLI Reference](/guide/ops/cli/) page.
 
 <div class="started-pdf-exclude">
 
-The first thing we want to do with Brooklyn is **[deploy a blueprint](/guide/start/blueprints)**.
+The first thing we want to do with Brooklyn is **[deploy a blueprint](/guide/start/blueprints.md)**.
 
 </div>

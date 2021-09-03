@@ -20,7 +20,7 @@ For example:
         credential: 1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
 
 Users are strongly recommended to use 
-[externalized configuration](/guide/ops/externalized-configuration) for better
+[externalized configuration](/guide/ops/externalized-configuration.md) for better
 credential management, for example using [Vault](https://www.vaultproject.io/).
 
 

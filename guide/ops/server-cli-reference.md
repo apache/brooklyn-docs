@@ -17,7 +17,7 @@ To launch Brooklyn, from the directory where Brooklyn is unpacked, run:
 With no configuration, this will launch the Brooklyn web console and REST API on [`http://localhost:8081/`](http://localhost:8081/),
 listening on all network interfaces. No credentials are required by default. For a production 
 system, or if Apache Brooklyn is publicly reachable, it is strongly recommended to 
-[configure security](configuration/brooklyn_cfg).
+[configure security](configuration/brooklyn_cfg.md).
 
 By default, Brooklyn will write log messages at the INFO level or above to `brooklyn.info.log` and messgages at the
 DEBUG level or above to `brooklyn.debug.log`. Redirecting the output to `/dev/null` prevents the default console output
@@ -78,7 +78,7 @@ This means that, once the task history is large, Brooklyn will continually use t
 memory. It will only expunge tasks from memory when this space is required for other objects within the
 Brooklyn process.
 
-See [Memory Usage](troubleshooting/memory-usage) for more information on memory usage and
+See [Memory Usage](troubleshooting/memory-usage.md) for more information on memory usage and
 other suggested `JAVA_OPTS`.
 
 
@@ -106,7 +106,7 @@ from earlier ones, if exactly the same property is specified multiple times).
 1. Shell environment variables
 1. System properties, supplied with ``-D`` on the brooklyn (Java) command-line.
 
-These properties are described in more detail [here](configuration/brooklyn_cfg).
+These properties are described in more detail [here](configuration/brooklyn_cfg.md).
 
 
 ### Extending the Classpath
