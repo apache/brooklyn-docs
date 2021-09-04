@@ -151,7 +151,7 @@ module JekyllRelativeLinks
 
       else
         url = url_for_path(pathWithText[1], src) if pathWithText
-        url = url + pathWithText[2] if url
+        url = url + pathWithText[3] if url
         url = path unless url
       end
       url
