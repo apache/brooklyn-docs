@@ -7,7 +7,7 @@
 # - speculatively map .html to .md when doing the lookup
 # - make url_for_path public, and have way to inject site and initialize context outside of normal generator usage
 
-# distributed under the MIT License as follows (note this is only used to build the docs, not included with any AMP output):
+# distributed under the MIT License as follows (note this is only used to build the docs, not included with any Brooklyn output):
 
 # MIT License
 #
@@ -43,7 +43,7 @@ module JekyllRelativeLinks
     FRAGMENT_REGEX = %r!(#.+?|)?!.freeze
     TITLE_REGEX = %r{(\s+"(?:\\"|[^"])*(?<!\\)"|\s+"(?:\\'|[^'])*(?<!\\)')?}.freeze
     FRAG_AND_TITLE_REGEX = %r!#{FRAGMENT_REGEX}#{TITLE_REGEX}!.freeze
-    INLINE_LINK_REGEX = %r!\[#{LINK_TEXT_REGEX}\]\(([^\)]+?)#{FRAG_AND_TITLE_REGEX}\)!.freeze
+    INLINE_LINK_REGEX = %r!\[#{LINK_TEXT_REGEX}\]\(([^\)]*?)#{FRAG_AND_TITLE_REGEX}\)!.freeze
     REFERENCE_LINK_REGEX = %r!^\s*?\[#{LINK_TEXT_REGEX}\]: (.+?)#{FRAG_AND_TITLE_REGEX}\s*?$!.freeze
     LINK_REGEX = %r!(#{INLINE_LINK_REGEX}|#{REFERENCE_LINK_REGEX})!.freeze
     CONVERTER_CLASS = Jekyll::Converters::Markdown
@@ -91,26 +91,38 @@ module JekyllRelativeLinks
       end
     end
 
+
     def replace_relative_links!(document)
-      url_base = File.dirname(document.relative_path)
       return document if document.content.nil?
 
-      document.content = document.content.dup.gsub(LINK_REGEX) do |original|
+      document.content = replace_relative_links_in_content(document.content, document.relative_path)
+
+      replace_relative_links_excerpt!(document)
+    rescue ArgumentError => e
+      raise e unless e.to_s.start_with?("invalid byte sequence in UTF-8")
+    end
+
+    def replace_relative_links_in_content(content, relative_to_path)
+      url_base = File.dirname(relative_to_path)
+
+      content.dup.gsub(LINK_REGEX) do |original|
         link = link_parts(Regexp.last_match)
+
+        if (link.path == "" && link.fragment == "" && link.text && link.text.start_with?("http"))
+          link.path = link.text
+          return replacement_text(link)
+        end
+
         next original unless replaceable_link?(link.path)
 
         path = path_from_root(link.path, url_base)
-        url  = url_for_path(path, document.relative_path)
+        url  = url_for_path(path, relative_to_path)
 
         next original unless url
 
         link.path = url
         replacement_text(link)
       end
-
-      replace_relative_links_excerpt!(document)
-    rescue ArgumentError => e
-      raise e unless e.to_s.start_with?("invalid byte sequence in UTF-8")
     end
 
     def url_for_path_absolute(path)

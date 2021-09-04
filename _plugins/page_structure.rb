@@ -214,6 +214,11 @@ module PageStructureUtils
         # render the included content with the current page renderer
         info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => page } }
         path_for_cache = "include_page-#{context['page']}"
+
+        relative_link_parser = JekyllRelativeLinks::Generator.new(nil)
+        relative_link_parser.prepare_for_site(site)
+        $content = relative_link_parser.replace_relative_links_in_content($content, page.relative_path)
+
         page.render_liquid($content, site.site_payload, info, path_for_cache)
       end
     end
