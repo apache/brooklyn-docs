@@ -55,6 +55,10 @@ module JekyllRelativeLinks
     safe true
     priority :lowest
 
+    # warnings can be misleading e.g. if the link is in an excluded liquid tag; but might be useful in places
+    # for most things, use eg htmlproofer on the output site
+    @warn = false
+
     def initialize(config)
       @config = config
     end
@@ -63,6 +67,10 @@ module JekyllRelativeLinks
       @potential_targets = nil
       @site = site
       @context = context
+    end
+
+    def warn_missing_links(warn)
+      @warn = warn
     end
 
     def generate(site)
@@ -139,7 +147,7 @@ module JekyllRelativeLinks
         url = url_for_path_internal(path.sub(%r!/\z!.freeze, "") + "/index.md") unless url
         url = url_for_path_internal(path.sub(%r!\z!.freeze, "") + "/index.md") unless url
         url = url_for_path_internal(path.sub(%r!\z!.freeze, ".md")) unless url
-        puts "WARN: unresolved link in #{src}:  #{path}" if !url
+        puts "WARN: unresolved link in #{src}:  #{path}" unless url if @warn
 
       else
         url = url_for_path(pathWithText[1], src) if pathWithText
