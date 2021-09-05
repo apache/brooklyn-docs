@@ -14,7 +14,7 @@ For a given phase, only one of the commands (PowerShell or Batch) should be supp
 ### Execution Phases
 
 Bear in mind that 
-the best practices for other entities (e.g. using [VanillaSoftwareProcess](/guide/blueprints/custom-entitie.md#vanilla-software-using-bash))
+the best practices for other entities (e.g. using [VanillaSoftwareProcess](/guide/blueprints/custom-entities.md#vanilla-software-using-bash))
 apply for WinRM as well.
 
 Blueprint authors are strongly encouraged to provide an implementation for install, launch, stop

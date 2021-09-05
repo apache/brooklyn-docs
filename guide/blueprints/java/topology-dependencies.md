@@ -10,8 +10,8 @@ recommended.
 ## Define your Application Blueprint
 
 The example below creates a three tier web service, composed of an Nginx load-balancer, 
-a cluster of Tomcat app-servers, and a MySQL database. It is similar to the [YAML policies
-example](/guide/start/policies.md), but also includes the MySQL database
+a cluster of Tomcat app-servers, and a MySQL database. It is similar to the 
+[YAML policies example](/guide/start/policies.md), but also includes the MySQL database
 to demonstrate the use of dependent configuration.
 
 {% highlight java %}
