@@ -6,8 +6,8 @@ children:
 - creating-salt-blueprints.md
 ---
 
-This guide describes how Brooklyn entities can be created using the Salt infrastructure management tool
- ([saltstack.com](https://saltstack.com/)).
+This guide describes how Brooklyn entities can be created using the 
+[Salt](https://docs.saltproject.io/) infrastructure management tool.
 At present Brooklyn provides basic support for Salt, operating in a 'masterless' mode. 
 Comments on this support and suggestions for further development are welcome.
 

@@ -39,8 +39,7 @@ where the `<major>`, `<minor>`, and `<patch>` parts are numbers
 in accordance with [semver](http://semver.org) semantic versioning,
 assumed to be `0` if omitted,
 and an `<qualifier>` is made up of letters, numbers, `"-"` and `"_"`
-in accordance with [OSGi](https://www.osgi.org/release-4-version-4-3-download/)
-(see sections 1.3.2 and 3.2.5).
+in accordance with OSGi version requirements.
 
 Examples:
 

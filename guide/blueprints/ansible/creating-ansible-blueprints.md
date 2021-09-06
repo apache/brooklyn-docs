@@ -69,8 +69,7 @@ service `service.name` is operating. By default Brooklyn checks that the service
 The `ansible.vars` configuration key allows the blueprint author to provide entity-specific values for configuration
 variables used in the playbook, so that one playbook can be used by multiple entities, each customized appropriately.
 The value of `ansible.vars` is an arbitrary block of YAML configuration that will be applied to the playbook using 
-Ansible's `--extra-vars` mechanism, as described in the
-Ansible [documentation](http://docs.ansible.com/ansible/playbooks_variables.html#passing-variables-on-the-command-line).
+Ansible's `--extra-vars` mechanism.
 For example, if the playbook in the example above contained configuration such as:
  
     - hosts: all
@@ -112,9 +111,10 @@ or REST API.)
 
 ### Roles and Multi-Playbook Installations
 
-There is no specific configuration in AnsibleEntity for Ansible [Roles](http://docs.ansible.com/ansible/playbooks_roles.html),
- or to install multiple playbooks. However, the installation of roles or multiple playbooks can be carried out first 
- by taking advantage of Brooklyn's SameServerEntity. The installation step can be applied in one child of the same server
+There is no specific configuration in AnsibleEntity for Ansible roles,
+ or to install multiple playbooks.
+However, the installation of roles or multiple playbooks can be carried out first 
+ by taking advantage of Brooklyn's `SameServerEntity`. The installation step can be applied in one child of the same server
  entity, while the AnsibleEntity can operate under the second child. It will typically be necessary to delay the start
  of the AnsibleEntity until the first child has carried out whatever preparation is required. The examples below
  illustrate the concept (with just one playbook, for brevity).

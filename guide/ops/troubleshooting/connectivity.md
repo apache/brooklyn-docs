@@ -49,7 +49,8 @@ The following commands can be useful:
 * `traceroute` prints the route that packets take to a network host. e.g. `traceroute www.google.com`.
 
 ## Proxy settings
-Depending on the type of location, brooklyn might use HTTP to provision machines (clocker, jclouds). If the host environment defines proxy settings, these might interfere with the reachability of the respective HTTP service.
+Depending on the type of location, Apache Brooklyn might require HTTP to provision machines or services. 
+If the host environment defines proxy settings, these might interfere with the reachability of the respective HTTP service.
 
 One such case is using VirtualBox with host-only or private internal network settings, while using an external proxy for accessing the internet. It is clear that the external proxy won't be able to route HTTP calls properly, but that might not be clear when reading the logs (although brooklyn will present the failing URL).
 
@@ -60,7 +61,7 @@ Try accessing the web-service URLs from a browser via the proxy, or perhaps try 
     bin/brooklyn launch
 ~~~
 
-If a system-level proxy server has been configured, you can instruct brooklyn to use the proxy server by passing `-Djava.net.useSystemProxies=true` to the JVM
+If a system-level proxy server has been configured, you can instruct Apache Brooklyn to use the proxy server by passing `-Djava.net.useSystemProxies=true` to the JVM.
 
 ## Service is listening
 

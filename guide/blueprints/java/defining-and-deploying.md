@@ -129,7 +129,7 @@ for how to store these credentials more securely.
 
 ## Building the OSGi Bundle
 
-Next we will build this example as an [OSGi Bundle](https://www.osgi.org/developer/architecture/) 
+Next we will build this example as an [OSGi bundle](https://docs.osgi.org/) 
 so that it can be added to the Apache Brooklyn server at runtime, and so multiple versions of the  
 blueprint can be managed.
 

@@ -104,9 +104,8 @@ version: 0.1.0-SNAPSHOT
         </div>
         <div class="long"><p>
           Blueprints are designed for portability.
-          Pick from dozens of clouds in hundreds of datacenters. 
-          Or machines with fixed IP addresses, localhost, 
-          Docker on <a href="http://clocker.io">Clocker</a>, etc.
+          Pick from Amazon or Azure or any of dozens of clouds.
+          Or containers, VMware, physical servers, etc.
         </p><p>
           Here we target pre-existing Vagrant VMs.
         </p></div>

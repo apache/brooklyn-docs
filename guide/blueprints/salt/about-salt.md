@@ -27,9 +27,7 @@ Salt comes with built-in support for many software systems, and has a repository
 Brooklyn provides a Salt entity type. An entity of this type can be specified in a blueprint in order to provision the 
 node through Salt. The Salt entity will download Salt and install it on the node. The entity type supports the 
 configuration of Salt formulas and Pillar data to download, and the configuration of what Salt states to apply. 
-These are managed using Salt in 'masterless' mode, as described on the
-[Saltstack site](https://docs.saltstack.com/en/latest/topics/tutorials/quickstart.html#salt-masterless-quickstart),
-using the 'salt-call' functionality of Salt.
+These are managed using Salt in 'masterless' mode using the 'salt-call' functionality of Salt.
 
 The Salt 'highstate' (the collection of states applied to the system) is exposed as a sensor on the entity.  An effector
  is provided on the entity that supports general purpose Salt instructions.

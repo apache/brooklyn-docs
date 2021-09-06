@@ -58,10 +58,9 @@ This is fast and simple, but has some obvious downsides:
 * Some entities require `sudo` rights, which must be granted to the user running Brooklyn.
 
 
-#### Deploying to Clocker
+#### Deploying to Containers
 
-Docker containers provide a convenient way to test blueprints (and also to run blueprints in
-production!).
+Containers can give a fast, convenient way to test blueprints, to run apps, or to failover temporarily.
 
 
 #### Local Repository of Install Artifacts

@@ -19,12 +19,11 @@ title_in_menu: Blueprint Tour
         <div class="short">
           Describe your application
         </div>
-        <div class="long"><p>
+        <div class="long"><p markdown="1">
             Start by giving it a name, 
             optionally adding a version and other metadata.
             The format is YAML -- a human-friendly extension to JSON --
-            following the  
-            <a href="/website/learnmore/theory.html#standards">CAMP</a> standard.
+            following the [CAMP](/website/learnmore/theory.html#standards) standard.
           </p><p>
             Treat it like source code: use comments, version control it, test it with CI.
         </p></div>
@@ -147,9 +146,8 @@ services:</div></div>
         </div>
         <div class="long"><p>
           Blueprints are designed for portability.
-          Pick from dozens of clouds in hundreds of datacenters. 
-          Or machines with fixed IP addresses, localhost, 
-          Docker on <a href="http://clocker.io">Clocker</a>, etc.
+          Pick from Amazon or Azure or any of dozens of clouds. 
+          Or containers, VMware, physical servers, etc.
         </p><p>
           And you're not limited to servers:
           services, PaaS, even networks can be locations.

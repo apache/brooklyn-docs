@@ -57,6 +57,7 @@ div.annotated_blueprint {
           position: absolute;
           @include transform('translateX(-100%) translateY(-50%)');
           width: $annotation_width;
+          max-width: 28em;
           
           @include flex();
           -webkit-align-items: center;
