@@ -43,7 +43,7 @@ module JekyllRelativeLinks
     FRAGMENT_REGEX = %r!(#.+?|)?!.freeze
     TITLE_REGEX = %r{(\s+"(?:\\"|[^"])*(?<!\\)"|\s+"(?:\\'|[^'])*(?<!\\)')?}.freeze
     FRAG_AND_TITLE_REGEX = %r!#{FRAGMENT_REGEX}#{TITLE_REGEX}!.freeze
-    INLINE_LINK_REGEX = %r!\[#{LINK_TEXT_REGEX}\]\(([^\)]+?)#{FRAG_AND_TITLE_REGEX}\)!.freeze
+    INLINE_LINK_REGEX = %r!\[#{LINK_TEXT_REGEX}\]\(([^\)]*?)#{FRAG_AND_TITLE_REGEX}\)!.freeze
     REFERENCE_LINK_REGEX = %r!^\s*?\[#{LINK_TEXT_REGEX}\]: (.+?)#{FRAG_AND_TITLE_REGEX}\s*?$!.freeze
     LINK_REGEX = %r!(#{INLINE_LINK_REGEX}|#{REFERENCE_LINK_REGEX})!.freeze
     CONVERTER_CLASS = Jekyll::Converters::Markdown
@@ -108,19 +108,21 @@ module JekyllRelativeLinks
       content.dup.gsub(LINK_REGEX) do |original|
         link = link_parts(Regexp.last_match)
 
+        puts "link #{link}"
         if (link.path == "" && link.fragment == "" && link.text && link.text.start_with?("http"))
+          puts "empty link #{link}"
           link.path = link.text
-          return replacement_text(link)
+
+        else
+          next original unless replaceable_link?(link.path)
+
+          path = path_from_root(link.path, url_base)
+          url  = url_for_path(path, relative_to_path)
+
+          next original unless url
+
+          link.path = url
         end
-
-        next original unless replaceable_link?(link.path)
-
-        path = path_from_root(link.path, url_base)
-        url  = url_for_path(path, relative_to_path)
-
-        next original unless url
-
-        link.path = url
         replacement_text(link)
       end
     end
