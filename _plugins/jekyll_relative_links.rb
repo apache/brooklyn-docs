@@ -108,9 +108,7 @@ module JekyllRelativeLinks
       content.dup.gsub(LINK_REGEX) do |original|
         link = link_parts(Regexp.last_match)
 
-        puts "link #{link}"
         if (link.path == "" && link.fragment == "" && link.text && link.text.start_with?("http"))
-          puts "empty link #{link}"
           link.path = link.text
 
         else
