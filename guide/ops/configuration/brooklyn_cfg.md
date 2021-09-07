@@ -136,7 +136,7 @@ The other things you need to set in `brooklyn.cfg` are:
 
 * `brooklyn.webconsole.security.ldap.url` - ldap connection url
 * `brooklyn.webconsole.security.ldap.user_name_regex` *optional* none by default- regex pattern for usernames. If it's 
-  configured, non-matching usernames will be rejected without checking the credentials in the LDAP server  
+  configured, non-matching usernames will be rejected without checking the credentials in the LDAP server. Special characters need to be escaped
 * `brooklyn.webconsole.security.ldap.realm` - ldap dc parameter (domain)
 * `brooklyn.webconsole.security.ldap.allowed_realms_regex` - allows multiple realms (domains) that match regex - username must 
   be of form domain\user
@@ -155,7 +155,7 @@ brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider
 brooklyn.webconsole.security.ldap.url=ldap://localhost:10389/????X-BIND-USER=uid=admin%2cou=system,X-BIND-PASSWORD=secret,X-COUNT-LIMIT=1000
 brooklyn.webconsole.security.ldap.realm=example.com
 # username regext pattern for <DOMAIN>\<USERNAME>
-brooklyn.webconsole.security.ldap.user_name_regex=.*\\.*
+brooklyn.webconsole.security.ldap.user_name_regex=.*\\\\\\\\.*
 ~~~
 
 After you setup the brooklyn connection to your LDAP server, you can authenticate in brooklyn using your cn (e.g. John Smith) and your password.
