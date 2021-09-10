@@ -122,7 +122,7 @@ hence the bundle replacement noted above.
 
 If you are creating an OSGi `MANIFEST.MF` for a bundle that also contains a `catalog.bom`, 
 you will need to use the mapped result (OSGi version syntax) in the manifest,
-but should continue to use the Brooklyn-recommended syntax in the `catalog.bom`.
+but should continue to use the recommended syntax in the `catalog.bom`.
  
 For those who are curious, the reason for the Brooklyn version syntax is to reconcile
 the popular usage of semver and maven with the internal requirement to use OSGi versions.

@@ -14,7 +14,7 @@ The following section provides a quick summary of the main Brooklyn concepts you
 
 ***Applications*** are the top level entities that are the parents of all other entities.
 
-***Configuration*** Entities can have arbitrary configuration values, which get inherited by their child entities. You can set global (Brooklyn-wide) properties in (``~/.brooklyn/brooklyn.properties``).  Common configuration keys have convenient aliases called "flags".
+***Configuration*** Entities can have arbitrary configuration values, which get inherited by their child entities. You can set global properties in (``~/.brooklyn/brooklyn.properties``).  Common configuration keys have convenient aliases called "flags".
 
 ***Sensors*** are the mechanism for entities to expose information for other entities to see.  Sensors from an entity can be subscribed to by other entities to track changes in the entity’s activity. Sensors can be updated, potentially frequently, by the entity or associated tasks.
 
