@@ -160,8 +160,8 @@ brooklyn.security.sensitive.fields.plaintext.blocked=true
 With this set, Apache Brooklyn will prevent deployment of blueprints that do not use externalized configuration
 in these places, forcing users to follow security best practice.  This will apply to potentially sensitive
 values embedded in a blueprint being deployed or in a blueprint from the catalog referenced by a blueprint
-being deployed.  This will also block some additions to the catalog (including from the Composer) where
-secrets are set as plaintext config values.
+being deployed.  This will also block some additions to the catalog where secrets are set as plaintext config
+values (including types from the Composer, except in some cases where it is explicitly marked as a "template").
 
 This does not apply to default values specified for parameters or to values supplied via Java,
 as it is expected in these contexts that users are less likely to accidentally supply sensitive values in plaintext.
@@ -173,9 +173,11 @@ When blueprints are executing, they will by design have access to the sensitive 
 so authors should be careful to limit their usage and maintain the security around these values.
 In particular:
 
-* The sensitive-name scheme should be followed for all parameters which might contain the sensitive value
-* When needed for a script, it should be passed as an environment variable
-  (following the sensitive-name scheme) and not output by the script
+* The sensitive-name scheme should be followed for all parameters which might contain the sensitive value,
+  and these should refer to sensitive-named configuration properties which refer to an external provider
+* When needed for a script, sensitive value should be should be passed as environment variables
+  following the sensitive-name scheme, taking their values by referring to sensitive configuration properties, 
+  and the values should not be output by the script
 * Sensitive values should not be used in template files, sensors, tags, task result, or any other places 
   where the value might be returned in the UI or the logs
 
@@ -239,10 +241,5 @@ the value will not be masked; and in addition, in some places masking is not pra
 such as in the Composer.  Thus security through the sensitive-name scheme alone should
 not be relied upon, and where guarantees about the integrity of sensitive information are
 required, it must be used alongside the externalized configuration.
-
-
-
-
-
 
 
