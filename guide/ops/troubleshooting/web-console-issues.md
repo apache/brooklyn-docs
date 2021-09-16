@@ -27,7 +27,7 @@ For more information, see
 On older versions of the Windows Defender malware definitions, the `br.exe` download was erroneously
 flagged as containing a virus. The executable has been scanned against multiple antivirus protection
 providers and no infection has been found. As of 15 Sept. 2021, Microsoft has confirmed that the detection
-has been removed
+has been removed.
 
 Please follow the steps below to clear cached detection files and obtain the latest malware definitions.
 
