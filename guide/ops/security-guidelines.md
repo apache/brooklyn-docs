@@ -231,7 +231,7 @@ For example, in the logs and in the UI, sensitive information might be displayed
     password: <suppressed> (MD5 hash prefix: 0A721B3B)
 
 If you want to confirm the value of the password (in this case `TopSecret`), you can
-compute the MD5 hash yourself, e.g. with `echo TopSecret | md5`, looking at the first
+compute the MD5 hash yourself, e.g. with `echo -n TopSecret | md5`, looking at the first
 8 hex digits, and of course taking care to run the command in a secure location!
 
 Note that in some places (eg if plaintext values are embedded in blueprints, contrary to
