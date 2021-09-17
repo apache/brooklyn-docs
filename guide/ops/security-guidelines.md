@@ -101,37 +101,108 @@ For other artifacts, users should consider hosting these artifacts in their own 
 configuring Brooklyn to use this. See the documentation for 
 `org.apache.brooklyn.core.entity.drivers.downloads.DownloadProducerFromProperties`.
 
-## Controlling Sensitive Information in the Logs
 
-Log messages which may contain sensitive information are normally logged at TRACE level.
-Sensitive information is identified heuristically, including config keys and environment variables
-which contain any of the words below (case insensitive):
+## Controlling Sensitive Information
+
+Often it is necessary to include sensitive information such as credentials within blueprints and locations.
+Apache Brooklyn provides a secure mechanism for users to protect the integrity of this information, as follows:
+
+* Values should be set in a secure external store such as an HSM, Vault, AWS Secrets Manager, or properties file
+* The blueprint should provide a reference to these values in config keys 
+  using [externalized configuration](/guide/ops/externalized-configuration.md)
+* Config keys where these values are referenced should comply with the naming scheme below,
+  where one of the "sensitive-named tokens" is contained in the key name
+
+Externalized configuration allows blueprints to be written such that they do not contain any secure information,
+and with the steps above Apache Brooklyn further guarantees that these values of config keys are not stored on disk
+as part of the catalog nor as part of an active deployment, they are not written to the log, and they are not
+displayed in the UI.  Because the values are needed for blueprint execution, there are still ways that users with
+appropriate permissions can discover these values, such as by using them in scripts or using low-level API calls,
+so due care should be taken to secure the user entitlements, the Brooklyn server, and the systems under management. 
+
+
+### Sensitive-Named Fields
+
+Potentially sensitive information is identified heuristically, by default according to a naming scheme
+whereby config keys and environment variables are deemed potentially sensitive if they contain any of 
+the following "sensitive-named tokens" (case insensitive):
 
 - `password`
-- `passwd` 
+- `passwd`
 - `credential`
 - `secret`
 - `private`
 - `access.cert`
 - `access.key`
 
+This list can be customized by setting `brooklyn.security.sensitive.fields.tokens` in 
+`etc/brooklyn.cfg` to a list of strings, e.g. instead of the list above, to treat keys
+containing "hidden" or "pass" as potentially sensitive, set:
+
+```
+brooklyn.security.sensitive.fields.tokens=[hidden,pass]
+```
+
+Brooklyn will suppress the values of potentially sensitive information in many places, as described below,
+but to ensure the values are treated as secure it is necessary to follow the naming scheme _and_
+supply the values via externalized configuration.
+
+
+### Preventing Plaintext Values for Sensitive Named Fields
+
+Apache Brooklyn can be configured to disallow plaintext values for potentially sensitive config keys
+with the following `/etc/brooklyn.cfg` property:
+
+```
+brooklyn.security.sensitive.fields.plaintext.blocked=true
+```
+
+With this set, Apache Brooklyn will prevent deployment of blueprints that do not use externalized configuration
+in these places, forcing users to follow security best practice.  This will apply to potentially sensitive
+values embedded in a blueprint being deployed or in a blueprint from the catalog referenced by a blueprint
+being deployed.  This will also block some additions to the catalog where secrets are set as plaintext config
+values (including types from the Composer, except in some cases where it is explicitly marked as a "template").
+
+This does not apply to default values specified for parameters or to values supplied via Java,
+as it is expected in these contexts that users are less likely to accidentally supply sensitive values in plaintext.
+
+
+### Scripts, Sensors, and other Blueprint Execution Considerations
+
+When blueprints are executing, they will by design have access to the sensitive values,
+so authors should be careful to limit their usage and maintain the security around these values.
+In particular:
+
+* The sensitive-name scheme should be followed for all parameters which might contain the sensitive value,
+  and these should refer to sensitive-named configuration properties which refer to an external provider
+* When needed for a script, sensitive value should be should be passed as environment variables
+  following the sensitive-name scheme, taking their values by referring to sensitive configuration properties, 
+  and the values should not be output by the script
+* Sensitive values should not be used in template files, sensors, tags, task result, or any other places 
+  where the value might be returned in the UI or the logs
+
+If these steps are not followed, the security afforded by the externalized configuration might be compromised.
+
+
+### Logging
+
+
+Log messages which may contain sensitive information are normally logged at TRACE level.
+
 Logging should configured such that TRACE is excluded or appropriately secured
-to prevent the values of these keys and variables from being logged at too high a level.
-A commented sample configuration for enabling TRACE logging is available in 
-the `org.ops4j.pax.logging.cfg` logging configuration file. 
+to prevent sensitive values from being compromised.
+A commented sample configuration for enabling TRACE logging is available in
+the `org.ops4j.pax.logging.cfg` logging configuration file.
 With this configuration enabled, all TRACE log entries are written to the `brooklyn.trace.log` file.
 
-Blueprint source code and some activity may be logged at DEBUG level or higher, 
-so secrets should not be included in plain text in blueprints 
+Blueprint source code and some activity may be logged at DEBUG level or higher,
+so, as per above, secrets should not be included in plain text in blueprints
 unless the Apache Brooklyn environment and its logs are appropriately secured.
-It is recommend to use [Externalized Configuration](externalized-configuration.md) 
-to store credentials securely externally and read them as needed
-for blueprints and to prevent their inclusion in logs (and also in the UI). 
 
 If it is desired to suppress information that is logged at DEBUG or higher level,
 which should not ordinarily be needed but may be desired on occasion,
 this can be done by setting filter(s) and/or appender(s) on the appropriate logging category in
-`org.ops4j.pax.logging.cfg`. Some of the categories (or individual sub-categories of these) 
+`org.ops4j.pax.logging.cfg`. Some of the categories (or individual sub-categories of these)
 which may be relevant for exclusion or higher security are:
 
 * `org.apache.brooklyn.core.typereg`:
@@ -142,4 +213,33 @@ which may be relevant for exclusion or higher security are:
   creation of entities from CAMP
 * `org.apache.brooklyn.camp.brooklyn.spi.dsl`:
   resolution of DSL expressions
+
+
+
+### Sanitizing Outputs
+
+For security against accidental exposure, plaintext values for sensitive named fields are 
+masked in many places in the logs and UI,
+typically replaced with a string indicating it is suppressed and supplying a MD5 hash prefix 
+(the first 4 bytes / 8 hex chars).
+This is so that if you know the value, you can confirm it with high confidence, 
+but attackers don't have enough information to
+uniquely crack typical-length passwords.
+
+For example, in the logs and in the UI, sensitive information might be displayed as:
+
+    password: <suppressed> (MD5 hash prefix: 0A721B3B)
+
+If you want to confirm the value of the password (in this case `TopSecret`), you can
+compute the MD5 hash yourself, e.g. with `echo -n TopSecret | md5`, looking at the first
+8 hex digits, and of course taking care to run the command in a secure location!
+
+Note that in some places (eg if plaintext values are embedded in blueprints, contrary to
+best practice) masking only applies to values set on the same line after a `:` or `=`.
+If the value is supplied on a different line, possibly with comments in between,
+the value will not be masked; and in addition, in some places masking is not practical,
+such as in the Composer.  Thus security through the sensitive-name scheme alone should
+not be relied upon, and where guarantees about the integrity of sensitive information are
+required, it must be used alongside the externalized configuration.
+
 
