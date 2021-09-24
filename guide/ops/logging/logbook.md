@@ -4,7 +4,7 @@ section_type: inline
 section_position: 2
 ---
 
-## Logbook
+# Logbook
 
 The logbook offers the possibility to query and view logs in the UI. By default, logs are stored in files as per configuration
 in `etc/org.ops4j.pax.logging.cfg`. The logbook can be configured against different log aggregation sources by setting the
@@ -36,7 +36,7 @@ on the App Inspector Entity Summary view, and
 on the App Inspector Activity view, where logs filtered by entity ID and activity ID respectively are shown.
 
 
-### Suggested Elasticsearch Setup
+## Suggested Elasticsearch Setup
 
 [OpenSearch (OpenDistro for Elasticsearch)](https://opendistro.github.io/for-elasticsearch) is an Apache-licensed open-source
 backend that works well with Apache Brooklyn, with this configuration in `brooklyn.cfg`:
@@ -49,7 +49,7 @@ backend that works well with Apache Brooklyn, with this configuration in `brookl
         brooklyn.logbook.openSearchLogStore.verifySsl=false
 ```
 
-#### Routing Logs to Elastic Search
+### Routing Logs to Elasticsearch
 
 There are many solutions to routing log messages from Apache Brooklyn to Elasticsearch, either plugging in to the log4j subsystem
 or routing the log files from disk. [Fluentd](https://www.fluentd.org/download), with the following configuration in `td-agent.conf`,
@@ -105,7 +105,7 @@ is a good simple way to forward content added to the info and debug log files:
 The filter block is needed for only picking up the `debug` log level from the debug source, as the `info` and upper
 levels are already present in the info file.
 
-#### Sizing and Rotating Logs
+### Sizing and Rotating Logs
 
 Keeping log data obviously consumes disk storage, and serving the data requires memory.
 The log levels in Apache Brooklyn can be configured on a fine-grained log-category basis,
@@ -128,7 +128,7 @@ When designing your strategy for maintaining logs, some good rules of thumb are:
 Instructions and links to assist with this are below.
 
 
-#### Index partitioning
+### Index partitioning
 
 It’s possible to configure Fluentd for sending the information to an index using an index name generated using datetime markers.
 This example will create and send the data to a new index every day:
@@ -156,7 +156,7 @@ Apache Brooklyn can be configured to use an index _pattern_ for querying, eg:
     brooklyn.logbook.openSearchLogStore.index = brooklyn*
 ```
 
-#### Index lifecycle management
+### Index lifecycle management
 
 Policies also allow handling the lifecycle of the indexes.
 For example, to delete debug indexes after a period of time based on the index naming pattern used in this page:

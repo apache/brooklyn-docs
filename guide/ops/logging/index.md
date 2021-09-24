@@ -29,8 +29,7 @@ karaf client, e.g. `log:tail`, to read these messages.
 
 In the OSGi based Apache Brooklyn logging is configured from ops4j pax logging.
 
-See: [Logging - OSGi based Apache Brooklyn](/guide/dev/tips/logging/index.md#osgi-based-apache-brooklyn) <br/>
-[https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
+See: [https://ops4j1.jira.com/wiki/display/paxlogging/Configuration](https://ops4j1.jira.com/wiki/display/paxlogging/Configuration)
 
 ## Standard Configuration
 
@@ -112,4 +111,4 @@ The following resources may be useful when configuring logging:
 * [Elasticsearch Memory Usage](https://www.elastic.co/blog/significantly-decrease-your-elasticsearch-heap-memory-usage)
 * [OpenSearch Index Management](https://opensearch.org/docs/im-plugin/ism/index/) and [policies](https://opensearch.org/docs/im-plugin/ism/policies/)
 
-* {% child_content %}
+{% child_content %}
