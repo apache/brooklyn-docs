@@ -164,7 +164,7 @@ and the [IDE docs](/guide/dev/env/ide) for more information.
 ## Log Files
 
 Apache Brooklyn will by default create brooklyn.info.log and brooklyn.debug.log files. See the
-[Logging](/guide/ops/logging.md) docs for more information.
+[Logging](/guide/ops/logging/index.md) docs for more information.
 
 The following are useful log messages to search for (e.g. using `grep`). Note the wording of
 these messages (or their very presence) may change in future version of Brooklyn. 

@@ -5,7 +5,7 @@ toc: /guide/toc.json
 ---
 
 If Apache Brooklyn does not start, or starts with errors, the problem is usually easy to resolve.
-The first place to look is the [logs](/guide/ops/logging.md):  `grep` for the first `ERROR`,
+The first place to look is the [logs](/guide/ops/logging/index.md):  `grep` for the first `ERROR`,
 and sometimes look backwards for the first `WARN` message.
 
 There are a handful of common causes.

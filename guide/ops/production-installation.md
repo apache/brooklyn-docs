@@ -16,7 +16,7 @@ To install Apache Brooklyn on a production server:
 
 This guide covers the basics. You may also wish to configure:
 
-* [Logging](/guide/ops/logging.md)
+* [Logging](/guide/ops/logging/index.md)
 * [Persistence](persistence)
 * [High availability](high-availability)
 
