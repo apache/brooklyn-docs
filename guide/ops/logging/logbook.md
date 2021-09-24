@@ -1,7 +1,7 @@
 ---
 section: Logbook
 section_type: inline
-section_position: 2
+section_position: 3
 ---
 
 # Logbook
