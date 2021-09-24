@@ -53,7 +53,6 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     libv8 (3.16.14.19)
-    libv8 (3.16.14.19-x86_64-linux)
     liquid (4.0.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -64,8 +63,6 @@ GEM
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
     nokogiri (1.11.5-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.11.5-x86_64-linux)
       racc (~> 1.4)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -97,7 +94,6 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   html-proofer
