@@ -157,15 +157,23 @@ with the following `/etc/brooklyn.cfg` property:
 brooklyn.security.sensitive.fields.plaintext.blocked=true
 ```
 
-With this set, Apache Brooklyn will prevent deployment of blueprints that do not use externalized configuration
-in these places, forcing users to follow security best practice.  This will apply to potentially sensitive
-values embedded in a blueprint being deployed or in a blueprint from the catalog referenced by a blueprint
-being deployed.  This will also block some additions to the catalog where secrets are set as plaintext config
+With this set, Apache Brooklyn will prevent deployment of blueprints that provide plaintext values in these places, 
+forcing users to follow security best practice.  This will apply to potentially sensitive values embedded in a blueprint 
+being deployed or in a blueprint from the catalog referenced by a blueprint being deployed.  
+This will also block some additions to the catalog where secrets are set as plaintext config
 values (including types from the Composer, except in some cases where it is explicitly marked as a "template").
 
 This does not apply to default values specified for parameters or to values supplied via Java,
 as it is expected in these contexts that users are less likely to accidentally supply sensitive values in plaintext.
 
+All functions and complex objects, including mechanisms such as `$brooklyn:literal("value")` (to escape at design-time
+and evaluate as `value` at runtime). It can optionally be further restricted to exclude DSL values and complex objects
+whose string representation (unresolved) contains selected tokens or phrases. For example to prevent the usage of
+the `literal` DSL function anywhere in a supplied expression, the following setting can be used: 
+
+```
+brooklyn.security.sensitive.fields.ext.blocked.phrases = [ "$brooklyn:literal" ]
+```
 
 ### Scripts, Sensors, and other Blueprint Execution Considerations
 
