@@ -167,9 +167,12 @@ This does not apply to default values specified for parameters or to values supp
 as it is expected in these contexts that users are less likely to accidentally supply sensitive values in plaintext.
 
 All functions and complex objects, including mechanisms such as `$brooklyn:literal("value")` (to escape at design-time
-and evaluate as `value` at runtime). It can optionally be further restricted to exclude DSL values and complex objects
-whose string representation (unresolved) contains selected tokens or phrases. For example to prevent the usage of
-the `literal` DSL function anywhere in a supplied expression, the following setting can be used: 
+and evaluate as `value` at runtime), are permitted as values. 
+Sensitive field blocking can optionally be further restricted to exclude selected DSL values and complex objects
+where the string representation (unresolved `toString`) contains selected tokens or phrases, by using the
+`brooklyn.security.sensitive.fields.ext.blocked.phrases` configuration property.
+For example to prevent the usage of the `literal` DSL function anywhere in a supplied expression, 
+the following setting can be used: 
 
 ```
 brooklyn.security.sensitive.fields.ext.blocked.phrases = [ "$brooklyn:literal" ]
