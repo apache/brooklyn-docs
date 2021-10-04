@@ -12,7 +12,7 @@ children:
 - configuration/
 - persistence/
 - high-availability/
-- logging.md
+- logging/
 - externalized-configuration.md
 - requirements.md
 - paths.md

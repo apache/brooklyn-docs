@@ -36,7 +36,7 @@ There are three main consumers of disk space:
 * **Log files**: Brooklyn writes info and debug log files. By default, these are
   written to the local filesystem. This can be reconfigured to set the
   destination and to increase or decrease the detail in the logs. See the
-  [Logging](/guide/ops/logging.md) section for more details.
+  [Logging](/guide/ops/logging/index.md) section for more details.
 
 The Apache Brooklyn distribution itself, when unpacked, consumes approximately
 75MB of disk space. This includes everything needed to run Brooklyn except for a
@@ -57,7 +57,7 @@ therefore, can consume up to 2GB of disk space.
 
 In the default configuration of Brooklyn's `.tar.gz` and `.zip` distributions,
 logs are saved to the Brooklyn installation directory. You will most likely want
-to [reconfigure Brooklyn's logging](/guide/ops/logging.md) to save logs to a location
+to [reconfigure Brooklyn's logging](/guide/ops/logging/index.md) to save logs to a location
 elsewhere. In the `.rpm` and `.deb` packaging, logging files will be located
 under `/var/log`. You can further reconfiguring the logging detail level and log
 rotation according to your organisation's policy.
