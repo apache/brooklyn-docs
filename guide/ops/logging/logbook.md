@@ -31,9 +31,10 @@ outlined in more detail below.
 By default, only users with the `root`, `powerUser`, or an explicit `logViewer` entitlement are able to see log info through Apache Brooklyn.
 
 The Logbook UI widget can be found throughout the product:
-in the About section, where all logs can be viewed;
-on the App Inspector Entity Summary view, and
-on the App Inspector Activity view, where logs filtered by entity ID and activity ID respectively are shown.
+- on the **About** section, where all logs can be viewed
+- on the App Inspector **Entity Summary** view
+- on the App Inspector **Activity** view, where logs filtered by entity ID and activity ID respectively are shown
+- on the **Debug Console**, below the controls and output
 
 
 ## Suggested Elasticsearch Setup
