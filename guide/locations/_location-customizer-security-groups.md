@@ -1,6 +1,6 @@
 ---
 section: Customizing Cloud Security Groups
-section_position: 12
+section_position: 13
 section_type: inline
 ---
 
