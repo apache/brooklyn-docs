@@ -1,10 +1,10 @@
 ---
-section: vSphere Locations
+section: VMware vSphere
 section_position: 6
 section_type: inline
 ---
 
-### vSphere Locations
+### VMware vSphere
 
 [VMware vSphere](https://docs.vmware.com/en/VMware-vSphere) is VMware's virtualization platform, which transforms data centers into aggregated computing infrastructures that include CPU, storage, and networking resources.
 vSphere manages these infrastructures as a unified operating environment, and provides you with the tools to administer the data centers that participate in that environment.
