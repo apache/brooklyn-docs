@@ -45,6 +45,8 @@ including setting priority to control which nodes will be promoted on master fai
 * `/server/ha/states`: Returns the HA states and detail for all nodes in a management plane
 * `/server/ha/priority`: Returns the HA node priority for MASTER failover (GET),
   or sets that priority (POST)
+  
+The High Availability management plane can also be controlled via the Brooklyn UI. More information is available in [`Configuraing HA - an example`](/guide/ops/high-availability/high-availability-supplemental.md)
 
 Note that when POSTing to a non-master server it is necessary to pass a `Brooklyn-Allow-Non-Master-Access: true` header.
 For example, the following cURL command could be used to change the state of a `STANDBY` node on `localhost:8082` to `HOT_STANDBY`:

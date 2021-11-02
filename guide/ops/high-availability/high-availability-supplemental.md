@@ -59,6 +59,23 @@ state of the entity, but will not resume its provisioning or re-run any partiall
 to remove the entity and reprovision it. In the case of a failover whilst executing a task called by an effector, it may be possible to simple
 call the effector again
 
+### High Availability Management
+
+On top of the [`API`](/guide/ops/high-availability/index.md), High Availability can be explicitly controlled from the Brooklyn UI, 
+which allows for the server to change its priority and request to promote itself to master. 
+
+This can be achieved via the `HA Status` table in the `About` page, which displays information about
+nodes in the current management plane. The control menu is opened by selecting the `Manage` option on the current server entry in the table. 
+The following menu allows to change the priority value, as well as the status of the node.
+
+- If a node is `MASTER`, it can demote itself by changing to another state. In such case, a new master will be selected from available standby servers, 
+basing on their priority.
+- If a node is `STANDBY`, or `HOT_STANDBY`, it can promote itself by changing to `MASTER` state. 
+It is recommended for this server to have the highest priority amongst all available servers.
+  
+Additionally, terminated servers can be removed from the persistence with `Remove` option (visible upon hover over the terminated node in the `HA Status` Table). 
+All terminated servers can be removed at once with `Remove terminated nodes` option. These operations are only available to the master node.
+
 ### Client Configuration
 It is the responsibility of the client to connect to the master Brooklyn server. This can be accomplished in a variety of ways:
 
@@ -105,7 +122,7 @@ from the same directory from which you launched Brooklyn:
 $ kill -9 $(cat pid.txt)
 {% endhighlight %}
 
-It is also possiblity to check the high availability state of a running Brooklyn server using the following curl command:
+It is also possible to check the high availability state of a running Brooklyn server using the following curl command:
 
 {% highlight bash %}
 $ curl -k -u myusername:mypassword https://<ip-address>:8443/v1/server/ha/state
