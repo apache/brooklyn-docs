@@ -219,7 +219,7 @@ stored in protected .PFX file. It needs to be prepared upfront or created with t
 
 ###### Sample Windows Blueprint
 
-Placeholders surrounded with `<>` have to be replcaced with their respective values.
+Placeholders surrounded with `<>` have to be replaced with their respective values.
 
 {% read snippets/_location-azure-sample-windows.camp.md%}
 

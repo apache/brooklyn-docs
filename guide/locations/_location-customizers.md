@@ -1,7 +1,7 @@
 ---
 section: Location Customizers
 section_type: inline
-section_position: 11
+section_position: 12
 ---
 
 ### Location Customizers
