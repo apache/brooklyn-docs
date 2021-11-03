@@ -68,7 +68,7 @@ This can be achieved via the `HA Status` table in the `About` page, which displa
 nodes in the current management plane. The control menu is opened by selecting the `Manage` option on the current server entry in the table. 
 The following menu allows to change the priority value, as well as the status of the node.
 
-- If a node is `MASTER`, it can demote itself by changing to another state. In such case, a new master will be selected from available standby servers, 
+- If a node is `MASTER`, it can demote itself by changing to another state. In such case, a new master is selected from available standby servers, 
 basing on their priority.
 - If a node is `STANDBY`, or `HOT_STANDBY`, it can promote itself by changing to `MASTER` state. 
 It is recommended for this server to have the highest priority amongst all available servers.
