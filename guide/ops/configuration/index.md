@@ -4,7 +4,7 @@ title: Brooklyn Configuration and Options
 layout: website-normal
 children:
 - { section: Memory Usage }
-- { section: Authentication }
+- { section: Authentication and Security }
 - brooklyn_cfg.md
 - https.md
 - cors.md

@@ -239,3 +239,12 @@ An example script to be invoked by CRON is shown below:
     aws s3 cp $BACKUP_FILENAME s3://mybackupbucket
     rm $BACKUP_FILENAME
 
+# PERSISTED STATE IMPORT/EXPORT
+
+Rest API offers capability to `export` the current persistence state to an archive, which then can be restored by `import`.
+
+* `/ha/persist/export`: (GET) Captures the current state of persistence and saves it as an archive
+* `/ha/persist/import`: (POST) Takes a previously exported persistence state archive and restores it into the current persistence, 
+by merging the states, adding the catalog bundles, types, locations and deployed applications under the current management plane.
+  
+`Export`/`Import` functionality is also available from the Brooklyn UI, using the respective options in the `About` page.

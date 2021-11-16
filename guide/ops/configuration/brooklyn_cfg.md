@@ -3,7 +3,7 @@ title: brooklyn.cfg
 layout: website-normal
 children:
 - { section: Quick Setup }
-- { section: Locations }
+- { section: Camp YAML Expressions }
 - { section: Java }
 - { section: Authentication }
 - { section: Entitlements }
