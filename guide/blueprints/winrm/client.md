@@ -11,7 +11,7 @@ parameters available for WinRM.
 * host <String>: Host to connect to (required).Default value `null`
 * port <Integer>: WinRM port to use when connecting to the remote machine.<br>
   If no port is specified then it defaults to a port depending on the `winrm.useHttps` flag.
-* winrm.useHttps <Boolean>: The parameter tells the machine sensors whether the WinRM port is over HTTPS. If the parameter is true then 5986 will be used as a WinRM port.<br>
+* winrm.useHttps <Boolean>: The parameter tells the machine sensors whether the WinRM port is over HTTPS. If the parameter is true then 5986 will be used as a WinRM port, otherwise, port 5985 will be used<br>
   Default value: `false`
 * retriesOfNetworkFailures <Integer>: The parameter sets the number of retries for connection failures. If you use high value, consider taking care for the machine's network.<br>
   Default value: `4`
