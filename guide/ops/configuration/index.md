@@ -5,6 +5,7 @@ layout: website-normal
 children:
 - { section: Memory Usage }
 - { section: Authentication and Security }
+- { section: Catalog in OSGi }
 - brooklyn_cfg.md
 - https.md
 - cors.md
@@ -76,19 +77,12 @@ Users and passwords for Brooklyn can be configured in the brooklyn.cfg as detail
 See [HTTPS Configuration](https.md) for general information on configuring HTTPS.
 
 
-<!--
-----------
--- NOTE: comment out this section on catalog as the behaviour described is not enabled by default since
--- https://github.com/apache/brooklyn-server/pull/233; re-enable this when that changes
-----------
 ## Catalog in OSGi  
-With the traditional launcher, Brooklyn loads the initial contents of the catalog from a `default.catalog.bom` file
-as described in the section on [installation](/guide/ops/production-installation.md). Brooklyn finds Java 
-implementations to provide for certain things in blueprints (entities, enrichers etc.) by scanning the classpath. 
 
-In the OSGI world this approach is not used, as each bundle only has visibility of its own and its imported Java packages. 
-Instead, in the Karaf OSGi container, each bundle can declare its own `catalog.bom` file, in the root of the bundle,
-with the catalog declarations for any entities etc. that the bundle contains.
+OSGi bundles may include a `catalog.bom` file at root, defining the elements to be added to the Apache Brooklyn catalog
+when the bundle is installed. These bundles may be installed using the API or as part of the initial catalog.
+The initial catalog is loaded from `etc/default.catalog.bom` which typically references files in `catalog/*`,
+as described in the section on [installation](/guide/ops/production-installation.md).
 
 For example, the `catalog.bom` file for Brooklyn's Webapp bundle looks like (abbreviated):
 
@@ -115,6 +109,12 @@ In the above YAML the first item declares that the bundle provides an entity who
 `org.apache.brooklyn.entity.webapp.nodejs.NodeJsWebAppService`, and whose name is 'Node.JS Application'.  The second
 item declares that the bundle provides a template application, with id  `resilient-bash-web-cluster-template`, and
 includes a description for what this is.
+
+Note: the `type` argument can only refer to unqualified class names where the bundle is in scope,
+such as contained in the same bundle as one containing the `catalog.bom` (in some cases),
+or a bundle specified in the `org.apache.brooklyn.classloader.fallback.bundles` list supplied at startup;
+to reference a type in another bundle, the syntax `osgi-bundle:org.package.Class` is supported in most places.
+
 
 ### Configuring applications in the Catalog
 
@@ -200,15 +200,5 @@ A clear separation between service bundles and catalog bundles prevents that sit
 (On rebind, bundles that have OSGi metadata and not a `catalog.bom` are loaded first,
 to ensure any OSGi services they provide are available to other bundles,
 for any of the bundle installation techniques listed above.)
-
-
-### Caveats
-
-In the OSGi world specifying class names by string in Brooklyn's configuration will work only
-for classes living in Brooklyn's core modules. Raise an issue or ping us on IRC if you find
-a case where this doesn't work for you. For custom SecurityProvider implementations refer to the
-documentation of BrooklynLoginModule.
-    
- END Catalog in Karaf comment -->
 
 
