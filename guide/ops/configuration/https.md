@@ -61,3 +61,10 @@ org.ops4j.pax.web.ssl.clientauthneeded=false
 replacing the passwords with appropriate values, and restart the server. Note the keystore location is relative to 
 the installation root, but a fully qualified path can also be given, if it is desired to use some separate pre-existing
 store.
+
+To enable HTTPS _only_, i.e. to disable HTTP, add the following line to this file:
+
+{% highlight properties %}
+org.osgi.service.http.enabled=false
+{% endhighlight %}
+

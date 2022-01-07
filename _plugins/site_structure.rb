@@ -187,12 +187,15 @@ module SiteStructure
 # (but note, in the context hash map 'data' on pages is promoted, so you access it like {{ page.menu }})
     end
 
+    @@unique_path_id = 1001
+
     # processes liquid tags, e.g. in a link or path object
     def render_liquid_with_page(site, page, content, path=nil)
       return content unless page
       if (!path)
-        # path must be unique to the content ... ideally use a hash, but for now just:
-        path = "random-#{rand(1000000)}"
+        # path must be unique to the content and page ... ideally use a hash, but for now just:
+        this_id = @@unique_path_id+=1
+        path = "one-off-path-#{this_id}"
       end
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => page } }
       page.render_liquid(content, site.site_payload, info, path)
