@@ -188,10 +188,10 @@ If you have pre-existing nodes, you can use the `byon` provider, either in this 
         user: root
         privateKeyFile: ~/.ssh/key.pem
         hosts:
-        - 81.95.144.58
-        - 81.95.144.59
-        - brooklyn@159.253.144.139
-        - brooklyn@159.253.144.140
+        - 11.22.33.44
+        - 11.22.33.45
+        - brooklyn@55.66.77.88
+        - brooklyn@55.66.77.89
 
 or:
 
@@ -199,7 +199,7 @@ or:
       byon:
         user: root
         privateKeyFile: ~/.ssh/key.pem
-        hosts: "{81.95.144.{58,59},brooklyn@159.253.144.{139-140}"
+        hosts: "{11.22.33.{44,45},brooklyn@55.66.77.{88-89}"
 
 You cannot use glob expansions with the list notation, nor can you specify per-host
 information apart from user within a single `byon` declaration.
@@ -212,11 +212,11 @@ However you can combine locations using `multi`:
             user: root
             privateKeyFile: ~/.ssh/key.pem
             hosts:
-            - 81.95.144.58
-            - 81.95.144.59
+            - 11.22.33.44
+            - 11.22.33.45
         - byon:
             privateKeyFile: ~/.ssh/brooklyn_key.pem
-            hosts: brooklyn@159.253.144{139-140}
+            hosts: brooklyn@55.66.77{88-89}
 
 
 ## DSL Commands
