@@ -28,7 +28,7 @@ You can check if a given TCP port is reachable and listening using `telnet <host
 `telnet www.google.com 80`, which gives output like:
 
 ~~~
-    Trying 31.55.163.219...
+    Trying 11.22.33.44...
     Connected to www.google.com.
     Escape character is '^]'.
 ~~~

@@ -197,6 +197,8 @@ before the script is uploaded for execution. To explain this example in more det
 * Credential Security Service Provider (CredSSP) is used for authentication, to pass the explicit  
   credentials when using `Invoke-Command`.
 
+To avoid the inclusion of clear-text passwords in the scripts, we recommend the use of a secure keystore such as Vault,
+which can be used by the script to retrieve sensitive data such as credentials.
 
 ### Windows AMIs on AWS
 
