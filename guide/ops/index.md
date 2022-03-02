@@ -12,8 +12,8 @@ children:
 - configuration/
 - persistence/
 - high-availability/
-- logging/
 - externalized-configuration.md
+- logging/
 - requirements.md
 - paths.md
 - upgrades/

@@ -144,6 +144,18 @@ jstack-active $BROOKLYN_PID
 {% endhighlight %}
 
 
+#### OSGi Resolution
+
+The Karaf OSGi subsystem can in some cases spend a lot of energy identifying which bundles should provide packages.
+Often this can be resolved by removing redundant bundles.
+To observe this, add the following to `etc/org.ops4j.pax.logging.cfg` (no restart normally needed):
+
+    log4j2.logger.felix.name = org.apache.felix
+    log4j2.logger.felix.level = DEBUG
+
+To get a unique list of duplicate packages:  `grep chains data/log/*.debug.log | sed 's/.*exposed to //' | sed 's/from .*//' | sort | uniq`
+
+
 #### Profiling
 
 If an in-depth investigation of the CPU usage (and/or object creation) of a Brooklyn Server is
