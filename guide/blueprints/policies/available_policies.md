@@ -182,7 +182,97 @@ The CreateUserPolicy Attaches to an Entity and monitors for the addition of a lo
 
 This is similar to the CreateUserPolicy.  It will monitor the addition of WinRmMachineLocation to an entity and then create a sensor advertising the administrative user's credentials.
 
+### Synchronization Policies
 
+#### nginx-multi-upstream-sync Policy
+
+*nginx-multi-upstream-sync* policy is designed to be used in combination with `nginx-multi` type that allows to achieve blue-green deployment.
+Here is an example:
+
+1. Deploy cluster of apps version 1 with the following blueprint:
+
+    ```yaml
+    name: My Application
+    services:
+      - type: nginx-multi:1.1.0-SNAPSHOT
+        id: my-nginx-multi
+      - type: org.apache.brooklyn.entity.webapp.DynamicWebAppCluster
+        id: my-app-cluster-v1
+        name: App Cluster v1
+        brooklyn.config:
+          latch.launch: $brooklyn:component("my-nginx-multi").attributeWhenReady("service.isUp")
+          dynamiccluster.quarantineFailedEntities: false
+          dynamiccluster.memberspec:
+            '$brooklyn:entitySpec':
+              type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+              brooklyn.config:
+                wars.root: https://repo1.maven.org/maven2/org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/0.8.0-incubating/brooklyn-example-hello-world-sql-webapp-0.8.0-incubating.war
+        brooklyn.policies:
+          - type: nginx-multi-upstream-sync
+            brooklyn.config:
+              group: $brooklyn:component("my-app-cluster-v1")
+              sensorsToTrack:
+                - service.isUp
+              nginxNode: $brooklyn:component("my-nginx-multi")
+              groupName: v1
+    ```
+
+2. Navigate to NGINX effectors and render routing for `v1.myapp.com` pointing to v1 app group. `v1.myapp.com` is an
+   endpoint to test cluster of apps version 1.
+    * logicalNme `v1`
+    * hostName `v1.myapp.com`
+    * groupName `v1`
+3. Find IP address of the NGINX in sensors and map it to `v1.myapp.com` in `/etc/hosts` and load `v1.myapp.com` in the
+   browser on the machine where `/etc/hosts` is modified to test version 1, e.g. `11.22.33.44 v1.myapp.com`.
+4. Render routing for `myapp.com` pointing to v1 app group. `myapp.com` in this example is a production endpoint.
+    * logicalNme `production`
+    * hostName `myapp.com`
+    * groupName `v1`
+5. Map IP address of the NGINX to myapp.com in `/etc/hosts` and load `myapp.com` in the browser on the machine where
+   `/etc/hosts` is modified to verify that production endpoint loads version 1.
+6. Deploy cluster of apps version 2 alongside version 1 in the same application:
+
+    ```yaml
+    services:
+      - type: org.apache.brooklyn.entity.webapp.DynamicWebAppCluster
+        id: my-app-cluster-v2
+        name: App Cluster v2
+        brooklyn.config:
+          latch.launch: $brooklyn:component("my-nginx-multi").attributeWhenReady("service.isUp")
+          dynamiccluster.quarantineFailedEntities: false
+          dynamiccluster.memberspec:
+            '$brooklyn:entitySpec':
+              type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+              brooklyn.config:
+                wars.root: https://repo1.maven.org/maven2/org/apache/brooklyn/example/brooklyn-example-hello-world-sql-webapp/1.0.0/brooklyn-example-hello-world-sql-webapp-1.0.0.war
+        brooklyn.policies:
+          - type: nginx-multi-upstream-sync
+            brooklyn.config:
+              group: $brooklyn:component("my-app-cluster-v2")
+              sensorsToTrack:
+                - service.isUp
+              nginxNode: $brooklyn:component("my-nginx-multi")
+              groupName: v2
+    ```
+
+   ***Hint:*** add as a child to a deployed application.
+
+7. Render routing for `v2.myapp.com` pointing to v2 app group. `v2.myapp.com` is an endpoint to test cluster of apps
+   version 2.
+    * logicalNme `v2`
+    * hostName `v2.myapp.com`
+    * groupName `v2`
+8. Map IP address of the NGINX to `v2.myapp.com` in `/etc/hosts` and load `v2.myapp.com` in the browser on the machine
+   where `/etc/hosts` is modified to test version 2.
+9. Render routing for `myapp.com` pointing to v2 app group to switch the app version at production endpoint.
+    * logicalNme `production`
+    * hostName `myapp.com`
+    * groupName `v2`
+10. Refresh myapp.com in the browser on the machine where `/etc/hosts` is modified to verify that production endpoint
+    loads version 2.
+11. Try to resize cluster of app version 2 and see routing configuration updated in activities of nginx-multi node.
+
+***Note***, `/etc/hosts` is used to simplify demonstration of the policy in a blue-green deployment.
 
 Writing a Policy
 ----------------
