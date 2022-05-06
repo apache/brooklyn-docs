@@ -15,7 +15,7 @@ This will start the application in the given location(s). Each child-entity with
 The start effector will be called automatically when the application is deployed through the catalog.
 Is is strongly recommended to not call start again.
 
-{% read _stop-start-restart-bevaviour.camp.md %}
+{% read _stop-start-restart-behaviour.camp.md %}
 
 ### restart()
 This will invoke `restart()` on each child-entity concurrently (with the default values for the child-entity's restart effector parameters).
