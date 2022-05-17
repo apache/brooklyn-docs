@@ -5,7 +5,7 @@ layout: website-normal
 menu_parent: index.md
 ---
 
-From the Home page, go the "Application Inspector" module.
+From the Home page, go the "Inspector" module.
 
 We can explore the management hierarchy of the application, which will show us the entities it is composed of.  Starting from the application use the arrows to expand out the list of entities.
 
