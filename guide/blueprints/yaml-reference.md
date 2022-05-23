@@ -263,8 +263,9 @@ concise DSL defined here:
 
 <!-- TODO examples for object and entitySpec -->
 
-Parameters above can be supplied either as strings or as lists and maps in YAML, 
-and the `$brooklyn:` syntax can be used within those parameters.  
+Parameters above can be supplied either as strings or as lists and maps in YAML, and the `$brooklyn:` syntax can be used within those parameters.  
+
+**Note:** The DSL is always supported for the values of config keys on entities. The DSL is supported in many other places also, but not all, depending on how the value is used there. For instance some aspects of a location or initializer may need to be retrieved without an entity context and so do not support DSL.
 
 
 ## Some Powerful YAML Entities
