@@ -3,18 +3,11 @@ title: CLI Reference Guide
 layout: website-normal
 menu_parent: index.md
 children:
+- { section: Usage }
 - { section: List of Commands }
 - { section: Scopes }
-- { section: Abbreviations}
+- { section: Abbreviations }
 - { section: Command Reference }
-- { section: Login}
-- { section: Applications}
-- { section: Entities}
-- { section: Sensors}
-- { section: Effectors}
-- { section: Policies}
-- { section: Activities}
-- { section: Miscellaneous}
 ---
 
 ## Usage
