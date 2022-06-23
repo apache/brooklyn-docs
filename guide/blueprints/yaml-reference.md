@@ -323,3 +323,7 @@ These are:
   including `config-widgets` (setting custom widgets to render fields) and `config-quick-fixes` (proposals for fixing common errors);
   see the code for the Blueprint Composer for more details
 
+* `ui-effector-hints`: a tag containing a single-entry map with this key will constrain how effectors are 
+  presented in the UI. The value should be a map containing one or more of the following keys:
+  * `exclude-regex`: a regex string matched against effector names to exclude them from listing in the "Effectors" tag 
+  * `include-regex`: a regex string per above to explicitly include matching names which would be excluded by the above 
