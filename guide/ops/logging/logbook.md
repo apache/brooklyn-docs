@@ -32,8 +32,8 @@ By default, only users with the `root`, `powerUser`, or an explicit `logViewer` 
 
 The Logbook UI widget can be found throughout the product:
 - on the **About** section, where all logs can be viewed
-- on the App Inspector **Entity Summary** view
-- on the App Inspector **Activity** view, where logs filtered by entity ID and activity ID respectively are shown
+- on the Inspector **Entity Summary** view
+- on the Inspector **Activity** view, where logs filtered by entity ID and activity ID respectively are shown
 - on the **Debug Console**, below the controls and output
 
 

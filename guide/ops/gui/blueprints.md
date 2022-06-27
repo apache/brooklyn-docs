@@ -45,7 +45,7 @@ location:
 {% endhighlight %}
 
 With the modified YAML, click on the "Deploy" button. Brooklyn will begin deploying your application and redirect you to the
-"Application Inspector". In this screen, you will see your application as "Starting".
+"Inspector". In this screen, you will see your application as "Starting".
 
 [![Brooklyn web console, showing the application starting.](images/app-deploying.png)](images/app-deploying-large.png)
 
