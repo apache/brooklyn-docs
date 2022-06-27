@@ -259,7 +259,11 @@ concise DSL defined here:
   and either `object.fields` or `brooklyn.config` to supply bean/constructor/flags to create an instance
 * `$brooklyn:entitySpec(Map)` returns a new `ServiceSpecification` as defined by the given `Map`,
   but as an `EntitySpec` suitable for setting as the value of `ConfigKey<EntitySpec>` config items
-  (such as `dynamiccluster.memberspec` in `DynamicCluster`)
+  (such as `dynamiccluster.memberspec` in `DynamicCluster`); this is often not needed, 
+  if the `EntitySpec` is expected by context and can be coerced from a map
+  using the simple Jackson deserialization in the `EntitySpec` class
+  (this is similar to CAMP but is not as extensive, and other formats are not supported in coercion;
+  if there are any issues with a direct map, consider wrapping it in the `$brooklyn:entitySpec` DSL)
 
 <!-- TODO examples for object and entitySpec -->
 
@@ -323,3 +327,145 @@ These are:
   including `config-widgets` (setting custom widgets to render fields) and `config-quick-fixes` (proposals for fixing common errors);
   see the code for the Blueprint Composer for more details
 
+## Predicate DSL
+
+In contexts where a `DslPredicate` or `DslEntityPredicate` is expected, the `$brooklyn:object`
+DSL can be used to construct any suitable implementation, such as using factory methods from `EntityPredicates`.
+In many cases, however, a simplified YAML DSL can be used, 
+as defined by the Jackson deserialization rules on the `DslPredicate`.
+
+In its simplest form this can be a map containing the test or tests, e.g.:
+
+```
+equals: north
+```
+
+This will result in a `Predicate` which returns true if asked to `test("north")`,
+and false otherwise.  The full set of individual tests are:
+
+* `equals: <object>`, to test java object equality, attempting type coercion if necessary
+* `regex: <string|number>`
+* `glob: <string|number>`
+* `when: <presence>`, where `<presence>` is one of the values described below
+* `less-than: <object>`, for strings and primitives, computed using "natural ordering",
+  numeric order for numbers and digit sequences within numbers (`"9" < "10"`),
+  and ASCII-lexicographic comparison elsewhere (`"a" < "b"`);
+  otherwise if both arguments are the same type, or one a subtype of the other, and both comparable,
+  it will use that type's compare method;
+  otherwise if one side side is JSON, it will attempt coercion to the other argument's type;
+  and otherwise it will return false
+* `greater-than: <object>`, as above 
+* `less-than-or-equal-to: <object>` as above
+* `greater-than-or-equal-to: <object>, as above
+* `in-range: <range>`, where `<range>` is a list of two numbers, e.g. `[0,100]` (always inclusive)
+* `java-instance-of: <string>`, where the `<string>` is a registered type name, to test
+  type assignment of the underlying java class of the value being tested with the
+  underlying java class of the registered type referenced
+* `java-type-name: <test>`, where the `<test>` is a `DslPredicate` tested against the
+  underlying java class name of the value
+
+Two composite tests are supported, both taking a list of other `<test>` objects 
+(as a list of YAML maps):
+
+* `any: <list of tests>`, testing that any of the tests in the list are true (logical "or")
+* `all: <list of tests>`, testing that all of the tests in the list are true (logical "and")
+
+
+
+### Presence
+
+The `when` test allows for testing of edge cases, to distinguish between values which are unavailable
+(e.g. a sensor which has not been published, or a config which is unset), those which are null,
+and those which are "truthy" (non-empty, non-false, per `$brooklyn:attributeWhenReady`).
+Permitted values for this test are:
+
+* `absent`: value cannot be resolved (not even as null)
+* `absent_or_null`: value is null or cannot be resolved
+* `present`: value is available, but might be null
+* `present_non_null`: value is available and non-null (but might be 0 or empty)
+* `truthy`: value is available and ready/truthy (eg not false or empty)
+* `falsy`: value is unavailable or not ready/truthy (eg not false or empty)
+* `always`: always returns true
+* `never`: always returns false
+
+
+### Entity Tests
+
+To assist with tests on an `Entity` or `Location`, additional keys are supported on
+the `DslPredicate` via `DslEntityPredicate`:
+
+* `target: <expression>`: to specify a value to test, resolved relative to the "context entity"
+  (the one being tested, if appropriate, or otherwise the evaluating entity where the predicate is defined); 
+  this can be a DSL expression such as `$brooklyn:config("key")` 
+  or a keyword, currently `location` or `children`, to evaluate
+  against the location(s) or children of that entity
+* `config: <string>`: indicates that the tests should be applied to the value of config key
+  `<string> on the context entity, location, or policy
+* `sensor: <string>`: indicates that the tests should be applied to the value of sensor
+  `<string> on the context entity
+* `tag: <test>`: indicates that `<test>` should be applied to the tags on the context entity, location, or policy 
+
+
+### Lists and Flattening Behaviour
+
+To facilitate testing against collections (e.g. `target: location` or `target: children`, or `tags`,
+or a config key which is a collection), the default behaviour for testing against any `Iterable`
+is to perform the tests against the `Iterable` itself and, if that fails, against each 
+element therein (and any element in nested `Iterable` elements, recursively.
+The predicate will pass if the `Iterable` or any such member passes all the tests defined.
+
+This makes it easy to test for the presence of a specific tag of location,
+and is chosen as the default because the majority of test predicates are not
+applicable to collections.
+
+However there may be cases where the predicate needs to run against the `Iterable`
+and _not_ the nested values.  This can be indicated with the special test:
+
+* `unflattened: <test>`: Performs the test against the value prior to enumeration of
+  members, and if supplied must pass in order for the predicate to return true
+
+
+### Examples
+
+##### Location Config
+
+The following will test whether an entity has any location with config `region` 
+starting with `us-`, for example to filter within a `DynamicGroup`:
+
+```
+target: location
+config: region
+glob: us-*
+```
+
+(Instead of the `glob`, writing `regex: us-.*` would be equivalent.)
+
+
+##### Date Comparison
+
+Given a config `expiry` of type `Instant` (or related date/time type),
+this will check that the date is on or after Jan 1 2000:
+
+```
+config: expiry
+greater-than-or-equal-to: 2000-01-01
+```
+
+
+##### Missing Sensor
+
+This will select entities which have _not_ published the sensor "ready":
+
+```
+sensor: ready
+when: absent
+```
+
+And this will select entities where that sensor is present but null, false, or empty:
+
+```
+sensor: ready
+all:
+- when: present
+- when: falsy
+```
