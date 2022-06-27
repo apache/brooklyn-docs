@@ -253,7 +253,7 @@ concise DSL defined here:
 * `$brooklyn:urlEncode("val")` returns a future which creates a string with the characters escaped
   so it is a valid part of a URL. The parameter can be a string *or* another task. For example,
   `$brooklyn:urlEncode($brooklyn:config(\"mykey\"))`. It uses "www-form-urlencoded" for the encoding,
-  which is appropriate for query parameters but not for some other parts of the URL (e.g. space is encoded as '+').
+  which is appropriate for query parameters but not for some other parts of the URL (e.g. space is encoded as `'+'`).
 * `$brooklyn:literal("string")` returns the given string as a literal (suppressing any `$brooklyn:` expansion)
 * `$brooklyn:object(Map)` creates an object, using keys `type` to define the java type,
   and either `object.fields` or `brooklyn.config` to supply bean/constructor/flags to create an instance
@@ -362,7 +362,7 @@ and false otherwise.  The full set of individual tests are:
   and otherwise it will return false
 * `greater-than: <object>`, as above 
 * `less-than-or-equal-to: <object>` as above
-* `greater-than-or-equal-to: <object>, as above
+* `greater-than-or-equal-to: <object>`, as above
 * `in-range: <range>`, where `<range>` is a list of two numbers, e.g. `[0,100]` (always inclusive)
 * `java-instance-of: <string>`, where the `<string>` is a registered type name, to test
   type assignment of the underlying java class of the value being tested with the
@@ -373,8 +373,8 @@ and false otherwise.  The full set of individual tests are:
 Two composite tests are supported, both taking a list of other `<test>` objects 
 (as a list of YAML maps):
 
-* `any: <list of tests>`, testing that any of the tests in the list are true (logical "or")
-* `all: <list of tests>`, testing that all of the tests in the list are true (logical "and")
+* `any: <list of tests>`, testing that any of the tests in the list are true (logical `"or"`)
+* `all: <list of tests>`, testing that all of the tests in the list are true (logical `"and"`)
 
 
 
@@ -406,9 +406,9 @@ the `DslPredicate` via `DslEntityPredicate`:
   or a keyword, currently `location` or `children`, to evaluate
   against the location(s) or children of that entity
 * `config: <string>`: indicates that the tests should be applied to the value of config key
-  `<string> on the context entity, location, or policy
+  `<string>` on the context entity, location, or policy
 * `sensor: <string>`: indicates that the tests should be applied to the value of sensor
-  `<string> on the context entity
+  `<string>` on the context entity
 * `tag: <test>`: indicates that `<test>` should be applied to the tags on the context entity, location, or policy 
 
 
