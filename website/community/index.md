@@ -9,6 +9,7 @@ children:
 - security/index.md
 - { link: 'https://issues.apache.org/jira/browse/BROOKLYN', title: 'Bug Tracker (JIRA)' }
 - { path: how-to-contribute-docs.md }
+- { link: 'https://privacy.apache.org/policies/privacy-policy-public.html', title: 'Privacy Policy'}
 ---
 
 <div class="row">
