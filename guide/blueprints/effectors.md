@@ -52,6 +52,114 @@ Here is a simple example of an `SshCommandEffector` definition:
 
 See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brooklyn/core/effector/ssh/SshCommandEffector.html) for more details.
 
+### ContainerEffector
+
+An `Effector` to invoke a command or (a list of commands) on a container node accessible via `kubectl`. This obviously means access to a Kubernetes cluster must be ensured and `kubectl` must be installed where Apache Brooklyn runs. This effector is defined in the blueprint to be added to the entity using Apache Brooklyn initializers.
+
+It enables execution of a `command` in a specific container managed by a Kubernetes cluster. _Under the bonnet_ the commands and other configurations are used to generate a Kubernetes job that will execute in its own namespace. Regardless of the job execution result (success or failure) the namespace is deleted at the end, unless configured otherwise. 
+
+There are a number of configuration keys available for the `ContainerEffector`:
+
+| Configuration Key     | Default | Description                                                                                                                                                                                                                           |
+|-----------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| image                 |         | Docker image name, the container will be created from. (mandatory)                                                                                                                                                                    |
+| imagePullPolicy       | `Always` | Possible values: `IfNotPresent`, `Always`, `Never`. Same values from the Kubernetes official documentation, the only advantage is that Apache Brooklyn is case insensitive. So, for example 'NEVER` and `never` are accepted as well. |
+| containerName         |         | The name Kubernetes will give to the container. If not provided, it will be generated from the image name, the entity ID and a random string.                                                                                         |
+| keepContainerForDebug | `false` | When set to true, the namespace" and associated resources and services are not destroyed after execution, thus allowing access to the container for in-dept debugging.                                                                |
+| commands              |         | A list of commands to execute on the container.                                                                                                                                                                                       |
+| args                  |         | If the container is declared with an `ENTRYPOINT`, you might want to provide only arguments for the default command configured by the container.                                                                                      |
+| timeout               | `5m`    | How much should Kubernetes wait before considering a job to be failed and mark the container as failed as well.                                                                                                                       |
+| workingDir            |         | The directory where the commands should be executed, can be a directory in the container or on a volume attached to it.                                                                                                               |
+| volumeMounts          |         | Configuration to mount a volume into a container.(Same syntax as Kubernetes.)                                                                                                                                                         |
+| volumes               |         | List of directories with data that is accessible across multiple containers. These directories must exists and be configured in the Kubernetes cluster.                                                                               |
+
+Environment variables using the `shell.env`  Apache Brooklyn property are passed on to the container. 
+
+The following example shows a sample blueprint of configuring the `ContainerEffector` for a simple `BasicStartable` entity with a list of simple commands being run on a container based on the [Perl](https://hub.docker.com/_/perl) image. Notice the last `echo $hello` command in the list; this prints the value of the `hello` environment variable configured using `shell.env` Apache Brooklyn configuration key.
+
+{% highlight yaml %}
+
+name: container-effector
+services:
+- type: 'org.apache.brooklyn.entity.stock.BasicStartable:1.1.0-SNAPSHOT'
+  brooklyn.initializers:
+    - type: org.apache.brooklyn.tasks.kubectl.ContainerEffector
+      brooklyn.config:
+        name: container-effector
+        description: Very simple container effector
+        shell.env:
+          hello: world-amp
+        image: perl
+        imagePullPolicy: IfNotPresent
+        commands:
+          - /bin/bash
+          - -c
+          - HELLO=$(ls -la) ; echo $HELLO; date ; echo $hello
+
+{% endhighlight %}
+
+The following example shows a sample blueprint of configuring the `ContainerEffector` for a simple `BasicStartable` entity with a simple command passes as arguments to the [Perl](https://hub.docker.com/_/perl) image.
+
+{% highlight yaml %}
+
+name: container-effector
+services:
+- type: 'org.apache.brooklyn.entity.stock.BasicStartable:1.1.0-SNAPSHOT'
+  brooklyn.initializers:
+    - type: org.apache.brooklyn.tasks.kubectl.ContainerEffector
+      brooklyn.config:
+        name: container-effector
+        description: Very simple container effector
+        shell.env:
+        hello: world-amp
+        image: perl
+        imagePullPolicy: IfNotPresent
+        args:
+          - echo
+          - hello
+
+{% endhighlight %}
+
+**Note:**  Not all Kubernetes configuration properties are supported at the moment. 
+
+**Note:** Job template properties `completions`, `parallelism` and `backoffLimit` have been enforced to 1 in an attempt to prevent Kubernetes to attempt more than one job run. In case of failure, by default, Kubernetes tries to run the same job 6 times, thus creating six pods.
+
+**Note:** For trying this effector locally, we recommend using downloading [Minikube](https://minikube.sigs.k8s.io)  or install it on your local using package manager.
+
+**Note:** If you want to use your own image you can try customizing an existing one. We recommend you keep the image small to keep things quick. For example, the image described by the following Docker file is only 73MB in size(based on the minimal [Alpine](https://hub.docker.com/_/alpine)) and can be used to execute terraform commands.
+
+{% highlight yaml %}
+
+FROM alpine:latest
+
+RUN apk update && apk add --no-cache wget terraform unzip
+
+CMD ["/bin/sh"]
+
+{% endhighlight %}
+
+The same Apache Brooklyn configuration can be used to declare a `ContainerSensor` for an entity, as shown in the following blueprint. The smaller image is very suitable for a container sensor, since sensors are evaluated periodically.
+
+{% highlight yaml %}
+
+name: entity-with-container-sensor
+services:
+- type: 'org.apache.brooklyn.entity.stock.BasicStartable:1.1.0-SNAPSHOT'
+  brooklyn.initializers:
+    - type: org.apache.brooklyn.tasks.kubectl.ContainerSensor
+      brooklyn.config:
+      image: perl
+      imagePullPolicy: never
+      args:
+        - echo
+        - hello
+          name: test-sensor
+          period: 20s
+
+{% endhighlight %}
+
+
+
 ### HTTPCommandEffector
 
 An `Effector` to invoke HTTP endpoints.
@@ -71,8 +179,7 @@ There are a number of additional configuration keys available for the `HTTPComma
 | jsonPath                          |                  | A jsonPath expression to extract values from a JSON object                                                    |
 | jsonPathAndSensors                |                  | A map where keys are jsonPath expressions and values the name of the sensor where to publish extracted values |
 
-
-When a the header `HttpHeaders.CONTENT_TYPE` is equals to *application/x-www-form-urlencoded* and the `httpPayload` is a `map`, the payload is transformed into a single string using `URLEncoded`.
+When the header `HttpHeaders.CONTENT_TYPE` is equals to *application/x-www-form-urlencoded* and the `httpPayload` is a `map`, the payload is transformed into a single string using `URLEncoded`.
 
 {% highlight yaml %}
 brooklyn.initializers:
