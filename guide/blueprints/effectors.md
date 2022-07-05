@@ -56,7 +56,7 @@ See [`here`](https://brooklyn.apache.org/v/latest/misc/javadoc/org/apache/brookl
 
 An `Effector` to invoke a command or (a list of commands) on a container node accessible via `kubectl`. This obviously means access to a Kubernetes cluster must be ensured and `kubectl` must be installed where Apache Brooklyn runs. This effector is defined in the blueprint to be added to the entity using Apache Brooklyn initializers.
 
-It enables execution of a `command` in a specific container managed by a Kubernetes cluster. _Under the bonnet_ the commands and other configurations are used to generate a Kubernetes job that will execute in its own namespace. Regardless of the job execution result (success or failure) the namespace is deleted at the end, unless configured otherwise. 
+It enables execution of a `command` in a specific container managed by a Kubernetes cluster. _Under the covers_ the commands and other configurations are used to generate a Kubernetes job that will execute in its own namespace. Regardless of the job execution result (success or failure) the namespace is deleted at the end, unless configured otherwise. 
 
 There are a number of configuration keys available for the `ContainerEffector`:
 
@@ -157,8 +157,6 @@ services:
         period: 20s
 
 {% endhighlight %}
-
-
 
 ### HTTPCommandEffector
 
