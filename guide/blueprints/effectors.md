@@ -111,7 +111,7 @@ services:
         name: container-effector
         description: Very simple container effector
         shell.env:
-        hello: world-amp
+           hello: world-amp
         image: perl
         imagePullPolicy: IfNotPresent
         args:
@@ -148,13 +148,13 @@ services:
   brooklyn.initializers:
     - type: org.apache.brooklyn.tasks.kubectl.ContainerSensor
       brooklyn.config:
-      image: perl
-      imagePullPolicy: never
-      args:
-        - echo
-        - hello
-          name: test-sensor
-          period: 20s
+        image: perl
+        imagePullPolicy: never
+        args:
+          - echo
+          - hello
+        name: test-sensor
+        period: 20s
 
 {% endhighlight %}
 
