@@ -273,13 +273,13 @@ services:
   brooklyn.initializers:
   - type: org.apache.brooklyn.tasks.kubectl.ContainerSensor
     brooklyn.config:
-    image: perl
-    imagePullPolicy: never
-    args:
-      - echo
-      - hello
-    name: test-sensor
-    period: 20s
+      image: perl
+      imagePullPolicy: never
+      args:
+        - echo
+        - hello
+      name: test-sensor
+      period: 20s
  
 {% endhighlight %}
 
