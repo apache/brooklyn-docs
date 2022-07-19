@@ -24,7 +24,14 @@ which will be searched if a blueprint in one bundle references resources from an
 
 Resources in the bundle can be referenced from the `catalog.bom` by using
 the `classpath:` URL protocol, as in `classpath://path/to/script.sh`.
-This can also be used to load resources in explicitly declared dependent bundles. 
+This can also be used to load resources in explicitly declared dependent bundles,
+using `classpath:bundle:version:/path/to/file.sh`;
+if omitted, typically the bundle of the entity resolving the link will be searched
+along with its OSGi dependencies and `brooklyn.library` dependencies.
+(This means if you define an entity type in a bundle, resources in that bundle
+will be found automatically, but if your bundle defines a composite blueprint 
+referencing other types as children, those children will _not_ automatically
+search your bundle and a reference will be needed.)
 
 
 ### Example
