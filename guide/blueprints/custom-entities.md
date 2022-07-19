@@ -275,9 +275,8 @@ services:
     brooklyn.config:
       image: perl
       imagePullPolicy: never
-      args:
-        - echo
-        - hello
+      bashScript: |
+        echo hello
       name: test-sensor
       period: 20s
  

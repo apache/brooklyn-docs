@@ -18,14 +18,14 @@ Off-the-Shelf Effectors
 
 Effectors are highly reusable as their inputs, thresholds and targets are customizable.
 
-### SSHCommandEffector
+### SshCommandEffector
 
 An `Effector` to invoke a command on a node accessible via SSH.
 
 It enables execution of a `command` in a specific `execution director` (executionDir) by using a custom `shell environment` (shellEnv).
 By default, the specified command will be executed on the entity where the effector is attached or on all *children* or all *members* (if it is a group) by configuring `executionTarget`.
 
-There are a number of additional configuration keys available for the `SSHCommandEffector`:
+There are a number of additional configuration keys available for the `SshCommandEffector`:
 
 | Configuration Key                 | Default | Description                                                                          |
 |-----------------------------------|---------|--------------------------------------------------------------------------------------|
@@ -64,11 +64,12 @@ There are a number of configuration keys available for the `ContainerEffector`:
 |-----------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | image                 |         | Docker image name, the container will be created from. (mandatory)                                                                                                                                                                    |
 | imagePullPolicy       | `Always` | Possible values: `IfNotPresent`, `Always`, `Never`. Same values from the Kubernetes official documentation, the only advantage is that Apache Brooklyn is case insensitive. So, for example 'NEVER` and `never` are accepted as well. |
-| containerName         |         | The name Kubernetes will give to the container. If not provided, it will be generated from the image name, the entity ID and a random string.                                                                                         |
+| jobIdentifier         |         | An identifier to use to identify the jobs and containers in Kubernetes, with salt added (defaults to Brooklyn entity ID)                                                                                                              |
 | keepContainerForDebug | `false` | When set to true, the namespace" and associated resources and services are not destroyed after execution, thus allowing access to the container for in-dept debugging.                                                                |
-| commands              |         | A list of commands to execute on the container.                                                                                                                                                                                       |
+| bashScript            |         | A bash script to run (convenience for command `bash` `-c` and args as supplied here; a list, multiline string, or single line string are all accepted                                                                                 |
+| command               |         | The command (and args) to execute on the container.                                                                                                                                                                                   |
 | args                  |         | If the container is declared with an `ENTRYPOINT`, you might want to provide only arguments for the default command configured by the container.                                                                                      |
-| timeout               | `5m`    | How much should Kubernetes wait before considering a job to be failed and mark the container as failed as well. Kubernetes' default is 1m. Apache Brooklyn overrides this.                                                            |
+| timeout               | `5m`    | How much should Kubernetes wait before considering a job to be failed and mark the container as failed as well. Defaults to 5m.                                                                                                       |
 | workingDir            |         | The directory where the commands should be executed, can be a directory in the container or on a volume attached to it.                                                                                                               |
 | volumeMounts          |         | Configuration to mount a volume into a container.(Same syntax as Kubernetes.)                                                                                                                                                         |
 | volumes               |         | List of directories with data that is accessible across multiple containers. These directories must exists and be configured in the Kubernetes cluster.                                                                               |
@@ -158,13 +159,13 @@ services:
 
 {% endhighlight %}
 
-### HTTPCommandEffector
+### HttpCommandEffector
 
 An `Effector` to invoke HTTP endpoints.
 
 It allows the user to specify the URI, the HTTP verb, credentials for authentication and HTTP headers.
 
-There are a number of additional configuration keys available for the `HTTPCommandEffector`:
+There are a number of additional configuration keys available for the `HttpCommandEffector`:
 
 | Configuration Key                 | Default          | Description                                                                                                   |
 |-----------------------------------|------------------|---------------------------------------------------------------------------------------------------------------|
