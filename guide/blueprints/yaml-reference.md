@@ -250,6 +250,7 @@ concise DSL defined here:
   `$brooklyn:root()`.
 * `$brooklyn:formatString("pattern e.g. %s %s", "field 1", "field 2")` returns a future which creates the formatted string
   with the given parameters, where parameters may be strings *or* other tasks such as `attributeWhenReady`
+* `$brooklyn:external("provider", "token")` return the value stored for `token` in the externalized configuration store identified as `provider`
 * `$brooklyn:urlEncode("val")` returns a future which creates a string with the characters escaped
   so it is a valid part of a URL. The parameter can be a string *or* another task. For example,
   `$brooklyn:urlEncode($brooklyn:config(\"mykey\"))`. It uses "www-form-urlencoded" for the encoding,

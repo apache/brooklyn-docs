@@ -282,7 +282,7 @@ services:
  
 {% endhighlight %}
 
-`ContainerSensor` shared configuration details with `ContainerEffector`, so for more details about the `ContainerSensor` available configuration keys, see [`here`](/guide/blueprints/effectors/effectors.html#ContainerEffector)
+`ContainerSensor` shared configuration details with `ContainerEffector`, so for more details about the `ContainerSensor` available configuration keys, see [here](/guide/blueprints/effectors.html#ContainerEffector).
 
 
 #### Windows Command Sensor
