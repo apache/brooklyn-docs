@@ -29,7 +29,7 @@ directory of your Brooklyn instance. The following options are available:
 * `REBIND` - will rebind to the existing state, or fail if no state available;
 * `CLEAN` - will start up fresh (removing any existing state)
 
-`persistenceDir` - This is the directory to which Apache Brooklyn reads and writes its persistence data. The default location depends
+`persistenceDir` - This is the directory or object store container name to which Apache Brooklyn reads and writes its persistence data. The default location depends
 on your installation method. Checkout [this page](/guide/ops/paths.md) for more information.
 
 `persistenceLocation` - This is the location for an object store to read and write persisted state.
@@ -73,7 +73,7 @@ This gives access to any compatible Object Store product or cloud provider inclu
 SoftLayer, Rackspace, HP and Microsoft Azure. For a complete list of supported
 providers, see [jclouds](http://jclouds.apache.org/reference/providers/#blobstore).
 
-To configure the Object Store, add the credentials to `brooklyn.cfg` such as:
+To configure the Object Store, add the credentials to `brooklyn.cfg` by creating a new location such as:
 
 {% highlight properties %}
 brooklyn.location.named.aws-s3-eu-west-1=aws-s3:eu-west-1
