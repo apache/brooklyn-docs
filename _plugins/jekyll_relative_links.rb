@@ -238,7 +238,7 @@ module JekyllRelativeLinks
     end
 
     def replaceable_link?(string)
-      !fragment?(string) && !absolute_url?(string)
+      !fragment?(string) && !absolute_url?(string) && string != ""
     end
 
     def option(key)
