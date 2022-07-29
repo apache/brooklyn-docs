@@ -146,7 +146,7 @@ For more keys and more detail on the keys below, see
   
 - You can set `useMachinePublicAddressAsPrivateAddress` to true to overwrite the VMs private IP with its public IP. This is useful as it can be difficult to get VMs communicating via the private IPs they are assigned in some clouds.  Using this config, blueprints which use private IPs can still be deployed to these clouds.
   
-  ###### OS Setup
+###### OS Setup
 
 - `user` and `password` can be used to configure the operating user created on cloud-provisioned machines
 
@@ -224,11 +224,32 @@ For more keys and more detail on the keys below, see
   recommended when the VM startup is unusual (for example, if guest customizations will cause reboots and/or will 
   change login credentials).
 
-- Use `brooklyn.ssh.config.noDeleteAfterExec: true` to keep scripts on the server after execution.
+- Use `noDeleteAfterExec: true` to keep scripts on the server after execution.
   The contents of the scripts and the stdout/stderr of their execution are available in the Brooklyn web console,
   but sometimes it can also be useful to have them on the box.
   This setting prevents scripts executed on the VMs from being deleted on completion.
   Note that some scripts run periodically so this can eventually fill a disk; it should only be used for dev/test. 
+
+- Use `scripts.ignoreCerts: false` to issue `curl` and other download commands on-box
+  in such a way that they require valid certificates from the servers they connect to
+  (e.g. without the `-k` argument to `curl`, or GPG check for package installers);
+  this requires that images or setup configures instances so that they are able to validate any `https` sites used to download,
+  and that all such sites have valid certificates.
+
+- Use `sshToolClass: classname` to configure Apache Brooklyn to use a particular SSH Tool
+  installed into the system. The default is to use the SSHJ java library which is a good choice in most instances.
+  Brooklyn also includes `org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool` which can be used to delegate 
+  to the OS `ssh` command instead, which can be useful if SSH activity is restricted in the environment where Brooklyn is running.
+  Other tools can also be developed and installed.
+
+Other low level parameters are available in specific contexts, as described in the JavaDoc for the relevant classes
+and in some cases in `BrooklynConfigKeys`.
+
+Default values for the above properties can usually be set globally in `brooklyn.properties` or `brooklyn.cfg` by prefixing
+them with `brooklyn.ssh.config.`.  For example `brooklyn.ssh.config.scripts.ignoreCerts = false` there will cause bash
+commands generated to download files to omit the argument specifying to ignore certificates (unless overridden to `true`
+at the machine level).
+
 
 ###### Custom Template Options
 
