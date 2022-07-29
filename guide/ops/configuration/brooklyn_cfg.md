@@ -266,3 +266,22 @@ brooklyn.webconsole.security.unauthenticated.endpoints=brooklyn-ui-login
 brooklyn.webconsole.security.login.form=brooklyn-ui-login
 ```
 
+## SSH and Script Defaults
+
+Default values for SSH and script execution behaviour can be set in this file
+using the prefix `brooklyn.ssh.config.`, as described in [Locations](/guide/locations#os-setup).
+
+
+## Certificate Validation
+
+Apache Brooklyn can be configured to perform strict validation for HTTPS using the following keys:
+
+```
+brooklyn.https.config.trustAll=false
+brooklyn.https.config.laxRedirect=false
+```
+
+This is similar but independent of `brooklyn.ssh.config.scripts.ignoreCerts` noted in the previous section.
+If set false, Java must be correctly configured with the appropriate trust store in order to connect to HTTPS endpoints.
+
+These can be set globally or on a per-entity / per-location basis.
