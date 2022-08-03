@@ -156,7 +156,7 @@ use the Azure Compute ARM location. These are:
 
     jclouds.azurecompute.arm.publishers: OpenLogic
 
-The publishers is any item from the list available here: [https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-cli-ps-findimage](https://docs.microsoft.com/en-us/azure/virtual-machines/virtual-machines-linux-cli-ps-findimage)
+The publishers is any item from the list available here: [https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage)
     
     region: southeastasia    
 

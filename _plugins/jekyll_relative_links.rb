@@ -114,7 +114,7 @@ module JekyllRelativeLinks
         else
           next original unless replaceable_link?(link.path)
 
-          path = path_from_root(relative_to_path, url_base)
+          path = path_from_root(link.path, url_base)
           url  = url_for_path(path, relative_to_path)
 
           next original unless url
@@ -238,7 +238,7 @@ module JekyllRelativeLinks
     end
 
     def replaceable_link?(string)
-      !fragment?(string) && !absolute_url?(string)
+      !fragment?(string) && !absolute_url?(string) && string != ""
     end
 
     def option(key)

@@ -38,6 +38,6 @@ tar czf brooklyn-report.tgz ${REPORT_DIR}
 
 Also consider providing your log files and persisted state, though extreme care should be taken if
 these might contain cloud or machine credentials (especially if 
-[Externalised Configuration](/guide/ops/externalized-configuration) 
+[Externalised Configuration](/guide/ops/externalized-configuration.md) 
 is not being used for credential storage).
 
