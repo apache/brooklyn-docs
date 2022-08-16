@@ -57,12 +57,22 @@ the entity being defined, with these being the most common:
     (on an entity which as an ssh-able machine)
 
   * `org.apache.brooklyn.core.sensor.ssh.SshCommandSensor`: takes a `name` and `command`,
-    and optionally a `period`, to create a sensor feed which populates the sensor with
-    the given name by running the given command (on an entity which as an ssh-able machine)
+    and optionally a `period` (e.g. `1h`) or `triggers` (a sensor name, or list containing sensor names or
+    maps of the form `{entity: id, sensor: name}`), to create a sensor feed which populates the sensor with
+    the given name by running the given command (on an entity which as an ssh-able machine);
+    this also takes an optional `type` to coerce the output from YAML or JSON
+    (if the `---` document separator is used, only the output after the last such separator is coerced,
+    allowing output to be verbose until the final section) 
+
+  * `org.apache.brooklyn.core.sensor.ssh.SshCommandSensor`: takes a `name` and `image`,
+    and optionally either `bashScript` or `command`,
+    and optionally the same `period` and `triggers` and `type` as `SshCommandSensor`, 
+    to create a sensor feed which runs the given container to populate the sensor
 
   * `org.apache.brooklyn.core.sensor.windows.WinRmCommandSensor`: For a command supplied via WinRm. Takes a `name`, `command`,
-    and optionally a `period` and `executionDir`, to create a sensor feed which populates the sensor with
-    the given name by running the given command (on an entity which as an WinRM-able machine).<br/>
+    and optionally a `period` or `triggers`, and optionally `executionDir`, 
+    to create a sensor feed which populates the sensor with
+    the given name by running the given command (on an entity which as an WinRM-able machine);
     _`"~"` will use the default execution directory for the WinRm session which is usually `%USERPROFILE%`_
   
   When specifying the type of an initializer, registered types (added to the catalog) are preferred,
