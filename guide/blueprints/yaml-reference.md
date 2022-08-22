@@ -363,6 +363,8 @@ and false otherwise.  The full set of individual tests are:
 * `equals: <object>`, to test java object equality, attempting type coercion if necessary
 * `regex: <string|number>`
 * `glob: <string|number>`
+* `not: <test>`, to return whether the indicated `<test>` fails
+* `check: <test>`, to apply the indicated `<test>` (mainly useful to structure checks involving retargeting, e.g. nested `key` lookups)
 * `when: <presence>`, where `<presence>` is one of the values described below
 * `less-than: <object>`, for strings and primitives, computed using "natural ordering",
   numeric order for numbers and digit sequences within numbers (`"9" < "10"`),
@@ -374,6 +376,10 @@ and false otherwise.  The full set of individual tests are:
 * `greater-than: <object>`, as above 
 * `less-than-or-equal-to: <object>` as above
 * `greater-than-or-equal-to: <object>`, as above
+* `size: <test>`, for lists, maps, and strings, to apply the `<test>` to the size/length,
+  e.g. `size: 0` for empty, `size: { greater-than: 0 }` or `not: { size: 0 }` for non-empty
+* `has-element: <test>`, for lists, checks whether any entry satisifes the `<test>`
+  (same for sets; and for maps, applying `<test>` to each key-value entry as a two-element list) 
 * `in-range: <range>`, where `<range>` is a list of two numbers, e.g. `[0,100]` (always inclusive)
 * `java-instance-of: <string>`, where the `<string>` is a registered type name, to test
   type assignment of the underlying java class of the value being tested with the
@@ -381,12 +387,13 @@ and false otherwise.  The full set of individual tests are:
 * `java-type-name: <test>`, where the `<test>` is a `DslPredicate` tested against the
   underlying java class name of the value
 
+Where a `<test>` is required, a string or integer can be supplied to imply an `equals` test.
+
 Two composite tests are supported, both taking a list of other `<test>` objects 
 (as a list of YAML maps):
 
 * `any: <list of tests>`, testing that any of the tests in the list are true (logical `"or"`)
 * `all: <list of tests>`, testing that all of the tests in the list are true (logical `"and"`)
-
 
 
 ### Presence
@@ -409,45 +416,74 @@ Permitted values for this test are:
 ### Entity Tests
 
 To assist with tests on an `Entity` or `Location`, additional keys are supported on
-the `DslPredicate` via `DslEntityPredicate`:
+the `DslPredicate` via `DslEntityPredicate`, which allow "retargetting" the expression under test.
+These expressions change the focus of the tests defined in the predicate as follows:
 
 * `target: <expression>`: to specify a value to test, resolved relative to the "context entity"
   (the one being tested, if appropriate, or otherwise the evaluating entity where the predicate is defined); 
   this can be a DSL expression such as `$brooklyn:config("key")` 
-  or a keyword, currently `location` or `children`, to evaluate
-  against the location(s) or children of that entity
+  or a keyword, currently `locations` or `children` or `tags`, to evaluate the tests
+  against the location(s) or children of that entity,
+  and the singular (`location`, `child`, or `tag`) to check any child on the current test
+  (implicitly wrapping all other fields in `has-element`, so long as `has-element` isn't implicitly set)
 * `config: <string>`: indicates that the tests should be applied to the value of config key
   `<string>` on the context entity, location, or policy
 * `sensor: <string>`: indicates that the tests should be applied to the value of sensor
   `<string>` on the context entity
-* `tag: <test>`: indicates that `<test>` should be applied to the tags on the context entity, location, or policy 
+
+For either `config` or `sensor`, there is a default test for truthiness (cf DSL `availableWhenReady`).
+For everything else, it is an error if a test is omitted.
+
+Additionally on entities and locations, there is a test:
+
+* `tag: <test>`: indicates that `<test>` should be applied to all tags on the context entity, location, or policy,
+  passing if any tag passes the test; this is an alternative to specifying `tag` or `tags` as the `target`
+  (if that is supplied along with a `tag: <test>`, the predicate will check whether any tag has a tag)
 
 
-### Lists and Flattening Behaviour
+### Lists, Maps and JSON Behaviour
 
-To facilitate testing against collections (e.g. `target: location` or `target: children`, or `tags`,
-or a config key which is a collection), the default behaviour for testing against any `Iterable`
-is to perform the tests against the `Iterable` itself and, if that fails, against each 
-element therein (and any element in nested `Iterable` elements, recursively.
-The predicate will pass if the `Iterable` or any such member passes all the tests defined.
+To facilitate testing against collections (e.g. `target: locations`, or a map or complex type)
+the following retargetting keys are supported:
 
-This makes it easy to test for the presence of a specific tag of location,
-and is chosen as the default because the majority of test predicates are not
-applicable to collections.
-
-However there may be cases where the predicate needs to run against the `Iterable`
-and _not_ the nested values.  This can be indicated with the special test:
-
-* `unflattened: <test>`: Performs the test against the value prior to enumeration of
-  members, and if supplied must pass in order for the predicate to return true
+* `key: <object>`: retargets the tests to the value at the indicated key in a map
+* `filter: <test>`: retargets the tests to be a sub-list of entries matching `<test>`
+  (for lists and sets, and with maps treated as per `has-element`) 
+* `index: <integer>`: retargets the tests to the value at the indicated index in a list or set or map (for maps returning a two-element list, per `has-element`)
+* `jsonpath: <string>`: applies the given JSON-Path `<string>`, e.g. `key.subkey[1].list[0]`, to the JSON serialization of the value under test,
+  and retargets to the resulting value, or list of values if `..` or `*` is used
+  (some strict JSON-Path expressions require a `$.` prefix before key names and `$` before `[` expressions;
+  they are accepted but are unnecessary and will be inferred if omitted)
 
 
 ### Examples
 
+##### Entity Config
+
+The following will test whether an entity has a config `region`
+starting with `us-`, for example to filter within a `DynamicGroup`:
+
+```
+config: region
+glob: us-*
+```
+
+(Instead of the `glob`, writing `regex: us-.*` would be equivalent.)
+
+
 ##### Location Config
 
-The following will test whether an entity has any location with config `region` 
-starting with `us-`, for example to filter within a `DynamicGroup`:
+Sometimes we may wish to apply a similar filter, but for entities where any location matches the test.
+We can use a `target` and the `has-element` test:
+
+```
+target: locations
+has-element:
+  config: region
+  glob: us-*
+```
+
+We can instead use the shorthand `location` which implies `has-element`:
 
 ```
 target: location
@@ -455,7 +491,6 @@ config: region
 glob: us-*
 ```
 
-(Instead of the `glob`, writing `regex: us-.*` would be equivalent.)
 
 
 ##### Date Comparison
@@ -469,7 +504,13 @@ greater-than-or-equal-to: 2000-01-01
 ```
 
 
-##### Missing Sensor
+##### Present, Absent, and Null Sensors
+
+This will select entities which have a non-trivial ("truthy") value for the sensor "ready":
+
+```
+sensor: ready
+```
 
 This will select entities which have _not_ published the sensor "ready":
 
@@ -478,7 +519,8 @@ sensor: ready
 when: absent
 ```
 
-And this will select entities where that sensor is present but null, false, or empty:
+And this will select entities where that sensor _has_ been published,
+but its value is null, false, or empty.
 
 ```
 sensor: ready
@@ -486,3 +528,4 @@ all:
 - when: present
 - when: falsy
 ```
+
