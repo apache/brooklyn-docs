@@ -242,6 +242,35 @@ For more keys and more detail on the keys below, see
   to the OS `ssh` command instead, which can be useful if SSH activity is restricted in the environment where Brooklyn is running.
   Other tools can also be developed and installed.
 
+- When `org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool` is set to delegate the OS `ssh` command, then 
+  location can have a custom `ssh` and `scp` executable configured, via `sshExecutable` and `scpExecutable` properties:
+  ```yaml
+  brooklyn.catalog:
+    items:
+      - id: my-location
+        itemType: location
+        item:
+          type: byon
+          brooklyn.config:
+            sshToolClass: org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool
+            sshExecutable: my-ssh # SSH executable, default is 'ssh' if not set.
+            scpExecutable: my-scp # SCP executable, default is 'scp' if not set.
+            # The rest is omitted for brevity
+  ```
+  
+  With this, `my-ssh` can access to the following environment variables:
+    * `SSH_HOST` - the host of the remote OS.
+    * `SSH_USER` - the user of the remote OS.
+    * `SSH_PASSWORD` - the user password to access remote OS.
+    * `SSH_COMMAND_BODY` - the command to run on remote OS.
+    * `SSH_TEMP_KEY_FILE` - the identity key file to access remote OS.
+  
+  And `my-scp` can access to the following environment variables:
+    * `SCP_TEMP_KEY_FILE` - the identity key file to access remote OS.
+    * `SCP_PASSWORD` - the user password to access remote OS.
+    * `SCP_FROM` - the path of the local file to copy.
+    * `SCP_TO` - the path of the remote file destination, which includes user and host of the remote OS.
+
 Other low level parameters are available in specific contexts, as described in the JavaDoc for the relevant classes
 and in some cases in `BrooklynConfigKeys`.
 
