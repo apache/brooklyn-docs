@@ -238,9 +238,11 @@ For more keys and more detail on the keys below, see
 
 - Use `sshToolClass: classname` to configure Apache Brooklyn to use a particular SSH Tool
   installed into the system. The default is to use the SSHJ java library which is a good choice in most instances.
-  Brooklyn also includes `org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool` which can be used to delegate 
-  to the OS `ssh` command instead, which can be useful if SSH activity is restricted in the environment where Brooklyn is running.
-  Other tools can also be developed and installed.
+  Brooklyn also includes `org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool` which can be used to delegate to
+  the OS `ssh` command instead. This can be useful if SSH activity is restricted in the environment where Brooklyn is
+  running, such as a specific SSH client being mandated, or if FIPS support or specific cryptography is required which
+  is not supported with the default `sshj` java library used by Brooklyn. Other custom tool classes can also be
+  developed and installed.
 
 - When `org.apache.brooklyn.util.core.internal.ssh.cli.SshCliTool` is set to delegate the OS `ssh` command, then 
   location can have a custom `ssh` and `scp` executable configured, via `sshExecutable` and `scpExecutable` properties:
