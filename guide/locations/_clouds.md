@@ -263,10 +263,10 @@ For more keys and more detail on the keys below, see
     * `SSH_USER` - the user of the remote OS.
     * `SSH_PASSWORD` - the user password to access remote OS.
     * `SSH_COMMAND_BODY` - the command to run on remote OS.
-    * `SSH_TEMP_KEY_FILE` - the identity key file to access remote OS.
+    * `SSH_KEY_FILE` - the identity key file to access remote OS.
   
   And `my-scp` can access to the following environment variables:
-    * `SCP_TEMP_KEY_FILE` - the identity key file to access remote OS.
+    * `SCP_KEY_FILE` - the identity key file to access remote OS.
     * `SCP_PASSWORD` - the user password to access remote OS.
     * `SCP_FROM` - the path of the local file to copy.
     * `SCP_TO` - the path of the remote file destination, which includes user and host of the remote OS.
