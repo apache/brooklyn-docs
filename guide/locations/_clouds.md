@@ -271,6 +271,18 @@ For more keys and more detail on the keys below, see
     * `SCP_FROM` - the path of the local file to copy.
     * `SCP_TO` - the path of the remote file destination, which includes user and host of the remote OS.
 
+  In addition to the environment variables, ssh and scp executables will be invoked with the following arguments:
+  ```shell
+  my-ssh -o BatchMode=yes [-i sshKeyFile] [-o StrictHostKeyChecking=no] [-P port] [-tt] user@host bash -c bashCommand
+  ```
+  ```shell
+  my-scp [-B] [-i scpKeyFile] [-o StrictHostKeyChecking=no] [-P port] fromFile user@host:/path/to/toFile
+  ```
+  Custom scripts may process these command-line arguments or ignore them and use the environment variables or use a
+  combination of the two. If a password is required, it must access that from the environment variables as passing it in
+  the CLI is not good practice. It can be tricky to pass password directly (e.g. using expect scripts or askpass) and
+  password-less mechanisms are normally recommended when using a CLI-based SSH.
+
 Other low level parameters are available in specific contexts, as described in the JavaDoc for the relevant classes
 and in some cases in `BrooklynConfigKeys`.
 
