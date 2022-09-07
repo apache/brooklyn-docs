@@ -107,10 +107,13 @@ Extensions may provide additional formats.
 Exactly **one** of `item` and `items` is also required:
 
 **`item`**
-The YAML for an entity, or policy, or location specification
-(a map containing `type` and optional `brooklyn.config`). For a "template" item, it
+The YAML definition for a type such as an entity, policy, or location,
+such as a map containing `type` and optional `brooklyn.config`. For a "template" item, it
 should be a map containing `services` (i.e. the usual YAML format for a full application
 blueprint).
+This value may also be a URL e.g. `classpath://other-blueprint.yaml` to indicate that the
+referenced URL should be read to supply the item, which is useful if the blueprint exists
+as a standalone file, such as one developed in the composer.
 
 **`items`**
 A list of catalog items, where each entry in the map follows the same schema as
