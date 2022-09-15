@@ -56,7 +56,7 @@ the entity being defined, with these being the most common:
     to define an effector with the given name implemented by the given SSH command
     (on an entity which as an ssh-able machine)
 
-  * `org.apache.brooklyn.tasks.kubectl.ContainerSensor`: takes a `name` and `command`,
+  * `org.apache.brooklyn.core.sensor.ssh.SshCommandSensor`: takes a `name` and `command`,
     and optionally a `period` (e.g. `1h`) or `triggers` (a sensor name, or list containing sensor names or
     maps of the form `{entity: id, sensor: name}`), to create a sensor feed which populates the sensor with
     the given name by running the given command (on an entity which as an ssh-able machine);
@@ -64,7 +64,7 @@ the entity being defined, with these being the most common:
     (if the `---` document separator is used, only the output after the last such separator is coerced,
     allowing output to be verbose until the final section) 
 
-  * `org.apache.brooklyn.core.sensor.ssh.SshCommandSensor`: takes a `name` and `image`,
+  * `org.apache.brooklyn.tasks.kubectl.ContainerSensor`: takes a `name` and `image`,
     and optionally either `bashScript` or `command`,
     and optionally the same `period` and `triggers` and `type` as `SshCommandSensor`, 
     to create a sensor feed which runs the given container to populate the sensor
