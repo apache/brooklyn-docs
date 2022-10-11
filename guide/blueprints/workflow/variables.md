@@ -13,7 +13,7 @@ For example, you can write:
 - log Starting workflow: ${workflow.name}
 - let integer x = 1
 - id: log
-  s:  log Step ${x}
+  s:  log The value for x is now ${x}
 - let x = ${x} + 1
   next: log
   condition:
@@ -34,7 +34,8 @@ Step 3
 ### Workflow Variables
 
 The above illustration showed how `let x = <VALUE>` can be used to set a workflow variable
-and `${x}` or `"Step ${x}"` will resolve it.  This is the simplest example of an interpolation expression.
+and `${x}` or `"The value for x is now ${x}"` will resolve it.  
+This is the simplest example of an interpolation expression.
 There is a large set of information available through these expressions, described below.
 
 Workflow variables, using `let`, have some additional behaviors described further below,
@@ -53,6 +54,7 @@ The interpolated reference `${workflow.<KEY>}` can be used to access workflow in
 * `error` - if there is an error in scope
 * `current_step.<KEY>` - info on the current step, where `<KEY>` can be any of the above (and the returned data is specific to the current step)
 * `previous_step.<KEY>` - info on the previously invoked step, as above
+* `error_handler.<KEY>` - info on the current error handler, as above, if in an on-error step
 * `step.<ID>.<KEY>` - info on the last invocation of the step with declared `id` matching `<ID>`, as above
 * `var.<VAR>` - return the value of `<VAR>` which should be a workflow-scoped variable (set with `let`) 
 
@@ -85,7 +87,9 @@ workflow is running, where `<KEY>` can be:
 
 Where `${<VAR>}` is supplied, assuming it doesn't match one of the models above, the following search order is used:
 
-* `${workflow.current_step.output.<VAR>}` 
+* `${workflow.error_handler.output.<VAR>}` (only in an on-error block)
+* `${workflow.error_handler.input.<VAR>}` (only in an on-error block)
+* `${workflow.current_step.output.<VAR>}` (only set when evaluating `output` for a step, pointing at default output of the step)
 * `${workflow.current_step.input.<VAR>}` 
 * `${workflow.previous_step.output.<VAR>}` 
 * `${workflow.var.<VAR>}`
@@ -94,7 +98,8 @@ Where `${<VAR>}` is supplied, assuming it doesn't match one of the models above,
 
 Thus `${x}` will be matched against the current step first, then outputs from the previous step,
 and then workflow vars and inputs. It will be an error if `x` is not defined in any of those scopes.
-(The `output` of the `current_step` is only defined when processing an explicit `output` block defined on a step.)  
+(The `output` of the `current_step` is only defined when processing an explicit `output` block defined on a step,
+and the `error_handler` is only defined when running in an `on-error` step.)
 
 Note that the `workflow` and `entity` models take priority over workflow variables,
 so it is a bad idea to call a workflow variable `workflow`, as an attempt to evaluate
@@ -118,7 +123,8 @@ the "nullish coalescing" operator `??` can be used within `let` statements:
 This will set `x = unset`, assuming there is no sensor `does_not_exist` (or if that sensor is `null`).
 
 A limited number of other operations is also permitted in `let`,
-namely the basic mathematical operands `+`, `-`, `*`, and `/`.
+namely the basic mathematical operands `+`, `-`, `*`, and `/` for integers and doubles, 
+and the modulo operator `%` for integers giving the remainder.
 These are evaluated in usual mathematical order.
 Parentheses are not supported.
 

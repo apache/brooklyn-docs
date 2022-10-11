@@ -383,11 +383,13 @@ and false otherwise.  The full set of individual tests are:
 * `has-element: <test>`, for lists, checks whether any entry satisifes the `<test>`
   (same for sets; and for maps, applying `<test>` to each key-value entry as a two-element list) 
 * `in-range: <range>`, where `<range>` is a list of two numbers, e.g. `[0,100]` (always inclusive)
-* `java-instance-of: <string>`, where the `<string>` is a registered type name, to test
-  type assignment of the underlying java class of the value being tested with the
-  underlying java class of the registered type referenced
-* `java-type-name: <test>`, where the `<test>` is a `DslPredicate` tested against the
-  underlying java class name of the value
+* `java-instance-of: <test|registered-type>`, where the `<test>` is applied to the underlying java class of the
+  value being tested and all super-classes and super-interfaces, 
+ allowing strings to match the fully qualified or simple name of the class or any super,
+  and string tests (e.g. glob, regex) applied to the fully-qualified class name;
+  if the argument is a string it is also tested as a registered type and instance-of applied against the
+  the type assignment of the underlying java class of the value being tested with the
+  underlying java type of that registered type
 
 Where a `<test>` is required, unless otherwise indicated a string or integer can be supplied to imply an `equals` test.
 
@@ -444,6 +446,36 @@ and false if there is a first element which does not start with `a`.
 If the input is an empty list, or not a list, or contains `null` as the first entry,
 the `assert: present_not_null` line causes it to throw an exception saying which of these is the case.
 (Without this line the condition will simply return `false` in any of these cases.)
+
+
+### Error Handling
+
+Two additional options are available for checking errors or any Java `Throwable` type:
+
+* `error-field: <name>`, to retarget the test against the value of the field `<name>` on the
+  throwable, trying first with `target.getName()` then with `target.name`;
+  this is useful for inspecting the `message` or other fields such as `statusCode` that
+  might be present on an error class
+* `error-cause: <test>`, to retarget the test against the throwable or its cause,
+  recursively, finding the first instance which matches the test;
+  this is useful where exceptions have been wrapped at the point where they need to test
+
+These are especially powerful in conjunction with `java-instance-of` and `regex` or `glob`.
+For example the following will match any exception which is, or is caused by, an
+`HttpResponseException` whose toString (message) contains `www.acme.com` 
+and where the `getStatusCode()` method returns an HTTP error code (400 or higher).
+This could be used, for instance, to retry workflow steps in the case of specific
+errors on specific servers.
+
+```
+condition:
+  error-cause:
+    java-instance-of: HttpResponseException
+    glob: *www.acme.com*
+    check:
+      error-field: statusCode
+      greater-than-or-equal-to: 400
+```
 
 
 ### Entity Tests

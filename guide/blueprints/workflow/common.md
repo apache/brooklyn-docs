@@ -155,5 +155,47 @@ is covered [here](variables.md).
 ### TODO Other keys
 
 timeout, on-error, retry (or new section)
+- timeout implement for workflow steps
+- on-error implement for workflow steps
 
-TODO also include this in defining
+
+- first matching on-error block applies, usually applied a condition, must apply a step (e.g. retry), and
+  can apply output or next which replaces that defined by the original step
+- 
+- on-error not permitted to have id or replayable mode; the error step remains the replay target;
+- where error handlers use nested workflow, these are not persisted or replayable
+
+- ui support for error handlers (deferred, see notes in WorkflowErrorHandling)
+ 
+
+
+TODO also include this in defining:
+
+If interrupted, steps are replayed, so care must be taken for actions which are not idempotent,
+i.e. if an individual step is replayed we should be wary if they cause a different result.
+For example, if the following were allowed:
+
+```
+- set-sensor count = ${entity.sensor.count} + 1   # NOT supported
+```
+
+if it were interrupted, Brooklyn would have no way of knowing whether
+the sensor `count` contains the old value or the new value.
+For this reason, arithmetic operations are permitted only in `let`,
+and because workflow variables are stored per step,
+we ensure that the arithmetic is idempotent, so either of these can be
+safely replayed from the point where they are interrupted
+(in addition to handling the case where the sensor is not yet published):
+
+```
+- let integer count_local = ${entity.sensor.count} + 1 ?? 1",
+- set_sensor count = ${count_local}
+```
+
+or
+
+```
+- let integer count_local = ${entity.sensor.count} ?? 0",
+- let count_local = ${count_local} + 1
+- set_sensor count = ${count_local}
+```
