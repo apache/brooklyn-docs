@@ -284,3 +284,30 @@ This step type is described in more detail [here](nested-workflow.md).
 * `target`: an optional target specifier (see below)
 
 **Output return value**: the output from the last step in the nested workflow
+
+
+# Third-Party Software Steps
+
+### ansible-ssh
+
+Runs a playbook via Ansible by SSHing to the VM under management.
+These playbooks will often target `localhost` but may target other servers.
+
+**Shorthand**: `ansible-ssh PLAYBOOK_NAME [ "from" PLAYBOOK_URL ]`
+
+**Input parameters**:
+* `playbook_name`: name of the playbook to run; required
+* `playbook_url`: URL for downloading the playbook; exactly one of this or `playbook_yaml` is required
+* `playbook_yaml`: YAML for the playbook, embedded in the step
+* `vars`: optional variables to pass to Ansible
+* `run_dir`: the directory on the target system where playbooks should be installed and run;
+  defaults to an entity-specific folder
+* `install`: whether to install Ansible if necessary, defaults to `true`
+* `install_dir`: the directory on the target system from which Ansible should be downloaded and installed,
+  if `install` is not false, defaults to an entity-specific folder
+
+**Output return value**:
+* `stdout`
+* `stderr`
+* `exit_code`
+

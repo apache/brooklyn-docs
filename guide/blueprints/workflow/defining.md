@@ -117,3 +117,47 @@ The config to define the policy feed is:
 The `steps` must also be defined, as per above,
 and the same common configuration is supported.
 
+
+### Workflow Software Process Entities
+
+Entities that run software or another machine-based process can be defined using workflow for the
+install, customize, launch, check-running, and stop phases.
+These entities will provision a machine if required (e.g. if given a cloud or machine provisioning
+location, rather than a machine), and use the same latches and pre/post phase on-box commands,
+but for the key phases it will take a `workflow` object including at minimum `steps`.
+
+The `steps` will often run `ssh` and possibly `set-sensor`, and
+they can access the run dir and install dir using Freemarker 
+`${entity.driver.installDir}` and `${entity.driver.runDir}`.
+The `workflow` object can also define inputs and outputs for use locally,
+and `on-error` handlers.
+
+The `checkRunning.workflow` should return `true` or `false` to indicate whether
+the software is running. Alternatively, by setting the entity config `usePidFile: true` 
+and in the launch command writing the process id (PID) to `${entity.driver.pidFile}`,
+Brooklyn's automatic PID detection can be used.
+
+As an example:
+
+```
+- type: org.apache.brooklyn.entity.software.base.WorkflowSoftwareProcess
+  brooklyn.config:
+    install.workflow:
+      steps:
+      - ssh yum update
+      - ssh yum install ...
+    launch.workflow:
+      steps:
+      - ssh java ...
+    checkRunning.workflow:
+      steps:
+      - ssh ps aux | grep java
+      - set-sensor check-running-detail = ${output.stdout}
+      - return true
+      on-error:
+      - type: no-op
+        output: false
+    stop.workflow:
+      steps:
+      - ssh killall java
+```
