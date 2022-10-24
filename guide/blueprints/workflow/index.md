@@ -27,3 +27,8 @@ This can be used to define [effectors, sensors, and policies](defining.md).
 
 The syntax supports [longhand, conditions, loops, error-handling](common.md), [variables](variables.md),
 a large set of [built-in step types](steps.md), and the ability to [define custom step types](nested-workflow.md).
+
+You can also get started by looking at examples:
+
+* [Ansible/BASH for a web server](example-ansible-and-bash.yaml)
+* [OAuth web request workflow](oauth.yaml)

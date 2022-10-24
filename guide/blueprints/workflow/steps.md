@@ -88,6 +88,10 @@ Sends an HTTPS (or HTTP) request and returns the response content and code.
 * `method`: the HTTP method for the request, defaulting to `get`
 * `username` and `password`: credentials to set on the request, e.g. for Basic auth
   (other auth schemes can be implemented using `headers`)
+* `config`: allows configuration of HTTPS, specifically a map of booleans `laxRedirect`, `trustAll`, and `trustSelfSigned`;
+  defaults to entity config or `brooklyn.properties` values of the same keys prefixed with
+  `brooklyn.https.config.`, and otherwise defaulting to `false` for each for security;
+  this allows e.g. configuration to work with self-signed hosts where the network is trusted
 
 **Output return value**:
 * `status_code`: integer status code, e.g. 200

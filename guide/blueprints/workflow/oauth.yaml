@@ -1,0 +1,80 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+name: google_oauth_example
+
+services:
+  - type: org.apache.brooklyn.entity.stock.BasicEntity
+    brooklyn.config:
+      google_client_id: $brooklyn:external("google-oauth", "google_client_id")
+      google_client_secret: $brooklyn:external("google-oauth", "google_client_secret")
+      google_refresh_token: $brooklyn:external("google-oauth", "google_refresh_token")
+
+    brooklyn.initializers:
+      - type: workflow-effector
+        brooklyn.config:
+          name: get-userinfo
+
+          steps:
+            - step: http www.googleapis.com/oauth2/v2/userinfo
+              replayable: "yes"
+              headers:
+                Authorization: Bearer ${entity.sensor.google_access_token}
+              on-error:
+                - step: goto refresh_token
+                  condition:
+                    regex: .*InvalidReference.*google_access_token.*.?    # refresh token if there is no token
+                - step: goto refresh_token
+                  condition:
+                    target: ${status_code}        # refresh token if we got a 401
+                    equals: 401
+                - fail rethrow
+                - # any other error, just retry up to 5 times with exponential backoff,
+                  # resetting after 1m in case the refresh token comes through several minutes later
+                  retry limit 5 in 1m backoff 100ms increasing 2x
+
+            - log Got userinfo ${content}
+            - let map userinfo = ${content}
+            - set-sensor discovered-name = ${userinfo.name}
+            - set-sensor discovered-email = ${userinfo.email}
+            - return Completed, user confirmed as ${userinfo.name}.
+
+            # if there is an error
+            - id: refresh_token
+              step: let refresh_token = ${entity.sensor.google_refresh_token} ?? ${entity.config.google_refresh_token}
+            - step: http https://oauth2.googleapis.com/token
+              query:
+                client_id: ${entity.config.google_client_id}
+                client_secret: ${entity.config.google_client_secret}
+                refresh_token: ${refresh_token}
+                grant_type: refresh_token
+              method: post
+              replayable: "yes"
+              on-error:
+                - # any error here, we just retry up to 5 times, first rapidly then waiting 1m between requests
+                  # (could be smarter about which errors permit retry or not)
+                  retry limit 5 backoff 100ms 1s 1m
+
+            - let map refresh_result = ${content}
+            - set-sensor google_access_token = ${refresh_result.access_token}
+            - let new_refresh_token = ${refresh_result.refresh_token} ?? ""
+            - step: set-sensor google_refresh_token = ${refresh_result.refresh_token}
+              condition:
+                target: ${new_refresh_token}
+                when: truthy
+            - # re-run the request
+              goto start
