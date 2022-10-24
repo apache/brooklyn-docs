@@ -366,6 +366,8 @@ and false otherwise.  The full set of individual tests are:
 * `not: <test>`, to return whether the indicated `<test>` fails
 * `check: <test>`, to apply the indicated `<test>` (mainly useful to structure checks involving retargeting, e.g. nested `key` lookups)
 * `when: <presence>`, where `<presence>` is one of the values described below
+* `assert: <presence|test>`, to cause the test to fail fast if the value does not meet the indicated `<presence>` or `<test>`, 
+  throwing an exception with details rather than merely returning false  
 * `less-than: <object>`, for strings and primitives, computed using "natural ordering",
   numeric order for numbers and digit sequences within numbers (`"9" < "10"`),
   and ASCII-lexicographic comparison elsewhere (`"a" < "b"`);
@@ -381,13 +383,15 @@ and false otherwise.  The full set of individual tests are:
 * `has-element: <test>`, for lists, checks whether any entry satisifes the `<test>`
   (same for sets; and for maps, applying `<test>` to each key-value entry as a two-element list) 
 * `in-range: <range>`, where `<range>` is a list of two numbers, e.g. `[0,100]` (always inclusive)
-* `java-instance-of: <string>`, where the `<string>` is a registered type name, to test
-  type assignment of the underlying java class of the value being tested with the
-  underlying java class of the registered type referenced
-* `java-type-name: <test>`, where the `<test>` is a `DslPredicate` tested against the
-  underlying java class name of the value
+* `java-instance-of: <test|registered-type>`, where the `<test>` is applied to the underlying java class of the
+  value being tested and all super-classes and super-interfaces, 
+ allowing strings to match the fully qualified or simple name of the class or any super,
+  and string tests (e.g. glob, regex) applied to the fully-qualified class name;
+  if the argument is a string it is also tested as a registered type and instance-of applied against the
+  the type assignment of the underlying java class of the value being tested with the
+  underlying java type of that registered type
 
-Where a `<test>` is required, a string or integer can be supplied to imply an `equals` test.
+Where a `<test>` is required, unless otherwise indicated a string or integer can be supplied to imply an `equals` test.
 
 Two composite tests are supported, both taking a list of other `<test>` objects 
 (as a list of YAML maps):
@@ -396,11 +400,13 @@ Two composite tests are supported, both taking a list of other `<test>` objects
 * `all: <list of tests>`, testing that all of the tests in the list are true (logical `"and"`)
 
 
-### Presence
+### Presence, When, and Assert
 
-The `when` test allows for testing of edge cases, to distinguish between values which are unavailable
-(e.g. a sensor which has not been published, or a config which is unset), those which are null,
-and those which are "truthy" (non-empty, non-false, per `$brooklyn:attributeWhenReady`).
+The `<presence>` object allows for testing of edge case values, 
+to distinguish between values which are unavailable
+(e.g. a sensor which has not been published, or a config which is unset), 
+values which are null,
+and values which are "truthy" (non-empty, non-false, per `$brooklyn:attributeWhenReady`).
 Permitted values for this test are:
 
 * `absent`: value cannot be resolved (not even as null)
@@ -411,6 +417,65 @@ Permitted values for this test are:
 * `falsy`: value is unavailable or not ready/truthy (eg not false or empty)
 * `always`: always returns true
 * `never`: always returns false
+
+The key `when` can be used with any of these values to cause the check to return false
+if the presence requirement is not met.
+
+The key `assert` can be used with any of these values to cause the check to fail immediately,
+throwing an exception with details, if the presence requirement is not met.
+This key can also take a nested condition (but not an implicit equals).
+Typically `assert` is used to ensure that the condition is testing the right target
+and to provide feedback in the form of an error message if some conditions are not met.
+Whereas the other keys will simply return false with little or feedback 
+unless `trace` logging is enabled, a `<presence>` or `<test>` in an `assert` key
+will provide information about why the condition has failed.
+This can be useful to inform the user if they provided invalid input and for debugging
+(to make it easier to see why conditions are returning false).
+
+As an example, consider the following condition:
+
+```
+condition:
+  index: 0
+  glob: a*
+  assert: present_not_null
+```
+
+If given a list with at least one element, it will return true if the first element starts with `a`,
+and false if there is a first element which does not start with `a`.
+If the input is an empty list, or not a list, or contains `null` as the first entry,
+the `assert: present_not_null` line causes it to throw an exception saying which of these is the case.
+(Without this line the condition will simply return `false` in any of these cases.)
+
+
+### Error Handling
+
+Two additional options are available for checking errors or any Java `Throwable` type:
+
+* `error-field: <name>`, to retarget the test against the value of the field `<name>` on the
+  throwable, trying first with `target.getName()` then with `target.name`;
+  this is useful for inspecting the `message` or other fields such as `statusCode` that
+  might be present on an error class
+* `error-cause: <test>`, to retarget the test against the throwable or its cause,
+  recursively, finding the first instance which matches the test;
+  this is useful where exceptions have been wrapped at the point where they need to test
+
+These are especially powerful in conjunction with `java-instance-of` and `regex` or `glob`.
+For example the following will match any exception which is, or is caused by, an
+`HttpResponseException` whose toString (message) contains `www.acme.com` 
+and where the `getStatusCode()` method returns an HTTP error code (400 or higher).
+This could be used, for instance, to retry workflow steps in the case of specific
+errors on specific servers.
+
+```
+condition:
+  error-cause:
+    java-instance-of: HttpResponseException
+    glob: *www.acme.com*
+    check:
+      error-field: statusCode
+      greater-than-or-equal-to: 400
+```
 
 
 ### Entity Tests

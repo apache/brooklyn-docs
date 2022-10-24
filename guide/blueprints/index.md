@@ -9,6 +9,7 @@ children:
 - multiple-services.md
 - custom-entities.md
 - config-files.md
+- workflow/
 - catalog/
 - clusters.md
 - enrichers.md
