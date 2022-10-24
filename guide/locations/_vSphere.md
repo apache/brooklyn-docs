@@ -29,7 +29,7 @@ brooklyn.catalog:
   id: my-vsphere-linux-location
   name: my-vsphere-linux-location
   itemType: location
-    item:
+  item:
       type: vsphere
       brooklyn.config:
         displayName: vSphere VMware Linux
@@ -68,7 +68,7 @@ brooklyn.catalog:
   id: my-vsphere-windows-location
   name: my-vsphere-windows-location
   itemType: location
-    item:
+  item:
       type: vsphere
       brooklyn.config:
         displayName: vSphere VMware Windows
