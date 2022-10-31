@@ -43,11 +43,15 @@ require 'json'
 # then e.g. {% for record in jsonball %} {{ record.name }} {% endfor %}
 # to print out all the name entries (or build a fancy TOC sidebar)
 
-# and finally, if that json file might itself contain liquid tags,
+# if that json file might itself contain liquid tags,
 # or need jekylling, treat it as a page and it will get jekylled
 # (we use this for toc.json reading from subdirs' toc.json files):
 #
 #   {% jsonball foo from page toc.json %}
+
+# YAML is support by inserting the keyword 'yaml' after from
+#
+#   {% jsonball foo from yaml data { a: "b" } %}
 
 module JekyllJsonball
   class JsonballTag < Liquid::Tag
@@ -74,27 +78,50 @@ module JekyllJsonball
 		context[$1] = JSON jekylled_page_relative_file_contents(context, $2.strip)
 		return ''
 	end
+
+    if /(.+) from yaml var (.+)/.match(@text)
+        context[$1] = YAML.load( context[$2] )
+        return ''
+    end
+    if /(.+) from yaml data (.+)/.match(@text)
+        context[$1] = YAML.load( $2 )
+        return ''
+    end
+    if /(.+) from yaml file (.+)/.match(@text)
+        context[$1] = YAML.load( page_relative_file_contents(context, $2.strip) )
+        return ''
+    end
+    if /(.+) from yaml page (.+)/.match(@text)
+        context[$1] = YAML.load( jekylled_page_relative_file_contents(context, $2.strip) )
+        return ''
+    end
+
 	# syntax error
 	return 'ERROR:bad_jsonball_syntax'
     end
 
     def page_relative_file_contents(context, filename)
-	jekyllSite = context.registers[:site]
-	dir = jekyllSite.source+'/'+File.dirname(context['page']['url'])
-        filename = context[filename] || filename
-	if !filename.match(/\/.*/)
-		filename = dir + '/' + filename
-	end
-	file = File.open(filename, "rb")
-	return file.read
+        jekyllSite = context.registers[:site]
+        dir = jekyllSite.source+'/'+dirname(context['page']['url'])
+            filename = context[filename] || filename
+        if !filename.match(/\/.*/)
+            filename = dir + '/' + filename
+        end
+        file = File.open(filename, "rb")
+        return file.read
+    end
+
+    def dirname(path)
+        return path if path.end_with?("/")
+        return File.dirname(path)
     end
 
     def jekylled_page_relative_file_contents(context, filename)
-	jekyllSite = context.registers[:site]
-        filename = context[filename] || filename
-	targetPage = Jekyll::Page.new(jekyllSite, jekyllSite.source, File.dirname(context['page']['url']), filename)
-	targetPage.render(jekyllSite.layouts, jekyllSite.site_payload)
-	targetPage.output
+        jekyllSite = context.registers[:site]
+            filename = context[filename] || filename
+        targetPage = Jekyll::Page.new(jekyllSite, jekyllSite.source, File.dirname(context['page']['url']), filename)
+        targetPage.render(jekyllSite.layouts, jekyllSite.site_payload)
+        targetPage.output
     end
 
   end

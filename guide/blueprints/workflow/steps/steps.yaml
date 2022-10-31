@@ -1,0 +1,271 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+-
+  section_name: Workflow Control
+  section_intro: |
+    The first group of built-in step types are those which control the flow of execution and local state within the workflow.
+
+  steps:
+    - name: let
+      summary: An alias for `set-workflow-variable`.
+      shorthand: '`let [ "trimmed" ] [ TYPE ] VARIABLE_NAME = VALUE`'
+
+    - name: set-workflow-variable
+      summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
+      shorthand: '`set-workflow-variable ["trimmed"] [TYPE] VARIABLE_NAME = VALUE`'
+      input: |
+        * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
+             to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
+        * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
+        * `trim`: whether the value, if a string, should be trimmed after evaluation and prior to setting, as described [here](../variables.md);
+             this can be set from shorthand if the first word after the step type is `trimmed`
+      output: the output from the previous step, or null if this is the first step
+
+    - name: clear-workflow-variable
+      summary: Clears the value of a workflow internal variable.
+      shorthand: '`clear-workflow-variable [TYPE] VARIABLE_NAME`'
+      input: |
+        * `variable`: a string being the workflow variable name or a map containing the `name`
+             of the workflow variable which should be cleared
+      output: the output from the previous step, or null if this is the first step
+
+    - name: return
+      summary: |
+        Returns an indicated value and specifies that the workflow should end,
+        essentially equivalent to `{ type: no-op, output: VALUE, next: end }`.
+      shorthand: '`return VALUE`'
+      input: |
+        * `value`: the value to return
+      output: the value indicated
+
+    - name: wait
+      summary: |
+        Waits for a value which might not yet be resolved, or a task which might not have finished,
+        optionally setting the value or the task's result to a workflow variable.
+      shorthand: '`wait [ [TYPE] VARIABLE_NAME = ] [MODE] VALUE`'
+      input: |
+        * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
+             to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
+        * `mode`: either `expression` (the default) or `task` to treat value as a task or task ID
+        * `value`: the expression to wait on and optionally set
+      output: |
+        the value once available if a `variable` is not being set,
+        or if a variable is being set either the output from the previous step or null if this is the first step
+
+    - name: workflow
+      summary: |
+        Runs nested workflow, optionally over an indicated target.
+        This step type is described in more detail [here](../nested-workflow.md).
+      input: |
+        * `steps`: a list of steps to run, run in a separate context
+        * `target`: an optional target specifier (see below)
+      output: the output from the last step in the nested workflow
+
+-
+  section_name: External Actions
+  section_intro: |
+    The next group of step types are those which typically do the "real work" by interacting with
+    external resources in the real world.
+
+  steps:
+    - name: container
+      summary: |
+        Runs a container with optional command and environment variables.
+      shorthand: '`container IMAGE [ COMMAND ]`'
+      input: |
+        * `image`: the image to run
+        * Optionally a command to pass to the image, at most one of:
+            * `command`: a command or script as a string, to pass to bash to be run
+            * `commands`: a list of commands to pass to bash to be run
+            * `raw-command`: a list containing the base executable in the first entry and any arguments as additional entries
+        * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
+        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+                         to require of the exit status code from the command, defaulting to `0`
+        * `pull-policy`: one of `IfNotPresent`, `Always`, or `Never`, whether to pull the image before running;
+             defaults to `IfNotPresent`
+      output: |
+        * `stdout`
+        * `stderr`
+        * `exit_code`
+
+
+    - name: http
+      summary: Sends an HTTPS (or HTTP) request and returns the response content and code.
+      shorthand: '`http ENDPOINT`'
+      input: |
+        * `endpoint`: the URL to connect to, optionally omitting the protocol and slash prefix if `https://` is intended
+             (e.g. just the host and any path); per URL standard any unusual characters such as query parameters should be URL-encoded,
+             so if e.g. passing parameters containing spaces, `params` should be used instead of `host/path?param=${value}`
+        * `query`: a map of query parameters to URL encode and add to the URL
+        * `body`: an object to be serialized and sent as the body (or just set as body if it is an array of bytes)
+        * `charset`: the character set to use to convert between byte arrays and strings for the request body and response content;
+             not applied if `body` is already a byte array, and not applied to the `content_bytes` output;
+             defaults to the system default
+        * `status-code`: the word `any`, a number, or a predicate DSL expression to require of the response status code,
+             defaulting to `{ less-than: 400, greater-than-or-equal-to: 200 }`
+        * `headers`: a map of header key-values to set on the request
+        * `method`: the HTTP method for the request, defaulting to `get`
+        * `username` and `password`: credentials to set on the request, e.g. for Basic auth
+             (other auth schemes can be implemented using `headers`)
+        * `config`: allows configuration of HTTPS, specifically a map of booleans `laxRedirect`, `trustAll`, and `trustSelfSigned`;
+             defaults to entity config or `brooklyn.properties` values of the same keys prefixed with
+             `brooklyn.https.config.`, and otherwise defaulting to `false` for each for security;
+             this allows e.g. configuration to work with self-signed hosts where the network is trusted
+      output: |
+        * `status_code`: integer status code, e.g. 200
+        * `headers`: a map of header keys to a _list_ of values for that header on the response (as multiple values are permitted)
+        * `content`: the content, converted to a string using `charset`
+        * `content_bytes`: the content, as a raw byte array
+        * `duration`: how long the request took
+
+    - name: ssh
+      summary: Runs a command over ssh.
+      shorthand: '`ssh COMMAND`'
+      input: |
+        * `command`: the command to run
+        * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
+        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+
+      #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
+      #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
+      output: |
+        * `stdout`
+        * `stderr`
+        * `exit_code`
+
+    - name: winrm
+      summary: Runs a command over winrm.
+      shorthand: '`winrm COMMAND`'
+      input: |
+        * `command`: the command to run
+        * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
+        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+                         to require of the exit status code from the command, defaulting to `0`
+
+      #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
+      #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
+
+      output: |
+        * `stdout`
+        * `stderr`
+        * `exit_code`
+
+
+    - name: ansible-ssh
+      summary: |
+        Runs a playbook via Ansible by SSHing to the VM under management.
+        These playbooks will often target `localhost` but may target other servers.
+      shorthand: '`ansible-ssh PLAYBOOK_NAME [ "from" PLAYBOOK_URL ]`'
+      input: |
+        * `playbook_name`: name of the playbook to run; required
+        * `playbook_url`: URL for downloading the playbook; exactly one of this or `playbook_yaml` is required
+        * `playbook_yaml`: YAML for the playbook, embedded in the step
+        * `vars`: optional variables to pass to Ansible
+        * `run_dir`: the directory on the target system where playbooks should be installed and run;
+             defaults to an entity-specific folder
+        * `install`: whether to install Ansible if necessary, defaults to `true`
+        * `install_dir`: the directory on the target system from which Ansible should be downloaded and installed,
+             if `install` is not false, defaults to an entity-specific folder
+      output: |
+        * `stdout`
+        * `stderr`
+        * `exit_code`
+
+-
+  section_name: Application Models
+  section_intro: |
+    The next group of step types manipulate the application models in Brooklyn.
+
+  steps:
+    - name: invoke-effector
+      summary: Invokes an effector.
+      shorthand: '`invoke-effector EFFECTOR`'
+      input: |
+        * `effector`: the name of the effector to invoke
+        * `entity`: optional entity or entity ID where the effector should be invoked
+        * `args`: map of argument names to values to pass to the effector
+      output: the returned object from the invoked effector
+
+    - name: set-config
+      summary: Sets the value of a config key on an entity.
+      shorthand: '`set-config [TYPE] CONFIG_KEY_NAME = VALUE`'
+      input: |
+        * `config`: a string being the config key name or a map containing the `name` and
+             optionally the `type` (defaulting to the declared type of the config key, if present, or to `Object`)
+             and/or the `entity` where the config should be set (defaulting to the entity where the workflow is running)
+        * `value`: the value to set
+      output: the output from the previous step, or null if this is the first step
+
+    - name: set-sensor
+      summary: Sets the value of a sensor on an entity.
+      shorthand: '`set-sensor [TYPE] SENSOR_NAME = VALUE`'
+      input: |
+        * `sensor`: a string being the sensor name or a map containing the `name` and
+             optionally the `type` (defaulting to the declared type of the sensor, if present, or to `Object`)
+             and/or the `entity` where the sensor should be set (defaulting to the entity where the workflow is running)
+        * `value`: the value to set
+      output: the output from the previous step, or null if this is the first step
+
+    - name: clear-config
+      summary: Clears the value of a config key on an entity.
+      shorthand: '`clear-config [TYPE] CONFIG_KEY_NAME`'
+      input: |
+        * `config`: a string being the config key name or a map containing the `name` and
+          optionally the `entity` where the config should be set (defaulting to the entity where the workflow is running)
+      output: |
+        the output from the previous step, or null if this is the first step
+
+    - name: clear-sensor
+      summary: Clears the value of a sensor on an entity.
+      shorthand: '`clear-sensor [TYPE] SENSOR_NAME`'
+      input: |
+        * `sensor`: a string being the sensor name or a map containing the `name` and
+          optionally the `entity` where the sensor should be cleared (defaulting to the entity where the workflow is running)
+      output: the output from the previous step, or null if this is the first step
+
+
+-
+  section_name: General Purpose
+  section_intro: |
+    A few other miscellaneous step types don't fit into the other categories.
+  steps:
+
+    - name: log
+      summary: Logs a message.
+      shorthand: '`log MESSAGE`'
+      input: |
+        * `message`: the message to be logged
+      output: the output from the previous step, or null if this is the first step
+
+    - name: no-op
+      summary: |
+        Does nothing. It is mainly useful when setting a `next` point to jump to,
+        optionally with a `condition`.
+      shorthand: '`no-op`'
+      input: _none_
+      output: the output from the previous step, or null if this is the first step
+
+    - name: sleep
+      summary: Causes execution to pause for a specified duration.
+      shorthand: '`sleep DURATION`'
+      input: |
+        * `duration`: how long to sleep for, e.g. `5s` for 5 seconds
+      output: the output from the previous step, or null if this is the first step
+
+
+

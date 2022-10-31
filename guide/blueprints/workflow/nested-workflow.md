@@ -4,7 +4,7 @@ layout: website-normal
 ---
 
 The `type: workflow` can be used to create new step types and save them to the Brooklyn type registry.
-New step types can be used in the same way as the [standard step types](steps.md).
+New step types can be used in the same way as the [standard step types](steps/).
 This allows common workflow logic to be saved and re-used as steps in other workflow.
 The usual properties of steps -- inputs, outputs, error handling -- are all supported,
 and it supports defining parameters and even custom shorthand templates.

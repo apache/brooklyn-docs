@@ -25,3 +25,9 @@
 .flip {
   @include flip;
 }
+
+div.no-space-in-list {
+  p {
+    margin: 0;
+  }
+}
