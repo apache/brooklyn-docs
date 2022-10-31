@@ -7,7 +7,7 @@ Let's start by discussing _why_ workflow is introduced and where it can and shou
 
 The Apache Brooklyn Workflow is designed to make it easy to describe behaviour of effectors, sensors, and policies in blueprints.
 It has the sophistication of a programming language including [conditions, loops, and error-handling](common.md) and [variables](variables.md),
-but more important are the [steps](steps.md) which delegate to other systems,
+but more important are the [steps](steps/) which delegate to other systems,
 such as containers or SSH or HTTP endpoints.
 Complex programming logic will typically be done in another system, such as a container;
 but where effectors and sensors need to interact with Brooklyn, such as reading and setting sensors, or invoking effectors,
@@ -144,20 +144,21 @@ As an example:
   brooklyn.config:
     install.workflow:
       steps:
-      - ssh yum update
-      - ssh yum install ...
+        - ssh yum update
+        - ssh yum install ...
     launch.workflow:
       steps:
-      - ssh java ...
+        - let PORT = 4321
+        - 'ssh { echo hello | nc -l ${PORT} & } ; echo $! > /tmp/brooklyn-nc.pid'
+        - 'set-sensor main.uri = http://localhost:${PORT}/'
     checkRunning.workflow:
       steps:
-      - ssh ps aux | grep java
-      - set-sensor check-running-detail = ${output.stdout}
-      - return true
-      on-error:
-      - type: no-op
-        output: false
+        - step: ssh ps -p `cat /tmp/brooklyn-nc.pid`
+          timeout: 10s
+          on-error:
+            - return false
+        - return true
     stop.workflow:
       steps:
-      - ssh killall java
+        - ssh kill -9 `cat /tmp/brooklyn-nc.pid`
 ```

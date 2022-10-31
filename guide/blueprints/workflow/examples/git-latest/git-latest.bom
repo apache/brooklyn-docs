@@ -1,0 +1,41 @@
+brooklyn.catalog:
+  bundle: git-workflow-utils
+  version: 1.0.0-SNAPSHOT
+  items:
+  - id: ssh-git-latest
+    format: bean-with-type
+    item:
+      type: workflow
+      shorthand: ${repo_url} [ " in " ${dir_name} ]
+      parameters:
+        repo_url: {}
+        dir_name: {}
+      steps:
+      - let dir_name = ${dir_name} ?? ""   # allow this parameter to be optional
+      - type: ssh
+        command: |
+
+          # move to this dir for cleanliness
+          mkdir -p managed-gits/
+          cd managed-gits/
+
+          # install to this dir, relative or absolute, if specified
+          DIR="${dir_name}"
+          if [ -z "$DIR" ] ; then
+
+            # if not specified infer from url name
+            DIR=`echo ${repo_url} | sed -E 's/(.git)?\/*$//g' | sed -E 's/.*\///'`
+            if [ -z "$DIR" ] ; then
+              echo Unable to infer directory
+              exit 1
+            fi
+          fi
+
+          if ( cd $DIR && git pull ) ; then
+            echo Successfully updated
+          else
+            rm -rf $DIR/
+            git clone ${repo_url} $DIR
+            echo Successfully cloned
+          fi
+        output: ${stdout}

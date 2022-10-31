@@ -8,6 +8,7 @@ children:
 - steps.md
 - variables.md
 - nested-workflow.md
+- examples/
 ---
 
 Apache Brooklyn has a powerful workflow engine and syntax for defining entities, effectors, sensors, and policies.
@@ -28,7 +29,4 @@ This can be used within [most Apache Brooklyn resources](defining.md).
 The syntax supports [longhand, conditions, loops, error-handling](common.md), [variables](variables.md),
 a large set of [built-in step types](steps.md), and the ability to [define custom step types](nested-workflow.md).
 
-You can also get started by looking at examples:
-
-* [Ansible/BASH for a web server](example-ansible-and-bash.yaml)
-* [OAuth web request workflow](oauth.yaml)
+You can also get started by looking at a variety [examples](examples/).

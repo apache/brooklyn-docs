@@ -241,23 +241,31 @@ concise DSL defined here:
   can be used to supply config at the root which is used in multiple places in the plan
 * `$brooklyn:sensor("sensor.name")` returns the given sensor on the current entity if found, or an untyped (Object) sensor;
   `$brooklyn:sensor("com.acme.brooklyn.ContainingEntityClass", "sensor.name")` returns the strongly typed sensor defined in the given class
-* `$brooklyn:entity("ID")` refers to a Brooklyn entity with the given ID; you can then access the following subfields,
+
+* `$brooklyn:entity("ID")` refers to a Brooklyn entity with the given ID;
+  you can then access the following subfields,
   using the same syntax as defined above but with a different reference entity,
   e.g. `$brooklyn:entity("ID").attributeWhenReady("sensor")`:
   * `.attributeWhenReady("sensor")`
   * `.config("key")`
   * `.sensor("sensor.name")`
-* `$brooklyn:component("scope", "ID")` is also supported, to limit scope to any of
-  * `global`: looks for the `ID` anywhere in the plan
-  * `child`: looks for the `ID` anywhere in the child only
-  * `descendant`: looks for the `ID` anywhere in children or their descendants
-  * `sibling`: looks for the `ID` anywhere among children of the parent entity
-  * `parent`: returns the parent entity (ignores the `ID`)
-  * `this`: returns this entity (ignores the `ID`)
+* `$brooklyn:component("ID")` is also supported as a synonym for the above
+  (optionally taking a scope in the first argument but this is deprecated from the DSL as the scope is
+  redundant with the methods below); note methods prefer matching entities nearer the origin,
+  and only look in the same application unless otherwise noted (e.g. `application("ID")`),
+  and can be chained, e.g. `application("other_app").entity("node_in_other_app").config("key_there")`
+* `$brooklyn:self()` will return the current entity
+* `$brooklyn:parent()` will return the entity's parent, failing if it is an application
 * `$brooklyn:root()` will return the topmost entity (the application)
 * `$brooklyn:scopeRoot()` will return the root entity in the current plan scope.
   For catalog items it's the topmost entity in the plan, for application plans it is the same as
   `$brooklyn:root()`.
+* `$brooklyn:child("ID")`: looks for any immediate child with the given `ID`
+* `$brooklyn:application("ID")`: looks for any application (root) with the given `ID`
+* `$brooklyn:descendant("ID")`: looks for any descendant excluding members with the given `ID`
+* `$brooklyn:member("ID")`: looks for any descendant including members with the given `ID`
+* `$brooklyn:sibling("ID")`: looks for any child of the entity's parent with the given `ID`
+
 * `$brooklyn:formatString("pattern e.g. %s %s", "field 1", "field 2")` returns a future which creates the formatted string
   with the given parameters, where parameters may be strings *or* other tasks such as `attributeWhenReady`
 * `$brooklyn:external("provider", "token")` return the value stored for `token` in the externalized configuration store identified as `provider`
@@ -276,8 +284,6 @@ concise DSL defined here:
   (this is similar to CAMP but is not as extensive, and other formats are not supported in coercion;
   if there are any issues with a direct map, consider wrapping it in the `$brooklyn:entitySpec` DSL)
 
-<!-- TODO examples for object and entitySpec -->
-
 Parameters above can be supplied either as strings or as lists and maps in YAML, and the `$brooklyn:` syntax can be used within those parameters.  
 
 **Note:** The DSL is always supported for the values of config keys on entities. The DSL is supported in many other places also, but not all, depending on how the value is used there. For instance some aspects of a location or initializer may need to be retrieved without an entity context and so do not support DSL.
@@ -289,11 +295,10 @@ All entities support configuration via YAML, but these entities in particular
 have been designed for general purpose use from YAML.  Consult the Javadoc for these
 elements for more information:
 
+* **Workflow Software** in `WorkflowSoftwareProcess`: makes it very easy to build entities
+  using workflow to install, launch, stop, and check running
 * **Vanilla Software** in `VanillaSoftwareProcess`: makes it very easy to build entities
   which use `bash` commands to install and the PID to stop and restart
-* **Chef** in `ChefSoftwareProcess`: makes it easy to use Chef cookbooks to build entities,
-  either with recipes following conventions or with configuration in the `ServiceSpecification`
-  to use arbitrary recipes 
 * `DynamicCluster`: provides resizable clusters given a `dynamiccluster.memberspec` set with `$brooklyn.entitySpec(Map)` as described above 
 * `DynamicFabric`: provides a set of homogeneous instances started in different locations,
   with an effector to `addLocation`, i.e. add a new instance in a given location, at runtime
