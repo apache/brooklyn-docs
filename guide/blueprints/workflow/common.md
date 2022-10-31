@@ -40,11 +40,11 @@ steps:
 ```
 
 Shorthand can be combined as part of a map by providing the step shorthand string in a key
-`s` (or `shorthand`). The type must be included as the first word, and the `type` key must not be used.
+`step` (or `s` or `shorthand`). The type must be included as the first word, and the `type` key must not be used.
 
 ```
 steps:
-- s: ssh echo today is `DATE`
+- step: ssh echo today is `DATE`
   condition:
     target: ${scratch.skip_date}
     not: { equals: true }
@@ -103,13 +103,13 @@ steps:
     target: ${scratch.skip_date}
     equals: true
 
-- s: ssh echo today is `date`
+- step: ssh echo today is `date`
   name: Doing SSH
   next: end
 
 - id: skipping-ssh-date
   name: Not doing SSH
-  s: log skipping ssh date command
+  step: log skipping ssh date command
 ```
 
 
@@ -122,24 +122,24 @@ It is also possible to customize the output from a step using an `output` block.
 For example:
 
 ```
-- s: let target = aws
+- step: let target = aws
   condition:
     target: location
     tag: aws
   next: picked-target
-- s: let target = azure
+- step: let target = azure
   condition:
     target: location
     tag: azure
   next: picked-target
 - input:
     location_name: ${entity.location.name}
-  s: log Unrecognized cloud ${location_name}, using default
+  step: log Unrecognized cloud ${location_name}, using default
   output:
     cloud: default
   next: end
 - id: picked-target
-  s: log Picked target ${target}
+  step: log Picked target ${target}
   output:
     cloud: ${target}
 ```

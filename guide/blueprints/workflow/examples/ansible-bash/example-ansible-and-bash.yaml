@@ -47,7 +47,7 @@ services:
           - set-sensor main.uri = http://${entity.sensor['host.address']}/
       checkRunning.workflow:
         steps:
-          - s: http ${entity.sensor['main.uri']}
+          - step: http ${entity.sensor['main.uri']}
             timeout: 10s
             on-error:
               - return false

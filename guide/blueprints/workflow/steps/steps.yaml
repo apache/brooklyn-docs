@@ -67,6 +67,39 @@
         the value once available if a `variable` is not being set,
         or if a variable is being set either the output from the previous step or null if this is the first step
 
+    - name: fail
+      summary: Fails the workflow, throwing an exception which can be handled by an `on-error` block or returned to the user
+      shorthand: '`fail [ "rethrow" ] [ "message" MESSAGE ]`'
+      input: |
+        * `message`: a string to report in the exception
+        * `rethrow`: whether to include any error in scope (if being used within an `on-error` step)
+      output: _none_ (throws exception)
+
+    - name: retry
+      summary: Retries from an appropriate point with a configurable delay and back-off
+      shorthand: '`retry [ "replay" ] [ "from" NEXT ] [ "limit" LIMIT_COUNT [ "in" LIMIT_TIME ] ] [ "backoff" BACKOFF ] [ "timeout" TIMEOUT ]`'
+      input: |
+        * `replay`: whether to replay or not; XXX 
+        * `limit`: a list of limit definitions, e.g. `[ "10", "2 in 1 min" ]` to restrict to 10 retries total with
+          an additional limit of 2 in any 1 minute period; as shorthand, per the syntax above, it takes one such limit
+        * `backoff`: a specification of how to delay, of the form `INITIAL [ "increasing" FACTOR ] [ "up to" MAX ]`,
+          where `INITIAL` is one or more durations applied to the respective iteration, and the last value applying to all
+          unless `FACTOR` is supplied; `FACTOR` as either a number followed by `x` to multiply, a number followed by by `%` to add a percentage each time, 
+          or a duration to increase linearly; and `MAX` to specify a maximum duration; for example,
+          `backoff 1s 1s 10s` will retry after 1 second the first two times, then after 10 seconds on subsequent instances; 
+          and `backoff 1s 2s backoff 3x max 1m` will retry after 1 second then 2s then 6s then 18s then 54s then 60s each subsequent time 
+        * `key`: an optional key to identify related retries in a workflow; all retry blocks with the same `key` will share counts
+          for the purpose of counting limits, although the limits themselves are as per the definition in each retry block
+        * `next` and `timeout` per the [common](../common.md) step properties
+      output: the output from the previous step, or null if this is the first step
+
+    - name: goto
+      summary: Moves execution to another step indicated by its ID
+      shorthand: '`goto NEXT`'
+      input: |
+        * `next` per the [common](../common.md) step properties
+      output: the output from the previous step, or null if this is the first step
+
     - name: workflow
       summary: |
         Runs nested workflow, optionally over an indicated target.

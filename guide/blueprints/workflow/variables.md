@@ -13,7 +13,7 @@ For example, you can write:
 - log Starting workflow: ${workflow.name}
 - let integer x = 1
 - id: log
-  s:  log The value for x is now ${x}
+  step:  log The value for x is now ${x}
 - let x = ${x} + 1
   next: log
   condition:
@@ -107,13 +107,18 @@ so it is a bad idea to call a workflow variable `workflow`, as an attempt to eva
 (You could still access such a variable, using `${workflow.var.workflow}`.)
 
 
-### Evaluation for `let` and `wait`
+### Unavailable Variables and `let ... ??`
 
-It is an error if a variable not available or is null, including access to a sensor which has not yet been published.
+To guard against mistakes in variable names or state, workflow execution will typically throw an error if
+a referenced variable is unavailable or null, including access to a sensor which has not yet been published.
+There are three exceptions:
 
-You can cause workflow to block until a sensor becomes available using the `wait` step.
+* the `let` step supports the `??` operator for this case, as described below below
+* the `wait` step will block until a sensor becomes available
+* `condition` blocks can reference a null or unavailable value in the `target`,
+  and check for absence using `when: absent_or_null`
 
-Where it is necessary to allow a null value or a potentially unavilable variable,
+Where it is necessary to allow a null value or a potentially unavilable variable in other contexts,
 the "nullish coalescing" operator `??` can be used within `let` statements:
 
 ```
