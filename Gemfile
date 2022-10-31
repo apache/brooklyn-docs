@@ -1,12 +1,12 @@
-#ruby=ruby-3.0.1
+#ruby=ruby-3.1.2
 #ruby-gemset=brooklyn-site
 
 source 'https://rubygems.org'
-ruby '3.0.1'
+ruby '3.1.2'
 
 gem 'jekyll'
 gem 'minima'
-gem 'therubyracer'
+# gem 'therubyracer'
 gem 'html-proofer'
 gem 'json'
 
