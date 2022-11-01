@@ -125,12 +125,14 @@
         * Optionally a command to pass to the image, at most one of:
             * `command`: a command or script as a string, to pass to bash to be run
             * `commands`: a list of commands to pass to bash to be run
-            * `raw-command`: a list containing the base executable in the first entry and any arguments as additional entries
+            * `raw_command`: a list containing the base executable in the first entry and any arguments as additional entries
         * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
-        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+        * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
                          to require of the exit status code from the command, defaulting to `0`
-        * `pull-policy`: one of `IfNotPresent`, `Always`, or `Never`, whether to pull the image before running;
+        * `pull_policy`: one of `IfNotPresent`, `Always`, or `Never`, whether to pull the image before running;
              defaults to `IfNotPresent`
+        * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
+          or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
       output: |
         * `stdout`
         * `stderr`
@@ -149,7 +151,7 @@
         * `charset`: the character set to use to convert between byte arrays and strings for the request body and response content;
              not applied if `body` is already a byte array, and not applied to the `content_bytes` output;
              defaults to the system default
-        * `status-code`: the word `any`, a number, or a predicate DSL expression to require of the response status code,
+        * `status_code`: the word `any`, a number, or a predicate DSL expression to require of the response status code,
              defaulting to `{ less-than: 400, greater-than-or-equal-to: 200 }`
         * `headers`: a map of header key-values to set on the request
         * `method`: the HTTP method for the request, defaulting to `get`
@@ -172,7 +174,9 @@
       input: |
         * `command`: the command to run
         * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
-        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+        * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+        * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
+          or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
 
       #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
       #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
@@ -187,8 +191,10 @@
       input: |
         * `command`: the command to run
         * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
-        * `exit-code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+        * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
                          to require of the exit status code from the command, defaulting to `0`
+        * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
+          or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
 
       #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
       #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
@@ -214,6 +220,11 @@
         * `install`: whether to install Ansible if necessary, defaults to `true`
         * `install_dir`: the directory on the target system from which Ansible should be downloaded and installed,
              if `install` is not false, defaults to an entity-specific folder
+        * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
+        * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+                         to require of the exit status code from the command, defaulting to `0`
+        * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
+          or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
       output: |
         * `stdout`
         * `stderr`
