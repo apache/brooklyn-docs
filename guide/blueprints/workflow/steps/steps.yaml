@@ -27,13 +27,23 @@
 
     - name: set-workflow-variable
       summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
-      shorthand: '`set-workflow-variable ["trimmed"] [TYPE] VARIABLE_NAME = VALUE`'
+      shorthand: '`set-workflow-variable ["trim"] ["merge" ["deep"] ["clean"]] ["wait"] [TYPE] VARIABLE_NAME = VALUE`'
       input: |
         * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
-             to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
+          to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`);
+          the `name` can be of the form `x.key` if `x` is a map to set a `key` within it
         * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
-        * `trim`: whether the value, if a string, should be trimmed after evaluation and prior to setting, as described [here](../variables.md);
-             this can be set from shorthand if the first word after the step type is `trimmed`
+        * `trim`: whether the value should be trimmed after evaluation and prior to setting, removing whitespace
+          and for complex types coerced from YAML or JSON processing only the last YAML document after a `---` line separator as described [here](../variables.md)
+        * `merge`: indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`, which will be merged and
+          set as the indicated variable; `type` must be specified; for maps, all values must be maps; 
+          for lists and sets, any value is permitted and collection values are flattened (to insert a list as an entry in a list, it must be wrapped in another list using longhand syntax);
+          if `trim` is specified, null or unresolvable values are ignored; if `clean` is specified, null entries (including key or value for maps) are removed;
+          if `wait` is specified, unavailable values are waited on
+        * `merge_deep`: whether to merge maps deeply, i.e. where the keys are identical the values should be maps and those maps are themselves merged deeply; 
+          the value should be as per `merge` but containing maps only;
+          the values to merge are not otherwise coerced so must be pre-transformed to the appropriate type 
+        * `wait`: whether to block on expressions such as `entity.sensor.x` which are well-formed but not yet available
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
@@ -57,15 +67,15 @@
       summary: |
         Waits for a value which might not yet be resolved, or a task which might not have finished,
         optionally setting the value or the task's result to a workflow variable.
-      shorthand: '`wait [ [TYPE] VARIABLE_NAME = ] [MODE] VALUE`'
+      shorthand: '`wait [ [TYPE] VARIABLE_NAME = ] [ "task" ] VALUE`'
       input: |
         * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
              to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
-        * `mode`: either `expression` (the default) or `task` to treat value as a task or task ID
+        * `task`: boolean to indicate that value should be treated as a task or task ID to wait on and take its result
         * `value`: the expression to wait on and optionally set
       output: |
         the value once available if a `variable` is not being set,
-        or if a variable is being set either the output from the previous step or null if this is the first step
+        or if a variable is being set the output from the previous step or null if this is the first step
 
     - name: fail
       summary: Fails the workflow, throwing an exception which can be handled by an `on-error` block or returned to the user
