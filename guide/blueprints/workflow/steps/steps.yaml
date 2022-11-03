@@ -29,9 +29,10 @@
       summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
       shorthand: '`set-workflow-variable ["trim"] ["merge" ["deep"] ["clean"]] ["wait"] [TYPE] VARIABLE_NAME = VALUE`'
       input: |
-        * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
-          to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`);
-          the `name` can be of the form `x.key` if `x` is a map to set a `key` within it
+        * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
+          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
+          the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
+          the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
         * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
         * `trim`: whether the value should be trimmed after evaluation and prior to setting, removing whitespace
           and for complex types coerced from YAML or JSON processing only the last YAML document after a `---` line separator as described [here](../variables.md)
@@ -259,9 +260,10 @@
       summary: Sets the value of a config key on an entity.
       shorthand: '`set-config [TYPE] CONFIG_KEY_NAME = VALUE`'
       input: |
-        * `config`: a string being the config key name or a map containing the `name` and
-             optionally the `type` (defaulting to the declared type of the config key, if present, or to `Object`)
-             and/or the `entity` where the config should be set (defaulting to the entity where the workflow is running)
+        * `config`: either a string, being the config key name, or a map, containing the `name` and 
+          optionally the `type` (defaulting to the declared type of the config key, if present, or to `Object`)
+          and/or the `entity` where the config should be set (defaulting to the entity where the workflow is running);
+          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type
         * `value`: the value to set
       output: the output from the previous step, or null if this is the first step
 
@@ -269,9 +271,10 @@
       summary: Sets the value of a sensor on an entity.
       shorthand: '`set-sensor [TYPE] SENSOR_NAME = VALUE`'
       input: |
-        * `sensor`: a string being the sensor name or a map containing the `name` and
-             optionally the `type` (defaulting to the declared type of the sensor, if present, or to `Object`)
-             and/or the `entity` where the sensor should be set (defaulting to the entity where the workflow is running)
+        * `sensor`: either a string, being the sensor name, or a map, containing the `name` and 
+          optionally the `type` (defaulting to the declared type of the sensor, if present, or to `Object`)
+          and/or the `entity` where the sensor should be set (defaulting to the entity where the workflow is running);
+          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type
         * `value`: the value to set
       output: the output from the previous step, or null if this is the first step
 
