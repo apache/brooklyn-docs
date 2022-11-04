@@ -27,23 +27,30 @@
 
     - name: set-workflow-variable
       summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
-      shorthand: '`set-workflow-variable ["trim"] ["merge" ["deep"] ["clean"]] ["wait"] [TYPE] VARIABLE_NAME = VALUE`'
+      shorthand: '`set-workflow-variable ["merge" ["deep"]] ["trim"] ["yaml"|"json"] ["wait"] [TYPE] VARIABLE_NAME = VALUE`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
           the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
           the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
         * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
-        * `trim`: whether the value should be trimmed after evaluation and prior to setting, removing whitespace
-          and for complex types coerced from YAML or JSON processing only the last YAML document after a `---` line separator as described [here](../variables.md)
-        * `merge`: indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`, which will be merged and
-          set as the indicated variable; `type` must be specified; for maps, all values must be maps; 
+        * `merge`: indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`, 
+          which will be merged and set as the indicated variable; `type` must be specified; 
+          for maps, all values must be maps; 
           for lists and sets, any value is permitted and collection values are flattened (to insert a list as an entry in a list, it must be wrapped in another list using longhand syntax);
-          if `trim` is specified, null or unresolvable values are ignored; if `clean` is specified, null entries (including key or value for maps) are removed;
+          if `trim` is specified, null or unresolvable values and entries (including either key or value for maps) are ignored;
           if `wait` is specified, unavailable values are waited on
         * `merge_deep`: whether to merge maps deeply, i.e. where the keys are identical the values should be maps and those maps are themselves merged deeply; 
           the value should be as per `merge` but containing maps only;
           the values to merge are not otherwise coerced so must be pre-transformed to the appropriate type 
+        * `trim`: whether the value should be trimmed after evaluation and prior to setting; 
+          this applies to string input and to an explicit string type result
+        * `yaml`: indicates the input should be converted to YAML if not already a string,
+          and if a type other than string is specified, the YAML will be parsed as YAML to make that type;
+          if no type is specified then the YAML will be parsed and the resulting primitive/map/list/string returned;
+          if the type `string` is specified, the encoded YAML will be returned;
+          in all cases apart from the last (`yaml string`), any content in a string input before a YAML document separator `---` is dropped
+        * `json`: as for `yaml`, but using JSON for any conversion and parse; in particular `json string` can be used to get a JSON-encoded string for passing to scripts
         * `wait`: whether to block on expressions such as `entity.sensor.x` which are well-formed but not yet available
       output: the output from the previous step, or null if this is the first step
 
@@ -77,6 +84,19 @@
       output: |
         the value once available if a `variable` is not being set,
         or if a variable is being set the output from the previous step or null if this is the first step
+
+    - name: load
+      summary: |
+        Loads the contents of a URL into a string or coerced to a type.
+        Particularly useful when reading classpath resources.
+      shorthand: '`load ["charset" CHARSET] [TYPE] VARIABLE_NAME = URL`'
+      input: |
+        * `variable`: a string being the workflow variable name or a map containing the `name` and optionally the `type`
+             to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
+        * `url`: the URL to load
+        * `charset`: the charset to use to process the input
+      output: |
+        the output from the previous step or null if this is the first step
 
     - name: fail
       summary: Fails the workflow, throwing an exception which can be handled by an `on-error` block or returned to the user
