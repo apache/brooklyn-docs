@@ -95,7 +95,6 @@ Where `${<VAR>}` is supplied, assuming it doesn't match one of the models above,
 * `${workflow.var.<VAR>}`
 * `${workflow.input.<VAR>}`
 
-
 Thus `${x}` will be matched against the current step first, then outputs from the previous step,
 and then workflow vars and inputs. It will be an error if `x` is not defined in any of those scopes.
 (The `output` of the `current_step` is only defined when processing an explicit `output` block defined on a step,
@@ -106,19 +105,27 @@ so it is a bad idea to call a workflow variable `workflow`, as an attempt to eva
 `${workflow}` refers to the model above which is not a valid result for an expression.
 (You could still access such a variable, using `${workflow.var.workflow}`.)
 
+When populating a `<VAR>` for use in the scopes above, it might not make sense to include the previous scopes;
+in these cases resolution starts at the appropriate scope.
+For example when resolving a step's input, the step's output is not considered.
+Furthermore when resolving a step's input, it is permitted to reference other input so long as there is no recursive reference,
+and it is permitted to reference the variable being set, from a parent scope, but other local or recursive references are not permitted.
+This only applies in very specific edge cases, and so can generally be ignored.
+If resolution behavior is ever surprising, it is recommended to use the full syntax including scope (prefixed by `workflow.`).
 
-### Unavailable Variables and `let ... ??`
+
+### Unavailable Variables and the `let` Nullish Check
 
 To guard against mistakes in variable names or state, workflow execution will typically throw an error if
 a referenced variable is unavailable or null, including access to a sensor which has not yet been published.
 There are three exceptions:
 
-* the `let` step supports the `??` operator for this case, as described below below
+* the `let` step supports the "nullish coalescing" operator `??` for this case, as described below below
 * the `wait` step will block until a sensor becomes available
 * `condition` blocks can reference a null or unavailable value in the `target`,
   and check for absence using `when: absent_or_null`
 
-Where it is necessary to allow a null value or a potentially unavilable variable in other contexts,
+Where it is necessary to consider "nullish" values -- variables which are either null or not yet available --
 the "nullish coalescing" operator `??` can be used within `let` statements:
 
 ```
@@ -143,25 +150,43 @@ to the outputting the YAML intended to set in the variable: the script can do `e
 output which is wanted.
 
 
-### Edge Cases
+### Interpolating Objects and Strings
 
-#### Interpolating Objects and Strings
+Shorthand form is designed primarily for simple strings as the data. To pass more complex objects or control
+the quotes, longhand form (map) is recommended, and it may be helpful to convert complex objects to strings
+in a previous step using e.g. `let string map_s = ${map}`.
 
-Normally, expressions must either be the only content for an input or must be trivially convertable to a string 
-(such as a string or number).
-If we say `log "Hi ${person}"`, if `person` is something complex such as a map, the expression will return an error.
-If we say `let x = ${person}`, because the expression is the only content for the value,
-the trivial-to-string rule does not apply, and `x` will be whatever type `person` is.
-If we say `let map x = ${name}`, then there will be an error if `person` is not a map (or coercible to a map).
-Similarly if we say `let fancy-bean x = ${person}`, then `person` will be coerced to the registered type `fancy-bean`;
-thus if `fancy-bean` refers to a Java class with fields `String name` and `Integer age`, 
-and if we got a YAML string `{ name: Bob, age: 42 }` for `person`, 
-then `x` would be an instance of that class. 
+It is possible to embed most quoted expressions and some complex types as shorthand, but care must be taken
+and it is helpful to understand the parsing process.
+Shorthand will groups things using quotation marks, single or double, provided the quoted string is separated
+by whitespace or an end-of-line. Thus it is technically possible to set a workflow variable `a b` using
+`let "a b" = 1`, although it is not recommended, and because the expression syntax doesn't allow spaces,
+there is no way to access such a variable!
 
-There is one other special rule about `let`; it tokenizes its `value` into words respecting spaces and quotes
-before it evaluates them, any tokens which are quoted will be unescaped but _not_ evaluated as expressions,
-and other tokens are evaluated individually as expressions and then coerced to strings if necessary
-(if there are multiple tokens).
+Expressions within strings are evaluated as strings, and where a shorthand step can match multiple words
+(most final arguments, e.g. everything after `=` in `set-sensor`),
+if there are multiple words, they will also be treated as a string.
+Simple types such as numbers and booleans can be converted to strings, but complex types will be an error,
+as will null or absent variables. If an argument is a single word which is a single expression then its type will be
+preserved.  Thus if we run `let integer val = 1` then `set-sensor s1 = val is ${val}` or `set-sensor s1 = "val is ${val}"`,
+the string `val is 1` will be set as the sensor `s1`; however `set-sensor s1 = ${val}` will emit the integer `1`.
+If `val` is a map, then the last form will preserve the map, but the other two, including it in `val is ${val}`,
+will throw an error.
+
+It can be helpful to use the `let` command to coerce data to the write format in a new variable
+or to handle potentially unset values; for example `let json string val_json = ${val}` to create a string
+`val_json` representing the JSON encoding of `val`, or even `let map x = { a: 1 }` for simple unambiguous map expressions,
+where the string `{ a: 1 }` is converted to a map.
+The longhand form, e.g. `{ step: "let x", value: { a: 1 } }`, should be used for potentially ambiguous values.
+
+The `let` step has some special behavior. It can accept `yaml` and, when converting to complex types,
+will strip everything before a `---` document separator.  Thus a script can have any output, so long as it
+ends with `---\n` followed the YAML to read in, then `let yaml fancy-bean = ${stdout}` will convert it to
+a registered type `fancy-bean`. It will be an error if `stdout` is not coercible to `fancy-bean`.
+
+Another special behavior of `let` is that its shorthand form preserves spaces and quotes when tokenizing its final argument, `value`.
+Any tokens which are quoted will be unescaped but _not_ evaluated as expressions,
+and all other tokens are evaluated and then coerced to strings (except where the value is a single expression).
 This allows embedding literal quotation marks, multiple spaces, and `${...}` literals into variables.
 Thus given the steps:
 
@@ -171,6 +196,18 @@ Thus given the steps:
 ```
 
 Brooklyn will log `"${person}" is { name: "Bob", age: 42 }`.
+
+
+### Advanced Details
+
+If unusual behaviour is encountered with encoding and resolving expressions, a few simple tips can often help:
+
+* Use the longhand (map) format for steps if using complex types or strings
+* Use `let` with coercion, trim, and YAML/JSON options for fine-grained control and visibility of the output
+* Remember thay YAML parsing will also remove strings; where quotes need to be included, the YAML `|` marker,
+  followed by the content on the following line, is a good pattern
+
+In rare cases it can be useful to understand some of the advanced nuances. These are described below.
 
 #### Quotes and Whitespaces
 
