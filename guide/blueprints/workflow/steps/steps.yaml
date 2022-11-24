@@ -23,35 +23,49 @@
   steps:
     - name: let
       summary: An alias for `set-workflow-variable`.
-      shorthand: '`let [ "trimmed" ] [ TYPE ] VARIABLE_NAME = VALUE`'
+      shorthand: '`let ["merge" ["deep"]] ["trim"] ["yaml"|"json"|"bash" ["encode"|"parse"]] ["wait"] [ TYPE ] VARIABLE_NAME [ = VALUE ]`'
 
     - name: set-workflow-variable
       summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
-      shorthand: '`set-workflow-variable ["merge" ["deep"]] ["trim"] ["yaml"|"json"] ["wait"] [TYPE] VARIABLE_NAME = VALUE`'
+      shorthand: '`set-workflow-variable ["merge" ["deep"]] ["trim"] ["yaml"|"json"|"bash" ["encode"|"parse"]] ["wait"] [TYPE] VARIABLE_NAME [ = VALUE ]`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
           the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
           the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
         * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
-        * `merge`: indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`, 
-          which will be merged and set as the indicated variable; `type` must be specified; 
-          for maps, all values must be maps; 
-          for lists and sets, any value is permitted and collection values are flattened (to insert a list as an entry in a list, it must be wrapped in another list using longhand syntax);
-          if `trim` is specified, null or unresolvable values and entries (including either key or value for maps) are ignored;
-          if `wait` is specified, unavailable values are waited on
-        * `merge_deep`: whether to merge maps deeply, i.e. where the keys are identical the values should be maps and those maps are themselves merged deeply; 
-          the value should be as per `merge` but containing maps only;
-          the values to merge are not otherwise coerced so must be pre-transformed to the appropriate type 
-        * `trim`: whether the value should be trimmed after evaluation and prior to setting; 
-          this applies to string input and to an explicit string type result
-        * `yaml`: indicates the input should be converted to YAML if not already a string,
-          and if a type other than string is specified, the YAML will be parsed as YAML to make that type;
-          if no type is specified then the YAML will be parsed and the resulting primitive/map/list/string returned;
-          if the type `string` is specified, the encoded YAML will be returned;
-          in all cases apart from the last (`yaml string`), any content in a string input before a YAML document separator `---` is dropped
-        * `json`: as for `yaml`, but using JSON for any conversion and parse; in particular `json string` can be used to get a JSON-encoded string for passing to scripts
-        * `wait`: whether to block on expressions such as `entity.sensor.x` which are well-formed but not yet available
+      output: the output from the previous step, or null if this is the first step
+
+    - name: transform
+      summary: Applies a transformation to a variable or expression.
+      shorthand: '`transform [TYPE] VARIABLE_NAME [ [ = VALUE ] | TRANSFORM ]`'
+      input: |
+        * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
+          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
+          the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
+          the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
+        * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
+        * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
+          * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
+          * `merge [list|set|map] [deep] [wait] [lax]` to treat the words in the value as expressions to be combined;
+            indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`;
+            if a type is specified, all values must be compatible with that type, otherwise collection v map merge is inferred from the types;
+            if `deep`, any maps containing mergeable values (lists or maps) are themselves merged deeply;
+            if `wait`, unavailable sensor values are blocked on before merging;
+            if `lax` then nulls, and if not waiting unavailable sensors, are silently removed
+          * `wait` to wait on values (such as `${entity.attributeWhenReady...}`); must precede any expression that has to resolve values, such as `trim`)
+          * `type TYPE` to coerce to registered type `TYPE`
+          * `json [string|parse|encode]`: indicates the input should be converted as needed using JSON;
+            if `string` is specified, the value is returned if it is a string, or serialized as a JSON string if it is anything else;
+            if `parse` is specified, the result of `string` is then parsed to yield maps/lists/strings/primitives (any string value must be valid json);
+            if `encode` is specified, the value is serialized as a JSON string as per JS "stringify", including encoding string values wrapped in explicit `"`;
+            if nothing is specified the behavior is as per `parse`, but any value which is already a map/list/primitive is passed-through unchanged
+        * `yaml [string|parse|encode]`: as per `json` but using YAML serialization and, 
+          for anything other than `encode`, stripping any text before a `---` YAML document separator,
+        * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
+          ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
+        * `first`, `last`, `min`, `max`, and `average` are accepted for collections
+        * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
@@ -108,20 +122,35 @@
 
     - name: retry
       summary: Retries from an appropriate point with a configurable delay and back-off
-      shorthand: '`retry [ "replay" ] [ "from" NEXT ] [ "limit" LIMIT_COUNT [ "in" LIMIT_TIME ] ] [ "backoff" BACKOFF ] [ "timeout" TIMEOUT ]`'
+      shorthand: '`retry [ "replay" ] [ "from" NEXT ] [ "limit" LIMIT_COUNT [ "in" LIMIT_TIME ] ] [ "backoff" BACKOFF ]`'
       input: |
-        * `replay`: whether to replay or not; XXX 
-        * `limit`: a list of limit definitions, e.g. `[ "10", "2 in 1 min" ]` to restrict to 10 retries total with
-          an additional limit of 2 in any 1 minute period; as shorthand, per the syntax above, it takes one such limit
-        * `backoff`: a specification of how to delay, of the form `INITIAL [ "increasing" FACTOR ] [ "up to" MAX ]`,
+        * `replay`: whether to do the retry as a replay or not; 
+          if done as a replay, it reverts to the workflow variables as known at the target step;
+          if a `next` step is specified the default is `false`, but if there is no `next` step
+          the default is `true` and `next` is taken as `end` if in an error handler and `last` otherwise,
+          so blank/default `retry` behavior in an error handler is to try to replay resuming 
+          and in a normal workflow to replay from the last valid replay point;
+          if `replay` is specified without next, the default `next` is the `last` replay point
+          (always excluding the retry step itself, even if it is a valid replay point)
+        * `limit`: a list of limit definitions, e.g. `[ "10", "1h", "2 in 1 min" ]` to restrict to a max of 10 retries total,
+          an additional limit of 2 in any 1 minute period, and an additional limit of 1 hour; the retry will fail if any of these are exceeded;
+          as shorthand, per the syntax above, it takes one such limit definition
+        * `backoff`: a specification of how to delay, of the form `INITIAL [ "increasing" FACTOR ] [ "jitter" JITTER ] [ "up to" MAX ]`,
           where `INITIAL` is one or more durations applied to the respective iteration, and the last value applying to all
-          unless `FACTOR` is supplied; `FACTOR` as either a number followed by `x` to multiply, a number followed by by `%` to add a percentage each time, 
-          or a duration to increase linearly; and `MAX` to specify a maximum duration; for example,
+          unless an `increasing FACTOR` is supplied; 
+          `FACTOR` as either a number followed by `x` to multiply, a number followed by by `%` to add a percentage each time, 
+          or a duration to increase linearly; 
+          `JITTER` as either a percentage or real factor by which to jitter the result with randomness, 0 being none, 100% being up to double, and -100% being down to zero;
+          and `MAX` to specify a maximum duration; for example,
           `backoff 1s 1s 10s` will retry after 1 second the first two times, then after 10 seconds on subsequent instances; 
           and `backoff 1s 2s backoff 3x max 1m` will retry after 1 second then 2s then 6s then 18s then 54s then 60s each subsequent time 
-        * `key`: an optional key to identify related retries in a workflow; all retry blocks with the same `key` will share counts
-          for the purpose of counting limits, although the limits themselves are as per the definition in each retry block
-        * `next` and `timeout` per the [common](../common.md) step properties
+        * `hash`: an optional hash expression to identify related retries in a workflow instance; all retry blocks with the same `hash` will share counts
+          for the purpose of counting limits (although the limits themselves are as per the definition in each retry block),
+          which can be useful if there are different steps which might fail in different ways but the overall retry behaviour should be preserved
+        * `next` per the [common](../common.md) step properties, with special targets 
+          `last` for the last replayable step
+          (the default if not in an error handler or if `replay` is specified) and 
+          `end` to replay resuming (only permitted in an error handler where it is the default if `replay` is not specified)
       output: the output from the previous step, or null if this is the first step
 
     - name: goto
@@ -131,14 +160,33 @@
         * `next` per the [common](../common.md) step properties
       output: the output from the previous step, or null if this is the first step
 
+    - name: switch
+      summary: Concisely selects and runs the first matching step case, like `if ... else if ... else`
+      shorthand: '`switch [ VALUE ]`'
+      input: |
+        * `cases`: a list of steps, all but the last with a `condition`, and the first applicable will be run, the others not;
+          error if none match (where the last has a `condition`)
+        * `value`: a value passed to each of the conditions as the `target`
+      output: the output from the matched case step
+
     - name: workflow
       summary: |
         Runs nested workflow, optionally over an indicated target.
         This step type is described in more detail [here](../nested-workflow.md).
+        It can also
+      shorthand: '`workflow [ replayable REPLAYBLE ] [ retention RETENTION ]`' or custom
       input: |
         * `steps`: a list of steps to run, run in a separate context
-        * `target`: an optional target specifier (see below)
-      output: the output from the last step in the nested workflow
+        * `target`: an optional target specifier, an entity or input to the steps for the sub-workflow,
+          or if a list, a list of entities or inputs to pass to multiple sub-workflows
+        * `concurrency`: a specification for how many of the sub-workflows can be run in parallel, if given a list target;
+          defaulting to one at a time, supporting a DSL as described [here](../nested-workflow.md)
+        * `condition`: the usual condition settable on steps as described [here](../common.md) can be used, with one difference
+          that if a target is specified, the condition is applied to it or to each entry in the list, to conditionally allow sub-workflows,
+          and the workflow step itself will always run (i.e. the condition does not apply to the step itself if it has a target)
+        * `replayable`: instructions to add or modify replay points, as described [here](../settings.md), for example `workflow replayable from here`
+        * `retention`: instructions to modify workflow retention, as described [here](../settings.md)
+      output: the output from the last step in the nested workflow, or a list of such outputs if supplied a `target` list
 
 -
   section_name: External Actions
@@ -296,6 +344,8 @@
           and/or the `entity` where the sensor should be set (defaulting to the entity where the workflow is running);
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type
         * `value`: the value to set
+        * `require`: a condition to evaluate against the sensor value while holding the lock on the sensor,
+          used to enable atomic operations similar to the `lock` workflow setting
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-config

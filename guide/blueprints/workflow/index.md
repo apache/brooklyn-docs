@@ -5,9 +5,10 @@ layout: website-normal
 children:
 - defining.md
 - common.md
-- steps/
 - variables.md
+- steps/
 - nested-workflow.md
+- settings.md
 - examples/
 ---
 

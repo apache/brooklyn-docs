@@ -15,7 +15,9 @@ or to apply `on-error` behavior to a group of steps.
 
 Nested and custom workflows are not permitted to access data from their containing workflow;
 instead, they accept an `input` block like other steps.
-When defining a new step type in the catalog, `parameters` and a `shorthand` template can be defined. 
+
+This type permits all the [common step properties](common.md) and all the [workflow settings properties](settings.md),
+plus a few others, `target`, `concurrency`, `parameters`, and `shorthand` as described below.
 
 
 ### Basic Usage in a Workflow
@@ -33,9 +35,62 @@ For example:
   input:
     x: ${x}
   steps:
-    - log This is a nested workflow, able to see x=${x} but not y from the output workflow.
+    - log This is a nested workflow, able to see x=${x} from input but not y from the output workflow.
   on-error:
     # error handler which runs if the nested workflow fails (i.e. if any step therein fails and does not correct it) 
+```
+
+### Loops and Parallelization
+
+The `workflow` type can also be used to run a sequence of steps on multiple targets.
+If given a `target` value, Brooklyn will run the workflow against that target or targets,
+as follows:
+
+* If the target is a managed entity, e.g. `$brooklyn:entity("some-child")`, the nested workflow
+  will run in the scope of that entity. It will be visible in the UI under that entity,
+  and references to sensors and effectors will be aginst that entity.
+* If the target is any value which resolves to a list, it will be run against every entry in the list,
+  with the variable expression `${target}` available in the sub-workflow to refer to the relevant entry
+* If the target is `children` or `members` it will run against each entity in the relevant list
+* If the target is of the form `M..N` for integers `M` and `N` it will run for all integers in that range,
+  inclusive (so the string `1..4` is equivalent to the list `[1,2,3,4]`)
+
+Where a list is supplied, the result of the step is the list collecting the output of each sub-workflow.
+
+If a `condition` is supplied when a list is being used, the `workflow` step will always run,
+and the `condition` will be applied to entries in the list.
+An example of this is included below.
+
+By default nested workflows with list targets run sequentially over the entries,
+but this can be varied by setting `concurrency`.
+The following values are allowed:
+
+* a number to indicate the maximum number of simultaneous executions (with `1` being the default, for no concurrency)
+* the string `unlimited` to allow all to run in parallel
+* a negative number to indicate all but a certain number
+* a percentage to indicate a percentage of the targets
+* the string `min(...)` or `max(...)`, where `...` is a comma separated list of valid values
+
+This concisely allows complicated -- but important in the real world -- logic such as 
+`max(1, min(50%, -10))` to express running concurrently over up to half if more than twenty, otherwise all but 10, 
+and always allowing 1.
+This might be used for example to upgrade a cluster in situ, leaving the larger of 10 instances or half the cluster alone, if possible.  
+If the concurrency expression evaluates to 0, or to a negative number whose absolute value is larger than the number of values, the step will fail before executing, to ensure that if e.g. "-10" is specified when there are fewer than 10 items in the target list, the workflow does not run.  (Use "max(1, -10)" to allow it to run 1 at a time if there are 10 or fewer.)
+
+#### Example
+
+This example invokes an effector on all children which are `service.isUp`,
+running in batches of up to 5 but not more than a third of the children at once:
+
+```
+- type: workflow
+  target: children
+  concurrency: max(1, min(33%, 5))
+  condition:
+    sensor: service.isUp
+    equals: true
+  steps:
+    - invoke-effector effector-on-children
 ```
 
 
@@ -44,8 +99,10 @@ For example:
 This type can be used to define new step types and add them as new types in the type registry.
 The definition must specify the `steps`, and may in addition specify:
 
-* `parameters`: a map of parameters accepted by the workflow, TODO link to config params
-* `shorthand`: a template
+* `parameters`: a map of parameters accepted by the workflow, with the key the parameter name,
+  and the value map possibly empty or providing optional `type` (default `string`), `defaultValue` (default none),
+  `required` (default `false`), `description` (default none), and/or `constraints`
+* `shorthand`: a template, as described below
 * `output`: an output map or value to be returned by the step, evaluated in the context of the nested workflow
 
 When this type is used to define a new workflow step, the newly defined step does _not_ allow the
@@ -55,23 +112,51 @@ It also accepts the standard step keys such as `input`, `timeout` on `on-error`.
 A user of the defined step type can also supply `output` which, as per other steps,
 is evaluated in the context of the outer workflow, with visibility of the output from the current step.
 
-For example:
 
-TODO
+#### Shorthand Template Syntax
 
+A custom workflow step can define a `shorthand` template which permits a user
+to use the workflow step as a string rather than a map, even with parameters.
+The shorthand template syntax consists of a sequence of the following tokens:
 
-#### Shorthand Template
+* `${VAR}` - to set VAR, which should be of the regex [A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*, 
+  with dot separation used to set nested maps
+* `${VAR...}` - as `${VAR}` but allowing it to match multiple words
+* `"LITERAL"` - to expect the user to supply the exact token `LITERAL`;
+  this should include spaces if spaces are required
+* `[ <TOKENS> ]` - to indicate that a sequence of `<TOKENS>` is optional; 
+  parsing is attempted first with this block, then without it
 
-TODO
+#### Example
 
-* Accepts a shorthand template, and converts it to a map of values,
-* e.g. given template "[ ${sensor.type} ] ${sensor.name} \"=\" ${value}"
-* and input "integer foo=3", this will return
-* { sensor: { type: integer, name: foo }, value: 3 }.
-*
-* Expects space separated TOKEN where TOKEN is either:
-*
-* [ TOKEN ] - to indicate TOKEN is optional. parsing is attempted first with it, then without it.
-* ${VAR} - to set VAR, which should be of the regex [A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*, with dot separation used to set nested maps;
-*   will match a quoted string if supplied, else up to the next literal if the next token is a literal, else the next work.
-* "LITERAL" - to expect a literal expression. this should include spaces if spaces are required.
+A simple example to say hello is as follows:
+
+```
+id: greet
+type: workflow
+shorthand: ${name...} [ " with " ${greeting} ]
+parameters:
+  name:
+    required: true
+  greeting:
+    defaultValue: Hello
+steps:
+- log ${greeting} ${name}
+```
+
+With this added as a registered type, workflows can write:
+
+```
+- type: greet
+  input:
+    name: Angela
+```
+
+The result will be the same as `log Hello Angela`.
+The shorthand template spec also allows `greet Angela` for the same,
+or exercising the optional block, `greet Zachary Jones with Howdy` to `log Howdy Zachary Jones`.
+
+This is a trivial single-step example but shows the power of creating custom workflows,
+especially with parameters and shorthand templates.
+The [examples](examples/) and the [workflow settings](settings.md) include more realistic
+illustrations of custom workflow steps.

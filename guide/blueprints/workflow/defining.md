@@ -41,19 +41,26 @@ which uses workflow to do just that.  The config to define the effector is:
 
 * `name`: the name of the effector to define (required)
 * `parameters`: an optional map of parameters to advertise for the effector,
-  keyed by the parameter name against the definition as a map including optionally `type`, `description`, and `defaultValue`
+  keyed by the parameter name against the definition as a map including optionally 
+  `type`, `description`, and `defaultValue`; see [nested workflow](nested.md) for more details
 
 To define the workflow, this requires:
 
 * `steps`: to supply the list of steps defining the workflow (required)
 
-And the following optional [common](command.md) configuration keys are supported with the same semantics as for individual steps:
+And the following optional common configuration keys are supported,
+with the same semantics as for individual steps as described under [Common Step Properties](common.md):
 
 * `condition`: an optional condition on the effector which if set and evaluating to false,
   prevents the effector workflow from running; this does _not_ support interpolated variables
+
 * `input`: a map of keys to values to make accessible in the workflow, in addition to effector `parameters`
 
-TODO on-error, timeout, retry
+* `output`: defines the output of the workflow, often referring to workflow [variables](variables.md) or
+  the output of the last step in the workflow
+
+* other [common step properties](common.md) such as `timeout`, `on-error`, and `next`
+* other [workflow settings properties](settings.md) such as `lock`, `retention`, `replayable`, and `idempotent`
 
 
 ### Sensors
