@@ -31,3 +31,12 @@ The syntax supports [longhand, conditions, loops, error-handling](common.md), [v
 a large set of [built-in step types](steps/), and the ability to [define custom step types](nested-workflow.md).
 
 You can also get started by looking at a variety [examples](examples/).
+
+Finally, you can run individual workflows in on an existing deployment using the "Run workflow" facility in the UI.
+This is a good way to build familiarity with workflows.
+Access this by selecting an entity in App Inspector and opening the top-right three-lines menu.
+To create a sandbox entity to experiment on, deploy a 
+`services: [ { type:org.apache.brooklyn.entity.stock.BasicEntity } ]`
+or a `services: [ { type: server, location: localhost } ]`.
+
+If you prefer to read sequentially, simply follow the sub-menu options.
