@@ -14,7 +14,7 @@ services:
 
           steps:
             - step: http www.googleapis.com/oauth2/v2/userinfo
-              replayable: "yes"
+              idempotent: yes
               headers:
                 Authorization: Bearer ${entity.sensor.google_access_token}
               on-error:
@@ -46,7 +46,7 @@ services:
                 refresh_token: ${refresh_token}
                 grant_type: refresh_token
               method: post
-              replayable: "yes"
+              idempotent: yes
               on-error:
                 - # any error here, we just retry up to 5 times, first rapidly then waiting 1m between requests
                   # (could be smarter about which errors permit retry or not)

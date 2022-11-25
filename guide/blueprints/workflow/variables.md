@@ -137,11 +137,15 @@ The `let` step allows mathematical operations, such as:
 - let x = ${x} * 3 + 1
 ```
 
-This is the only place arithmetic is supported, setting local variables whose values
-at that step are restored if a workflow is "replayed" from that step.
+The spaces around the operations are required, and this is the only place arithmetic is supported.
+Any other usage, such as `set-sensor disallowed = ${x} + 1` or `let x = ${x}+1` will result in strings.
+It is recommended to explicitly specify a mathematical type, `integer` or `double` to trigger an error
+because the string `3+1` will not be coercible to an integer.
 
+The reason `let` is the only place operations is allowed is because Brooklyn is able to restore local variables
+if a workflow is replayed from that step.
 This ensures that all the internal steps (excluding steps that act externally such as `ssh` or `container`)
-are individually idempotent, and if interrupted at the step can be safely resumed from that step.
+are individually idempotent, so if interrupted at the step can be safely resumed from that step.
 
 For example, if the following were allowed:
 
