@@ -165,8 +165,9 @@ uncertainty about whether the step completed or not can be ignored, and the step
 as "sleep", "set-config", or "wait for sensor X to be true" are obviously idempotent; it also applies to `let` because
 Brooklyn records a copy of the value of workflow variables on entry to each step and will restore them on a replay.
 
-However, for some step types, it is impossible for Brooklyn to infer whether they are idempotent:  this applies to "
-external" steps such as `http` and `ssh`. It can also be the case that even where individual steps are idempotent, a
+However, for some step types, it is impossible for Brooklyn to infer whether they are idempotent:  this applies to 
+"external" steps such as `http` and `ssh`, and some `invoke-effector` steps.
+It can also be the case that even where individual steps are idempotent, a
 sequence of steps is not. In either of these cases the workflow author should give instructions to Brooklyn about how
 to "replay".
 
@@ -201,6 +202,11 @@ Where an external step is known to be idempotent -- such as a `describe-instance
 read-only step -- the step can be marked `idempotent: yes` and Brooklyn will support replay resuming at that step.  (
 However here, and often, this is unnecessary, if the nearest "replay point" is good enough.)
 
+The internal steps `workflow` and `invoke-effector` are by default considered idempotent 
+if Brooklyn can tell they are running nested workflows at idempotent step. 
+All other internal steps are idempotent.
+Actions such as `deploy-application` use special techniques internally to guarantee idempotency.
+
 In some cases, it can be convenient to indicate default replayable/idempotency instructions when defining a workflow. As
 part of any workflow definition, such as `workflow-effector` or a nested `type: workflow` step, the
 entry `idempotent: all` indicates that all external steps in the workflow are idempotent; `replayable: automatically`
@@ -220,7 +226,9 @@ extra attention. The following is a summary of the common settings used:
     when defining a workflow
   * **`replayable: from start`** to indicate that the start of the workflow is a valid replay point
   * **`replayable: automatically`** to indicate that on an unhandled Brooklyn failover (DanglingWorkflowException), the workflow should attempt to "replay resuming", either from the last executed step if it is resumable, or from the last replay point
-  * **`idempotent: all`** to indicate that external steps such as `http` and `container` in the workflow are resumable unless explicitly indicated otherwise (by default these are not; only internal steps known to be safely re-runnable are resumable)
+  * **`idempotent: all`** to indicate that all steps are idempotent and if interrupted there, the workflow can resume there,
+    unless explicitly indicated otherwise
+    (by default steps such as `http` and `container` are not; only internal steps known to be safely re-runnable are resumable)
 
 Finally, it is worth elaborating the differences between the three types of retry behavior, as described on the `retry` step:
 

@@ -144,8 +144,8 @@ because the string `3+1` will not be coercible to an integer.
 
 The reason `let` is the only place operations is allowed is because Brooklyn is able to restore local variables
 if a workflow is replayed from that step.
-This ensures that all the internal steps (excluding steps that act externally such as `ssh` or `container`)
-are individually idempotent, so if interrupted at the step can be safely resumed from that step.
+This ensures that most steps are individually idempotent,
+so if interrupted at the step can be safely resumed from that step.
 
 For example, if the following were allowed:
 
@@ -166,6 +166,8 @@ The following sequence of steps (which is permitted) can always safely be replay
 
 Where workflows need to be resumed on interruption or might replay steps to recover from other errors,
 idempotency is an important part of reliable workflow design.
+External actions such as `http` and `container` are not guaranteed to be idempotent,
+and neither are some `invoke-effector` calls, so care must be taken here for workflows to be replayable.
 Good practice and the settings available for resilient workflows are covered in [Workflow Settings](settings.md).
 
 

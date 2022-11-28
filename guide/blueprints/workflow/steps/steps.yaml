@@ -365,6 +365,72 @@
           optionally the `entity` where the sensor should be cleared (defaulting to the entity where the workflow is running)
       output: the output from the previous step, or null if this is the first step
 
+    - name: deploy-application
+      summary: Deploys an application from a registered type or a blueprint
+      shorthand: '`deploy-application [TYPE]`'
+      input: |
+        * `type`: a registered type to deploy as a root application, without any configuration; exactly one of this and `blueprint` is required
+        * `blueprint`: the blueprint to deploy
+        * `format`: optional format specifier for the blueprint
+      output:
+        * `app`: the application instance deployed
+
+    - name: add-entity
+      summary: Deploys an application from a registered type or a blueprint
+      shorthand: '`add-entity [TYPE]`'
+      input: |
+        * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
+        * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
+        * `format`: optional format specifier for the blueprint
+      output:
+        * `entities`: a list of entities added
+        * `entity`: if a single entity was added, that entity, otherwise unset
+
+    - name: delete-entity
+      summary: Deploys an application from a registered type or a blueprint
+      shorthand: '`delete-entity ENTITY`'
+      input: |
+        * `entity`: the entity or entity ID to delete (unmanage)
+      output: the output from the previous step, or null if this is the first step
+
+    - name: reparent-entity
+      summary: Moves an entity to be under a new parent
+      shorthand: '`reparent-entity child CHILD under PARENT`'
+      input: |
+        * `child`: the entity or entity ID to be moved
+        * `parent`: the entity or entity ID of the new parent
+      output: the output from the previous step, or null if this is the first step
+
+    - name: apply-initializer
+      summary: Moves an entity to be under a new parent
+      shorthand: '`apply-initializer [TYPE [at ENTITY]]`'
+      input: |
+        * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
+        * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
+        * `entity`: the entity or entity ID where the initializer should be run, defaulting to the current entity
+      output: the output from the previous step, or null if this is the first step
+
+    - name: add-policy
+      summary: Adds a policy or other adjunct from a registered type or a blueprint
+      shorthand: '`add-policy [TYPE] [at ENTITY] [unique-tag UNIQUE_TAG]`'
+      input: |
+        * `type`: a registered type for a policy or other adjunct, to be attached to this entity, without any configuration; exactly one of this and `blueprint` is required
+        * `blueprint`: the blueprint for a policy, enricher, feed, or other adjunct, to be added at the current entity
+        * `entity`: the entity or entity ID where the adjunct should be added, defaulting to the current entity
+        * `unique-tag`: a tag to uniquely identify this adjunct, defaulting to the workflow step; this will replace any instance with the same unique-tag at the entity
+          (to make the operation idempotent)
+      output:
+        * `adjunct`: the policy or other adjunct added
+        * `policy` or `enricher` or `feed`: as above, depending on the type of the adjunct
+
+    - name: delete-policy
+      summary: Removes a policy or other adjunct at an entity
+      shorthand: '`delete-policy POLICY [at ENTITY]`'
+      input: |
+        * `policy`: the policy or adjunct to be removed, or the unique tag or ID of such an adjunct
+        * `entity`: the entity or entity ID where the adjunct should be removed, defaulting to the current entity
+      output: the output from the previous step, or null if this is the first step
+
 
 -
   section_name: General Purpose

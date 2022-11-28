@@ -160,3 +160,44 @@ This is a trivial single-step example but shows the power of creating custom wor
 especially with parameters and shorthand templates.
 The [examples](examples/) and the [workflow settings](settings.md) include more realistic
 illustrations of custom workflow steps.
+
+
+#### Writing Workflow Steps in Java
+
+The most common way to define custom workflow types is as workflow, using the primitives defined here,
+and delegating to custom containers where the logic is best done in a higher-level programming language.
+This avoids any language bias and the need to learn Brooklyn interfaces.
+However it is supported to provide custom workflow step types as Java classes in a bundle.
+
+To write a Java workflow step type, provide a class extending `WorkflowStepDefinition`,
+providing implementations for the following methods:
+
+```
+Object doTaskBody(WorkflowStepInstanceExecutionContext context);
+void populateFromShorthand(String value);
+boolean isDefaultIdempotent();
+```
+
+The first of these does the work of the step, resolving inputs and accessing context as needed via `context`.
+The second handles providing a cusotm shorthand, as described above;
+it can call to a superclass method `populateFromShorthandTemplate(TEMPLATE, value)`
+with the `TEMPLATE` for the class, if shorthand is to be supported.
+Finally, the third returns whether the step is idempotent, that is if the custom step is interrupted,
+can Brooklyn safely recover simply by rerunning it with the same inputs.
+As described [here](settings.md), it is recommended to write the step so that it is idempotent if possible.
+
+Once written, the class should be added to the Brooklyn Catalog, 
+e.g. for a custom java step called `com.acme.YourJavaWorkflowStep` with shorthand name `your-step`,
+create a `catalog.bom` such as the following, and `br catalog add catalog.bom`:
+
+```
+brooklyn.catalog:
+  bundle: your-step-bundle
+  version: "1.0.0-SNAPSHOT"
+  items:
+  - id: your-step
+    format: java-type-name
+    itemType: bean
+    item:
+      type: com.acme.YourJavaWorkflowStep
+```
