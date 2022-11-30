@@ -174,7 +174,7 @@
         Runs nested workflow, optionally over an indicated target.
         This step type is described in more detail [here](../nested-workflow.md).
         It can also
-      shorthand: '`workflow [ replayable REPLAYBLE ] [ retention RETENTION ]`' or custom
+      shorthand: '`workflow [ replayable REPLAYBLE ] [ retention RETENTION ]` or custom'
       input: |
         * `steps`: a list of steps to run, run in a separate context
         * `target`: an optional target specifier, an entity or input to the steps for the sub-workflow,
@@ -372,7 +372,7 @@
         * `type`: a registered type to deploy as a root application, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint to deploy
         * `format`: optional format specifier for the blueprint
-      output:
+      output: |
         * `app`: the application instance deployed
 
     - name: add-entity
@@ -382,7 +382,7 @@
         * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
         * `format`: optional format specifier for the blueprint
-      output:
+      output: |
         * `entities`: a list of entities added
         * `entity`: if a single entity was added, that entity, otherwise unset
 
@@ -419,7 +419,7 @@
         * `entity`: the entity or entity ID where the adjunct should be added, defaulting to the current entity
         * `unique-tag`: a tag to uniquely identify this adjunct, defaulting to the workflow step; this will replace any instance with the same unique-tag at the entity
           (to make the operation idempotent)
-      output:
+      output: |
         * `adjunct`: the policy or other adjunct added
         * `policy` or `enricher` or `feed`: as above, depending on the type of the adjunct
 

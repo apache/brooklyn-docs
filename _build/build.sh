@@ -232,7 +232,7 @@ function make_jekyll() {
     fi
   fi
 
-  echo JEKYLL running with: jekyll build $JEKYLL_CONFIG
+  echo JEKYLL running with: jekyll build --config $JEKYLL_CONFIG
   jekyll build --config $JEKYLL_CONFIG || return 1
   echo JEKYLL completed
 
