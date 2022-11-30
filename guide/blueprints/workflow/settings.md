@@ -62,16 +62,13 @@ on a server at the same time:
 ```
 id: apt-get
 type: workflow
-lock: apt
+lock: apt-package-management
 shorthand: ${package}
 parameters:
   package:
     description: package(s) to install
 steps:
-- type: workflow
-  lock: apt-package-management
-  steps:
-    - ssh sudo apt-get install -y ${package}
+- ssh sudo apt-get install -y ${package}
 ```
 
 A workflow can then do `apt-get iputils-ping` as a step and Brooklyn will

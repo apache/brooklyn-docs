@@ -64,7 +64,7 @@
           for anything other than `encode`, stripping any text before a `---` YAML document separator,
         * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
           ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
-        * `first`, `last`, `min`, `max`, and `average` are accepted for collections
+        * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
         * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
       output: the output from the previous step, or null if this is the first step
 
