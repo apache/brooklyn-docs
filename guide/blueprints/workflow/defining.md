@@ -5,7 +5,7 @@ layout: website-normal
 
 Let's start by discussing _why_ workflow is introduced and where it can and should be used.
 
-The Apache Brooklyn Workflow is designed to make it easy to describe behaviour of effectors, sensors, and policies in blueprints.
+The Apache Brooklyn Workflow is designed to make it easy to describe behaviour of entities, effectors, sensors, and policies in blueprints.
 It has the sophistication of a programming language including [conditions, loops, and error-handling](common.md) and [variables](variables.md),
 but more important are the [steps](steps/) which delegate to other systems,
 such as containers or SSH or HTTP endpoints.
@@ -125,13 +125,134 @@ The `steps` must also be defined, as per above,
 and the same common configuration is supported.
 
 
+### Initializer
+
+A workflow can be made to run when an entity is created using a `workflow-initializer`.
+This can do any custom entity setup, including the above tasks using `add-policy` or `apply-initializer` steps,
+as follows:
+
+```
+- type: some-entity
+  brooklyn.initializers:
+  - type: workflow-initializer
+    brooklyn.config:
+      name: initializer-to-say-hi-then-add-effector-and-sensor
+      steps:
+        - log Hi this workflow initializer will run at entity creation
+        - step: add-policy
+          blueprint:
+            type: workflow-policy
+            brooklyn.config:
+              name: invoke-effector-other_sensor-is-published
+              triggers:
+              - other_sensor
+              steps:
+                - invoke-effector say-hi-and-publish-sensor
+        - step: apply-initializer
+          blueprint:
+            type: workflow-effector
+            brooklyn.config:
+              name: say-hi-and-publish-sensor
+              steps:
+                - log Hi
+                - set-sensor boolean said_hi = true
+```
+
+The `workflow-initializer` takes the same config as `workflow-effector` with the exception of `parameters`.
+
+
+### Workflow Entities
+
+New entities can be written to use workflow for their start and stop behavior by extending the 
+type `workflow-entity`.  This requires a `start` and `stop` configuration to be supplied
+defining the workflow for those steps.  Optionally `restart` can be supplied, which if omitted
+will default to stopping then starting.
+
+```
+- type: workflow-entity
+  brooklyn.config:
+    start:
+      steps:
+        - log Starting up
+    stop:
+      steps:
+        - log Stopping
+```
+
+The `workflow-entity` will automatically set the `service.isUp` and `service.state` sensors
+based on invocation of `start` and `stop` and the success of the workflow.
+
+It will also take into consideration the map sensors `service.problems` and `service.notUp.indicators`,
+where any entry in the former will cause `service.state` to show as "on-fire" if it is meant to be running,
+and any entry in the latter will cause `service.isUp` to become false (which will trigger an
+entry in `service.problems` if it is meant to be running). Thus liveness and health checks can,
+and often should, be added, such as in the following getting the `status_code` from the `main.uri`,
+and setting a `service.problems` if it is unavailable:
+
+```
+- type: workflow-entity
+  brooklyn.config:
+    start:
+      steps:
+        - ... # start the service, e.g. using container or http call
+        
+        - clear-sensor status_code
+        - set-sensor main.uri = ...  # get the URL from the previous; this will trigger sensor feed
+        - step: wait ${entity.sensor.status_code}
+          timeout: 5m
+    stop:
+      # omitted
+
+  brooklyn.initializers:
+  - type: workflow-sensor
+    brooklyn.config:
+      sensor: status_code
+    period: 1m
+    triggers:
+      - main.uri
+    steps:
+      - step: http ${main.uri}
+        on-error:
+          - set-sensor service.problems['endpoint-live'] = ${error}
+          - fail rethrow message Endpoint is not accessible
+      - clear-sensor service.problems['endpoint-live']
+      - return ${status_code}
+```
+
+The workflow entity does not automatically start or stop children.
+If this is required, it should be part of the start/stop workflow, as follows:
+
+```
+- type: workflow-entity
+  brooklyn.config:
+    start:
+      steps:
+        - ... # start this
+        # now start children
+        - type: workflow
+          target: children
+          steps:
+            - invoke-effector start
+            
+    stop:
+      steps:
+        # stop children first
+        - type: workflow
+          target: children
+          steps:
+            - invoke-effector stop
+        - ... # then stop this
+```
+
+
 ### Workflow Software Process Entities
 
-Entities that run software or another machine-based process can be defined using workflow for the
-install, customize, launch, check-running, and stop phases.
-These entities will provision a machine if required (e.g. if given a cloud or machine provisioning
-location, rather than a machine), and use the same latches and pre/post phase on-box commands,
-but for the key phases it will take a `workflow` object including at minimum `steps`.
+Entities that run software or another machine-based process can also be defined,
+relying on Apache Brooklyn to provision a machine if required, then 
+using workflow for the install, customize, launch, check-running, and stop phases.
+These entities will provision a machine if if given a cloud or machine provisioning
+location, and use the same latches and pre/post phase on-box commands as the ofther `SoftwareProcess` entities,
+but for the key phases it will take a `workflow` object as for `workflow-entity`.
 
 The `steps` will often run `ssh` and possibly `set-sensor`, and
 they can access the run dir and install dir using Freemarker 
@@ -147,7 +268,7 @@ Brooklyn's automatic PID detection can be used.
 As an example:
 
 ```
-- type: org.apache.brooklyn.entity.software.base.WorkflowSoftwareProcess
+- type: workflow-software-process
   brooklyn.config:
     install.workflow:
       steps:

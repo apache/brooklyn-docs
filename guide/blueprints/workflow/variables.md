@@ -57,6 +57,8 @@ The interpolated reference `${workflow.<KEY>}` can be used to access workflow in
 * `error_handler.<KEY>` - info on the current error handler, as above, if in an on-error step
 * `step.<ID>.<KEY>` - info on the last invocation of the step with declared `id` matching `<ID>`, as above
 * `var.<VAR>` - return the value of `<VAR>` which should be a workflow-scoped variable (set with `let`) 
+* `util.<UTIL>` - access a utility pseudo-variable, either `random` for a random between 0 and 1,
+  `now` for milliseconds since 1970, `now_iso` for ISO 8601 date string, `now_nice` or `now_stamp` for a human readable date format
 
 In the step contexts, the following is also supported after `workflow.`:
 

@@ -342,7 +342,8 @@
         * `sensor`: either a string, being the sensor name, or a map, containing the `name` and 
           optionally the `type` (defaulting to the declared type of the sensor, if present, or to `Object`)
           and/or the `entity` where the sensor should be set (defaulting to the entity where the workflow is running);
-          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type
+          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
+          if the `name` contains bracketed portions, these are treated as keys in a map or positions in list to be set
         * `value`: the value to set
         * `require`: a condition to evaluate against the sensor value while holding the lock on the sensor,
           used to enable atomic operations similar to the `lock` workflow setting
@@ -362,7 +363,8 @@
       shorthand: '`clear-sensor [TYPE] SENSOR_NAME`'
       input: |
         * `sensor`: a string being the sensor name or a map containing the `name` and
-          optionally the `entity` where the sensor should be cleared (defaulting to the entity where the workflow is running)
+          optionally the `entity` where the sensor should be cleared (defaulting to the entity where the workflow is running);
+          as with `set-sensor`, the `name` can include bracketed portions to remove an entry from a map or list
       output: the output from the previous step, or null if this is the first step
 
     - name: deploy-application
