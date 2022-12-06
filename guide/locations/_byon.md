@@ -27,6 +27,15 @@ location:
     - 192.168.0.19
 {% endhighlight %}
 
+This location acts like a cloud location or a pool of servers
+in that each entry in the `hosts` list is only allowed
+to be provisioned by one entity at a time.
+If two entities should share a host, they should be children of an entity which provisions the host, 
+or if a host should be allowed to be used multiple times, its IP should be listed multiple times.
+When an entity releases an IP address from the list, that entry is again available for other entities.
+If more entities try to provision machines from this location than there are IP addresses listed,
+the BYON location will throw a `NoMachinesAvailableException`.
+
 Some of the login properties as described above for jclouds are supported,
 but not `loginUser` (as no users are created), and not any of the
 VM creation parameters such as `minRam` and `imageId`.
