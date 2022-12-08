@@ -42,7 +42,7 @@ which uses workflow to do just that.  The config to define the effector is:
 * `name`: the name of the effector to define (required)
 * `parameters`: an optional map of parameters to advertise for the effector,
   keyed by the parameter name against the definition as a map including optionally 
-  `type`, `description`, and `defaultValue`; see [nested workflow](nested.md) for more details
+  `type`, `description`, and `defaultValue`; see [nested workflow](nested-workflow.md) for more details
 
 To define the workflow, this requires:
 
