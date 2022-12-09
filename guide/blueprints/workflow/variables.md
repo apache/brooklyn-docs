@@ -25,9 +25,9 @@ This will output a series of log messages such as:
 
 ```
 Starting workflow: my-workflow
-Step 1
-Step 2
-Step 3
+The value for x is now 1
+The value for x is now 2
+The value for x is now 3
 ```
 
 
