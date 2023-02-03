@@ -33,6 +33,8 @@ will be found automatically, but if your bundle defines a composite blueprint
 referencing other types as children, those children will _not_ automatically
 search your bundle and a reference will be needed.)
 
+Optionally, an icon can be provided for the bundle using `bundleIconUrl`, which accepts `http:`, `https:`,
+and `classpath:` protocols, e.g. `classpath://brooklyn/icons/server.svg` or `https://brooklyn.apache.org/style/img/bridge.png`
 
 ### Example
 
@@ -50,6 +52,7 @@ Now create a file in bundleFolder called `catalog.bom` with the following conten
 ~~~ yaml
 brooklyn.catalog:
   bundle: MyServerBundle
+  bundleIconUrl: classpath://brooklyn/icons/server.svg
   version: 1.0.0
   items:  
     - id: my-server
