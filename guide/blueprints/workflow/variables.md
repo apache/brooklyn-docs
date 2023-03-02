@@ -163,7 +163,7 @@ The following sequence of steps (which is permitted) can always safely be replay
 ```
 - let integer count_local = ${entity.sensor.count} ?? 0",
 - let count_local = ${count_local} + 1
-- set_sensor count = ${count_local}
+- set-sensor count = ${count_local}
 ```
 
 Where workflows need to be resumed on interruption or might replay steps to recover from other errors,
