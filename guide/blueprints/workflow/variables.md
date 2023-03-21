@@ -14,7 +14,7 @@ For example, you can write:
 - let integer x = 1
 - id: log
   step:  log The value for x is now ${x}
-- let x = ${x} + 1
+- step: let x = ${x} + 1
   next: log
   condition:
     target: ${x}
