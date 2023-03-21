@@ -34,6 +34,11 @@
           the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
           the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
         * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
+        * `interpolation_mode`: whether to run interpolation, defaulting to `words` for shorthand or `full` if `value` is specified in a map;
+           options are to run on the `full` value (not touching quotes), on `words` (unquoting words, and interpolating only if unquoted),
+           or `disabled` (to prevent interpolation in the evaluation of this variable)
+        * `interpolation_errors`: whether unresolvable interpolated expressions `fail` and return an error (the default), or to `ignore`
+          them (leaving them in their interpolated form), or to replace them with a `blank` string
       output: the output from the previous step, or null if this is the first step
 
     - name: transform
@@ -109,6 +114,10 @@
              to coerce (needed e.g. if you want to set a bean registered type, or in shorthand to set an `integer`)
         * `url`: the URL to load
         * `charset`: the charset to use to process the input
+        * `interpolation_mode`: whether to evaluated interpolated expressions in the content; default `disabled`; options are as for `let`
+        * `interpolation_errors`: how to handle errors in interpolated expressions, if `interpolation_mode` is set; 
+          the default `ignore` will leave unresolveable expressions in their expression form which is useful for scripts and other templating systems;
+          options are as for `let`
       output: |
         the output from the previous step or null if this is the first step
 
@@ -133,8 +142,10 @@
           if `replay` is specified without next, the default `next` is the `last` replay point
           (always excluding the retry step itself, even if it is a valid replay point)
         * `limit`: a list of limit definitions, e.g. `[ "10", "1h", "2 in 1 min" ]` to restrict to a max of 10 retries total,
-          an additional limit of 2 in any 1 minute period, and an additional limit of 1 hour; the retry will fail if any of these are exceeded;
-          as shorthand, per the syntax above, it takes one such limit definition
+          an additional limit of 2 in any 1 minute period, and an additional limit of 1 hour; 
+          as shorthand, per the syntax above, it takes one such limit definition;
+          the retry will fail with a `RetriesExceededException` if any of these are exceeded;
+          if it is intended to continue, it is necessary to attach an error handler to the retry step
         * `backoff`: a specification of how to delay, of the form `INITIAL [ "increasing" FACTOR ] [ "jitter" JITTER ] [ "up to" MAX ]`,
           where `INITIAL` is one or more durations applied to the respective iteration, and the last value applying to all
           unless an `increasing FACTOR` is supplied; 

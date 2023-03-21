@@ -200,8 +200,8 @@ and the modulo operator `%` for integers giving the remainder.
 These are evaluated in usual mathematical order.
 Parentheses are not supported.
 
-The `let` step also supports a `trim` property (or keyword `trimmed` as the first word after the step type)
-to indicate that if the value is a string, it should be "trimmed" before setting into the variable.
+The `transform` step can be used for more complicated transformations, such as whether to `wait` on values that are not yet ready,
+conversion using `json` and `yaml`, and whether to `trim` strings or yaml documents.
 This supports two types of trimming: if a `type` is specified, the value is scanned for `---` on a line by itself
 and that token is used as a "document separator", and only the last document is considered;
 if no `type` is specified, the value has leading and trailing whitespace removed.
@@ -256,6 +256,7 @@ The `let` step has some special behavior. It can accept `yaml` and, when convert
 will strip everything before a `---` document separator.  Thus a script can have any output, so long as it
 ends with `---\n` followed the YAML to read in, then `let yaml fancy-bean = ${stdout}` will convert it to
 a registered type `fancy-bean`. It will be an error if `stdout` is not coercible to `fancy-bean`.
+For more conversion, see `transform`.
 
 Another special behavior of `let` is that its `value` is reprocessed, supporting arithmetic as described elsewhere,
 and also unwrapping quoted words in the value (removing quotes) _without_ evaluating expressions within them.
@@ -273,6 +274,9 @@ It is also possible to use longhand syntax `{ type: set-sensor, sensor: x, value
 or a hybrid syntax `{ step: set-sensor x, value: value }`, 
 which can be useful for complex types and bypassing the shorthand processor's unquoting strategy,
 but in this case note that YAML processing will unwrap quotes.
+
+The `interpolation_mode` and `interpolation_errors` options can be used to specify other
+behavior for interpolation, both on `let` and on `load` of data from a URL.
 
 
 ### Advanced Details
