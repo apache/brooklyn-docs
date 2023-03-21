@@ -23,17 +23,17 @@
   steps:
     - name: let
       summary: An alias for `set-workflow-variable`.
-      shorthand: '`let ["merge" ["deep"]] ["trim"] ["yaml"|"json"|"bash" ["encode"|"parse"]] ["wait"] [ TYPE ] VARIABLE_NAME [ = VALUE ]`'
+      shorthand: '`let [ TYPE ] VARIABLE_NAME [ = VALUE ]`'
 
     - name: set-workflow-variable
       summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
-      shorthand: '`set-workflow-variable ["merge" ["deep"]] ["trim"] ["yaml"|"json"|"bash" ["encode"|"parse"]] ["wait"] [TYPE] VARIABLE_NAME [ = VALUE ]`'
+      shorthand: '`set-workflow-variable [TYPE] VARIABLE_NAME [ = VALUE ]`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
           the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
           the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
-        * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
+        * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
       output: the output from the previous step, or null if this is the first step
 
     - name: transform
@@ -44,7 +44,7 @@
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
           the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
           the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
-        * `value`: the value to set, with some limited evaluation as described [here](../variables.md)
+        * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
         * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
           * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
           * `merge [list|set|map] [deep] [wait] [lax]` to treat the words in the value as expressions to be combined;
@@ -147,7 +147,7 @@
         * `hash`: an optional hash expression to identify related retries in a workflow instance; all retry blocks with the same `hash` will share counts
           for the purpose of counting limits (although the limits themselves are as per the definition in each retry block),
           which can be useful if there are different steps which might fail in different ways but the overall retry behaviour should be preserved
-        * `next` per the [common](../common.md) step properties, with special targets 
+        * `next` per the [common](../common.html) step properties, with special targets 
           `last` for the last replayable step
           (the default if not in an error handler or if `replay` is specified) and 
           `end` to replay resuming (only permitted in an error handler where it is the default if `replay` is not specified)
@@ -157,7 +157,7 @@
       summary: Moves execution to another step indicated by its ID
       shorthand: '`goto NEXT`'
       input: |
-        * `next` per the [common](../common.md) step properties
+        * `next` per the [common](../common.html) step properties
       output: the output from the previous step, or null if this is the first step
 
     - name: switch
@@ -172,20 +172,19 @@
     - name: workflow
       summary: |
         Runs nested workflow, optionally over an indicated target.
-        This step type is described in more detail [here](../nested-workflow.md).
-        It can also
+        This step type is described in more detail [here](../nested-workflow.html).
       shorthand: '`workflow [ replayable REPLAYBLE ] [ retention RETENTION ]` or custom'
       input: |
         * `steps`: a list of steps to run, run in a separate context
         * `target`: an optional target specifier, an entity or input to the steps for the sub-workflow,
           or if a list, a list of entities or inputs to pass to multiple sub-workflows
         * `concurrency`: a specification for how many of the sub-workflows can be run in parallel, if given a list target;
-          defaulting to one at a time, supporting a DSL as described [here](../nested-workflow.md)
-        * `condition`: the usual condition settable on steps as described [here](../common.md) can be used, with one difference
+          defaulting to one at a time, supporting a DSL as described [here](../nested-workflow.html)
+        * `condition`: the usual condition settable on steps as described [here](../common.html) can be used, with one difference
           that if a target is specified, the condition is applied to it or to each entry in the list, to conditionally allow sub-workflows,
           and the workflow step itself will always run (i.e. the condition does not apply to the step itself if it has a target)
-        * `replayable`: instructions to add or modify replay points, as described [here](../settings.md), for example `workflow replayable from here`
-        * `retention`: instructions to modify workflow retention, as described [here](../settings.md)
+        * `replayable`: instructions to add or modify replay points, as described [here](../settings.html), for example `workflow replayable from here`
+        * `retention`: instructions to modify workflow retention, as described [here](../settings.html)
       output: the output from the last step in the nested workflow, or a list of such outputs if supplied a `target` list
 
 -
@@ -245,6 +244,7 @@
         * `headers`: a map of header keys to a _list_ of values for that header on the response (as multiple values are permitted)
         * `content`: the content, converted to a string using `charset`
         * `content_bytes`: the content, as a raw byte array
+        * `content_json`: the content, parsed as JSON if possible to return a map, list, string, or primitive (null if not valid json)
         * `duration`: how long the request took
 
     - name: ssh
