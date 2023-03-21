@@ -10,11 +10,11 @@ You can also use the Brooklyn DSL, but in most cases the interpolation syntax is
 For example, you can write:
 
 ```
-- log Starting workflow: ${workflow.name}
+- log Starting workflow ${workflow.name}
 - let integer x = 1
 - id: log
   step:  log The value for x is now ${x}
-- let x = ${x} + 1
+- step: let x = ${x} + 1
   next: log
   condition:
     target: ${x}
