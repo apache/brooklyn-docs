@@ -78,7 +78,7 @@ services:
 
 # and add an enricher at the root so all sensors from netcat-server are visible on the root
 brooklyn.enrichers:
-- enricherType: org.apache.brooklyn.enricher.stock.Propagator
+- type: org.apache.brooklyn.enricher.stock.Propagator
   brooklyn.config:
     enricher.producer: $brooklyn:entity("netcat-server")
     enricher.propagating.propagatingAll: true
