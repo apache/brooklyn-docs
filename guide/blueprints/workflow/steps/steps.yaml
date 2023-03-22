@@ -232,9 +232,8 @@
       summary: Sends an HTTPS (or HTTP) request and returns the response content and code.
       shorthand: '`http ENDPOINT`'
       input: |
-        * `endpoint`: the URL to connect to, optionally omitting the protocol and slash prefix if `https://` is intended
-             (e.g. just the host and any path); per URL standard any unusual characters such as query parameters should be URL-encoded,
-             so if e.g. passing parameters containing spaces, `params` should be used instead of `host/path?param=${value}`
+        * `endpoint`: the URL to connect to; protocol can be omitted to use the default `https://`; 
+          query parameters can be supplied via the separate `query` input and/or here as `?param1&param2`
         * `query`: a map of query parameters to URL encode and add to the URL
         * `body`: an object to be serialized and sent as the body (or just set as body if it is an array of bytes)
         * `charset`: the character set to use to convert between byte arrays and strings for the request body and response content;
