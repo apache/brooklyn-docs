@@ -115,9 +115,9 @@
         * `url`: the URL to load
         * `charset`: the charset to use to process the input
         * `interpolation_mode`: whether to evaluated interpolated expressions in the content; default `disabled`; options are as for `let`
-        * `interpolation_errors`: how to handle errors in interpolated expressions, if `interpolation_mode` is set; 
-          the default `ignore` will leave unresolveable expressions in their expression form which is useful for scripts and other templating systems;
-          options are as for `let`
+        * `interpolation_errors`: how to handle errors in interpolated expressions, if `interpolation_mode` is set; the default here is `ignore`
+          which applies if `interpolation_mode` is set, and will leave unresolveable expressions untouched 
+          so that such expressions can be resolved later by command shells or re-resolution; options are as for `let`
       output: |
         the output from the previous step or null if this is the first step
 
@@ -266,6 +266,7 @@
         * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
         * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
           or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
 
       #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
       #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
@@ -284,6 +285,7 @@
                          to require of the exit status code from the command, defaulting to `0`
         * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
           or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
 
       #  [//]: # (* `endpoint`: an alternative endpoint &#40;format TODO&#41;; typically this is omitted and the SSH machine location of the entity is the target)
       #  [//]: # (* `key`: a private key to use for the connection to the endpoint &#40;TODO, again typically embedded in the SSH machine location of the entity&#41;)
@@ -384,6 +386,7 @@
         * `type`: a registered type to deploy as a root application, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint to deploy
         * `format`: optional format specifier for the blueprint
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
       output: |
         * `app`: the application instance deployed
 
@@ -394,6 +397,7 @@
         * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
         * `format`: optional format specifier for the blueprint
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
       output: |
         * `entities`: a list of entities added
         * `entity`: if a single entity was added, that entity, otherwise unset
@@ -420,6 +424,7 @@
         * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
         * `entity`: the entity or entity ID where the initializer should be run, defaulting to the current entity
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
       output: the output from the previous step, or null if this is the first step
 
     - name: add-policy

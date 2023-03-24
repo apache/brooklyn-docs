@@ -55,6 +55,9 @@ as follows:
 * If the target is of the form `M..N` for integers `M` and `N` it will run for all integers in that range,
   inclusive (so the string `1..4` is equivalent to the list `[1,2,3,4]`)
 
+The scratch variables `target` and `target_index` are available referring to to the specific target
+and its 0-indexed position.
+
 Where a list is supplied, the result of the step is the list collecting the output of each sub-workflow.
 
 If a `condition` is supplied when a list is being used, the `workflow` step will always run,
