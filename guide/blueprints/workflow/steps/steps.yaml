@@ -65,12 +65,12 @@
             if `parse` is specified, the result of `string` is then parsed to yield maps/lists/strings/primitives (any string value must be valid json);
             if `encode` is specified, the value is serialized as a JSON string as per JS "stringify", including encoding string values wrapped in explicit `"`;
             if nothing is specified the behavior is as per `parse`, but any value which is already a map/list/primitive is passed-through unchanged
-        * `yaml [string|parse|encode]`: as per `json` but using YAML serialization and, 
-          for anything other than `encode`, stripping any text before a `---` YAML document separator,
-        * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
-          ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
-        * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
-        * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
+          * `yaml [string|parse|encode]`: as per `json` but using YAML serialization and, 
+            for anything other than `encode`, stripping any text before a `---` YAML document separator,
+          * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
+            ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
+          * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
+          * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
@@ -397,6 +397,7 @@
         * `type`: a registered type to add as a child here, without any configuration; exactly one of this and `blueprint` is required
         * `blueprint`: the blueprint of the entity, or a list of such blueprints, to be added at the current entity
         * `format`: optional format specifier for the blueprint
+        * `start`: optional specifier for whether and how the entity should be started, if the current entity is running, either `async` in background (default), `sync` in foreground, or `disabled` to never start
         * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
       output: |
         * `entities`: a list of entities added
