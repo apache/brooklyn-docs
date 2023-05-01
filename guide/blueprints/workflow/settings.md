@@ -49,6 +49,9 @@ An operator with appropriate access permissions could also manually cancel the `
 Details of why the effector is blocked are shown in the UI and available via the API,
 as part of the workflow data.
 
+To set a lock shared across multiple entities, the `lock` can be set as
+map of the form `{ name: <lock-name>, entity: <entity> }`.
+
 
 ### Example: Thread-Safe Package Management
 
