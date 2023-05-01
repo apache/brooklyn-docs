@@ -52,6 +52,7 @@
         * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
         * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
           * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
+          * `replace MODE PATTERN REPLACEMENT` to replace a pattern in a string with a replacement, supporting mode `regex`, `glob`, or `literal`
           * `merge [list|set|map] [deep] [wait] [lax]` to treat the words in the value as expressions to be combined;
             indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`;
             if a type is specified, all values must be compatible with that type, otherwise collection v map merge is inferred from the types;
@@ -418,6 +419,14 @@
         * `parent`: the entity or entity ID of the new parent
       output: the output from the previous step, or null if this is the first step
 
+    - name: set-entity-name
+      summary: Sets the display name of an entity
+      shorthand: '`set-entity-name VALUE`'
+      input: |
+        * `value`: the new name
+        * `entity`: the entity on which to set (default as the entity where the workflow is running)
+      output: the output from the previous step, or null if this is the first step
+
     - name: apply-initializer
       summary: Moves an entity to be under a new parent
       shorthand: '`apply-initializer [TYPE [at ENTITY]]`'
@@ -461,6 +470,8 @@
       shorthand: '`log MESSAGE`'
       input: |
         * `message`: the message to be logged
+        * `level`: the log level (default `info`)
+        * `category`: the log category (default `o.a.b.core.workflow.steps.flow.LogWorkflowStep`)
       output: the output from the previous step, or null if this is the first step
 
     - name: no-op
