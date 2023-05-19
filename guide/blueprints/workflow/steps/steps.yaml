@@ -489,26 +489,40 @@
           if the `update-children` is performed frequently, it might be efficient in this method to check whether the `item` has changed
         
         * `on_delete`: a workflow to run on each child which no longer has a corresponding item prior to its being deleted;
-          the default behavior is to invoke an `on_delete` effector at the child (if there is such an effector, or nothing)
+          the default behavior is to invoke an `on_delete` effector at the child (if there is such an effector, or nothing);
+          if this workflow returns `false` the framework will not delete it;
+          this workflow may reparent or delete the entity, although if deletion is desired there is no need as that will be done after this workflow
         
-        * `item_check`:
-          this optionally supplied workflow will be invoked for each item in `items`
-          to customize the discovery of existing children and/or the creation of new children;
+        * `match_check`:
+          this optionally supplied workflow allows the matching process to be customized; 
+          it will be invoked for each item in `items` to find a matching child/entity if one is already present;
           the workflow is passed input variable `item` (and all inputs to the `update-children` step)
-          and should check whether there is an existing child of `parent` that matches the `item`; 
-          if there is a match that should be updated, this workflow should return that child, 
-          or `null` or `true` if a child should be created, or `false` if the item should be ignored;
-          following this workflow, the child will be created if necessary (with `on_create` called),
-          and then have `on_update` called (unless the workflow returned `false`);
-          the default implementation of this workflow is to compute and return `${parent.child[${${identifier}}]} ?? true`;
-          this workflow can be used to customize the creation process by creating and returning a new child (or false)
+          and should return the existing child that corresponds to it,
+          or `true` or `null` if there is none and the item should be passed to the `creation_check`,
+          or `false` if the `item` should be ignored (no child created or updated, identical to the `creation_check` but in some cases it may be easier to test in this workflow);
+          the default implementation of this workflow is to compute and return `${parent.child[${${identifier}}]} ?? true`
+        
+        * `creation_check`:
+          this optionally supplied workflow allows filtering and custom creation;
+          it will be invoked for each item in `items` for which the `match_check` returned `null` or `true`;
+          the workflow is passed input variable `item` (and all inputs to the `update-children` step)
+          and can return the same semantics as `match_check`, with the difference that this method can create and return a custom entity;
+          if `null` or `true` is returned, the child will be created and `on_create` called;
+          and if an entity is returned or created (i.e. this workflow does not return `false`) then `on_update` will be called;
+          the default implementation of this workflow is to return `true`;
+          this workflow may, for example, check whether an entity that exists elsewhere (e.g. something previously created then reparented away in the `deletion_check`)
+          should be reparented again under the `parent` and re-connected to this synchronization process 
         
         * `deletion_check`:
-          this optionally supplied workflow will be invoked for each pre-existing child which was not
+          this optionally supplied workflow allows customizing pre-deletion activities and/or the deletion itself;
+          it will be invoked for each pre-existing child which was not
           returned by the `item_check_workflow`, 
           with each such entity passed as an input variable `child` (along with all inputs to the `update-children` step);
           it can then return `true` or `false` to specify whether the child should be deleted
-          (with `on_delete` called prior to deletion if `true` is returned) 
+          (with `on_delete` called prior to deletion if `true` is returned);
+          this workflow may reparent the entity and return `false` if it is intended to keep the entity but
+          disconnected from this synchronization process,
+          or may even `delete-entity ${child}` (although that is not usually necessary)
 
       output: the output from the previous step, or null if this is the first step
 
