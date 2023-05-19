@@ -182,7 +182,7 @@ boolean isDefaultIdempotent();
 ```
 
 The first of these does the work of the step, resolving inputs and accessing context as needed via `context`.
-The second handles providing a cusotm shorthand, as described above;
+The second handles providing a custom shorthand, as described above;
 it can call to a superclass method `populateFromShorthandTemplate(TEMPLATE, value)`
 with the `TEMPLATE` for the class, if shorthand is to be supported.
 Finally, the third returns whether the step is idempotent, that is if the custom step is interrupted,

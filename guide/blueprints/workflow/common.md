@@ -50,6 +50,8 @@ steps:
     not: { equals: true }
 ```
 
+Care should be taken when using `:` in a step with shorthand.  YAML will parse it as a map if it is not quoted in YAML. However at runtime, if the step looks like it came from an accidental colon causing a map, it will be reverted to a string with the colon re-introduced, so you can write steps with shorthand `- log Your name is: ${name}`. 
+
 All steps support a number of common properties, described below.
 
 ### Explicit IDs and Name

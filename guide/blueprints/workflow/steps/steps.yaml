@@ -529,7 +529,7 @@
 -
   section_name: General Purpose
   section_intro: |
-    A few other miscellaneous step types don't fit into the other categories.
+    Miscellaneous step types that don't fit into the other categories.
   steps:
 
     - name: log
