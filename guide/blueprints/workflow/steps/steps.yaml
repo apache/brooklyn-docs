@@ -458,6 +458,60 @@
         * `entity`: the entity or entity ID where the adjunct should be removed, defaulting to the current entity
       output: the output from the previous step, or null if this is the first step
 
+    - name: update-children
+      # TODO would `synchronize-children` be a better name, or something else?
+      summary: Updates children of an entity to be in 1:1 correspondence with items in a given list
+      shorthand: '`update-children [of PARENT] blueprint BLUEPRINT id IDENTIFIER from ITEMS`'
+      input: |
+        * `blueprint`: a blueprint or name of a registered entity type to use to create the children;
+          this is required unless `on_create` is specified; where supplied as a blueprint (not a string)
+          the variable `item` can be referenced to provide initial values, but note this is not updated
+        * `identifier`: an expression in terms of a local variable `item` to use to identify the same child;
+          e.g. if the `items` is of the form `[{ field_id: ticket1, name: "Ticket 1" },...]` then
+          and `identifier: ${item.field_id}` will create/update/delete a child whose ID is `ticket1`;
+          ignored unless `item_check_workflow` is specified
+        * `items`: the list of items to be used to create/update/delete the children  
+        * `parent`: the entity or entity ID whose children are to be updated, defaulting to the current entity;
+          any children which do not match something in `items` may be removed
+        
+        * `on_create`: an optionally supplied workflow to run at any newly created child, where no pre-existing child was found
+          corresponding to an item in `items` and `update-children` created it from `blueprint`,
+          passed the `item` (and all inputs to the `update-children` step) 
+          and typically doing initial setup as required on the child;
+          the default behavior is to invoke an `on_create` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
+          this is invoked prior to `on_update` so if there is nothing special needed for creation this can be omitted
+        
+        * `on_update`: a workflow to run on each child which has a corresponding item,
+          passed the `item` (and all inputs to the `update-children` step), 
+          and typically updating config and sensors as appropriate on the child;
+          the default behavior is to invoke an `on_update` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
+          if the name or any policies may need to change on update, that should be considered in this workflow;
+          if the `update-children` is performed frequently, it might be efficient in this method to check whether the `item` has changed
+        
+        * `on_delete`: a workflow to run on each child which no longer has a corresponding item prior to its being deleted;
+          the default behavior is to invoke an `on_delete` effector at the child (if there is such an effector, or nothing)
+        
+        * `item_check`:
+          this optionally supplied workflow will be invoked for each item in `items`
+          to customize the discovery of existing children and/or the creation of new children;
+          the workflow is passed input variable `item` (and all inputs to the `update-children` step)
+          and should check whether there is an existing child of `parent` that matches the `item`; 
+          if there is a match that should be updated, this workflow should return that child, 
+          or `null` or `true` if a child should be created, or `false` if the item should be ignored;
+          following this workflow, the child will be created if necessary (with `on_create` called),
+          and then have `on_update` called (unless the workflow returned `false`);
+          the default implementation of this workflow is to compute and return `${parent.child[${${identifier}}]} ?? true`;
+          this workflow can be used to customize the creation process by creating and returning a new child (or false)
+        
+        * `deletion_check`:
+          this optionally supplied workflow will be invoked for each pre-existing child which was not
+          returned by the `item_check_workflow`, 
+          with each such entity passed as an input variable `child` (along with all inputs to the `update-children` step);
+          it can then return `true` or `false` to specify whether the child should be deleted
+          (with `on_delete` called prior to deletion if `true` is returned) 
+
+      output: the output from the previous step, or null if this is the first step
+
 -
   section_name: General Purpose
   section_intro: |
