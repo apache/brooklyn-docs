@@ -115,6 +115,11 @@ It also accepts the standard step keys such as `input`, `timeout` on `on-error`.
 A user of the defined step type can also supply `output` which, as per other steps,
 is evaluated in the context of the outer workflow, with visibility of the output from the current step.
 
+When supplying a workflow in contexts where a `workflow` is already expected,
+such as in a config key that takes a `workflow` (a Java `CustomWorkflowStep`),
+it is not necessary to specify the `type: workflow`, and additionally, if the only things being set is `steps`, those steps can be provided as a list without the `steps` keyword.
+Internally a _list_ will coerce to a `workflow` by interpreting the list as the steps.
+
 
 #### Shorthand Template Syntax
 
