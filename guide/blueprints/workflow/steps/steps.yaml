@@ -22,11 +22,11 @@
 
   steps:
     - name: let
-      summary: An alias for `set-workflow-variable`.
+      summary: An alias for `set-workflow-variable`
       shorthand: '`let [ TYPE ] VARIABLE_NAME [ = VALUE ]`'
 
     - name: set-workflow-variable
-      summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
+      summary: Sets the value of a workflow internal variable. The step `let` is an alias for this
       shorthand: '`set-workflow-variable [TYPE] VARIABLE_NAME [ = VALUE ]`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
@@ -42,7 +42,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: transform
-      summary: Applies a transformation to a variable or expression.
+      summary: Applies a transformation to a variable or expression
       shorthand: '`transform [TYPE] VARIABLE_NAME [ [ = VALUE ] | TRANSFORM ]`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
@@ -75,7 +75,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
-      summary: Clears the value of a workflow internal variable.
+      summary: Clears the value of a workflow internal variable
       shorthand: '`clear-workflow-variable [TYPE] VARIABLE_NAME`'
       input: |
         * `variable`: a string being the workflow variable name or a map containing the `name`
@@ -230,7 +230,7 @@
 
 
     - name: http
-      summary: Sends an HTTPS (or HTTP) request and returns the response content and code.
+      summary: Sends an HTTPS (or HTTP) request and returns the response content and code
       shorthand: '`http ENDPOINT`'
       input: |
         * `endpoint`: the URL to connect to; protocol can be omitted to use the default `https://`; 
@@ -259,7 +259,7 @@
         * `duration`: how long the request took
 
     - name: ssh
-      summary: Runs a command over ssh.
+      summary: Runs a command over ssh
       shorthand: '`ssh COMMAND`'
       input: |
         * `command`: the command to run
@@ -277,7 +277,7 @@
         * `exit_code`
 
     - name: winrm
-      summary: Runs a command over winrm.
+      summary: Runs a command over winrm
       shorthand: '`winrm COMMAND`'
       input: |
         * `command`: the command to run
@@ -329,7 +329,7 @@
 
   steps:
     - name: invoke-effector
-      summary: Invokes an effector.
+      summary: Invokes an effector
       shorthand: '`invoke-effector EFFECTOR`'
       input: |
         * `effector`: the name of the effector to invoke
@@ -338,7 +338,7 @@
       output: the returned object from the invoked effector
 
     - name: set-config
-      summary: Sets the value of a config key on an entity.
+      summary: Sets the value of a config key on an entity
       shorthand: '`set-config [TYPE] CONFIG_KEY_NAME = VALUE`'
       input: |
         * `config`: either a string, being the config key name, or a map, containing the `name` and 
@@ -349,7 +349,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: set-sensor
-      summary: Sets the value of a sensor on an entity.
+      summary: Sets the value of a sensor on an entity
       shorthand: '`set-sensor [TYPE] SENSOR_NAME = VALUE`'
       input: |
         * `sensor`: either a string, being the sensor name, or a map, containing the `name` and 
@@ -363,7 +363,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-config
-      summary: Clears the value of a config key on an entity.
+      summary: Clears the value of a config key on an entity
       shorthand: '`clear-config [TYPE] CONFIG_KEY_NAME`'
       input: |
         * `config`: a string being the config key name or a map containing the `name` and
@@ -372,7 +372,7 @@
         the output from the previous step, or null if this is the first step
 
     - name: clear-sensor
-      summary: Clears the value of a sensor on an entity.
+      summary: Clears the value of a sensor on an entity
       shorthand: '`clear-sensor [TYPE] SENSOR_NAME`'
       input: |
         * `sensor`: a string being the sensor name or a map containing the `name` and
@@ -458,7 +458,6 @@
         * `entity`: the entity or entity ID where the adjunct should be removed, defaulting to the current entity
       output: the output from the previous step, or null if this is the first step
 
-
 -
   section_name: General Purpose
   section_intro: |
@@ -466,7 +465,7 @@
   steps:
 
     - name: log
-      summary: Logs a message.
+      summary: Logs a message
       shorthand: '`log MESSAGE`'
       input: |
         * `message`: the message to be logged
@@ -483,7 +482,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: sleep
-      summary: Causes execution to pause for a specified duration.
+      summary: Causes execution to pause for a specified duration
       shorthand: '`sleep DURATION`'
       input: |
         * `duration`: how long to sleep for, e.g. `5s` for 5 seconds
