@@ -81,6 +81,7 @@ workflow is running, where `<KEY>` can be:
 * `config.<KEY>` - returns the value of the config key `<KEY>` 
 * `sensor.<KEY>` - returns the value of the sensor key `<KEY>` 
 * `attributeWhenReady.<KEY>` - returns the value of the sensor key `<KEY>` once it is ready (available and truthy), for use with the `wait` step
+* `effector.<KEY>` - returns the definition of the effector `<KEY>` (useful in conditions to invoke effectors only if they are defined on an entity)
 * `children` - returns the list of children; these can be further identified either by index or by ID using square-bracket notation
 * `members` - returns the list of members (for a group); these can be further identified either by index or by ID using square-bracket notation
 * `parent.<KEY>` - returns the value of `<KEY>` per any of the above in the context of the application 
