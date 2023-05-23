@@ -6,6 +6,7 @@ children:
 - ansible-bash/
 - git-latest/
 - oauth/
+- aws-cfn-stacks/
 ---
 
 The following examples are available:
