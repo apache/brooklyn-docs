@@ -43,13 +43,19 @@
 
     - name: transform
       summary: Applies a transformation to a variable or expression
-      shorthand: '`transform [TYPE] VARIABLE_NAME [ [ = VALUE ] | TRANSFORM ]`'
+      shorthand: '`transform [TYPE] [ "value" ] VARIABLE_NAME [ = VALUE ] | TRANSFORM`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
-          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
-          the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
-          the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
-        * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
+          if `value` is supplied, this variable will be set to the result of all transforms and then coercion to any indicated type, 
+          e.g. to force conversion to an integer or to a bean registered type;
+          if `value` is not supplied, the name is treated as a variable name to resolve and coerce to any indicated type
+          (i.e. wrapping the name in `${...}`; this is suppressed if the type is the special keyword `value`, and `name` is resolved as a normal expression)
+          and then used for the transform with the result being returned;
+          `name` here can be of the form `x.key` where `x` is an existing map variable, to user or set a specific `key` within it
+        * `value_is_initial`: a boolean, implied in shorthand by the word "value", means to treat the variable name as a value rather than a variable name,
+          evaluating it as a normal expression rather than wraping it in `${...}`; this cannot be used it a `value` is supplied
+        * `value`: the value to set, with some limited evaluation prior to transforms as described [here](../variables.html);
+          if not supplied, the `variable` is evaluated per the above and used as the input for the transform
         * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
           * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
           * `replace MODE PATTERN REPLACEMENT` to replace a pattern in a string with a replacement, supporting mode `regex`, `glob`, or `literal`
@@ -71,8 +77,12 @@
           * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
             ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
           * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
+          * `to_string`, `to_upper_case`, and `to_lower_case` are accepted for strings
+          * `resolve_expression` performs resolution of any interpolated expressions; this can be used to do nested interpolation
+          * `set VAR` to set the workflow variable `VAR` to the the value at that point in the transformation
+          * `return` to return the result of the transformation (not compatible with supplying a `value` to set in a variable)
           * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
-      output: the output from the previous step, or null if this is the first step
+      output: if no `value` is supplied, the result of all transformed; if a `value` is supplied and set in `variable`, then the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
       summary: Clears the value of a workflow internal variable
@@ -477,9 +487,8 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: update-children
-      # TODO would `synchronize-children` be a better name, or something else?
       summary: Updates children of an entity to be in 1:1 correspondence with items in a given list
-      shorthand: '`update-children [of PARENT] blueprint BLUEPRINT id IDENTIFIER from ITEMS`'
+      shorthand: '`update-children [of PARENT] type BLUEPRINT id IDENTIFIER from ITEMS`'
       input: |
         * `blueprint`: a blueprint or name of a registered entity type to use to create the children;
           this is required unless `on_create` is specified; where supplied as a blueprint (not a string)
@@ -512,20 +521,20 @@
           this workflow may reparent or delete the entity, although if deletion is desired there is no need as that will be done after this workflow
         
         * `match_check`:
-          this optionally supplied workflow allows the matching process to be customized; 
+          this optionally supplied workflow allows the matching process to be customized, filtering and determining the intended child or its id; 
           it will be invoked for each item in `items` to find a matching child/entity if one is already present;
-          the workflow is passed input variable `item` (and all inputs to the `update-children` step)
-          and should return the existing child that corresponds to it,
-          or `true` or `null` if there is none and the item should be passed to the `creation_check`,
-          or `false` if the `item` should be ignored (no child created or updated, identical to the `creation_check` but in some cases it may be easier to test in this workflow);
-          the default implementation of this workflow is to compute and return `${parent.child[${${identifier}}]} ?? true`
+          the workflow is passed input variable `item` (and other inputs to the `update-children` step)
+          and should return either the existing child that corresponds to it or the identifier for the child that should (but might or might not) exist,
+          or `null` if the item should be omitted;
+          the default implementation of this workflow is to evaluate the expression in `identifier`, i.e. `let id = ${${identifier}}`,
+          then to return any child matching that if there is one or the identifier, i.e. `${parent.child[${id}]} ?? ${id}`
         
         * `creation_check`:
           this optionally supplied workflow allows filtering and custom creation;
-          it will be invoked for each item in `items` for which the `match_check` returned `null` or `true`;
-          the workflow is passed input variable `item` (and all inputs to the `update-children` step)
-          and can return the same semantics as `match_check`, with the difference that this method can create and return a custom entity;
-          if `null` or `true` is returned, the child will be created and `on_create` called;
+          it will be invoked for each item in `items` for which the `match_check` returned a non-null value,
+          the workflow is passed input variable `item`, the resulting `match` from the match check (and other inputs to the `update-children` step)
+          and has the same return semantics, with the difference that this method can create and return a custom entity;
+          
           and if an entity is returned or created (i.e. this workflow does not return `false`) then `on_update` will be called;
           the default implementation of this workflow is to return `true`;
           this workflow may, for example, check whether an entity that exists elsewhere (e.g. something previously created then reparented away in the `deletion_check`)
@@ -535,7 +544,7 @@
           this optionally supplied workflow allows customizing pre-deletion activities and/or the deletion itself;
           it will be invoked for each pre-existing child which was not
           returned by the `item_check_workflow`, 
-          with each such entity passed as an input variable `child` (along with all inputs to the `update-children` step);
+          with each such entity passed as an input variable `child` (along with other inputs to the `update-children` step);
           it can then return `true` or `false` to specify whether the child should be deleted
           (with `on_delete` called prior to deletion if `true` is returned);
           this workflow may reparent the entity and return `false` if it is intended to keep the entity but

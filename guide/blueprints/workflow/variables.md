@@ -203,10 +203,22 @@ and the modulo operator `%` for integers giving the remainder.
 These are evaluated in usual mathematical order.
 Parentheses are not supported.
 
-The `transform` step can be used for more complicated transformations, such as whether to `wait` on values that are not yet ready,
-conversion using `json` and `yaml`, and whether to `trim` strings or yaml documents.
-This supports two types of trimming: if a `type` is specified, the value is scanned for `---` on a line by itself
-and that token is used as a "document separator", and only the last document is considered;
+The `transform` step can be used for more complicated transformations, such as 
+to `wait` on values that are not yet ready,
+to convert `json` and `yaml`, to `trim` strings, merge lists and maps, and much more.
+For example:
+
+```
+- transform x = " [ a, b ] " | trim`   # sets x to the string '[ a, b ]'
+- transform y = ${x} | json`           # sets y to the list of strings '[ "a", "b" ]'
+- step: transform | merge | set z`           # sets z to the list of strings '[ "a", "b", "c" ]'
+  value:
+  - ${x}
+  - [ c ]
+```
+
+The `yaml` transform will treat a `---` on a line by itself
+as a "document separator", and only the last document is considered;
 if no `type` is specified, the value has leading and trailing whitespace removed.
 The former is primarily intended for YAML processing from a script which might include unwanted output prior 
 to the outputting the YAML intended to set in the variable: the script can do `echo ---` before the
