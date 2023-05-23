@@ -221,7 +221,9 @@
       shorthand: '`foreach TARGET_VAR_NAME [ in TARGET ]`'
       input: |
         * `steps`: a list of steps to run, run in a separate context
-        * `target_var_name`: the name of the variable that should be set in nested workflows to refer to the element in the target list
+        * `target_var_name`: the name of the variable that should be set in nested workflows to refer to the element in the target list,
+          with the additional behavior that if this is of the "spread map syntax" form `{KEY,KEY2}`, each element in the target list will be assumed to be a map
+          and the keys "KEY" and "KEY2" will be extracted and each one set as a variable in the nested workflow
         * `target`: the list that should be looped over
         * other input as per `workflow`
       output: as per `workflow`, if `reducing` is specified, the final value of those variables,
