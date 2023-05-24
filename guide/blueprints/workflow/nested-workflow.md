@@ -119,7 +119,7 @@ and always allowing 1.
 This might be used for example to upgrade a cluster in situ, leaving the larger of 10 instances or half the cluster alone, if possible.  
 If the concurrency expression evaluates to 0, or to a negative number whose absolute value is larger than the number of values, the step will fail before executing, to ensure that if e.g. "-10" is specified when there are fewer than 10 items in the target list, the workflow does not run.  (Use "max(1, -10)" to allow it to run 1 at a time if there are 10 or fewer.)
 
-Concurrency cannot be specified when `reducing`.
+Note: Concurrency cannot be specified when `reducing`.
 
 #### Example
 
