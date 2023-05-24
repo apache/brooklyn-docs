@@ -10,7 +10,7 @@ Some of the common properties permitted on [steps](common.md) also apply to work
 including `condition`, `timeout`, and `on-error`.
 
 This rest of this section describes the remaining properties for more advanced use cases 
-including mutex locking and resilient workflows with replay points.
+including mutex locking and resilient workflows with replay points, and some tips on optimizing.
 
 
 ## Locks and Mutual Exclusion Behavior
@@ -476,4 +476,23 @@ on-error:
 # finally restore default retention per parent or system, as details are now stored on the entity
 - workflow retention parent
 ```
+
+## Optimizing for Workflows
+
+Workflows can generate a huge amount of data which can impact memory usage, persistence, and the UI.
+The REST API and UI do some filtering (e.g. in the body of the `internal` sensors used by workflow),
+but when working with large `ssh` `output` and `http` `content` payloads, and with `update-children`,
+performance can be dramatically improved by following these tips:
+
+* Optimize external calls to return the minimal amount of information needed
+  * Use `jq` to filter when using `ssh` or `container` steps
+  * Pass filter argumetns to `http` endpoints that accept them
+  * Use small page sizes with `retry from` steps
+
+* Optimize the data which is stored
+  * Override the `output` on `ssh` and `http` steps to remove unnecessary objects;
+    for example `http` returns several `content*` fields, and often just one is needed.
+    Simply settings `output: { content: ${content} }` will achieve this.
+  * Set `retention: 1` or `retention: 0` on workflows that use a large amount of information
+    and can simply be replayed from the start
 

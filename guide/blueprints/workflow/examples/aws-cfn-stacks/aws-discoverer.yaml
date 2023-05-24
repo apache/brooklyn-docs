@@ -1,0 +1,16 @@
+name: AWS CloudFormation Discoverer
+
+services:
+  - type: workflow-software-process
+    location: localhost
+    name: Stacks
+
+    brooklyn.policies:
+      - type: workflow-policy
+        brooklyn.config:
+          name: periodically update children
+          period: 1m
+          steps:
+            - ssh aws cloudformation describe-stacks
+            - transform stdout | json | set describe_stacks_output_json
+            - update-children type aws-cfn-discovered-stack-sample id ${item.StackId} from ${describe_stacks_output_json.Stacks}

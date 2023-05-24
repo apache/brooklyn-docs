@@ -1,0 +1,15 @@
+brooklyn.catalog:
+  bundle: aws-cfn-discovery-sample
+  version: 1.0.0-SNAPSHOT
+  items:
+    - id: aws-cfn-discovered-stack-sample
+      item:
+        type: org.apache.brooklyn.entity.stock.BasicEntity
+        brooklyn.initializers:
+          - type: workflow-effector
+            name: on_update
+            steps:
+              - set-entity-name ${item.StackName}
+              - set-sensor data = ${item}
+              - set-sensor stack_status = ${item.StackStatus}
+              # above is just a start, you can check drift, explore resources, etc

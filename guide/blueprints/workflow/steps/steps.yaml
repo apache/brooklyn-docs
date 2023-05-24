@@ -22,11 +22,11 @@
 
   steps:
     - name: let
-      summary: An alias for `set-workflow-variable`.
+      summary: An alias for `set-workflow-variable`
       shorthand: '`let [ TYPE ] VARIABLE_NAME [ = VALUE ]`'
 
     - name: set-workflow-variable
-      summary: Sets the value of a workflow internal variable. The step `let` is an alias for this.
+      summary: Sets the value of a workflow internal variable. The step `let` is an alias for this
       shorthand: '`set-workflow-variable [TYPE] VARIABLE_NAME [ = VALUE ]`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
@@ -42,14 +42,20 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: transform
-      summary: Applies a transformation to a variable or expression.
-      shorthand: '`transform [TYPE] VARIABLE_NAME [ [ = VALUE ] | TRANSFORM ]`'
+      summary: Applies a transformation to a variable or expression
+      shorthand: '`transform [TYPE] [ "value" ] VARIABLE_NAME [ = VALUE ] | TRANSFORM`'
       input: |
         * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
-          the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
-          the special types `yaml` and `json` can be specified here to force conversion to a valid YAML or JSON string;
-          the `name` here can be of the form `x.key` where `x` is an existing map variable, to set a specific `key` within it
-        * `value`: the value to set, with some limited evaluation as described [here](../variables.html)
+          if `value` is supplied, this variable will be set to the result of all transforms and then coercion to any indicated type, 
+          e.g. to force conversion to an integer or to a bean registered type;
+          if `value` is not supplied, the name is treated as a variable name to resolve and coerce to any indicated type
+          (i.e. wrapping the name in `${...}`; this is suppressed if the type is the special keyword `value`, and `name` is resolved as a normal expression)
+          and then used for the transform with the result being returned;
+          `name` here can be of the form `x.key` where `x` is an existing map variable, to user or set a specific `key` within it
+        * `value_is_initial`: a boolean, implied in shorthand by the word "value", means to treat the variable name as a value rather than a variable name,
+          evaluating it as a normal expression rather than wraping it in `${...}`; this cannot be used it a `value` is supplied
+        * `value`: the value to set, with some limited evaluation prior to transforms as described [here](../variables.html);
+          if not supplied, the `variable` is evaluated per the above and used as the input for the transform
         * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
           * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
           * `replace MODE PATTERN REPLACEMENT` to replace a pattern in a string with a replacement, supporting mode `regex`, `glob`, or `literal`
@@ -71,11 +77,15 @@
           * `bash [json|yaml] [string|encode]`: equivalent to the corresponding `json` or `yaml` transform, with `json` being the default, followed by bash-escaping and wrapping in double quotes;
             ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
           * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
+          * `to_string`, `to_upper_case`, and `to_lower_case` are accepted for strings
+          * `resolve_expression` performs resolution of any interpolated expressions; this can be used to do nested interpolation
+          * `set VAR` to set the workflow variable `VAR` to the the value at that point in the transformation
+          * `return` to return the result of the transformation (not compatible with supplying a `value` to set in a variable)
           * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
-      output: the output from the previous step, or null if this is the first step
+      output: if no `value` is supplied, the result of all transformed; if a `value` is supplied and set in `variable`, then the output from the previous step, or null if this is the first step
 
     - name: clear-workflow-variable
-      summary: Clears the value of a workflow internal variable.
+      summary: Clears the value of a workflow internal variable
       shorthand: '`clear-workflow-variable [TYPE] VARIABLE_NAME`'
       input: |
         * `variable`: a string being the workflow variable name or a map containing the `name`
@@ -190,14 +200,34 @@
         * `steps`: a list of steps to run, run in a separate context
         * `target`: an optional target specifier, an entity or input to the steps for the sub-workflow,
           or if a list, a list of entities or inputs to pass to multiple sub-workflows
+        * `target_var_name`: an optional variable name to set in nested workflows to refer to the element in the target, defaulting to `target`
+        * `target_index_var_name`: an optional variable name to set in nested workflows to refer to the index of the element in the target, if the target is a list, defaulting to `target_index`
         * `concurrency`: a specification for how many of the sub-workflows can be run in parallel, if given a list target;
           defaulting to one at a time, supporting a DSL as described [here](../nested-workflow.html)
+        * `reducing`: a map of variables to pass sequentially to each nested workflow instance,
+          with the values of those variables in the output or scratch for each nested workflow passed to the next nested workflow,
+          and the final set of those values being returned from this step for use in the calling workflow;
+          not permitted if `concurrency` is not static at `1`
         * `condition`: the usual condition settable on steps as described [here](../common.html) can be used, with one difference
           that if a target is specified, the condition is applied to it or to each entry in the list, to conditionally allow sub-workflows,
           and the workflow step itself will always run (i.e. the condition does not apply to the step itself if it has a target)
         * `replayable`: instructions to add or modify replay points, as described [here](../settings.html), for example `workflow replayable from here`
         * `retention`: instructions to modify workflow retention, as described [here](../settings.html)
-      output: the output from the last step in the nested workflow, or a list of such outputs if supplied a `target` list
+      output: if `reducing` is specified, the final value of those variables, 
+        otherwise the output from the last step in the nested workflow or a list of such outputs if supplied a `target` list
+
+    - name: foreach
+      summary: Runs nested workflow over a list using the specified variable name, equivalent to `workflow` when looping over a list
+      shorthand: '`foreach TARGET_VAR_NAME [ in TARGET ]`'
+      input: |
+        * `steps`: a list of steps to run, run in a separate context
+        * `target_var_name`: the name of the variable that should be set in nested workflows to refer to the element in the target list,
+          with the additional behavior that if this is of the "spread map syntax" form `{KEY,KEY2}`, each element in the target list will be assumed to be a map
+          and the keys "KEY" and "KEY2" will be extracted and each one set as a variable in the nested workflow
+        * `target`: the list that should be looped over
+        * other input as per `workflow`
+      output: as per `workflow`, if `reducing` is specified, the final value of those variables,
+        otherwise the list of outputs from the last step of each nested workflow corresponding to an element in the `target` list
 
 -
   section_name: External Actions
@@ -230,7 +260,7 @@
 
 
     - name: http
-      summary: Sends an HTTPS (or HTTP) request and returns the response content and code.
+      summary: Sends an HTTPS (or HTTP) request and returns the response content and code
       shorthand: '`http ENDPOINT`'
       input: |
         * `endpoint`: the URL to connect to; protocol can be omitted to use the default `https://`; 
@@ -259,7 +289,7 @@
         * `duration`: how long the request took
 
     - name: ssh
-      summary: Runs a command over ssh.
+      summary: Runs a command over ssh
       shorthand: '`ssh COMMAND`'
       input: |
         * `command`: the command to run
@@ -277,7 +307,7 @@
         * `exit_code`
 
     - name: winrm
-      summary: Runs a command over winrm.
+      summary: Runs a command over winrm
       shorthand: '`winrm COMMAND`'
       input: |
         * `command`: the command to run
@@ -329,7 +359,7 @@
 
   steps:
     - name: invoke-effector
-      summary: Invokes an effector.
+      summary: Invokes an effector
       shorthand: '`invoke-effector EFFECTOR`'
       input: |
         * `effector`: the name of the effector to invoke
@@ -338,7 +368,7 @@
       output: the returned object from the invoked effector
 
     - name: set-config
-      summary: Sets the value of a config key on an entity.
+      summary: Sets the value of a config key on an entity
       shorthand: '`set-config [TYPE] CONFIG_KEY_NAME = VALUE`'
       input: |
         * `config`: either a string, being the config key name, or a map, containing the `name` and 
@@ -349,7 +379,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: set-sensor
-      summary: Sets the value of a sensor on an entity.
+      summary: Sets the value of a sensor on an entity
       shorthand: '`set-sensor [TYPE] SENSOR_NAME = VALUE`'
       input: |
         * `sensor`: either a string, being the sensor name, or a map, containing the `name` and 
@@ -363,7 +393,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-config
-      summary: Clears the value of a config key on an entity.
+      summary: Clears the value of a config key on an entity
       shorthand: '`clear-config [TYPE] CONFIG_KEY_NAME`'
       input: |
         * `config`: a string being the config key name or a map containing the `name` and
@@ -372,7 +402,7 @@
         the output from the previous step, or null if this is the first step
 
     - name: clear-sensor
-      summary: Clears the value of a sensor on an entity.
+      summary: Clears the value of a sensor on an entity
       shorthand: '`clear-sensor [TYPE] SENSOR_NAME`'
       input: |
         * `sensor`: a string being the sensor name or a map containing the `name` and
@@ -458,15 +488,79 @@
         * `entity`: the entity or entity ID where the adjunct should be removed, defaulting to the current entity
       output: the output from the previous step, or null if this is the first step
 
+    - name: update-children
+      summary: Updates children of an entity to be in 1:1 correspondence with items in a given list
+      shorthand: '`update-children [of PARENT] type BLUEPRINT id IDENTIFIER_EXPRESSION from ITEMS`'
+      input: |
+        * `blueprint`: a blueprint or name of a registered entity type to use to create the children;
+          this is required unless `on_create` is specified; where supplied as a blueprint (not a string)
+          the variable `item` can be referenced to provide initial values, but note this is not updated
+        * `identifier_expression`: an expression in terms of a local variable `item` to use to identify the same child;
+          e.g. if the `items` is of the form `[{ field_id: 1, name: "Ticket 1" },...]` then
+          `identifier_expression: ticket_${item.field_id}` will create/update/delete a child whose ID is `ticket_1`;
+          used only by the default `match_check` so not required if that is overridden not to use it
+        * `items`: the list of items to be used to create/update/delete the children  
+        * `parent`: the entity or entity ID whose children are to be updated, defaulting to the current entity;
+          any children which do not match something in `items` may be removed
+        
+        * `on_create`: an optionally supplied workflow to run at any newly created child, where no pre-existing child was found
+          corresponding to an item in `items` and `update-children` created it from `blueprint`,
+          passed the `item` (and all inputs to the `update-children` step) 
+          and typically doing initial setup as required on the child;
+          the default behavior is to invoke an `on_create` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
+          this is invoked prior to `on_update` so if there is nothing special needed for creation this can be omitted
+        
+        * `on_update`: a workflow to run on each child which has a corresponding item,
+          passed the `item` (and all inputs to the `update-children` step), 
+          and typically updating config and sensors as appropriate on the child;
+          the default behavior is to invoke an `on_update` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
+          if the name or any policies may need to change on update, that should be considered in this workflow;
+          if the `update-children` is performed frequently, it might be efficient in this method to check whether the `item` has changed
+        
+        * `on_delete`: a workflow to run on each child which no longer has a corresponding item prior to its being deleted;
+          the default behavior is to invoke an `on_delete` effector at the child (if there is such an effector, or nothing);
+          if this workflow returns `false` the framework will not delete it;
+          this workflow may reparent or delete the entity, although if deletion is desired there is no need as that will be done after this workflow
+        
+        * `match_check`:
+          this optionally supplied workflow allows the matching process to be customized, filtering and determining the intended child or its id; 
+          it will be invoked for each item in `items` to find a matching child/entity if one is already present;
+          the workflow is passed input variable `item` (and other inputs to the `update-children` step)
+          and should return either the entity that corresponds to it which should be updated (`on_update`) or the identifier for the child that should be created,
+          or `null` if the item should be omitted;
+          the default implementation is to evaluate the expression in `identifier`, i.e. `let id = ${${identifier}}`,
+          then to return any child matching that if there is one or the resolved identifier, i.e. `${parent.child[${id}]} ?? ${id}`;
+          this workflow may create or reparent an entity and return it, and it will not have `on_create` invoked
+        
+        * `creation_check`:
+          this optionally supplied workflow allows filtering and custom creation;
+          it will be invoked for each item in `items` for which the `match_check` returned a string value indicating to create a child,
+          the workflow is passed the resulting `match` and the `item` (and other inputs to the `update-children` step),
+          and should return the entity created or `null` if the item should be omitted;
+          the result of this, if not null, will have the `on_create` handler invoked on it;
+          the default implementation is to create the entity (applying the `resolve_expression` transform on `blueprint`),
+          set the ID, and return the newly created entity
+        
+        * `deletion_check`:
+          this optionally supplied workflow allows customizing pre-deletion activities and/or the deletion itself;
+          it will be invoked for each child of `parent` which was not returned by the `match_check` or `creation_check`, 
+          with each such entity passed as an input variable `child` (along with other inputs to the `update-children` step);
+          it can then return `true` or `false` to specify whether the child should be deleted
+          (with `on_delete` called prior to deletion if `true` is returned);
+          this workflow may reparent the entity and return `false` if it is intended to keep the entity but
+          disconnect it from this synchronization process,
+          or may even `delete-entity ${child}` (although that is not usually necessary)
+
+      output: the output from the previous step, or null if this is the first step
 
 -
   section_name: General Purpose
   section_intro: |
-    A few other miscellaneous step types don't fit into the other categories.
+    Miscellaneous step types that don't fit into the other categories.
   steps:
 
     - name: log
-      summary: Logs a message.
+      summary: Logs a message
       shorthand: '`log MESSAGE`'
       input: |
         * `message`: the message to be logged
@@ -483,7 +577,7 @@
       output: the output from the previous step, or null if this is the first step
 
     - name: sleep
-      summary: Causes execution to pause for a specified duration.
+      summary: Causes execution to pause for a specified duration
       shorthand: '`sleep DURATION`'
       input: |
         * `duration`: how long to sleep for, e.g. `5s` for 5 seconds

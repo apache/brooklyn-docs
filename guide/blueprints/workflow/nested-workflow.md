@@ -56,13 +56,52 @@ as follows:
   inclusive (so the string `1..4` is equivalent to the list `[1,2,3,4]`)
 
 The scratch variables `target` and `target_index` are available referring to to the specific target
-and its 0-indexed position.
+and its 0-indexed position. These names can be overridden with the `target_var_name` and `target_index_var_name` keys. 
 
 Where a list is supplied, the result of the step is the list collecting the output of each sub-workflow.
 
 If a `condition` is supplied when a list is being used, the `workflow` step will always run,
 and the `condition` will be applied to entries in the list.
 An example of this is included below.
+
+The `foreach` type is a simplified variant of `workflow` when recursing over a list,
+taking the same.
+
+#### Example
+
+```
+- step: foreach x in 1..3
+  steps:
+  - return ${x}
+```
+
+The above loop will return `[1,2,3]`.
+
+
+### Reducing
+
+Each nested workflow runs in its own scope and does not share workflow variables with the parent,
+apart from values specified as `input`, or with other iterations of a loop.
+Where it is desired to share variables across iterations, the key `reducing` can be supplied,
+giving a map of variable names to be shared and their initial values.
+
+When `reducing`, the output of the workflow is this set of variables with their final values.
+
+
+#### Example
+
+```
+- step: foreach x in 1..3
+  reducing:
+    sum: 0
+  steps:
+  - let sum = ${sum} + ${x}
+```
+
+The above loop will return `6`.
+
+
+### Concurrency
 
 By default nested workflows with list targets run sequentially over the entries,
 but this can be varied by setting `concurrency`.
@@ -79,6 +118,8 @@ This concisely allows complicated -- but important in the real world -- logic su
 and always allowing 1.
 This might be used for example to upgrade a cluster in situ, leaving the larger of 10 instances or half the cluster alone, if possible.  
 If the concurrency expression evaluates to 0, or to a negative number whose absolute value is larger than the number of values, the step will fail before executing, to ensure that if e.g. "-10" is specified when there are fewer than 10 items in the target list, the workflow does not run.  (Use "max(1, -10)" to allow it to run 1 at a time if there are 10 or fewer.)
+
+Note: Concurrency cannot be specified when `reducing`.
 
 #### Example
 
@@ -114,6 +155,11 @@ Instead it accepts the parameters defined in the `parameters` key of the definit
 It also accepts the standard step keys such as `input`, `timeout` on `on-error`.
 A user of the defined step type can also supply `output` which, as per other steps,
 is evaluated in the context of the outer workflow, with visibility of the output from the current step.
+
+When supplying a workflow in contexts where a `workflow` is already expected,
+such as in a config key that takes a `workflow` (a Java `CustomWorkflowStep`),
+it is not necessary to specify the `type: workflow`, and additionally, if the only things being set is `steps`, those steps can be provided as a list without the `steps` keyword.
+Internally a _list_ will coerce to a `workflow` by interpreting the list as the steps.
 
 
 #### Shorthand Template Syntax
@@ -182,7 +228,7 @@ boolean isDefaultIdempotent();
 ```
 
 The first of these does the work of the step, resolving inputs and accessing context as needed via `context`.
-The second handles providing a cusotm shorthand, as described above;
+The second handles providing a custom shorthand, as described above;
 it can call to a superclass method `populateFromShorthandTemplate(TEMPLATE, value)`
 with the `TEMPLATE` for the class, if shorthand is to be supported.
 Finally, the third returns whether the step is idempotent, that is if the custom step is interrupted,
