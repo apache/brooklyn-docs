@@ -14,7 +14,7 @@ This example shows how CloudFormation stacks in AWS can be synchronized.
 Firstly, we define our type to represent discovered stack and be able to refresh `on_update`:
 
 {% highlight yaml %}
-{% readj aws-cfn-type.yaml %}
+{% readj aws-cfn-type.bom %}
 {% endhighlight %}
 
 This should be added to the catalog.
