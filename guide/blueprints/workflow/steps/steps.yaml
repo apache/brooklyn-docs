@@ -65,6 +65,8 @@
             if `deep`, any maps containing mergeable values (lists or maps) are themselves merged deeply;
             if `wait`, unavailable sensor values are blocked on before merging;
             if `lax` then nulls, and if not waiting unavailable sensors, are silently removed
+          * `slice <start-index> <optional-end-index>` to take a list and return the sublist; a negative index is taken from the end
+          * `remove <item-or-index>` to remove an entry given a key (for a map, ignoring if not found) or an index (for a list, negative index taken from the end, failing if out of bounds)
           * `wait` to wait on values (such as `${entity.attributeWhenReady...}`); must precede any expression that has to resolve values, such as `trim`)
           * `type TYPE` to coerce to registered type `TYPE`
           * `json [string|parse|encode]`: indicates the input should be converted as needed using JSON;
