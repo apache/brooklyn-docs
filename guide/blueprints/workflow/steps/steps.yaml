@@ -65,6 +65,7 @@
             if `deep`, any maps containing mergeable values (lists or maps) are themselves merged deeply;
             if `wait`, unavailable sensor values are blocked on before merging;
             if `lax` then nulls, and if not waiting unavailable sensors, are silently removed
+          * `prepend <item>` and `append <item>` to add `<item>` at the start or end, respectively, when the input to the transform is a list or a string
           * `slice <start-index> <optional-end-index>` to take a list and return the sublist; a negative index is taken from the end
           * `remove <item-or-index>` to remove an entry given a key (for a map, ignoring if not found) or an index (for a list, negative index taken from the end, failing if out of bounds)
           * `wait` to wait on values (such as `${entity.attributeWhenReady...}`); must precede any expression that has to resolve values, such as `trim`)
@@ -80,7 +81,8 @@
             ideally suited for passing to scripts; `string` is the default and suitable for most purposes, but `encode` is needed where passing to something that expects JSON such as `jq`
           * `first`, `last`, `min`, `max`, `sum`, `average` and `size` are accepted for collections
           * `to_string`, `to_upper_case`, and `to_lower_case` are accepted for strings
-          * `resolve_expression` performs resolution of any interpolated expressions; this can be used to do nested interpolation
+          * `resolve_expression` to trigger a re-resolution of the value being transformed, eg if it has nested variable references that need resolution or has been explicitly prepended and appended with `${` and `}`;
+            this is not done immediately but on the next step (or at the end), so the value can be piped to `wait` if desired
           * `set VAR` to set the workflow variable `VAR` to the the value at that point in the transformation
           * `return` to return the result of the transformation (not compatible with supplying a `value` to set in a variable)
           * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
