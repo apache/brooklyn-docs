@@ -187,10 +187,10 @@ brooklyn.entitlements.global=<class>
 The default entitlement manager is one which responds to per-user entitlement rules,
 and understands:
 
-* `root`:  full access, including to the Groovy console
-* `poweruser`:  full access, excluding to the Groovy console
-* `user`:  access to everything but actions that affect the server itself. Such actions include the
-  Groovy console, stopping the server and retrieving management context configuration
+* `root`:  full access, including local scripts and the Groovy console
+* `poweruser`:  full access apart from local shell scripts and Groovy scripts
+* `user`:  access to everything but actions that affect the server itself. Such actions include scripts,
+  stopping the server and retrieving management context configuration
 * `blueprintAuthor`:  same as user but cannot install bundles containing jar or class files
 * `readonly`:  read-only access to almost all information
 * `minimal`:  access only to server stats, for use by monitoring systems
@@ -268,8 +268,15 @@ brooklyn.webconsole.security.login.form=brooklyn-ui-login
 
 ## SSH and Script Defaults
 
-Default values for SSH and script execution behaviour can be set in this file
+Default values for SSH connection and script execution behaviour can be set in this file
 using the prefix `brooklyn.ssh.config.`, as described in [Locations](/guide/locations#os-setup).
+
+Local shell access via the `shell` workflow step, available only to users with `root`-level entitlement,
+can be disabled altogether using the following setting:
+
+```
+brooklyn.security.shell.workflow_step.disabled=true
+```
 
 
 ## Certificate Validation

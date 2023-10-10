@@ -43,21 +43,16 @@
 
     - name: transform
       summary: Applies a transformation to a variable or expression
-      shorthand: '`transform [TYPE] [ "value" ] VARIABLE_NAME [ = VALUE ] | TRANSFORM`'
+      shorthand: '`transform [TYPE] [ VALUE | "value" VALUE | "variable" VARIABLE_NAME | VARIABLE_NAME "=" VALUE ] "|" TRANSFORM`'
       input: |
-        * `variable`: either a string, being the workflow variable name, or a map, containing the `name` and optionally the `type`;
-          if `value` is supplied, this variable will be set to the result of all transforms and then coercion to any indicated type, 
-          e.g. to force conversion to an integer or to a bean registered type;
-          if `value` is not supplied, the name is treated as a variable name to resolve and coerce to any indicated type
-          (i.e. wrapping the name in `${...}`; this is suppressed if the type is the special keyword `value`, and `name` is resolved as a normal expression)
-          and then used for the transform with the result being returned;
-          `name` here can be of the form `x.key` where `x` is an existing map variable, to user or set a specific `key` within it
-        * `value_is_initial`: a boolean, implied in shorthand by the word "value", means to treat the variable name as a value rather than a variable name,
-          evaluating it as a normal expression rather than wraping it in `${...}`; this cannot be used it a `value` is supplied
-        * `value`: the value to set, with some limited evaluation prior to transforms as described [here](../variables.html);
-          if not supplied, the `variable` is evaluated per the above and used as the input for the transform
+        * `variable`: either a string, being the workflow variable name, or a map, containing a `name` and/or a `type`;
+          if a variable name is supplied, it is set as the result of the transform,
+          and if `value` is not supplied, its initial value is used as the input to the transform (update in place) 
+        * `value`: the value to start with; if omitted a `variable` is required and its value used as the starting value;
+          where the value might be confused with a variable name it must be explicitly offset with the keyword `"value"`;
+          more information is [here](../variables.html)
         * `transform`: a string indicating a transform, or multiple transforms separated by `|`, where a transform can be
-          * `trim` to remove leading and trailing whitespace on strings, null values from lists or sets, and any entry with a null key or null value in a map
+          * `trim` to remove leading and trailing whitespace on strings, null and empty string values from lists or sets, and any entry with a null key or null value in a map
           * `replace MODE PATTERN REPLACEMENT` to replace a pattern in a string with a replacement, supporting mode `regex`, `glob`, or `literal`
           * `merge [list|set|map] [deep] [wait] [lax]` to treat the words in the value as expressions to be combined;
             indicates the value will be a space-separated list of values, with quotes significant, usually including `$(vars)`;
@@ -66,6 +61,8 @@
             if `wait`, unavailable sensor values are blocked on before merging;
             if `lax` then nulls, and if not waiting unavailable sensors, are silently removed
           * `prepend <item>` and `append <item>` to add `<item>` at the start or end, respectively, when the input to the transform is a list or a string
+          * `join [<separator>]` to concatenate stringable items from a list
+          * `split [limit <limit>] [keep_delimiters] [literal|regex] <delimiter>` to split a string around the given `<delimiter>`, optionally including the delimiters or limiting the count
           * `slice <start-index> <optional-end-index>` to take a list and return the sublist; a negative index is taken from the end
           * `remove <item-or-index>` to remove an entry given a key (for a map, ignoring if not found) or an index (for a list, negative index taken from the end, failing if out of bounds)
           * `wait` to wait on values (such as `${entity.attributeWhenReady...}`); must precede any expression that has to resolve values, such as `trim`)
@@ -83,6 +80,8 @@
           * `to_string`, `to_upper_case`, and `to_lower_case` are accepted for strings
           * `resolve_expression` to trigger a re-resolution of the value being transformed, eg if it has nested variable references that need resolution or has been explicitly prepended and appended with `${` and `}`;
             this is not done immediately but on the next step (or at the end), so the value can be piped to `wait` if desired
+          * `get [<modifier>]` to get the unwrapped value of a supplier (if no arguments) or get a specific indexed value or modifier sequence,
+            such as `get 0` or `get [0]` to get the first element of a list, or `get .key.subkey[0]` to take an element `key` in a map, an element `subkey` in the resulting map, and the first element of that list
           * `set VAR` to set the workflow variable `VAR` to the the value at that point in the transformation
           * `return` to return the result of the transformation (not compatible with supplying a `value` to set in a variable)
           * any other word is looked up as a registered type of type `org.apache.brooklyn.core.workflow.steps.transform.WorkflowTransform` (or `WorkflowTransformWithContext` to get the context or arguments)
@@ -142,6 +141,7 @@
       input: |
         * `message`: a string to report in the exception
         * `rethrow`: whether to include any error in scope (if being used within an `on-error` step)
+        * `value`: on optional value that can be included in the failure, and for callers to inspect additional context
       output: _none_ (throws exception)
 
     - name: retry
@@ -291,6 +291,21 @@
         * `content_bytes`: the content, as a raw byte array
         * `content_json`: the content, parsed as JSON if possible to return a map, list, string, or primitive (null if not valid json)
         * `duration`: how long the request took
+
+    - name: shell
+      summary: Runs a command using the local system shell
+      shorthand: '`shell COMMAND`'
+      input: |
+        * `command`: the command to run
+        * `env`: a map of string keys with values whose JSON is taken and passed to the command be executed
+        * `exit_code`: the word `any`, a number, or a predicate DSL expression (e.g. `less-than: 32`)
+        * `output_max_size`: by default output from commands is limited to 100k, truncating to keep the end; this can be increased or decreased,
+          or disabled with `-1` (assuming Apache Brooklyn has sufficient memory to hold the data)
+        * `interpolation_mode` and `interpolation_errors`: as per `let` and `load`, with defaults `full` and `ignore` so that applicable values are resolved and others deferred
+      output: |
+        * `stdout`
+        * `stderr`
+        * `exit_code`
 
     - name: ssh
       summary: Runs a command over ssh

@@ -92,6 +92,9 @@ The config to define the sensor feed is:
   if on the local entity, or a map of `sensor` containing the name and `entity` containing the entity or entity ID
   where the sensor should be listened for, or if just a single local sensor, that sensor name supplied as a string
 * `period`: whether the feed should run periodically
+* `skip_initial_run`: by default sensors and policies will run when created (if any `condition` is met); 
+  this can be set `true` to prevent that,
+  ensuring it is only run after the initial `period` or when one of the `triggers` fires
 
 In addition to defining the `sensor` name, at least one of `triggers` or `period` must be supplied.
 The `steps` must also be defined, as per `workflow-effector` above,
