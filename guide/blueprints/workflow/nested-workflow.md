@@ -30,7 +30,7 @@ For example:
 ```
 - log This is about to run a nested workflow
 - let x=1
-- ley y=2
+- let y=2
 - type: workflow
   input:
     x: ${x}
