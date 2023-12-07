@@ -529,10 +529,11 @@
           the default behavior is to invoke an `on_create` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
           this is invoked prior to `on_update` so if there is nothing special needed for creation this can be omitted
         
-        * `on_update`: a workflow to run on each child which has a corresponding item,
-          passed the `item` (and all inputs to the `update-children` step), 
-          and typically updating config and sensors as appropriate on the child;
-          the default behavior is to invoke an `on_update` effector at the child (if there is such an effector, otherwise do nothing), passing `item`;
+        * `on_update`: a workflow to run for each child which has a corresponding item,
+          run in the context of the parent, passed the `child` and `item` and `index` 
+          (and all inputs to the `update-children` step), 
+          and typically updating config and sensors as appropriate on the child, possibly in a sub-workflow in `target: child`;
+          the default behavior is to invoke an `on_update` effector at the child (if there is such an effector, otherwise do nothing);
           if the name or any policies may need to change on update, that should be considered in this workflow;
           if the `update-children` is performed frequently, it might be efficient in this method to check whether the `item` has changed
         
