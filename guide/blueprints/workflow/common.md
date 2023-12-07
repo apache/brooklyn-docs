@@ -81,7 +81,7 @@ steps:
 ### Conditions
 
 The previous example shows the use of conditions, as mentioned as one of the properties common to all steps.  
-This makes use of the recent "[Predicate DSL](https://github.com/apache/brooklyn-docs/blob/master/guide/blueprints/yaml-reference.md#predicate-dsl)" conditions framework .
+This makes use of the recent "[Predicate DSL](../yaml-reference.md#predicate-dsl)" conditions framework .
 
 It is normally necessary to supply a `target`, unless one of the entity-specific target keys (e.g. `sensor` or `config`)
 is used.  The target and arguments here can use the [workflow expression syntax](variables.md).  

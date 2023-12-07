@@ -13,13 +13,13 @@ Apache Brooklyn workflow supports a range of step types covering the most common
 commonly done as part of application management.
 These are divided into the following groups:
 
-* [Workflow Control](#workflow_control): use local variables and control flow,
+* [Workflow Control](#workflow-control): use local variables and control flow,
   with step types such as `let`, `return`, and `retry`
-* [External Actions](#external_actions): interact with external systems 
+* [External Actions](#external-actions): interact with external systems 
   using step types such as `container`, `ssh`, `winrm`, and `http`
-* [Application Models](#application_models): work with the models stored in Brooklyn,
+* [Application Models](#application-models): work with the models stored in Brooklyn,
   doing things such as `invoke-effector`, `set-sensor`, `deploy-application`, and `add-entity`
-* [General Purpose](#general_purpose): miscellaneous step types such as `log` and `sleep`
+* [General Purpose](#general-purpose): miscellaneous step types such as `log` and `sleep`
 
 Custom step types can be written and added to the catalog, either written as workflow using these primitives
 (including doing virtually anything in a container) or by implementing a Java type, both [as described here](../nested-workflow.md).
