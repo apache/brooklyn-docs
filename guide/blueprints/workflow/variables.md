@@ -201,6 +201,12 @@ A limited number of other operations is also permitted in `let`,
 namely the basic mathematical operands `+`, `-`, `*`, and `/` for integers and doubles, 
 and the modulo operator `%` for integers giving the remainder.
 These are evaluated in usual mathematical order.
+The ternary `?` operator is supported as follows:
+
+```
+- let x = <boolean condition> ? <value if true> : <value if false>
+```
+
 Parentheses are not supported.
 
 The `transform` step can be used for more complicated transformations, such as 
