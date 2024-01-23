@@ -169,7 +169,7 @@
           `JITTER` as either a percentage or real factor by which to jitter the result with randomness, 0 being none, 100% being up to double, and -100% being down to zero;
           and `MAX` to specify a maximum duration; for example,
           `backoff 1s 1s 10s` will retry after 1 second the first two times, then after 10 seconds on subsequent instances; 
-          and `backoff 1s 2s backoff 3x max 1m` will retry after 1 second then 2s then 6s then 18s then 54s then 60s each subsequent time 
+          and `backoff 1s 2s increasing 3x up to 1m` will retry after 1 second then 2s then 6s then 18s then 54s then 60s each subsequent time 
         * `hash`: an optional hash expression to identify related retries in a workflow instance; all retry blocks with the same `hash` will share counts
           for the purpose of counting limits (although the limits themselves are as per the definition in each retry block),
           which can be useful if there are different steps which might fail in different ways but the overall retry behaviour should be preserved
