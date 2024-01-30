@@ -19,6 +19,10 @@ This documentation was generated {{ site.time | date_to_string }}.
 
 Apache Brooklyn has made the following releases:
 
+* **[1.1.0](/v/1.1.0)**: Workflows and Container commands
+
+* **[1.0.0](/v/1.0.0/)**: Major Release
+
 * **[0.12.0](/v/0.12.0/)**: OSGI container runtime, improved catalog and bundle integration (September 2017)
 
 * **[0.11.0](/v/0.11.0/)**: Improved cloud support, additional blueprinting features (May 2017)
