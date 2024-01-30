@@ -17,7 +17,7 @@ to Brooklyn's commercial users for funding much of this development.
 #### Workflows
 
 Apache Brooklyn now has a powerful workflow engine and syntax for defining entities, effectors, sensors, and policies.
-The syntax supports longhand, conditions, loops, error-handling, variables, a large set of built-in step types, and 
+It supports longhand and shorthand syntax, conditions, loops, error-handling, variables, a large set of built-in step types, and 
 the ability to define custom step types.md).
 
 ```yaml
@@ -39,7 +39,7 @@ Brooklyn now supports a `workflow-entity` where `start` / `stop` are defined by 
 
 #### Kubectl Task factory, Docker effector and Docker Sensor
 
-This is a practical and highly customizable way to externalize effectors and sensors to containers run on a Kubernetes cluster or docker container.
+This is a practical and highly customizable way to externalize effectors and sensors to containers run on a Kubernetes cluster or Docker container.
 
 ```yaml
 name: container-effector
@@ -78,7 +78,7 @@ This release is an important release on the Karaf 4.3.x series containing:
 - fix deployment issue by upgrading to Apache Felix FileInstall 3.7.4
 - and much more!
 
-- The Release Notes are available here: https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311140&version=12351123
+The Release Notes are available here: https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311140&version=12351123
 
 #### Groups Change Policy
 
@@ -86,7 +86,7 @@ New policy for adding policies, enrichers, and initializers to entities as the j
 
 #### Connection tag
 
-Inspired by the Terraform `connection` element and added a `connection` tag that encapsulates connection details. When declared on an entity, any SSH steps will use the details to establish a connection and execute
+Inspired by the Hashicorp Terraform `connection` element and added a `connection` tag that encapsulates connection details. When declared on an entity, any SSH steps will use the details to establish a connection and execute
 
 #### Add support setup default initializers for all deployment
 
@@ -110,13 +110,13 @@ Invoking the operation will merge the new data to the currently existing store. 
 
 Adding a new effector to call a inner effector in all the children entities where the effector is inserted in batches of a parametrized size.
 
-#### add a Secret object which can be used to capture a secret
+#### Add a Secret object which can be used to capture a secret
 
 This can be used wherever we need extra assurance that credentials are not accidentally logged or shown in ui
 
 ### Security Fixes
 
-#### mitigate CVE-2023-1370
+#### Mitigate CVE-2023-1370
 
 see: https://security.snyk.io/vuln/SNYK-JAVA-NETMINIDEV-3369748
 
