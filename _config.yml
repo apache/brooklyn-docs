@@ -65,7 +65,7 @@ pdf-rewrite-prefixes:
     '/guide' : '/v/0.12.0'
     '/website' : ''
     
-brooklyn-version: 1.1.0-SNAPSHOT # BROOKLYN_VERSION brooklyn-docs-version
+brooklyn-version: 1.2.0-SNAPSHOT # BROOKLYN_VERSION brooklyn-docs-version
 brooklyn-snapshot-git-branch: master   # if line above is SNAPSHOT this should point to corresponding git branch (e.g. master, 0.4)
 
 # This is auto-detected, but you can override it if needed.

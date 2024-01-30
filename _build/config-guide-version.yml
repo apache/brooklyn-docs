@@ -1,6 +1,6 @@
 path:
   # BROOKLYN_VERSION_BELOW
-  guide: /v/1.1.0-SNAPSHOT
+  guide: /v/1.2.0-SNAPSHOT
   # BROOKLYN_VERSION_BELOW
-  style: /v/1.1.0-SNAPSHOT/style
+  style: /v/1.2.0-SNAPSHOT/style
   website: ""
