@@ -220,6 +220,19 @@
       output: if `reducing` is specified, the final value of those variables, 
         otherwise the output from the last step in the nested workflow or a list of such outputs if supplied a `target` list
 
+    - name: subworkflow
+      summary: |
+        A simple set of steps to run, like `workflow` but more restricted in options,
+        and sharing workflow variables with the containing workflow.
+        No `target` or `concurrency` can be specified, and all containing workflow variables are in scope,
+        
+        A `name` can be given to a block of commands to improve understandability,
+        A `condition` can be set on the entire block
+        , but not allowing a target Runs nested workflow, optionally over an indicated target.
+        This step type is described in more detail [here](../nested-workflow.html).
+      shorthand: none; this step type is implied if there is no `step` shorthand or type indicated when there are `steps` defined
+      input: |
+
     - name: foreach
       summary: Runs nested workflow over a list using the specified variable name, equivalent to `workflow` when looping over a list
       shorthand: '`foreach TARGET_VAR_NAME [ in TARGET ]`'
@@ -407,8 +420,11 @@
           the value will be coerced to the given type, e.g. to force conversion to an integer or to a bean registered type;
           if the `name` contains bracketed portions, these are treated as keys in a map or positions in list to be set
         * `value`: the value to set
-        * `require`: a condition to evaluate against the sensor value while holding the lock on the sensor,
-          used to enable atomic operations similar to the `lock` workflow setting
+        * `require`: a condition to evaluate against the sensor value, 
+          evaluated along with `value` while holding the lock on the sensor;
+          if the condition is not satisfied, an error is thrown and the sensor is not set,
+          enabling lightweight atomic check-and-set operations against the current value 
+          without needing to use a explicit `lock` in the workflow
       output: the output from the previous step, or null if this is the first step
 
     - name: clear-config

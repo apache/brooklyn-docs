@@ -60,12 +60,31 @@ and its 0-indexed position. These names can be overridden with the `target_var_n
 
 Where a list is supplied, the result of the step is the list collecting the output of each sub-workflow.
 
-If a `condition` is supplied when a list is being used, the `workflow` step will always run,
-and the `condition` will be applied to entries in the list.
-An example of this is included below.
+If a `condition` is supplied when a list is being used, 
+that `condition` is applied to each entry in the list.
+The `workflow` step itself will always appear to run, but might have 0 nested workflows,
+and in that case will return the empty list.
+If the condition is intended to block the list from being evaluated,
+and should be evaluated in the containing workflow's scope,
+consider using a `subworkflow` with the outer condition containing the `workflow`.
+An example of this is included below, using `service.isUp` with `children`.
+
+### Associated Step Types
 
 The `foreach` type is a simplified variant of `workflow` when recursing over a list,
-taking the same.
+taking the same arguments as `workflow` but supporting a shorthand syntax where
+the `target_var_name` and `target` can be specified as in `foreach VAR_NAME in TARGET`.
+The `steps` are required and are run for all elements in the list.
+
+The `subworkflow` type is another simplified variant that does not allow any target
+(so no recursing over a list and no concurrency), and which -- unlike the other workflow step types --
+shares variables with the calling workflow. All variables from the immediate containing workflow
+can be accessed and updated in a `subworkflow`, and new variables defined in the `subworkflow`
+are subsequently available in the outer workflow. The `steps` are required/
+A `name` is frequently given for readability, as are `condition` or `on-error` entries
+to apply a condition or error-handler to the block of steps.
+If no step type is defined, but `steps` are defined, this `subworkflow` step type is assumed.
+
 
 #### Example
 
@@ -85,7 +104,11 @@ apart from values specified as `input`, or with other iterations of a loop.
 Where it is desired to share variables across iterations, the key `reducing` can be supplied,
 giving a map of variable names to be shared and their initial values.
 
-When `reducing`, the output of the workflow is this set of variables with their final values.
+When `reducing`, the indicated variables are available as scratch workflow variables in the calling workflow.
+
+This cannot be used with `subworkflow`, as all variables are considered reduced in a `subworkflow`,
+and it cannot be used with `concurrency` as that risks race conditions in updating the reduced variables.
+(You can use `inputs` with both to provide new local variables.)
 
 
 #### Example
@@ -137,6 +160,20 @@ running in batches of up to 5 but not more than a third of the children at once:
     - invoke-effector effector-on-children
 ```
 
+As noted above, the `condition` here is evaluated on each child.
+To have it evaluated on the parent context instead, you can write:
+
+```
+- condition:
+    sensor: service.isUp
+    equals: true
+  steps:
+  - type: workflow
+    target: children
+    concurrency: max(1, min(33%, 5))
+    steps:
+    - invoke-effector effector-on-children
+```
 
 ### Defining Custom Workflow Steps
 
