@@ -404,11 +404,14 @@
   steps:
     - name: invoke-effector
       summary: Invokes an effector
-      shorthand: '`invoke-effector EFFECTOR`'
+      shorthand: '`invoke-effector EFFECTOR [ "on" ENTITY ] [ "with" ARGS ]`'
       input: |
         * `effector`: the name of the effector to invoke
-        * `entity`: optional entity or entity ID where the effector should be invoked
-        * `args`: map of argument names to values to pass to the effector
+        * `entity`: optional entity or entity ID where the effector should be invoked,
+          if not the entity where the workflow is running
+        * `args`: map of argument names to values to pass to the effector;
+          if supplied as shorthand, it expects the form `arg1=v1, arg2=v2`;
+          complex arguments are recommended to be passed using longhand syntax
       output: the returned object from the invoked effector
 
     - name: set-config
