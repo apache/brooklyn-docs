@@ -74,7 +74,9 @@ An example of this is included below, using `service.isUp` with `children`.
 The `foreach` type is a simplified variant of `workflow` when recursing over a list,
 taking the same arguments as `workflow` but supporting a shorthand syntax where
 the `target_var_name` and `target` can be specified as in `foreach VAR_NAME in TARGET`.
-The `steps` are required and are run for all elements in the list.
+A single step can be supplied as `do STEP` at the end;
+either that or `steps` is required (but not both), 
+and that step or those steps are run for all items in the target list. 
 
 The `subworkflow` type is another simplified variant that does not allow any target
 (so no recursing over a list and no concurrency), and which -- unlike the other workflow step types --
@@ -85,16 +87,65 @@ A `name` is frequently given for readability, as are `condition` or `on-error` e
 to apply a condition or error-handler to the block of steps.
 If no step type is defined, but `steps` are defined, this `subworkflow` step type is assumed.
 
+The `if` type acts like `subworkflow` but allows specifying a condition in shorthand.
+
 
 #### Example
 
 ```
+- foreach x in 1..3 do return ${x}
+```
+
+The above loop will return `[1,2,3]` and proceed to the next step.
+
+```
+# foreach, nested workflow
 - step: foreach x in 1..3
   steps:
+  - let x = ${x} + 1
   - return ${x}
 ```
 
-The above loop will return `[1,2,3]`.
+The above loop will return `[2,3,4]` and proceed to the next step.
+It is the same as the previous except it is supplying multiple steps
+to run on each iteration.
+Note that the assignment to `${x}` does not side-effect the loop,
+and nor is it available to the outer workflow, when using `foreach` or `workflow`.
+Use `${output}` to access the result,
+and see the `reducing` section below.
+
+```
+# subworkflow
+- let x = 1
+- steps:
+  - let x = ${x} + 1
+  - return ${x}
+- let x = Not run, but if it were it could access ${x}
+```
+
+The above implicit lightweight subworkflow _does_ run in the parent workflow's context,
+so it will access and update the same instance of `${x}`,
+and it will `return` from the workflow, not running the next step.
+
+```
+# if
+- let x = 1
+- if ${x} == 1 then let x = ${x} + 1
+- return ${x}
+```
+
+The above `if` step can access and update outer variables, like `subworkflow`, providing a convenient shorthand for simple conditions and steps. It is functionally identical to this:
+
+```
+- let x = 1
+- condition:
+    target: ${x}
+    equals: 1
+  steps:
+  - let x = ${x} + 1
+- return ${x}
+```
+
 
 
 ### Reducing
@@ -114,11 +165,9 @@ and it cannot be used with `concurrency` as that risks race conditions in updati
 #### Example
 
 ```
-- step: foreach x in 1..3
+- step: foreach x in 1..3 do let sum = ${sum} + ${x}
   reducing:
     sum: 0
-  steps:
-  - let sum = ${sum} + ${x}
 ```
 
 The above loop will return `6`.

@@ -91,6 +91,8 @@ the workflow moves to the following step in the sequence, or ends if that was th
 Apart from `name` and `id` above, if a step's `condition` is unmet,
 the other properties set on a step are ignored.
 
+The `if` step can be used for simple conditions, as shown in the next section.
+
 
 ### Jumping with "Next" or "Goto"
 
@@ -115,6 +117,19 @@ and its availability not abused:  in particular where a task can be better done
 in a proper high-level programming language, consider putting that program 
 into a container and calling it from your workflow.
 
+Thus the above workflow can be written more concisely as:
+
+```
+steps:
+- if ${scratch.skip_date} then goto skipping-ssh-date
+
+- step: ssh echo today is `date`
+  next: end
+
+- id: skipping-ssh-date
+  name: Not doing SSH
+  step: log skipping ssh date command
+```
 
 ### Input and Output
 

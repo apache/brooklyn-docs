@@ -104,6 +104,16 @@
         * `value`: the value to return
       output: the value indicated
 
+    - name: if
+      summary: |
+        Provides shorthand for a simple condition and step.
+      shorthand: '`${condition_target} [ "==" ${condition_equals} ] [ " then " ${step...} ]`'
+      input: |
+        * `condition_target`: a condition to evaluate or an expression to check (for truthiness, unless a condition_equals is supplied)
+        * `condition_equals`: a value to compare for equality against the supplied condition_target (which should not be a condition if this is used)
+        * `step` or `steps`: a subworkflow to run if the condition passes
+      output: the result of the supplied step or steps
+
     - name: wait
       summary: |
         Waits for a value which might not yet be resolved, or a task which might not have finished,
@@ -234,10 +244,12 @@
       input: |
 
     - name: foreach
-      summary: Runs nested workflow over a list using the specified variable name, equivalent to `workflow` when looping over a list
-      shorthand: '`foreach TARGET_VAR_NAME [ in TARGET ]`'
+      summary: |
+        Runs nested workflow over a list using the specified variable name, equivalent to `workflow` when looping over a list,
+        with support for including a single step as shorthand
+      shorthand: '`foreach TARGET_VAR_NAME [ in TARGET [ do STEP ]]`'
       input: |
-        * `steps`: a list of steps to run, run in a separate context
+        * `step` or `steps`: a list of steps to run, run in a separate context
         * `target_var_name`: the name of the variable that should be set in nested workflows to refer to the element in the target list,
           with the additional behavior that if this is of the "spread map syntax" form `{KEY,KEY2}`, each element in the target list will be assumed to be a map
           and the keys "KEY" and "KEY2" will be extracted and each one set as a variable in the nested workflow
