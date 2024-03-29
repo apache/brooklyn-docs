@@ -29,7 +29,7 @@ The Brooklyn documentation uses [Jekyll](https://jekyllrb.com/) to process the s
 This in turn requires Ruby and gems as described in the `Gemfile`:
 install [RVM](http://rvm.io/) to manage Ruby installations and sets of Ruby gems.
 
-    \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
+    curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
 
 Close your shell session and start a new one, to get the new
 environment that RVM has configured. Change directory to the location where
