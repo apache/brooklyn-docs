@@ -567,6 +567,8 @@
           the default behavior is to invoke an `on_update` effector at the child (if there is such an effector, otherwise do nothing);
           if the name or any policies may need to change on update, that should be considered in this workflow;
           if the `update-children` is performed frequently, it might be efficient in this method to check whether the `item` has changed
+        * `on_update_child`: as `on_update`, but run in the context of the `child` entity for easier configuration there,
+          still with access to `item` and `index`
         
         * `on_delete`: a workflow to run on each child which no longer has a corresponding item prior to its being deleted;
           the default behavior is to invoke an `on_delete` effector at the child (if there is such an effector, or nothing);

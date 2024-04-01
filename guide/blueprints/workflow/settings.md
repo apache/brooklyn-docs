@@ -359,7 +359,9 @@ and/or as part of a workflow step, if the retention period should be changed dep
 
 Where not explicitly set, a system-wide retention default is used. This can be configured in `brooklyn.properties` using
 the key `workflow.retention.default`. If no supplied, Brooklyn defaults to `3`, meaning it will keep the three most
-recent invocations of a workflow, with no time limit, and
+recent invocations of a workflow, with no time limit.
+
+Workflows may be kept in-memory for a longer period than persisted to disk, depending on the memory available. This allows, for example, `disabled` and `0` to be indicated to minimize persistence requirements, while maintaining UI and API access to workflow state "softly", that is to say if memory permits. The key `workflow.retention.default.soft` can be configured in `brooklyn.properties` to override the default limit of such workflows kept in memory, from the default value of `3`, or the expression `soft <soft_retention_value>` can be used as part of a retention expression, typically at the end, to customize it per-workflow. If the soft limit is less than or the same as the standard limit there is no apparent effect, as workflow state can be retrieved from in-memory or on-disk. Active workflows are always kept in memory.
 
 Workflow retention is done on a per-entity basis based by default on a hash of the workflow name. Typically workflow
 definitions for effectors, sensors, and policies all get unique names for that definition, so the retention applies
@@ -398,6 +400,8 @@ Permitted `<value>` expressions in either case are:
   * `max` means completed workflow instances must be retained if they meet any of the constraints implied by
     the `<value>` arguments, i.e. `max(2, 3, 1h, 2h)` means to keep the 3 most recent instances irrespective of when
     they run, and to keep all instances for up to two hours
+* `<value> soft <soft_value>` where `<soft_value>` can be any of the above, to specify an explicit in-memory soft-retention limit, and `<value>` is any retention expression indicating the normal on-disk retention (where `<value>` must not indicate an additional `soft` or `hard` expression)
+* `<value> hard` as per `soft` but indicating that the `<value>` is both the on-disk and in-memory limit
 * `disabled`, to prevent persistence of a workflow, causing less work for the system where workflows don't need to be
   stored; such workflows will not be replayable by an operator or recoverable on failover;
   this should not be used with workflows that acquire a `lock` unless the entity has special handlers to clear locks
