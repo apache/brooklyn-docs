@@ -21,7 +21,7 @@ defined by that step type.
 
 Internally, steps are maps with multiple inputs and properties,
 and the shorthand syntax makes it possible to set the most common ones.
-For `ssh` this is the command to run; for `container` an image; for `http` a URL; and for `set-xxx` 
+For `ssh` this is the command to run; for `container` an image; for `http` a URL; and for `set-xxx`
 an expression of the form `key=value`.
 
 It is always possible to write the longhand map syntax, and if using inputs or properties
@@ -50,14 +50,17 @@ steps:
     not: { equals: true }
 ```
 
-Care should be taken when using `:` in a step with shorthand.  YAML will parse it as a map if it is not quoted in YAML. However at runtime, if the step looks like it came from an accidental colon causing a map, it will be reverted to a string with the colon re-introduced, so you can write steps with shorthand `- log Your name is: ${name}`. 
+Care should be taken when using `:` in a step with shorthand. YAML will parse it as a map if it is not quoted in YAML.
+However at runtime, if the step looks like it came from an accidental colon causing a map, it will be reverted to a
+string with the colon re-introduced, so you can write steps with shorthand `- log Your name is: ${name}`.
 
 All steps support a number of common properties, described below.
 
 ### Explicit IDs and Name
 
 Steps can define an explicit ID for use with `next`, for correlation in the UI,
-and to be able to reference the output or input from a specific step using the [workflow expression syntax](variables.md).
+and to be able to reference the output or input from a specific step using
+the [workflow expression syntax](variables.md).
 They can also include a `name` used in the UI.
 
 ```
@@ -77,24 +80,22 @@ steps:
   step: log skipping ssh date command
 ```
 
-
 ### Conditions
 
 The previous example shows the use of conditions, as mentioned as one of the properties common to all steps.  
-This makes use of the recent "[Predicate DSL](../yaml-reference.md#predicate-dsl)" conditions framework .
+This makes use of the recent [Predicate DSL](../yaml-reference.md#predicate-dsl) conditions framework.
 
 It is normally necessary to supply a `target`, unless one of the entity-specific target keys (e.g. `sensor` or `config`)
-is used.  The target and arguments here can use the [workflow expression syntax](variables.md).  
+is used. The target and arguments here can use the [workflow expression syntax](variables.md).
 
-The condition is evaluated when the step is about to run, and if the condition is not satisfied, 
+The condition is evaluated when the step is about to run, and if the condition is not satisfied,
 the workflow moves to the following step in the sequence, or ends if that was the last step.
 Apart from `name` and `id` above, if a step's `condition` is unmet,
 the other properties set on a step are ignored.
 
-
 ### Jumping with "Next" or "Goto"
 
-The common property `next` allows overriding the workflow sequencing, 
+The common property `next` allows overriding the workflow sequencing,
 indicating that a different step should be gone to next.
 This does not apply if a step's condition is not satisfied, as noted at the end of the previous section.
 
@@ -102,7 +103,8 @@ The value of the `next` property should be the ID of the step to go to
 or one of the following reserved words:
 
 * `start`: return to the start of the workflow
-* `end`: exit the workflow (or if in a block where this doesn't make sense, such as `retry`, go to the last executed step)
+* `end`: exit the workflow (or if in a block where this doesn't make sense, such as `retry`, go to the last executed
+  step)
 * `exit`: if in an error handler, exit that error handler
 
 The `goto` step type is equivalent to the `no-op` step with `next` set,
@@ -112,13 +114,12 @@ for declarative workflow it is fairly common, because it can simplify what
 might otherwise involve multiple nested workflows.
 That said, the confusion that `goto` can cause should be kept in mind,
 and its availability not abused:  in particular where a task can be better done
-in a proper high-level programming language, consider putting that program 
+in a proper high-level programming language, consider putting that program
 into a container and calling it from your workflow.
-
 
 ### Input and Output
 
-Most steps take input parameters and return output. 
+Most steps take input parameters and return output.
 Many step-specific input parameters can be set in the shorthand, but not all.
 All input parameters can be specified in an `input` block.
 It is also possible to customize the output from a step using an `output` block.
@@ -152,8 +153,7 @@ In addition, a custom `input` variable is passed to the third step.
 (This is not the simplest way to write this logic, but it illustrates the concepts.)
 
 This example also shows the expression syntax. More on inputs, outputs, variables, and expressions
-is covered [here](variables.md). 
-
+is covered [here](variables.md).
 
 ### Timeout
 
@@ -162,11 +162,10 @@ where the `<duration>` is of the form `1 day` or `1h 30m`.
 If the step or workflow where this is present takes longer than this duration,
 it will be interrupted and will throw a `TimeoutException`.
 
-
 ### Error Handling with `on-error`
 
 Errors on a step and/or a workflow can use the `on-error: <handler>` property to determine how
-and error should be handled.  The `<handler>` can be:
+and error should be handled. The `<handler>` can be:
 
 * a single step as a string, for instance `on-error: retry`, or to prevent infinite loops
   and introduce exponential backoff `on-error: retry limit 4 backoff 5s increasing 2x`
@@ -183,7 +182,7 @@ and error should be handled.  The `<handler>` can be:
         greater-than: 0
   ```
 
-  If the `ssh` command returns an `exit_code` greater than zero (which the `ssh` step treats as an error) 
+  If the `ssh` command returns an `exit_code` greater than zero (which the `ssh` step treats as an error)
   this will go to the step with `id: my-service-restart-error`.
   Any other error, such as network connectivity, will be rethrown and could be addressed by a workflow-level
   `on-error` or could cause the workflow to fail.
@@ -197,7 +196,8 @@ the DSL `error-cause` predicate can be used, for example
 `error-cause: { glob: "*server timeout*" }`.
 
 The error handler will complete and be considered to have handled the error at the first step
-where the condition is satisfied and which indicates a `next` step (either a `goto` or `retry` step, or `next` property).
+where the condition is satisfied and which indicates a `next` step (either a `goto` or `retry` step, or `next`
+property).
 and subsequent steps in the error handler will not run.
 If all steps have conditions and none are met, the error handler will rethrow the error,
 but otherwise, if one or more steps run and none of them throw errors or indicate a `next`,
@@ -224,10 +224,9 @@ might require care:
 * The workflow UI does not show error handling steps; their activity can only be seen in the tasks view
   and in the logs
 
-
 ### Workflow Settings
 
 There are a few other settings allowed on all or some steps which configure workflow behavior.
-These are `replayable`, `idempotent`,  and `retention`,
+These are `replayable`, `idempotent`, and `retention`,
 and are described under [Workflow Settings](settings.md).
 
