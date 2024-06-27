@@ -109,6 +109,21 @@ tasks like ssh to also be extremely slow. See
 for details of how to work around this.
 
 
+#### SSHD Limits
+
+Apache Brooklyn will attempt to re-use the SSH connections to machines on a per-location basis, by default,
+keeping sessions open for up to 5 minutes if the entity/location is managed.
+If the same target is used via multiple `SshMachineLocation` instances
+(such as through BYON or localhost), this may trigger SSHD throttling.
+
+This can be resolved by setting either `sshCacheExpiryDuration: 10s` or `brooklyn.ssh.config.close: true`, 
+on the location, as described [here](/guide/locations#ssh-low-level-configuration).
+
+It could also be resolved by increasing `MaxSessions` and `MaxStartups` in `sshd_config` on the target system.
+More info on SSHD limits are documented [here](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Load_Balancing).
+
+
+
 ## Process Diagnostics
 
 #### Thread and Memory Usage

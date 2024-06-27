@@ -230,6 +230,8 @@ For more keys and more detail on the keys below, see
   This setting prevents scripts executed on the VMs from being deleted on completion.
   Note that some scripts run periodically so this can eventually fill a disk; it should only be used for dev/test. 
 
+###### SSH Low-Level Configuration
+
 - Use `scripts.ignoreCerts: false` to issue `curl` and other download commands on-box
   in such a way that they require valid certificates from the servers they connect to
   (e.g. without the `-k` argument to `curl`, or GPG check for package installers);
@@ -284,6 +286,13 @@ For more keys and more detail on the keys below, see
   combination of the two. If a password is required, it must access that from the environment variables as passing it in
   the CLI is not good practice. It can be tricky to pass password directly (e.g. using expect scripts or askpass) and
   password-less mechanisms are normally recommended when using a CLI-based SSH.
+
+- `sshCacheExpiryDuration` will override how long SSH sessions are kept open for reuse, defaulting to 5 minutes.
+  This can be any positive duration, such as `15s` to close pretty quickly, or `forever` not to close
+  (unless the location is unmanaged or there is another trigger). This may not be 0, but see the next key.
+
+- `brooklyn.ssh.config.close` can be set `true` to cause SSH sessions to be closed immediately after use.
+  This overrides any `sshCacheExpiryDuration`, and is useful where many entities may SSH to the same target.
 
 Other low level parameters are available in specific contexts, as described in the JavaDoc for the relevant classes
 and in some cases in `BrooklynConfigKeys`.
