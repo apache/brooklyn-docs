@@ -40,10 +40,21 @@ such as new appenders or different log levels, can be made directly in this file
 Karaf logging is highly configurable. For example enable the sift appender to log to separate log files for
 each bundle as described here: [Advanced configuration](https://karaf.apache.org/manual/latest/#_advanced_configuration)
 
-Using the default configuration the log entries are reported in UTC time. If you want the logging to be reported using the server local time you can replace the `log4j2.pattern` removing the UTC flag and the Z suffix:
+By default, file logging uses the following pattern, in the PAX logging file:
+
 ```properties
 log4j2.pattern = %d{ISO8601}Z %X{task.id}-%X{entity.ids} %-5.5p %3X{bundle.id} %c{1.} [%.16t] %m%n
 ```
+
+This uses UTC time, and includes any context thread (`%t`), as well as the bundle ID, task ID, and entity IDs.
+This makes the log easy to search, either from within AMP or using standard tools.
+As log messages are written for all tasks when they are created, these IDs make it possible
+trace back through the creation stack and identify the originating task or REST API call.
+The `bundle.id`, `task.id` and `entity.ids` are set as logging context variables, accessed using `%X`.
+The context variable `username` is also available if in the context of a REST API request,
+and can be included by inserting `%X{username}` into the pattern above.
+
+
 
 ## Advanced Configuration
 
