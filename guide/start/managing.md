@@ -18,19 +18,19 @@ the beginning. Next we will outline how to *manage* the application that has bee
 
 ## Applications
 
-{% read _br_applications.camp.md %}
+{% read _br.applications.camp.md %}
 
 ## Entities
 
-{% read _br_entities.camp.md %}
+{% read _br.entities.camp.md %}
 
 ## Sensors
 
-{% read _br_sensors.camp.md %}
+{% read _br.sensors.camp.md %}
 
 ## Effectors
 
-{% read _br_effectors.camp.md %}
+{% read _br.effectors.camp.md %}
 
 ## Activities
 
