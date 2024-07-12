@@ -91,7 +91,13 @@ You can view the blueprint for the application again:
 $ br application Tomcat spec
 {% endhighlight %}
 <pre>
-"name: Tomcat\nlocation:\n  mylocation\nservices:\n- serviceType: brooklyn.entity.webapp.tomcat.TomcatServer\n"
+name: Tomcat
+version: 1.0.0-SNAPSHOT
+services:
+- type: org.apache.brooklyn.entity.webapp.tomcat.TomcatServer
+  name: tomcatServer
+location:
+  ...
 </pre>                </div>
             </div>
         </div>

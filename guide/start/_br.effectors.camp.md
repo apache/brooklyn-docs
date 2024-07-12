@@ -46,7 +46,7 @@ The commands below deploy the Apache Tomcat [hello world example](http://tomcat.
 sensor and the index page html is displayed.
 
 {% highlight bash %}
-$ br application Tomcat entity tomcatServer effector deploy invoke -P url=https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war -P targetName=sample
+$ br application Tomcat entity tomcatServer effector deploy invoke -param url=https://tomcat.apache.org/tomcat-6.0-doc/appdev/sample/sample.war -param targetName=sample
 $ webapp=$(br application Tomcat entity tomcatServer sensor webapp.url | tr -d '"')
 $ curl $webapp/sample/
 {% endhighlight %}

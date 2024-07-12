@@ -12,6 +12,7 @@ service.notUp.indicators   A map of namespaced indicators that the service is no
 service.problems           A map of namespaced indicators of problems with a service                               {}   
 service.state              Actual lifecycle state of the service                                                   "RUNNING"   
 service.state.expected     Last controlled change to service state, indicating what the expected state should be   "running @ 1450356994928 / Thu Dec 17 12:56:34 GMT 2015"
+# etc.
 </pre>
 
 To explore sensors on a specific entity use the `sensor` command with an entity specified:
@@ -29,7 +30,7 @@ host.name            Host name                                                  
 host.sshAddress      user@host:port for ssh'ing (or null if inappropriate)                                             "vagrant@10.10.10.101:22"   
 host.subnet.address  Host address as known internally in the subnet where it is running (if different to host.name)    "10.10.10.101"   
 host.subnet.hostname Host name as known internally in the subnet where it is running (if different to host.name)       "10.10.10.101"   
-# etc. etc.
+# etc.
 </pre>
 
 
