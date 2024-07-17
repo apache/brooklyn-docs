@@ -110,7 +110,7 @@ by referencing it in another feature.xml file.
 ### Embedded Dependencies
 
 An OSGi bundle can 
-[embed jar dependencies](http://felix.apache.org/documentation/subprojects/apache-felix-maven-bundle-plugin-bnd.html#embedding-dependencies)
+[embed jar dependencies](https://felix.apache.org/documentation/subprojects/apache-felix-maven-bundle-plugin-bnd.html#_embedding_dependencies)
 within it. This allows dependencies to be kept private within a bundle, and easily shipped with that bundle.
 
 To keep these private, it is vital that the OSGi bundle does not import or export the packages

@@ -22,7 +22,7 @@ The following example is for Amazon EC2:
 
 (You'll need to replace the `identity` and `credential` with the 
 "Access Key ID" and "Secret Access Key" for your account,
-as configured in the [AWS Console](https://console.aws.amazon.com/iam/home?#security_credential).)
+as configured in the [AWS Console](https://console.aws.amazon.com/iam/home).)
 
 Other popular public clouds include `softlayer`, `google-compute-engine`, and `rackspace-cloudservers-us`.
 Private cloud systems including `openstack-nova` and `cloudstack` are also supported,

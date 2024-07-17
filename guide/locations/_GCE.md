@@ -73,7 +73,7 @@ GCE accounts often have a limit to the number of networks that can be created. O
 is to manually create a network with the required open ports, and to refer to that named network
 in Brooklyn's location configuration.
 
-To create a network, see [GCE network instructions](https://cloud.google.com/compute/docs/networking#networks_1).
+To create a network, see [GCE network instructions](https://cloud.google.com/vpc/docs/vpc).
 
 For example, for dev/demo purposes an "everything" network could be created that opens all ports.
 

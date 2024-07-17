@@ -205,7 +205,7 @@ stored in protected .PFX file. It needs to be prepared upfront or created with t
   `sourceVault` Resource `id` of the KeyVault
 
    `vaultCertificates` `certificateStore` has to use `My` as a value.
-    KeyVault's `certificateUrl`. An URI to the [Secret Identifier](https://docs.microsoft.com/en-us/rest/api/keyvault/about-keys--secrets-and-certificates#BKMK_DataTypes)
+    KeyVault's `certificateUrl`. An URI to the [Secret Identifier](https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates#data-types)
 
 * `windowsConfiguration`
 
