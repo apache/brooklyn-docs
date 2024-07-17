@@ -23,7 +23,7 @@ These are divided into the following groups:
 
 Custom step types can be written and added to the catalog, either written as workflow using these primitives
 (including doing virtually anything in a container) or by implementing a Java type, both [as described here](../nested-workflow.md).
-An index of all out-of-the-box step types is included at the [end of this section](#index_of_step_types).
+An index of all out-of-the-box step types is included at the [end of this section](#index-of-step-types).
 
 
 {% jsonball steps from yaml file steps.yaml %}

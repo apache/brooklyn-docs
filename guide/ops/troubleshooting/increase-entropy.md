@@ -74,7 +74,7 @@ The following links contain further information:
 
 * [haveged (another solution) and general info from Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-setup-additional-entropy-for-cloud-servers-using-haveged)
 * for specific OSs:
-  * [for RHEL or CentOS](https://redhatlinux.guru/2016/04/03/increase-system-entropy-on-rhel-centos-6-and-7/)
+  * [for RHEL or CentOS](https://developers.redhat.com/blog/2017/10/05/entropy-rhel-based-cloud-instances#/)
   * [for Ubuntu](http://www.howtoforge.com/helping-the-random-number-generator-to-gain-enough-entropy-with-rng-tools-debian-lenny)
   * [for Alpine](https://wiki.alpinelinux.org/wiki/Entropy_and_randomness)
 

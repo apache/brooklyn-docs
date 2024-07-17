@@ -37,7 +37,7 @@ Options for speeding up provisioning include those below.
 
 #### Deploying to Bring Your Own Nodes (BYON)
 
-A [BYON location](/guide/locations#byon) can be defined, which avoids the time 
+A [BYON location](/guide/locations/index.html#byon) can be defined, which avoids the time 
 required to provision VMs. This is fast, but has the downside that artifacts installed during a 
 previous run can interfere with subsequent runs.
 

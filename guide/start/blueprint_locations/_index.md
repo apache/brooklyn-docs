@@ -44,7 +44,7 @@ Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blan
 </div>
 <div id="impl-3" class="tab-pane fade">
 
-The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here](/guide/locations#byon){:target="_blank"}.
+The Bring Your Own Nodes (BYON) configuration allows Apache Brooklyn to make use of already available servers. These can be specified by a list of IP addresses with a user and password as shown below. More information including the full range of configuration options is available [here](/guide/locations/index.html#byon){:target="_blank"}.
 
 {% read _byon.camp.md %}
 

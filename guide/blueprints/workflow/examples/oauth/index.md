@@ -10,7 +10,7 @@ and using backoff/retry strategies.
 
 The blueprint assumes that a Google App requiring OAuth is set up.
 This is easy done at Google, or the code should be straightforward to adapt for any other OAuth-based site.
-The blueprint expects the following three values from an [externalized config provider](/guide/ops/externalized-config.md)
+The blueprint expects the following three values from an [externalized config provider](/guide/ops/externalized-configuration.md)
 called `google-oauth`:
 
 * `google_client_id` - the client ID for the Google App (created when the App is created there)
