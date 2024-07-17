@@ -36,7 +36,7 @@ $ vagrant up byon1 byon2 byon3 byon4
 </div>
 <div id="impl-2" class="tab-pane fade">
 
-Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here](/guide/locations#clouds){:target="_blank"}.
+Apache Brooklyn uses [Apache jclouds](http://jclouds.apache.org/){:target="_blank"} to support a range of cloud locations. More information on the range of providers and configurations is available [here](/guide/locations/index.html#clouds){:target="_blank"}.
 
 {% read _jclouds.camp.md %}
 
