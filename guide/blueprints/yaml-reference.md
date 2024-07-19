@@ -236,7 +236,10 @@ concise DSL defined here:
  
 * `$brooklyn:attributeWhenReady("sensor")` will store a future which will be blocked when it is accessed,
   until the given `sensor` from this entity "truthy" (i.e. non-trivial, non-empty, non-zero) value
-  (see below on `component` for looking up values on other sensors) 
+  (see below on `component` for looking up values on other sensors);
+  this can take a second argument being a map of options `timeout`, `timeout_if_down`, `abort_if_on_fire` (default `true`), 
+  and `wait_for_truthy` (default `true`);
+  the default is `{ $brooklyn:attributeWhenReady: [ "sensor", { timeout: "forever", timeouf_if_down: "1m" } ] }`
 * `$brooklyn:config("key")` will insert the value set against the given key at this entity (or nearest ancestor);
   can be used to supply config at the root which is used in multiple places in the plan
 * `$brooklyn:sensor("sensor.name")` returns the given sensor on the current entity if found, or an untyped (Object) sensor;
@@ -283,6 +286,8 @@ concise DSL defined here:
   using the simple Jackson deserialization in the `EntitySpec` class
   (this is similar to CAMP but is not as extensive, and other formats are not supported in coercion;
   if there are any issues with a direct map, consider wrapping it in the `$brooklyn:entitySpec` DSL)
+* `$brooklyn:chain: [ dsl, chained_function ]` allows chaining another `dsl` expression with a function on the result of that expression,
+  identical to using `dsl.chained_function` but for cases where one or the other requires list or maps
 
 Parameters above can be supplied either as strings or as lists and maps in YAML, and the `$brooklyn:` syntax can be used within those parameters.  
 
