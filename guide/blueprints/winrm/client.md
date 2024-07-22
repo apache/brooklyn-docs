@@ -5,8 +5,8 @@ layout: website-normal
 
 ## WinRM4j parameters
 
-Check [org.apache.brooklyn.location.winrm.WinRmMachineLocation](https://github.com/apache/brooklyn-server/blob/master/software/winrm/src/main/java/org/apache/brooklyn/location/winrm/WinRmMachineLocation.java#L82-L112)
-parameters available for WinRM.
+Per the `ConfigKey` entries in [org.apache.brooklyn.location.winrm.WinRmMachineLocation](https://github.com/apache/brooklyn-server/blob/master/software/winrm/src/main/java/org/apache/brooklyn/location/winrm/WinRmMachineLocation.java),
+the parameters available for WinRM are:
 
 * host <String>: Host to connect to (required).Default value `null`
 * port <Integer>: WinRM port to use when connecting to the remote machine.<br>
