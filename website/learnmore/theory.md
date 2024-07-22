@@ -173,7 +173,7 @@ model.
 ### Standards
 
 Finally we note some emerging standards in this area. OASIS CAMP 
-(<a href="https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=camp#technical">Cloud Application Management for Platforms</a>) 
+(<a href="https://docs.oasis-open.org/camp/camp-ta/v1.1/camp-ta-v1.1.html">Cloud Application Management for Platforms</a>) 
 and TOSCA 
 (<a href="https://www.oasis-open.org/committees/tosca/">Topology and Orchestration Specification for Cloud Applications</a>) 
 both define YAML application models similar to Brooklyn's. 
