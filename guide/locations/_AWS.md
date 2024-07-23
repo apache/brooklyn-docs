@@ -79,7 +79,7 @@ and speed things up.
 
 First, in the AWS Console, open the EC2 service in the region you are interested in,
 then click "Key Pairs" at the left.  For `us-east-1`, the link is 
-[here](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#KeyPairs:sort=keyName).
+[here](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1).
 Click "Create Key Pair" (or "Import Key Pair" if you want to provide a public key) and
 follow the instructions.
 
