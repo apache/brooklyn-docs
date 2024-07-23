@@ -9,7 +9,7 @@ This guide will walk you through deploying an example 3-tier web application to 
 
 Two methods of deployment are detailed in this tutorial, using virtualisation with Vagrant and an install in your own environment (such as your local machine or in your private/public cloud). 
 
-The latter assumes that you have a [Java Runtime Environment (JRE)](https://www.java.com){:target="_blank"} installed (version 7 or later), as Brooklyn is Java under the covers. 
+The latter assumes that you have a Java Runtime Environment installed (version 7 or later), as Brooklyn is Java under the covers. 
 
 To get you up-and-running quickly, the Vagrant option will provision four compute nodes for you to deploy applications to. 
 

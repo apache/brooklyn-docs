@@ -15,7 +15,7 @@ An illustrative example is below:
 *This works without any installation: try it now, copying-and-pasting to the Brooklyn console.
 (Don't forget to add your preferred `location: some-cloud` to the spec.)*  
 
-Notice, if you target `google-compute-engine` location, you may need to specify `bind_address: 0.0.0.0` for the `mysql` cookbook, as described [here](https://github.com/sous-chefs/mysql/blob/main/documentation/resource_mysql_service.md#parameters).
+Notice, if you target `google-compute-engine` location, you may need to specify `bind_address: 0.0.0.0` for the `mysql` cookbook, as described [here](https://github.com/sous-chefs/mysql/blob/main/documentation/resource_mysql_service.md).
 
 We'll now walk through the important constituent parts,
 and then proceed to describing things which can be done to simplify the deployment.
