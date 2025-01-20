@@ -64,7 +64,7 @@ is a good simple way to forward content added to the info and debug log files:
   <parse>
     @type multiline
     format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
-    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) ([(?<threadName>[^\]]*)\] )?(?<message>.*)/
     time_format %Y-%m-%dT%H:%M:%S,%L
   </parse>
   path /var/logs/brooklyn/brooklyn.info.log
@@ -79,7 +79,7 @@ is a good simple way to forward content added to the info and debug log files:
   <parse>
     @type multiline
     format_firstline /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
-    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) \[(?<threadName>\S+)\] (?<message>.*)/
+    format1 /^(?<timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z) (?<taskId>\S+)?-(?<entityIds>\S+)? (?<level>\w{4} |\w{5})\W{1,4}(?<bundleId>\d{1,3}) (?<class>(?:\S\.)*\S*) ([(?<threadName>[^\]]*)\] )?(?<message>.*)/
     time_format %Y-%m-%dT%H:%M:%S,%L
   </parse>
   path /var/logs/brooklyn/brooklyn.debug.log
@@ -103,8 +103,11 @@ is a good simple way to forward content added to the info and debug log files:
 </match>
 ```
 
+The `format1` line assumes the standard log format which ships with Apache Brooklyn, and that thread names do not contain `]`;
+if this is not the case the configuration here and/or in logback can be configured differently for your environment.
 The filter block is needed for only picking up the `debug` log level from the debug source, as the `info` and upper
 levels are already present in the info file.
+
 
 ### Sizing and Rotating Logs
 
