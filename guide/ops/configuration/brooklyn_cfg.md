@@ -145,15 +145,20 @@ The other things you need to set in `brooklyn.cfg` are:
 * `brooklyn.webconsole.security.ldap.realm` - ldap dc parameter (domain)
 * `brooklyn.webconsole.security.ldap.allowed_realms_regex` - allows multiple realms (domains) that match regex - username must 
   be of form domain\user
-* `brooklyn.webconsole.security.ldap.ou` *optional, by default it set to Users* -  ldap ou parameter
-* `brooklyn.webconsole.security.ldap.group_config_key` *optional* to be used in combination with the next. Name of the 
-  config key prefix for the valid LDAP groups to be mapped to AMP entitlements. If used only mapped groups will be added 
+* `brooklyn.webconsole.security.ldap.ou` *optional, by default Users* - ldap ou parameter or comma separated ou=... values
+* `brooklyn.webconsole.security.ldap.group_config_key` *optional* to be used in combination with user group fetches (the next setting). 
+  Name of the config key prefix for the valid LDAP groups to be mapped to AMP entitlements. If used only mapped groups will be added 
   to the user groups. If empty, user LDAP groups will be ignored.
-* `brooklyn.webconsole.security.ldap.fetch_user_group` *optional, by default it set to false* - whether or not the LDAP
+* `brooklyn.webconsole.security.ldap.fetch_user_group` *optional, by default false* - whether or not the LDAP
   groups for the user should be gathered. If true, the groups will be stored in the user session and the security context
-* `brooklyn.webconsole.security.ldap.login_info_log` *optional, by default it set to false* - whether or not the user attempts
+* `brooklyn.webconsole.security.ldap.login_info_log` *optional, by default false* - whether or not the user attempts
   to log in the system must be added to the info log
-  **brooklyn.cfg example configuration:**
+* `brooklyn.webconsole.security.ldap.recursive` *optional, by default false* - whether searches for users and groups should be recursive
+* `brooklyn.webconsole.security.ldap.group_filter` *optional* - a search expression using {0} as the principal (prospective user) to match to find groups, {0}, e.g. `(&(member:1.2.840.113556.1.4.1941:={0})(objectClass=group))`
+* `brooklyn.webconsole.security.ldap.group_ou=02-Groups,OU=DOMAIN` *optional; required if using group_filter* - a filter for the groups returned by the group_filter
+
+
+**brooklyn.cfg example configuration:**
 
 ~~~
 brooklyn.webconsole.security.provider=org.apache.brooklyn.rest.security.provider.LdapSecurityProvider
