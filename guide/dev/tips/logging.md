@@ -3,7 +3,7 @@ title: Logging
 layout: website-normal
 ---
 
-## Logging: A Quick Overview
+## Logging for Developers: A Quick Overview
 
 For logging, we use **log4j** which implements the slf4j API.
 This means you can use any slf4j compliant logging framework,

@@ -259,7 +259,15 @@ seconds as properties on `brooklyn.cfg`:
 org.apache.brooklyn.server.maxSessionAge = 3600
 org.apache.brooklyn.server.maxInactiveInterval = 3600
 {% endhighlight %}
-  
+
+A further property `org.apache.brooklyn.server.returnStackTraces` can be set
+to control whether REST requests that have errors include stack traces:
+`true` or `all` to do this always; 
+`false` or `none` means never; 
+and `root` or `power` does so only for users with root or powerUser entitlements, respectively. 
+A unique reference identifier is returned and included in the logs for correlation.
+
+
 ## Login Page
 
 When using a username/password based authentication mechanism, Apache Brooklyn will be default respond with a 401

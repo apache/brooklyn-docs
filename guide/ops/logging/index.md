@@ -7,6 +7,23 @@ check_directory_for_children: true
 Brooklyn uses the SLF4J logging facade, which allows use of many popular frameworks including `logback`,
 `java.util.logging` and `log4j`.
 
+Most loggers follow the ``package.ClassName`` naming standard,
+apart from some high-level ones which simplify the package and classname.
+
+For handy reference, the most commonly used logging categories are:
+
+* `org.apache.brooklyn.rest.security.LoginLogging`: login and logouts
+* `org.apache.brooklyn.REST`: REST handling details
+* `org.apache.brooklyn.SSH`: SSH i/o details
+* `org.apache.brooklyn.WinRm`: WinRM i/o details
+* `org.apache.brooklyn.core.mgmt.internal.BrooklynGarbageCollector`: Java memory GC details
+
+The default logging is to write INFO+ messages to `brooklyn.info.log`,
+and DEBUG+ to `brooklyn.debug.log`. Each is a rolling log file,
+where the past 10 files will be kept. INFO level, and above, messages
+will be logged to the karaf console. Use the `log:` commands in the
+karaf client, e.g. `log:tail`, to read these messages.
+
 The convention for log levels is as follows:
 
 * `ERROR` and above:  exceptional situations which indicate that something has unexpectedly failed or
@@ -16,13 +33,6 @@ The convention for log levels is as follows:
 * `DEBUG`:  detail of activity which might merit closer inspection under certain circumstances.
 * `TRACE` and lower: detail of activity which is not normally of interest, but which might merit closer inspection under certain circumstances including sensitive information (e.g. secrets) that should not be exposed in higher lover levels. A configuration example for TRACE level is present in the log configuration file, but is commented because of security concerns.
 
-Loggers follow the ``package.ClassName`` naming standard.
-
-The default logging is to write INFO+ messages to `brooklyn.info.log`,
-and DEBUG+ to `brooklyn.debug.log`. Each is a rolling log file,
-where the past 10 files will be kept. INFO level, and above, messages
-will be logged to the karaf console. Use the `log:` commands in the
-karaf client, e.g. `log:tail`, to read these messages.
 
 
 ## Using Logback through OSGi Pax Logging
