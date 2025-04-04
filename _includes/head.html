@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link href="{% dependency_url bootstrap.css %}" rel="stylesheet" />
+<link href="{{site.path.style | relative_url}}/deps/bootstrap.min.css" rel="stylesheet" />
 <link href="{{site.path.style | relative_url}}/deps/octicons/octicons.css" rel="stylesheet" />
 <link href="{{site.path.style | relative_url}}/deps/bootstrap-theme.css" rel="stylesheet" />
 <link href="{{site.path.style | relative_url}}/deps/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -11,4 +11,4 @@
 <link href="{{site.path.style | relative_url}}/css/code.css" rel="stylesheet" />
 <link href="{{site.path.style | relative_url}}/css/website.css" rel="stylesheet" />
 
-<script type="text/javascript" src="{% dependency_url jquery.js %}"></script>
+<script type="text/javascript" src="{{site.path.style | relative_url}}/deps/jquery.js"></script>
