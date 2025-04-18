@@ -37,7 +37,7 @@ path:
   guide: /guide
   website: /website
   v: /v
-  
+
 # Use local copies of dependencies in dev build (switched to remote using URLs for prod build)
 dependency_mode: local
 dependency_urls:
@@ -57,14 +57,14 @@ sass:
     style: compressed
 
 # TODO the 0.12.0 paths must be changed!
-brooklyn-stable-version: 0.12.0
+brooklyn-stable-version: 1.1.0
 pdf-default-base-url: http://brooklyn.apache.org
-pdf-default-versioned-url-subpath: /v/0.12.0
+pdf-default-versioned-url-subpath: /v/1.1.0
 
-pdf-rewrite-prefixes: 
-    '/guide' : '/v/0.12.0'
+pdf-rewrite-prefixes:
+    '/guide' : '/v/1.1.0'
     '/website' : ''
-    
+
 brooklyn-version: 1.2.0-SNAPSHOT # BROOKLYN_VERSION brooklyn-docs-version
 brooklyn-snapshot-git-branch: master   # if line above is SNAPSHOT this should point to corresponding git branch (e.g. master, 0.4)
 
