@@ -3,16 +3,55 @@ title: Security Guidelines
 layout: website-normal
 ---
 
+## Reporting a Vulnerability
+
+See [SECURITY.md](https://github.com/apache/brooklyn-server/blob/master/SECURITY.md) in the
+`brooklyn-server` repository for how to report a suspected security vulnerability.
+
+Before reporting, please also read the
+[threat model](https://github.com/apache/brooklyn-server/blob/master/THREAT_MODEL.md), which
+describes Apache Brooklyn's trust assumptions in detail and lists behaviour that is expected by
+design rather than a vulnerability - for example, a user entitled to `root`, `EXECUTE_SCRIPT` or
+`ADD_CATALOG_ITEM` being able to run arbitrary code on the Brooklyn server, or the zero-configuration
+"quick start" mode (see below) having no authentication.
+
+
 ## Brooklyn Server
 
 ### Web-console and REST API
 
-Users are strongly encouraged to use HTTPS, rather than HTTP.
+Users are strongly encouraged to use HTTPS, rather than HTTP. HTTPS is not enabled by default;
+see [HTTPS Configuration](configuration/brooklyn_cfg.md#https-configuration).
 
 The use of LDAP is encouraged, rather than basic auth.
 
 Configuration of "entitlements" is encouraged, to lock down access to the REST API for different 
-users.
+users. By default, the entitlement manager is `root`, which grants full administrative access to
+every authenticated user, including running arbitrary code on the Brooklyn server via the Groovy
+console. Treat any user entitled to `root`, `EXECUTE_SCRIPT`/`EXECUTE_GROOVY_SCRIPT`,
+`ADD_CATALOG_ITEM`, or `DEPLOY_APPLICATION` as equivalent in trust to someone with shell access on
+the Brooklyn host, and restrict these entitlements accordingly; see
+[Entitlements](configuration/brooklyn_cfg.md#entitlements) for the available profiles.
+
+If Apache Brooklyn is started with no `brooklyn.webconsole.security.*` configuration at all, it
+defaults to no authentication and full `root` entitlement for every request, and the web console
+binds to all network interfaces (`0.0.0.0`) over plain HTTP. This "quick start" default is intended
+only for a trial on a trusted, isolated machine or network, and must never be used for an
+installation reachable from an untrusted network.
+
+Apache Brooklyn does not implement rate-limiting or account lockout on login attempts; this is
+left to the deployment environment, e.g. a reverse proxy or firewall.
+
+
+### Karaf Management Console
+
+Apache Brooklyn runs on Apache Karaf, which ships its own SSH management console. This is bound
+to localhost only by default, but is protected only by Karaf's stock default credentials until
+these are changed. An unchanged Karaf console should be treated the same as the web console's
+zero-config default described above: localhost-only binding limits *remote* exposure, but it
+remains a default-credential admin shell on the Brooklyn host, reachable by any local user or
+process. See [Configuring Karaf Security](production-installation.md#configuring-karaf-security)
+for how to change these credentials.
 
 
 ### Brooklyn user

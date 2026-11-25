@@ -198,7 +198,12 @@ and understands:
   stopping the server and retrieving management context configuration
 * `blueprintAuthor`:  same as user but cannot install bundles containing jar or class files
 * `readonly`:  read-only access to almost all information
-* `minimal`:  access only to server stats, for use by monitoring systems
+* `minimal`:  denies access to everything that requires entitlements, including server stats;
+  this is **not** "server stats only" despite some descriptions suggesting otherwise - for that,
+  use `serverStatusOnly` below
+* `serverStatusOnly`:  access only to server stats (version, HA state, up/healthy checks), for use
+  by monitoring systems
+* `logViewer`:  access only to query the server's own logs
 
 These keywords are also understood at the `global` level, so to grant full access to `admin`,
 read-only access to `support`, limited access to `metrics` and regular access to `user`
