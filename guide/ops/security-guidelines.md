@@ -33,6 +33,28 @@ be 600 (i.e. read-write only by the owner). Care should be taken for permissions
 relevant mount points, disks and directories.
 
 
+### YAML Parsing
+
+By default, Apache Brooklyn parses YAML (for example blueprints and catalog items) using
+SnakeYAML's `SafeConstructor`, so that only a limited set of well-known, harmless types can be
+instantiated directly by the YAML, e.g. maps, lists, and strings.
+
+Older versions of Brooklyn, and other tools expecting default SnakeYAML behaviour, permit YAML
+to instantiate arbitrary Java types known to the JVM, using tags such as `!!java.util.Date`.
+This is strongly discouraged as it is unsafe: if an attacker can supply YAML to be parsed, 
+such tags can potentially be used to construct objects of attacker's choosing,
+which combined with other classes available on the classpath could be used to compromise the server
+(as with similar deserialization vulnerabilities in other systems).
+
+This behaviour can be reverted, e.g. for compatibility with blueprints relying on the old
+behaviour, by setting the following system property on the JVM used to run Brooklyn:
+
+    -Dorg.apache.brooklyn.unsafe.YamlTypeInstantiation=true
+
+This is strongly discouraged other than for short-term diagnosis or migration, and in particular
+should not be set on a server which parses YAML from untrusted or insufficiently-entitled users.
+
+
 ## Credential Storage
 
 For credential storage, users are strongly encouraged to consider using the "externalised 
